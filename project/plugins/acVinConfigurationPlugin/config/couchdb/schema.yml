@@ -168,6 +168,7 @@ Configuration:
                               douane_cat: { }
                               taxable_douane: { }
                               restriction_lies: { }
+                              switch_regime: { }
                   sorties:
                     required: false
                     type: collection
@@ -190,6 +191,7 @@ Configuration:
                               douane_cat: { }
                               taxable_douane: { }
                               restriction_lies: { }
+                              switch_regime: { }
                   stocks_fin:
                     required: false
                     type: collection
@@ -212,6 +214,7 @@ Configuration:
                               douane_cat: { }
                               taxable_douane: { }
                               restriction_lies: { }
+                              switch_regime: { }
             certifications:
               type: collection
               definition:
