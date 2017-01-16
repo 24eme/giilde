@@ -145,6 +145,7 @@ Configuration:
                               douane_cat: { }
                               taxable_douane: { }
                               restriction_lies: { }
+                              switch_regime: { }
                   entrees:
                     required: false
                     type: collection
