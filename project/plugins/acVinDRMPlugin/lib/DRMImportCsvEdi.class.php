@@ -205,7 +205,6 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                 }
                 if ($confDetailMvt->hasDetails()) {
                     $detailTotalVol += floatval($drmDetails->getOrAdd($cat_key)->getOrAdd($type_key));
-
                     if ($type_key == 'export') {
                         $pays = ConfigurationClient::getInstance()->findCountry($csvRow[self::CSV_CAVE_EXPORTPAYS]);
                         $detailNode = $drmDetails->getOrAdd($cat_key)->getOrAdd($type_key . '_details')->add($pays);
@@ -263,7 +262,6 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                         }
 
                         $vrac_id = $this->findContratDocId($csvRow);
-
                         if(!$vrac_id) {
                             $this->csvDoc->addErreur($this->contratIDNotFoundError($num_ligne, $csvRow));
                             $num_ligne++;
@@ -275,6 +273,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
 
             $num_ligne++;
         }
+
     }
 
     private function importCrdsFromCSV($just_check = false) {

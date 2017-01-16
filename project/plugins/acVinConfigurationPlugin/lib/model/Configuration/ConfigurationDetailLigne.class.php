@@ -23,7 +23,7 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
 
     public function hasDetails() {
 
-        return ($this->details > 0);
+        return ($this->details);
     }
 
     public function getLibelle() {

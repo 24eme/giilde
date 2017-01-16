@@ -14,7 +14,12 @@ class ConfigurationDeclaration extends BaseConfigurationDeclaration {
     }
 
     public function setDonneesCsv($datas) {
-        
+
+    }
+
+    public function getDetail() {
+
+        return $this->getDetails();
     }
 
     public function getDatesDroits($interpro = "INTERPRO-declaration") {
@@ -29,7 +34,7 @@ class ConfigurationDeclaration extends BaseConfigurationDeclaration {
 
         return null;
     }
-    
+
     public function hasDroits() {
 
         return false;
@@ -55,8 +60,8 @@ class ConfigurationDeclaration extends BaseConfigurationDeclaration {
     }
 
     public function getFormatLibelle() {
-       
-       return "%g% %a% %m% %l% %co% %ce%"; 
+
+       return "%g% %a% %m% %l% %co% %ce%";
     }
 
     public function getLibelles() {

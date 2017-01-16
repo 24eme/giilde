@@ -375,7 +375,7 @@ if($19 > 0) { print base "sorties;vracsanscontratacquitte;" $19 ; } #facture_etc
 if($19 < 0) { print base "entrees;sortie_negative;" $19*-1 ";;;;sortie négative de facture etc" } #facture_etc
 if($20 > 0) { print base "sorties;vracsanscontratsuspendu;" $20 ; } #france_sans_contrat
 if($20 < 0) { print base "entrees;sortie_negative;" $20*-1 ";;;;sortie négative de france sans contrat" ; } #france_sans_contrat
-if($21 != 0 && identifiant == "00225701") { print base "sorties;vracsanscontratsuspendu;" $21 ; } #france_sous_contrat
+if($21 != 0) { print base "sorties;vracsanscontratsuspendu;" $21 ; } #france_sous_contrat
 if($22 > 0) { print base "sorties;export;" $22 ";Union Européenne" ; }  #expedition_ue
 if($22 < 0) { print base "entrees;sortie_negative;" $22*-1 ";;;;sortie négative de expedition ue" ; }  #expedition_ue
 if($23 > 0) { print base "sorties;export;" $23 ";Hors Union Européenne" ; } #expedition_hors_ue
@@ -398,19 +398,17 @@ base="CAVE;" $5 ";" identifiant ";;" $45 ";;;;;;;" ;
 numero_contrat=gensub(/-/, "0000", 1, $10);
 mouvement="vrac"
 
-if(identifiant == "00225701") {
-    next;
-}
-
 if(!numero_contrat || numero_contrat == "INCONNU") {
     mouvement="vracsanscontratsuspendu";
     numero_contrat="";
+    next;
 }
 volume = $19 + $20 + $21;
 if(!volume) {
     next;
 }
 print base "sorties;" mouvement ";" volume ";;" numero_contrat ;
+print base "sorties;vracsanscontratsuspendu;" volume * -1 ";;" ;
 }' > $DATA_DIR/drm_cave_contrats.csv
 
 cat $DATA_DIR/drm_cave.csv $DATA_DIR/drm_cave_contrats.csv | sort -t ";" -k 2,3 > $DATA_DIR/drm.csv
@@ -421,7 +419,7 @@ cat $DATA_DIR/drm.csv | grep -E "^[A-Z]+;(2005(08|09|10|11|12)|2006[0-1]{1}[0-9]
 
 rm -rf $DATA_DIR/drms; mkdir $DATA_DIR/drms
 
-awk -F ";" '{print >> ("'$DATA_DIR'/drms/" $3 "_" $2 ".csv")}' $DATA_DIR/drm_200508_201007.csv
+awk -F ";" '{print >> ("'$DATA_DIR'/drms/" $3 "_" $2 ".csv")}' $DATA_DIR/drm_201008_201307.csv
 
 echo "Import des contacts"
 
@@ -439,12 +437,12 @@ ls $DATA_DIR/drms | while read ligne
 do
     PERIODE=$(echo $ligne | sed 's/.csv//' | cut -d "_" -f 2)
     IDENTIFIANT=$(echo $ligne | sed 's/.csv//' | cut -d "_" -f 1)
-    php symfony drm:edi-import $DATA_DIR/drms/$ligne $PERIODE $IDENTIFIANT --facture=true --creation-depuis-precedente=true --env="ivso"
+    #php symfony drm:edi-import $DATA_DIR/drms/$ligne $PERIODE $IDENTIFIANT --facture=true --creation-depuis-precedente=true --env="ivso"
 done
 
 echo "Contrôle de cohérence des DRM"
 
 cat $DATA_DIR/drm.csv | cut -d ";" -f 3 | sort | uniq | while read ligne
 do
-    php symfony drm:controle-coherence "$ligne"
+    #php symfony drm:controle-coherence "$ligne"
 done

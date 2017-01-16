@@ -15,6 +15,11 @@ class Configuration extends BaseConfiguration {
         $this->set('_id', "CONFIGURATION");
     }
 
+    public function getLibelleDetailLigne() {
+
+        return $this->_get('libelle_detail_ligne')->_get('details');
+    }
+
     public function getProduits() {
 
         return $this->declaration->getProduits();
@@ -49,7 +54,7 @@ class Configuration extends BaseConfiguration {
             //echo $libelleSlugify."/".$libelleProduitSlugify."\n";
             if($libelleSlugify == $libelleProduitSlugify) {
                 $this->identifyLibelleProduct[$libelle] = $produit;
-                
+
                 return $produit;
             }
         }

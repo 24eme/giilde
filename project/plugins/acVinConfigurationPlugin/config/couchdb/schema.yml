@@ -54,50 +54,54 @@ Configuration:
         type: collection
         definition:
           fields:
-            stocks_debut:
-              type: collection
-              definition:
-                fields:
-                  '*':
-                    type: collection
-                    definition:
-                      fields:
-                        libelle: {  }
-                        libelle_long: {  }
-                        description: {  }
-            entrees:
-              type: collection
-              definition:
-                fields:
-                  '*':
-                    type: collection
-                    definition:
-                      fields:
-                        libelle: {  }
-                        libelle_long: {  }
-                        description: {  }
-            sorties:
-              type: collection
-              definition:
-                fields:
-                  '*':
-                    type: collection
-                    definition:
-                      fields:
-                        libelle: {  }
-                        libelle_long: {  }
-                        description: {  }
-            stocks_fin:
-              type: collection
-              definition:
-                fields:
-                  '*':
-                    type: collection
-                    definition:
-                      fields:
-                        libelle: {  }
-                        libelle_long: {  }
-                        description: {  }
+            '*':
+               type: collection
+               definition:
+                 fields:
+                   stocks_debut:
+                     type: collection
+                     definition:
+                       fields:
+                         '*':
+                           type: collection
+                           definition:
+                             fields:
+                               libelle: {  }
+                               libelle_long: {  }
+                               description: {  }
+                   entrees:
+                     type: collection
+                     definition:
+                       fields:
+                         '*':
+                           type: collection
+                           definition:
+                             fields:
+                               libelle: {  }
+                               libelle_long: {  }
+                               description: {  }
+                   sorties:
+                     type: collection
+                     definition:
+                       fields:
+                         '*':
+                           type: collection
+                           definition:
+                             fields:
+                               libelle: {  }
+                               libelle_long: {  }
+                               description: {  }
+                   stocks_fin:
+                     type: collection
+                     definition:
+                       fields:
+                         '*':
+                           type: collection
+                           definition:
+                             fields:
+                               libelle: {  }
+                               libelle_long: {  }
+                               description: {  }
       alias:
         type: collection
         definition:
@@ -112,8 +116,8 @@ Configuration:
         class: ConfigurationDeclaration
         inheritance: _ConfigurationDeclaration
         definition:
-          fields: 
-            detail:
+          fields:
+            '*':
               required: false
               class: ConfigurationDetail
               type: collection
@@ -140,6 +144,7 @@ Configuration:
                               douane_type: { }
                               douane_cat: { }
                               taxable_douane: { }
+                              restriction_lies: { }
                   entrees:
                     required: false
                     type: collection
@@ -161,6 +166,7 @@ Configuration:
                               douane_type: { }
                               douane_cat: { }
                               taxable_douane: { }
+                              restriction_lies: { }
                   sorties:
                     required: false
                     type: collection
@@ -182,6 +188,7 @@ Configuration:
                               douane_type: { }
                               douane_cat: { }
                               taxable_douane: { }
+                              restriction_lies: { }
                   stocks_fin:
                     required: false
                     type: collection
@@ -203,6 +210,7 @@ Configuration:
                               douane_type: { }
                               douane_cat: { }
                               taxable_douane: { }
+                              restriction_lies: { }
             certifications:
               type: collection
               definition:
@@ -389,7 +397,7 @@ Configuration:
                                                     type: collection
                                                     required: false
                                                     definition:
-                                                      fields:                                                        
+                                                      fields:
                                                         '*':
                                                           class: ConfigurationDateCirculation
                                                           type: collection
@@ -772,7 +780,7 @@ Configuration:
                                                                                         type: collection
                                                                                         required: false
                                                                                         definition:
-                                                                                          fields:                                                                                            
+                                                                                          fields:
                                                                                             '*':
                                                                                               class: ConfigurationDateCirculation
                                                                                               type: collection
@@ -888,7 +896,7 @@ Configuration:
                                                                                           mouvement_coefficient: { type: integer }
                                                                                           vrac: { type: integer }
                                                                                           facturable: { type: integer }
-                                                                        couleurs: 
+                                                                        couleurs:
                                                                           type: collection
                                                                           definition:
                                                                             fields:
@@ -1039,7 +1047,7 @@ Configuration:
                                                                                                       mouvement_coefficient: { type: integer }
                                                                                                       vrac: { type: integer }
                                                                                                       facturable: { type: integer }
-                                                                                    cepages: 
+                                                                                    cepages:
                                                                                       type: collection
                                                                                       definition:
                                                                                         fields:
@@ -1074,7 +1082,7 @@ Configuration:
                                                                                                               type: collection
                                                                                                               required: false
                                                                                                               definition:
-                                                                                                                fields:                                                                                            
+                                                                                                                fields:
                                                                                                                   '*':
                                                                                                                     class: ConfigurationDateCirculation
                                                                                                                     type: collection
@@ -1115,7 +1123,7 @@ Configuration:
                                                                                                                               taux: {  }
                                                                                                                               code: {  }
                                                                                                                               libelle: {  }
-                        detail:
+                        '*':
                           required: false
                           class: ConfigurationDetail
                           type: collection
