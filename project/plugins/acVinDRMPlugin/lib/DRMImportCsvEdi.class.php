@@ -148,7 +148,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
         //$all_produits = $this->configuration->declaration->getProduitsAll();
 
         $num_ligne = 1;
-        foreach ($this->getDocRows() as $csvRow) {
+        foreach ($this->getDocRows() as $keyRow => $csvRow) {
             if (KeyInflector::slugify($csvRow[self::CSV_TYPE] != self::TYPE_CAVE)) {
                 $num_ligne++;
                 continue;
@@ -263,6 +263,8 @@ class DRMImportCsvEdi extends DRMCsvEdi {
 
                         $vrac_id = $this->findContratDocId($csvRow);
                         if(!$vrac_id) {
+                            $this->csvdata[$keyRow][12] = "vracsanscontratsuspendu";
+                            continue;
                             $this->csvDoc->addErreur($this->contratIDNotFoundError($num_ligne, $csvRow));
                             $num_ligne++;
                             continue;
