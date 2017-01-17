@@ -203,7 +203,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
         foreach ($drm->getProduits() as $produit) {
             $produitConfig = $this->getConfig()->getProduitWithCorrespondanceInverse($produit->hash);
-            if (!$produitConfig->isActif($this->getDate())) {
+            if (!$produitConfig && !$produitConfig->isActif($this->getDate())) {
 
                 continue;
             }
@@ -657,20 +657,20 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 foreach ($detail->entrees as $keyEntree => $valueEntree) {
                     if ($valueEntree && !in_array($keyEntree, $listEntrees)) {
                         $key_to_remove[] = $produit_hash.'/entrees/'.$keyEntree;
-                          
+
                     }
                 }
                 foreach ($detail->sorties as $keySortie => $valueSortie) {
                     if ($valueSortie instanceof DRMESDetails) {
                         continue;
                     }
-                    if ($valueSortie && !in_array($keySortie, $listSorties)) {                        
+                    if ($valueSortie && !in_array($keySortie, $listSorties)) {
                        $key_to_remove[] = $produit_hash.'/sorties/'.$keySortie;
                     }
                 }
             }
         }
-        
+
         foreach ($key_to_remove as $key) {
            $this->remove($key);
         }
@@ -1285,7 +1285,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 $droitDouane->clearDroitDouane();
             }
         } catch (Exception $e) {
-            
+
         }
     }
 

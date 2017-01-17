@@ -238,6 +238,11 @@ class Configuration extends BaseConfiguration {
         }
         $correspondanceInverse = $this->getCorrespondancesInverse();
 
+        if(!isset($correspondanceInverse[$hash])) {
+
+            return null;
+        }
+
         $newHash = str_replace('-', '/', $correspondanceInverse[$hash]);
         return $this->get($newHash);
     }
