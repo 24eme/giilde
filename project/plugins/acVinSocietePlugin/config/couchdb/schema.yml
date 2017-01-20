@@ -29,6 +29,7 @@ Societe:
       telephone: {  }
       fax: {  }
       commentaire: { }
+      paiement_douane_frequence: { required: false }
       siege:
         type: collection
         definition:
@@ -69,4 +70,3 @@ Societe:
                 fields:
                   nom: {}
                   ordre: {}
-
