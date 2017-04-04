@@ -1577,6 +1577,15 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
       return true;
     }
 
+    public function setPaiementDouaneFrequence($p){
+      $this->societe->paiement_douane_frequence = $p;
+      $soc = $this->getEtablissement()->getSociete();
+      if (!$soc->exist('paiement_douane_frequence') || !$soc->get('paiement_douane_frequence') != $p) {
+        $soc->add('paiement_douane_frequence', $p);
+        $soc->save();
+      }
+    }
+
     /** Fin Droit de circulation douane */
 
     /*

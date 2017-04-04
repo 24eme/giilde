@@ -33,6 +33,7 @@ $societeviti = SocieteClient::getInstance()->createSociete("société viti test"
 $societeviti->pays = "FR";
 $societeviti->code_postal = $codePostalRegion;
 $societeviti->commune = "Neuilly sur seine";
+$societeviti->insee = "94512";
 $societeviti->save();
 $id = $societeviti->getidentifiant();
 $compteviti = CompteClient::getInstance()->findByIdentifiant($id.'01');

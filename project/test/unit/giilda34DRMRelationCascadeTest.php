@@ -95,6 +95,7 @@ $t->ok(!$drm->isImport() && $drm->type_creation == DRMClient::DRM_CREATION_VIERG
 $details = $drm->get($produit_hash.'/details/DEFAUT');
 $t->ok($details->canSetStockDebutMois(), "Le stock début est éditable");
 $details->stocks_debut->initial = 1800;
+$details->stocks_debut->dont_revendique = -400;
 $details->sorties->ventefrancecrd = 100;
 $drm->update();
 $drm->save();

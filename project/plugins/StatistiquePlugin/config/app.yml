@@ -9,7 +9,7 @@ all:
         exportations:
           libelle: "Exportations"
           index: "DRMMVT"
-          hashkeysize: 2
+          hashkeysize: 1
           aggregation:
             filter:
               term:
@@ -17,76 +17,59 @@ all:
             aggs:
               totaux_blanc:
                 sum_bucket:
-                  buckets_path: "agg_page>total_blanc"
+                  buckets_path: "agg_line>blanc>agg_column"
               totaux_rose:
                 sum_bucket:
-                  buckets_path: "agg_page>total_rose"
+                  buckets_path: "agg_line>rose>agg_column"
               totaux_rouge:
                 sum_bucket:
-                  buckets_path: "agg_page>total_rouge"
+                  buckets_path: "agg_line>rouge>agg_column"
               totaux_total:
                 sum_bucket:
-                  buckets_path: "agg_page>total_total"
-              agg_page:
+                  buckets_path: "agg_line>total>agg_column"
+              agg_line:
                 terms:
                   size: 0,
-                  field: 'doc.mouvements.appellation'
+                  field: 'doc.mouvements.detail_libelle'
+                  order:
+                    "total>agg_column": desc
                 aggs:
-                  total_blanc:
-                    sum_bucket:
-                      buckets_path: "agg_line>blanc>agg_column"
-                  total_rose:
-                    sum_bucket:
-                      buckets_path: "agg_line>rose>agg_column"
-                  total_rouge:
-                    sum_bucket:
-                      buckets_path: "agg_line>rouge>agg_column"
-                  total_total:
-                    sum_bucket:
-                      buckets_path: "agg_line>total>agg_column"
-                  agg_line:
-                    terms:
-                      size: 0,
-                      field: 'doc.mouvements.detail_libelle'
-                      order:
-                        "total>agg_column": desc
+                  blanc:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'blanc'
                     aggs:
-                      blanc:
-                        filter:
-                          term:
-                            doc.mouvements.couleur: 'blanc'
-                        aggs:
-                          agg_column:
-                            sum:
-                              field: 'doc.mouvements.volume'
-                              script: '_value * -1'
-                      rose:
-                        filter:
-                          term:
-                            doc.mouvements.couleur: 'rose'
-                        aggs:
-                          agg_column:
-                            sum:
-                              field: 'doc.mouvements.volume'
-                              script: '_value * -1'
-                      rouge:
-                        filter:
-                          term:
-                            doc.mouvements.couleur: 'rouge'
-                        aggs:
-                          agg_column:
-                            sum:
-                              field: 'doc.mouvements.volume'
-                              script: '_value * -1'
-                      total:
-                        filter:
-                          terms:
-                            doc.mouvements.couleur: ['blanc', 'rose', 'rouge']
-                        aggs:
-                          agg_column:
-                            sum:
-                              field: 'doc.mouvements.volume'
-                              script: '_value * -1'
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  rose:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'rose'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  rouge:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'rouge'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  total:
+                    filter:
+                      terms:
+                        doc.mouvements.couleur: ['blanc', 'rose', 'rouge']
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
         stocks:
           libelle: "Stocks"
           index: "DRMMVT"
@@ -124,6 +107,7 @@ all:
                     terms:
                       size: 0,
                       field: 'doc.declarant.famille'
+                      "order" : { "_term" : "desc" }
                     aggs:
                       stock_initial:
                         filter:
@@ -206,6 +190,7 @@ all:
                         terms:
                           size: 0,
                           field: 'doc.mouvements.couleur'
+                          "order" : { "_term" : "asc" }
                         aggs:
                           france:
                             filter:
@@ -297,6 +282,7 @@ all:
                     terms:
                       size: 0,
                       field: 'doc.mouvements.couleur'
+                      "order" : { "_term" : "asc" }
                     aggs:
                       france:
                         filter:

@@ -101,8 +101,7 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
         }
 
         $paiement_douane_frequence = $values['paiement_douane_frequence'];
-
-        $this->drm->getSociete()->add('paiement_douane_frequence', $paiement_douane_frequence);
+        $this->drm->setPaiementDouaneFrequence($values['paiement_douane_frequence']);
         if ($paiement_douane_frequence == DRMPaiement::FREQUENCE_ANNUELLE) {
             foreach ($this->drm->getProduits() as $produit) {
                 $genre = $produit->getConfig()->getGenre();

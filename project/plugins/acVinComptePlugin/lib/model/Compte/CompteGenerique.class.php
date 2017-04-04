@@ -152,6 +152,7 @@ abstract class CompteGenerique extends acCouchdbDocument {
             ($compte1->getAdresse() == $compte2->getAdresse() || !$compte1->getAdresse()) &&
             ($compte1->getCommune() == $compte2->getCommune() || !$compte1->getCommune()) &&
             ($compte1->getCodePostal() == $compte2->getCodePostal() || !$compte1->getCodePostal()) &&
+            ($compte1->getInsee() == $compte2->getInsee() || !$compte1->getInsee()) &&
             ($compte1->getAdresseComplementaire() == $compte2->getAdresseComplementaire() || !$compte1->getAdresseComplementaire()) &&
             ($compte1->getPays() == $compte2->getPays() || !$compte1->getPays())
         )
@@ -257,8 +258,10 @@ abstract class CompteGenerique extends acCouchdbDocument {
 
     public static function pullAdresse(InterfaceCompteGenerique $compteTo, InterfaceCompteGenerique $compteFrom) {
         $compteTo->setAdresse($compteFrom->adresse);
+        $compteTo->setAdresseComplementaire($compteFrom->adresse_complementaire);
         $compteTo->setCommune($compteFrom->commune);
         $compteTo->setCodePostal($compteFrom->code_postal);
+        $compteTo->setInsee($compteFrom->insee);
         $compteTo->setPays($compteFrom->pays);
     }
 
@@ -272,6 +275,7 @@ abstract class CompteGenerique extends acCouchdbDocument {
         $compteTo->setFax($compteFrom->fax);
         $compteTo->setTelephonePerso($compteFrom->telephone_perso);
         $compteTo->setTelephoneMobile($compteFrom->telephone_mobile);
+        $compteTo->setSiteInternet($compteFrom->site_internet);
     }
 
     public function pullContactFrom(InterfaceCompteGenerique $compteFrom) {

@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(19);
+$t = new lime_test(21);
 $t->comment("création d'une DRM avec des sorties facturables et non");
 
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();
@@ -102,3 +102,14 @@ $drm_mod->validate();
 $drm_mod->save();
 $mvts_viti = $drm_mod->mouvements->{$drm_mod->identifiant};
 $t->is(count($mvts_viti) * count($drm_mod->mouvements), 2, $drm_mod->_id." : la validation a généré deux mouvements (tous pour le viti)");
+
+
+$drm_mod->setPaiementDouaneFrequence(DRMPaiement::FREQUENCE_ANNUELLE);
+$drm_mod->save();
+$societe = SocieteClient::getInstance()->find($viti->id_societe);
+$t->is($societe->paiement_douane_frequence, DRMPaiement::FREQUENCE_ANNUELLE, $drm_mod->_id." : Le changement de frequence douane a un impact sur la societe");
+
+$drm_mod->setPaiementDouaneFrequence(DRMPaiement::FREQUENCE_MENSUELLE);
+$drm_mod->save();
+$societe = SocieteClient::getInstance()->find($viti->id_societe);
+$t->is($societe->paiement_douane_frequence, DRMPaiement::FREQUENCE_MENSUELLE, $drm_mod->_id." : Un nouveau changement de frequence douane a un impact sur la societe");

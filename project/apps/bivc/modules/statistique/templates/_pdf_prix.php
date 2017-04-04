@@ -10,6 +10,7 @@ $values = explode(';', $item);
 if (!$values[0] || preg_match('/total/i', $values[0])) { continue; }
 $headers[$values[0]] = $values[0];
 }
+$options = $options->getRawValue();
 $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset($options['periode'][1]))? $options['periode'] : null;
 ?>
 \documentclass[a4paper, landscape, 10pt]{article}
