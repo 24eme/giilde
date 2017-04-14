@@ -243,12 +243,12 @@ abstract class _ConfigurationDeclaration extends acCouchdbDocumentTree {
         return $this->_get('densite');
     }
 
-    public function getLibelleFormat($labels = array(), $format = "%format_libelle%", $label_separator = ", ") {
+    public function getLibelleFormat($denomination_complementaire = null, $format = "%format_libelle%", $label_separator = ", ") {
         if (!array_key_exists($format, $this->libelle_format)) {
             $format_libelle = $this->getFormatLibelleCalcule();
             $format = str_replace("%format_libelle%", $format_libelle, $format);
             $libelle = $this->formatProduitLibelle($format);
-            $libelle = $this->getDocument()->formatLabelsLibelle($labels, $libelle, $label_separator);
+            $libelle = $this->getDocument()->formatDenominationComplLibelle($denomination_complementaire, $libelle, $label_separator);
             $this->libelle_format[$format] = trim($libelle);
         }
 
@@ -549,7 +549,7 @@ abstract class _ConfigurationDeclaration extends acCouchdbDocumentTree {
         $produits = $this->getProduits($date, $interpro, $departement, $attributes);
         $produits_formated = array();
         foreach ($produits as $hash => $produit) {
-            $produits_formated[$hash] = $produit->getLibelleFormat(array(), $format, ',');
+            $produits_formated[$hash] = $produit->getLibelleFormat( null, $format, ',');
         }
         return $produits_formated;
     }

@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(21);
+$t = new lime_test(42);
 $t->comment("création d'une DRM avec des sorties facturables et non");
 
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();
@@ -113,3 +113,168 @@ $drm_mod->setPaiementDouaneFrequence(DRMPaiement::FREQUENCE_MENSUELLE);
 $drm_mod->save();
 $societe = SocieteClient::getInstance()->find($viti->id_societe);
 $t->is($societe->paiement_douane_frequence, DRMPaiement::FREQUENCE_MENSUELLE, $drm_mod->_id." : Un nouveau changement de frequence douane a un impact sur la societe");
+
+$periodeNext = date("Y").sprintf("%02d",date("m")+1);
+
+$drmNext = DRMClient::getInstance()->createDoc($viti->identifiant, $periodeNext, true);
+$drmNext->save();
+
+$details = $drmNext->addProduit($produit_hash, 'details');
+$details->stocks_debut->initial = 1000;
+
+
+## test produit en denom complémentaires
+$produitLibelle = $details->getLibelle();
+$details->sorties->consommationfamilialedegustation = 100;
+$drmNext->update();
+$drmNext->save();
+$t->is($drmNext->getProduit($produit_hash, 'details')->get('stocks_fin/final'), 900, $drmNext->_id." : vérification du stock final sur le produit ".$details->getHash());
+
+## Ajout d'un produit avec une dénomination
+$millesime = "2016";
+$t->comment("On instancie dans la DRM un produit avec denomination complémentaire : ".$millesime);
+
+$detailsM = $drmNext->addProduit($produit_hash, 'details', $millesime);
+$detailsM->stocks_debut->initial = 200;
+$detailsM->sorties->consommationfamilialedegustation = 50;
+$drmNext->update();
+$drmNext->save();
+$t->is($drmNext->getProduit($produit_hash, 'details', $millesime)->get('stocks_fin/final'), 150, $drmNext->_id." : vérification du stock final sur le produit ".$detailsM->getHash());
+
+## Vérification que les deux produits existes et que leur clé soit différentes
+$countProduit = 0;
+$produitsByCertif = $drmNext->declaration->getProduitsDetailsByCertifications(true);
+foreach ($produitsByCertif as $produitByCertif) {
+  if(count($produitByCertif->produits) && (($produitByCertif->certification_libelle == "IGP") || ($produitByCertif->certification_libelle == "AOP") || ($produitByCertif->certification_libelle == "AOC"))){
+    $countProduit = count($produitByCertif->produits);
+  }
+}
+$t->is($countProduit, 2, $drmNext->_id." : le nombre de produits est bien 2");
+
+## vérification que la dénomination complémentaire soit bien remplie dans le second produit
+foreach ($produitsByCertif as $produitByCertif) {
+  if(count($produitByCertif->produits) && (($produitByCertif->certification_libelle == "IGP") || ($produitByCertif->certification_libelle == "AOP" || ($produitByCertif->certification_libelle == "AOC")))){
+    $produitsAdded = $produitByCertif->produits;
+    $cpt = 0;
+    foreach ($produitsAdded as $produitAdded) {
+      if($cpt){
+        $t->is($produitAdded->get('denomination_complementaire'), $millesime, $drmNext->_id." : La dénomination complémentaire vaut $millesime");
+      }else{
+        $t->is($produitAdded->get('denomination_complementaire'), null, $drmNext->_id." : La dénomination complémentaire est nulle ici.");
+      }
+      $cpt++;
+    }
+  }
+}
+
+## vérification que le getLibelle renvoie le millésime
+
+foreach ($produitsByCertif as $produitByCertif) {
+  if(count($produitByCertif->produits) && (($produitByCertif->certification_libelle == "IGP") || ($produitByCertif->certification_libelle == "AOP" || ($produitByCertif->certification_libelle == "AOC")))){
+    $produitsAdded = $produitByCertif->produits;
+    $cpt = 0;
+    foreach ($produitsAdded as $produitAdded) {
+      if($cpt){
+        $t->is($produitAdded->getLibelle(), $produitLibelle." ".$millesime, $drmNext->_id." : Le libelle du produit est bien : ".$produitAdded->getLibelle());
+      }else{
+        $t->is($produitAdded->getLibelle(), $produitLibelle, $drmNext->_id." : Le libelle du produit est bien : ".$produitAdded->getLibelle());
+      }
+      $cpt++;
+    }
+  }
+}
+
+## changement de Dénomination complémentaire
+
+$grandCru = "Grand Cru";
+$hashOrigine = $detailsM->getHash();
+$baseLibelle = "";
+$denomComplLibelle = "";
+$drmNext->get($hashOrigine)->set("denomination_complementaire",$grandCru);
+$drmNext->update();
+$drmNext->save();
+
+$produitFounded = false;
+foreach ($drmNext->declaration->getProduitsDetailsByCertifications(true) as $produitByCertif) {
+  if(count($produitByCertif->produits) && (($produitByCertif->certification_libelle == "IGP") || ($produitByCertif->certification_libelle == "AOP" || ($produitByCertif->certification_libelle == "AOC")))){
+    $produitsAdded = $produitByCertif->produits;
+    $cpt = 0;
+    foreach ($produitsAdded as $produitAdded) {
+      if(!$cpt){
+        $baseLibelle = $produitAdded->getLibelle();
+      }else{
+        $produitFounded = $produitAdded;
+        $denomComplLibelle = $produitFounded->getLibelle();
+      }
+      $cpt++;
+    }
+  }
+}
+$hashDest = $produitFounded->getHash();
+$keyDetailsDest = $produitFounded->getKey();
+
+$t->is($drmNext->get($hashDest)->get('denomination_complementaire'), $grandCru, $drmNext->_id." : la dénomination complémentaire est bien devenue $grandCru ");
+$t->isnt($hashOrigine, $hashDest, $drmNext->_id." : La hash a bougé parce que $millesime a été remplacé par $grandCru");
+$t->is($drmNext->get($hashDest)->get('stocks_fin/final'), 150, $drmNext->_id." : vérification du stock final sur le produit ".$hashDest);
+$t->is($drmNext->get($hashDest)->get('sorties/consommationfamilialedegustation'), 50, $drmNext->_id." : vérification de la conso familiale ".$hashDest);
+
+$existNodeMillesime = $drmNext->exist($hashOrigine);
+$t->ok(!$existNodeMillesime, $drmNext->_id." : il n'y a plus de produit avec $millesime ");
+
+# test des mvts avant validation
+$drm_mvts_sorted = $drmNext->getMouvementsCalculeByIdentifiant($drmNext->identifiant);
+$mvts_sorted = DRMClient::getInstance()->sortMouvementsForDRM($drm_mvts_sorted);
+$cpt = 0;
+foreach ($mvts_sorted as $type_mvt_drm => $mvts_grouped) {
+  foreach ($mvts_grouped as $hash_produit => $mvts) {
+    foreach ($mvts as $key => $mvt) {
+      if($cpt){
+        $t->is($mvt->getProduitLibelle(), $denomComplLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $denomComplLibelle");
+      }else{
+        $t->is($mvt->getProduitLibelle(), $baseLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $baseLibelle");
+      }
+      $cpt++;
+    }
+  }
+}
+
+# test des mvts après validation
+$drmNext->validate();
+$drmNext->save();
+
+$mvts_viti = $drmNext->mouvements->{$drmNext->identifiant};
+$t->is(count($mvts_viti), 2, $drmNext->_id." : la validation a généré deux mouvements chez le viti");
+
+$mvt_consoFam = null;
+$cpt = 0;
+foreach ($mvts_viti as $mvt) {
+  if ($mvt->type_hash == 'sorties/consommationfamilialedegustation') {
+    $mvt_consoFam = $mvt;
+  }
+  if(!$cpt){
+    $getKeyOfMvthash = str_replace("details/","",strstr($mvt_consoFam->produit_hash,"details/"));
+    $t->is($getKeyOfMvthash, "DEFAUT", $drmNext->_id." : la fin de la hash produit du mvt est bien DEFAUT");
+    $t->is($mvt->getProduitLibelle(), $baseLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $baseLibelle");
+  }else{
+    $getKeyOfMvthash = str_replace("details/","",strstr($mvt_consoFam->produit_hash,"details/"));
+    $t->is($getKeyOfMvthash, $keyDetailsDest, $drmNext->_id." : la fin de la hash produit du mvt est bien $keyDetailsDest");
+    $t->is($mvt->getProduitLibelle(), $denomComplLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $denomComplLibelle");
+  }
+  $cpt++;
+}
+
+$drm_mvts_sorted = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndPeriode($drmNext->identifiant, $drmNext->periode);
+$mvts_sorted = DRMClient::getInstance()->sortMouvementsForDRM($drm_mvts_sorted);
+$cpt = 0;
+foreach ($mvts_sorted as $type_mvt_drm => $mvts_grouped) {
+  foreach ($mvts_grouped as $hash_produit => $mvts) {
+    foreach ($mvts as $key => $mvt) {
+      if(!$cpt){
+        $t->is($mvt->produit_libelle, $denomComplLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $denomComplLibelle");
+      }else{
+        $t->is($mvt->produit_libelle, $baseLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $baseLibelle");
+      }
+      $cpt++;
+    }
+  }
+}

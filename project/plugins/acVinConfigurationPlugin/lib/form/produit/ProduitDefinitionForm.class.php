@@ -158,8 +158,9 @@ class ProduitDefinitionForm extends acCouchdbObjectForm {
         $this->getNoeudInterpro($object)->add('produit_non_interpro', $produit_non_interpro);
         $droit_cvo = $values['droit_cvo'];
         $droit_douane = $values['droit_douane'];
-        $this->getObject()->setCepagesAutorises($this->values['cepages_autorises']);
-
+        if($this->getObject()->hasCepagesAutorises()){
+          $this->getObject()->setCepagesAutorises($this->values['cepages_autorises']);
+        }
         unset($this->values['produit_non_interpro']);
         unset($this->values['droit_cvo']);
         unset($this->values['droit_douane']);

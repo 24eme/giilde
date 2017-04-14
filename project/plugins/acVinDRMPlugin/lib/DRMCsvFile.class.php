@@ -1,6 +1,6 @@
 <?php
 
-class DRMCsvFile extends CsvFile 
+class DRMCsvFile extends CsvFile
 {
 
   const NOEUD_TEMPORAIRE = 'TMP';
@@ -30,8 +30,8 @@ class DRMCsvFile extends CsvFile
   const CSV_COL_CEPAGE_CODE = 22;
   const CSV_COL_MILLESIME = 23;
   const CSV_COL_MILLESIME_CODE = 24;
-  const CSV_COL_LABELS = 25;
-  const CSV_COL_LABELS_CODE = 26;
+  const CSV_COL_LABELS = 25; //PLUS UTILISE
+  const CSV_COL_LABELS_CODE = 26; //PLUS UTILISE
   const CSV_COL_MENTION_EXTRA = 27;
   const CSV_COL_CONTRAT_IDENTIFIANT = 28;
   const CSV_COL_CONTRAT_VOLUME = 29;
@@ -127,8 +127,6 @@ class DRMCsvFile extends CsvFile
       $line[self::CSV_COL_CEPAGE_CODE] = $d->getCepage()->getCode();
       $line[self::CSV_COL_MILLESIME] = '';
       $line[self::CSV_COL_MILLESIME_CODE] = '';
-      $line[self::CSV_COL_LABELS] = $d->getLabelsLibelle("%la%", "|");
-      $line[self::CSV_COL_LABELS_CODE] = $d->getLabelKeyString();
       $line[self::CSV_COL_MENTION] = $d->label_supplementaire;
       $line[self::CSV_COL_DETAIL_TOTAL_DEBUT_MOIS] = $d->total_debut_mois;
       $line[self::CSV_COL_DETAIL_ENTREES] = $d->total_entrees;
@@ -186,15 +184,15 @@ class DRMCsvFile extends CsvFile
       throw new sfException("Incoherence dans le mois de la DRM (".$this->drm->getMois().' <> '.$line[self::CSV_COL_MOIS].')');
     if($this->drm->identifiant != $line[self::CSV_COL_IDENTIFIANT_DECLARANT])
       throw new sfException("Incoherence dans l'identifiant de l'établissement DRM");
-    
-    $hash = $this->config->identifyProduct($line[self::CSV_COL_CERTIFICATION], 
-					   $line[self::CSV_COL_GENRE], 
-					   $line[self::CSV_COL_APPELLATION], 
-					   $line[self::CSV_COL_MENTION], 
-					   $line[self::CSV_COL_LIEU], 
-					   $line[self::CSV_COL_COULEUR], 
+
+    $hash = $this->config->identifyProduct($line[self::CSV_COL_CERTIFICATION],
+					   $line[self::CSV_COL_GENRE],
+					   $line[self::CSV_COL_APPELLATION],
+					   $line[self::CSV_COL_MENTION],
+					   $line[self::CSV_COL_LIEU],
+					   $line[self::CSV_COL_COULEUR],
 					   $line[self::CSV_COL_CEPAGE]);
-    $detail = $this->drm->addProduit($hash, $this->config->identifyLabels($line[self::CSV_COL_LABELS]));
+    $detail = $this->drm->addProduit($hash);
     if ($line[self::CSV_COL_MENTION])
       $detail->label_supplementaire = $line[self::CSV_COL_MENTION];
     return $detail;
@@ -248,7 +246,7 @@ class DRMCsvFile extends CsvFile
     $this->drm = null;
     $this->errors = array();
     $this->numline = (isset($options['init_line'])) ? $options['init_line'] : 0;
-    
+
     try {
       foreach ($this->getCsv() as $line) {
 	//Les CSV d'InterRhone et CIPV n'ont pas le noeud mention, on l'ajoute

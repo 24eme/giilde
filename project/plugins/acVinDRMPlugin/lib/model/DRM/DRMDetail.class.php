@@ -11,7 +11,7 @@ class DRMDetail extends BaseDRMDetail {
     }
 
     public function getLibelle($format = "%format_libelle%", $label_separator = ", ") {
-        return $this->getCepage()->getConfig()->getLibelleFormat($this->labels->toArray(), $format, $label_separator);
+        return $this->getCepage()->getConfig()->getLibelleFormat($this->get('denomination_complementaire'), $format, $label_separator);
     }
 
     public function getCode($format = "%g%%a%%m%%l%%co%%ce%") {
@@ -89,18 +89,6 @@ class DRMDetail extends BaseDRMDetail {
         return '';
     }
 
-    public function getLabelKey() {
-        $key = null;
-        if ($this->labels) {
-            $key = implode('-', $this->labels->toArray());
-        }
-        return ($key) ? $key : DRM::DEFAULT_KEY;
-    }
-
-    public function getLabelsLibelle($format = "%la%", $label_separator = ", ") {
-
-        return $this->getConfig()->getDocument()->formatLabelsLibelle($this->labels->toArray(), $format, $label_separator);
-    }
 
     public function getTypeDRM() {
 
@@ -178,7 +166,7 @@ class DRMDetail extends BaseDRMDetail {
         $hasobs = false;
         foreach($this->entrees as $entree => $v) {
           if ($this->getConfig()->get('entrees')->exist($entree)){
-            if (preg_match('/autres-entrees/', $this->getConfig()->get('entrees')->get($entree)->douane_cat) && $v) {
+            if (preg_match('/autres-entrees|replacement/', $this->getConfig()->get('entrees')->get($entree)->douane_cat) && $v) {
                 $hasobs = true;
                 if (!$this->exist('observations')) {
                   $this->add('observations',$entree);
@@ -367,7 +355,8 @@ class DRMDetail extends BaseDRMDetail {
                 continue;
             }
             $mouvement = DRMMouvement::freeInstance($this->getDocument());
-            $mouvement->produit_hash = $this->getCepage()->getConfig()->getHash();
+            $mouvement->produit_libelle = $this->getLibelle();
+            $mouvement->produit_hash = $this->getHash(); //WARNING : ceci change tout je pense
             $mouvement->type_drm = $this->getTypeDRM();
             $mouvement->type_drm_libelle = $this->getTypeDRMLibelle();
             $mouvement->facture = 0;
@@ -498,4 +487,40 @@ class DRMDetail extends BaseDRMDetail {
         return $this->getCepage()->getConfig()->code_douane;
     }
 
+
+    public function getReplacementDate() {
+      $d = $this->_get('replacement_date');
+      return preg_replace('/(\d{4})-(\d{2})-(\d{2})/', '\3/\2/\1', $d);
+    }
+
+    public function setReplacementDate($d) {
+      $d = preg_replace('/(\d{2}).(\d{2}).(\d{4})/', '$3-$2-$1', $d);
+      return $this->_set('replacement_date', $d);
+    }
+
+    public function getReplacementMonth() {
+      $d = $this->_get('replacement_date');
+      return sprintf('%02d', preg_replace('/.*(-|\/)(\d{2})(-|\/).*/', '\2', $d));
+    }
+    public function getReplacementYear() {
+      $d = $this->_get('replacement_date');
+      return preg_replace('/(\d{4})/', '\1', $d);
+    }
+
+    public function setDenominationComplementaire($denomination_complementaire){
+      $denomChanged = ($this->get('denomination_complementaire') && ($this->get('denomination_complementaire') != $denomination_complementaire));
+
+      if(!$denomChanged){
+        $this->_set('denomination_complementaire',$denomination_complementaire);
+      }else{
+        $oldKey = $this->getKey();
+        $parent = $this->getParent();
+        $detailNode = clone $this;
+        $detailNode->_set('denomination_complementaire',$denomination_complementaire);
+
+        $newKey = $parent->createSHA1Denom($denomination_complementaire);
+        $parent->add($newKey,$detailNode);
+        $parent->get($oldKey)->delete();
+      }
+    }
 }

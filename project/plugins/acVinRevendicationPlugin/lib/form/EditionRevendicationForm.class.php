@@ -88,7 +88,7 @@ class EditionRevendicationForm extends sfForm {
         if (!isset($produits->$codeDouane)) {
             $produits->$codeDouane = new stdClass();
         }
-        $libelle = $this->getConfig()->get($this->values['produit_hash'])->getLibelleFormat(array(), "%format_libelle% %la%");
+        $libelle = $this->getConfig()->get($this->values['produit_hash'])->getLibelleFormat( null, "%format_libelle% %la%");
         $produits->$codeDouane->libelle_produit_csv = $libelle;
         $produits->$codeDouane->produit_hash = $hash;
         $produits->$codeDouane->produit_libelle = $libelle;
@@ -100,7 +100,7 @@ class EditionRevendicationForm extends sfForm {
         $new_ligne->num_ligne = $oldNode->volumes->$row->num_ligne;
         $new_ligne->volume = $oldNode->volumes->$row->volume;
         $new_ligne->bailleur_identifiant = $oldNode->volumes->$row->bailleur_identifiant;
-        $new_ligne->bailleur_nom = $oldNode->volumes->$row->bailleur_nom;        
+        $new_ligne->bailleur_nom = $oldNode->volumes->$row->bailleur_nom;
         $new_ligne->date_certification = $oldNode->volumes->$row->date_certification;
         $new_ligne->ligne = $oldNode->volumes->$row->ligne;
         $new_ligne->statut = RevendicationProduits::STATUT_MODIFIE;

@@ -4,7 +4,7 @@ class GenericLatex {
 
   const OUTPUT_TYPE_PDF = 'pdf';
   const OUTPUT_TYPE_LATEX = 'latex';
-  
+
   public function getLatexFile() {
     $fn = $this->getLatexFileName();
     $leFichier = fopen($fn, "w");
@@ -20,33 +20,17 @@ class GenericLatex {
   private function getLatexDestinationDir() {
     return sfConfig::get('sf_root_dir')."/data/latex/";
   }
-  
+
   protected function getTEXWorkingDir() {
     return "/tmp/";
   }
 
   public function generatePDF() {
-    $cmdCompileLatex = '/usr/bin/pdflatex -output-directory="'.$this->getTEXWorkingDir().'" -synctex=1 -interaction=nonstopmode "'.$this->getLatexFile().'" 2>&1';
-    $output = array();
-    exec($cmdCompileLatex, $output, $ret);
-    $output = implode(' ', $output);
-    if (!preg_match('/Transcript written/', $output) || preg_match('/Fatal error/', $output)) {
-      throw new sfException($output);
-    }
-/*
-    if ($ret) {
-      $log = $this->getLatexFileNameWithoutExtention().'.log';
-      $grep = preg_grep('/^!/', file($log));
-      if ($grep){
-	      array_unshift($grep, "/!\ Latex error\n");
-	      array_unshift($grep, "Latex log $log:\n");
-              throw new sfException(implode(' ', $grep));
-      }
-    }
-*/
+    $cmdCompileLatex = '/usr/bin/latexmk -pdf -output-directory="'.$this->getTEXWorkingDir().'" -interaction=nonstopmode "'.$this->getLatexFile().'" 2>&1';
+    exec($cmdCompileLatex, $output);
     $pdfpath = $this->getLatexFileNameWithoutExtention().'.pdf';
     if (!file_exists($pdfpath)) {
-      throw new sfException("pdf not created ($pdfpath): ".$output);
+      throw new sfException("pdf not created ($pdfpath): ".implode(',', $output));
     }
     return $pdfpath;
   }
@@ -58,6 +42,8 @@ class GenericLatex {
     @unlink($file.'.pdf');
     @unlink($file.'.tex');
     @unlink($file.'.synctex.gz');
+    @unlink($file.'.fls');
+    @unlink($file.'.fdb_latexmk');
   }
 
   public function getPDFFile() {
@@ -103,7 +89,7 @@ class GenericLatex {
       return $this->echoLatexWithHTTPHeader();
     return $this->echoPDFWithHTTPHeader();
   }
- 
+
   public function getLatexFileName() {
     return $this->getLatexFileNameWithoutExtention().'.tex';
   }
@@ -111,7 +97,7 @@ class GenericLatex {
   public function getNbPages() {
     throw new sfException("need to be implemented upstream");
   }
-  
+
   public function getLatexFileNameWithoutExtention() {
     throw new sfException("need to be implemented upstream");
   }

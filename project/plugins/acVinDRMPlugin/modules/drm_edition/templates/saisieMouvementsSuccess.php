@@ -34,13 +34,14 @@
                   'saisieSuspendu' => $saisieSuspendu));
                 ?>
             </div>
-
             <div class="col-sm-3">
                 <div class="panel panel-default stickyHeader">
                     <div class="panel-heading">Édition des Produits<?php echo getPointAideHtml('drm','mouvements_choix_produits') ?></div>
-                    <div class="panel-body">
+                      <?php if(!$isTeledeclarationMode): ?>
+                        <div class="panel-body">
                         <?php include_component('drm_edition', 'produitForm', array('drm' => $drm, 'config' => $config, 'detailsKey' => $detailsKey)) ?>
-                    </div>
+                      </div>
+                      <?php endif; ?>
                     <ul id="list-produits" class="list-group drm_fil_edition_produit pointer">
                         <?php foreach ($details as $produit) : ?>
                             <?php

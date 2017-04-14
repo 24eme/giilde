@@ -8,7 +8,7 @@ class DSProduit extends BaseDSProduit {
 
     public function updateProduit()
     {
-        $this->produit_libelle = $this->getConfig()->getLibelleFormat(array(), "%format_libelle%");
+        $this->produit_libelle = $this->getConfig()->getLibelleFormat(null, "%format_libelle%");
         $this->code_produit = $this->getConfig()->getCodeProduit();
     }
 
@@ -16,7 +16,7 @@ class DSProduit extends BaseDSProduit {
 
         return (!is_null($this->stock_declare));
     }
-    
+
     public function hasElaboration(){
         return strstr($this->produit_hash, 'EFF')!==false;
     }

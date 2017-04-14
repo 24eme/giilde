@@ -42,8 +42,12 @@ function multiArray2XML($preXML) {
 			$xml .= "</$k>";
 		}else{
 			$xml .= "<$k>";
-                        $xml .= sprintf('%.04f', $v);
-                        $xml .= "</$k>";
+			if ($k != "annee" && $k != "mois") {
+      	$xml .= sprintf('%.04f', $v);
+			}else{
+				$xml .= sprintf('%02d', $v);
+			}
+      $xml .= "</$k>";
 		}
 	}
 	return $xml;
@@ -65,6 +69,10 @@ function details2XmlDouane($detail) {
 	  foreach ($detail->get($type) as $k => $v) {
 		if (($v || (($k == 'initial' || $k == 'final') && preg_match('/^stock/', $type))) && $confDetail->get($type)->exist($k) && $confDetail->get($type)->get($k)->douane_cat) {
                         $preXML = storeMultiArray($preXML, split('/', $confDetail->get($type)->get($k)->douane_cat),  $v);
+			if (preg_match('/replacement/', $confDetail->get($type)->get($k)->douane_cat)) {
+				$preXML = storeMultiArray($preXML, split('/', 'entrees-periode/replacements/replacement-suspension/mois'),  $detail->getReplacementMonth());
+				$preXML = storeMultiArray($preXML, split('/', 'entrees-periode/replacements/replacement-suspension/annee'), $detail->getReplacementYear());
+			}
 		}
 	  }
 	}

@@ -226,7 +226,7 @@ class SV12Contrat extends BaseSV12Contrat {
             return;
         $this->contrat_numero = (isset($contratinfo['contrat_numero'])) ? $contratinfo['contrat_numero'] : null;
         $this->contrat_type = $contratinfo['contrat_type'];
-        $this->produit_libelle = $produit->getLibelleFormat(array(), "%format_libelle% %la%");
+        $this->produit_libelle = $produit->getLibelleFormat( null, "%format_libelle% %la%");
         $this->produit_hash = $produit->getHash();
         $this->vendeur_identifiant = $contratinfo['vendeur_identifiant'];
         $this->vendeur_nom = $contratinfo['vendeur_nom'];

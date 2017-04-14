@@ -19,7 +19,7 @@ class drm_validationActions extends drmGeneriqueActions {
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         $this->initSocieteAndEtablissementPrincipal();
         $this->mouvements = $this->drm->getMouvementsCalculeByIdentifiant($this->drm->identifiant);
-        $this->createMouvementsByProduits($this->mouvements);
+        $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);
 
         $this->drm->cleanDeclaration();
         if ($this->isTeledeclarationMode) {

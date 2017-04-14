@@ -324,9 +324,8 @@ class ConfigurationClient extends acCouchdbClient {
         }
     }
 
-    public function formatLabelsLibelle($labels, $format = "%la%", $separator = ", ") {
-
-        return str_replace("%la%", implode($separator, $labels), $format);
+    public function formatDenominationComplLibelle($denomination_complementaire = null, $format = "%la%", $separator = ", ") {				
+				return trim(str_replace("%la%", $denomination_complementaire, $format)." ".$denomination_complementaire);
     }
 
     public function fork($fork_doc_id, $configuration = null) {

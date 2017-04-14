@@ -98,7 +98,7 @@ class RelanceTypeExplications extends BaseRelanceTypeExplications {
 //                        $diff = $stock_drm - $rev_vol;
 //                        $seuil = $config->getOption('seuil');
 //                        if (abs($diff) > (abs($rev_vol) * ($seuil / 100))) {
-//                            $libelle = ConfigurationClient::getCurrent()->get($produit->produit_hash)->getLibelleFormat(array(), "%format_libelle% %la%");
+//                            $libelle = ConfigurationClient::getCurrent()->get($produit->produit_hash)->getLibelleFormat(null, "%format_libelle% %la%");
 //                            $this->explications .= $libelle . '|' . sprintFloatFr($rev_vol) . '|' . sprintFloatFr($stock_drm) . '|' . sprintFloatFr($diff) . ' \\\\ ';
 //                        }
 //                    }
@@ -116,7 +116,7 @@ class RelanceTypeExplications extends BaseRelanceTypeExplications {
 //                    $diff = $declaration->stock_initial - $declaration->stock_declare;
 //                    $seuil = $config->getOption('seuil');
 //                    if (abs($diff) > (abs($declaration->stock_initial) * ($seuil / 100))) {
-//                        $libelle = ConfigurationClient::getCurrent()->get(str_replace('-', '/', $hashKey))->getLibelleFormat(array(), "%format_libelle% %la%");
+//                        $libelle = ConfigurationClient::getCurrent()->get(str_replace('-', '/', $hashKey))->getLibelleFormat(null, "%format_libelle% %la%");
 //                        $this->explications .= $libelle . '|' . sprintFloatFr($declaration->stock_initial) . '|' . sprintFloatFr($declaration->stock_declare) . '|' . sprintFloatFr($diff) . ' \\\\ ';
 //                    }
 //                }
@@ -146,9 +146,9 @@ class RelanceTypeExplications extends BaseRelanceTypeExplications {
 //                    $diff = $stock_drm - $declaration->stock_declare;
 //                    $seuil = $config->getOption('seuil');
 //                    if (abs($diff) > (abs($declaration->stock_declare) * ($seuil / 100))) {
-//                        $libelle = ConfigurationClient::getCurrent()->get(str_replace('-', '/', $hashKey))->getLibelleFormat(array(), "%format_libelle% %la%");
+//                        $libelle = ConfigurationClient::getCurrent()->get(str_replace('-', '/', $hashKey))->getLibelleFormat(null, "%format_libelle% %la%");
 //                        $this->explications .= $libelle . '|' . sprintFloatFr($stock_drm) . '|' . sprintFloatFr($declaration->stock_declare) . '|' . sprintFloatFr($diff) . ' \\\\ ';
-//                    
+//
 //                    }
 //                }
 //                break;

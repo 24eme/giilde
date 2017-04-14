@@ -314,8 +314,14 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
                     }
                     $detail->quantite += ($ligneByType->value[MouvementfactureFacturationView::VALUE_VOLUME] * -1);
                 }
-                $codeProduit =
-                $this->configuration->get($ligneByType->key[MouvementfactureFacturationView::KEYS_PRODUIT_ID])->getCodeComptable();
+                $produit_configuration = null;
+                if($this->configuration->exist($ligneByType->key[MouvementfactureFacturationView::KEYS_PRODUIT_ID])){
+                  $produit_configuration = $this->configuration->get($ligneByType->key[MouvementfactureFacturationView::KEYS_PRODUIT_ID]);
+                }else{
+                  $hashTransformed = preg_replace('/(.*)\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)/',"$1",$ligneByType->key[MouvementfactureFacturationView::KEYS_PRODUIT_ID]);
+                  $produit_configuration = $this->configuration->get($hashTransformed);
+                }
+                $codeProduit = $produit_configuration->getCodeComptable();
 
                 $detail->add(FactureConfiguration::getInstance()->getStockageCodeProduit(), $codeProduit);
             }

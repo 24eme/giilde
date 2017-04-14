@@ -64,7 +64,7 @@ class Vrac extends BaseVrac {
         if ($value != $this->_get('produit')) {
             $this->_set('produit', $value);
             if ($value) {
-                $this->produit_libelle = $this->getProduitObject()->getLibelleFormat(array(), "%format_libelle%");
+                $this->produit_libelle = $this->getProduitObject()->getLibelleFormat( null, "%format_libelle%");
             } else {
                 $this->produit_libelle = "";
             }

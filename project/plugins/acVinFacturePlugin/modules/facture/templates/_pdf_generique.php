@@ -8,21 +8,10 @@ if($facture->hasArgument(FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS)){
     $titre_type_facture = "";
 }
 $avoir = ($facture->total_ht <= 0);
-include_partial('facture/pdf_generique_entete', array('facture' => $facture));
+include_partial('facture/pdf_generique_prelatex', array('pdf_nb_pages' => $nb_pages, 'pdf_titre' => $titre_type_facture, 'ressortissant' => $facture->declarant));
+include_partial('facture/pdf_facture_def', array('facture' => $facture));
+include_partial('facture/pdf_generique_entete', array('facture' => $facture, 'avoir' => $avoir));
 ?>
-\begin{document}
-<?php
-include_partial('facture/pdf_generique_titreAdresse', array('facture' => $facture, 'avoir' => $avoir));
-?>
-\fontsize{8}{10}\selectfont
-\begin{flushright}
-page \thepage / <?php echo $nb_pages; ?>
-\end{flushright}
-
-\begin{center}
- \large{\textbf{<?php echo $titre_type_facture; ?>}} \\
-\end{center}
-
 \centering
 \fontsize{8}{10}\selectfont
     \begin{tikzpicture}
@@ -66,17 +55,8 @@ foreach ($facture->lignes as $type => $typeLignes) {
             \node[draw=gray, inner sep=-2pt, rounded corners=3pt, line width=2pt, fit=(tab1.north west) (tab1.north east) (tab1.south east) (tab1.south west)] {};
             \end{tikzpicture}
             <?php
-            echo "\\newpage\n";
+            pdf_newpage();
             ?>
-            \fontsize{8}{10}\selectfont
-            \begin{flushright}
-            page \thepage / <?php echo $nb_pages; ?>
-            \end{flushright}
-
-            \begin{center}
-             \large{\textbf{<?php echo $titre_type_facture; ?>}} \\
-            \end{center}
-
             \centering
             \fontsize{8}{10}\selectfont
                 \begin{tikzpicture}

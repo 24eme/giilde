@@ -33,22 +33,20 @@ $hasDontRevendique = ConfigurationClient::getCurrent()->hasDontRevendique();
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            <?php foreach ($mouvementsByProduit[$typeKey] as $produit_hash => $mouvements): ?>
-            <?php $produit = $drm->get($produit_hash);
-                $produit_libelle = $produit->getLibelle();
+            <?php foreach ($mouvementsByProduit[$typeKey] as $produit_hash => $mouvements):
+                $produitDetail = $drm->getDetailsByHash($produit_hash);
+                $produit_libelle = $produitDetail->getLibelle();
                 $libelleDoc = DRMClient::getInstance()->getLibelleFromId($drm->_id);
                 ?>
-                <?php foreach($produit->getProduitsDetails(true, $typeDetailKey) as $detail): ?>
                 <tr data-words='<?php echo json_encode(array_merge(array(strtolower($produit_libelle), strtolower("Stock début"))), JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE) ?>' id="<?php echo mouvement_get_id($drm->_id) ?>" class="hamzastyle-item">
-                    <td><?php echo $detail->getTypeDRMLibelle() ?></td>
+                    <td><?php echo $produitDetail->getTypeDRMLibelle() ?></td>
                     <td><?php if($drm->version): ?><small class="text-muted"><?php echo $drm->version ?></small> <?php endif; ?><a href="#tab=mouvements_<?php echo $typeKey ?>&filtre=<?php echo strtolower($produit_libelle); ?>"><strong><?php echo $produit_libelle ?></strong></a></td>
                     <td><strong>Stock début</strong></td>
-                    <td class="text-right"><strong><?php echoFloat($produit->total_debut_mois) . ' hl'; ?></strong></td>
-                    <?php if($hasDontRevendique && $detail->stocks_debut->exist('dont_revendique')): ?>
-                    <td class="text-left"><strong>(<?php echo ($detail->stocks_debut->dont_revendique) ? sprintFloat($detail->stocks_debut->dont_revendique) : "0.00"; ?>)</strong></td>
+                    <td class="text-right"><strong><?php echoFloat($produitDetail->total_debut_mois) . ' hl'; ?></strong></td>
+                    <?php if($hasDontRevendique && $produitDetail->stocks_debut->exist('dont_revendique')): ?>
+                    <td class="text-left"><strong>(<?php echo ($produitDetail->stocks_debut->dont_revendique) ? sprintFloat($produitDetail->stocks_debut->dont_revendique) : "0.00"; ?>)</strong></td>
                     <?php endif; ?>
                 </tr>
-                <?php endforeach ?>
                 <?php foreach ($mouvements as $mouvement): ?>
                     <tr data-words='<?php echo json_encode(array_merge(array(strtolower($mouvement->produit_libelle), strtolower($mouvement->type_libelle), strtolower($mouvement->detail_libelle))), JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE) ?>' id="<?php echo mouvement_get_id($mouvement) ?>" class="hamzastyle-item <?php echo ($mouvement->facturable && (!$isTeledeclarationMode || $visualisation)) ? " facturable" : ""; ?>">
                         <td><?php echo $mouvement->type_drm_libelle ?></td>
@@ -76,19 +74,15 @@ $hasDontRevendique = ConfigurationClient::getCurrent()->hasDontRevendique();
                       <?php if($hasDontRevendique): ?>  <td></td> <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
-
-                <?php foreach($produit->getProduitsDetails(true, $typeDetailKey) as $detail): ?>
                 <tr data-words='<?php echo json_encode(array_merge(array(strtolower($produit_libelle), strtolower("Stock fin"))), JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE) ?>' id="<?php echo mouvement_get_id($drm->_id) ?>" class="hamzastyle-item">
-                    <td><?php echo $detail->getTypeDRMLibelle() ?></td>
+                    <td><?php echo $produitDetail->getTypeDRMLibelle() ?></td>
                     <td><?php if($drm->version): ?><small class="text-muted"><?php echo $drm->version ?></small> <?php endif; ?><a href="#tab=mouvements&filtre=<?php echo strtolower($produit_libelle); ?>"><strong><?php echo $produit_libelle ?></strong></a></td>
                     <td><strong>Stock fin</strong></td>
-                    <td class="text-right"><strong><?php echoFloat($produit->total) . ' hl'; ?></strong></td>
-                    <?php if($hasDontRevendique && $detail->stocks_fin->exist('dont_revendique')): ?>
-                    <td class="text-left"><strong>(<?php echo ($detail->stocks_fin->dont_revendique) ? sprintFloat($detail->stocks_fin->dont_revendique) : "0.00"; ?>)</strong></td>
+                    <td class="text-right"><strong><?php echoFloat($produitDetail->total) . ' hl'; ?></strong></td>
+                    <?php if($hasDontRevendique && $produitDetail->stocks_fin->exist('dont_revendique')): ?>
+                    <td class="text-left"><strong>(<?php echo ($produitDetail->stocks_fin->dont_revendique) ? sprintFloat($produitDetail->stocks_fin->dont_revendique) : "0.00"; ?>)</strong></td>
                     <?php endif; ?>
                 </tr>
-                <?php endforeach; ?>
-
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -12,14 +12,14 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     protected $archivage_document = null;
 
     public function  __construct() {
-        parent::__construct();   
+        parent::__construct();
         $this->initDocuments();
     }
 
     public function __clone() {
         parent::__clone();
         $this->initDocuments();
-    }   
+    }
 
     protected function initDocuments() {
         $this->mouvement_document = new MouvementDocument($this);
@@ -30,8 +30,8 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
     public function constructId() {
         $this->storeDeclarant();
-        $this->set('_id', SV12Client::getInstance()->buildId($this->identifiant, 
-							   $this->periode, 
+        $this->set('_id', SV12Client::getInstance()->buildId($this->identifiant,
+							   $this->periode,
 							   $this->version));
     }
 
@@ -40,13 +40,13 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
       $this->campagne = $p;
       return $this->_set('periode', $p);
     }
-    
+
     //A conserver pour gestion des abstracts de InterfaceArchivageDoc
     public function getCampagne() {
       return $this->_get('campagne');
     }
-    
-    public function getFirstDayOfPeriode() {        
+
+    public function getFirstDayOfPeriode() {
        return substr($this->periode, 0,4).'-'.substr($this->periode, 4,2).'-01';
     }
 
@@ -84,7 +84,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
         return ($this->valide->date_saisie) && ($this->valide->statut==SV12Client::STATUT_BROUILLON);
     }
-    
+
     public function updateContrats($num_contrat, $contrat) {
         if ($this->contrats->exist($num_contrat)) {
     	    if($contrat[VracClient::VRAC_VIEW_STATUT] == VracClient::STATUS_CONTRAT_ANNULE) {
@@ -95,21 +95,21 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
             return;
         }
-      
+
         if (!$contrat) {
-	       
+
            throw new acCouchdbException(sprintf("Le Contrat \"%s\" n'existe pas!", $num_contrat));
         }
 
         if(!in_array($contrat[VracClient::VRAC_VIEW_STATUT], VracClient::$statuts_vise)) {
-        
+
             return;
         }
 
         $contratObj = new stdClass();
         $contratObj->contrat_numero = $num_contrat;
         $contratObj->contrat_type = $contrat[VracClient::VRAC_VIEW_TYPEPRODUIT];
-        $contratObj->produit_libelle = ConfigurationClient::getCurrent()->get($contrat[VracClient::VRAC_VIEW_PRODUIT_ID])->getLibelleFormat(array(), "%format_libelle% %la%");
+        $contratObj->produit_libelle = ConfigurationClient::getCurrent()->get($contrat[VracClient::VRAC_VIEW_PRODUIT_ID])->getLibelleFormat( null, "%format_libelle% %la%");
         $contratObj->produit_hash = $contrat[VracClient::VRAC_VIEW_PRODUIT_ID];
         $contratObj->vendeur_identifiant = $contrat[VracClient::VRAC_VIEW_VENDEUR_ID];
         $contratObj->vendeur_nom = $contrat[VracClient::VRAC_VIEW_VENDEUR_NOM];
@@ -129,7 +129,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
         $contrat = new stdClass();
 
-        $config_produit = $vrac->getProduitObject(); 
+        $config_produit = $vrac->getProduitObject();
         $contrat->contrat_numero = $vrac->numero_contrat;
         $contrat->contrat_type = $vrac->type_transaction;
         $contrat->produit_libelle = $config_produit->getLibelleFormat("%format_libelle%");
@@ -159,11 +159,11 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
         foreach ($this->contrats as $c) {
             if (!$c->canBeSoldable()) {
                 return false;
-            }        
+            }
         }
 
         return true;
-    } 
+    }
 
     public function getVolumeTotal() {
       return $this->totaux->volume_raisins + $this->totaux->volume_mouts + $this->totaux->volume_ecarts;
@@ -180,25 +180,25 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
             if(!$this->totaux->produits->exist($contrat->produit_libelle)) {
                 $noeud = $this->totaux->produits->add($contrat->produit_libelle);
                 $noeud->produit_hash = $contrat->produit_hash;
-                $noeud->volume_raisins = 0;      
-                $noeud->volume_mouts = 0;      
+                $noeud->volume_raisins = 0;
+                $noeud->volume_mouts = 0;
             } else {
                 $noeud = $this->totaux->produits->get($contrat->produit_libelle);
             }
 
             if ($contrat->contrat_type == VracClient::TYPE_TRANSACTION_RAISINS) {
-                $noeud->volume_raisins += $contrat->volume; 
-                $this->totaux->volume_raisins += $contrat->volume; 
+                $noeud->volume_raisins += $contrat->volume;
+                $this->totaux->volume_raisins += $contrat->volume;
             } elseif($contrat->contrat_type == VracClient::TYPE_TRANSACTION_MOUTS) {
                 $noeud->volume_mouts += $contrat->volume;
-                $this->totaux->volume_mouts += $contrat->volume;   
+                $this->totaux->volume_mouts += $contrat->volume;
             } else {
                 $noeud->volume_ecarts += $contrat->volume;
-                $this->totaux->volume_ecarts += $contrat->volume;   
+                $this->totaux->volume_ecarts += $contrat->volume;
 	    }
         }
     }
-    
+
     public function updateVolume($num_contrat,$volume) {
         $this->contrats[$num_contrat]->volume = $volume;
     }
@@ -217,7 +217,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
         $this->storeDates();
         $this->storeDeclarant();
-        
+
         $this->generateMouvements();
         $this->updateTotaux();
 
@@ -232,7 +232,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
         } else {
             $this->valide->statut = SV12Client::STATUT_VALIDE_PARTIEL;
         }
-        
+
     }
 
     public function devalide() {
@@ -240,13 +240,13 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
         $this->valide->date_saisie = '';
         $this->valide->statut = SV12Client::STATUT_BROUILLON;
     }
-    
+
 
     public function saveBrouillon() {
         $this->valide->date_saisie = date('d-m-y');
         $this->valide->statut = SV12Client::STATUT_BROUILLON;
     }
-    
+
     public function getDate() {
 
         return SV12Client::getInstance()->buildDate($this->periode);
@@ -268,13 +268,13 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
             throw new sfException("Impossible de supprimer une SV12 validée");
         }
-        
+
         parent::delete();
     }
-    
+
     public function __toString()
     {
-        
+
         return SV12Client::getInstance()->getLibelleFromId($this->_id);
     }
 
@@ -307,7 +307,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
     public function isVersionnable() {
         if (!$this->isValidee()) {
-           
+
            return false;
         }
 
@@ -325,7 +325,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     }
 
     public function isRectifiable() {
-        
+
         return false;
     }
 
@@ -350,14 +350,14 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     }
 
     public function getMasterVersionOfRectificative() {
-        return SV12Client::getInstance()->findMasterRectificative($this->identifiant, 
-                                                                 $this->periode, 
+        return SV12Client::getInstance()->findMasterRectificative($this->identifiant,
+                                                                 $this->periode,
                                                                  self::buildVersion($this->getRectificative() - 1, 0));
     }
 
     public function needNextVersion() {
 
-       return $this->version_document->needNextVersion();      
+       return $this->version_document->needNextVersion();
     }
 
     public function getMaster() {
@@ -382,7 +382,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
 
     public function getMother() {
 
-        return $this->version_document->getMother();   
+        return $this->version_document->getMother();
     }
 
     public function motherGet($hash) {
@@ -406,7 +406,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     }
 
     public function isModifiedMother($hash_or_object, $key = null) {
-        
+
         return $this->version_document->isModifiedMother($hash_or_object, $key);
     }
 
@@ -430,7 +430,7 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     }
 
     public function listenerGenerateNextVersion($document) {
-        
+
     }
 
     /**** FIN DE VERSION ****/
@@ -443,14 +443,14 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     }
 
     public function getMouvementsCalcule() {
-        
+
         $mouvements = array();
         foreach($this->contrats as $contrat) {
             $mouvement_vendeur = $contrat->getMouvementVendeur();
             if ($mouvement_vendeur && $contrat->vendeur_identifiant) {
                 $mouvements[$contrat->vendeur_identifiant][$mouvement_vendeur->getMD5Key()] = $mouvement_vendeur;
             }
-            
+
             $mouvement_acheteur = $contrat->getMouvementAcheteur();
             if ($mouvement_acheteur) {
                 $mouvements[$this->getDocument()->identifiant][$mouvement_acheteur->getMD5Key()] = $mouvement_acheteur;
@@ -461,15 +461,15 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     }
 
     public function getMouvementsCalculeByIdentifiant($identifiant) {
-       
+
        return $this->mouvement_document->getMouvementsCalculeByIdentifiant($identifiant);
     }
-    
+
     public function generateMouvements() {
 
         return $this->mouvement_document->generateMouvements();
     }
-    
+
     public function findMouvement($cle, $id = null){
       return $this->mouvement_document->findMouvement($cle, $id);
     }
@@ -508,12 +508,12 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
         }
         return false;
     }
-    
+
     /**** FIN DES MOUVEMENTS ****/
-    
-    
+
+
     /**** DECLARANT ****/
-        
+
     public function storeDeclarant() {
         $this->declarant_document->storeDeclarant();
     }
@@ -523,10 +523,10 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
     }
 
     public function getEtablissement() {
-        
+
         return EtablissementClient::getInstance()->find($this->identifiant);
     }
-    
+
     /**** FIN DES DECLARANT ****/
 
     /*** ARCHIVAGE ***/

@@ -143,7 +143,7 @@ class acVinCompteUpdateProductionTagTask extends sfBaseTask {
         }
 
 
-        return $this->replaceAccents($configuration->get($hash)->getLibelleFormat(array(), "%format_libelle%"));
+        return $this->replaceAccents($configuration->get($hash)->getLibelleFormat(null, "%format_libelle%"));
     }
 
     protected function replaceAccents($s) {

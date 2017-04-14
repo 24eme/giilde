@@ -57,7 +57,11 @@ class DRMProduitsChoiceForm extends acCouchdbObjectForm {
             if (preg_match('/^acquitte(.*)/', $key, $matches)) {
                 $key = str_replace('-', '/', $matches[1]);
                 if ($value) {
-                	$this->_drm->addProduit($this->_drm->get($key)->getCepage()->getHash(), DRM::DETAILS_KEY_ACQUITTE, array());
+                  $denomination_complementaire = null;
+                  if($this->_drm->get($key)->exist("denomination_complementaire") && $this->_drm->get($key)->get("denomination_complementaire")){
+                    $denomination_complementaire = $this->_drm->get($key)->get("denomination_complementaire");
+                  }
+                	$this->_drm->addProduit($this->_drm->get($key)->getCepage()->getHash(), DRM::DETAILS_KEY_ACQUITTE, $denomination_complementaire);
                 } else {
                 	if ($this->_drm->get($key)->getCepage()->exist(DRM::DETAILS_KEY_ACQUITTE)) {
                 		$this->_drm->get($key)->getCepage()->remove(DRM::DETAILS_KEY_ACQUITTE);

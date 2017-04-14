@@ -37,7 +37,7 @@ abstract class _DRMTotal extends acCouchdbDocumentTree {
 
     public function getLibelle($format = "%format_libelle%") {
 
-      return $this->getConfig()->getLibelleFormat(array(), $format);
+      return $this->getConfig()->getLibelleFormat(null, $format);
     }
 
    	public function getCode($format = "%g%%a%%m%%l%%co%%ce%") {

@@ -168,19 +168,9 @@ class Configuration extends BaseConfiguration {
         return $result;
     }
 
-    public function getLabelsLibelles($labels) {
-        $libelles = array();
-        foreach ($labels as $key) {
-            $libelles[$key] = $this->labels[$key];
-        }
 
-        return $libelles;
-    }
-
-    public function formatLabelsLibelle($labels, $format = "%la%", $separator = ", ") {
-        $libelles = $this->getLabelsLibelles($labels);
-
-        return ConfigurationClient::getInstance()->formatLabelsLibelle($libelles, $format, $separator);
+    public function formatDenominationComplLibelle($denomination_complementaire, $format = "%la%", $separator = ", ") {
+            return ConfigurationClient::getInstance()->formatDenominationComplLibelle($denomination_complementaire, $format, $separator);
     }
 
     public function updateAlias($hashProduit, $alias) {

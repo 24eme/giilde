@@ -61,23 +61,7 @@ class drmGeneriqueActions extends sfActions {
     protected function isUsurpationMode() {
         return $this->getUser()->isUsurpationCompte();
     }
-
-    protected function createMouvementsByProduits($mouvements) {
-        $this->mouvementsByProduit = array();
-        foreach ($mouvements as $mouvement) {
-          $type_drm = (property_exists($mouvement,"type_drm") && $mouvement->type_drm)? $mouvement->type_drm : "SUSPENDU";
-          if (!isset($this->mouvementsByProduit[$type_drm])) {
-            $this->mouvementsByProduit[$type_drm] = array();
-          }
-            if (!array_key_exists($mouvement->produit_hash, $this->mouvementsByProduit[$type_drm])) {
-                $this->mouvementsByProduit[$type_drm][$mouvement->produit_hash] = array();
-            }
-            $this->mouvementsByProduit[$type_drm][$mouvement->produit_hash][] = $mouvement;
-        }
-
-        return $this->mouvementsByProduit;
-    }
-
+  
     protected function processProduitDetails($request, $formClass) {
         $this->detail = $this->getRoute()->getDRMDetail();
         $this->drm = $this->detail->getDocument();

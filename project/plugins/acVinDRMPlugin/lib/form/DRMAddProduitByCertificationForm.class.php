@@ -18,7 +18,7 @@ class DRMAddProduitByCertificationForm extends acCouchdbObjectForm {
     protected $_choices_produits = null;
 
     public function __construct(DRM $drm, $options = array(), $CSRFSecret = null) {
-        $this->_drm = $drm;        
+        $this->_drm = $drm;
         $this->_configurationCertifications = array();
         $this->_produitFilter = $options['produitFilter'];
         foreach (explode(',', $this->_produitFilter) as $certifKey) {
@@ -30,14 +30,17 @@ class DRMAddProduitByCertificationForm extends acCouchdbObjectForm {
 
     public function configure() {
         $this->setWidgets(array(
-            'produit' => new bsWidgetFormChoice(array('expanded' => false, 'multiple' => false, 'choices' => $this->getProduits()))
+            'produit' => new bsWidgetFormChoice(array('expanded' => false, 'multiple' => false, 'choices' => $this->getProduits())),
+            'denomination_complementaire' => new bsWidgetFormInput()
         ));
         $this->widgetSchema->setLabels(array(
-            'produit' => 'Produit : '
+            'produit' => 'Produit : ',
+            'denomination_complementaire' => "Libellé libre (optionnel) : "
         ));
 
         $this->setValidators(array(
             'produit' => new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getProduits())), array('required' => "Aucun produit n'a été saisi !")),
+            'denomination_complementaire' => new sfValidatorString(array('required' => false)),
         ));
 
         $this->widgetSchema->setNameFormat('add_produit_' . $this->_produitFilter . '[%s]');
@@ -77,11 +80,14 @@ class DRMAddProduitByCertificationForm extends acCouchdbObjectForm {
         return $this->_choices_produits;
     }
 
-    public function doUpdateObject($values) { 
-        parent::doUpdateObject($values);     
-        
-        $this->_drm->addProduit($values['produit'], DRM::DETAILS_KEY_SUSPENDU);
+    public function doUpdateObject($values) {
+        parent::doUpdateObject($values);
+        $denomination_complementaire = null;
+        if(isset($values["denomination_complementaire"]) && $values["denomination_complementaire"]){
+          $denomination_complementaire = $values["denomination_complementaire"];
+        }
+        $this->_drm->addProduit($values['produit'], DRM::DETAILS_KEY_SUSPENDU,$denomination_complementaire);
         $this->_drm->save();
-    }    
+    }
 
 }

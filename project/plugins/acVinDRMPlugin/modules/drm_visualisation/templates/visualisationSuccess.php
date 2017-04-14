@@ -106,13 +106,18 @@
       <?php echo getPointAideHtml('drm','visualisation_pdf'); ?>
         <a href="<?php echo url_for('drm_pdf', array('identifiant' => $drm->getIdentifiant(), 'periode_version' => $drm->getPeriodeAndVersion(), 'appellation' => 0)); ?>" class="btn btn-success">Télécharger le PDF</a>
     </div>
+    <div class="col-xs-4 text-right">
     <?php if ($drm->isTeledeclare() && !$isTeledeclarationMode) : ?>
-      <div class="col-xs-4 text-right">
           <?php if ($drm->isNonFactures()): ?>
           <a href="<?php echo url_for('drm_reopen', $drm); ?>" class="btn btn-warning">Reouvrir la DRM</a>
           <?php else: ?>
           <span>DRM Facturée (pas réouvrable)</span>
           <?php endif; ?>
-      </div>
     <?php endif; ?>
+    <?php if(isset($compte) && $compte && $compte->hasDroit("teledeclaration_douane") && $isTeledeclarationMode): ?>
+      <?php if (!$drm->transmission_douane->success) : ?>
+        <a style="margin-left: 5px;" href="<?php echo url_for('drm_transmission', $drm); ?>" class="btn btn-success" ><span>Transmettre la Drm sur CIEL</span></a>
+      <?php endif; ?>
+    <?php endif; ?>
+  </div>
 </div>
