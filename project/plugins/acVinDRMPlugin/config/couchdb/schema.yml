@@ -540,6 +540,7 @@ DRM:
                         facture: { type: integer }
                         facturable: { type: integer }
                         region: { }
+                        region_destinataire: { }
                         date: {  }
                         date_version: {  }
                         version: {  }

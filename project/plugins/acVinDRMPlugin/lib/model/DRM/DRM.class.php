@@ -1452,7 +1452,7 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
     /**     * FAVORIS ** */
     public function buildFavoris() {
         foreach ($this->drmDefaultFavoris() as $key => $value) {
-            $keySplitted = split('/', $key);
+            $keySplitted = explode('/', $key);
             $this->getOrAdd('favoris')->getOrAdd($keySplitted[0])->getOrAdd($keySplitted[1])->add($keySplitted[2], $value);
         }
     }

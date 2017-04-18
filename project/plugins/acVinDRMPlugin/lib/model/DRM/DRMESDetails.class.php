@@ -63,10 +63,12 @@ class DRMESDetails extends BaseDRMESDetails {
         if (!$mouvement) {
             return;
         }
-        $mouvements[$this->getDocument()->getIdentifiant()][$mouvement->getMD5Key()] = $mouvement;
+        $md5 = $mouvement->getMD5Key();
+        $mouvements[$this->getDocument()->getIdentifiant()][$md5] = $mouvement;
 
         if ($mouvement_vrac_destinataire = $this->createMouvementVracDestinataire(clone $mouvement, $detail)) {
             $mouvements[$detail->getVrac()->acheteur_identifiant][$mouvement->getMD5Key()] = $mouvement_vrac_destinataire;
+            $mouvements[$this->getDocument()->getIdentifiant()][$md5]['region_destinataire'] = $mouvement_vrac_destinataire->region;
         }
 
         if ($mouvement_vrac_intermediaire = $this->createMouvementVracIntermediaire(clone $mouvement, $detail)) {
