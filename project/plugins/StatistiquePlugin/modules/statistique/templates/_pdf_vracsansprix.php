@@ -11,9 +11,9 @@ include_partial('facture/pdf_generique_prelatex', array('pdf_nb_pages' => 1, 'pd
 include_partial('facture/pdf_generique_entete');
 
 ?>
+\fontsize{10}{12}\selectfont
 
 ~ \\
-
 Veuillez trouver ci-joint les mouvements d'achats sans prix enregistrés pour votre société <?php
 if ($options['date_fin']) {
   echo "du ".preg_replace('/(\d+)-(\d+)-(\d+)/', '$3/$2/$1', $options['date_debut'])." au ".preg_replace('/(\d+)-(\d+)-(\d+)/', '$3/$2/$1', $options['date_fin']);
@@ -22,10 +22,10 @@ if ($options['date_fin']) {
 }?>.
 
 ~ \\
-
 Merci de renseigner les prix afin de nous permettre d'établir les statistiques correspondantes :
 
 ~ \\
+\fontsize{8}{10}\selectfont
 
 \centering
 \begin{tabular}{|l|l|l|r|r|l|}

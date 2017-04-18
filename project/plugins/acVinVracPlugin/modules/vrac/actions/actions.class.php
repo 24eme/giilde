@@ -506,8 +506,8 @@ class vracActions extends sfActions {
     public function executeVisualisation(sfWebRequest $request) {
         $this->getUser()->setAttribute('vrac_object', null);
         $this->getUser()->setAttribute('vrac_acteur', null);
-        $this->getResponse()->setTitle(sprintf('Contrat N° %d - Visualisation', $request["numero_contrat"]));
         $this->vrac = $this->getRoute()->getVrac();
+        $this->getResponse()->setTitle(sprintf('Contrat N° %05d - Visualisation', $this->vrac->numero_archive));
         $this->signatureDemande = false;
         $this->compte = null;
         $this->societe = null;

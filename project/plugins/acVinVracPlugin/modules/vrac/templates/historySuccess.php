@@ -46,10 +46,7 @@ use_helper('Float');
 <br/>
         <div class="row">
           <div class="col-xs-12">
-    <?php
-        include_partial('global/hamzaStyle', array('table_selector' => '#table_contrats',
-                                                 'mots' => contrats_get_words($contratsByCampagneEtablissementAndStatut),
-                                                 'consigne' => "Saisissez un produit, un numéro de contrat ou un nom de soussigné :")) ?>
+              <input type="hidden" data-placeholder="Saisissez un produit, un numéro de contrat ou un nom de soussigné :" data-hamzastyle-container="#table_contrats" class="hamzastyle" />
          </div>
        </div>
        <br/>

@@ -947,4 +947,8 @@ class Vrac extends BaseVrac {
     }
 
 
+    public function isVracCreation() {
+      return preg_match('/^DRM-/', $this->numero_contrat);
+    }
+
 }
