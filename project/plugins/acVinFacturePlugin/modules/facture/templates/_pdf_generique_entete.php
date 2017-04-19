@@ -77,7 +77,7 @@ use_helper('Display');
 		function pdf_newpage_entete() {
 			echo "\\fontsize{8}{10}\\selectfont\n";
 		  echo "\\begin{flushright}\n";
-		  echo "page \\thepage / \\PdfNbPages\n";
+		  echo "page~\\thepage~/~\\pageref{LastPage}\n";
 			echo "\\end{flushright}\n\n";
 			echo "\\begin{center}\n";
 		 	echo "\\large{\\textbf{\\PdfTitre}} \\\\";

@@ -487,6 +487,16 @@ class DRMDetail extends BaseDRMDetail {
         return $this->getCepage()->getConfig()->code_douane;
     }
 
+    public function isCodeDouaneAlcool(){
+      if(!$this->getCodeDouane()){
+        return false;
+      }
+      if(preg_match('/^[0-9]{1}/', $this->getCodeDouane())){
+        return false;
+      }
+      return true;
+    }
+
 
     public function getReplacementDate() {
       $d = $this->_get('replacement_date');
@@ -522,5 +532,11 @@ class DRMDetail extends BaseDRMDetail {
         $parent->add($newKey,$detailNode);
         $parent->get($oldKey)->delete();
       }
+    }
+    public function getTav(){
+      if(!$this->exist('tav')){
+       return false;
+      }
+      return $this->_get('tav');
     }
 }

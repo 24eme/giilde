@@ -52,6 +52,9 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
         $this->widgetSchema->setNameFormat('drmAnnexesForm[%s]');
 
 
+        $tavs = new DRMTavsCollectionForm($this->drm);
+        $this->embedForm('tavsProduits', $tavs);
+
         $this->setWidget('paiement_douane_frequence', new bsWidgetFormChoice(array('expanded' => true, 'multiple' => false,'inline' => true,  'choices' => $this->getPaiementDouaneFrequence())));
         $this->setValidator('paiement_douane_frequence', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getPaiementDouaneFrequence())), array('required' => "Aucune fréquence de paiement des droits douane n'a été choisie")));
         $this->widgetSchema->setLabel('paiement_douane_frequence', 'Fréquence de paiement');
@@ -95,7 +98,7 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
         }
 
         foreach ($this->getEmbeddedForms() as $key => $releveNonApurementForm) {
-          if($key!="observationsProduits"){
+          if($key!="observationsProduits" && $key!="tavsProduits"){
             $releveNonApurementForm->updateObject($values[$key]);
             }
         }
@@ -122,6 +125,11 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
             if (isset($observation['replacement'])) {
             $this->drm->addReplacementDateProduit($hash, $observation['replacement']);
             }
+          }
+        }
+        if ($tavs = $values['tavsProduits']) {
+          foreach ($tavs as $hash => $tav) {
+            $this->drm->addTavProduit($hash, $tav['tav']);            
           }
         }
 

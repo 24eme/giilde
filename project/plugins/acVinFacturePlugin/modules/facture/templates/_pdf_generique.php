@@ -8,7 +8,7 @@ if($facture->hasArgument(FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS)){
     $titre_type_facture = "";
 }
 $avoir = ($facture->total_ht <= 0);
-include_partial('facture/pdf_generique_prelatex', array('pdf_nb_pages' => $nb_pages, 'pdf_titre' => $titre_type_facture, 'ressortissant' => $facture->declarant));
+include_partial('facture/pdf_generique_prelatex', array('pdf_titre' => $titre_type_facture, 'ressortissant' => $facture->declarant));
 include_partial('facture/pdf_facture_def', array('facture' => $facture));
 include_partial('facture/pdf_generique_entete', array('facture' => $facture, 'avoir' => $avoir));
 ?>

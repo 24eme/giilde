@@ -75,7 +75,9 @@ class DRMDetails extends BaseDRMDetails {
                 }
             }
         }
-
+        if($detail->isCodeDouaneAlcool()){
+          $detail->add('tav',0.0);
+        }
         return $detail;
     }
 

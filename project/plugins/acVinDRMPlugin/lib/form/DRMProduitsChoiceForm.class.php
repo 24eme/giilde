@@ -50,7 +50,7 @@ class DRMProduitsChoiceForm extends acCouchdbObjectForm {
             $matches = array();
             if (preg_match('/^produit(.*)/', $key, $matches)) {
                 $key = str_replace('-', '/', $matches[1]);
-                $this->_drm->get($key)->getCepage()->add('no_movements', ! $value);
+                $this->_drm->get($key)->add('no_movements', ! $value);
                 $this->_drm->etape = DRMClient::ETAPE_SAISIE;
 
             }
@@ -61,10 +61,11 @@ class DRMProduitsChoiceForm extends acCouchdbObjectForm {
                   if($this->_drm->get($key)->exist("denomination_complementaire") && $this->_drm->get($key)->get("denomination_complementaire")){
                     $denomination_complementaire = $this->_drm->get($key)->get("denomination_complementaire");
                   }
-                	$this->_drm->addProduit($this->_drm->get($key)->getCepage()->getHash(), DRM::DETAILS_KEY_ACQUITTE, $denomination_complementaire);
+                $p =	$this->_drm->addProduit($this->_drm->get($key)->getCepage()->getHash(), DRM::DETAILS_KEY_ACQUITTE, $denomination_complementaire);
+
                 } else {
-                	if ($this->_drm->get($key)->getCepage()->exist(DRM::DETAILS_KEY_ACQUITTE)) {
-                		$this->_drm->get($key)->getCepage()->remove(DRM::DETAILS_KEY_ACQUITTE);
+                  if ($this->_drm->get($key)->getCepage()->exist(DRM::DETAILS_KEY_ACQUITTE)) {
+                  	$this->_drm->get($key)->getCepage()->remove(DRM::DETAILS_KEY_ACQUITTE);
                 	}
                 }
 
@@ -77,13 +78,17 @@ class DRMProduitsChoiceForm extends acCouchdbObjectForm {
         $this->all_checked = true;
         parent::updateDefaultsFromObject();
         foreach ($this->_produits as $produit) {
-            if (!$produit->getCepage()->exist('no_movements') || !$produit->getCepage()->no_movements) {
+
+              if (!$produit->getCepage()->exist('no_movements') || !$produit->getCepage()->no_movements) {
+                  $this->setDefault('produit' . $produit->getHashForKey(), true);
+              }
+              if($produit->exist('no_movements') && $produit->get('no_movements')){
                 $this->setDefault('produit' . $produit->getHashForKey(), true);
-            }
-            if ($produit->getCepage()->exist(DRM::DETAILS_KEY_ACQUITTE)) {
-                $this->setDefault('acquitte' . $produit->getHashForKey(), true);
-            }
-        }
+              }
+              if ($produit->getCepage()->exist(DRM::DETAILS_KEY_ACQUITTE)) {
+                  $this->setDefault('acquitte' . $produit->getHashForKey(), true);
+              }
+          }
     }
 
     public function isAllChecked() {
