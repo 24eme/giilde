@@ -95,7 +95,11 @@ class GenericLatex {
   }
 
   public function getNbPages() {
-    throw new sfException("need to be implemented upstream");
+    exec("pdfinfo ".$this->getPDFFile(), $output);
+    if (preg_match('/Pages:\D*(\d+)\D/', implode($output), $m)) {
+      return $m[1];
+    }
+    throw new sfException("pdfinfo failed");
   }
 
   public function getLatexFileNameWithoutExtention() {

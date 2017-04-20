@@ -41,10 +41,13 @@ class FactureGenerationForm extends BaseForm {
         $choices = array_merge(FactureClient::getInstance()->getTypeFactureMouvement());
         if (FactureConfiguration::getInstance()->getExportShell()) {
           $choices = array_merge($choices, array(self::TYPE_GENERATION_EXPORT => 'Export comptable'));
-	}
+	      }
+        if (sfConfig::get('statistique_configuration_vracssansprix')) {
+          $choices[GenerationClient::TYPE_DOCUMENT_VRACSSANSPRIX] = 'Contrats sans prix';
+        }
         if (!isset(sfConfig::get('app_configuration_facture')['emetteur_libre'])) {
-		unset($choices[FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS]);
-	}
+		      unset($choices[FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS]);
+	      }
         return $choices;
     }
 

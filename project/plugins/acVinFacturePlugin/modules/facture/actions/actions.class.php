@@ -216,6 +216,9 @@ class factureActions extends sfActions {
             }elseif ($values['modele'] == FactureGenerationForm::TYPE_GENERATION_EXPORT) {
                 $filters_parameters['type_document'] = GenerationClient::TYPE_DOCUMENT_EXPORT_SHELL;
                 $filters_parameters['modele'] = null;
+            }elseif ($values['modele'] == GenerationClient::TYPE_DOCUMENT_VRACSSANSPRIX) {
+                $filters_parameters['type_document'] = GenerationClient::TYPE_DOCUMENT_VRACSSANSPRIX;
+                $filters_parameters['modele'] = null;
             }
         }
         if(isset($values['seuil'])) {
