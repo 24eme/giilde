@@ -1316,7 +1316,9 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
     public function initProduitsAutres($isTeledeclarationMode){
       foreach ($this->getConfigProduits($isTeledeclarationMode) as $hash => $produit) {
         if(preg_match("|/declaration/certifications/AUTRES|",$hash)){
-          $this->addProduit($hash, DRM::DETAILS_KEY_SUSPENDU);
+            if(preg_match("/(DPLC|LIES)/",$hash)){
+              $this->addProduit($hash, DRM::DETAILS_KEY_SUSPENDU);
+            }
         }
       }
     }
@@ -1643,6 +1645,41 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
     /*
     * Fin Observations
     */
+
+    /**
+    * Tavs
+    */
+    public function addTavProduit($hash, $tav)
+    {
+      if ($this->exist($hash)) {
+        $produit = $this->get($hash);
+        $produit->add("tav",$tav);
+      }
+    }
+
+    public function hasTavs(){
+      foreach ($this->getProduitsDetails($this->teledeclare) as $hash => $detail) {
+        if($detail->exist('tav')){
+          return true;
+        }
+      }
+        return false;
+    }
+
+    public function getTavsArray(){
+      $tavs = array();
+      foreach ($this->getProduitsDetails($this->teledeclare) as $hash => $detail) {
+
+        if($detail->exist('tav') && $detail->get('tav')){
+          $tavs[$detail->getLibelle().' ('.$detail->getTypeDRMLibelle().')'] = $detail->get('tav');
+        }
+      }
+      return $tavs;
+    }
+    /**
+    * Fin Tavs
+    */
+
 
     public function allLibelleDetailLigneForDRM() {
         $config = $this->getConfig();

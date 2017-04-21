@@ -143,6 +143,7 @@ all:
         annexe_nonapurement_num_accise: "Indiquer le n° d’accise du destinataire."
         annexe_observations: "La douane exige que vous remplissiez les observations concernant les mouvements de retour de vin, transfert de comptabilité matières,  destruction, excédents ou manquants pour les vins suivants."
         annexe_statistique_eur: "Veuillez indiquer ci dessous vos quantités de moûts transformées en jus de raisin, MCR et vinaigre."
+        annexe_tavs: "Veuillez indiquer ci dessous vos TAV pour l'ensemble de vos alcools."
         annexe_paiement_douane: "Indiquer la fréquence de paiement des droits d’accise aux douanes et, si vous payer de manière annuelle, le cumul des droits des mois précédents."
         annexe_paiement_douane_condition: "Les conditions de paiement sont liées au montant cumulé de vos droits d’accise (y compris la taxe sur le sucre) pour une campagne.  Le seuil de référence pour ce montant cumulé est modifié à chaque nouvelle campagne. Si le cumul annuel de vos droits est inférieur ou égal  au seuil de référence, vous êtes dispensé de caution et devez payer vos droits de manière annuelle en fin de campagne. Si le cumul annuel de vos droits est supérieur au seuil de référence, vous devez être cautionné et payer vos droits chaque mois."
         annexe_paiement_douane_frequence: "Indiquer la fréquence de paiement pour la campagne en cours. Pour la campagne 2016-2017, le seuil de référence est de 4 342 €."

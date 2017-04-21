@@ -245,6 +245,7 @@ DRM:
                                                                                                         type: collection
                                                                                                         definition:
                                                                                                           fields:
+                                                                                                            no_movements: { required: false }
                                                                                                             denomination_complementaire: { }
                                                                                                             pas_de_mouvement_check: { type: integer }
                                                                                                             total_debut_mois: { type: float }
@@ -261,6 +262,7 @@ DRM:
                                                                                                             replacement_date: { required: false }
                                                                                                             code_inao: { }
                                                                                                             observations: { required: false }
+                                                                                                            tav: { required: false }
                                                                                                             labels:
                                                                                                               type: array_collection
                                                                                                               definition:

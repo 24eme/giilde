@@ -1,6 +1,6 @@
 <?php
 
-class VracSansPrixData {
+class VracsSansPrixData {
     public function __construct($date_debut, $date_fin = '') {
       $this->date_debut = $date_debut;
       $this->date_fin = $date_fin;
@@ -9,6 +9,7 @@ class VracSansPrixData {
         $this->date_fin_effective = date("Y-m-d");
       }
       $this->index = acElasticaManager::getType('VRAC');
+      $this->pdfs = null;
     }
 
     public function query() {
@@ -44,12 +45,19 @@ class VracSansPrixData {
       return $prix_vendeurs;
     }
 
-    public function getPdfObjects() {
-      $pdfs = array();
+    public function getPDFObjects() {
+      $this->pdfs = array();
       foreach($this->getCSVs() as $k => $csv) {
-        $pdfs[$k] = new VracSansPrixLatex($csv, array('date_debut'=> $this->date_debut, 'date_fin'=> $this->date_fin));
+        $this->pdfs[$k] = new VracsSansPrixLatex($csv, array('date_debut'=> $this->date_debut, 'date_fin'=> $this->date_fin));
       }
-      return $pdfs;
+      return $this->pdfs;
+    }
+
+    public function getPDF($id) {
+      if (!$this->pdfs) {
+        $this->pdfs = $this->getPDFObjects();
+      }
+      return $this->pdfs[$id];
     }
 
 }

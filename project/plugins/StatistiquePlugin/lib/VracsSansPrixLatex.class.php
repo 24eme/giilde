@@ -1,5 +1,5 @@
 <?php
-class VracSansPrixLatex extends GenericLatex
+class VracsSansPrixLatex extends GenericLatex
 {
 	protected $csv;
 	protected $type;
@@ -10,11 +10,6 @@ class VracSansPrixLatex extends GenericLatex
     	sfProjectConfiguration::getActive()->loadHelpers("Partial", "Url", "MyHelper");
     	$this->csv = $csv;
     	$this->options = $options;
-  	}
-
-  	public function getNbPages()
-  	{
-    	return 1;
   	}
 
   	public function getLatexFileNameWithoutExtention()

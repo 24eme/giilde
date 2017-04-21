@@ -8,6 +8,7 @@ class GenerationClient extends acCouchdbClient {
     const TYPE_DOCUMENT_EXPORT_CSV = 'EXPORTCSV';
     const TYPE_DOCUMENT_EXPORT_SAGE = 'SAGE';
     const TYPE_DOCUMENT_EXPORT_SHELL = 'EXPORT';
+    const TYPE_DOCUMENT_VRACSSANSPRIX = 'VRACSSANSPRIX';
     const HISTORY_KEYS_TYPE_DOCUMENT = 0;
     const HISTORY_KEYS_TYPE_DATE_EMISSION = 1;
     const HISTORY_KEYS_DOCUMENT_ID = 2;
@@ -114,6 +115,11 @@ class GenerationClient extends acCouchdbClient {
             case GenerationClient::TYPE_DOCUMENT_EXPORT_SHELL:
 
                 return 'GenerationExportShell';
+
+            case GenerationClient::TYPE_DOCUMENT_VRACSSANSPRIX:
+
+                return 'GenerationVracsSansPrixPDF';
+
         }
 
         throw new sfException($generation->type_document." n'est pas un type supporté");

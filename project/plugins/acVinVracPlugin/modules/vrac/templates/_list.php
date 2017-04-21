@@ -21,7 +21,7 @@ use_helper('PointsAides');
             <th style="width: 110px;">Date<?php echo getPointAideHtml('vrac','dernier_contrat_date'); ?></th>
             <th>Soussignés<?php echo getPointAideHtml('vrac','dernier_contrat_soussignes'); ?></th>
             <th>Produit (Millésime)<?php echo getPointAideHtml('vrac','dernier_contrat_produits'); ?></th>
-            <th style="width: 180px;">Vol.&nbsp;prop. / Vol.&nbsp;enl.<?php echo getPointAideHtml('vrac','dernier_contrat_volume'); ?></th>
+            <th style="width: 90px;">Vol.&nbsp;prop. / Vol.&nbsp;enl.<?php echo getPointAideHtml('vrac','dernier_contrat_volume'); ?></th>
             <th style="width: 50px;">Prix<?php echo getPointAideHtml('vrac','dernier_contrat_prix'); ?></th>
             <th style="width: 90px;">Visu.<?php echo getPointAideHtml('vrac','dernier_contrat_acces_visu'); ?></th>
         </tr>
@@ -54,13 +54,14 @@ use_helper('PointsAides');
                         <?php else: ?>
                         <a href="<?php echo url_for('vrac_redirect_saisie', array('numero_contrat' => $v->numero_contrat)) ?>">
                         <?php endif; ?>
-                        <?php if($v->numero_archive) : if (preg_match('/^DRM/', $v->numero_archive)) { echo tooltipForPicto($v->type_transaction); } else { echo $v->numero_archive ; } elseif(!$v->valide->statut): ?>Brouillon<?php else: ?>Non visé<?php endif; ?>
+                        <?php if($v->numero_archive) : if (preg_match('/^DRM/', $v->numero_contrat)) { echo tooltipForPicto($v->type_transaction); } else { echo $v->numero_archive ; } elseif(!$v->valide->statut): ?>Brouillon<?php else: ?>Non visé<?php endif; ?>
+
                         </a>
                         <br />
                         <?php if($v && isset($v->teledeclare) && $v->teledeclare): ?>
                         Télédeclaré
                         <?php endif; ?>
-                        <?php if (preg_match('/^DRM/', $v->numero_archive)) : ?>
+                        <?php if (preg_match('/^DRM/', $v->numero_contrat)) : ?>
                         <span class="text-muted" style="font-size: 12px;">issu de DRM</span>
                         <?php else: ?>
                         <span class="text-muted" style="font-size: 12px;"><?php echo formatNumeroBordereau($v->numero_contrat) ?></span>

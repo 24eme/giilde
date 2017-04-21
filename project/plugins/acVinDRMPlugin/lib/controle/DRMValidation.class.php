@@ -180,10 +180,6 @@ class DRMValidation extends DocumentValidation {
                 $this->addPoint('vigilance', 'caution_absent', 'Veuillez enregistrer votre type de caution', $this->generateUrl('drm_validation_update_etablissement', $this->document));
             }
 
-            if (!$this->document->observations &&
-                    (($total_entrees_excedents > 0) || ($total_entrees_manipulation > 0) || ($total_sorties_destructionperte > 0))) {
-                $this->addPoint('vigilance', 'observations', "Entrée excédents (" . $total_entrees_excedents . " hl), manipulation (" . $total_entrees_manipulation . " hl), sortie manquant (" . $total_sorties_destructionperte . ")", $this->generateUrl('drm_annexes', $this->document));
-            }
         }
 
         $sortiesDocAnnexes = array();

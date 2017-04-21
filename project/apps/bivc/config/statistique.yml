@@ -2,3 +2,4 @@ all:
   configuration:
     statistique:
       actif: true
+    vracssansprix: true

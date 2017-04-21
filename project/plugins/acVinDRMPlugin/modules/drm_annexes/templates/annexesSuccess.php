@@ -210,6 +210,54 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                     </div>
                   </div>
               <?php endif; ?>
+
+
+              <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading" id="drm_annexes_tavs" >
+                          <div class="row">
+                            <div class="col-xs-11">
+                              <h3 class="panel-title text-center"><strong>TAV - Taux d'alcool volumique</strong></h3>
+                            </div>
+                            <div class="col-xs-1 text-right">
+                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_tavs" aria-expanded="true" aria-controls="collapse_tavs">
+                                &nbsp;<span class="glyphicon  glyphicon-chevron-down" style="padding-top: 4px;" ></span>
+                              </a>
+                            </div>
+                          </div>
+                      </div>
+                      <div id="collapse_tavs" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="drm_annexes_tavs">
+                      <div class="panel-body">
+                        <p><?php echo getPointAideText('drm','annexe_tavs'); ?></p>
+                        <table class="table table-bordered table-striped">
+                            <thead >
+                              <tr>
+                                  <th class="col-xs-8" >Produits</th>
+                                  <th class="col-xs-4" >TAV</th>
+                                  
+                              </tr>
+                            </thead>
+                            <tbody class="drm_non_apurement" id="tav_list">
+                                <?php foreach ($annexesForm['tavsProduits'] as $formTavs): ?>
+                                  <?php if(isset($formTavs['tav'])): ?>
+                                  <tr>
+                                    <td class="col-xs-8" ><?php echo $formTavs['tav']->renderLabel() ?></td>
+                                    <td class="col-xs-4" >
+                                          <?php echo $formTavs['tav']->renderError() ?>
+                                          <?php echo $formTavs['tav']->render(array("style" => "width: 95%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4) inset; border-radius: 3px; border: 0px none; padding: 5px;")) ?><br/>
+                                    </td>
+                                  </tr>
+                                  <?php endif; ?>
+                                <?php endforeach; ?>
+                              </tbody>
+                            </table>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
               <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">

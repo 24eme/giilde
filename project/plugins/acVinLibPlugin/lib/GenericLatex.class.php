@@ -26,7 +26,7 @@ class GenericLatex {
   }
 
   public function generatePDF() {
-    $cmdCompileLatex = '/usr/bin/latexmk -pdf -output-directory="'.$this->getTEXWorkingDir().'" -interaction=nonstopmode "'.$this->getLatexFile().'" 2>&1';
+    $cmdCompileLatex = 'latexmk -pdf -output-directory="'.$this->getTEXWorkingDir().'" -interaction=nonstopmode "'.$this->getLatexFile().'" 2>&1';
     exec($cmdCompileLatex, $output);
     $pdfpath = $this->getLatexFileNameWithoutExtention().'.pdf';
     if (!file_exists($pdfpath)) {
@@ -95,7 +95,11 @@ class GenericLatex {
   }
 
   public function getNbPages() {
-    throw new sfException("need to be implemented upstream");
+    exec("pdfinfo ".$this->getPDFFile(), $output);
+    if (preg_match('/Pages:\D*(\d+)\D/', implode($output), $m)) {
+      return $m[1];
+    }
+    throw new sfException("pdfinfo failed");
   }
 
   public function getLatexFileNameWithoutExtention() {

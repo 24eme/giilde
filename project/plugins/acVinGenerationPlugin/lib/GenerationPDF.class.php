@@ -130,7 +130,7 @@ class GenerationPDF extends GenerationAbstract {
     foreach ($this->generation->documents as $docid) {
       $pdf = $this->generatePDFForADocumentID($docid);
       if (!isset($pdfs[$pdf->getNbPages()]))
-	$pdfs[$pdf->getNbPages()] = array();
+	      $pdfs[$pdf->getNbPages()] = array();
       array_push($pdfs[$pdf->getNbPages()], $pdf);
     }
     $pages = array();
