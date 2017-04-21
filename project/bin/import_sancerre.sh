@@ -86,15 +86,13 @@ cat $DATA_DIR/stocks-produits.csv | sed 's/";$/";"/g' | awk -F '";"' '{
 print "CAVE;" substr($3, 1, 6) ";" sprintf("%06d01", $2) ";;;;;;;;;;" $10 ";suspendu;stocks_debut;initial;" $4 ";;;;;"
 }'  >> $DATA_DIR/drm.csv
 
-#cat $DATA_DIR/drm.csv | sort -t ';' -k 3,3 -k 2,2 > $DATA_DIR/drm_final.csv
+cat $DATA_DIR/drm.csv | sort -t ';' -k 3,3 -k 2,2 > $DATA_DIR/drm_final.csv
 
-cat $DATA_DIR/drm.csv | sort -t ';' -k 3,3 -k 2,2 | grep -E "^[A-Z]+;[0-9]+;$(cat /tmp/acheteurs_a_supprimer.csv | tr '\n' '|' | sed 's/^/(/' |sed 's/|$/)/')" > $DATA_DIR/drm_final.csv
-
-cat $DATA_DIR/drm_final.csv | grep -E "^[A-Z]+;(2013(08|09|10|11|12)|2014[0-9]{2}|2015[0-9]{2}|2016[0-9]{2});" > $DATA_DIR/drm_final_201308.csv
+cat $DATA_DIR/drm_final.csv | grep -vE "^[A-Z]+;(2013(08|09|10|11|12)|201(4|5|6|7|8)[0-9]{2});" | grep -Ev "^CAVE;;" > $DATA_DIR/drm_final_avant_201308.csv
 
 rm -rf $DATA_DIR/drms; mkdir $DATA_DIR/drms
 
-awk -F ";" '{print >> ("'$DATA_DIR'/drms/" $3 "_" $2 ".csv")}' $DATA_DIR/drm_final_201308.csv
+awk -F ";" '{print >> ("'$DATA_DIR'/drms/" $3 "_" $2 ".csv")}' $DATA_DIR/drm_final_avant_201308.csv
 
 echo "Import des DRMs"
 
@@ -105,6 +103,6 @@ do
     php symfony drm:edi-import $DATA_DIR/drms/$ligne $PERIODE $IDENTIFIANT --facture=true --creation-depuis-precedente=true $SYMFONYTASKOPTIONS
 done
 
-echo "Import des tags"
+#echo "Import des tags"
 
 #php symfony tag:addManuel --file=$DATA_DIR/tags_manuels_abonne_bivc.csv $SYMFONYTASKOPTIONS
