@@ -119,6 +119,18 @@ class StatistiqueStatsFilterForm extends BaseForm
     	return $appellations;
     }
     
+    public function getCategories()
+    {
+    	$values = $this->getValues();
+    	$categories = array();
+    	$libelles = self::getFamilles();
+    	$items = (isset($values['doc.declarant.famille']))? $values['doc.declarant.famille'] : array();
+    	foreach ($items as $item) {
+    		$categories[] = $libelles[$item];
+    	}
+    	return $categories;
+    }
+    
     public function getPeriode($format = 'd/m/Y')
     {
     	$values = $this->getValues();

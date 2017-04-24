@@ -1,5 +1,5 @@
 <?php
-setlocale(LC_ALL, 'fr_FR');
+setlocale(LC_TIME, 'fr_FR');
 $items = explode(PHP_EOL, $csv);
 array_shift($items);
 $maxTableRowsPerPage = 30;
@@ -32,7 +32,7 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 \renewcommand\sfdefault{phv}
 \renewcommand{\familydefault}{\sfdefault}
 \fancyfoot[R]{\thepage~/~\pageref{LastPage}}
-\fancyfoot[L]{<?php echo strftime("%e %B %Y", mktime()) ?>}
+\fancyfoot[L]{<?php echo strftime("%e %B %Y", time()) ?>}
 \fancyhead[L]{\includegraphics[scale=0.6]{\LOGO}}
 
 
@@ -50,12 +50,12 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 <?php if ($compare): ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | }
 \hline
-\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Nég. extérieur} & \multicolumn{3}{c |}{Total} \tabularnewline
+\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Négoce ext.} & \multicolumn{3}{c |}{Total} \tabularnewline
 \rowcolor{gray!40} Article & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} \tabularnewline \hline
 <?php else: ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 \hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Export} & \multicolumn{1}{c |}{Nég. extérieur} & \multicolumn{1}{c |}{Total} \tabularnewline \hline
+\rowcolor{gray!40} Article & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Export} & \multicolumn{1}{c |}{Négoce ext.} & \multicolumn{1}{c |}{Total} \tabularnewline \hline
 <?php endif; ?>
 <?php 
 	$i = ($compare)? 2 : 1;
@@ -81,14 +81,14 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | }
 <?php if ($newSection): ?>
 \hline
-\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Nég. extérieur} & \multicolumn{3}{c |}{Total} \tabularnewline
+\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Négoce ext.} & \multicolumn{3}{c |}{Total} \tabularnewline
 \rowcolor{gray!40} Article & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} \tabularnewline
 <?php endif; ?>
 <?php else: ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 <?php if ($newSection): ?>
 \hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Export} & \multicolumn{1}{c |}{Nég. extérieur} & \multicolumn{1}{c |}{Total} \tabularnewline
+\rowcolor{gray!40} Article & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Export} & \multicolumn{1}{c |}{Négoce ext.} & \multicolumn{1}{c |}{Total} \tabularnewline
 <?php endif; ?>
 <?php endif; ?>
 \hline

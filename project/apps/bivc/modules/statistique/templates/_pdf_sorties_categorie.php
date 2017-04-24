@@ -1,18 +1,13 @@
 <?php
-setlocale(LC_ALL, 'fr_FR');
+setlocale(LC_TIME, 'fr_FR');
 $items = explode(PHP_EOL, $csv);
 array_shift($items);
-$headers = array();
 $maxTableRowsPerPage = 30;
 $nbPage = 0;
-foreach ($items as $item) {
-$values = explode(';', $item);
-if (!$values[0] || preg_match('/total/i', $values[0])) { continue; }
-$headers[$values[0]] = $values[0];
-}
 $options = $options->getRawValue();
 $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset($options['periode'][1]))? $options['periode'] : null;
 $compare = (isset($options['compare']))? $options['compare'] : false;
+$categories = (isset($options['categories']))? $options['categories'] : array();
 ?>
 \documentclass[a4paper, landscape, 10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -38,20 +33,15 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 \renewcommand\sfdefault{phv}
 \renewcommand{\familydefault}{\sfdefault}
 \fancyfoot[R]{\thepage~/~\pageref{LastPage}}
-\fancyfoot[L]{<?php echo strftime("%e %B %Y", mktime()) ?>}
+\fancyfoot[L]{<?php echo strftime("%e %B %Y", time()) ?>}
 \fancyhead[L]{\includegraphics[scale=0.6]{\LOGO}}
-
-<?php $i=0; foreach ($headers as $header): ?>
-\fancypagestyle{fstyle_<?php echo $i ?>}{
-\fancyhead[C]{Ventes de \textbf{<?php echo $header ?>}<?php if ($periode): ?>\\Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
+\fancypagestyle{fstyle_0}{
+\fancyhead[C]{Sorties des stocks complète<?php if (count($categories) > 1): ?> de \textbf{<?php echo implode(', ', $categories); ?>}<?php endif; ?><?php if ($periode): ?>\\Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
 }
-<?php $i++; endforeach; ?>
 
 \begin{document}
 
-<?php $fstyle = 0; ?>
-
-\pagestyle{fstyle_<?php echo $fstyle ?>}
+\pagestyle{fstyle_0}
 
 \begin{table}[ht!]
 <?php if ($compare): ?>
@@ -66,7 +56,6 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 <?php endif; ?>
 <?php 
 	$i = ($compare)? 2 : 1;
-	$page = null;
 	foreach ($items as $item):
 		$values = explode(';', $item);
 		if (!$values[0]) {
@@ -74,26 +63,16 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 		}
 		$isTotal = preg_match('/total/i', $item);
 		$current = $values[0];
-		if (!$page) {
-			$page = $values[0];
-		}
-		unset($values[0]);
-		$values[1] = ($values[1] != $values[2])? $values[1].' '.$values[2] : $values[1];
-		unset($values[2]);
+		$values[0] = ($values[0] != $values[1])? $values[0].' '.$values[1] : $values[0];
+		unset($values[1]);
 ?>
 <?php 
-	if ($i == $maxTableRowsPerPage || ($page != $current && !preg_match('/total/i', $current))): 
-	$newSection = false;
-	if ($page != $current) {
-		$fstyle++;
-		$page = $current;
-		$newSection = true;
-	}
+	if ($i == $maxTableRowsPerPage): 
 ?>
 \end{tabularx}
 \end{table}
 \clearpage
-\pagestyle{fstyle_<?php echo $fstyle ?>}
+\pagestyle{fstyle_0}
 \begin{table}[ht!]
 <?php if ($compare): ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | }
@@ -110,8 +89,8 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 <?php endif; ?>
 <?php endif; ?>
 \hline
-<?php $i=($newSection)? ($compare)? 2 : 1 : 0; else: $i++;endif; ?>
-<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if (preg_match('/total/i', $current)) {unset($values[1]); echo 'TOTAL général & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
+<?php $i=0; else: $i++;endif; ?>
+<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if (preg_match('/total/i', $current)) {unset($values[0]); echo 'TOTAL général & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
 <?php  endforeach;?>
 \end{tabularx}
 \end{table}

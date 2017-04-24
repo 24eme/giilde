@@ -54,7 +54,7 @@ class statistiqueActions extends sfActions {
 				$csvResult = $this->getAggsResultCsv($values['statistiques'], $this->getCsvToArray($csvResult, $nbKeys), $this->getCsvToArray($csvResultLastPeriode, $nbKeys));
 			}
 			if ($this->form->pdfFormat()) {
-				return $this->renderPdf($csvResult, $values['statistiques'], array('appellations' => $this->form->getAppellations(), 'compare' => $this->form->canPeriodeCompare(), 'periode' => $this->form->getPeriode()));
+				return $this->renderPdf($csvResult, $values['statistiques'], array('categories' => $this->form->getCategories(), 'appellations' => $this->form->getAppellations(), 'compare' => $this->form->canPeriodeCompare(), 'periode' => $this->form->getPeriode()));
 			} else {
 				return $this->renderCsv($csvResult, 'statistiques_'.$values['statistiques']);
 			}
