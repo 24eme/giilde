@@ -1,5 +1,5 @@
 <?php
-setlocale(LC_ALL, 'fr_FR');
+setlocale(LC_TIME, 'fr_FR');
 $items = explode(PHP_EOL, $csv);
 array_shift($items);
 $headers = array();
