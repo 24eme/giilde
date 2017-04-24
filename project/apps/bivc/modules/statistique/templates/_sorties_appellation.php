@@ -3,7 +3,7 @@ use_helper('Statistique');
 use_helper('BivcStatistique');
 
 if($lastPeriode) {
-	$csv = "Appellation;Couleur;France N-1;France;France %;Export N-1;Export;Export %;Négociant N-1;Négociant;Négociant %;TOTAL N-1;TOTAL;TOTAL %\n";
+	$csv = "Appellation;Couleur;France N-1;France;France %;Export N-1;Export;Export %;Négoce ext. N-1;Négoce ext.;Négoce ext. %;TOTAL N-1;TOTAL;TOTAL %\n";
 	$result = $result->getRawValue();
 	$lastPeriode = $lastPeriode->getRawValue();
 	$resultKeys = array_keys($result);
@@ -36,7 +36,7 @@ if($lastPeriode) {
 		}
 	}
 } else {
-	$csv = "Appellation;Couleur;France;Export;Négociant;TOTAL\n";
+	$csv = "Appellation;Couleur;France;Export;Négoce ext.;TOTAL\n";
 	foreach ($result['agg_page']['buckets'] as $appellation) {
 			$appellationLibelle = getAppellationLibelle(strtoupper($appellation['key']));
 			$totalFrance = formatNumber($appellation['total_france']['value']);
@@ -47,7 +47,7 @@ if($lastPeriode) {
 				$couleurLibelle = getCouleurLibelle($couleur['key']);
 				$france =formatNumber($couleur['france']['agg_column']['value']);
 				$export =formatNumber($couleur['export']['agg_column']['value']);
-				$negoce =formatNumber($couleur['negoce']['value']);
+				$negoce =formatNumber($couleur['negoce']['agg_column']['agg_column']['value']);
 				$total =formatNumber($couleur['total']['value']);
 				if (!$france && !$export && !$negoce) {
 					continue;
