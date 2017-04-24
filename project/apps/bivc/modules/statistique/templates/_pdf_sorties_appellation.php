@@ -32,7 +32,7 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 \renewcommand\sfdefault{phv}
 \renewcommand{\familydefault}{\sfdefault}
 \fancyfoot[R]{\thepage~/~\pageref{LastPage}}
-\fancyfoot[L]{<?php echo strftime("%e %B %Y", mktime()) ?>}
+\fancyfoot[L]{<?php echo strftime("%e %B %Y", time()) ?>}
 \fancyhead[L]{\includegraphics[scale=0.6]{\LOGO}}
 
 
