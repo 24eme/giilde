@@ -211,7 +211,7 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                   </div>
               <?php endif; ?>
 
-
+              <?php if(count($annexesForm['tavsProduits'])): ?>
               <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
@@ -235,7 +235,7 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                               <tr>
                                   <th class="col-xs-8" >Produits</th>
                                   <th class="col-xs-4" >TAV</th>
-                                  
+
                               </tr>
                             </thead>
                             <tbody class="drm_non_apurement" id="tav_list">
@@ -257,8 +257,9 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                 </div>
               </div>
             </div>
+            <?php endif; ?>
 
-              <div class="row">
+            <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
                       <div class="panel-heading"  id="drm_annexes_douanes" >

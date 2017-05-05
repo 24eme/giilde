@@ -35,6 +35,7 @@
   - pdftk
   - texlive-lang-french
   - texlive-lang-greek
+  - latexmk
   - sudo
   - vim
   - rkhunter

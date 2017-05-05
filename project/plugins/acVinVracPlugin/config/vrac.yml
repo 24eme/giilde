@@ -132,3 +132,4 @@ all:
       solde_seuil: "10%"
       repartition_cvo: "100_ACHETEUR"
       region_departement: ".*"
+      teledeclaration_visa_automatique: true

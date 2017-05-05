@@ -828,6 +828,10 @@ class Vrac extends BaseVrac {
             if (!$this->date_signature) {
                 $this->date_signature = date('c');
             }
+
+            if(VracConfiguration::getInstance()->getTeledeclarationVisaAutomatique()) {
+                $this->createVisa();
+            }
         }
         return $allSignatures;
     }

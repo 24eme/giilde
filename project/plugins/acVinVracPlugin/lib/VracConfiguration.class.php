@@ -62,6 +62,11 @@ class VracConfiguration
 		return $this->configuration['repartition_courtage'];
 	}
 
+	public function getTeledeclarationVisaAutomatique()
+	{
+		return $this->configuration['teledeclaration_visa_automatique'];
+	}
+
 	public function getTva()
 	{
 		return $this->configuration['tva'];
