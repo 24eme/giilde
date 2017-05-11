@@ -29,16 +29,16 @@ if ($lastPeriode) {
 	}	
 } else {
 	$csv = "Pays;Blanc;Rosé;Rouge;TOTAL\n";
-	$totalBlanc = formatNumber($result['totaux_blanc']['value'], 2);
-	$totalRose = formatNumber($result['totaux_rose']['value'], 2);
-	$totalRouge = formatNumber($result['totaux_rouge']['value'], 2);
-	$totalTotal = formatNumber($result['totaux_total']['value'], 2);
+	$totalBlanc = (formatNumber($result['totaux_blanc']['value']) != 0)? formatNumber($result['totaux_blanc']['value']) : null;
+	$totalRose = (formatNumber($result['totaux_rose']['value']) != 0)? formatNumber($result['totaux_rose']['value']) : null;
+	$totalRouge = (formatNumber($result['totaux_rouge']['value']) != 0)? formatNumber($result['totaux_rouge']['value']) : null;
+	$totalTotal = (formatNumber($result['totaux_total']['value']) != 0)? formatNumber($result['totaux_total']['value']) : null;
 	foreach ($result['agg_line']['buckets'] as $pays) {
 		$paysLibelle = $pays['key'];
-		$blanc = formatNumber($pays['blanc']['agg_column']['value'], 2);
-		$rose = formatNumber($pays['rose']['agg_column']['value'], 2);
-		$rouge = formatNumber($pays['rouge']['agg_column']['value'], 2);
-		$total = formatNumber($pays['total']['agg_column']['value'], 2);
+		$blanc = (formatNumber($pays['blanc']['agg_column']['value']) != 0)? formatNumber($pays['blanc']['agg_column']['value']) : null;
+		$rose = (formatNumber($pays['rose']['agg_column']['value']) != 0)? formatNumber($pays['rose']['agg_column']['value']) : null;
+		$rouge = (formatNumber($pays['rouge']['agg_column']['value']) != 0)? formatNumber($pays['rouge']['agg_column']['value']) : null;
+		$total = (formatNumber($pays['total']['agg_column']['value']) != 0)? formatNumber($pays['total']['agg_column']['value']) : null;
 		$csv .= $paysLibelle.';'.$blanc.';'.$rose.';'.$rouge.';'.$total."\n";
 	}
 	$csv .= 'TOTAL;'.$totalBlanc.';'.$totalRose.';'.$totalRouge.';'.$totalTotal."\n";

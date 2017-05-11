@@ -48,7 +48,7 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 
 \begin{table}[ht!]
 <?php if ($compare): ?>
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | }
+\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | }
 \hline
 \rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Négoce ext.} & \multicolumn{3}{c |}{Total} \tabularnewline
 \rowcolor{gray!40} Article & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} \tabularnewline \hline
@@ -78,7 +78,7 @@ $compare = (isset($options['compare']))? $options['compare'] : false;
 \pagestyle{fstyle_0}
 \begin{table}[ht!]
 <?php if ($compare): ?>
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.061\linewidth} | >{\raggedleft}p{0.028\linewidth} | }
+\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | }
 <?php if ($newSection): ?>
 \hline
 \rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Négoce ext.} & \multicolumn{3}{c |}{Total} \tabularnewline

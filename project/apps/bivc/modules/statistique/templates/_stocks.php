@@ -5,14 +5,14 @@ use_helper('BivcStatistique');
 $csv = "Appellation;Catégorie;Stock initial;Stock actuel;TOTAL mvt\n";
 foreach ($result['agg_page']['buckets'] as $appellation) {
 	$appellationLibelle = str_replace('AOC', '', $appellation['key']);
-	$totalStockInitial = formatNumber($appellation['total_stock_initial']['value']);
-	$totalStockFinal = formatNumber($appellation['total_stock_final']['value']);
-	$totalTotal = formatNumber($appellation['total_total']['value']);
+	$totalStockInitial = (formatNumber($appellation['total_stock_initial']['value']) != 0)? formatNumber($appellation['total_stock_initial']['value']) : null;
+	$totalStockFinal = (formatNumber($appellation['total_stock_final']['value']) != 0)? formatNumber($appellation['total_stock_final']['value']) : null;
+	$totalTotal = (formatNumber($appellation['total_total']['value']) != 0)? formatNumber($appellation['total_total']['value']) : null;
 	foreach ($appellation['agg_line']['buckets'] as $categorie) {
 		$categorieLibelle = getFamilleLibelle($categorie['key']);
-		$stockInitial = formatNumber($categorie['stock_initial']['agg_column']['value']);
-		$stockFinal = formatNumber($categorie['stock_final']['agg_column']['value']);
-		$totalMvt = formatNumber($categorie['total']['value']);
+		$stockInitial = (formatNumber($categorie['stock_initial']['agg_column']['value']) != 0)? formatNumber($categorie['stock_initial']['agg_column']['value']) : null;
+		$stockFinal = (formatNumber($categorie['stock_final']['agg_column']['value']) != 0)? formatNumber($categorie['stock_final']['agg_column']['value']) : null;
+		$totalMvt = (formatNumber($categorie['total']['value']) != 0)? formatNumber($categorie['total']['value']) : null;
 		$csv .= $appellationLibelle.';'.$categorieLibelle.';'.$stockInitial.';'.$stockFinal.';'.$totalMvt."\n";
 	}
 	$csv .= $appellationLibelle.';TOTAL;'.$totalStockInitial.';'.$totalStockFinal.';'.$totalTotal."\n";
