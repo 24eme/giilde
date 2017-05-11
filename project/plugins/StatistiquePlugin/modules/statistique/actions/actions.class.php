@@ -355,6 +355,8 @@ class statistiqueActions extends sfActions {
         	$csv_file .= ";";
         	$produit = ($item['doc']['type_transaction'] == VracClient::TYPE_TRANSACTION_VIN_VRAC || $item['doc']['type_transaction'] == VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE)? $item['doc']['produit_libelle'] : $item['doc']['cepage_libelle'];
         	$millesime = $item['doc']['millesime'] ? $item['doc']['millesime'] : 'nm';
+        	$csv_file .= $produit;
+        	$csv_file .= ";";
         	$csv_file .= $millesime;
         	$csv_file .= ";";
         	$csv_file .= $item['doc']['volume_propose'];
