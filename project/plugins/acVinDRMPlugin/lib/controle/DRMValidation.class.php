@@ -16,7 +16,7 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('erreur', 'transfert_appellation', "La somme des transferts d'appellation en entrée et en sortie n'est pas la même");
         $this->addControle('vigilance', 'revendique_sup_initial', "Le stock revendiqué ne peut pas être supérieur au stock récolté");
         if (!$this->isTeledeclarationDrm) {
-          //$this->addControle('erreur', 'vrac_detail_nonsolde', "Le contrat est soldé (ou annulé)");
+            $this->addControle('vigilance', 'vrac_detail_nonsolde', "Le contrat est soldé (ou annulé)");
             $this->addControle('erreur', 'vrac_detail_exist', "Le contrat n'existe plus");
         }
         $this->addControle('vigilance', 'total_negatif', "Le stock revendiqué théorique fin de mois est négatif");
@@ -119,7 +119,7 @@ class DRMValidation extends DocumentValidation {
                     $volumes_restant[$id_volume_restant]['volume'] += $mouvement->volume;
 
                     if ($vrac->valide->statut != VracClient::STATUS_CONTRAT_NONSOLDE) {
-                        $this->addPoint('erreur', 'vrac_detail_nonsolde', sprintf("Contrat %s", $mouvement->produit_libelle, $vrac->__toString()), $this->generateUrl('vrac_visualisation', $vrac));
+                        $this->addPoint('vigilance', 'vrac_detail_nonsolde', sprintf("Contrat %s", $mouvement->produit_libelle, $vrac->__toString()), $this->generateUrl('vrac_visualisation', $vrac));
                         continue;
                     }
                 }

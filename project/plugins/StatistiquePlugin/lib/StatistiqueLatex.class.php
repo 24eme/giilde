@@ -4,6 +4,8 @@ class StatistiqueLatex extends GenericLatex
 	protected $csv;
 	protected $type;
 	protected $options;
+	
+	protected $filename;
 
   	function __construct($csv, $type, $options = array())
   	{
@@ -11,6 +13,7 @@ class StatistiqueLatex extends GenericLatex
     	$this->csv = $csv;
     	$this->type = $type;
     	$this->options = $options;
+    	$this->filename = 'statistiques_'.$this->type.'_'.date('YmdHis');
   	}
 
   	public function getNbPages()
@@ -20,7 +23,7 @@ class StatistiqueLatex extends GenericLatex
 
   	public function getLatexFileNameWithoutExtention()
   	{
-    	return $this->getTEXWorkingDir().'statistiques_'.$this->type.'_'.date('YmdHi');
+    	return $this->getTEXWorkingDir().$this->filename;
   	}
 
   	public function getLatexFileContents()
@@ -30,7 +33,7 @@ class StatistiqueLatex extends GenericLatex
 
   	public function getPublicFileName($extention = '.pdf')
   	{
-    	return 'statistiques_'.$this->type.'_'.date('YmdHi').$extention;
+    	return 'statistiques_'.$this->filename.$extention;
   	}
 
 }
