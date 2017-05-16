@@ -3,7 +3,7 @@ use_helper('Float');
 use_helper('Display');
 $firstLibelle = ($produit->origine_type)? str_replace("&#039;", "'", $produit->origine_type) : str_replace("&#039;", "'", $produit->libelle);
 $secondLibelle = ($produit->origine_type)? ' \fontsize{8}{10}\selectfont '.str_replace("&#039;", "'", $produit->libelle) : "";
-if( FactureConfiguration::getInstance()->isPdfProduitFirst()){
+if( FactureConfiguration::getInstance()->isPdfProduitFirst() && !$produit->getDocument()->isFactureDivers()){
   $firstLibelle = ($produit->origine_type)? str_replace("&#039;", "'", $produit->libelle) : str_replace("&#039;", "'", $produit->libelle.' - Autres sorties');
   $secondLibelle = ($produit->origine_type)? ' \fontsize{8}{10}\selectfont '.str_replace("&#039;", "'", ' - '.$produit->origine_type) : "";
 }
