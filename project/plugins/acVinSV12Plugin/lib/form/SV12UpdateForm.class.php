@@ -31,5 +31,6 @@ class SV12UpdateForm  extends acCouchdbForm {
                 $this->getDocument()->contrats[$num_contrat]->volume = $volume;
             }
         }
+        $this->getDocument()->updateTotaux();
     }
 }

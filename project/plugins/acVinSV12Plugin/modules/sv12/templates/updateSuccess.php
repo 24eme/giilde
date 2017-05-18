@@ -34,9 +34,9 @@ $types_contrats = array_merge(VracClient::getTypes(), array(SV12Client::SV12_TYP
                         <td><?php if ($contrat->vendeur_identifiant): ?><?php echo $contrat->vendeur_nom . ' (' . $contrat->vendeur_identifiant . ')'; ?><?php else: ?>-<?php endif; ?></td>
                         <td><?php echo $contrat->produit_libelle; ?></td>
                         <td>
-                            <?php if (!$contrat->contrat_numero): ?>
+                            <?php if (!$contrat->contrat_numero && $contrat->contrat_type): ?>
                                 <?php echo $types_contrats[$contrat->contrat_type]; ?>
-                            <?php else: ?>
+                            <?php elseif($contrat->contrat_numero): ?>
                                 <a href="<?php echo url_for(array('sf_route' => 'vrac_visualisation', 'numero_contrat' => $contrat->contrat_numero)) ?>"><?php echo $contrat->numero_archive; ?></a>
                                 <?php echo sprintf('(%s,&nbsp;%s&nbsp;hl)', $contrat->getContratTypeLibelle(), $contrat->volume_prop); ?>
                             <?php endif; ?>

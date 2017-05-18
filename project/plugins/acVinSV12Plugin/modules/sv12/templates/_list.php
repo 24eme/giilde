@@ -1,4 +1,5 @@
 <?php use_helper('Float'); ?>
+<?php $raisinetmout = SV12Configuration::getInstance()->hasRaisinetmout(); ?>
 
 <h3>Liste des SV12</h3>
 <?php if(sizeof($list) > 0): ?>
@@ -7,8 +8,12 @@
         <tr>
             <th>Campagne</th>
             <th>Etat</th>
+            <?php if($raisinetmout): ?>
             <th>Volume total raisins</th>
             <th>Volume total moûts</th>
+            <?php else: ?>
+                <th>Volume total vendanges</th>
+            <?php endif; ?>
             <th>Total</th>
             <th></th>
         </tr>
@@ -32,12 +37,18 @@
                         <p><span class="statut_suspendu">Brouillon</span></p>
                     <?php endif; ?>
                 </td>
+                <?php if($raisinetmout): ?>
                 <td>
                     <?php echoFloat($item->totaux->volume_raisins) ?>&nbsp;hl
                 </td>
                 <td>
                     <?php echoFloat($item->totaux->volume_mouts) ?>&nbsp;hl
                 </td>
+                <?php else: ?>
+                    <td>
+                        <?php echoFloat($item->totaux->volume_ecarts) ?>&nbsp;hl
+                    </td>
+                <?php endif; ?>
                 <td>
                     <?php echoFloat($item->totaux->volume_raisins + $item->totaux->volume_mouts + $item->totaux->volume_ecarts) ?>&nbsp;hl
                 </td>

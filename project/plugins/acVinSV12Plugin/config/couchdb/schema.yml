@@ -78,6 +78,8 @@ SV12:
                     definition:
                       fields:
                         categorie: {  }
+                        denomination_complementaire: {  }
+                        region_destinataire: { }
                         produit_hash: {  }
                         produit_libelle: {  }
                         type_hash: {  }
