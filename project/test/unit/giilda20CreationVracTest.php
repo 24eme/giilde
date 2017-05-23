@@ -8,7 +8,7 @@ if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration-
     exit(0);
 }
 
-$t = new lime_test(16);
+$t = new lime_test(17);
 $t->comment("création d'un contrat viti/négo/courtier");
 
 $vrac = new Vrac();
@@ -48,10 +48,11 @@ $t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_ATTENTE_SIGNATURE, $vra
 $vrac->signatureByEtb(CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement());
 $vrac->save();
 $t->isnt($vrac->valide->date_signature_vendeur, null, $vrac->_id." : signature du vendeur enregistrée");
-$t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_VALIDE, $vrac->_id." : après 3ème signature (viti), le contrat passe à validé");
+$t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_VISE, $vrac->_id." : après 3ème signature (viti), le contrat passe à validé");
 
 $t->comment("cas d'un contrat sans courtier avec négo hors région");
 $vrac = new Vrac();
+$vrac->numero_contrat = VracClient::getInstance()->buildNumeroContrat("2016", 0, 0, 9999);
 $vrac->initCreateur(CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_horsregion')->getEtablissement()->getIdentifiant());
 $vrac->teledeclare = true;
 $vrac->vendeur_identifiant =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement()->getIdentifiant();
@@ -63,7 +64,8 @@ $vrac->setPrixUnitaire(70);
 $vrac->validate();
 $vrac->signatureByEtb(CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement());
 $vrac->save();
+$t->is($vrac->_id, "VRAC-2016000009999", $vrac->_id." : La consctruction de l'id à partir d'un numéro de bordereau ne comporte pas de date");
 $t->is($vrac->cvo_repartition, "100_VENDEUR", $vrac->_id." : Répartition 100 car négo hors région");
 $t->isnt($vrac->valide->date_signature_acheteur, null, $vrac->_id." : signature de de l'acheteur enregistrée");
 $t->isnt($vrac->valide->date_signature_vendeur, null, $vrac->_id." : signature du vendeur enregistrée");
-$t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_VALIDE, $vrac->_id." : après la signature du viti, le contrat passe à validé");
+$t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_VISE, $vrac->_id." : après la signature du viti, le contrat passe à validé");
