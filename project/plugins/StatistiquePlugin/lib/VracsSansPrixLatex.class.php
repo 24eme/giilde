@@ -14,7 +14,7 @@ class VracsSansPrixLatex extends GenericLatex
 
   	public function getLatexFileNameWithoutExtention()
   	{
-    	return $this->getTEXWorkingDir().'vracsansprix_'.$this->csv[0][0].'_'.$options['date_debut'].$options['date_fin'];
+    	return $this->getTEXWorkingDir().'vracsansprix_'.$this->csv[0][0].'_'.$this->options['date_debut'].$this->options['date_fin'];
   	}
 
   	public function getLatexFileContents()
@@ -24,7 +24,7 @@ class VracsSansPrixLatex extends GenericLatex
 
   	public function getPublicFileName($extention = '.pdf')
   	{
-    	return 'vracsansprix_'.$this->csv[0][0].'_'.$options['date_debut'].$options['date_fin'].$extention;
+    	return 'vracsansprix_'.$this->csv[0][0].'_'.$this->options['date_debut'].$this->options['date_fin'].$extention;
   	}
 
 }
