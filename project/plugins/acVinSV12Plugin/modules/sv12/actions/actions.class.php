@@ -97,6 +97,9 @@ class sv12Actions extends sfActions {
             $this->sv12->save();
             $this->redirect('sv12_visualisation', $this->sv12);
         }
+
+        $this->sv12->cleanContrats();
+        $this->sv12->updateTotaux();
     }
 
     public function executeVisualisation(sfWebRequest $request) {

@@ -157,7 +157,7 @@ class VracClient extends acCouchdbClient {
           $annee = date('Y');
         }
 
-        if (!$type) {
+        if (is_null($type)) {
           $type = date('md');
         }
 

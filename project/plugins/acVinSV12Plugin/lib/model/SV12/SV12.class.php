@@ -233,6 +233,21 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
             $this->valide->statut = SV12Client::STATUT_VALIDE_PARTIEL;
         }
 
+        $this->cleanContrats();
+    }
+
+    public function cleanContrats() {
+        $noeudContratToDelete = array();
+
+        foreach($this->contrats as $contrat) {
+            if($contrat->isCleanable()) {
+                $noeudContratToDelete[$contrat->getKey()] = $contrat->getKey();
+            }
+        }
+
+        foreach($noeudContratToDelete as $key) {
+            $this->contrats->remove($key);
+        }
     }
 
     public function devalide() {

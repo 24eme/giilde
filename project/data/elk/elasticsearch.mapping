@@ -202,6 +202,9 @@
                 			"type" : "string",
                 			"index" : "not_analyzed"
               			},
+                  		"kibana_date" : {
+                    		"type" : "date"
+                  		},
               			"valide" : {
                 			"properties" : {
                   				"date_saisie" : {
@@ -330,6 +333,9 @@
                 			"type" : "string",
                 			"index" : "not_analyzed"
               			},
+                  		"kibana_date" : {
+                    		"type" : "date"
+                  		},
               			"mandataire" : {
                 			"properties" : {
                   				"adresse" : {

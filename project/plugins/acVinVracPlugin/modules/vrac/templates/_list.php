@@ -54,7 +54,7 @@ use_helper('PointsAides');
                         <?php else: ?>
                         <a href="<?php echo url_for('vrac_redirect_saisie', array('numero_contrat' => $v->numero_contrat)) ?>">
                         <?php endif; ?>
-                        <?php if($v->numero_archive) : if (preg_match('/^DRM/', $v->numero_contrat)) { echo tooltipForPicto($v->type_transaction); } else { echo $v->numero_archive ; } elseif(!$v->valide->statut): ?>Brouillon<?php else: ?>Non visé<?php endif; ?>
+                        <?php if($v->numero_archive) : if (preg_match('/^DRM/', $v->numero_contrat)) { echo tooltipForPicto($v->type_transaction); } else { echo $v->numero_archive ; } elseif(!$v->valide->statut || $v->valide->statut == VracClient::STATUS_CONTRAT_BROUILLON): ?>Brouillon<?php else: ?>Non visé<?php endif; ?>
 
                         </a>
                         <br />
@@ -169,7 +169,7 @@ use_helper('PointsAides');
                     <?php if (isset($v->prix_initial_unitaire_hl) && $v->prix_initial_unitaire_hl):
                             echoFloat($v->prix_initial_unitaire_hl);
                             echo "&nbsp;".VracConfiguration::getInstance()->getUnites()[$v->type_transaction]['prix_initial_unitaire']['libelle'] ;
-                          elseif($v->valide->statut):
+                          elseif($v->valide->statut != VracClient::STATUS_CONTRAT_BROUILLON && $v->valide->statut):
                     ?>
                     <a href="<?php echo url_for('vrac_marche', array('numero_contrat' => $v->numero_contrat, 'urlretour' => $sf_request->getUri()."#ligne_".vrac_get_id($value))) ?>" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Éditer</a>
                   <?php endif;?>
@@ -201,7 +201,7 @@ use_helper('PointsAides');
                     <?php else: ?>
 
                       <td class="text-center">
-                          <?php if($v->valide->statut): ?>
+                          <?php if($v->valide->statut != VracClient::STATUS_CONTRAT_BROUILLON && $v->valide->statut): ?>
                               <a class="btn btn-sm btn-default" href="<?php echo url_for('vrac_visualisation', array('numero_contrat' => $v->numero_contrat)) ?>">Visualiser</a>
                           <?php else: ?>
                               <a class="btn btn-sm btn-default" href="<?php echo url_for('vrac_redirect_saisie', array('numero_contrat' => $v->numero_contrat)) ?>">Continuer</a>
