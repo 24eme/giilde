@@ -496,6 +496,8 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
 
     public function switchStatusAndSave() {
       $newStatus = "";
+      $this->save();
+
       if($this->isActif()){
          $newStatus = SocieteClient::STATUT_SUSPENDU;
       }
