@@ -20,7 +20,7 @@ foreach (CompteTagsView::getInstance()->listByTags('test', 'test') as $k => $v) 
 }
 
 
-$t = new lime_test(7);
+$t = new lime_test(8);
 $t->comment('création des différentes sociétés');
 
 $codePostalRegion = "92100";
@@ -113,3 +113,16 @@ $compte->addTag('test', 'test_cooperative');
 $compte->addTag('test', 'test');
 $compte->save();
 $t->is($compte->tags->automatique->toArray(true, false), array('societe', 'ressortissant'), "Création de société intermédiaire crée un compte du même type");
+
+$societeviti->date_modification = '2017-01-01';
+$societeviti->save();
+try {
+  $societeviti->switchStatusAndSave();
+  $t->is($societeviti->statut , SocieteClient::STATUT_SUSPENDU, "Changement de statut (suspendu) de la societe viti");
+  $societeviti->date_modification = '2017-01-01';
+  $societeviti->save();
+  $societeviti->switchStatusAndSave();
+  $t->is($societeviti->statut , SocieteClient::STATUT_ACTIF, "Changement de statut (actif) de la societe viti");
+}catch(sfException $e) {
+  $t->fail("Changement de statut de la societe viti");
+}
