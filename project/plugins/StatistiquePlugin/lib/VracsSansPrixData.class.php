@@ -16,8 +16,7 @@ class VracsSansPrixData {
       $elasticaQuery = new acElasticaQuery();
       $query = array("query"=> array("bool"=> array("must" => array(
         array("term" => array("doc.prix_initial_unitaire_hl" =>  "0")),
-        array("range" => array("doc.date_signature" => array("gte" => $this->date_debut, "lte" => $this->date_fin_effective))),
-        array('term' => array("doc.acheteur.region" => "REGION_CVO"))
+        array("range" => array("doc.date_signature" => array("gte" => $this->date_debut, "lte" => $this->date_fin_effective)))
       ))),
       "sort" => array(array("doc.acheteur_identifiant"=>array("order"=>"asc"), "doc.date_signature"=>array("order"=>"asc"), "doc.vendeur_identifiant"=>array("order"=>"asc"),))
       );

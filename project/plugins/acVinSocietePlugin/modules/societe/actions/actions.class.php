@@ -133,25 +133,7 @@ class societeActions extends sfCredentialActions {
 
     public function executeSwitchStatus(sfWebRequest $request) {
         $this->societe = $this->getRoute()->getSociete();
-        $newStatus = "";
-        if($this->societe->isActif()){
-           $newStatus = SocieteClient::STATUT_SUSPENDU;
-        }
-        if($this->societe->isSuspendu()){
-           $newStatus = SocieteClient::STATUT_ACTIF;
-        }
-        foreach ($this->societe->contacts as $keyCompte => $compte) {
-            $contact = CompteClient::getInstance()->find($keyCompte);
-            $contact->setStatut($newStatus);
-            $contact->save();
-        }
-        foreach ($this->societe->etablissements as $keyEtablissement => $etablissement) {
-            $etablissement = EtablissementClient::getInstance()->find($keyEtablissement);
-            $etablissement->setStatut($newStatus);
-            $etablissement->save();
-        }
-        $this->societe->setStatut($newStatus);
-        $this->societe->save();
+        $this->societe->switchStatusAndSave();
         return $this->redirect('compte_visualisation', array('identifiant' => $this->societe->getMasterCompte()->identifiant));
     }
 

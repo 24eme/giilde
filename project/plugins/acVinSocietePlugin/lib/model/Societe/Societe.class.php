@@ -494,4 +494,28 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
       return $compte;
     }
 
+    public function switchStatusAndSave() {
+      $newStatus = "";
+      $this->save();
+
+      if($this->isActif()){
+         $newStatus = SocieteClient::STATUT_SUSPENDU;
+      }
+      if($this->isSuspendu()){
+         $newStatus = SocieteClient::STATUT_ACTIF;
+      }
+      foreach ($this->contacts as $keyCompte => $compte) {
+          $contact = CompteClient::getInstance()->find($keyCompte);
+          $contact->setStatut($newStatus);
+          $contact->save();
+      }
+      foreach ($this->etablissements as $keyEtablissement => $etablissement) {
+          $etablissement = EtablissementClient::getInstance()->find($keyEtablissement);
+          $etablissement->setStatut($newStatus);
+          $etablissement->save();
+      }
+      $this->setStatut($newStatus);
+      $this->save();
+    }
+
 }
