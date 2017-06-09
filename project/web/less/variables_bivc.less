@@ -1,0 +1,65 @@
+//
+// Variables
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+@vertbivc: #8faf6e;
+
+@import "less-original/variables.less";
+
+
+@navbar-default-color:             #777;
+@navbar-default-bg:                #FFF;
+@navbar-default-border:            @vertbivc;
+@body-bg:                          #e8efe2;
+@link-color:                       @vertbivc;
+
+.navbar
+{
+  margin-top: 20px;
+  border: 1px solid @vertbivc;
+  .navbar-nav
+  {
+    > li
+    {
+      > a
+      {
+
+        padding-left: 20px;
+        padding-right: 20px;
+        position: relative;
+        line-height: normal;
+
+        &:before
+        {
+          background: @vertbivc;
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 0;
+          transition: height .2s;
+        }
+
+        &:hover:before,
+        &:focus:before { height: 6px; }
+      }
+
+      &.active
+      {
+        > a:before { height: 6px; }
+      }
+    }
+  }
+}
+.container {
+  background-color: white;
+  position: relative;
+  img.logo-site {position: absolute;height: 80px; top: 5px; z-index: 1001; left: -70px;}
+  h1 { color:  @vertbivc; margin-bottom: 0px; margin-top: 5px; font-size: 10px;}
+}

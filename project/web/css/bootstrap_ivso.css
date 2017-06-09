@@ -3,27 +3,6 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@font-face {
-  font-family: 'overlockregular';
-  src: url('../fonts/overlock-regular-webfont.eot');
-  src: url('../fonts/overlock-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/overlock-regular-webfont.woff2') format('woff2'), url('../fonts/overlock-regular-webfont.woff') format('woff'), url('../fonts/overlock-regular-webfont.ttf') format('truetype'), url('../fonts/overlock-regular-webfont.svg#overlockregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'overlockblack';
-  src: url('../fonts/overlock-black-webfont.eot');
-  src: url('../fonts/overlock-black-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/overlock-black-webfont.woff2') format('woff2'), url('../fonts/overlock-black-webfont.woff') format('woff'), url('../fonts/overlock-black-webfont.ttf') format('truetype'), url('../fonts/overlock-black-webfont.svg#overlockblack') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'overlockblack_italic';
-  src: url('../fonts/overlock-blackitalic-webfont.eot');
-  src: url('../fonts/overlock-blackitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/overlock-blackitalic-webfont.woff2') format('woff2'), url('../fonts/overlock-blackitalic-webfont.woff') format('woff'), url('../fonts/overlock-blackitalic-webfont.ttf') format('truetype'), url('../fonts/overlock-blackitalic-webfont.svg#overlockblack_italic') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
