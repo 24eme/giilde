@@ -117,6 +117,8 @@
             initRaccourcis();
         }
 
+
+        initChoiceProduits();
         initCreationDrmPopup();
         initRegimeCrdsPopup();
         initCrds();
@@ -127,6 +129,19 @@
         initBoldSaisie();
         initAnnexes();
     });
+
+    var initChoiceProduits = function(){
+      $('.table_produit_body').each(function(){
+        $(this).find('td.pointer').each(function(){
+          $(this).click(function(){
+            var cible = $(this).attr('data-cible');
+            var checkbox = $(".checkbox_"+cible);
+              checkbox.prop('checked',!checkbox.is(':checked'));
+            
+          });
+        })
+      })
+    }
 
     var initAnnexes = function(){
 

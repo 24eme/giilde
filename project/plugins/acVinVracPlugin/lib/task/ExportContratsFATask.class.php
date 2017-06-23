@@ -154,7 +154,7 @@ EOF;
 
             $delai_retiraison = $this->diffDate($contrat->date_limite_retiraison, $contrat->date_debut_retiraison, 'i');
 
-            $ligne[self::CSV_FA_DELAI_RETIRAISON] = sprintf("%0.1f", $delai_retiraison); 
+            $ligne[self::CSV_FA_DELAI_RETIRAISON] = sprintf("%0.1f", $delai_retiraison);
             $ligne[self::CSV_FA_POURCENTAGE_ACCOMPTE] = sprintf("%d", $contrat->acompte);
 
             $ligne[self::CSV_FA_DELAI_PAIEMENT] = sprintf("%0.1f", $this->getDelaiPaiement($contrat));
@@ -215,27 +215,21 @@ EOF;
         switch ($contrat->delai_paiement) {
             case "60_JOURS": {
                     return 2.0;
-                    break;
                 }
             case "30_JOURS": {
                     return 1.0;
-                    break;
                 }
             case "90_JOURS": {
                     return 3.0;
-                    break;
                 }
             case "COMPTANT": {
                     return 0.0;
-                    break;
                 }
             case "ACCORD_INTERPROFESSIONNEL": {
                     return 2.5;
-                    break;
                 }
             case "45_JOURS": {
                     return 1.5;
-                    break;
                 }
         }
     }
@@ -253,11 +247,8 @@ EOF;
                 case "blanc":
                     return "BL";
 
-                    break;
-
                 default:
                     return "CO";
-                    break;
             }
         }
         switch ($couleur) {
@@ -265,17 +256,10 @@ EOF;
             case "blanc":
             case "blanc_doux":
                 return "BL";
-
-                break;
-
             case "rouge":
                 return "RG";
-
-                break;
             case "rose":
                 return "RS";
-
-                break;
         }
         return $couleur;
     }

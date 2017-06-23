@@ -19,7 +19,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
 
     public function exportEDI() {
         if (!$this->drm) {
-            new sfException('Absence de DRM');
+            throw new sfException('Absence de DRM');
         }
         $header = $this->createHeaderEdi();
         $body = $this->createBodyEdi();
@@ -118,7 +118,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
                         foreach ($sortieValue as $sortieDetailKey => $sortieDetailValue) {
                             if ($sortieDetailValue->getVolume()) {
                                 $complement = $sortieDetailValue->getIdentifiant();
-                               
+
                                 $numero_doc = ($sortieDetailValue->numero_document) ? $sortieDetailValue->numero_document : '';
                                 if ($sortiekey == 'export_details') {
                                     $pays = $this->countryList[$sortieDetailValue->getIdentifiant()];

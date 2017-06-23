@@ -158,39 +158,37 @@ class EtablissementAllView extends acCouchdbView
 
     }
 
-    public static function makeLibelle($row) {
-        $libelle = '';
+		public static function makeLibelle($row) {
+			$libelle = '';
 
-        if ($nom = $row->key[self::KEY_NOM]) {
-            $libelle .= $nom;
-        }
+			if ($nom = $row->key[self::KEY_NOM]) {
+				$libelle .= $nom;
+			}
 
-        $libelle .= ' ('.$row->key[self::KEY_IDENTIFIANT];
+			$libelle .= ' ('.$row->key[self::KEY_IDENTIFIANT];
 
-        if (isset($row->key[self::KEY_CVI]) && $cvi = $row->key[self::KEY_CVI]) {
-            $libelle .= ' / '.$cvi;
-        }
+			if (isset($row->key[self::KEY_CVI]) && $cvi = $row->key[self::KEY_CVI]) {
+				$libelle .= ' / '.$cvi;
+			}
 
-		if (isset($row->value[self::VALUE_NO_ACCISES]) && $numAccises = $row->value[self::VALUE_NO_ACCISES]) {
-            $libelle .= ' / '.$numAccises;
-        }else {
-					$libelle .= " / sans n° d'accise";
-				}
+			if (isset($row->value[self::VALUE_NO_ACCISES]) && $numAccises = $row->value[self::VALUE_NO_ACCISES]) {
+				$libelle .= ' / '.$numAccises . ') ';
+			}else {
+				$libelle .= " / sans n° d'accise ) ";
+			}
 
-        $libelle .= ') ';
+			if (isset($row->key[self::KEY_FAMILLE]))
+				$libelle .= $row->key[self::KEY_FAMILLE];
 
-    	if (isset($row->key[self::KEY_FAMILLE]))
-    	  	$libelle .= $row->key[self::KEY_FAMILLE];
+			if (isset($row->value[self::VALUE_COMMUNE]))
+				$libelle .= ' '.$row->value[self::VALUE_COMMUNE];
 
-    	if (isset($row->value[self::VALUE_COMMUNE]))
-    	  	$libelle .= ' '.$row->value[self::VALUE_COMMUNE];
+			if (isset($row->value[self::VALUE_CODE_POSTAL]))
+				$libelle .= ' '.$row->value[self::VALUE_CODE_POSTAL];
 
-    	if (isset($row->value[self::VALUE_CODE_POSTAL]))
-    	  	$libelle .= ' '.$row->value[self::VALUE_CODE_POSTAL];
+			$libelle .= " (Etablissement)";
 
-        $libelle .= " (Etablissement)";
-
-        return trim($libelle);
-    }
+			return trim($libelle);
+		}
 
 }

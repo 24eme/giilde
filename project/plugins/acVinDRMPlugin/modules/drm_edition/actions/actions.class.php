@@ -3,6 +3,7 @@
 class drm_editionActions extends drmGeneriqueActions {
 
     public function executeSaisieMouvements(sfWebRequest $request) {
+        // set_time_limit(-1);
         if(!($drmdetailtype = $this->getRequest()->getParameter('details'))) {
             $this->drm = $this->getRoute()->getDRM();
 

@@ -233,8 +233,8 @@ DRM:
                                                                                                 total_facturable: { type: float }
                                                                                                 total_revendique: { type: float }
                                                                                                 total: { type: float }
-                                                                                                no_movements: { required: false }
-                                                                                                edited: { required: false }
+                                                                                                no_movements: { required: false } # Plus utilisé
+                                                                                                edited: { required: false } # Plus utilisé
                                                                                                 '*':
                                                                                                   type: collection
                                                                                                   class: DRMDetails
@@ -246,6 +246,7 @@ DRM:
                                                                                                         definition:
                                                                                                           fields:
                                                                                                             no_movements: { required: false }
+                                                                                                            edited: { required: false }
                                                                                                             denomination_complementaire: { }
                                                                                                             pas_de_mouvement_check: { type: integer }
                                                                                                             total_debut_mois: { type: float }

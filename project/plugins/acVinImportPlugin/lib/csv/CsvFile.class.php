@@ -23,7 +23,7 @@ class CsvFile
     if (!$file)
       return ;
     if (!file_exists($file) && !preg_match('/^http/', $file))
-      throw new Exception("Cannont access $file");
+      throw new sfException("Cannont access $file");
     $this->file = $file;
     $handle = fopen($this->file, 'r');
     if (!$handle) {
@@ -38,7 +38,7 @@ class CsvFile
     }
     $buffer = preg_replace('/$[^\n]*\n/', '', $buffer);
     if (!$buffer) {
-      throw new Exception('invalid csv file; '.$this->file);
+      throw new sfException('invalid csv file; '.$this->file);
     }
 
     $virgule = explode(',', $buffer);
@@ -57,7 +57,7 @@ class CsvFile
     }
     $handler = fopen($this->file, 'r');
     if (!$handler) {
-      throw new Exception('Cannot open csv file anymore');
+      throw new sfException('Cannot open csv file anymore');
     }
     $this->csvdata = array();
     while (($data = fgetcsv($handler, 0, $this->separator)) !== FALSE) {

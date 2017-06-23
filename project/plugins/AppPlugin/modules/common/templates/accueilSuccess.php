@@ -28,7 +28,9 @@
     <?php endif; ?>
 <?php if($teledeclaration): ?>
 <?php include_component('common', 'blocksTeledeclaration', array('etablissementPrincipal' => $etablissementPrincipal)); ?>
+<?php include_partial('common/blocksTeledeclarationExtra'); ?>
 <?php else: ?>
 <?php include_component('common', 'blocks', array('etablissement' => $etablissement)); ?>
 <?php endif; ?>
+
 </div>

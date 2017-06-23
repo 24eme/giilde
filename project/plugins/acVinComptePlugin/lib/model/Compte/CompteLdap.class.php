@@ -1,7 +1,7 @@
 <?php
 class CompteLdap extends acVinLdap {
 
-  public function saveCompte($compte, $verbose = 0) 
+  public function saveCompte($compte, $verbose = 0)
     {
       $info = $this->info($compte);
       if ($verbose) {
@@ -14,7 +14,7 @@ class CompteLdap extends acVinLdap {
     /**
      *
      * @param _Compte $compte
-     * @return bool 
+     * @return bool
      */
     public function deleteCompte($compte, $verbose = 0) {
       if ($verbose) {
@@ -22,7 +22,7 @@ class CompteLdap extends acVinLdap {
       }
         return $this->delete(self::getIdentifiant($compte));
     }
-    
+
     protected static function getIdentifiant($compte) {
       if ($compte->isSocieteContact()) {
 	return $compte->getSociete()->identifiant;
@@ -34,21 +34,12 @@ class CompteLdap extends acVinLdap {
     /**
      *
      * @param _Compte $compte
-     * @return array 
+     * @return array
      */
-    protected function info($compte) 
+    protected function info($compte)
     {
       $info = array();
       $info['uid']              = self::getIdentifiant($compte);
-      if (!is_null($compte->getNom())){
-	$info['sn']             = $compte->getNom();
-      } 
-      else{
-	$info['sn']             = $compte->nom_a_afficher;          
-      }
-      if ($compte->getPrenom()){
-          $info['givenName']        = $compte->getPrenom(); 
-      }
       $info['cn']               = $compte->nom_a_afficher;
       $info['objectClass'][0]   = 'top';
       $info['objectClass'][1]   = 'person';
@@ -58,32 +49,41 @@ class CompteLdap extends acVinLdap {
       $info['uidNumber']        = (int)self::getIdentifiant($compte);
       $info['gidNumber']        = '1000';
       $info['homeDirectory']    = '/home/'.self::getIdentifiant($compte);
-      if ($compte->email && preg_match('/@/', $compte->email))
-	$info['mail']             = $compte->email;
-      if ($compte->adresse) {
-      $info['street']           = preg_replace('/;/', '\n', $compte->adresse);
-      if ($compte->adresse_complementaire)
-	$info['street']        .= " \n ".preg_replace('/;/', '\n', $compte->adresse_complementaire);
-      }
       $info['o']                = $compte->getSociete()->raison_sociale;
-      if ($compte->commune)
-      $info['l']                = $compte->commune;
-      if ($compte->code_postal)
-      $info['postalCode']       = $compte->code_postal;
-      if ($compte->telephone_bureau)
-      $info['telephoneNumber']  = $compte->telephone_bureau;
-      if ($compte->fax)
-      $info['facsimileTelephoneNumber'] = $compte->fax;
-      if ($compte->telephone_mobile)
-      $info['mobile']           = $compte->telephone_mobile;
       $info['description']      = ($compte->societe_informations->type)? $compte->societe_informations->type : '';
+
+      if (!is_null($compte->getNom())){
+	        $info['sn']             = $compte->getNom();
+      } else {
+	        $info['sn']             = $compte->nom_a_afficher;
+      }
+      if ($compte->getPrenom()){
+          $info['givenName']        = $compte->getPrenom();
+      }
+      if ($compte->email && preg_match('/@/', $compte->email))
+	       $info['mail']             = $compte->email;
+      if ($compte->adresse) {
+         $info['street']           = preg_replace('/;/', '\n', $compte->adresse);
+      if ($compte->adresse_complementaire)
+	       $info['street']        .= " \n ".preg_replace('/;/', '\n', $compte->adresse_complementaire);
+      }
+      if ($compte->commune)
+          $info['l']                = $compte->commune;
+      if ($compte->code_postal)
+          $info['postalCode']       = $compte->code_postal;
+      if ($compte->telephone_bureau)
+          $info['telephoneNumber']  = $compte->telephone_bureau;
+      if ($compte->fax)
+          $info['facsimileTelephoneNumber'] = $compte->fax;
+      if ($compte->telephone_mobile)
+          $info['mobile']           = $compte->telephone_mobile;
       if ($compte->exist('mot_de_passe')) {
-	$info['userPassword']  = $compte->mot_de_passe;
-	if(!$compte->isActif()) {
-	  $info['userPassword'] = null;
-	}
+	        $info['userPassword']  = $compte->mot_de_passe;
+	        if(!$compte->isActif()) {
+	           $info['userPassword'] = null;
+	        }
       }
       return $info;
     }
-    
+
 }

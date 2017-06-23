@@ -46,7 +46,7 @@ class bsWidgetFormChoice extends sfWidgetFormChoice
     	if($onlyChoice)
     	{
     		if(!isset($choices[$onlyChoice]))
-    			throw new Exception("Option '$onlyChoice' doesn't exist.");
+    			throw new sfException("Option '$onlyChoice' doesn't exist.");
     
     		$key    = $onlyChoice;
     		$option = $choices[$key];

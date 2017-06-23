@@ -34,7 +34,7 @@ class EtablissementCsvFile extends CompteCsvFile
     private function verifyCsvLine($line) {
           if (!preg_match('/[0-9]+/', $line[self::CSV_ID_SOCIETE])) {
 
-              throw new Exception(sprintf('ID invalide : %s', $line[self::CSV_ID_SOCIETE]));
+              throw new sfException(sprintf('ID invalide : %s', $line[self::CSV_ID_SOCIETE]));
           }
       }
 
@@ -203,8 +203,7 @@ class EtablissementCsvFile extends CompteCsvFile
     }
 
     protected function getField($line, $strConstant) {
-
-        eval("\$constante = self::".$strConstant.";" );
+        $constante = constant("self::$strConstant");
 
         return $line[$constante];
     }

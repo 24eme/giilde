@@ -112,7 +112,7 @@ class ProduitCsvFile extends CsvFile {
         if ($withDefault) {
             return ($key) ? $key : Configuration::DEFAULT_KEY;
         } elseif (!$key) {
-            throw new Exception('La clé "' . $key . '" n\'est pas valide');
+            throw new sfException('La clé "' . $key . '" n\'est pas valide');
         } else {
             return $key;
         }

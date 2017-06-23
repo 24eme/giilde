@@ -154,7 +154,6 @@ class RelanceTypeExplications extends BaseRelanceTypeExplications {
 //                break;
             default:
                 throw new sfException("L'alerte $alerte->id de type $type_alerte n'a pas été trouvée.");
-                break;
         }
     }
 

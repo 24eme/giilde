@@ -23,7 +23,7 @@ class acCouchdbJsonDefinition {
     }
 
     public function getInheritance() {
-        
+
         return $this->_inheritance;
     }
 
@@ -35,7 +35,6 @@ class acCouchdbJsonDefinition {
     public function add(acCouchdbJsonDefinitionField $field) {
         if ($this->has($field->getKey())) {
             return $this->get($field->getKey());
-            throw new acCouchdbException(sprintf("This field already exist %s", $field->getKey()));
         }
         $this->_fields[$field->getKey()] = $field;
 
@@ -51,7 +50,7 @@ class acCouchdbJsonDefinition {
         }
         return $this->_required_fields;
     }
-    
+
     public function getFields() {
         return $this->_fields;
     }
@@ -71,7 +70,7 @@ class acCouchdbJsonDefinition {
 
         return false;
     }
-    
+
     public function exist($key) {
         return $this->hasField($key);
     }
@@ -84,7 +83,7 @@ class acCouchdbJsonDefinition {
         if ($this->has('*')) {
            return $this->_fields['*'];
         }
-        
+
         throw new acCouchdbException(sprintf("This field doesn't exist : %s", $key));
     }
 
@@ -98,7 +97,7 @@ class acCouchdbJsonDefinition {
     }
 
     public function getDefinitionByClassName($class_name) {
-        
+
         return $this->getDefinitionByHash($this->findHashByClassName($class_name));
     }
 

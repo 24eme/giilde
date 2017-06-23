@@ -27,14 +27,14 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table_produit_body">
                     <?php if (count($certificationProduits->produits)): ?>
                         <?php foreach ($certificationProduits->produits as $produit):
                             ?>
                             <tr>
                                 <td class="text-left"><?php echo $produit->getLibelle("%format_libelle%"); ?></td>
-                                <td class="text-center"><?php echo $form['produit' . $produit->getHashForKey()]->render(); ?></td>
-                                <td class="text-center"><?php echo $form['acquitte' . $produit->getHashForKey()]->render(); ?></td>
+                                <td class="pointer text-center" data-cible="<?php echo 'produit_'.$produit->getHashForKey() ?>" ><?php echo $form['produit' . $produit->getHashForKey()]->render(array('class' => 'checkbox_produit_'.$produit->getHashForKey())); ?></td>
+                                <td class="pointer text-center" data-cible="<?php echo 'acquitte_'.$produit->getHashForKey() ?>"><?php echo $form['acquitte' . $produit->getHashForKey()]->render(array('class' => 'checkbox_acquitte_'.$produit->getHashForKey())); ?></td>
                             </tr>
                             <?php ?>
                         <?php endforeach; ?>

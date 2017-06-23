@@ -9,10 +9,6 @@ class drmGeneriqueActions extends sfActions {
     protected function initSocieteAndEtablissementPrincipal() {
         $this->compte = $this->getUser()->getCompte();
         if ($this->isTeledeclarationDrm()) {
-
-            /*if (!$this->compte) {
-                new sfException("Le compte $compte n'existe pas");
-            }*/
             $this->etablissementPrincipal = $this->getRoute()->getEtablissement();
             $this->societe = $this->etablissementPrincipal->getSociete();
         }
@@ -61,7 +57,7 @@ class drmGeneriqueActions extends sfActions {
     protected function isUsurpationMode() {
         return $this->getUser()->isUsurpationCompte();
     }
-  
+
     protected function processProduitDetails($request, $formClass) {
         $this->detail = $this->getRoute()->getDRMDetail();
         $this->drm = $this->detail->getDocument();

@@ -29,16 +29,7 @@ class societeActions extends sfCredentialActions {
     }
 
     public function executeIndex(sfWebRequest $request) {
-
         return $this->redirect('compte_search');
-        $this->contactsForm = new ContactsChoiceForm('INTERPRO-declaration');
-        $this->formUploadCSVNoCVO = new UploadCSVNoCVOForm();
-        if ($request->isMethod(sfWebRequest::POST)) {
-            $this->contactsForm->bind($request->getParameter($this->contactsForm->getName()));
-            if ($this->contactsForm->isValid()) {
-                return $this->redirect('societe_contact_chosen', array('identifiant' => $this->contactsForm->getContact()));
-            }
-        }
     }
 
     public function executeContactChosen(sfWebRequest $request) {

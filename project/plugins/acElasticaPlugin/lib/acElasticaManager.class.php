@@ -20,7 +20,7 @@ class acElasticaManager {
     public static function initializeClient($dsn, $dbname) {
       self::getInstance()->_client = new acElasticaClient($dsn, $dbname);
       if (!self::getInstance()->_client->getDefaultIndex())
-	throw new Exception($dbname." does not exist");
+	throw new sfException($dbname." does not exist");
       return self::getInstance()->_client;
     }
 

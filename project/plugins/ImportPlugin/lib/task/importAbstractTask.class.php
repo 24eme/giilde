@@ -58,7 +58,7 @@ abstract class importAbstractTask extends sfBaseTask {
         }
         if (!$key) {
 
-            throw new Exception('La clé "' . $key . '" n\'est pas valide');
+            throw new sfException('La clé "' . $key . '" n\'est pas valide');
         }
 
         return $key;

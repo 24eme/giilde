@@ -22,12 +22,12 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                 <div class="col-xs-12">
                     <div class="panel panel-default" >
                         <div class="panel-heading " style="cursor:pointer;" id="drm_annexes_documents" >
-                          <div class="row">
+                          <div class="row" data-toggle="collapse" data-parent="#accordion" href="#collapse_documents" aria-expanded="true" aria-controls="collapse_documents">
                             <div class="col-xs-11">
                               <h3 class="panel-title text-center"><strong>Déclaration des documents d'accompagnement</strong></h3>
                             </div>
                             <div class="col-xs-1 text-right">
-                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_documents" aria-expanded="true" aria-controls="collapse_documents">
+                              <a role="button" >
                                 &nbsp;<span class="glyphicon  <?php echo ($drm->hasAnnexes())? 'glyphicon-chevron-down' : 'glyphicon-chevron-right' ?> " style="padding-top: 4px;" ></span>
                               </a>
                             </div>
@@ -65,13 +65,13 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
               <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading" id="drm_annexes_apurement" >
+                        <div class="panel-heading" style="cursor:pointer;" id="drm_annexes_apurement" data-toggle="collapse" data-parent="#accordion" href="#collapse_apurement" aria-expanded="true" aria-controls="collapse_apurement" >
                           <div class="row">
                             <div class="col-xs-11">
                               <h3 class="panel-title text-center"><strong>Relevé de non apurement</strong></h3>
                             </div>
                             <div class="col-xs-1 text-right">
-                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_apurement" aria-expanded="true" aria-controls="collapse_apurement">
+                              <a role="button">
                                 &nbsp;<span class="glyphicon  <?php echo (count($annexesForm['releve_non_apurement']))? 'glyphicon-chevron-down' : 'glyphicon-chevron-right' ?> " style="padding-top: 4px;" ></span>
                               </a>
                             </div>
@@ -111,14 +111,14 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
 
                 <div class="row">
                   <div class="col-xs-12">
-                      <div class="panel panel-default">
-                        <div class="panel-heading" id="drm_annexes_stats_europeenes" >
+                      <div class="panel panel-default" data-toggle="collapse" data-parent="#accordion" href="#collapse_stats_europeenes" aria-expanded="true" aria-controls="collapse_stats_europeenes">
+                        <div class="panel-heading" style="cursor:pointer;" id="drm_annexes_stats_europeenes" >
                             <div class="row">
                               <div class="col-xs-11">
                                 <h3 class="panel-title text-center"><strong>Statistiques européennes</strong></h3>
                               </div>
                               <div class="col-xs-1 text-right">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_stats_europeenes" aria-expanded="true" aria-controls="collapse_stats_europeenes">
+                                <a role="button" >
                                   &nbsp;<span class="glyphicon  glyphicon-chevron-down" style="padding-top: 4px;" ></span>
                                 </a>
                               </div>
@@ -162,13 +162,13 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                 <div class="row">
                   <div class="col-xs-12">
                       <div class="panel panel-default">
-                        <div class="panel-heading" id="drm_annexes_observations" >
+                        <div class="panel-heading" style="cursor:pointer;" id="drm_annexes_observations" data-toggle="collapse" data-parent="#accordion" href="#collapse_observations" aria-expanded="true" aria-controls="collapse_observations">
                             <div class="row">
                               <div class="col-xs-11">
                                 <h3 class="panel-title text-center"><strong>Observations</strong></h3>
                               </div>
                               <div class="col-xs-1 text-right">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_observations" aria-expanded="true" aria-controls="collapse_observations">
+                                <a role="button" >
                                   &nbsp;<span class="glyphicon  glyphicon-chevron-down" style="padding-top: 4px;" ></span>
                                 </a>
                               </div>
@@ -215,13 +215,13 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
               <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
-                      <div class="panel-heading" id="drm_annexes_tavs" >
+                      <div class="panel-heading" style="cursor:pointer;" id="drm_annexes_tavs" data-toggle="collapse" data-parent="#accordion" href="#collapse_tavs" aria-expanded="true" aria-controls="collapse_tavs">
                           <div class="row">
                             <div class="col-xs-11">
                               <h3 class="panel-title text-center"><strong>TAV - Taux d'alcool volumique</strong></h3>
                             </div>
                             <div class="col-xs-1 text-right">
-                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_tavs" aria-expanded="true" aria-controls="collapse_tavs">
+                              <a role="button" >
                                 &nbsp;<span class="glyphicon  glyphicon-chevron-down" style="padding-top: 4px;" ></span>
                               </a>
                             </div>
@@ -262,13 +262,13 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
-                      <div class="panel-heading"  id="drm_annexes_douanes" >
+                      <div class="panel-heading" style="cursor:pointer;" id="drm_annexes_douanes" data-toggle="collapse" data-parent="#accordion" href="#collapse_douanes" aria-expanded="true" aria-controls="collapse_douanes">
                         <div class="row">
                           <div class="col-xs-11">
                             <h3 class="panel-title text-center"><strong>Paiement Douane</strong></h3>
                           </div>
                           <div class="col-xs-1 text-right">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_douanes" aria-expanded="true" aria-controls="collapse_douanes">
+                            <a role="button" >
                               &nbsp;<span class="glyphicon <?php echo (!$drm->hasPaiementDouane())? 'glyphicon-chevron-down' : 'glyphicon-chevron-right' ?> " style="padding-top: 4px;" ></span>
                             </a>
                           </div>

@@ -1,0 +1,730 @@
+certification,genre,appellation,mention,lieu,couleur,cepage,libelle complet
+AOC,Tranquille,Alsace blanc,,,Blanc,,Total Alsace Blanc hors mention
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,,Total Lieu dit Blanc  hors mention 
+AOC,Tranquille,Alsace Lieu-dit,,,Rouge,,Total Lieu dit Rouge 
+AOC,Tranquille,Alsace blanc,,,,Chasselas,AOC Alsace blanc Chasselas
+AOC,Tranquille,Alsace blanc,,,,Sylvaner,AOC Alsace blanc Sylvaner
+AOC,Tranquille,Alsace blanc,,,,Auxerrois,AOC Alsace blanc Auxerrois
+AOC,Tranquille,Alsace blanc,,,,Pinot Blanc,AOC Alsace blanc Pinot Blanc
+AOC,Tranquille,Alsace blanc,,,,Pinot,AOC Alsace blanc Pinot
+AOC,Tranquille,Alsace blanc,,,,Assemblage,AOC Alsace blanc Assemblage
+AOC,Tranquille,Alsace blanc,,,,Riesling,AOC Alsace blanc Riesling
+AOC,Tranquille,Alsace blanc,,,,Pinot Gris,AOC Alsace blanc Pinot Gris
+AOC,Tranquille,Alsace blanc,,,,Muscat,AOC Alsace blanc Muscat
+AOC,Tranquille,Alsace blanc,,,,Muscat Ottonel,AOC Alsace blanc Muscat Ottonel
+AOC,Tranquille,Alsace blanc,,,,Gewurztraminer,AOC Alsace blanc Gewurztraminer
+AOC,Tranquille,Alsace blanc,VT,,,Riesling,AOC Alsace blanc Riesling VT
+AOC,Tranquille,Alsace blanc,VT,,,Pinot Gris,AOC Alsace blanc Pinot Gris VT
+AOC,Tranquille,Alsace blanc,VT,,,Muscat,AOC Alsace blanc Muscat VT
+AOC,Tranquille,Alsace blanc,VT,,,Muscat Ottonel,AOC Alsace blanc Muscat Ottonel VT
+AOC,Tranquille,Alsace blanc,VT,,,Gewurztraminer,AOC Alsace blanc Gewurztraminer VT
+AOC,Tranquille,Alsace blanc,SGN,,,Riesling,AOC Alsace blanc Riesling SGN
+AOC,Tranquille,Alsace blanc,SGN,,,Pinot Gris,AOC Alsace blanc Pinot Gris SGN
+AOC,Tranquille,Alsace blanc,SGN,,,Muscat,AOC Alsace blanc Muscat SGN
+AOC,Tranquille,Alsace blanc,SGN,,,Muscat Ottonel,AOC Alsace blanc Muscat Ottonel SGN
+AOC,Tranquille,Alsace blanc,SGN,,,Gewurztraminer,AOC Alsace blanc Gewurztraminer SGN
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Chasselas,AOC Alsace Lieu-dit Chasselas
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Sylvaner,AOC Alsace Lieu-dit Sylvaner
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Auxerrois,AOC Alsace Lieu-dit Auxerrois
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Pinot Blanc,AOC Alsace Lieu-dit Pinot Blanc
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Pinot,AOC Alsace Lieu-dit Pinot
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Assemblage,AOC Alsace Lieu-dit Assemblage
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Riesling,AOC Alsace Lieu-dit Riesling
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Pinot Gris,AOC Alsace Lieu-dit Pinot Gris
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Muscat,AOC Alsace Lieu-dit Muscat
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Muscat Ottonel,AOC Alsace Lieu-dit Muscat Ottonel
+AOC,Tranquille,Alsace Lieu-dit,,,Blanc,Gewurztraminer,AOC Alsace Lieu-dit Gewurztraminer
+AOC,Tranquille,Alsace Lieu-dit,,,Rouge,Pinot Noir Rouge,AOC Alsace Lieu-dit Pinot Noir Rouge
+AOC,Tranquille,Alsace Lieu-dit,VT,,Blanc,Riesling,AOC Alsace Lieu-dit Riesling VT
+AOC,Tranquille,Alsace Lieu-dit,VT,,Blanc,Pinot Gris,AOC Alsace Lieu-dit Pinot Gris VT
+AOC,Tranquille,Alsace Lieu-dit,VT,,Blanc,Muscat,AOC Alsace Lieu-dit Muscat VT
+AOC,Tranquille,Alsace Lieu-dit,VT,,Blanc,Muscat Ottonel,AOC Alsace Lieu-dit Muscat Ottonel VT
+AOC,Tranquille,Alsace Lieu-dit,VT,,Blanc,Gewurztraminer,AOC Alsace Lieu-dit Gewurztraminer VT
+AOC,Tranquille,Alsace Lieu-dit,SGN,,Blanc,Riesling,AOC Alsace Lieu-dit Riesling SGN
+AOC,Tranquille,Alsace Lieu-dit,SGN,,Blanc,Pinot Gris,AOC Alsace Lieu-dit Pinot Gris SGN
+AOC,Tranquille,Alsace Lieu-dit,SGN,,Blanc,Muscat,AOC Alsace Lieu-dit Muscat SGN
+AOC,Tranquille,Alsace Lieu-dit,SGN,,Blanc,Muscat Ottonel,AOC Alsace Lieu-dit Muscat Ottonel SGN
+AOC,Tranquille,Alsace Lieu-dit,SGN,,Blanc,Gewurztraminer,AOC Alsace Lieu-dit Gewurztraminer SGN
+AOC,Tranquille,Alsace Communale,,Blienschwiller,Blanc,Sylvaner,AOC Alsace Communale Blienschwiller Sylvaner
+AOC,Tranquille,Alsace Communale,,Bergheim,Blanc,Gewurztraminer,AOC Alsace Communale Bergheim Gewurztraminer
+AOC,Tranquille,Alsace Communale,,Côtes de Barr,Blanc,Sylvaner,AOC Alsace Communale Côtes de Barr Sylvaner
+AOC,Tranquille,Alsace Communale,,Côte de Rouffach,Blanc,Riesling,AOC Alsace Communale Côte de Rouffach Riesling
+AOC,Tranquille,Alsace Communale,,Côte de Rouffach,Blanc,Pinot Gris,AOC Alsace Communale Côte de Rouffach Pinot Gris
+AOC,Tranquille,Alsace Communale,,Côte de Rouffach,Blanc,Gewurztraminer,AOC Alsace Communale Côte de Rouffach Gewurztraminer
+AOC,Tranquille,Alsace Communale,,Côte de Rouffach,Rouge,Pinot Noir,AOC Alsace Communale Côte de Rouffach Pinot Noir
+AOC,Tranquille,Alsace Communale,,Coteaux du Haut-Koenigsbourg,Blanc,Riesling,AOC Alsace Communale Coteaux du Haut-Koenigsbourg Riesling
+AOC,Tranquille,Alsace Communale,,Coteaux du Haut-Koenigsbourg,Blanc,Gewurztraminer,AOC Alsace Communale Coteaux du Haut-Koenigsbourg Gewurztraminer
+AOC,Tranquille,Alsace Communale,,Klevener de Heiligenstein,Blanc,Klevener de Heiligenstein,AOC Alsace Communale Klevener de Heiligenstein Klevener de Heiligenstein
+AOC,Tranquille,Alsace Communale,,Ottrott,Rouge,Pinot Noir,AOC Alsace Communale Ottrott Pinot Noir
+AOC,Tranquille,Alsace Communale,,Rodern,Rouge,Pinot Noir,AOC Alsace Communale Rodern Pinot Noir
+AOC,Tranquille,Alsace Communale,,Saint Hippolyte,Rouge,Pinot Noir,AOC Alsace Communale Saint Hippolyte Pinot Noir
+AOC,Tranquille,Alsace Communale,,Vallée Noble,Blanc,Riesling,AOC Alsace Communale Vallée Noble Riesling
+AOC,Tranquille,Alsace Communale,,Vallée Noble,Blanc,Pinot Gris,AOC Alsace Communale Vallée Noble Pinot Gris
+AOC,Tranquille,Alsace Communale,,Vallée Noble,Blanc,Gewurztraminer,AOC Alsace Communale Vallée Noble Gewurztraminer
+AOC,Tranquille,Alsace Communale,,Val Saint Grégoire,Blanc,Auxerrois,AOC Alsace Communale Val Saint Grégoire Auxerrois
+AOC,Tranquille,Alsace Communale,,Val Saint Grégoire,Blanc,Pinot Blanc,AOC Alsace Communale Val Saint Grégoire Pinot Blanc
+AOC,Tranquille,Alsace Communale,,Val Saint Grégoire,Blanc,Pinot Gris,AOC Alsace Communale Val Saint Grégoire Pinot Gris
+AOC,Tranquille,Alsace Communale,,Scherwiller,Blanc,Riesling,AOC Alsace Communale Scherwiller Riesling
+AOC,Tranquille,Alsace Communale,,Wolxheim,Blanc,Riesling,AOC Alsace Communale Wolxheim Riesling
+AOC,Tranquille,Alsace Communale,VT,Bergheim,Blanc,Gewurztraminer,AOC Alsace Communale Bergheim Gewurztraminer VT
+AOC,Tranquille,Alsace Communale,VT,Côte de Rouffach,Blanc,Riesling,AOC Alsace Communale Côte de Rouffach Riesling VT
+AOC,Tranquille,Alsace Communale,VT,Côte de Rouffach,Blanc,Pinot Gris,AOC Alsace Communale Côte de Rouffach Pinot Gris VT
+AOC,Tranquille,Alsace Communale,VT,Côte de Rouffach,Blanc,Gewurztraminer,AOC Alsace Communale Côte de Rouffach Gewurztraminer VT
+AOC,Tranquille,Alsace Communale,VT,Coteaux du Haut-Koenigsbourg,Blanc,Riesling,AOC Alsace Communale Coteaux du Haut-Koenigsbourg Riesling VT
+AOC,Tranquille,Alsace Communale,VT,Coteaux du Haut-Koenigsbourg,Blanc,Gewurztraminer,AOC Alsace Communale Coteaux du Haut-Koenigsbourg Gewurztraminer VT
+AOC,Tranquille,Alsace Communale,VT,Vallée Noble,Blanc,Riesling,AOC Alsace Communale Vallée Noble Riesling VT
+AOC,Tranquille,Alsace Communale,VT,Vallée Noble,Blanc,Pinot Gris,AOC Alsace Communale Vallée Noble Pinot Gris VT
+AOC,Tranquille,Alsace Communale,VT,Vallée Noble,Blanc,Gewurztraminer,AOC Alsace Communale Vallée Noble Gewurztraminer VT
+AOC,Tranquille,Alsace Communale,VT,Val Saint Grégoire,Blanc,Pinot Gris,AOC Alsace Communale Val Saint Grégoire Pinot Gris VT
+AOC,Tranquille,Alsace Communale,VT,Scherwiller,Blanc,Riesling,AOC Alsace Communale Scherwiller Riesling VT
+AOC,Tranquille,Alsace Communale,VT,Wolxheim,Blanc,Riesling,AOC Alsace Communale Wolxheim Riesling VT
+AOC,Tranquille,Alsace Communale,SGN,Bergheim,Blanc,Gewurztraminer,AOC Alsace Communale Bergheim Gewurztraminer SGN
+AOC,Tranquille,Alsace Communale,SGN,Côte de Rouffach,Blanc,Riesling,AOC Alsace Communale Côte de Rouffach Riesling SGN
+AOC,Tranquille,Alsace Communale,SGN,Côte de Rouffach,Blanc,Pinot Gris,AOC Alsace Communale Côte de Rouffach Pinot Gris SGN
+AOC,Tranquille,Alsace Communale,SGN,Côte de Rouffach,Blanc,Gewurztraminer,AOC Alsace Communale Côte de Rouffach Gewurztraminer SGN
+AOC,Tranquille,Alsace Communale,SGN,Coteaux du Haut-Koenigsbourg,Blanc,Riesling,AOC Alsace Communale Coteaux du Haut-Koenigsbourg Riesling SGN
+AOC,Tranquille,Alsace Communale,SGN,Coteaux du Haut-Koenigsbourg,Blanc,Gewurztraminer,AOC Alsace Communale Coteaux du Haut-Koenigsbourg Gewurztraminer SGN
+AOC,Tranquille,Alsace Communale,SGN,Vallée Noble,Blanc,Riesling,AOC Alsace Communale Vallée Noble Riesling SGN
+AOC,Tranquille,Alsace Communale,SGN,Vallée Noble,Blanc,Pinot Gris,AOC Alsace Communale Vallée Noble Pinot Gris SGN
+AOC,Tranquille,Alsace Communale,SGN,Vallée Noble,Blanc,Gewurztraminer,AOC Alsace Communale Vallée Noble Gewurztraminer SGN
+AOC,Tranquille,Alsace Communale,SGN,Val Saint Grégoire,Blanc,Pinot Gris,AOC Alsace Communale Val Saint Grégoire Pinot Gris SGN
+AOC,Tranquille,Alsace Communale,SGN,Scherwiller,Blanc,Riesling,AOC Alsace Communale Scherwiller Riesling SGN
+AOC,Tranquille,Alsace Communale,SGN,Wolxheim,Blanc,Riesling,AOC Alsace Communale Wolxheim Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergbieten,,Riesling,AOC Alsace Grand Cru Altenberg de Bergbieten Riesling
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergbieten,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Bergbieten Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergbieten,,Muscat,AOC Alsace Grand Cru Altenberg de Bergbieten Muscat
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergbieten,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Bergbieten Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergheim,,Assemblage,AOC Alsace Grand Cru Altenberg de Bergheim Assemblage
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergheim,,Riesling,AOC Alsace Grand Cru Altenberg de Bergheim Riesling
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergheim,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Bergheim Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Bergheim,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Bergheim Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Wolxheim,,Riesling,AOC Alsace Grand Cru Altenberg de Wolxheim Riesling
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Wolxheim,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Wolxheim Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Wolxheim,,Muscat,AOC Alsace Grand Cru Altenberg de Wolxheim Muscat
+AOC,Tranquille,Alsace Grand Cru,,Altenberg de Wolxheim,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Wolxheim Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Brand,,Riesling,AOC Alsace Grand Cru Brand Riesling
+AOC,Tranquille,Alsace Grand Cru,,Brand,,Pinot Gris,AOC Alsace Grand Cru Brand Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Brand,,Muscat,AOC Alsace Grand Cru Brand Muscat
+AOC,Tranquille,Alsace Grand Cru,,Brand,,Gewurztraminer,AOC Alsace Grand Cru Brand Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Bruderthal,,Riesling,AOC Alsace Grand Cru Bruderthal Riesling
+AOC,Tranquille,Alsace Grand Cru,,Bruderthal,,Pinot Gris,AOC Alsace Grand Cru Bruderthal Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Bruderthal,,Muscat,AOC Alsace Grand Cru Bruderthal Muscat
+AOC,Tranquille,Alsace Grand Cru,,Bruderthal,,Gewurztraminer,AOC Alsace Grand Cru Bruderthal Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Eichberg,,Riesling,AOC Alsace Grand Cru Eichberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Eichberg,,Pinot Gris,AOC Alsace Grand Cru Eichberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Eichberg,,Muscat,AOC Alsace Grand Cru Eichberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Eichberg,,Gewurztraminer,AOC Alsace Grand Cru Eichberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Engelberg,,Riesling,AOC Alsace Grand Cru Engelberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Engelberg,,Pinot Gris,AOC Alsace Grand Cru Engelberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Engelberg,,Muscat,AOC Alsace Grand Cru Engelberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Engelberg,,Gewurztraminer,AOC Alsace Grand Cru Engelberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Florimont,,Riesling,AOC Alsace Grand Cru Florimont Riesling
+AOC,Tranquille,Alsace Grand Cru,,Florimont,,Pinot Gris,AOC Alsace Grand Cru Florimont Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Florimont,,Muscat,AOC Alsace Grand Cru Florimont Muscat
+AOC,Tranquille,Alsace Grand Cru,,Florimont,,Gewurztraminer,AOC Alsace Grand Cru Florimont Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Frankstein,,Riesling,AOC Alsace Grand Cru Frankstein Riesling
+AOC,Tranquille,Alsace Grand Cru,,Frankstein,,Pinot Gris,AOC Alsace Grand Cru Frankstein Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Frankstein,,Muscat,AOC Alsace Grand Cru Frankstein Muscat
+AOC,Tranquille,Alsace Grand Cru,,Frankstein,,Gewurztraminer,AOC Alsace Grand Cru Frankstein Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Froehn,,Riesling,AOC Alsace Grand Cru Froehn Riesling
+AOC,Tranquille,Alsace Grand Cru,,Froehn,,Pinot Gris,AOC Alsace Grand Cru Froehn Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Froehn,,Muscat,AOC Alsace Grand Cru Froehn Muscat
+AOC,Tranquille,Alsace Grand Cru,,Froehn,,Gewurztraminer,AOC Alsace Grand Cru Froehn Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Furstentum,,Riesling,AOC Alsace Grand Cru Furstentum Riesling
+AOC,Tranquille,Alsace Grand Cru,,Furstentum,,Pinot Gris,AOC Alsace Grand Cru Furstentum Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Furstentum,,Muscat,AOC Alsace Grand Cru Furstentum Muscat
+AOC,Tranquille,Alsace Grand Cru,,Furstentum,,Gewurztraminer,AOC Alsace Grand Cru Furstentum Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Geisberg,,Riesling,AOC Alsace Grand Cru Geisberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Geisberg,,Pinot Gris,AOC Alsace Grand Cru Geisberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Geisberg,,Muscat,AOC Alsace Grand Cru Geisberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Geisberg,,Gewurztraminer,AOC Alsace Grand Cru Geisberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Gloeckelberg,,Riesling,AOC Alsace Grand Cru Gloeckelberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Gloeckelberg,,Pinot Gris,AOC Alsace Grand Cru Gloeckelberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Gloeckelberg,,Muscat,AOC Alsace Grand Cru Gloeckelberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Gloeckelberg,,Gewurztraminer,AOC Alsace Grand Cru Gloeckelberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Goldert,,Riesling,AOC Alsace Grand Cru Goldert Riesling
+AOC,Tranquille,Alsace Grand Cru,,Goldert,,Pinot Gris,AOC Alsace Grand Cru Goldert Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Goldert,,Muscat,AOC Alsace Grand Cru Goldert Muscat
+AOC,Tranquille,Alsace Grand Cru,,Goldert,,Gewurztraminer,AOC Alsace Grand Cru Goldert Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Hatschbourg,,Riesling,AOC Alsace Grand Cru Hatschbourg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Hatschbourg,,Pinot Gris,AOC Alsace Grand Cru Hatschbourg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Hatschbourg,,Muscat,AOC Alsace Grand Cru Hatschbourg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Hatschbourg,,Gewurztraminer,AOC Alsace Grand Cru Hatschbourg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Hengst,,Riesling,AOC Alsace Grand Cru Hengst Riesling
+AOC,Tranquille,Alsace Grand Cru,,Hengst,,Pinot Gris,AOC Alsace Grand Cru Hengst Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Hengst,,Muscat,AOC Alsace Grand Cru Hengst Muscat
+AOC,Tranquille,Alsace Grand Cru,,Hengst,,Gewurztraminer,AOC Alsace Grand Cru Hengst Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Kaefferkopf,,Assemblage,AOC Alsace Grand Cru Kaefferkopf Assemblage
+AOC,Tranquille,Alsace Grand Cru,,Kaefferkopf,,Riesling,AOC Alsace Grand Cru Kaefferkopf Riesling
+AOC,Tranquille,Alsace Grand Cru,,Kaefferkopf,,Pinot Gris,AOC Alsace Grand Cru Kaefferkopf Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Kaefferkopf,,Gewurztraminer,AOC Alsace Grand Cru Kaefferkopf Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Kanzlerberg,,Riesling,AOC Alsace Grand Cru Kanzlerberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Kanzlerberg,,Pinot Gris,AOC Alsace Grand Cru Kanzlerberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Kanzlerberg,,Muscat,AOC Alsace Grand Cru Kanzlerberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Kanzlerberg,,Gewurztraminer,AOC Alsace Grand Cru Kanzlerberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Kastelberg,,Riesling,AOC Alsace Grand Cru Kastelberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Kastelberg,,Pinot Gris,AOC Alsace Grand Cru Kastelberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Kastelberg,,Muscat,AOC Alsace Grand Cru Kastelberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Kastelberg,,Gewurztraminer,AOC Alsace Grand Cru Kastelberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Kessler,,Riesling,AOC Alsace Grand Cru Kessler Riesling
+AOC,Tranquille,Alsace Grand Cru,,Kessler,,Pinot Gris,AOC Alsace Grand Cru Kessler Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Kessler,,Muscat,AOC Alsace Grand Cru Kessler Muscat
+AOC,Tranquille,Alsace Grand Cru,,Kessler,,Gewurztraminer,AOC Alsace Grand Cru Kessler Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Barr,,Riesling,AOC Alsace Grand Cru Kirchberg de Barr Riesling
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Barr,,Pinot Gris,AOC Alsace Grand Cru Kirchberg de Barr Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Barr,,Muscat,AOC Alsace Grand Cru Kirchberg de Barr Muscat
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Barr,,Gewurztraminer,AOC Alsace Grand Cru Kirchberg de Barr Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Ribeauvillé,,Riesling,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Riesling
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Ribeauvillé,,Pinot Gris,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Ribeauvillé,,Muscat,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Muscat
+AOC,Tranquille,Alsace Grand Cru,,Kirchberg de Ribeauvillé,,Gewurztraminer,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Kitterlé,,Riesling,AOC Alsace Grand Cru Kitterlé Riesling
+AOC,Tranquille,Alsace Grand Cru,,Kitterlé,,Pinot Gris,AOC Alsace Grand Cru Kitterlé Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Kitterlé,,Muscat,AOC Alsace Grand Cru Kitterlé Muscat
+AOC,Tranquille,Alsace Grand Cru,,Kitterlé,,Gewurztraminer,AOC Alsace Grand Cru Kitterlé Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Mambourg,,Riesling,AOC Alsace Grand Cru Mambourg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Mambourg,,Pinot Gris,AOC Alsace Grand Cru Mambourg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Mambourg,,Muscat,AOC Alsace Grand Cru Mambourg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Mambourg,,Gewurztraminer,AOC Alsace Grand Cru Mambourg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Mandelberg,,Riesling,AOC Alsace Grand Cru Mandelberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Mandelberg,,Pinot Gris,AOC Alsace Grand Cru Mandelberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Mandelberg,,Muscat,AOC Alsace Grand Cru Mandelberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Mandelberg,,Gewurztraminer,AOC Alsace Grand Cru Mandelberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Marckrain,,Riesling,AOC Alsace Grand Cru Marckrain Riesling
+AOC,Tranquille,Alsace Grand Cru,,Marckrain,,Pinot Gris,AOC Alsace Grand Cru Marckrain Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Marckrain,,Muscat,AOC Alsace Grand Cru Marckrain Muscat
+AOC,Tranquille,Alsace Grand Cru,,Marckrain,,Gewurztraminer,AOC Alsace Grand Cru Marckrain Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Moenchberg,,Riesling,AOC Alsace Grand Cru Moenchberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Moenchberg,,Pinot Gris,AOC Alsace Grand Cru Moenchberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Moenchberg,,Muscat,AOC Alsace Grand Cru Moenchberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Moenchberg,,Gewurztraminer,AOC Alsace Grand Cru Moenchberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Muenchberg,,Riesling,AOC Alsace Grand Cru Muenchberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Muenchberg,,Pinot Gris,AOC Alsace Grand Cru Muenchberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Muenchberg,,Muscat,AOC Alsace Grand Cru Muenchberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Muenchberg,,Gewurztraminer,AOC Alsace Grand Cru Muenchberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Ollwiller,,Riesling,AOC Alsace Grand Cru Ollwiller Riesling
+AOC,Tranquille,Alsace Grand Cru,,Ollwiller,,Pinot Gris,AOC Alsace Grand Cru Ollwiller Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Ollwiller,,Muscat,AOC Alsace Grand Cru Ollwiller Muscat
+AOC,Tranquille,Alsace Grand Cru,,Ollwiller,,Gewurztraminer,AOC Alsace Grand Cru Ollwiller Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Osterberg,,Riesling,AOC Alsace Grand Cru Osterberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Osterberg,,Pinot Gris,AOC Alsace Grand Cru Osterberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Osterberg,,Muscat,AOC Alsace Grand Cru Osterberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Osterberg,,Gewurztraminer,AOC Alsace Grand Cru Osterberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Pfersigberg,,Riesling,AOC Alsace Grand Cru Pfersigberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Pfersigberg,,Pinot Gris,AOC Alsace Grand Cru Pfersigberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Pfersigberg,,Muscat,AOC Alsace Grand Cru Pfersigberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Pfersigberg,,Gewurztraminer,AOC Alsace Grand Cru Pfersigberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Pfingstberg,,Riesling,AOC Alsace Grand Cru Pfingstberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Pfingstberg,,Pinot Gris,AOC Alsace Grand Cru Pfingstberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Pfingstberg,,Muscat,AOC Alsace Grand Cru Pfingstberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Pfingstberg,,Gewurztraminer,AOC Alsace Grand Cru Pfingstberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Praelatenberg,,Riesling,AOC Alsace Grand Cru Praelatenberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Praelatenberg,,Pinot Gris,AOC Alsace Grand Cru Praelatenberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Praelatenberg,,Muscat,AOC Alsace Grand Cru Praelatenberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Praelatenberg,,Gewurztraminer,AOC Alsace Grand Cru Praelatenberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Rangen,,Riesling,AOC Alsace Grand Cru Rangen Riesling
+AOC,Tranquille,Alsace Grand Cru,,Rangen,,Pinot Gris,AOC Alsace Grand Cru Rangen Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Rangen,,Muscat,AOC Alsace Grand Cru Rangen Muscat
+AOC,Tranquille,Alsace Grand Cru,,Rangen,,Gewurztraminer,AOC Alsace Grand Cru Rangen Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Rosacker,,Riesling,AOC Alsace Grand Cru Rosacker Riesling
+AOC,Tranquille,Alsace Grand Cru,,Rosacker,,Pinot Gris,AOC Alsace Grand Cru Rosacker Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Rosacker,,Muscat,AOC Alsace Grand Cru Rosacker Muscat
+AOC,Tranquille,Alsace Grand Cru,,Rosacker,,Gewurztraminer,AOC Alsace Grand Cru Rosacker Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Saering,,Riesling,AOC Alsace Grand Cru Saering Riesling
+AOC,Tranquille,Alsace Grand Cru,,Saering,,Pinot Gris,AOC Alsace Grand Cru Saering Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Saering,,Muscat,AOC Alsace Grand Cru Saering Muscat
+AOC,Tranquille,Alsace Grand Cru,,Saering,,Gewurztraminer,AOC Alsace Grand Cru Saering Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Schlossberg,,Riesling,AOC Alsace Grand Cru Schlossberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Schlossberg,,Pinot Gris,AOC Alsace Grand Cru Schlossberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Schlossberg,,Muscat,AOC Alsace Grand Cru Schlossberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Schlossberg,,Gewurztraminer,AOC Alsace Grand Cru Schlossberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Schoenenbourg,,Riesling,AOC Alsace Grand Cru Schoenenbourg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Schoenenbourg,,Pinot Gris,AOC Alsace Grand Cru Schoenenbourg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Schoenenbourg,,Muscat,AOC Alsace Grand Cru Schoenenbourg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Schoenenbourg,,Gewurztraminer,AOC Alsace Grand Cru Schoenenbourg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Sommerberg,,Riesling,AOC Alsace Grand Cru Sommerberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Sommerberg,,Pinot Gris,AOC Alsace Grand Cru Sommerberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Sommerberg,,Muscat,AOC Alsace Grand Cru Sommerberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Sommerberg,,Gewurztraminer,AOC Alsace Grand Cru Sommerberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Sonnenglanz,,Riesling,AOC Alsace Grand Cru Sonnenglanz Riesling
+AOC,Tranquille,Alsace Grand Cru,,Sonnenglanz,,Pinot Gris,AOC Alsace Grand Cru Sonnenglanz Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Sonnenglanz,,Muscat,AOC Alsace Grand Cru Sonnenglanz Muscat
+AOC,Tranquille,Alsace Grand Cru,,Sonnenglanz,,Gewurztraminer,AOC Alsace Grand Cru Sonnenglanz Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Spiegel,,Riesling,AOC Alsace Grand Cru Spiegel Riesling
+AOC,Tranquille,Alsace Grand Cru,,Spiegel,,Pinot Gris,AOC Alsace Grand Cru Spiegel Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Spiegel,,Muscat,AOC Alsace Grand Cru Spiegel Muscat
+AOC,Tranquille,Alsace Grand Cru,,Spiegel,,Gewurztraminer,AOC Alsace Grand Cru Spiegel Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Sporen,,Riesling,AOC Alsace Grand Cru Sporen Riesling
+AOC,Tranquille,Alsace Grand Cru,,Sporen,,Pinot Gris,AOC Alsace Grand Cru Sporen Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Sporen,,Muscat,AOC Alsace Grand Cru Sporen Muscat
+AOC,Tranquille,Alsace Grand Cru,,Sporen,,Gewurztraminer,AOC Alsace Grand Cru Sporen Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Steinert,,Riesling,AOC Alsace Grand Cru Steinert Riesling
+AOC,Tranquille,Alsace Grand Cru,,Steinert,,Pinot Gris,AOC Alsace Grand Cru Steinert Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Steinert,,Muscat,AOC Alsace Grand Cru Steinert Muscat
+AOC,Tranquille,Alsace Grand Cru,,Steinert,,Gewurztraminer,AOC Alsace Grand Cru Steinert Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Steingrubler,,Riesling,AOC Alsace Grand Cru Steingrubler Riesling
+AOC,Tranquille,Alsace Grand Cru,,Steingrubler,,Pinot Gris,AOC Alsace Grand Cru Steingrubler Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Steingrubler,,Muscat,AOC Alsace Grand Cru Steingrubler Muscat
+AOC,Tranquille,Alsace Grand Cru,,Steingrubler,,Gewurztraminer,AOC Alsace Grand Cru Steingrubler Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Steinklotz,,Riesling,AOC Alsace Grand Cru Steinklotz Riesling
+AOC,Tranquille,Alsace Grand Cru,,Steinklotz,,Pinot Gris,AOC Alsace Grand Cru Steinklotz Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Steinklotz,,Muscat,AOC Alsace Grand Cru Steinklotz Muscat
+AOC,Tranquille,Alsace Grand Cru,,Steinklotz,,Gewurztraminer,AOC Alsace Grand Cru Steinklotz Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Vorbourg,,Riesling,AOC Alsace Grand Cru Vorbourg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Vorbourg,,Pinot Gris,AOC Alsace Grand Cru Vorbourg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Vorbourg,,Muscat,AOC Alsace Grand Cru Vorbourg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Vorbourg,,Gewurztraminer,AOC Alsace Grand Cru Vorbourg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Wiebelsberg,,Riesling,AOC Alsace Grand Cru Wiebelsberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Wiebelsberg,,Pinot Gris,AOC Alsace Grand Cru Wiebelsberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Wiebelsberg,,Muscat,AOC Alsace Grand Cru Wiebelsberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Wiebelsberg,,Gewurztraminer,AOC Alsace Grand Cru Wiebelsberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Wineck-Schlossberg,,Riesling,AOC Alsace Grand Cru Wineck-Schlossberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Wineck-Schlossberg,,Pinot Gris,AOC Alsace Grand Cru Wineck-Schlossberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Wineck-Schlossberg,,Muscat,AOC Alsace Grand Cru Wineck-Schlossberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Wineck-Schlossberg,,Gewurztraminer,AOC Alsace Grand Cru Wineck-Schlossberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Winzenberg,,Riesling,AOC Alsace Grand Cru Winzenberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Winzenberg,,Pinot Gris,AOC Alsace Grand Cru Winzenberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Winzenberg,,Muscat,AOC Alsace Grand Cru Winzenberg Muscat
+AOC,Tranquille,Alsace Grand Cru,,Winzenberg,,Gewurztraminer,AOC Alsace Grand Cru Winzenberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Zinnkoepflé,,Riesling,AOC Alsace Grand Cru Zinnkoepflé Riesling
+AOC,Tranquille,Alsace Grand Cru,,Zinnkoepflé,,Pinot Gris,AOC Alsace Grand Cru Zinnkoepflé Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Zinnkoepflé,,Muscat,AOC Alsace Grand Cru Zinnkoepflé Muscat
+AOC,Tranquille,Alsace Grand Cru,,Zinnkoepflé,,Gewurztraminer,AOC Alsace Grand Cru Zinnkoepflé Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,,Zotzenberg,,Sylvaner,AOC Alsace Grand Cru Zotzenberg Sylvaner
+AOC,Tranquille,Alsace Grand Cru,,Zotzenberg,,Riesling,AOC Alsace Grand Cru Zotzenberg Riesling
+AOC,Tranquille,Alsace Grand Cru,,Zotzenberg,,Pinot Gris,AOC Alsace Grand Cru Zotzenberg Pinot Gris
+AOC,Tranquille,Alsace Grand Cru,,Zotzenberg,,Gewurztraminer,AOC Alsace Grand Cru Zotzenberg Gewurztraminer
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Bergbieten,,Riesling,AOC Alsace Grand Cru Altenberg de Bergbieten Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Bergbieten,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Bergbieten Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Bergbieten,,Muscat,AOC Alsace Grand Cru Altenberg de Bergbieten Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Bergbieten,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Bergbieten Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Bergheim,,Riesling,AOC Alsace Grand Cru Altenberg de Bergheim Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Bergheim,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Bergheim Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Bergheim,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Bergheim Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Wolxheim,,Riesling,AOC Alsace Grand Cru Altenberg de Wolxheim Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Wolxheim,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Wolxheim Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Wolxheim,,Muscat,AOC Alsace Grand Cru Altenberg de Wolxheim Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Altenberg de Wolxheim,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Wolxheim Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Brand,,Riesling,AOC Alsace Grand Cru Brand Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Brand,,Pinot Gris,AOC Alsace Grand Cru Brand Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Brand,,Muscat,AOC Alsace Grand Cru Brand Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Brand,,Gewurztraminer,AOC Alsace Grand Cru Brand Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Bruderthal,,Riesling,AOC Alsace Grand Cru Bruderthal Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Bruderthal,,Pinot Gris,AOC Alsace Grand Cru Bruderthal Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Bruderthal,,Muscat,AOC Alsace Grand Cru Bruderthal Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Bruderthal,,Gewurztraminer,AOC Alsace Grand Cru Bruderthal Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Eichberg,,Riesling,AOC Alsace Grand Cru Eichberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Eichberg,,Pinot Gris,AOC Alsace Grand Cru Eichberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Eichberg,,Muscat,AOC Alsace Grand Cru Eichberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Eichberg,,Gewurztraminer,AOC Alsace Grand Cru Eichberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Engelberg,,Riesling,AOC Alsace Grand Cru Engelberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Engelberg,,Pinot Gris,AOC Alsace Grand Cru Engelberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Engelberg,,Muscat,AOC Alsace Grand Cru Engelberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Engelberg,,Gewurztraminer,AOC Alsace Grand Cru Engelberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Florimont,,Riesling,AOC Alsace Grand Cru Florimont Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Florimont,,Pinot Gris,AOC Alsace Grand Cru Florimont Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Florimont,,Muscat,AOC Alsace Grand Cru Florimont Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Florimont,,Gewurztraminer,AOC Alsace Grand Cru Florimont Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Frankstein,,Riesling,AOC Alsace Grand Cru Frankstein Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Frankstein,,Pinot Gris,AOC Alsace Grand Cru Frankstein Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Frankstein,,Muscat,AOC Alsace Grand Cru Frankstein Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Frankstein,,Gewurztraminer,AOC Alsace Grand Cru Frankstein Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Froehn,,Riesling,AOC Alsace Grand Cru Froehn Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Froehn,,Pinot Gris,AOC Alsace Grand Cru Froehn Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Froehn,,Muscat,AOC Alsace Grand Cru Froehn Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Froehn,,Gewurztraminer,AOC Alsace Grand Cru Froehn Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Furstentum,,Riesling,AOC Alsace Grand Cru Furstentum Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Furstentum,,Pinot Gris,AOC Alsace Grand Cru Furstentum Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Furstentum,,Muscat,AOC Alsace Grand Cru Furstentum Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Furstentum,,Gewurztraminer,AOC Alsace Grand Cru Furstentum Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Geisberg,,Riesling,AOC Alsace Grand Cru Geisberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Geisberg,,Pinot Gris,AOC Alsace Grand Cru Geisberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Geisberg,,Muscat,AOC Alsace Grand Cru Geisberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Geisberg,,Gewurztraminer,AOC Alsace Grand Cru Geisberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Gloeckelberg,,Riesling,AOC Alsace Grand Cru Gloeckelberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Gloeckelberg,,Pinot Gris,AOC Alsace Grand Cru Gloeckelberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Gloeckelberg,,Muscat,AOC Alsace Grand Cru Gloeckelberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Gloeckelberg,,Gewurztraminer,AOC Alsace Grand Cru Gloeckelberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Goldert,,Riesling,AOC Alsace Grand Cru Goldert Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Goldert,,Pinot Gris,AOC Alsace Grand Cru Goldert Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Goldert,,Muscat,AOC Alsace Grand Cru Goldert Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Goldert,,Gewurztraminer,AOC Alsace Grand Cru Goldert Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hatschbourg,,Riesling,AOC Alsace Grand Cru Hatschbourg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hatschbourg,,Pinot Gris,AOC Alsace Grand Cru Hatschbourg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hatschbourg,,Muscat,AOC Alsace Grand Cru Hatschbourg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hatschbourg,,Gewurztraminer,AOC Alsace Grand Cru Hatschbourg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hengst,,Riesling,AOC Alsace Grand Cru Hengst Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hengst,,Pinot Gris,AOC Alsace Grand Cru Hengst Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hengst,,Muscat,AOC Alsace Grand Cru Hengst Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Hengst,,Gewurztraminer,AOC Alsace Grand Cru Hengst Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kaefferkopf,,Riesling,AOC Alsace Grand Cru Kaefferkopf Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kaefferkopf,,Pinot Gris,AOC Alsace Grand Cru Kaefferkopf Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kaefferkopf,,Gewurztraminer,AOC Alsace Grand Cru Kaefferkopf Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kanzlerberg,,Riesling,AOC Alsace Grand Cru Kanzlerberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kanzlerberg,,Pinot Gris,AOC Alsace Grand Cru Kanzlerberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kanzlerberg,,Muscat,AOC Alsace Grand Cru Kanzlerberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kanzlerberg,,Gewurztraminer,AOC Alsace Grand Cru Kanzlerberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kastelberg,,Riesling,AOC Alsace Grand Cru Kastelberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kastelberg,,Pinot Gris,AOC Alsace Grand Cru Kastelberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kastelberg,,Muscat,AOC Alsace Grand Cru Kastelberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kastelberg,,Gewurztraminer,AOC Alsace Grand Cru Kastelberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kessler,,Riesling,AOC Alsace Grand Cru Kessler Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kessler,,Pinot Gris,AOC Alsace Grand Cru Kessler Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kessler,,Muscat,AOC Alsace Grand Cru Kessler Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kessler,,Gewurztraminer,AOC Alsace Grand Cru Kessler Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Barr,,Riesling,AOC Alsace Grand Cru Kirchberg de Barr Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Barr,,Pinot Gris,AOC Alsace Grand Cru Kirchberg de Barr Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Barr,,Muscat,AOC Alsace Grand Cru Kirchberg de Barr Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Barr,,Gewurztraminer,AOC Alsace Grand Cru Kirchberg de Barr Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Ribeauvillé,,Riesling,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Ribeauvillé,,Pinot Gris,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Ribeauvillé,,Muscat,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kirchberg de Ribeauvillé,,Gewurztraminer,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kitterlé,,Riesling,AOC Alsace Grand Cru Kitterlé Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kitterlé,,Pinot Gris,AOC Alsace Grand Cru Kitterlé Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kitterlé,,Muscat,AOC Alsace Grand Cru Kitterlé Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Kitterlé,,Gewurztraminer,AOC Alsace Grand Cru Kitterlé Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mambourg,,Riesling,AOC Alsace Grand Cru Mambourg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mambourg,,Pinot Gris,AOC Alsace Grand Cru Mambourg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mambourg,,Muscat,AOC Alsace Grand Cru Mambourg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mambourg,,Gewurztraminer,AOC Alsace Grand Cru Mambourg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mandelberg,,Riesling,AOC Alsace Grand Cru Mandelberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mandelberg,,Pinot Gris,AOC Alsace Grand Cru Mandelberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mandelberg,,Muscat,AOC Alsace Grand Cru Mandelberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Mandelberg,,Gewurztraminer,AOC Alsace Grand Cru Mandelberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Marckrain,,Riesling,AOC Alsace Grand Cru Marckrain Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Marckrain,,Pinot Gris,AOC Alsace Grand Cru Marckrain Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Marckrain,,Muscat,AOC Alsace Grand Cru Marckrain Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Marckrain,,Gewurztraminer,AOC Alsace Grand Cru Marckrain Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Moenchberg,,Riesling,AOC Alsace Grand Cru Moenchberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Moenchberg,,Pinot Gris,AOC Alsace Grand Cru Moenchberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Moenchberg,,Muscat,AOC Alsace Grand Cru Moenchberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Moenchberg,,Gewurztraminer,AOC Alsace Grand Cru Moenchberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Muenchberg,,Riesling,AOC Alsace Grand Cru Muenchberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Muenchberg,,Pinot Gris,AOC Alsace Grand Cru Muenchberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Muenchberg,,Muscat,AOC Alsace Grand Cru Muenchberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Muenchberg,,Gewurztraminer,AOC Alsace Grand Cru Muenchberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Ollwiller,,Riesling,AOC Alsace Grand Cru Ollwiller Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Ollwiller,,Pinot Gris,AOC Alsace Grand Cru Ollwiller Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Ollwiller,,Muscat,AOC Alsace Grand Cru Ollwiller Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Ollwiller,,Gewurztraminer,AOC Alsace Grand Cru Ollwiller Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Osterberg,,Riesling,AOC Alsace Grand Cru Osterberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Osterberg,,Pinot Gris,AOC Alsace Grand Cru Osterberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Osterberg,,Muscat,AOC Alsace Grand Cru Osterberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Osterberg,,Gewurztraminer,AOC Alsace Grand Cru Osterberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfersigberg,,Riesling,AOC Alsace Grand Cru Pfersigberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfersigberg,,Pinot Gris,AOC Alsace Grand Cru Pfersigberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfersigberg,,Muscat,AOC Alsace Grand Cru Pfersigberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfersigberg,,Gewurztraminer,AOC Alsace Grand Cru Pfersigberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfingstberg,,Riesling,AOC Alsace Grand Cru Pfingstberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfingstberg,,Pinot Gris,AOC Alsace Grand Cru Pfingstberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfingstberg,,Muscat,AOC Alsace Grand Cru Pfingstberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Pfingstberg,,Gewurztraminer,AOC Alsace Grand Cru Pfingstberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Praelatenberg,,Riesling,AOC Alsace Grand Cru Praelatenberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Praelatenberg,,Pinot Gris,AOC Alsace Grand Cru Praelatenberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Praelatenberg,,Muscat,AOC Alsace Grand Cru Praelatenberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Praelatenberg,,Gewurztraminer,AOC Alsace Grand Cru Praelatenberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rangen,,Riesling,AOC Alsace Grand Cru Rangen Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rangen,,Pinot Gris,AOC Alsace Grand Cru Rangen Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rangen,,Muscat,AOC Alsace Grand Cru Rangen Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rangen,,Gewurztraminer,AOC Alsace Grand Cru Rangen Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rosacker,,Riesling,AOC Alsace Grand Cru Rosacker Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rosacker,,Pinot Gris,AOC Alsace Grand Cru Rosacker Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rosacker,,Muscat,AOC Alsace Grand Cru Rosacker Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Rosacker,,Gewurztraminer,AOC Alsace Grand Cru Rosacker Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Saering,,Riesling,AOC Alsace Grand Cru Saering Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Saering,,Pinot Gris,AOC Alsace Grand Cru Saering Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Saering,,Muscat,AOC Alsace Grand Cru Saering Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Saering,,Gewurztraminer,AOC Alsace Grand Cru Saering Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schlossberg,,Riesling,AOC Alsace Grand Cru Schlossberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schlossberg,,Pinot Gris,AOC Alsace Grand Cru Schlossberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schlossberg,,Muscat,AOC Alsace Grand Cru Schlossberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schlossberg,,Gewurztraminer,AOC Alsace Grand Cru Schlossberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schoenenbourg,,Riesling,AOC Alsace Grand Cru Schoenenbourg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schoenenbourg,,Pinot Gris,AOC Alsace Grand Cru Schoenenbourg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schoenenbourg,,Muscat,AOC Alsace Grand Cru Schoenenbourg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Schoenenbourg,,Gewurztraminer,AOC Alsace Grand Cru Schoenenbourg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sommerberg,,Riesling,AOC Alsace Grand Cru Sommerberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sommerberg,,Pinot Gris,AOC Alsace Grand Cru Sommerberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sommerberg,,Muscat,AOC Alsace Grand Cru Sommerberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sommerberg,,Gewurztraminer,AOC Alsace Grand Cru Sommerberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sonnenglanz,,Riesling,AOC Alsace Grand Cru Sonnenglanz Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sonnenglanz,,Pinot Gris,AOC Alsace Grand Cru Sonnenglanz Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sonnenglanz,,Muscat,AOC Alsace Grand Cru Sonnenglanz Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sonnenglanz,,Gewurztraminer,AOC Alsace Grand Cru Sonnenglanz Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Spiegel,,Riesling,AOC Alsace Grand Cru Spiegel Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Spiegel,,Pinot Gris,AOC Alsace Grand Cru Spiegel Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Spiegel,,Muscat,AOC Alsace Grand Cru Spiegel Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Spiegel,,Gewurztraminer,AOC Alsace Grand Cru Spiegel Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sporen,,Riesling,AOC Alsace Grand Cru Sporen Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sporen,,Pinot Gris,AOC Alsace Grand Cru Sporen Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sporen,,Muscat,AOC Alsace Grand Cru Sporen Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Sporen,,Gewurztraminer,AOC Alsace Grand Cru Sporen Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinert,,Riesling,AOC Alsace Grand Cru Steinert Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinert,,Pinot Gris,AOC Alsace Grand Cru Steinert Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinert,,Muscat,AOC Alsace Grand Cru Steinert Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinert,,Gewurztraminer,AOC Alsace Grand Cru Steinert Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steingrubler,,Riesling,AOC Alsace Grand Cru Steingrubler Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steingrubler,,Pinot Gris,AOC Alsace Grand Cru Steingrubler Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steingrubler,,Muscat,AOC Alsace Grand Cru Steingrubler Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steingrubler,,Gewurztraminer,AOC Alsace Grand Cru Steingrubler Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinklotz,,Riesling,AOC Alsace Grand Cru Steinklotz Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinklotz,,Pinot Gris,AOC Alsace Grand Cru Steinklotz Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinklotz,,Muscat,AOC Alsace Grand Cru Steinklotz Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Steinklotz,,Gewurztraminer,AOC Alsace Grand Cru Steinklotz Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Vorbourg,,Riesling,AOC Alsace Grand Cru Vorbourg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Vorbourg,,Pinot Gris,AOC Alsace Grand Cru Vorbourg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Vorbourg,,Muscat,AOC Alsace Grand Cru Vorbourg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Vorbourg,,Gewurztraminer,AOC Alsace Grand Cru Vorbourg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wiebelsberg,,Riesling,AOC Alsace Grand Cru Wiebelsberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wiebelsberg,,Pinot Gris,AOC Alsace Grand Cru Wiebelsberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wiebelsberg,,Muscat,AOC Alsace Grand Cru Wiebelsberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wiebelsberg,,Gewurztraminer,AOC Alsace Grand Cru Wiebelsberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wineck-Schlossberg,,Riesling,AOC Alsace Grand Cru Wineck-Schlossberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wineck-Schlossberg,,Pinot Gris,AOC Alsace Grand Cru Wineck-Schlossberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wineck-Schlossberg,,Muscat,AOC Alsace Grand Cru Wineck-Schlossberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Wineck-Schlossberg,,Gewurztraminer,AOC Alsace Grand Cru Wineck-Schlossberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Winzenberg,,Riesling,AOC Alsace Grand Cru Winzenberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Winzenberg,,Pinot Gris,AOC Alsace Grand Cru Winzenberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Winzenberg,,Muscat,AOC Alsace Grand Cru Winzenberg Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Winzenberg,,Gewurztraminer,AOC Alsace Grand Cru Winzenberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Zinnkoepflé,,Riesling,AOC Alsace Grand Cru Zinnkoepflé Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Zinnkoepflé,,Pinot Gris,AOC Alsace Grand Cru Zinnkoepflé Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Zinnkoepflé,,Muscat,AOC Alsace Grand Cru Zinnkoepflé Muscat VT
+AOC,Tranquille,Alsace Grand Cru,VT,Zinnkoepflé,,Gewurztraminer,AOC Alsace Grand Cru Zinnkoepflé Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,VT,Zotzenberg,,Riesling,AOC Alsace Grand Cru Zotzenberg Riesling VT
+AOC,Tranquille,Alsace Grand Cru,VT,Zotzenberg,,Pinot Gris,AOC Alsace Grand Cru Zotzenberg Pinot Gris VT
+AOC,Tranquille,Alsace Grand Cru,VT,Zotzenberg,,Gewurztraminer,AOC Alsace Grand Cru Zotzenberg Gewurztraminer VT
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Bergbieten,,Riesling,AOC Alsace Grand Cru Altenberg de Bergbieten Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Bergbieten,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Bergbieten Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Bergbieten,,Muscat,AOC Alsace Grand Cru Altenberg de Bergbieten Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Bergbieten,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Bergbieten Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Bergheim,,Riesling,AOC Alsace Grand Cru Altenberg de Bergheim Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Bergheim,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Bergheim Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Bergheim,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Bergheim Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Wolxheim,,Riesling,AOC Alsace Grand Cru Altenberg de Wolxheim Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Wolxheim,,Pinot Gris,AOC Alsace Grand Cru Altenberg de Wolxheim Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Wolxheim,,Muscat,AOC Alsace Grand Cru Altenberg de Wolxheim Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Altenberg de Wolxheim,,Gewurztraminer,AOC Alsace Grand Cru Altenberg de Wolxheim Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Brand,,Riesling,AOC Alsace Grand Cru Brand Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Brand,,Pinot Gris,AOC Alsace Grand Cru Brand Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Brand,,Muscat,AOC Alsace Grand Cru Brand Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Brand,,Gewurztraminer,AOC Alsace Grand Cru Brand Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Bruderthal,,Riesling,AOC Alsace Grand Cru Bruderthal Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Bruderthal,,Pinot Gris,AOC Alsace Grand Cru Bruderthal Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Bruderthal,,Muscat,AOC Alsace Grand Cru Bruderthal Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Bruderthal,,Gewurztraminer,AOC Alsace Grand Cru Bruderthal Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Eichberg,,Riesling,AOC Alsace Grand Cru Eichberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Eichberg,,Pinot Gris,AOC Alsace Grand Cru Eichberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Eichberg,,Muscat,AOC Alsace Grand Cru Eichberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Eichberg,,Gewurztraminer,AOC Alsace Grand Cru Eichberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Engelberg,,Riesling,AOC Alsace Grand Cru Engelberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Engelberg,,Pinot Gris,AOC Alsace Grand Cru Engelberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Engelberg,,Muscat,AOC Alsace Grand Cru Engelberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Engelberg,,Gewurztraminer,AOC Alsace Grand Cru Engelberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Florimont,,Riesling,AOC Alsace Grand Cru Florimont Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Florimont,,Pinot Gris,AOC Alsace Grand Cru Florimont Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Florimont,,Muscat,AOC Alsace Grand Cru Florimont Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Florimont,,Gewurztraminer,AOC Alsace Grand Cru Florimont Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Frankstein,,Riesling,AOC Alsace Grand Cru Frankstein Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Frankstein,,Pinot Gris,AOC Alsace Grand Cru Frankstein Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Frankstein,,Muscat,AOC Alsace Grand Cru Frankstein Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Frankstein,,Gewurztraminer,AOC Alsace Grand Cru Frankstein Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Froehn,,Riesling,AOC Alsace Grand Cru Froehn Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Froehn,,Pinot Gris,AOC Alsace Grand Cru Froehn Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Froehn,,Muscat,AOC Alsace Grand Cru Froehn Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Froehn,,Gewurztraminer,AOC Alsace Grand Cru Froehn Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Furstentum,,Riesling,AOC Alsace Grand Cru Furstentum Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Furstentum,,Pinot Gris,AOC Alsace Grand Cru Furstentum Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Furstentum,,Muscat,AOC Alsace Grand Cru Furstentum Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Furstentum,,Gewurztraminer,AOC Alsace Grand Cru Furstentum Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Geisberg,,Riesling,AOC Alsace Grand Cru Geisberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Geisberg,,Pinot Gris,AOC Alsace Grand Cru Geisberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Geisberg,,Muscat,AOC Alsace Grand Cru Geisberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Geisberg,,Gewurztraminer,AOC Alsace Grand Cru Geisberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Gloeckelberg,,Riesling,AOC Alsace Grand Cru Gloeckelberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Gloeckelberg,,Pinot Gris,AOC Alsace Grand Cru Gloeckelberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Gloeckelberg,,Muscat,AOC Alsace Grand Cru Gloeckelberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Gloeckelberg,,Gewurztraminer,AOC Alsace Grand Cru Gloeckelberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Goldert,,Riesling,AOC Alsace Grand Cru Goldert Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Goldert,,Pinot Gris,AOC Alsace Grand Cru Goldert Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Goldert,,Muscat,AOC Alsace Grand Cru Goldert Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Goldert,,Gewurztraminer,AOC Alsace Grand Cru Goldert Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hatschbourg,,Riesling,AOC Alsace Grand Cru Hatschbourg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hatschbourg,,Pinot Gris,AOC Alsace Grand Cru Hatschbourg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hatschbourg,,Muscat,AOC Alsace Grand Cru Hatschbourg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hatschbourg,,Gewurztraminer,AOC Alsace Grand Cru Hatschbourg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hengst,,Riesling,AOC Alsace Grand Cru Hengst Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hengst,,Pinot Gris,AOC Alsace Grand Cru Hengst Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hengst,,Muscat,AOC Alsace Grand Cru Hengst Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Hengst,,Gewurztraminer,AOC Alsace Grand Cru Hengst Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kaefferkopf,,Riesling,AOC Alsace Grand Cru Kaefferkopf Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kaefferkopf,,Pinot Gris,AOC Alsace Grand Cru Kaefferkopf Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kaefferkopf,,Gewurztraminer,AOC Alsace Grand Cru Kaefferkopf Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kanzlerberg,,Riesling,AOC Alsace Grand Cru Kanzlerberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kanzlerberg,,Pinot Gris,AOC Alsace Grand Cru Kanzlerberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kanzlerberg,,Muscat,AOC Alsace Grand Cru Kanzlerberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kanzlerberg,,Gewurztraminer,AOC Alsace Grand Cru Kanzlerberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kastelberg,,Riesling,AOC Alsace Grand Cru Kastelberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kastelberg,,Pinot Gris,AOC Alsace Grand Cru Kastelberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kastelberg,,Muscat,AOC Alsace Grand Cru Kastelberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kastelberg,,Gewurztraminer,AOC Alsace Grand Cru Kastelberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kessler,,Riesling,AOC Alsace Grand Cru Kessler Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kessler,,Pinot Gris,AOC Alsace Grand Cru Kessler Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kessler,,Muscat,AOC Alsace Grand Cru Kessler Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kessler,,Gewurztraminer,AOC Alsace Grand Cru Kessler Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Barr,,Riesling,AOC Alsace Grand Cru Kirchberg de Barr Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Barr,,Pinot Gris,AOC Alsace Grand Cru Kirchberg de Barr Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Barr,,Muscat,AOC Alsace Grand Cru Kirchberg de Barr Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Barr,,Gewurztraminer,AOC Alsace Grand Cru Kirchberg de Barr Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Ribeauvillé,,Riesling,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Ribeauvillé,,Pinot Gris,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Ribeauvillé,,Muscat,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kirchberg de Ribeauvillé,,Gewurztraminer,AOC Alsace Grand Cru Kirchberg de Ribeauvillé Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kitterlé,,Riesling,AOC Alsace Grand Cru Kitterlé Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kitterlé,,Pinot Gris,AOC Alsace Grand Cru Kitterlé Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kitterlé,,Muscat,AOC Alsace Grand Cru Kitterlé Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Kitterlé,,Gewurztraminer,AOC Alsace Grand Cru Kitterlé Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mambourg,,Riesling,AOC Alsace Grand Cru Mambourg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mambourg,,Pinot Gris,AOC Alsace Grand Cru Mambourg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mambourg,,Muscat,AOC Alsace Grand Cru Mambourg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mambourg,,Gewurztraminer,AOC Alsace Grand Cru Mambourg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mandelberg,,Riesling,AOC Alsace Grand Cru Mandelberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mandelberg,,Pinot Gris,AOC Alsace Grand Cru Mandelberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mandelberg,,Muscat,AOC Alsace Grand Cru Mandelberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Mandelberg,,Gewurztraminer,AOC Alsace Grand Cru Mandelberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Marckrain,,Riesling,AOC Alsace Grand Cru Marckrain Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Marckrain,,Pinot Gris,AOC Alsace Grand Cru Marckrain Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Marckrain,,Muscat,AOC Alsace Grand Cru Marckrain Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Marckrain,,Gewurztraminer,AOC Alsace Grand Cru Marckrain Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Moenchberg,,Riesling,AOC Alsace Grand Cru Moenchberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Moenchberg,,Pinot Gris,AOC Alsace Grand Cru Moenchberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Moenchberg,,Muscat,AOC Alsace Grand Cru Moenchberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Moenchberg,,Gewurztraminer,AOC Alsace Grand Cru Moenchberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Muenchberg,,Riesling,AOC Alsace Grand Cru Muenchberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Muenchberg,,Pinot Gris,AOC Alsace Grand Cru Muenchberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Muenchberg,,Muscat,AOC Alsace Grand Cru Muenchberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Muenchberg,,Gewurztraminer,AOC Alsace Grand Cru Muenchberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Ollwiller,,Riesling,AOC Alsace Grand Cru Ollwiller Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Ollwiller,,Pinot Gris,AOC Alsace Grand Cru Ollwiller Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Ollwiller,,Muscat,AOC Alsace Grand Cru Ollwiller Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Ollwiller,,Gewurztraminer,AOC Alsace Grand Cru Ollwiller Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Osterberg,,Riesling,AOC Alsace Grand Cru Osterberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Osterberg,,Pinot Gris,AOC Alsace Grand Cru Osterberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Osterberg,,Muscat,AOC Alsace Grand Cru Osterberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Osterberg,,Gewurztraminer,AOC Alsace Grand Cru Osterberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfersigberg,,Riesling,AOC Alsace Grand Cru Pfersigberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfersigberg,,Pinot Gris,AOC Alsace Grand Cru Pfersigberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfersigberg,,Muscat,AOC Alsace Grand Cru Pfersigberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfersigberg,,Gewurztraminer,AOC Alsace Grand Cru Pfersigberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfingstberg,,Riesling,AOC Alsace Grand Cru Pfingstberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfingstberg,,Pinot Gris,AOC Alsace Grand Cru Pfingstberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfingstberg,,Muscat,AOC Alsace Grand Cru Pfingstberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Pfingstberg,,Gewurztraminer,AOC Alsace Grand Cru Pfingstberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Praelatenberg,,Riesling,AOC Alsace Grand Cru Praelatenberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Praelatenberg,,Pinot Gris,AOC Alsace Grand Cru Praelatenberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Praelatenberg,,Muscat,AOC Alsace Grand Cru Praelatenberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Praelatenberg,,Gewurztraminer,AOC Alsace Grand Cru Praelatenberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rangen,,Riesling,AOC Alsace Grand Cru Rangen Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rangen,,Pinot Gris,AOC Alsace Grand Cru Rangen Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rangen,,Muscat,AOC Alsace Grand Cru Rangen Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rangen,,Gewurztraminer,AOC Alsace Grand Cru Rangen Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rosacker,,Riesling,AOC Alsace Grand Cru Rosacker Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rosacker,,Pinot Gris,AOC Alsace Grand Cru Rosacker Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rosacker,,Muscat,AOC Alsace Grand Cru Rosacker Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Rosacker,,Gewurztraminer,AOC Alsace Grand Cru Rosacker Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Saering,,Riesling,AOC Alsace Grand Cru Saering Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Saering,,Pinot Gris,AOC Alsace Grand Cru Saering Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Saering,,Muscat,AOC Alsace Grand Cru Saering Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Saering,,Gewurztraminer,AOC Alsace Grand Cru Saering Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schlossberg,,Riesling,AOC Alsace Grand Cru Schlossberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schlossberg,,Pinot Gris,AOC Alsace Grand Cru Schlossberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schlossberg,,Muscat,AOC Alsace Grand Cru Schlossberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schlossberg,,Gewurztraminer,AOC Alsace Grand Cru Schlossberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schoenenbourg,,Riesling,AOC Alsace Grand Cru Schoenenbourg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schoenenbourg,,Pinot Gris,AOC Alsace Grand Cru Schoenenbourg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schoenenbourg,,Muscat,AOC Alsace Grand Cru Schoenenbourg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Schoenenbourg,,Gewurztraminer,AOC Alsace Grand Cru Schoenenbourg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sommerberg,,Riesling,AOC Alsace Grand Cru Sommerberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sommerberg,,Pinot Gris,AOC Alsace Grand Cru Sommerberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sommerberg,,Muscat,AOC Alsace Grand Cru Sommerberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sommerberg,,Gewurztraminer,AOC Alsace Grand Cru Sommerberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sonnenglanz,,Riesling,AOC Alsace Grand Cru Sonnenglanz Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sonnenglanz,,Pinot Gris,AOC Alsace Grand Cru Sonnenglanz Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sonnenglanz,,Muscat,AOC Alsace Grand Cru Sonnenglanz Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sonnenglanz,,Gewurztraminer,AOC Alsace Grand Cru Sonnenglanz Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Spiegel,,Riesling,AOC Alsace Grand Cru Spiegel Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Spiegel,,Pinot Gris,AOC Alsace Grand Cru Spiegel Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Spiegel,,Muscat,AOC Alsace Grand Cru Spiegel Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Spiegel,,Gewurztraminer,AOC Alsace Grand Cru Spiegel Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sporen,,Riesling,AOC Alsace Grand Cru Sporen Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sporen,,Pinot Gris,AOC Alsace Grand Cru Sporen Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sporen,,Muscat,AOC Alsace Grand Cru Sporen Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Sporen,,Gewurztraminer,AOC Alsace Grand Cru Sporen Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinert,,Riesling,AOC Alsace Grand Cru Steinert Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinert,,Pinot Gris,AOC Alsace Grand Cru Steinert Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinert,,Muscat,AOC Alsace Grand Cru Steinert Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinert,,Gewurztraminer,AOC Alsace Grand Cru Steinert Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steingrubler,,Riesling,AOC Alsace Grand Cru Steingrubler Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steingrubler,,Pinot Gris,AOC Alsace Grand Cru Steingrubler Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steingrubler,,Muscat,AOC Alsace Grand Cru Steingrubler Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steingrubler,,Gewurztraminer,AOC Alsace Grand Cru Steingrubler Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinklotz,,Riesling,AOC Alsace Grand Cru Steinklotz Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinklotz,,Pinot Gris,AOC Alsace Grand Cru Steinklotz Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinklotz,,Muscat,AOC Alsace Grand Cru Steinklotz Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Steinklotz,,Gewurztraminer,AOC Alsace Grand Cru Steinklotz Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Vorbourg,,Riesling,AOC Alsace Grand Cru Vorbourg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Vorbourg,,Pinot Gris,AOC Alsace Grand Cru Vorbourg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Vorbourg,,Muscat,AOC Alsace Grand Cru Vorbourg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Vorbourg,,Gewurztraminer,AOC Alsace Grand Cru Vorbourg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wiebelsberg,,Riesling,AOC Alsace Grand Cru Wiebelsberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wiebelsberg,,Pinot Gris,AOC Alsace Grand Cru Wiebelsberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wiebelsberg,,Muscat,AOC Alsace Grand Cru Wiebelsberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wiebelsberg,,Gewurztraminer,AOC Alsace Grand Cru Wiebelsberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wineck-Schlossberg,,Riesling,AOC Alsace Grand Cru Wineck-Schlossberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wineck-Schlossberg,,Pinot Gris,AOC Alsace Grand Cru Wineck-Schlossberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wineck-Schlossberg,,Muscat,AOC Alsace Grand Cru Wineck-Schlossberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Wineck-Schlossberg,,Gewurztraminer,AOC Alsace Grand Cru Wineck-Schlossberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Winzenberg,,Riesling,AOC Alsace Grand Cru Winzenberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Winzenberg,,Pinot Gris,AOC Alsace Grand Cru Winzenberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Winzenberg,,Muscat,AOC Alsace Grand Cru Winzenberg Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Winzenberg,,Gewurztraminer,AOC Alsace Grand Cru Winzenberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Zinnkoepflé,,Riesling,AOC Alsace Grand Cru Zinnkoepflé Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Zinnkoepflé,,Pinot Gris,AOC Alsace Grand Cru Zinnkoepflé Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Zinnkoepflé,,Muscat,AOC Alsace Grand Cru Zinnkoepflé Muscat SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Zinnkoepflé,,Gewurztraminer,AOC Alsace Grand Cru Zinnkoepflé Gewurztraminer SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Zotzenberg,,Riesling,AOC Alsace Grand Cru Zotzenberg Riesling SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Zotzenberg,,Pinot Gris,AOC Alsace Grand Cru Zotzenberg Pinot Gris SGN
+AOC,Tranquille,Alsace Grand Cru,SGN,Zotzenberg,,Gewurztraminer,AOC Alsace Grand Cru Zotzenberg Gewurztraminer SGN
+AOC,Tranquille,Alsace Pinot noir,,,,Pinot Noir,AOC Alsace Pinot noir Pinot Noir
+AOC,Tranquille,Alsace PN rouge,,,,Pinot Noir,AOC Alsace PN rouge Pinot Noir
+AOC,Mousseux,Crémant d'Alsace,,,,Pinot Blanc,AOC Crémant d'Alsace Pinot Blanc
+AOC,Mousseux,Crémant d'Alsace,,,,Chardonnay,AOC Crémant d'Alsace Chardonnay
+AOC,Mousseux,Crémant d'Alsace,,,,Pinot Noir Blanc,AOC Crémant d'Alsace Pinot Noir Blanc
+AOC,Mousseux,Crémant d'Alsace,,,,Riesling,AOC Crémant d'Alsace Riesling
+AOC,Mousseux,Crémant d'Alsace,,,,Pinot Gris,AOC Crémant d'Alsace Pinot Gris
+AOC,Mousseux,Crémant d'Alsace,,,,Pinot Noir Rosé,AOC Crémant d'Alsace Pinot Noir Rosé
+AOC,Mousseux,Crémant d'Alsace,,,,Rebêches,AOC Crémant d'Alsace Rebêches
+AOC,Mousseux,Crémant d'Alsace,,,,Blanc,AOC Crémant d'Alsace Blanc
+AOC,Mousseux,Crémant d'Alsace,,,,Rosé,AOC Crémant d'Alsace Rosé
+Vins sans IG,Tranquille,Vins sans IG,,,,Blanc,Vins sans IG Blanc
+Vins sans IG,Tranquille,Vins sans IG,,,,Rosé,Vins sans IG Rosé
+Vins sans IG,Tranquille,Vins sans IG,,,,Rouge,Vins sans IG Rouge
+Vins sans IG,Tranquille,Vins sans IG,,,,Sans IG,Vins sans IG Sans IG
+Vins sans IG,Tranquille,Vins sans IG,,,,(MS),Vins sans IG
+Vins sans IG,Mousseux,Vins sans IG,,,,,Vins sans IG Mousseux
+AOC,Mousseux,Champagne,,,Blanc,,Champagne
+AOP,Tranquille,,,,Blanc,,AOP France Blanc
+AOP,Tranquille,,,,Rouge,,AOP France Rouge
+AOP,Tranquille,,,,Rosé,,AOP France Rosé
+AOP,Tranquille,,,,Blanc,,AOP CEE Blanc
+AOP,Tranquille,,,,Rouge,,AOP CEE Rouge
+AOP,Tranquille,,,,Rosé,,AOP CEE Rosé
+IGP,Tranquille,,,,Blanc,,IGP France Blanc
+IGP,Tranquille,,,,Rouge,,IGP France Rouge
+IGP,Tranquille,,,,Rosé,,IGP France Rosé
+IGP,Tranquille,,,,Blanc,,IGP CEE Blanc
+IGP,Tranquille,,,,Rouge,,IGP CEE Rouge
+IGP,Tranquille,,,,Rosé,,IGP CEE Rosé
+Autre,Tranquille,Lies et Bourbes,,,,,Lies et Bourbes
+Autre,Tranquille,DPLC,,,,,DPLC

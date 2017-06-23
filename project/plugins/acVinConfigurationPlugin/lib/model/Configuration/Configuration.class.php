@@ -95,7 +95,7 @@ class Configuration extends BaseConfiguration {
             $next_libelles = $previous_libelles . ' / ' . $libelle;
         }
         if (!$parent->exist($obj_id)) {
-            throw new Exception($next_libelles);
+            throw new sfException($next_libelles);
         }
 
         return array('obj' => $obj_obj, 'next_libelles' => $next_libelles);

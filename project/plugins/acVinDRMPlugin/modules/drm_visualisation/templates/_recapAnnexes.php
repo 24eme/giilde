@@ -24,23 +24,24 @@
                 <?php
                 endforeach;
                 ?>
-
+                <?php if($drm->hasTavs()): ?>
                   <li class="list-group-item"><h4>TAV enregistrée(s) :</h4></li>
                 <?php
                   foreach ($drm->getTavsArray() as $produitLibelle => $tav):
-                ?>
-                    <li class="list-group-item">
-                      <div class="row">
-                      <div class="col-xs-8">
-                        <strong><?php echo $produitLibelle; ?> </strong>
+                  ?>
+                      <li class="list-group-item">
+                        <div class="row">
+                        <div class="col-xs-8">
+                          <strong><?php echo $produitLibelle; ?> </strong>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                          <?php echoFloat($tav); ?>
+                        </div>
                       </div>
-                      <div class="col-xs-4 text-right">
-                        <?php echoFloat($tav); ?>
-                      </div>
-                    </div>
-                    </li>
-                <?php
-                endforeach;
+                      </li>
+                  <?php
+                  endforeach;
+                endif;
                 foreach ($drm->getReplacementDateArray() as $produitLibelle => $date): ?>
                     <li class="list-group-item"><strong>Replacement de <?php echo $produitLibelle; ?> sorti en date du </strong> <?php echo $date; ?> </li>
                 <?php endforeach; if ($drm->quantite_sucre): ?>

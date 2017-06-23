@@ -54,7 +54,13 @@ function multiArray2XML($preXML) {
 }
 
 function details2XmlDouane($detail) {
-	$confDetail = $detail->getConfig()->getDocument()->declaration->details;
+	$detailKey = $detail->getParent()->getKey();
+	$confDetail = null;
+	if(!$detail->getConfig()->getDocument()->declaration->exist($detailKey)){
+		$confDetail = $detail->getConfig()->getDocument()->declaration->details;
+	}else{
+		$confDetail = $detail->getConfig()->getDocument()->declaration->$detailKey;
+	}
         $preXML = array();
 		$keyForceDisplay = array();
 		foreach (array('stocks_debut', 'stocks_fin') as $type) {

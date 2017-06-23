@@ -50,34 +50,26 @@ class drmActions extends drmGeneriqueActions {
             case DRMClient::ETAPE_CHOIX_PRODUITS:
                 if ($isTeledeclarationMode) {
                     return $this->redirect('drm_choix_produit', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
-                } else {
-                    return $this->redirect('drm_edition', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
                 }
-                break;
+                return $this->redirect('drm_edition', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
 
             case DRMClient::ETAPE_SAISIE:
                 return $this->redirect('drm_edition', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
-                break;
 
             case DRMClient::ETAPE_CRD:
                 if ($isTeledeclarationMode) {
                     return $this->redirect('drm_crd', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
-                } else {
-                    return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
                 }
-                break;
+                return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
 
             case DRMClient::ETAPE_ADMINISTRATION:
                 if ($isTeledeclarationMode) {
                     return $this->redirect('drm_annexes', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
-                } else {
-                    return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
                 }
-                break;
+                return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
 
             case DRMClient::ETAPE_VALIDATION:
                 return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
-                break;
         }
 
         if ((!$drm->etape) && !$drm->isValidee()) {
@@ -95,7 +87,7 @@ class drmActions extends drmGeneriqueActions {
         $isTeledeclarationMode = $this->isTeledeclarationDrm();
         if ($request->isMethod(sfWebRequest::POST)) {
             if (!$request->getParameter('drmChoixCreation')) {
-                new sfException("Le formulaire n'est pas valide");
+                throw new sfException("Le formulaire n'est pas valide");
             }
             $drmChoixCreation = $request->getParameter('drmChoixCreation');
             $choixCreation = $drmChoixCreation['type_creation'];
@@ -106,25 +98,20 @@ class drmActions extends drmGeneriqueActions {
 
             switch ($choixCreation) {
                 case DRMClient::DRM_CREATION_EDI :
-                    //if ($this->creationDrmForm->isValid()) {
-                        $md5 = $this->creationDrmForm->getValue('file')->getMd5();
+                    $md5 = $this->creationDrmForm->getValue('file')->getMd5();
 
-                        return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => $md5));
-                    //}
+                    return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => $md5));
 
-                    return $this->redirect('drm_societe', array('identifiant' => $identifiant));
-
-                    break;
                 case DRMClient::DRM_CREATION_VIERGE :
                     return $this->redirect('drm_nouvelle', array('identifiant' => $identifiant, 'periode' => $periode));
-                    break;
+
                 case DRMClient::DRM_CREATION_NEANT :
                     $drm = DRMClient::getInstance()->createDoc($identifiant, $periode, $isTeledeclarationMode);
                     $drm->etape = DRMClient::ETAPE_VALIDATION;
                     $drm->type_creation = DRMClient::DRM_CREATION_NEANT;
                     $drm->save();
                     return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
-                    break;
+
             }
         }
         return $this->redirect('drm_societe', array('identifiant' => $identifiant));

@@ -255,7 +255,7 @@ class VracCsvFile extends CsvFile {
         }
 
 
-        throw new Exception(sprintf("Le numéro de contrat est nul ou au mauvais format %s", $line[self::CSV_NUMERO_CONTRAT]));
+        throw new sfException(sprintf("Le numéro de contrat est nul ou au mauvais format %s", $line[self::CSV_NUMERO_CONTRAT]));
     }
 
     private function verifyAndFormatNumeroArchive($line) {
@@ -264,14 +264,14 @@ class VracCsvFile extends CsvFile {
             return sprintf("%05d", $line[self::CSV_NUMERO_PAPIER]);
         }
 
-        throw new Exception(sprintf("Le numéro d'archive est nul ou au mauvais format %s", $line[self::CSV_NUMERO_PAPIER]));
+        throw new sfException(sprintf("Le numéro d'archive est nul ou au mauvais format %s", $line[self::CSV_NUMERO_PAPIER]));
     }
 
     private function verifyAndFormatDateSignature($line) {
         $date = $line[self::CSV_DATE_SIGNATURE];
 
         if (!$date) {
-            throw new Exception(sprintf("La date de signature est requise", $date));
+            throw new sfException(sprintf("La date de signature est requise", $date));
         }
 
         return $this->formatAndVerifyDate($date);
@@ -281,7 +281,7 @@ class VracCsvFile extends CsvFile {
         $date = $line[self::CSV_DATE_SAISIE];
 
         if (!$date) {
-            throw new Exception(sprintf("La date de saisie est requise", $date));
+            throw new sfException(sprintf("La date de saisie est requise", $date));
         }
 
         return $this->formatAndVerifyDate($date);
@@ -292,7 +292,7 @@ class VracCsvFile extends CsvFile {
         $statuts = VracClient::getInstance()->getStatuts();
 
         if(!array_key_exists($line[self::CSV_STATUT], $statuts)) {
-            throw new Exception(sprintf("Le statut %s n'existe pas", $statut));
+            throw new sfException(sprintf("Le statut %s n'existe pas", $statut));
         }
 
         return $statut;
@@ -307,7 +307,7 @@ class VracCsvFile extends CsvFile {
         $etablissement = EtablissementClient::getInstance()->find($id, acCouchdbClient::HYDRATE_JSON);
 
         if (!$etablissement) {
-            throw new Exception(sprintf("L'établissement %s n'existe pas", $id));
+            throw new sfException(sprintf("L'établissement %s n'existe pas", $id));
         }
 
         return $etablissement;
@@ -347,7 +347,7 @@ class VracCsvFile extends CsvFile {
 
         if(!in_array($responsable, array('vendeur', 'acheteur', 'mandataire'))) {
 
-            throw new Exception(sprintf("Le type de responsable %s n'existe pas", $responsable));
+            throw new sfException(sprintf("Le type de responsable %s n'existe pas", $responsable));
         }
 
         return $responsable;
@@ -387,7 +387,7 @@ class VracCsvFile extends CsvFile {
 
         if (!$number) {
 
-            throw new Exception(sprintf("Le volume proposé est requis"));
+            throw new sfException(sprintf("Le volume proposé est requis"));
         }
 
         return $number;
@@ -405,7 +405,7 @@ class VracCsvFile extends CsvFile {
 
         if (!$number) {
 
-            throw new Exception(sprintf("Le prix unitaire est requis"));
+            throw new sfException(sprintf("Le prix unitaire est requis"));
         }
 
         return $number;
@@ -423,7 +423,7 @@ class VracCsvFile extends CsvFile {
 
         if(!in_array($contenance, $contenances)) {
 
-            throw new Exception(sprintf("La contenance %s n'existe pas en configuration", $contenance));
+            throw new sfException(sprintf("La contenance %s n'existe pas en configuration", $contenance));
         }
 
         return $contenance;
@@ -440,7 +440,7 @@ class VracCsvFile extends CsvFile {
 
         if(!in_array($vrac->bouteilles_contenance_volume, $contenances)) {
 
-            throw new Exception(sprintf("La contenance %s n'existe pas en configuration", $vrac->bouteilles_contenance_volume));
+            throw new sfException(sprintf("La contenance %s n'existe pas en configuration", $vrac->bouteilles_contenance_volume));
         }
 
         return array_search($vrac->bouteilles_contenance_volume, $contenances);
@@ -458,7 +458,7 @@ class VracCsvFile extends CsvFile {
         if (!$date) {
 
             return null;
-            //throw new Exception(sprintf("La date de début de retiraison est requise", $date));
+            //throw new sfException(sprintf("La date de début de retiraison est requise", $date));
         }
 
         return $this->formatAndVerifyDate($date);
@@ -525,7 +525,7 @@ class VracCsvFile extends CsvFile {
 
         if (!is_float($number)) {
 
-            throw new Exception(sprintf("Number %s is not a float", $number));
+            throw new sfException(sprintf("Number %s is not a float", $number));
         }
 
         return (float) FloatHelper::getInstance()->format($number);

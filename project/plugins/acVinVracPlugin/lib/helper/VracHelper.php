@@ -123,16 +123,12 @@ function showPrixUnitaireUnite($vrac) {
     switch ($vrac->type_transaction) {
         case VracClient::TYPE_TRANSACTION_RAISINS:
             return '€/kg';
-            break;
         case VracClient::TYPE_TRANSACTION_MOUTS:
             return '€/hl';
-            break;
         case VracClient::TYPE_TRANSACTION_VIN_VRAC:
             return '€/hl';
-            break;
         case VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE:
             return '€/btle';
-            break;
     }
 }
 

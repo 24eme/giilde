@@ -29,7 +29,7 @@ class LabelCsvFile extends CsvFile
   	} elseif ($line[self::CSV_LABEL_CATEGORIE_CODE]) {
   		$hash = 'certifications/'.$this->getKey($line[self::CSV_LABEL_CATEGORIE_CODE]);  		
   	} else {
-  		throw new Exception('Categorie code needed');
+  		throw new sfException('Categorie code needed');
   	}
     return $this->config->declaration->getOrAdd($hash);
   }
@@ -39,7 +39,7 @@ class LabelCsvFile extends CsvFile
 	if ($withDefault) {
   		return ($key)? $key : Configuration::DEFAULT_KEY;
   	} elseif (!$key) {
-  		throw new Exception('La clé "'.$key.'" n\'est pas valide');
+  		throw new sfException('La clé "'.$key.'" n\'est pas valide');
   	} else {
   		return $key;
   	}

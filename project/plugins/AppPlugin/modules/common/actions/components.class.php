@@ -37,7 +37,7 @@ class commonComponents extends sfComponents {
         $this->etablissementPrincipal = $this->getUser()->getCompte()->getSociete()->getEtablissementPrincipal();
           $this->compte = $this->getUser()->getCompte();
           if (!$this->compte) {
-              new sfException("Le compte $compte n'existe pas");
+              throw new sfException("Le compte $compte n'existe pas");
           }
           $this->societe = $this->compte->getSociete();
           $this->etablissement = $this->societe->getEtablissementPrincipal();

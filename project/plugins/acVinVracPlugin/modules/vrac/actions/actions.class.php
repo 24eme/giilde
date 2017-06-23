@@ -746,7 +746,6 @@ class vracActions extends sfActions {
         switch ($this->vrac->etape) {
             case 1:
                 return $this->redirect('vrac_soussigne', array('numero_contrat' => $this->vrac->numero_contrat));
-                break;
             case 2:
                 $this->redirect('vrac_marche', $this->vrac);
                 break;
@@ -833,7 +832,7 @@ class vracActions extends sfActions {
     private function initSocieteAndEtablissementPrincipal() {
         $this->compte = $this->getUser()->getCompte();
         if (!$this->compte) {
-            new sfException("Le compte $compte n'existe pas");
+            throw new sfException("Le compte $compte n'existe pas");
         }
         $this->societe = $this->compte->getSociete();
 

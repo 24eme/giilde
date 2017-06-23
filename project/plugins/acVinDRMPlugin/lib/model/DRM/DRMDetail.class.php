@@ -422,7 +422,8 @@ class DRMDetail extends BaseDRMDetail {
     }
 
     public function isEdited() {
-        return $this->getCepage()->exist('edited') && $this->getCepage()->edited;
+
+        return $this->exist('edited') && $this->edited;
     }
 
     public function hasMovements() {
@@ -431,7 +432,7 @@ class DRMDetail extends BaseDRMDetail {
             return true;
         }
 
-        return $this->getCepage()->hasMovements();
+        return !$this->exist('no_movements') || !$this->no_movements;
     }
 
     public function updateDroitsDouanes() {

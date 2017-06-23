@@ -367,7 +367,7 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
         foreach ($originesTable as $origineFormatted) {
             $origineKeyValue = explode(':', $origineFormatted);
             if (count($origineKeyValue) != 2)
-                throw new Exception('Le mouvement est mal formé : %s', print_r($origineKeyValue));
+                throw new sfException('Le mouvement est mal formé : %s', print_r($origineKeyValue));
             $key = $origineKeyValue[0];
             $value = $origineKeyValue[1];
             if (!array_key_exists($key, $origines)) {

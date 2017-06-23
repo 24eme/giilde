@@ -150,8 +150,7 @@ class CompteCsvFile extends CsvFile
     }
 
     protected function getField($line, $strConstant) {
-
-        eval("\$constante = self::".$strConstant.";" );
+        $constante = constant("self::$strConstant");
 
         return $line[$constante];
     }

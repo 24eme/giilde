@@ -267,8 +267,10 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         if (!$isTeledeclarationMode) {
             $tobedeleted = array();
             foreach ($drm_suivante->declaration->getProduitsDetails() as $details) {
-                $details->getCepage()->add('no_movements', false);
-                $details->getCepage()->add('edited', false);
+                $details->getCepage()->remove('no_movements');
+                $details->getCepage()->remove('edited');
+                $details->add('no_movements', false);
+                $details->add('edited', false);
                 if (!$details->getCepage()->getConfig()->isCVOActif($drm_suivante->getDate())) {
                     $tobedeleted[] = $details->getHash();
                 }
@@ -1781,5 +1783,26 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
       }
       throw new sfException("La Hash du mvt $hash_detail_or_cepage n'a pas été trouvée dans la DRM");
     }
+
+    public function hasExportableProduitsAcquittes(){
+      return count($this->getProduitsDetails(true,self::DETAILS_KEY_ACQUITTE));
+    }
+
+    public function getTotalStockSuspendu(){
+      $total = 0.0;
+      foreach ($this->getProduitsDetails(true,self::DETAILS_KEY_SUSPENDU) as $produit) {
+        $total += $produit->getTotal();
+      }
+      return $total;
+    }
+
+    public function getTotalStockAcquitte(){
+      $total = 0.0;
+      foreach ($this->getProduitsDetails(true,self::DETAILS_KEY_ACQUITTE) as $produit) {
+        $total += $produit->getTotal();
+      }
+      return $total;
+    }
+
 
 }

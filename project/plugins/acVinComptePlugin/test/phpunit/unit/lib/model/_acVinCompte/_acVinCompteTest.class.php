@@ -2,7 +2,7 @@
 
 /* This file is part of the acVinComptePlugin package.
  * Copyright (c) 2011 Actualys
- * Authors :	
+ * Authors :
  * Tangui Morlier <tangui@tangui.eu.org>
  * Vincent Laurent <vince.laurent@gmail.com>
  * Jean-Baptiste Le Metayer <lemetayer.jb@gmail.com>
@@ -13,7 +13,7 @@
 
 /**
  * acVinComptePlugin test.
- * 
+ *
  * @package    acVinComptePlugin
  * @subpackage lib
  * @author     Tangui Morlier <tangui@tangui.eu.org>
@@ -27,8 +27,8 @@ class _acVinCompteTest extends PHPUnit_Framework_TestCase
   {
 	$object = $this->getMockForAbstractClass('_acVinCompte');
 
-	$password = 'test';
-	$object->setMotDePasseSSHA($password);
+	$random_pass = md5(rand());
+	$object->setMotDePasseSSHA($random_pass);
 	$cryptedPassword = substr($object->mot_de_passe,6);
 	$this->assertEquals('{SSHA}', substr($object->mot_de_passe,0,6));
 	$this->assertTrue(strlen($cryptedPassword) == 32);
@@ -37,9 +37,9 @@ class _acVinCompteTest extends PHPUnit_Framework_TestCase
   {
 	$object = $this->getMockForAbstractClass('_acVinCompte');
 	$updateStatut = self::getMethod('updateStatut');
-	
-	$password = 'test';
-	$object->setMotDePasseSSHA($password);
+
+	$random_pass = md5(rand());
+	$object->setMotDePasseSSHA($random_pass);
   	$updateStatut->invokeArgs($object, array());
 	$this->assertEquals($object::STATUT_INSCRIT, $object->statut);
 	$object->mot_de_passe = str_replace('{SSHA}', '{TEXT}', $object->mot_de_passe);
@@ -88,14 +88,14 @@ class _acVinCompteTest extends PHPUnit_Framework_TestCase
 	$object = $this->getMockForAbstractClass('_acVinCompte');
 	$this->assertEquals(',,'.$object->getNom().',', $object->getGecos());
   }
-  protected static function getMethod($name) 
+  protected static function getMethod($name)
   {
 	$class = new ReflectionClass('_acVinCompte');
 	$method = $class->getMethod($name);
 	$method->setAccessible(true);
 	return $method;
   }
-  
-  protected function setUp(){ }  
+
+  protected function setUp(){ }
   protected function tearDown(){ }
 }

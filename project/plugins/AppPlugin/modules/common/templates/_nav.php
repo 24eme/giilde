@@ -1,5 +1,5 @@
 <?php include_component('common', 'navItem', array(
-            'libelle' => 'Déclaration',
+            'libelle' => 'Accueil',
             'prefix' => 'common_accueil',
             'route' => 'common_accueil',
             'route_etablissement' => 'common_accueil_etablissement',
@@ -100,6 +100,7 @@
 ));
 endif; ?>
 <?php endif; ?>
+<?php include_partial('common/navExtra'); ?>
 </ul>
 <ul class="nav navbar-nav navbar-right">
 <?php if ($sf_user->hasCredential('transactions') || $sf_user->hasCredential('contacts')) : ?>

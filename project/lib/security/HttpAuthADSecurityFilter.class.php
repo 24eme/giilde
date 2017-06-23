@@ -26,7 +26,7 @@ class HttpAuth2ADSecurityFilter extends sfBasicSecurityFilter
     $ad = new acActiveDirectory();
     try {
       if (!isset($_SERVER['PHP_AUTH_USER'])) {
-    throw new Exception('phpauth');
+    throw new sfException('phpauth');
       }
       $rights = $ad->getDescription($_SERVER['PHP_AUTH_USER']);
     }catch(Exception $e) {

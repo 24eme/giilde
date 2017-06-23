@@ -7,4 +7,4 @@ $application = (getenv("APPLICATION")) ? getenv("APPLICATION") : 'bivc';
 
 $configuration = ProjectConfiguration::getApplicationConfiguration( $application, 'dev', true);
 
-new sfDatabaseManager($configuration);
+$db = new sfDatabaseManager($configuration);

@@ -57,7 +57,6 @@ EOF;
             if (array_key_exists('code_creation', $arguments)) {
                 if ($arguments['code_creation'] && (!preg_match('/^[0-9]{4}$/', $arguments['code_creation']))) {
                     throw new sfException("Les codes de création doivent faire 4 chiffres!");
-                    return false;
                 }
                 $this->code_creation = $arguments['code_creation'];
                 echo $this->yellow("tout les code de création seront assigné comme ") . $this->green($this->code_creation) . "\n";

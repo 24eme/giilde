@@ -202,7 +202,7 @@ class importDRMTask extends importAbstractTask
   const CSV_CAVE_STOCK_DISPO_AVANT = 19;
   const CSV_CAVE_STOCK_DISPO_APRES = 20;
   const CSV_CAVE_CODE_UTILISATEUR_SUPPRESSION = 21;
-  const CSV_CAVE_DATE_SUPPRESSION = 22;  
+  const CSV_CAVE_DATE_SUPPRESSION = 22;
   const CSV_CAVE_MOIS_MOUVEMENT = 23;
   const CSV_CAVE_NUMERO_DOCUMENT = 24;
 
@@ -322,7 +322,7 @@ EOF;
         $this->importDRM($lines);
         $lines = array();
       }
-      
+
       $id = $this->getId($data);
       $lines[$i] = $data;
       $i++;
@@ -334,12 +334,12 @@ EOF;
   }
 
   protected function getCodeProduit($line) {
-    
+
     return $line[self::CSV_LIGNE_CODE_APPELLATION];
   }
 
   protected function getId($line) {
-    
+
     return DRMClient::getInstance()->buildId($this->getIdentifiant($line), $this->getPeriode($line));
   }
 
@@ -363,9 +363,9 @@ EOF;
 
     foreach($lines as $i => $line) {
       try{
-        if(!$this->verifyLine($line)) {	
+        if(!$this->verifyLine($line)) {
           $coherence_mouv = $this->postVerifLine($drm, $line, $coherence_mouv);
-		      continue;	
+		      continue;
 	      }
 
 	      $drm = $this->importLigne($drm, $line);
@@ -471,7 +471,7 @@ EOF;
         break;
       case self::CSV_LIGNE_TYPE_STOCK:
         $this->verifCoherenceWithStock($drm, $line);
-        break;  
+        break;
     }
 
     return $coherence_mouv;
@@ -520,9 +520,9 @@ EOF;
     $cvo = $this->convertToFloat($line[self::CSV_VENTE_COTISATION_VITICULEUR_VENTE_DIRECTE]);
 
     if($produit->cvo->taux && $produit->cvo->taux != $cvo) {
-      $this->logLigne('WARNING', sprintf("Deux taux de cvo différent ont été défini pour un produit d'une même DRM %s / %s", $produit->cvo->taux, $cvo), $line);      
+      $this->logLigne('WARNING', sprintf("Deux taux de cvo différent ont été défini pour un produit d'une même DRM %s / %s", $produit->cvo->taux, $cvo), $line);
     }
-    
+
     if(!$produit->cvo->taux) {
       $produit->cvo->taux = $cvo;
     }
@@ -591,7 +591,7 @@ EOF;
   public function importLigneCave($drm, $line) {
 
     $produit = $drm->addProduit($this->getHash($this->getCodeProduit($line)));
-    
+
     if($line[self::CSV_LIGNE_TYPE] == self::CSV_LIGNE_TYPE_CAVE_VITI) {
       $etablissement = EtablissementClient::getInstance()->find(sprintf("%06d%02d", $line[self::CSV_CAVE_CODE_COOPERATEUR], $line[self::CSV_CAVE_CODE_COOPERATEUR_CHAI]), acCouchdbClient::HYDRATE_JSON);
       if(!$etablissement) {
@@ -609,7 +609,7 @@ EOF;
       if($this->convertToFloat($line[self::CSV_CAVE_VOLUME_SORTIE]) > 0) {
         $produit->entrees->cooperative += $this->convertToFloat($line[self::CSV_CAVE_VOLUME_SORTIE]);
       }
-    
+
     }
 
     if($line[self::CSV_LIGNE_TYPE] == self::CSV_LIGNE_TYPE_CAVE_COOP) {
@@ -625,7 +625,7 @@ EOF;
     }
 
     if(isset($detail) && $detail->volume < 0) {
-        
+
         throw new sfException(sprintf("Le volume coop en sortie est négatif %s", $detail->volume));
     }
 
@@ -702,33 +702,24 @@ EOF;
     switch($line[self::CSV_LIGNE_TYPE]) {
       case self::CSV_LIGNE_TYPE_INFO:
         return true;
-        break;
       case self::CSV_LIGNE_TYPE_DS:
         return $this->verifyLineDS($line);
-        break;
       case self::CSV_LIGNE_TYPE_CONTRAT:
         return $this->verifyLineContrat($line);
-        break;
       case self::CSV_LIGNE_TYPE_DIVERS:
         return $this->verifyLineDivers($line);
-        break;
       case self::CSV_LIGNE_TYPE_CAVE_VITI:
       case self::CSV_LIGNE_TYPE_CAVE_COOP:
         return $this->verifyLineCave($line);
-        break;
       case self::CSV_LIGNE_TYPE_TRANSFERT_ENTREE:
       case self::CSV_LIGNE_TYPE_TRANSFERT_SORTIE:
         return $this->verifyLineTransfert($line);
-        break;
       case self::CSV_LIGNE_TYPE_VENTE:
         return $this->verifyLineVente($line);
-        break;
       case self::CSV_LIGNE_TYPE_REGULARISATION:
         return $this->verifyLineRegularisation($line);
-        break;
       case self::CSV_LIGNE_TYPE_REVENDICATION:
         return $this->verifyLineRevendication($line);
-        break;
     }
 
     return false;
@@ -736,13 +727,13 @@ EOF;
 
   protected function verifyLineDS($line) {
      $this->verifyVolume($line[self::CSV_DS_VOLUME_LIBRE]);
-  	
+
      return true;
   }
 
   protected function verifyLineContrat($line) {
     $this->verifyVolume($line[self::CSV_CONTRAT_VOLUME_ENLEVE_HL], true);
-  
+
     $numero_contrat = $this->constructNumeroContrat($line);
     $contrat = VracClient::getInstance()->findByNumContrat($numero_contrat, acCouchdbClient::HYDRATE_JSON);
 
@@ -750,7 +741,7 @@ EOF;
 	    throw new sfException(sprintf("Le contrat '%s' n'existe pas", $numero_contrat));
     }
     if(!in_array($contrat->type_transaction, array(VracClient::TYPE_TRANSACTION_VIN_VRAC, VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE))) {
-    	
+
 	    return false;
     }
 
@@ -761,7 +752,7 @@ EOF;
     $this->verifyVolume($line[self::CSV_VENTE_VOLUME_CRD], true);
     $this->verifyVolume($line[self::CSV_VENTE_VOLUME_CONGE], true);
     $this->verifyVolume($line[self::CSV_VENTE_VOLUME_EXPORT], true);
-  
+
     return true;
   }
 
@@ -777,7 +768,7 @@ EOF;
 
   protected function verifyLineTransfert($line) {
     $this->verifyVolume($line[self::CSV_TRANSFERT_VOLUME_HL], true);
-  
+
     return true;
   }
 
@@ -822,16 +813,16 @@ EOF;
     }
 
     if(!array_key_exists($country, $countries)) {
-      
+
       throw new sfException(sprintf("Code pays '%s' invalide", $country));
     }
-    
+
     return $country;
   }
 
 
   protected function getMouvementCommentaire($libelle, $line, $produit) {
-    
+
     return sprintf("%s en %s le %s de %01.02f hl : %s\n",
                                 $libelle,
                                 $produit->getLibelle("%format_libelle%"),
@@ -847,17 +838,17 @@ EOF;
   protected function buildCoheranceWithMouvement($coherence, $line) {
     $code = $this->getCodeProduit($line);
     if(!array_key_exists($code, $coherence)) {
-      $coherence[$code] = array("stock" => null, "entrees" => 0, "sorties" => 0); 
+      $coherence[$code] = array("stock" => null, "entrees" => 0, "sorties" => 0);
     }
 
     if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_ENLEVEMENT,
-                                                                 self::CSV_CODE_MOUVEMENT_ENLEVEMENT_ANNULATION, 
+                                                                 self::CSV_CODE_MOUVEMENT_ENLEVEMENT_ANNULATION,
                                                                  self::CSV_CODE_MOUVEMENT_ENLEVEMENT_REGUL))) {
       $coherence[$code]["sorties"] += $this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_ENLEVE]); //Contrat
     }
 
 
-    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_SAISIE_DMVDP, 
+    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_SAISIE_DMVDP,
                                                                  self::CSV_CODE_MOUVEMENT_MODIF_DMVDP,
                                                                  self::CSV_CODE_MOUVEMENT_ANNUL_DMVDP))) {
       if($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_SORTIE]) > 0) {
@@ -875,7 +866,7 @@ EOF;
       $coherence[$code]["entrees"] += abs($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_REGULARISATION])); //Repli
     }
 
-    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_CAVE_DEPOT, 
+    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_CAVE_DEPOT,
                                                                  self::CSV_CODE_MOUVEMENT_CAVE_DEPOT_ANNULATION))) {
       if($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_REGULARISATION]) > 0) {
         $coherence[$code]["entrees"] += abs($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_REGULARISATION])); //Cave
@@ -886,7 +877,7 @@ EOF;
       }
     }
 
-    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_CAVE_RETROCESSION, 
+    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_CAVE_RETROCESSION,
                                                                  self::CSV_CODE_MOUVEMENT_CAVE_RETROCESSION_ANNULATION))) {
       if($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_REGULARISATION]) > 0) {
         $coherence[$code]["entrees"] += abs($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_REGULARISATION])); //Cave
@@ -897,7 +888,7 @@ EOF;
       }
     }
 
-    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_CESSION_DU_VITI, 
+    if(in_array($line[self::CSV_MOUVEMENT_CODE_MOUVEMENT], array(self::CSV_CODE_MOUVEMENT_CESSION_DU_VITI,
                                                                  self::CSV_CODE_MOUVEMENT_CESSION_AU_VITI))) {
       if($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_REGULARISATION]) > 0) {
         $coherence[$code]["entrees"] += abs($this->convertToFloat($line[self::CSV_MOUVEMENT_VOLUME_REGULARISATION])); //Cession
@@ -940,7 +931,7 @@ EOF;
   protected function verifCoherenceWithStock($drm, $line) {
 
     if(!$drm->exist($this->getHash($this->getCodeProduit($line)))) {
-      
+
       $this->logLigne('WARNING', sprintf("Le produit %s n'existe pas dans cette campagne alors qu'il existe dans les stocks", $line[self::CSV_LIGNE_CODE_APPELLATION]), $line);
       return;
     }
@@ -955,7 +946,7 @@ EOF;
     $stock_fin_campagne = round($stock_fin_campagne, 2);
 
     if (round($produit->total, 2) != $stock_fin_campagne) {
-        
+
         $this->logLigne('WARNING', sprintf("Le volume fin de campagne %s ne correspond pas à celui pévu dans les stocks %s pour le produit %s", $produit->total, $stock_fin_campagne,  $line[self::CSV_LIGNE_CODE_APPELLATION]), $line);
     }
   }

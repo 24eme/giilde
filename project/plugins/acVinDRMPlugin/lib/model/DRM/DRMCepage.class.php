@@ -65,8 +65,4 @@ class DRMCepage extends BaseDRMCepage {
         throw new sfException('this function need to call before lieu tree');
     }
 
-    public function hasMovements(){
-
-        return !$this->exist('no_movements') || !$this->no_movements;
-    }
 }

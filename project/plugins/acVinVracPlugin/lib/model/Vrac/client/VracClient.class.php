@@ -769,7 +769,7 @@ class VracClient extends acCouchdbClient {
     }
 
     public function getLibelleContratNum($id) {
-        // if(strlen($id)!=13) throw new Exception(sprintf ('Le numéro de contrat %s ne possède pas un bon format.',$id));
+        // if(strlen($id)!=13) throw new sfException(sprintf ('Le numéro de contrat %s ne possède pas un bon format.',$id));
         $annee = substr($id, 0, 4);
         $mois = substr($id, 4, 2);
         $jour = substr($id, 6, 2);

@@ -2,9 +2,7 @@
 
 
 <div class="well">
-    <p>Vous pouvez dès à présent déclarer votre DRM de septembre sur ce portail ce qui vous permettra de récupérer le document PDF à envoyer aux douanes.</p>
-
-    <p>Afin de préparer le téléversement vers le portail des douanes qui pourra se faire à partir de la DRM d'octobre, nous vous invitons dés maintenant à remplir et envoyer&nbsp;votre&nbsp;<a data-toggle="modal" data-target="#convention_ciel" href="">convention&nbsp;CIEL</a>.</p>
+    <p>Vous pouvez dès à présent déclarer votre DRM sur ce portail ce qui vous permettra de récupérer le document PDF à envoyer aux douanes.</p>
 </div>
 
 <div id="convention_ciel" class="modal" tabindex="-1" role="dialog">
