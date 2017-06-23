@@ -45,7 +45,7 @@
                                     <?php foreach ($crds as $crdKey => $crd): ?>
                                         <tr class="crd_row" id="<?php echo $crdKey; ?>">
                                             <td class="vertical-center"><?php echo $crd->getShortLibelle(); ?></td>
-                                            <td class="crds_debut_de_mois"><?php if ($crd->stock_debut) { echo $crd->stock_debut; }  echo $crdsForms['stock_debut_' . $regime . '_' . $crdKey]->render(); ?></td>
+                                            <td class="crds_debut_de_mois  text-center vertical-center"><?php if ($crd->stock_debut) { echo $crd->stock_debut; }  echo $crdsForms['stock_debut_' . $regime . '_' . $crdKey]->render(); ?></td>
                                             <td class="crds_entreesAchats"><?php echo $crdsForms['entrees_achats_' . $regime . '_' . $crdKey]->render(); ?></td>
                                             <td class="crds_entreesRetours"><?php echo $crdsForms['entrees_retours_' . $regime . '_' . $crdKey]->render(); ?></td>
                                             <td class="crds_entreesExcedents"><?php echo $crdsForms['entrees_excedents_' . $regime . '_' . $crdKey]->render(); ?></td>
