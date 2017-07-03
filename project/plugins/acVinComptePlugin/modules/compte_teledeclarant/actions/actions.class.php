@@ -123,7 +123,8 @@ class compte_teledeclarantActions extends sfActions {
                 } catch (Exception $e) {
                     $this->getUser()->setFlash('error', "Problème de configuration : l'email n'a pu être envoyé");
                 }
-                $this->redirectWithCredentials($this->compte->identifiant);
+
+                return $this->redirect('common_homepage');
             }
         }
     }
@@ -258,18 +259,5 @@ class compte_teledeclarantActions extends sfActions {
         $this->getResponse()->setHttpHeader('Expires', '0');
         return $this->renderText(file_get_contents($path));
     }
-
-    protected function redirectWithCredentials($idCompte){
-             if($this->getUser()->hasCredential(Roles::TELEDECLARATION_DRM) && $this->getUser()->hasCredential(Roles::TELEDECLARATION_VRAC)){
-             return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $idCompte));
-             }
-             if($this->getUser()->hasCredential(Roles::TELEDECLARATION_VRAC)){
-                  return $this->redirect('vrac_societe', array('identifiant' => $idCompte));
-             }
-             if($this->getUser()->hasCredential(Roles::TELEDECLARATION_DRM)){
-                    return $this->redirect('drm_societe', array('identifiant' => $idCompte));
-             }
-            return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $idCompte));
-     }
 
 }

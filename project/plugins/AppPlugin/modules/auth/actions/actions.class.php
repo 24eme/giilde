@@ -28,7 +28,7 @@ class authActions extends sfActions {
         $idSociete = $this->form->process()->getSociete()->getIdentifiant();
         $this->getUser()->signInOrigin($this->form->getValue("login"));
 
-        return $this->redirectWithCredentials($idCompte);
+        return $this->redirect('common_homepage');
     }
 
     public function executeLogout(sfWebRequest $request) {
@@ -56,19 +56,6 @@ class authActions extends sfActions {
 
     public function executeForbidden(sfWebRequest $request) {
 
-    }
-
-    protected function redirectWithCredentials($idCompte){
-            if($this->getUser()->hasCredential(Roles::TELEDECLARATION_DRM) && $this->getUser()->hasCredential(Roles::TELEDECLARATION_VRAC)){
-            return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $idCompte));
-            }
-            if($this->getUser()->hasCredential(Roles::TELEDECLARATION_VRAC)){
-                 return $this->redirect('vrac_societe', array('identifiant' => $idCompte));
-            }
-            if($this->getUser()->hasCredential(Roles::TELEDECLARATION_DRM)){
-                   return $this->redirect('drm_societe', array('identifiant' => $idCompte));
-            }
-           return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $idCompte));
     }
 
 }
