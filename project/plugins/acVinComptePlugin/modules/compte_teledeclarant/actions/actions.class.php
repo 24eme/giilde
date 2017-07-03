@@ -235,7 +235,8 @@ class compte_teledeclarantActions extends sfActions {
                 $this->form->save();
                 $this->getUser()->getAttributeHolder()->remove(self::SESSION_COMPTE_DOC_ID_OUBLIE);
                 $this->getUser()->signInOrigin($this->compte);
-                return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $this->getUser()->getCompte()->getSociete()->getEtablissementPrincipal()->identifiant));
+
+                return $this->redirect('common_homepage');
             }
         }
     }
