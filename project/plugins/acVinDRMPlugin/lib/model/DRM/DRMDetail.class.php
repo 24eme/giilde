@@ -273,7 +273,7 @@ class DRMDetail extends BaseDRMDetail {
     }
 
     public function getContratsVracByHash($hash) {
-        return DRMClient::getInstance()->getContratsFromProduit($this->getDocument()->identifiant, $hash, array(VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE, VracClient::TYPE_TRANSACTION_VIN_VRAC));
+        return DRMClient::getInstance()->getContratsFromProduit($this->getDocument()->identifiant, $hash, array(VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE, VracClient::TYPE_TRANSACTION_VIN_VRAC),$this->getDocument()->getDate());
     }
 
     public function isModifiedMother($key) {

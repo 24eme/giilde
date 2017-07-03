@@ -324,7 +324,7 @@ class ConfigurationClient extends acCouchdbClient {
         }
     }
 
-    public function formatDenominationComplLibelle($denomination_complementaire = null, $format = "%la%", $separator = ", ") {				
+    public function formatDenominationComplLibelle($denomination_complementaire = null, $format = "%la%", $separator = ", ") {
 				return trim(str_replace("%la%", $denomination_complementaire, $format)." ".$denomination_complementaire);
     }
 
@@ -340,7 +340,29 @@ class ConfigurationClient extends acCouchdbClient {
         return $fork;
     }
 
+	public function convertHashProduitForDRM($hashProduit, $WithAgregat = false, $date = null){
+		if(!$date){
+			$date =  date('Y-m-d');
+		}
+
+		$produitsOldHashes = array();
+		$produitsOldHashes[] = $hashProduit;
+
+		$conf = $this->getConfiguration();
+		$produit = $conf->get($hashProduit);
+		if($WithAgregat && $produit->hasProduitsSibling()){
+			$produitsOldHashes = array_merge($produitsOldHashes, $produit->getProduitsSiblingWithoutTaux($date));
+		}
+		$newHashesProduits = array();
+		foreach ($produitsOldHashes as $produitOldHash) {
+			$newHashesProduits[] = preg_replace(
+			'/(declaration)\/(certification)s\/([A-Z_]*)\/(genre)s\/([A-Z]*)\/(appellation)s\/([A-Z]*)\/(mention)s\/([A-Z]*)\/(lieu)x\/([A-Z]*)\/(couleur)s\/([A-Z]*)\/(cepage)s\/([A-Z]*)/'
+			,'\1/\2/\4/\6_\7/\8/\10/\12/\14_\15',$produitOldHash);
+		}
+		return $newHashesProduits;
+	}
 }
+
 
 class ConfigurationClientCache {
 	public static function findConfigurationForCache($id) {

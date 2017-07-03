@@ -53,8 +53,8 @@ Organisme cautionneur : \textbf{<?php echo $organismeCautionneur; ?>} \\
  \end{small}
  \begin{large}
 \textbf{DRM <?php echo getFrPeriodeElision($drm->periode); ?>} \\
-\textbf{Signé électroniquement le <?php echo $drm->getEuValideDate(); ?>}
+\textbf{<?php if($drm->isValidee()): ?>Signé électroniquement le <?php echo $drm->getEuValideDate(); ?><?php endif; ?>}
 \end{large}
- }
+}
 
 \rfoot{page \thepage\ / <?php echo $nbPages ?>}

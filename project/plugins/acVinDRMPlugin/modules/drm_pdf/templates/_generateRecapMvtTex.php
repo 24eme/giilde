@@ -98,7 +98,7 @@ $mvtsSortiesForPdf = $drmLatex->getMvtsSortiesForPdf($detailsNodes);
 
             \multicolumn{1}{|l|}{  \small{<?php echo $entree->libelle; ?>} } &
             <?php foreach ($produits_for_page as $counter => $produit): ?>
-                \multicolumn{1}{r|}{ \small{<?php echoFloatWithHl($produit->entrees->$entreeKey); ?>}}
+                \multicolumn{1}{r|}{ \small{<?php echoFloatWithHl(($produit->entrees->exist($entreeKey)) ? $produit->entrees->$entreeKey : null) ; ?>}}
                 <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
             <?php endforeach; ?>
             \\
@@ -131,7 +131,7 @@ $mvtsSortiesForPdf = $drmLatex->getMvtsSortiesForPdf($detailsNodes);
 
             \multicolumn{1}{|l|}{  \small{<?php echo $sortie->libelle; ?>} } &
             <?php foreach ($produits_for_page as $counter => $produit): ?>
-                \multicolumn{1}{r|}{  \small{\color{black}{<?php echoFloatWithHl($produit->sorties->$sortieKey); ?>}}}
+                \multicolumn{1}{r|}{  \small{\color{black}{<?php echoFloatWithHl(($produit->sorties->exist($sortieKey)) ? $produit->sorties->$sortieKey : null); ?>}}}
                 <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
             <?php endforeach; ?>
             \\

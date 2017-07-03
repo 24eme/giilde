@@ -347,42 +347,68 @@ class DRMClient extends acCouchdbClient {
         return $drms;
     }
 
-    public function getContratsFromProduit($vendeur_identifiant, $produit, $transaction_types = null) {
+    public function getContratsFromProduit($vendeur_identifiant, $produit, $transaction_types = null, $date = null) {
         if ($transaction_types && !is_array($transaction_types))
             throw new sfException("transaction_types (param 3) must be an array");
         if (!$transaction_types)
-            return $this->getContratsFromProduitAndATransaction($vendeur_identifiant, $produit);
+            return $this->getContratsFromProduitAndATransaction($vendeur_identifiant, $produit, $date);
 
         $vracs = array();
         foreach ($transaction_types as $t) {
-            $vracs = array_merge($vracs, $this->getContratsFromProduitAndATransaction($vendeur_identifiant, $produit, $t));
+            $vracs = array_merge($vracs, $this->getContratsFromProduitAndATransaction($vendeur_identifiant, $produit, $t, $date));
         }
         return $vracs;
     }
 
-    public function getContratsFromProduitAndATransaction($vendeur_identifiant, $produit, $type_transaction = null) {
-        $startkey = array(VracClient::STATUS_CONTRAT_NONSOLDE, $vendeur_identifiant, $produit);
-        if ($type_transaction) {
-            array_push($startkey, $type_transaction);
+    public function getContratsFromProduitAndATransaction($vendeur_identifiant, $produit, $type_transaction = null, $date = null) {
+        $withAgregat = DRMConfiguration::getInstance()->isDRMVracMultiProduit();
+        $statutsContrats = VracClient::STATUS_CONTRAT_NONSOLDE;
+        $results = array();
+        if($withAgregat){
+          $results = $this->getContratsFromMultiProduitsAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction);
+        }else{
+          $results = $this->getContratsFromProduitAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction);
         }
-        $endkey = $startkey;
-        array_push($endkey, array());
-        $rows = acCouchdbManager::getClient()
-                        ->startkey($startkey)
-                        ->endkey($endkey)
-                        ->getView("vrac", "contratsFromProduit")
-                ->rows;
-        $vracs = array();
-        foreach ($rows as $key => $row) {
-            $vol_restant = round($row->value[self::CONTRATSPRODUITS_VOL_TOTAL] - $row->value[self::CONTRATSPRODUITS_VOL_ENLEVE], 2);
-            $volume = '[' . $row->value[self::CONTRATSPRODUITS_VOL_ENLEVE] . '/' . $row->value[self::CONTRATSPRODUITS_VOL_TOTAL] . ']';
-            $volume = ($row->value[self::CONTRATSPRODUITS_VOL_ENLEVE] == '') ? '[0/' . $row->value[self::CONTRATSPRODUITS_VOL_TOTAL] . ']' : $volume;
-            $vracs[VracClient::getInstance()->getId($row->id)] = $row->value[self::CONTRATSPRODUITS_ETS_NOM] .
-                    ' - ' . str_replace('VRAC-', '', $row->id).' ('. $row->value[self::CONTRATSPRODUITS_NUMERO_CONTRAT] . ') - ' .
-                    $vol_restant . ' hl ' .
-                    $volume;
-        }
-        return $vracs;
+        return $this->postTraitementVracResult($results);
+    }
+
+    private function getContratsFromProduitAndATransactionRow($contratStatut, $vendeur_identifiant, $produit,$type_transaction = null){
+      $startkey = array($contratStatut, $vendeur_identifiant, $produit);
+      if ($type_transaction) {
+          array_push($startkey, $type_transaction);
+      }
+      $endkey = $startkey;
+      array_push($endkey, array());
+      return acCouchdbManager::getClient()
+                      ->startkey($startkey)
+                      ->endkey($endkey)
+                      ->getView("vrac", "contratsFromProduit")
+              ->rows;
+    }
+
+    private function postTraitementVracResult($rowsVrac){
+      $vracs = array();
+      foreach ($rowsVrac as $key => $row) {
+          $vol_restant = round($row->value[self::CONTRATSPRODUITS_VOL_TOTAL] - $row->value[self::CONTRATSPRODUITS_VOL_ENLEVE], 2);
+          $volume = '[' . $row->value[self::CONTRATSPRODUITS_VOL_ENLEVE] . '/' . $row->value[self::CONTRATSPRODUITS_VOL_TOTAL] . ']';
+          $volume = ($row->value[self::CONTRATSPRODUITS_VOL_ENLEVE] == '') ? '[0/' . $row->value[self::CONTRATSPRODUITS_VOL_TOTAL] . ']' : $volume;
+          $vracs[VracClient::getInstance()->getId($row->id)] = $row->value[self::CONTRATSPRODUITS_ETS_NOM] .
+                  ' - ' . str_replace('VRAC-', '', $row->id).' ('. $row->value[self::CONTRATSPRODUITS_NUMERO_CONTRAT] . ') - ' .
+                  $vol_restant . ' hl ' .
+                  $volume;
+      }
+      return $vracs;
+    }
+
+    private function getContratsFromMultiProduitsAndATransactionRow($statutsContrats, $vendeur_identifiant, $produit, $type_transaction = null, $date = null){
+      $results = array();
+      $produits = ConfigurationClient::getInstance()->convertHashProduitForDRM($produit, true, $date);
+      $vendeur_identifiant = "ETABLISSEMENT-".$vendeur_identifiant;
+      $type_transaction = 'VRAC';
+      foreach ($produits as $produit) {
+        $results = array_merge($results,$this->getContratsFromProduitAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction));
+      }
+      return $results;
     }
 
     public function findProduits() {

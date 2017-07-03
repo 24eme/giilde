@@ -50,4 +50,24 @@ class DRMConfiguration {
 
         return $this->configuration['export_pays_fin'];
     }
+
+    public function getRepriseDonneesUrl() {
+
+        return $this->configuration['reprise_donnees_url'];
+    }
+
+    public function hasSansContratOption() {
+
+        return $this->configuration['sans_contrat_option'];
+    }
+
+    public function getDelaiOuvertureTeledeclaration() {
+
+        return $this->configuration['delai_ouverture_teledeclaration'];
+    }
+
+    public function isDRMVracMultiProduit() {
+
+        return $this->configuration['vrac_multi_produit'];
+    }
 }

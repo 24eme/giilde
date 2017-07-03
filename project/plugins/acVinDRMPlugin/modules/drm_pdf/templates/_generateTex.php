@@ -7,6 +7,7 @@
 \usepackage{fp}
 \usepackage[table]{xcolor}
 \usepackage{lscape}
+\usepackage{eso-pic}
 \usepackage{tikz}
 \usepackage{array,multirow,makecell}
 \usepackage{multicol}
@@ -31,6 +32,15 @@
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
+\newcommand\BackgroundPic{
+\put(0,0){
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,
+keepaspectratio]{<?php echo realpath(dirname(__FILE__) . "/../../../../../web/data") . "/img_brouillon.png"; ?>}%
+\vfill
+}}}
 
 \setlength{\oddsidemargin}{-2cm}
 \setlength{\evensidemargin}{-2cm}
@@ -44,6 +54,11 @@
 
 <?php include_partial('drm_pdf/generateEnteteTex', array('drm' => $drm, 'nbPages' => $nbPages)); ?>
 \begin{document}
+
+<?php if (!$drm->isValidee()): ?>
+\AddToShipoutPicture{\BackgroundPic}
+<?php endif; ?>
+
 <?php foreach (DRMClient::$types_libelles as $typeDetailsNodes => $libelle) : ?>
   <?php include_partial('drm_pdf/generateRecapMvtTex', array('drm' => $drm,'drmLatex' => $drmLatex, 'detailsNodes' => $typeDetailsNodes, "libelleDetail" => $libelle)); ?>
 <?php endforeach; ?>

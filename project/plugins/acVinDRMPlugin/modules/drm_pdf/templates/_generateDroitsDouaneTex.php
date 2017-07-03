@@ -140,8 +140,13 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 \begin{tabular}{|C{100mm}|}
 \hline
 ~ \\
-\multicolumn{1}{|l|}{\small{\underline{\textbf{Fait}} : sur la plateforme de télédeclaration de l'<?php echo $interpro; ?>}} \\	~ \\
+<?php if($drm->isValidee()): ?>
+\multicolumn{1}{|l|}{\small{\underline{\textbf{Fait}} : sur la plateforme de télédeclaration de l'interprofession (<?php echo $interpro; ?>)}} \\	~ \\
 \multicolumn{1}{|l|}{\small{\underline{\textbf{Le}} : <?php echo $drm->getEuValideDate(); ?> }} \\	~ \\
+<?php else: ?>
+    \multicolumn{1}{|l|}{} \\	~ \\
+    \multicolumn{1}{|l|}{} \\	~ \\
+<?php endif; ?>
 \hline
 ~ \\
 \multicolumn{1}{|l|}{\small{\textbf{Moyen de paiement utilisé : }}} \\

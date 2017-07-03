@@ -5,8 +5,9 @@ all:
       details:
         export_detail:
           required: ["identifiant"]
-        vrac_detail:
-          creation: true
       export_pays_debut: { }
       export_pays_fin: { "AUTRE": "Autres pays"}
-      vrac_multi_produit: false
+      reprise_donnees_url: true
+      sans_contrat_option: true
+      delai_ouverture_teledeclaration: "-6 month"
+      vrac_multi_produit: true
