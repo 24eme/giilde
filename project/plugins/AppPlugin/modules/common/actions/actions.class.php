@@ -29,9 +29,8 @@ class commonActions extends sfActions {
 
         if (!$this->getUser()->hasCredential('operateur')) {
 
-            return $this->redirect('vrac_societe', array("identifiant" => $this->getUser()->getCompte()->identifiant));
+            return $this->redirectWithCredentials($this->getUser()->getCompte()->identifiant);
         }
-
 
         return $this->redirect('societe');
     }
@@ -64,6 +63,19 @@ class commonActions extends sfActions {
       if($this->getUser()->hasCredential('teledeclaration_drm')){
         $this->teledeclaration_drm = true;
       }
+    }
+
+    protected function redirectWithCredentials($idCompte){
+            if($this->getUser()->hasCredential(Roles::TELEDECLARATION_DRM) && $this->getUser()->hasCredential(Roles::TELEDECLARATION_VRAC)){
+            return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $idCompte));
+            }
+            if($this->getUser()->hasCredential(Roles::TELEDECLARATION_VRAC)){
+                 return $this->redirect('vrac_societe', array('identifiant' => $idCompte));
+            }
+            if($this->getUser()->hasCredential(Roles::TELEDECLARATION_DRM)){
+                   return $this->redirect('drm_societe', array('identifiant' => $idCompte));
+            }
+           return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $idCompte));
     }
 
 }
