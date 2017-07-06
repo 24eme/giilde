@@ -6,8 +6,12 @@ if (getenv("NODELETE")) {
     $t = new lime_test(0);
     exit(0);
 }
+$nbtest = 36;
+if(($application == "bivc")){
+  $nbtest = 41;
+}
 
-$t = new lime_test(($application == "bivc") ? 38 : 35);
+$t = new lime_test($nbtest);
 
 $t->comment('suppression des différentes sociétés, de leurs établissements et comptes');
 

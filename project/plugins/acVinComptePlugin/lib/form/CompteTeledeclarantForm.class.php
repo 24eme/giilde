@@ -1,12 +1,23 @@
 <?php
 
-class CompteTeledeclarantForm extends acCouchdbObjectForm {
+class CompteTeledeclarantForm extends acCouchdbForm {
 
-    private $oldEmail;
+    public function __construct($doc, $defaults = array(), $options = array(), $CSRFSecret = null) {
+        $societe = $doc->getSociete();
 
-    public function __construct($object, $options = array(), $CSRFSecret = null) {
-        $this->oldEmail = $object->email;
-        parent::__construct($object, $options, $CSRFSecret);
+        $defaultEmail = null;
+        if($societe->isTransaction()){
+            $defaultEmail = $societe->getEtablissementPrincipal()->getEmailTeledeclaration();
+        }else{
+            $defaultEmail = $societe->getEmailTeledeclaration();
+        }
+        if(!$defaultEmail){
+            $defaultEmail = $societe->email;
+        }
+
+        $defaults['email'] = $defaultEmail;
+
+        parent::__construct($doc, $defaults, $options, $CSRFSecret);
     }
 
     public function configure() {
@@ -37,31 +48,43 @@ class CompteTeledeclarantForm extends acCouchdbObjectForm {
         $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('mdp1', sfValidatorSchemaCompare::EQUAL, 'mdp2', array(), array('invalid' => 'Les mots de passe doivent être identique.')));
     }
 
-    public function doUpdateObject($values) {
-        parent::doUpdateObject($values);
+    public function save() {
+        if (!$this->isValid())
+        {
+          throw $this->getErrorSchema();
+        }
 
         if ($this->getValue('mdp1')) {
-            $this->getObject()->setMotDePasseSSHA($this->getValue('mdp1'));
+            $this->getDocument()->setMotDePasseSSHA($this->getValue('mdp1'));
         }
-        $this->getObject()->add('teledeclaration_active', true);
-        $this->getObject()->email = $this->oldEmail;
-    }
-    
-    protected function updateDefaultsFromObject() {
-        parent::updateDefaultsFromObject();
-        $societe = $this->getObject()->getSociete();
-        
-        $defaultEmail = null;
-        if($societe->isTransaction()){
-            $etablissementPrincipal = $societe->getEtablissementPrincipal();
-            $defaultEmail = $etablissementPrincipal->getEmailTeledeclaration();
-        }else{
-            $defaultEmail = $societe->getEmailTeledeclaration();
-        }
-        if(!$defaultEmail){
-            $defaultEmail = $societe->email;
-        }
-        $this->setDefault('email', $defaultEmail);
-    }
 
+        $this->getDocument()->add('teledeclaration_active', true);
+        $this->getDocument()->save();
+
+        $email = $this->getValue('email');
+
+        $societe = SocieteClient::getInstance()->find($this->getDocument()->id_societe);
+
+        if ($societe->isTransaction()) {
+            $allEtablissements = $societe->getEtablissementsObj();
+            foreach ($allEtablissements as $etablissementObj) {
+                $etb = $etablissementObj->etablissement;
+                if ((!$etb->exist('email') || !$etb->email) && !$etb->isSameContactThanSociete()) {
+                    $etb->email = $email;
+                }
+                $etb->add('teledeclaration_email', $email);
+                $etb->save();
+            }
+        }
+
+        if (!$societe->isTransaction()) {
+            $societe->add('teledeclaration_email', $email);
+            $societe->save();
+        }
+
+        if(!$societe->email) {
+            $societe->email = $email;
+            $societe->save();
+        }
+    }
 }

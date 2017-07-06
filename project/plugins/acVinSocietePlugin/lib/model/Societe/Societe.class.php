@@ -368,8 +368,12 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
         $compteMasterOrigin = clone $compteMaster;
         $this->pushToCompteOrEtablissementAndSave($compteMaster, $compteMaster);
 
-        foreach ($this->getComptesAndEtablissements() as $id => $compteOrEtablissement) {
-            $this->pushToCompteOrEtablissementAndSave($compteMaster, $compteOrEtablissement, $compteMasterOrigin);
+        foreach ($this->etablissements as $id => $obj) {
+            $this->pushToCompteOrEtablissementAndSave($compteMaster, EtablissementClient::getInstance()->find($id), $compteMasterOrigin);
+        }
+
+        foreach ($this->getContactsObj() as $id => $compte) {
+            $this->pushToCompteOrEtablissementAndSave($compteMaster, $compte, $compteMasterOrigin);
         }
 
     }

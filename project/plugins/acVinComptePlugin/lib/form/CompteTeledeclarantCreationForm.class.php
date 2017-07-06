@@ -4,9 +4,10 @@ class CompteTeledeclarantCreationForm extends CompteTeledeclarantForm {
 
     private $typeCompte;
 
-    public function __construct($object, $options = array(), $CSRFSecret = null) {
-        $this->typeCompte = $object->getSociete()->type_societe;
-        parent::__construct($object, $options, $CSRFSecret);
+    public function __construct($doc, $defaults = array(), $options = array(), $CSRFSecret = null) {
+        $this->typeCompte = $doc->getSociete()->type_societe;
+
+        parent::__construct($doc, $defaults, $options, $CSRFSecret);
     }
 
     public function configure() {
@@ -42,9 +43,11 @@ class CompteTeledeclarantCreationForm extends CompteTeledeclarantForm {
         }
     }
 
-    public function doUpdateObject($values) {
-        parent::doUpdateObject($values);
-        $etbPrincipal = $this->getObject()->getSociete()->getEtablissementPrincipal();
+    public function save() {
+        parent::save();
+        $societe = SocieteClient::getInstance()->find($this->getDocument()->id_societe);
+
+        $etbPrincipal = $societe->getEtablissementPrincipal();
         if (($this->typeCompte == SocieteClient::TYPE_COURTIER) && ($this->getValue('carte_pro'))) {
             $etbPrincipal->carte_pro = $this->getValue('carte_pro');
             $etbPrincipal->save();
@@ -53,12 +56,15 @@ class CompteTeledeclarantCreationForm extends CompteTeledeclarantForm {
             $etbPrincipal->no_accises = strtoupper($this->getValue('num_accises'));
             $etbPrincipal->save();
         }
+
+        if (($this->typeCompte == SocieteClient::TYPE_OPERATEUR) && ($this->getValue('siret'))) {
+            $societe->siret = $this->getValue('siret');
+            $societe->save();
+        }
     }
 
     public function getTypeCompte() {
-        if (!$this->typeCompte) {
-            $this->typeCompte = $this->getObject()->type_societe;
-        }
+
         return $this->typeCompte;
     }
 
