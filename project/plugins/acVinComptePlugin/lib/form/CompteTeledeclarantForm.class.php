@@ -67,6 +67,7 @@ class CompteTeledeclarantForm extends acCouchdbForm {
             return;
         }
 
+        SocieteClient::getInstance()->clearSingleton();
         $societe = SocieteClient::getInstance()->find($this->getDocument()->id_societe);
 
         if ($societe->isTransaction()) {
