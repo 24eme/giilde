@@ -63,6 +63,10 @@ class CompteTeledeclarantForm extends acCouchdbForm {
 
         $email = $this->getValue('email');
 
+        if(!$email) {
+            return;
+        }
+
         $societe = SocieteClient::getInstance()->find($this->getDocument()->id_societe);
 
         if ($societe->isTransaction()) {

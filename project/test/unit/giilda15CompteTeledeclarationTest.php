@@ -1,7 +1,6 @@
 <?php
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
-require_once(dirname(__FILE__).'/../../plugins/acVinComptePlugin/modules/compte_teledeclarant/actions/actions.class.php');
 
 foreach (CompteTagsView::getInstance()->listByTags('test', 'test_teledeclaration') as $k => $v) {
     if (preg_match('/SOCIETE-([^ ]*)/', implode(' ', array_values($v->value)), $m)) {
@@ -12,7 +11,7 @@ foreach (CompteTagsView::getInstance()->listByTags('test', 'test_teledeclaration
 
 SocieteClient::getInstance()->clearSingleton();
 
-$t = new lime_test(47);
+$t = new lime_test(50);
 
 $t->comment("Création de la société");
 
@@ -188,5 +187,12 @@ $form->save();
 $t->ok($form->isValid(), "Le formulaire est valide");
 
 $compte = CompteClient::getInstance()->find($compte01->_id);
+$etablissement = EtablissementClient::getInstance()->find($etablissement->_id);
+$etablissement2 = EtablissementClient::getInstance()->find($etablissement2->_id);
+$etablissement3 = EtablissementClient::getInstance()->find($etablissement3->_id);
 
 $t->ok(($compte->mot_de_passe != $motDePasse), "Le mot de passe du compte a changé");
+
+$t->is($etablissement->teledeclaration_email, "courriel2@courriel2.fr", "L'email n'a pas bougé");
+$t->is($etablissement2->teledeclaration_email, "courriel2@courriel2.fr", "L'email n'a pas bougé");
+$t->is($etablissement3->teledeclaration_email, "courriel2@courriel2.fr", "L'email n'a pas bougé");
