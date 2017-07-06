@@ -131,16 +131,14 @@
     });
 
     var initChoiceProduits = function(){
-      $('.table_produit_body').each(function(){
-        $(this).find('td.pointer').each(function(){
-          $(this).click(function(){
-            var cible = $(this).attr('data-cible');
-            var checkbox = $(".checkbox_"+cible);
-              checkbox.prop('checked',!checkbox.is(':checked'));
-            
-          });
-        })
-      })
+        $('.table_produit_body td.pointer').click(function() {
+            var checkbox = $(this).find('input[type=checkbox]');
+            checkbox.prop('checked',!checkbox.is(':checked'));
+        });
+
+        $('.table_produit_body td.pointer input[type=checkbox]').click(function(e) {
+            e.stopPropagation();
+        });
     }
 
     var initAnnexes = function(){

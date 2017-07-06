@@ -56,7 +56,7 @@
         <script src="/js/teledeclaration.js"></script>
         <script src="/js/conditionnement.js"></script>
         <script src="/js/vrac.js"></script>
-        <script src="/js/drm.js?20170324"></script>
+        <script src="/js/drm.js?20170706"></script>
         <script src="/js/contacts.js"></script>
         <script src="/js/facture.js"></script>
         <script src="/js/stats.js?20170222"></script>

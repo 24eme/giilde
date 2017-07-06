@@ -33,8 +33,8 @@
                             ?>
                             <tr>
                                 <td class="text-left"><?php echo $produit->getLibelle("%format_libelle%"); ?></td>
-                                <td class="pointer text-center" data-cible="<?php echo 'produit_'.$produit->getHashForKey() ?>" ><?php echo $form['produit' . $produit->getHashForKey()]->render(array('class' => 'checkbox_produit_'.$produit->getHashForKey())); ?></td>
-                                <td class="pointer text-center" data-cible="<?php echo 'acquitte_'.$produit->getHashForKey() ?>"><?php echo $form['acquitte' . $produit->getHashForKey()]->render(array('class' => 'checkbox_acquitte_'.$produit->getHashForKey())); ?></td>
+                                <td class="pointer text-center"><?php echo $form['produit' . $produit->getHashForKey()]->render(array('class' => 'checkbox_produit_'.$produit->getHashForKey())); ?></td>
+                                <td class="pointer text-center"><?php echo $form['acquitte' . $produit->getHashForKey()]->render(array('class' => 'checkbox_acquitte_'.$produit->getHashForKey())); ?></td>
                             </tr>
                             <?php ?>
                         <?php endforeach; ?>
