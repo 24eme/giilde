@@ -22,9 +22,13 @@ if ($lastPeriode) {
 			}
 		}
 		if (isset($lastPeriode[$key])) {
-			$csv .= $tabKey[0].';'.$lastPeriode[$key][0].';'.$values[0].';'.getEvol($lastPeriode[$key][0], $values[0]).';'.$lastPeriode[$key][1].';'.$values[1].';'.getEvol($lastPeriode[$key][1], $values[1]).';'.$lastPeriode[$key][2].';'.$values[2].';'.getEvol($lastPeriode[$key][2], $values[2]).';'.$lastPeriode[$key][3].';'.$values[3].';'.getEvol($lastPeriode[$key][3], $values[3])."\n";
+			if ($lastPeriode[$key][3] || $values[3]) {
+				$csv .= $tabKey[0].';'.$lastPeriode[$key][0].';'.$values[0].';'.getEvol($lastPeriode[$key][0], $values[0]).';'.$lastPeriode[$key][1].';'.$values[1].';'.getEvol($lastPeriode[$key][1], $values[1]).';'.$lastPeriode[$key][2].';'.$values[2].';'.getEvol($lastPeriode[$key][2], $values[2]).';'.$lastPeriode[$key][3].';'.$values[3].';'.getEvol($lastPeriode[$key][3], $values[3])."\n";
+			}
 		} else {
-			$csv .= $tabKey[0].';'.null.';'.$values[0].';'.getEvol(0, $values[0]).';'.null.';'.$values[1].';'.getEvol(0, $values[1]).';'.null.';'.$values[2].';'.getEvol(0, $values[2]).';'.null.';'.$values[3].';'.getEvol(0, $values[3])."\n";
+			if ($values[3]) {
+				$csv .= $tabKey[0].';'.null.';'.$values[0].';'.getEvol(0, $values[0]).';'.null.';'.$values[1].';'.getEvol(0, $values[1]).';'.null.';'.$values[2].';'.getEvol(0, $values[2]).';'.null.';'.$values[3].';'.getEvol(0, $values[3])."\n";
+			}
 		}
 	}	
 } else {
@@ -39,7 +43,9 @@ if ($lastPeriode) {
 		$rose = (formatNumber($pays['rose']['agg_column']['value'],2) != 0)? formatNumber($pays['rose']['agg_column']['value'],2) : null;
 		$rouge = (formatNumber($pays['rouge']['agg_column']['value'],2) != 0)? formatNumber($pays['rouge']['agg_column']['value'],2) : null;
 		$total = (formatNumber($pays['total']['agg_column']['value'],2) != 0)? formatNumber($pays['total']['agg_column']['value'],2) : null;
-		$csv .= $paysLibelle.';'.$blanc.';'.$rose.';'.$rouge.';'.$total."\n";
+		if ($total) {
+			$csv .= $paysLibelle.';'.$blanc.';'.$rose.';'.$rouge.';'.$total."\n";
+		}
 	}
 	$csv .= 'TOTAL;'.$totalBlanc.';'.$totalRose.';'.$totalRouge.';'.$totalTotal."\n";
 }
