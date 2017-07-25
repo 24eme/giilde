@@ -74,7 +74,7 @@ function details2XmlDouane($detail) {
         foreach (array('stocks_debut', 'entrees', 'sorties', 'stocks_fin') as $type) {
 	  foreach ($detail->get($type) as $k => $v) {
 		if (($v || (($k == 'initial' || $k == 'final') && preg_match('/^stock/', $type))) && $confDetail->get($type)->exist($k) && $confDetail->get($type)->get($k)->douane_cat) {
-                        $preXML = storeMultiArray($preXML, split('/', $confDetail->get($type)->get($k)->douane_cat),  $v);
+                        $preXML = storeMultiArray($preXML, explode('/', $confDetail->get($type)->get($k)->douane_cat),  $v);
 			if (preg_match('/replacement/', $confDetail->get($type)->get($k)->douane_cat)) {
 				$preXML = storeMultiArray($preXML, split('/', 'entrees-periode/replacements/replacement-suspension/mois'),  $detail->getReplacementMonth());
 				$preXML = storeMultiArray($preXML, split('/', 'entrees-periode/replacements/replacement-suspension/annee'), $detail->getReplacementYear());

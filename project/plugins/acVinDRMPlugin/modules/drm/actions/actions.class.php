@@ -415,5 +415,43 @@ class drmActions extends drmGeneriqueActions {
 
         $this->redirect('drm_etablissement', $this->etablissementPrincipal);
     }
+    
+    public function executeConventionCielPdf(sfWebRequest $request) {
+
+		$conventionCielPdf = $this->generateConventionCielPdf($this->getRoute()->getEtablissement());
+		
+    	$response = $this->getResponse();
+    	$response->setHttpHeader('Content-Type', 'application/pdf');
+    	$response->setHttpHeader('Content-disposition', 'attachment; filename="' . basename($conventionCielPdf) . '"');
+    	$response->setHttpHeader('Content-Length', filesize($conventionCielPdf));
+    	$response->setHttpHeader('Pragma', '');
+    	$response->setHttpHeader('Cache-Control', 'public');
+    	$response->setHttpHeader('Expires', '0');
+    	 
+    	return $this->renderText(file_get_contents($conventionCielPdf));
+    }
+    
+    protected function generateConventionCielPdf($etablissement) {
+    	
+    	$compte = $etablissement->getSociete()->getMasterCompte();
+    	$path = sfConfig::get('sf_data_dir').'/convention';
+    	$filename = 'convention_ciel_'.$compte->identifiant.'.pdf';
+    	 
+    	if (!file_exists($path.'/pdf/'.$filename)) {
+    		$template = 'template_convention_'.sfConfig::get('app_teledeclaration_interpro').'.pdf';
+    		if (!file_exists($path.'/'.$template)) {
+    			throw new sfException("Le template de convention ciel ".$path."/".$template." n'existe pas.");
+    		}
+    		$fdf = tempnam(sys_get_temp_dir(), 'CONVENTIONCIEL');
+    		file_put_contents($fdf, utf8_decode($this->getPartial('common/fdfConvention', array('etablissement' => $etablissement))));
+    		exec('pdftk '.$path.'/'.$template.' fill_form '.$fdf.' output  /dev/stdout flatten |  gs -o '.$path.'/pdf/'.$filename.' -sDEVICE=pdfwrite -dEmbedAllFonts=true -sFONTPATH=\"/usr/share/fonts/truetype/freefont\" - ');
+    		unlink($fdf);
+    		if (!file_exists($path.'/pdf/'.$filename)) {
+    			throw new sfException("Le pdf ".$filename." n'a pas pu être généré.");
+    		}
+    	}
+    	
+    	return $path.'/pdf/'.$filename;
+    }
 
 }
