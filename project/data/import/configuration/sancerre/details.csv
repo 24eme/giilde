@@ -6,13 +6,12 @@ declaration;details;entrees;declassement;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-per
 declaration;details;entrees;retourembouteillage;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/mouvements-temporaires/relogement;0
 declaration;details;entrees;transfertcomptamatierecession;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/replacement-suspension;
 declaration;details;entrees;travailafacon;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/mouvements-temporaires/travail-a-facon;0
-declaration;details;entrees;transfertsvin;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/replacement-suspension;
-declaration;details;entrees;cooperative;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/volume-produit;
 declaration;details;entrees;retourmarchandisenontaxees;1;1;0;1;1;1;0;0;1;;SUSPENDU;entrees-periode/replacement-suspension;0
 declaration;details;entrees;retourmarchandisetaxees;1;1;0;1;1;1;0;0;1;;SUSPENDU;entrees-periode/replacement-suspension;1
 declaration;details;entrees;achatcrd;1;1;0;1;1;1;0;0;0;;ACQUITTE;entrees-periode/achats-reintegrations;0
 declaration;details;entrees;achatnoncrd;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/volume-produit;0
 declaration;details;entrees;regularisation;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/autres-entrees;0
+declaration;details;entrees;cooperative;1;1;0;1;1;1;0;0;0;;SUSPENDU;entrees-periode/replacement-suspension;
 declaration;details;sorties;creationvrac;1;1;1;-1;1;1;1;0;1;CREATIONVRAC;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/sorties-definitives;0
 declaration;details;sorties;creationvractirebouche;1;1;1;-1;1;1;1;0;1;CREATIONVRAC;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/sorties-definitives;0
 declaration;details;sorties;apportgroupement;1;1;0;-1;1;1;0;0;0;;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/autres-sorties;0
@@ -20,8 +19,6 @@ declaration;details;sorties;export;1;1;1;-1;1;1;0;0;1;EXPORT;SUSPENDU;sorties-pe
 declaration;details;sorties;vracsanscontratacquitte;1;1;0;-1;1;1;0;0;1;;ACQUITTE;sorties-periode/sorties-sans-paiement-droits;0
 declaration;details;sorties;ventefrancecrd;1;1;0;-1;1;1;0;0;1;;MIXTE;sorties-periode/sorties-avec-paiement-droits;1
 declaration;details;sorties;declassement;1;1;0;-1;1;1;0;0;0;;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation;0
-declaration;details;sorties;transfertsvin;1;1;0;-1;1;1;0;0;0;;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation;
-declaration;details;sorties;transfertsrecolte;1;1;0;-1;1;0;0;0;0;;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation;0
 declaration;details;sorties;embouteillage;1;1;0;-1;1;0;0;0;0;;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/mouvements-internes/embouteillage;0
 declaration;details;sorties;transfertcomptamatiere;1;1;0;-1;1;1;0;0;0;;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation;0
 declaration;details;sorties;travailafacon;1;1;0;-1;1;1;0;0;0;;SUSPENDU;sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/travail-a-facon;0

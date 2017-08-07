@@ -10,11 +10,12 @@ class DRMCrdsForm extends acCouchdbObjectForm {
 
     private $drm = null;
     private $crds = null;
+    private $isUsurpationMode = false;
 
     public function __construct(acCouchdbJson $object, $options = array(), $CSRFSecret = null) {
         $this->drm = $object;
         $this->crds = $this->drm->getAllCrdsByRegimeAndByGenre();
-
+        $this->isUsurpationMode = isset($options["isUsurpationMode"])? $options["isUsurpationMode"] : false;
         parent::__construct($this->drm, $options, $CSRFSecret);
     }
 
@@ -24,10 +25,10 @@ class DRMCrdsForm extends acCouchdbObjectForm {
             foreach ($crdAllGenre as $genre => $crds) {
                 foreach ($crds as $key => $crd) {
                     $keyWidgetsSuffixe = '_' . $regime . '_' . $key;
-                    if ($crd->stock_debut) 
+                    if ($crd->stock_debut && !$this->isUsurpationMode)
                         $this->setWidget('stock_debut' . $keyWidgetsSuffixe, new sfWidgetFormInputHidden());
                     else
-                        $this->setWidget('stock_debut' . $keyWidgetsSuffixe, new bsWidgetFormInputInteger());                        
+                        $this->setWidget('stock_debut' . $keyWidgetsSuffixe, new bsWidgetFormInputInteger());
                     $this->setWidget('entrees_achats' . $keyWidgetsSuffixe, new bsWidgetFormInputInteger());
                     $this->setWidget('entrees_retours' . $keyWidgetsSuffixe, new bsWidgetFormInputInteger());
                     $this->setWidget('entrees_excedents' . $keyWidgetsSuffixe, new bsWidgetFormInputInteger());

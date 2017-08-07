@@ -14,9 +14,14 @@
 class drm_validationActions extends drmGeneriqueActions {
 
     public function executeValidation(sfWebRequest $request) {
+
         set_time_limit(180);
         $this->drm = $this->getRoute()->getDRM();
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
+        if($this->drm->isValidee()){
+          $this->redirect('drm_visualisation', array('identifiant' => $this->drm->identifiant,
+      	            'periode_version' => $this->drm->getPeriodeAndVersion()));
+        }
         $this->initSocieteAndEtablissementPrincipal();
         $this->mouvements = $this->drm->getMouvementsCalculeByIdentifiant($this->drm->identifiant);
         $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);

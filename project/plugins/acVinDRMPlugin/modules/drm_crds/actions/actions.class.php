@@ -6,7 +6,8 @@ class drm_crdsActions extends drmGeneriqueActions {
         $this->initSocieteAndEtablissementPrincipal();
         $this->drm = $this->getRoute()->getDRM();
         $this->drm->crdsInitDefault();
-        $this->crdsForms = new DRMCrdsForm($this->drm);
+        $this->isUsurpationMode = $this->isUsurpationMode();
+        $this->crdsForms = new DRMCrdsForm($this->drm,array("isUsurpationMode" => $this->isUsurpationMode));
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         $this->initDeleteForm();
         $this->showPopupRegimeCrd = $request->getParameter('popupCRD') || !$this->drm->getEtablissement()->hasRegimeCrd();

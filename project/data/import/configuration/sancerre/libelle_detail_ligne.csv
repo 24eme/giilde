@@ -3,31 +3,28 @@ details;stocks_debut;instance;En instance de revendication;Vin en instance de re
 details;entrees;recolte;01. Récolte;Récolte;Récolte
 details;entrees;declassement;02. Issu d'un déclassement;Déclassement;Déclassement
 details;entrees;retourembouteillage;03. Retour conditionnmt;Retour de conditionnement;Retour d'embouteillage
-details;entrees;transfertcomptamatierecession;04. Retour logement ext.;Retour de logement externe;Retour de logement externe
+details;entrees;transfertcomptamatierecession;04. Transfert de produits;Transfert de récoltes ou de vins entre les chais d'une même exploitation;Transfert de récoltes ou de vins entre les chais d'une même exploitation
 details;entrees;travailafacon;05. Retour Travail à façon;Retour de travail à façon;Retour de travail à façon, distillation à façon
-details;entrees;transfertsvin;06. Transfert de vin;Transfert de vin;Transfert de vin – Retour de vin d’un autre chai de l’exploitation
-details;entrees;cooperative;07. Vin coopérateur;Entrée vin coopérateur;Entrée vin coopérateur
-details;entrees;retourmarchandisetaxees;08. Retour de vin CRD acquittées;Retour de vin CRD acquittées;Retour de vin CRD acquittées
-details;entrees;retourmarchandisenontaxees;09. Retour de vin en suspension;Retour de vin en suspension;Retour de vin en suspension
-details;entrees;achatcrd;10. Achat CRD acquittées;Achat CRD acquittées;Achat CRD acquittées
-details;entrees;achatnoncrd;11. Achat suspension;Achat suspension;Achat suspension
-details;entrees;regularisation;12. Excédent constaté;Régularisation;Régularisation
+details;entrees;retourmarchandisetaxees;06. Retour vin CRD acquittées;Retour de vin CRD acquittées;Retour de vin CRD acquittées
+details;entrees;retourmarchandisenontaxees;07. Retour vin en suspension;Retour de vin en suspension;Retour de vin en suspension
+details;entrees;achatcrd;08. Achat CRD acquittées;Achat CRD acquittées;Achat CRD acquittées
+details;entrees;achatnoncrd;09. Achat suspension;Achat suspension;Achat suspension
+details;entrees;regularisation;10. Excédent constaté;Régularisation;Régularisation
+details;entrees;cooperative;11. Coopérative;Coopérative;Coopérative
 details;sorties;export;01. Export;Export;Export
-details;sorties;creationvrac;02.Vrac négoce;Vrac négoce;Vrac négoce
+details;sorties;creationvrac;02. Vrac négoce;Vrac négoce;Vrac négoce
 details;sorties;creationvractirebouche;03. Tiré bouché négoce;Tiré bouché négoce;Tiré bouché négoce
 details;sorties;apportgroupement;04. Livraison coopérative;Livraison coopérative;Livraison coopérative
 details;sorties;vracsanscontratacquitte;05. Petit vrac France;Petit vrac France (DSA facture);Petit vrac France (DSA facture)
 details;sorties;ventefrancecrd;06. Vente sous CRD;Vente sous CRD;Vente sous CRD
-details;sorties;transfertcomptamatiere;07. Logement externe;Transferts internes d'un chai à un autre;Transferts internes d'un chai à un autre
+details;sorties;transfertcomptamatiere;07. Transfert de produits;Transfert de récoltes ou de vins entre les chais d'une même exploitation;Transfert de récoltes ou de vins entre les chais d'une même exploitation
 details;sorties;declassement;08. Déclassement;Déclassement;Déclassement
 details;sorties;travailafacon;09. Travail à façon;Sortie de travail à façon, distillation à façon;Sortie d'embouteillage, relogement, travail à façon, distillation à façon
-details;sorties;transfertsvin;10. Transfert de vin;Transfert de vin;Transfert de vin - Déplacement de vin vers un autre chai de l’exploitation
-details;sorties;transfertsrecolte;11. Transfert de produit;Transfert de récolte;Transfert de récolte
-details;sorties;embouteillage;12. Conditionnement;Conditionnement;Sortie de vin pour mise en bouteille
-details;sorties;consommationfamilialedegustation;13. Conso. familiale/Dégustation;Consommation familiale / Dégustation;Consommation familiale / Dégustation
-details;sorties;destructionperte;14. Destruction/perte;Destruction et pertes;Destruction et pertes
-details;sorties;manquant;15. Manquants;Manquants;Manquants
-details;sorties;cession;16. Cession d'exploitation;Cession d'activité;Cession d'activité
+details;sorties;embouteillage;10. Conditionnement;Conditionnement;Sortie de vin pour mise en bouteille
+details;sorties;consommationfamilialedegustation;11. Conso. fam./Dégustation;Consommation familiale / Dégustation;Consommation familiale / Dégustation
+details;sorties;destructionperte;12. Destruction/perte;Destruction et pertes;Destruction et pertes
+details;sorties;manquant;13. Manquants;Manquants;Manquants
+details;sorties;cession;14. Cession d'exploitation;Cessation d'activité;Cessation d'activité
 details;stocks_fin;final;Final;Final;Stock final
 details;stocks_fin;instance;En instance de revendication;En instance de revendication;En instance de revendication
 detailsACQUITTE;stocks_debut;initial;Initial;Stock début de mois;A remplir uniquement sur la 1ère DRM de campagne. En août, indiquer le stock réel constaté par inventaire et identique à la Déclaration de Stocks. Pour tous les mois suivants de la campagne, le stock est automatiquement repris du mois précédent.

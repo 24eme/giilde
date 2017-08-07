@@ -106,8 +106,7 @@ class DRMRouting {
 
         $r->prependRoute('drm_validation', new DRMRoute('/drm/:identifiant/edition/:periode_version/validation', array('module' => 'drm_validation',
             'action' => 'validation'), array('sf_method' => array('get', 'post')), array('model' => 'DRM',
-            'type' => 'object',
-            'control' => array('edition'))));
+            'type' => 'object')));
 
 
         $r->prependRoute('drm_redirect_to_visualisation', new sfRoute('/drm/redirect/:identifiant_drm', array('module' => 'drm', 'action' => 'redirect'), array('sf_method' => array('get'))
@@ -283,7 +282,7 @@ class DRMRouting {
         $r->prependRoute('drm_xml', new DRMRoute('/drm/:identifiant/xml/:periode_version', array('module' => 'drm_xml',
             'action' => 'print'), array('sf_method' => array('get', 'post')),
             array('model' => 'DRM', 'type' => 'object')));
-        
+
         $r->prependRoute('drm_convention', new EtablissementRoute('/drm/:identifiant/convention-ciel', array('module' => 'drm',
         		'action' => 'conventionCielPdf'), array('sf_method' => array('get', 'post')), array('model' => 'Etablissement',
         				'type' => 'object')
