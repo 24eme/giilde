@@ -125,6 +125,9 @@ class StatistiqueStatsFilterForm extends BaseForm
     	$categories = array();
     	$libelles = self::getFamilles();
     	$items = (isset($values['doc.declarant.famille']))? $values['doc.declarant.famille'] : array();
+    	if (!is_array($items)) {
+    		$items = array($items);
+    	}
     	foreach ($items as $item) {
     		$categories[] = $libelles[$item];
     	}
