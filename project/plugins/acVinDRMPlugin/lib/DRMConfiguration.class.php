@@ -86,5 +86,9 @@ class DRMConfiguration {
         return $this->configuration['aggregate_edi'];
     }
 
+    public function hasDeclassementIgp() {
+
+        return $this->configuration['declassement_igp'];
+    }
 
 }

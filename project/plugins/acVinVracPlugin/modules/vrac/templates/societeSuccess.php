@@ -22,10 +22,10 @@ use_helper('PointsAides');
         <div class="row">
             <?php
             $panel_size = ' col-xs-4 ';
-            if ($societe->isViticulteur() || $societe->isCourtier()):
+            if (!$societe->isNegociant()):
                 $panel_size = ' col-xs-6 ';
               endif;
-            if (!$societe->isViticulteur()):
+            if ($societe->isNegociant() || $societe->isCourtier()):
                 ?>
                 <div class="<?php echo $panel_size; ?>" >
                 <div class="panel panel-default">
@@ -42,7 +42,7 @@ use_helper('PointsAides');
                 </div>
                 </div>
             <?php endif; ?>
-            <?php if (!$societe->isCourtier()): ?>
+            <?php if ($societe->isNegociant() || $societe->isViticulteur()): ?>
             <div class="<?php echo $panel_size; ?>" >
                 <div class="panel panel-default">
                     <div class="panel-heading  <?php echo ($contratsSocietesWithInfos->infos->a_signer) ? "actif" : ""; ?>">A Signer<div class="pull-right"><?php echo getPointAideHtml('vrac','menu_list_asigner'); ?></div></div>
@@ -79,9 +79,15 @@ use_helper('PointsAides');
         <a class="btn btn-default" href="<?php echo url_for('vrac_history', array('identifiant' => $etablissementPrincipal->identifiant, 'campagne' => ConfigurationClient::getInstance()->getCurrentCampagne(), 'etablissement' => 'tous')); ?>">
             Voir tout l'historique
         </a>
-        <?php if ($etablissementPrincipal->isCourtier() || $etablissementPrincipal->isNegociant() || $etablissementPrincipal->isRepresentant()): ?>
+        <?php if ($societe->isCourtier() || $societe->isNegociant() || $societe->isRepresentant()):
+          if ($societe->isNegociant()) {
+            $etablissementCreateur = $societe->getNegociant();
+          }else{
+            $etablissementCreateur = $etablissementPrincipal;
+          }
+          ?>
             <div class="pull-right">
-              <a class="btn btn-warning " href="<?php echo url_for('vrac_nouveau', array('etablissement' => $etablissementPrincipal->identifiant)); ?>">
+              <a class="btn btn-warning " href="<?php echo url_for('vrac_nouveau', array('choix-etablissement' => $etablissementCreateur->identifiant)); ?>">
                 Saisir un nouveau contrat
               </a>
               <?php echo getPointAideHtml('vrac','menu_acces_nouveau'); ?>

@@ -279,26 +279,30 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
         if ($this->type_societe != SocieteClient::TYPE_OPERATEUR) {
             return false;
         }
-
+        return $this->getViticulteur();
+    }
+    public function getViticulteur() {
         foreach ($this->getEtablissementsObj() as $id => $e) {
             if ($e->etablissement->famille == EtablissementFamilles::FAMILLE_PRODUCTEUR) {
-                return true;
+                return $e->etablissement;
             }
         }
-        return false;
+        return null;
     }
 
     public function isNegociant() {
         if ($this->type_societe != SocieteClient::TYPE_OPERATEUR) {
             return false;
         }
-
+        return ($this->getNegociant() != null);
+    }
+    public function getNegociant() {
         foreach ($this->getEtablissementsObj() as $id => $e) {
             if ($e->etablissement->famille == EtablissementFamilles::FAMILLE_NEGOCIANT) {
-                return true;
+                return $e->etablissement;
             }
         }
-        return false;
+        return null;
     }
 
     public function isActif() {

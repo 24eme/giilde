@@ -13,3 +13,4 @@ all:
       sans_contrat_option: false
       delai_ouverture_teledeclaration: "-1 month"
       vrac_multi_produit: false
+      declassement_igp: false

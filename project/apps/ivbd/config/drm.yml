@@ -12,3 +12,4 @@ all:
       vrac_multi_produit: false
       crd_only_suspendus: false
       aggregate_edi: [ ]
+      declassement_igp: true

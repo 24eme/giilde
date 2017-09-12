@@ -56,3 +56,11 @@ Ce fichier reprend l'ensemble des spécificités décrites ci-dessus.
 | pac-informatique      | Oui |  |  |  |  |
 | solumatic             | Oui |  |  |  |  |
 | vinosoft              | Oui |  |  |  |  |
+
+## Création de DRM sur le portail du CIVA
+
+La création des DRM sur le potail du CIVA peut se faire de différentes façons.
+
+Le document d'aide [Création des DRM](creation_drm.md) détaille les différentes règles mise en place pour la création des DRM.
+
+Ces stratégies de reprise de données et pré-remplissage des différents mouvements sont susceptibles d'évoluer rapidement c'est pourquoi cette documentation est principalement diffuser à des fins de communication de la part du CIVA.  

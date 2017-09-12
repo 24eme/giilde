@@ -88,7 +88,7 @@
 <?php if ($drm->exist('transmission_douane') && $drm->transmission_douane): ?>
 <div class="row">
   <div class="col-xs-12">
-    <h3>Transmission sur le portail proDou@ane</h3>
+    <h3>Transmission sur le portail proDou@ane <small>(<?php echo link_to('xml', 'drm_xml', $drm); ?>)</small></h3>
     <?php if ($drm->transmission_douane->success) : ?>
       <p>La transmission a été réalisée avec succès le <?php echo $drm->getTransmissionDate(); ?> avec l'accusé reception numéro <?php echo $drm->transmission_douane->id_declaration ?>.</p>
     <?php else: ?>
@@ -117,6 +117,8 @@
     <?php if(isset($compte) && $compte && $compte->hasDroit("teledeclaration_douane") && $isTeledeclarationMode): ?>
       <?php if (!$drm->transmission_douane->success) : ?>
         <a style="margin-left: 5px;" href="<?php echo url_for('drm_transmission', $drm); ?>" class="btn btn-success" ><span>Transmettre la Drm sur CIEL</span></a>
+      <?php else: ?>
+        <a style="margin-left: 5px;" href="https://pro.douane.gouv.fr/" class="btn btn-success" ><span>Se rendre sur Pro Dou@ne</span></a>
       <?php endif; ?>
     <?php endif; ?>
   </div>
