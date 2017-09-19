@@ -29,7 +29,9 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('vigilance', 'moyen_paiement_absent', "Le moyen de paiement aux douanes n'a pas été renseigné");
         $this->addControle('vigilance', 'frequence_paiement_absent', "La fréquence de paiement aux douanes n'a pas été renseigné");
 
-        $this->addControle('vigilance', 'observations', "Les observations n'ont pas été renseignées");
+        $this->addControle('erreur', 'observations', "Les observations n'ont pas été renseignées");
+        $this->addControle('erreur', 'replacement_date', "Pour tout replacement, la date de sortie du produit est nécessaire. Vous ne l'avez pas saisi");
+
     }
 
     public function controle() {
@@ -50,25 +52,35 @@ class DRMValidation extends DocumentValidation {
 
             $entrees_excedents = ($detail->entrees->exist('excedents'))? $detail->entrees->excedents : 0.0;
             $entrees_retourmarchandisetaxees = ($detail->entrees->exist('retourmarchandisetaxees'))? $detail->entrees->retourmarchandisetaxees : 0.0;
+            $entrees_retourmarchandiseacquitte = ($detail->entrees->exist('retourmarchandiseacquitte'))? $detail->entrees->retourmarchandiseacquitte : 0.0;
             $entrees_retourmarchandisesanscvo = ($detail->entrees->exist('retourmarchandisesanscvo'))? $detail->entrees->retourmarchandisesanscvo : 0.0;
             $sorties_destructionperte = ($detail->sorties->exist('destructionperte'))? $detail->sorties->destructionperte : 0.0;
 
-
             $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $sorties_destructionperte;
-            if($total_observations_obligatoires && (!$detail->exist('observations') || !$detail->observations))
-            {
-              $produitLibelle = " pour le produit ".$detail->getLibelle();
-              if($entrees_excedents){
-                $this->addPoint('vigilance', 'observations', "Entrée excédents (".sprintf("%.2f",$entrees_excedents)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+
+            $produitLibelle = " pour le produit ".$detail->getLibelle();
+
+            if ($this->isTeledeclarationDrm) {
+              if($total_observations_obligatoires && (!$detail->exist('observations') || !$detail->observations))
+              {
+                if($entrees_excedents){
+                  $this->addPoint('erreur', 'observations', "Entrée excédents (".sprintf("%.2f",$entrees_excedents)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
+                if($entrees_retourmarchandisetaxees){
+                  $this->addPoint('erreur', 'observations', "Entrée retour de marchandises taxées (".sprintf("%.2f",$entrees_retourmarchandisetaxees)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
+                if ($entrees_retourmarchandiseacquitte) {
+                  $this->addPoint('erreur', 'observations', "Entrée retour de marchandises acquittées (".sprintf("%.2f",$entrees_retourmarchandiseacquitte)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
+                if($entrees_retourmarchandisesanscvo){
+                  $this->addPoint('erreur', 'observations', "Entrée retour de marchandises sans CVO (".sprintf("%.2f",$entrees_retourmarchandisesanscvo)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
+                if($sorties_destructionperte){
+                  $this->addPoint('erreur', 'observations', "Sortie manquant (".sprintf("%.2f",$sorties_destructionperte)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
               }
-              if($entrees_retourmarchandisetaxees){
-                $this->addPoint('vigilance', 'observations', "Entrée retour de marchandises taxées (".sprintf("%.2f",$entrees_retourmarchandisetaxees)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
-              }
-              if($entrees_retourmarchandisesanscvo){
-                $this->addPoint('vigilance', 'observations', "Entrée retour de marchandises sans CVO (".sprintf("%.2f",$entrees_retourmarchandisesanscvo)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
-              }
-              if($sorties_destructionperte){
-                $this->addPoint('vigilance', 'observations', "Sortie manquant (".sprintf("%.2f",$sorties_destructionperte)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+              if(($entrees_retourmarchandisetaxees + $entrees_retourmarchandiseacquitte + $entrees_retourmarchandisesanscvo) && (!$detail->exist('replacement_date') || !$detail->replacement_date)) {
+                $this->addPoint('erreur', 'replacement_date', $produitLibelle, $this->generateUrl('drm_annexes', $this->document));
               }
             }
 

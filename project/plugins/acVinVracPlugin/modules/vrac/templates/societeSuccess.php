@@ -79,7 +79,7 @@ use_helper('PointsAides');
         <a class="btn btn-default" href="<?php echo url_for('vrac_history', array('identifiant' => $etablissementPrincipal->identifiant, 'campagne' => ConfigurationClient::getInstance()->getCurrentCampagne(), 'etablissement' => 'tous')); ?>">
             Voir tout l'historique
         </a>
-        <?php if ($societe->isCourtier() || $societe->isNegociant() || $societe->isRepresentant()):
+        <?php if ($societe->isCourtier() || $societe->isNegociant()):
           if ($societe->isNegociant()) {
             $etablissementCreateur = $societe->getNegociant();
           }else{

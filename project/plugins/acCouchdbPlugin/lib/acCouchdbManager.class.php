@@ -16,8 +16,11 @@ class acCouchdbManager {
     public $_custom_accessors = array();
     public $_custom_mutators = array();
 
+    public static $keysFormat = array();
+    public static $hashObjects = array();
+
     protected $_schema = null;
-    
+
     private function __construct()
     {
     }

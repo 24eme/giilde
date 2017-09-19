@@ -20,26 +20,10 @@ class acCouchdbJsonDefinitionField {
     const TYPE_ARRAY_COLLECTION = 'array_collection';
 
     public function __construct($name, $type = self::TYPE_STRING, $required = true) {
-        $this->key = sfInflector::underscore($name);
+        $this->key = acCouchdbJsonFields::formatFieldKey($name);
         $this->name = $name;
         $this->type = $type;
-        
-        /*if ($type == self::TYPE_STRING) {
-            $this->class = 'acCouchdbJsonFieldString';
-        } elseif($type == self::TYPE_INTEGER ) {
-            $this->class = 'acCouchdbJsonFieldInteger';
-        } elseif($type == self::TYPE_FLOAT ) {
-            $this->class = 'acCouchdbJsonFieldFloat';
-        } elseif ($type == self::TYPE_COLLECTION) {
-            $this->class = 'acCouchdbJsonFieldCollection';
-        } elseif ($type == self::TYPE_ARRAY_COLLECTION) {
-            $this->class = 'acCouchdbJsonFieldArrayCollection';
-        } elseif ($type == self::TYPE_ANYONE) {
-            $this->class = 'acCouchdbJsonFieldAnyone';
-        } else {
-            throw new acCouchdbException("Type doesn't exit");
-        }*/
-        
+
         $this->is_required = $required;
         return null;
     }

@@ -91,4 +91,9 @@ class DRMConfiguration {
         return $this->configuration['declassement_igp'];
     }
 
+    public function isRepriseStocksChangementCampagne() {
+
+        return $this->configuration['reprise_stocks_changement_campagne'];
+    }
+
 }

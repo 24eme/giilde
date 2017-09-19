@@ -14,3 +14,4 @@ all:
       delai_ouverture_teledeclaration: "-1 month"
       vrac_multi_produit: false
       declassement_igp: false
+      reprise_stocks_changement_campagne: false

@@ -22,11 +22,17 @@ class ConfigurationDroits extends BaseConfigurationDroits {
 	  $value->code = $code;
 	  $value->libelle = $libelle;
 	}
-	
+
 	public function getCurrentDroit($date_str, $include_chapeau = true) {
         $cache_key = ($include_chapeau) ? '1'.$date_str : '0'.$date_str;
 		if(array_key_exists($cache_key, $this->currentDroits) && $this->currentDroits[$cache_key]) {
+
 			return $this->currentDroits[$cache_key];
+		}
+
+		if(array_key_exists($cache_key, $this->currentDroits) && $this->currentDroits[$cache_key] === false) {
+
+			throw new sfException('Aucun droit spécifié pour '.$this->getHash());
 		}
 
 	  	$currentDroit = null;
@@ -54,7 +60,8 @@ class ConfigurationDroits extends BaseConfigurationDroits {
 			$this->currentDroits[$cache_key] = $droit;
 			return $this->currentDroits[$cache_key];
 		} catch (sfException $e) {
-				throw new sfException('Aucun droit spécifié pour '.$this->getHash());
+			$this->currentDroits[$cache_key] = false;
+			throw new sfException('Aucun droit spécifié pour '.$this->getHash());
 		}
 	}
 

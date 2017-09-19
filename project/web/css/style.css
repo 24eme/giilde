@@ -86,3 +86,13 @@ panel.disabled {
 span.disabled, a.disabled {
     cursor: not-allowed !important;
 }
+
+.vrac_nom {
+  display: inline-block;
+  max-width: 250px;
+  height: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 32px;
+}

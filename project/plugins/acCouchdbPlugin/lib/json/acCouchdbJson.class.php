@@ -23,25 +23,26 @@ class acCouchdbJson extends acCouchdbJsonFields implements IteratorAggregate, Ar
     /**
      *
      * @param string $key_or_hash
-     * @return mixed 
+     * @return mixed
      */
     public function get($key_or_hash) {
-        $obj_hash = new acCouchdbHash($key_or_hash);
-        if ($obj_hash->isAlone()) {
-            if (!$this->isArray() && $this->hasAccessor($obj_hash->getFirst())) {
-                $method = $this->getAccessor($obj_hash->getFirst());
+        $objHash = $this->getHashObject($key_or_hash);
+
+        if ($objHash["w"] === null) {
+            if (!$this->isArray() && $method = $this->getAccessor($objHash["f"])) {
+
                 return $this->$method();
             }
-            return $this->_get($obj_hash->getFirst());
+            return $this->_get($objHash["f"]);
         } else {
-            return $this->get($obj_hash->getFirst())->get($obj_hash->getAllWithoutFirst());
+            return $this->get($objHash["f"])->get($objHash["w"]);
         }
     }
 
     /**
      *
      * @param string $key
-     * @return mixed 
+     * @return mixed
      */
     public function __get($key) {
         return $this->get($key);
@@ -50,33 +51,39 @@ class acCouchdbJson extends acCouchdbJsonFields implements IteratorAggregate, Ar
     /**
      *
      * @param string $key_or_hash
-     * @return mixed 
+     * @return mixed
      */
     public function getOrAdd($key_or_hash) {
-        $obj_hash = new acCouchdbHash($key_or_hash);
-        if ($obj_hash->isAlone()) {
-            return $this->add($obj_hash->getFirst());
+        $objHash = $this->getHashObject($key_or_hash);
+
+        if ($objHash["w"] === null) {
+
+            return $this->add($objHash["f"]);
         }
-        return $this->add($obj_hash->getFirst())->getOrAdd($obj_hash->getAllWithoutFirst());
+
+        return $this->add($objHash["f"])->getOrAdd($objHash["w"]);
     }
 
     public function set($key_or_hash, $value) {
-        $obj_hash = new acCouchdbHash($key_or_hash);
-        if ($obj_hash->isAlone()) {
-            if (!$this->isArray() && $this->hasMutator($obj_hash->getFirst())) {
-                $method = $this->getMutator($obj_hash->getFirst());
+        $objHash = $this->getHashObject($key_or_hash);
+
+        if ($objHash["w"] === null) {
+            if (!$this->isArray() && $method = $this->getMutator($objHash["f"])) {
+
                 return $this->$method($value);
             }
-            return $this->_set($obj_hash->getFirst(), $value);
+
+            return $this->_set($objHash["f"], $value);
         } else {
-            return $this->get($obj_hash->getFirst())->set($obj_hash->getAllWithoutFirst(), $value);
+
+            return $this->get($objHash["f"])->set($objHash["w"], $value);
         }
     }
 
     public function __set($key, $value) {
         return $this->set($key, $value);
     }
-    
+
     public function move($key_or_hash, $new_key_or_hash) {
         $object = $this->get($key_or_hash);
         if ($key_or_hash != $new_key_or_hash) {
@@ -190,10 +197,6 @@ class acCouchdbJson extends acCouchdbJsonFields implements IteratorAggregate, Ar
         $array_fields = array();
         foreach ($this as $key => $field) {
             if ($deep_array && $this->fieldIsCollection($key) && !$fetch_object) {
-                if(is_array($field)){ 
-                    
-    var_dump($field); exit;
-                }
                 $array_fields[$key] = $field->toArray($deep_array, $fetch_object);
             } elseif ($deep_array && $this->fieldIsCollection($key) && $fetch_object) {
                 $array_fields[$key] = $this->get($key);
@@ -257,7 +260,20 @@ class acCouchdbJson extends acCouchdbJsonFields implements IteratorAggregate, Ar
     			break;
     		}
 		}
-		return $previous;  
+		return $previous;
+    }
+
+    protected function getHashObject($key_or_hash) {
+        if(!isset(acCouchdbManager::$hashObjects[$key_or_hash])) {
+            $hashObject = acCouchdbHash::getResultArray($key_or_hash);
+            if($hashObject["w"] !== null) {
+                acCouchdbManager::$hashObjects[$key_or_hash] = serialize($hashObject);
+            }
+        } else {
+            $hashObject = unserialize(acCouchdbManager::$hashObjects[$key_or_hash]);
+        }
+
+        return $hashObject;
     }
 
     protected function loadAllData() {

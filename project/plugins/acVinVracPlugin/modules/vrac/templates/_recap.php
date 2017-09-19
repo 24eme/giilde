@@ -25,10 +25,10 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
             <div class="panel-heading"><strong>Vendeur</strong> <?php if ($vrac->responsable == 'vendeur'): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right" autofocus="autofocus">Modifier</a><?php endif; ?></div>
             <div class="text-center panel-body">
             	<?php if (!$isTeledeclarationMode): ?><a href="<?php echo url_for('vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $vrac->vendeur_identifiant)) ?>"><?php endif; ?>
-                <strong><?php echo $vrac->vendeur->nom; ?></strong>
+                <strong class="vrac_nom"><?php echo $vrac->vendeur->nom; ?></strong>
 				<?php if (!$isTeledeclarationMode): ?></a><?php endif; ?>
                 <small class="text-muted"><?php echo $vrac->vendeur_identifiant ?></small>
-				<br/>
+				        <br/>
                 <small><?php echo $vrac->vendeur->adresse; ?> -
                 <?php echo $vrac->vendeur->code_postal; ?>
                 <?php echo $vrac->vendeur->commune; ?></small><br/>
@@ -36,6 +36,15 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
                 <br />
                 <?php if ($vrac->representant_identifiant != $vrac->vendeur_identifiant): ?>Representé par <a href="<?php echo url_for('vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $vrac->representant_identifiant)) ?>"><?php echo ($vrac->getRepresentantObject())? $vrac->getRepresentantObject()->getNom() : "Représentant sans nom"; ?></a><br /><?php endif; ?>
                 <?php if ($vrac->logement): ?>Logement du vin : <?php echo $vrac->logement ?><br/><?php endif; ?>
+                <br/>
+                <?php if ($vrac->teledeclare) : ?>
+                <small class="text-muted">
+                <?php if ($vrac->valide->date_signature_vendeur) {
+                  echo "Signé le : ".format_date($vrac->valide->date_signature_vendeur);
+                }else{
+                    echo "En attente de signature";
+                }
+                ?></small><?php endif; ?>
             </div>
         </div>
     </div>
@@ -46,7 +55,7 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
                 <div class="panel-heading"><strong>Mandataire / Courtier</strong> <?php if ($vrac->responsable == 'mandataire'): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right">Modifier</a><?php endif; ?></div>
                 <div class="text-center panel-body">
                     <?php if (!$isTeledeclarationMode): ?><a href="<?php echo url_for('vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $vrac->mandataire_identifiant)) ?>"><?php endif; ?>
-                	<strong><?php echo $vrac->mandataire->nom; ?></strong>
+                	<strong class="vrac_nom"><?php echo $vrac->mandataire->nom; ?></strong>
 					<?php if (!$isTeledeclarationMode): ?></a><?php endif; ?>
                 <small class="text-muted"><?php echo $vrac->mandataire_identifiant ?></small>
 					<br />
@@ -57,6 +66,16 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
                     <br />
                     <?php if ($vrac->representant_identifiant != $vrac->vendeur_identifiant): ?><br /><?php endif; ?>
                     <?php if ($vrac->logement): ?><br/><?php endif; ?>
+
+                    <br/>
+                    <?php if ($vrac->teledeclare) : ?>
+                    <small class="text-muted">
+                    <?php if ($vrac->valide->date_signature_courtier) {
+                      echo "Signé le : ".format_date($vrac->valide->date_signature_courtier);
+                    }else{
+                        echo "En attente de signature";
+                    }
+                    ?></small><?php endif; ?>
                 </div>
             </div>
         </div>
@@ -67,7 +86,7 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
             <div class="panel-heading"><strong>Acheteur</strong> <?php if ($vrac->responsable == 'acheteur'): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right">Modifier</a><?php endif; ?></div>
             <div class="text-center panel-body">
                     <?php if (!$isTeledeclarationMode): ?><a href="<?php echo url_for('vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $vrac->acheteur_identifiant)) ?>"><?php endif; ?>
-                	<strong><?php echo $vrac->acheteur->nom; ?></strong>
+                	<strong class="vrac_nom"><?php echo $vrac->acheteur->nom; ?></strong>
 					<?php if (!$isTeledeclarationMode): ?></a><?php endif; ?>
                 <small class="text-muted"><?php echo $vrac->acheteur_identifiant ?></small>
 					<br />
@@ -79,6 +98,16 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
                 <br />
                 <?php if ($vrac->representant_identifiant != $vrac->vendeur_identifiant): ?><br /><?php endif; ?>
                 <?php if ($vrac->logement): ?><br/><?php endif; ?>
+
+                <br/>
+                <?php if ($vrac->teledeclare) : ?>
+                <small class="text-muted">
+                <?php if ($vrac->valide->date_signature_acheteur) {
+                  echo "Signé le : ".format_date($vrac->valide->date_signature_acheteur);
+                }else{
+                    echo "En attente de signature";
+                }
+                ?></small><?php endif; ?>
             </div>
         </div>
     </div>

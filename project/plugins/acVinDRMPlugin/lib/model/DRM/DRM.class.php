@@ -233,7 +233,13 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 continue;
             }
 
-            $this->addProduit($produitConfig->getHash(), DRM::DETAILS_KEY_SUSPENDU);
+            $p = $this->addProduit($produitConfig->getHash(), DRM::DETAILS_KEY_SUSPENDU);
+
+            if(DRMConfiguration::getInstance()->isRepriseStocksChangementCampagne() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
+                $p->stocks_debut->initial = $produit->total;
+                $p->stocks_debut->revendique = $produit->total_revendique;
+            }
+
         }
 
         foreach($drm->getAllCrds() as $regime => $crds) {
