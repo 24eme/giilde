@@ -28,10 +28,10 @@ cat $LOGFILE | grep -C 1 "DRM modificatrice ouverte" | grep "XML differents" | c
 
 echo -e "\n\n   DRM non trouvées sur la plateforme mais existantes sur CIEL = "$NBDRMDOUANEABSENTE" (les identifiants existent sur la plateforme). Liste des Identifiants impacté par ce cas :\n\n" >> $RAPPORTBODY;
 
-cat $LOGFILE | grep "n'a pas été trouvée" | sed -r 's/(.*)La DRM de (.+) (.+)/\2/g' | cut -d ' ' -f 1 | sort | uniq | sed -r "s|(.*)|         $URLDRMINTERNE\1|g" >> $RAPPORTBODY;
+cat $LOGFILE | grep "n'a pas été trouvée" | sed -r 's/(.*)La DRM de (.+) (.+)/\2/g' | cut -d ' ' -f 1 | sort | uniq | sed -r "s|(.*)|         $URLDRMINTERNE/etablissement\1|g" >> $RAPPORTBODY;
 
 echo -e "\n\n   Numéro d'accise mal référencé = "$NBNUMACCISEMALDRM" DRM correspondant à "$NBNUMACCISEMAL" accises :\n\n" >> $RAPPORTBODY;
 
-cat $LOGFILE | grep "Le numéro d'accise" | cut -d ":" -f 3 | sed "s/ Le numéro d'accise //" | sed "s/ ne correspond pas a celui de l'établissement (/;/g" | sed "s/ | /;/" | sed "s/)//" | sort | uniq | sed -r "s|(FR.+);(.+);(.*)|         $URLDRMINTERNE\2 \1 (obtenu des douanes) Accise référencée sur le portail de l'interpro  : \3|g" >> $RAPPORTBODY;
+cat $LOGFILE | grep "Le numéro d'accise" | cut -d ":" -f 3 | sed "s/ Le numéro d'accise //" | sed "s/ ne correspond pas a celui de l'établissement (/;/g" | sed "s/ | /;/" | sed "s/)//" | sort | uniq | sed -r "s|(FR.+);(.+);(.*)|         $URLDRMINTERNE/etablissement\2 \1 (obtenu des douanes) Accise référencée sur le portail de l'interpro  : \3|g" >> $RAPPORTBODY;
 
 cat $RAPPORTBODY  | iconv -t ISO-8859-1 | mail -s "[RAPPORT RETOUR DOUANE du $DATEFORMAT]" "adresse@adresse.com";
