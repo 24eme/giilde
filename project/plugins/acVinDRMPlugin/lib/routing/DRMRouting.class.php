@@ -287,6 +287,7 @@ class DRMRouting {
         		'action' => 'conventionCielPdf'), array('sf_method' => array('get', 'post')), array('model' => 'Etablissement',
         				'type' => 'object')
         		));
+        $r->prependRoute('drm_retour', new DRMRoute('/drm/:identifiant/retour/:periode_version', array('module' => 'drm_xml', 'action' => 'retour'), array('sf_method' => array('get', 'post')), array('model' => 'DRM', 'type' => 'object')));
     }
 
 }

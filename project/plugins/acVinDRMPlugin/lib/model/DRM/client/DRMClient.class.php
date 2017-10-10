@@ -573,33 +573,42 @@ class DRMClient extends acCouchdbClient {
     public static function storeXMLRetourFromURL($url, $verbose = false, $allwaysreturndrm = false) {
       $xml = file_get_contents($url);
       if (!$xml) {
-          throw new sfException($url." empty");
+          throw new sfException($url." vide");
       }
-      if(!preg_match('/<numero-agrement>([^<]+)</', $xml, $m)){
-          throw new sfException('Accise not found');
+      $aggrement = array();
+      $etablissement = null;
+      $cvimatch = preg_match('/<numero-cvi>([^<]+)</', $xml, $m);
+      $aggrementmatch = preg_match('/<numero-agrement>([^<]+)</', $xml, $aggrement);
+      $aggrement = isset($aggrement[1])? $aggrement[1] : null;
+
+      if(!$cvimatch && !$aggrementmatch){
+          throw new sfException("Il n'y a ni numéro de CVI ni numéro d'agrément (Accise) dans l'xml");
       }
-      $etablissement = EtablissementClient::getInstance()->findByAccises($m[1]);
+      if(isset($m[1])){
+        $etablissement = EtablissementClient::getInstance()->findByCvi($m[1]);
+      }
+      if(!$etablissement && $aggrement){
+        $etablissement = EtablissementClient::getInstance()->findByNoAccise($aggrement);
+      }
       if (!$etablissement) {
-        throw new sfException('No Etablissement found for accises '.$m[1]);
+        $idebntifiantCVI = (isset($m[1]))? $m[1] : "VIDE";
+        throw new sfException("L'établissement n'a ni été trouvé par son CVI ".$idebntifiantCVI." ni par son numéro d'agrément ".$aggrement);
       }
-      if(preg_match('/<numero-cvi>([^<]+)</', $xml, $m)){
-        $m[1] = str_replace(' ', '', $m[1]);
-        if ($etablissement->cvi != $m[1]) {
-          throw new sfException('XML CVI '.$m[1].' doest not match etablissement\'s one ('.$etablissement->identifiant.' | '.$etablissement->cvi.')');
-        }
+      if ($aggrement && ($etablissement->no_accises != $aggrement)) {
+        throw new sfException("Le numéro d'accise ".$aggrement." ne correspond pas a celui de l'établissement (".$etablissement->identifiant." | ".$etablissement->no_accises.")");
       }
       if(!preg_match('/<mois>([^<]+)</', $xml, $m)){
-          throw new sfException('mois not found');
+          throw new sfException("Mois non trouvé dans l'xml");
       }
-      $mois = $m[1];
+      $mois = sprintf('%02d',intval($m[1]));
       if(!preg_match('/<annee>([^<]+)</', $xml, $m)){
-          throw new sfException('Annee not found');
+          throw new sfException("Année non trouvé dans l'xml");
       }
       $annee = $m[1];
-      if ($verbose) echo "INFO: retrieve DRM for ".$etablissement->identifiant.' '.$annee.$mois."\n";
+      if ($verbose) echo "INFO: recherche de la DRM pour ".$etablissement->identifiant.' '.$annee.$mois."\n";
       $drm = DRMClient::getInstance()->findOrCreateByIdentifiantAndPeriode($etablissement->identifiant, $annee.$mois);
       if (!$drm->_id) {
-          throw new sfException("No DRM found for ".$etablissement->identifiant.' '.$annee.$mois);
+          throw new sfException("La DRM de ".$etablissement->identifiant.' '.$annee.$mois." n'a pas été trouvée");
       }
       if (!$drm->storeXMLRetour($xml) && !$allwaysreturndrm) {
         return null;

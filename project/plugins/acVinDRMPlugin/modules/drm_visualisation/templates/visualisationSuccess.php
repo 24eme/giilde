@@ -88,15 +88,68 @@
 <?php if ($drm->exist('transmission_douane') && $drm->transmission_douane): ?>
 <div class="row">
   <div class="col-xs-12">
-    <h3>Transmission sur le portail proDou@ane <small>(<?php echo link_to('xml', 'drm_xml', $drm); ?>)</small></h3>
-    <?php if ($drm->transmission_douane->success) : ?>
-      <p>La transmission a été réalisée avec succès le <?php echo $drm->getTransmissionDate(); ?> avec l'accusé reception numéro <?php echo $drm->transmission_douane->id_declaration ?>.</p>
-    <?php else: ?>
-      <p>La transmission a échouée. Le message d'erreur envoyé par le portail des douanes est « <?php echo $drm->getTransmissionErreur(); ?> ».</p>
-    <?php endif; ?>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">Transmission proDou@ane</h3>
+        </div>
+        <div class="panel-content>">
+            <table class="table table-striped table-condensed">
+                <tbody>
+                  <tr>
+                      <td class="col-xs-4">Transmission (<?php echo link_to('XML transmis', 'drm_xml', $drm); ?>)</td>
+                      <td class="col-xs-8">
+                        <?php if ($drm->transmission_douane->success) : ?>
+                          La transmission a été réalisée avec succès le <?php echo $drm->getTransmissionDate(); ?> avec l'accusé reception numéro <?php echo $drm->transmission_douane->id_declaration ?>.
+                        <?php else: ?>
+                          La transmission a échouée. Le message d'erreur envoyé par le portail des douanes est « <?php echo $drm->getTransmissionErreur(); ?> ».
+                        <?php endif; ?>
+                      </td>
+                  </tr>
+                  <?php if (!$isTeledeclarationMode): ?>
+                    <?php if (is_null($drm->transmission_douane->coherente)) : ?>
+                      <tr><td>Retour XML</td><td>Aucun retour de la part de proDou@ne n'a été effectué</td></tr>
+                    <?php elseif($drm->transmission_douane->coherente): ?>
+                      <tr><td>Retour XML</td><td>La DRM est <strong>conforme</strong> à celle de proDou@ne</td></tr>
+                    <?php else: ?>
+                      <tr><td>Retour XML</td><td>La DRM n'est <strong>pas conforme</strong> à celle de proDou@ne</td></tr>
+                    <?php endif; ?>
+                  <?php endif; ?>
+                </tbody>
+              </table>
+      </div>
+    </div>
   </div>
 </div>
 <?php endif; ?>
+
+<?php if ((!$isTeledeclarationMode) && ($drm->transmission_douane->coherente === false)): ?>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center">Rapport du retour XML proDou@ane</h3>
+        </div>
+        <div class="panel-content>">
+            <table class="table table-striped table-condensed">
+                <tbody>
+                  <tr>
+                    <td>Identification du problème rencontré (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td>
+                    <td>Valeur proDou@ne</td>
+                  </tr>
+                <?php foreach ($drm->getXMLComparison()->getFormattedXMLComparaison() as $problemeSrc => $valeur): ?>
+                <tr>
+                  <td><?php echo preg_replace('/(\[.+\]) (.+)/',"$1 $2",$problemeSrc); ?></td>
+                  <td><?php echo $valeur; ?></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+
 <br/><br/>
 <div class="row">
     <div class="col-xs-4">

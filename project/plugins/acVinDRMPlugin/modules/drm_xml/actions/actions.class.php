@@ -43,6 +43,12 @@ class drm_xmlActions extends drmGeneriqueActions {
       $this->getResponse()->setHttpHeader('Content-Type', 'text/xml');
   }
 
+  public function executeRetour(sfWebRequest $request) {
+    $this->drm = $this->getRoute()->getDRM();
+    $this->setLayout(false);
+    $this->getResponse()->setHttpHeader('Content-Type', 'text/xml');
+  }
+
   public function executeMain()
   {
   }

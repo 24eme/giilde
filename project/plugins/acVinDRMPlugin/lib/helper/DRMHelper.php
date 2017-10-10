@@ -119,8 +119,14 @@ function getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $et
 }
 
 function getTeledeclareeLabelCalendrier($isTeledeclarationMode, $calendrier, $periode, $etablissement = false) {
-    if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode))
-        return  '(Télédéclarée)';
+    if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode) && isTransmiseDouane($isTeledeclarationMode, $calendrier, $periode)){
+        if(isCoherenteDouane($isTeledeclarationMode, $calendrier, $periode)){
+          return '(Douane OK)';
+        }
+        return '(Transmise)';
+    }
+    else if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode))
+        return  '(Téleclarée)';
     else if ($isTeledeclarationMode)
         return '';
     else {
@@ -139,6 +145,16 @@ function isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode,
         }
     }
     return false;
+}
+
+
+function isTransmiseDouane($isTeledeclarationMode, $calendrier, $periode, $etablissement = false) {
+  return $calendrier->getTransmise($periode, $etablissement);
+}
+
+
+function isCoherenteDouane($isTeledeclarationMode, $calendrier, $periode, $etablissement = false) {
+  return $calendrier->getCoherente($periode, $etablissement);
 }
 
 function getEtatDRMHrefCalendrier($isTeledeclaration,$calendrier, $periode, $etablissement = false) {

@@ -9,6 +9,8 @@ class DRMCalendrier {
     protected $drms = null;
     protected $isTeledeclarationMode = false;
     protected $multiEtbs;
+    protected $transmises = null;
+    protected $coherentes = null;
 
     const VIEW_INDEX_ETABLISSEMENT = 0;
     const VIEW_CAMPAGNE = 1;
@@ -82,6 +84,8 @@ class DRMCalendrier {
             foreach ($this->periodes as $periode) {
                 $drm = DRMClient::getInstance()->viewMasterByIdentifiantPeriode($etbIdentifiant, $periode);
                 $this->drms[$etbIdentifiant][$periode] = $drm;
+                $this->transmises[$etbIdentifiant][$periode] = ($drm[10] == 'SUCCESS');
+                $this->coherentes[$etbIdentifiant][$periode] = $drm[12];
             }
         }
     }
@@ -162,6 +166,24 @@ class DRMCalendrier {
 
         return $this->statuts[$etablissement->identifiant][$periode];
     }
+
+    public function getTransmise($periode, $etablissement = false) {
+
+        if (!$etablissement) {
+            $etablissement = $this->etablissement;
+        }
+        return $this->transmises[$etablissement->identifiant][$periode];
+    }
+
+    public function getCoherente($periode, $etablissement = false) {
+
+        if (!$etablissement) {
+            $etablissement = $this->etablissement;
+        }
+        return $this->coherentes[$etablissement->identifiant][$periode];
+    }
+
+
 
     private function loadStatuts() {
         $this->statuts = array();

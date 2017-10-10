@@ -18,10 +18,50 @@ class DRMCielCompare
 		}
 	}
 
+	public function sortAndPurgeNull($array){
+		$nonnull = array();
+		foreach ($array as $key => $value) {
+			if(!is_null($value)){
+				$nonnull[$key] = $value;
+			}
+		}
+		ksort($nonnull);
+		$produits = array();
+		$res = array();
+		foreach($nonnull as $key => $value) {
+			if (!preg_match('/produit/', $key)) {
+				$res[$key] = $value;
+				continue;
+			}
+			if (preg_match('/produit\/\{array\}\/([A-Z0-9][^\/]+)\/\{array\}\/[a-z]/', $key, $m)) {
+				$idproduit = $m[1];
+			}else{
+				$idproduit = 'produit unique';
+			}
+			if(!array_key_exists($idproduit,$produits)){
+				$produits[$idproduit] = array();
+			}
+			$produits[$idproduit][$key] = $value;
+		}
+		foreach ($produits as $key => $produitArr) {
+			$somme_balance = 0;
+			foreach ($produitArr as $key_r => $value) {
+				if (preg_match('/balance-stocks/', $key_r)) {
+					$somme_balance += $value * 1;
+				 	}
+			}
+			if ($somme_balance) {
+		 			$res = array_merge($res, $produitArr);
+		 		}
+		}
+		return $res;
+	}
+
 	public function getDiff()
 	{
-		$arrIn = $this->identifyKey($this->flattenArray($this->xmlToArray($this->xmlIn)));
-		$arrOut = $this->identifyKey($this->flattenArray($this->xmlToArray($this->xmlOut)));
+
+		$arrIn = $this->sortAndPurgeNull($this->identifyKey($this->flattenArray($this->xmlToArray($this->xmlIn))));
+		$arrOut = $this->sortAndPurgeNull($this->identifyKey($this->flattenArray($this->xmlToArray($this->xmlOut))));
 
 		$diff = array();
 		foreach ($arrIn as $key => $value) {
@@ -37,6 +77,7 @@ class DRMCielCompare
 				$diff[$key] = null;
 			}
 		}
+
 		return $diff;
 	}
 
@@ -74,7 +115,7 @@ class DRMCielCompare
 					continue;
 				}
 				if (preg_match($patternProduit, $key) && preg_match('/libelle-personnalise/i', $key)) {
-					$newKeyProduit .= '_'.KeyInflector::slugify($value);
+					$newKeyProduit .= '_'.KeyInflector::slugifyCaseSensitive($value);
 					continue;
 				}
 				if (preg_match($patternCrd, $key) && preg_match('/categorie-fiscale-capsules/i', $key)) {
@@ -86,19 +127,30 @@ class DRMCielCompare
 					continue;
 				}
 				if (preg_match($patternCentilisation, $key) && preg_match('/@attributes/i', $key)) {
-					$newKeyCentilisation = $value;
+					if(preg_match('/\/volume$/i', $key)){
+						$newKeyCentilisation = $value;
+					}
+					if(preg_match('/\/volumePersonnalise/i', $key)){
+						$newKeyCentilisation .= $value;
+					}
 					continue;
 				}
 				$value = $this->cleanValue($value);
 				if (preg_match($patternProduit, $key)) {
 					$tmp = preg_replace($patternProduit, '/produit/{array}/'.$newKeyProduit.'/{array}/', $key);
 					$result[$tmp] = $value;
-				} elseif (preg_match($patternCrd, $key) || preg_match($patternCentilisation, $key)) {
-					$tmp = preg_replace($patternCrd, '/compte-crd/{array}/'.$newKeyCrd.'/{array}/', $key);
-					$tmp = preg_replace($patternCentilisation, '/centilisation/{array}/'.$newKeyCentilisation.'/{array}/', $tmp);
-					$result[$tmp] = $value;
+				}elseif (preg_match($patternCentilisation, $key)){
+				  if($value !== 0){
+						 $tmp = preg_replace($patternCrd, '/compte-crd/{array}/'.$newKeyCrd.'/{array}/', $key);
+						 $tmp = preg_replace($patternCentilisation, '/centilisation/{array}/'.$newKeyCentilisation.'/{array}/', $tmp);
+
+						 $result[$tmp] = $value;
+					 }
+				} elseif (preg_match($patternCrd, $key)){
+						$tmp = preg_replace($patternCrd, '/compte-crd/{array}/'.$newKeyCrd.'/{array}/', $key);
+						$result[$tmp] = $value;
 				} else {
-					$result[$key] = $value;
+						$result[$key] = $value;
 				}
 			}
 		}
@@ -118,4 +170,32 @@ class DRMCielCompare
 		}
 		return $value;
 	}
+
+
+	    public function getFormattedXMLComparaison() {
+	      $str_arr = array();
+	      foreach ($this->getDiff() as $key => $value) {
+	        $keyArr = explode("/",$key);
+	        if(strpos($key,"{array}/produit/{array}")){
+	          $probleme = "[Problème de ".((isset($keyArr[7]))? str_replace("-"," ",$keyArr[7]) : "???")." en ".str_replace("-"," ",$keyArr[1])."]";
+	          $produit = "".str_replace("_"," ",str_replace("-"," ",$keyArr[5]));
+	          $catMvt = (isset($keyArr[9]))? "".str_replace(array("-periode"),array(""),$keyArr[9]) : "";
+						$mvt = (isset($keyArr[11]))? " ".str_replace("-"," ",$keyArr[11]) : '';
+	          $str_arr[$probleme." ".$produit." ".$catMvt.$mvt] = (is_null($value))? "valeur nulle" : $value;
+	        }elseif(strpos($key,"{array}/compte-crd/{array}")){
+						$keyArr = explode("/",$key);
+	          $probleme = "[Problème de CRD ".str_replace(array("T_PERSONNALISEES","M_PERSONNALISEES"),array("TRANQ","MOUSSEUX"),$keyArr[3])."]";
+	          $origine = (isset($keyArr[5]))? ucfirst($keyArr[5]) : "";
+						$origine .= (isset($keyArr[7]))? " ".str_replace(array("-capsules"),array(""),$keyArr[7]) : '';
+
+	          $mvt = (isset($keyArr[9]))? " ".str_replace(array("-capsules"),array(""),$keyArr[9]) : '';
+						$mvt .= (isset($keyArr[11]))? " ".$keyArr[11] : '';
+	          $str_arr[$probleme." ".$origine.$mvt] = (is_null($value))? "valeur nulle" : $value;
+	        }else{
+	          $str_arr[$key] = $value;
+	        }
+
+	      }
+	      return $str_arr;
+	    }
 }

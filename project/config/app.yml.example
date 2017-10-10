@@ -3,6 +3,7 @@ all:
   auth_mode: NO_AUTH #HTTP_AD, CAS, NO_CAS, NO_AUTH
   routing_context_production_host: domaine.pro
   observatoire_url: "https://observatoire_url"
+  vinsi_url: "https://vinsi_url"
   cas:
     domain: login.cas
     port: 443

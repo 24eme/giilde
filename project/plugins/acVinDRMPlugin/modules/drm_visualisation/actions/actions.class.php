@@ -26,6 +26,7 @@ class drm_visualisationActions extends drmGeneriqueActions {
     public function executeVisualisation(sfWebRequest $request) {
         $this->drm = $this->getRoute()->getDRM();
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
+        $this->isUsurpationMode = $this->isUsurpationMode();
         $this->no_link = false;
         if ($this->getUser()->hasOnlyCredentialDRM()) {
             $this->no_link = true;
@@ -33,8 +34,8 @@ class drm_visualisationActions extends drmGeneriqueActions {
         $this->hide_rectificative = $request->getParameter('hide_rectificative');
         $this->drm_suivante = $this->drm->getSuivante();
         $this->mouvements = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndPeriode($this->drm->identifiant, $this->drm->periode);
-        $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);      
-
+        $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);
+        
         $this->recapCvos = $this->recapCvos();
     }
 
