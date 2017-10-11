@@ -122,7 +122,7 @@
 </div>
 <?php endif; ?>
 
-<?php if ((!$isTeledeclarationMode) && ($drm->transmission_douane->coherente === false)): ?>
+<?php if (!$isTeledeclarationMode && $drm->exist('transmission_douane') && $drm->transmission_douane->coherente === false): ?>
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">
