@@ -236,7 +236,8 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             $p = $this->addProduit($produitConfig->getHash(), DRM::DETAILS_KEY_SUSPENDU);
 
             if(DRMConfiguration::getInstance()->isRepriseStocksChangementCampagne() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
-                $p->stocks_debut->initial = $produit->total;
+            	$p->total_debut_mois = $produit->total;
+            	$p->stocks_debut->initial = $produit->total;
                 $p->stocks_debut->revendique = $produit->total_revendique;
             }
 
@@ -261,7 +262,6 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         $drm_suivante = clone $this;
         $drm_suivante->teledeclare = $isTeledeclarationMode;
         $drm_suivante->init(array('keepStock' => $keepStock));
-
         $drm_suivante->update();
         $drm_suivante->storeDeclarant();
         $drm_suivante->periode = $periode;
