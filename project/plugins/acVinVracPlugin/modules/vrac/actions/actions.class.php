@@ -109,8 +109,8 @@ class vracActions extends sfActions {
                 $this->etablissement = $this->choixEtablissement;
                 $this->initSocieteAndEtablissementPrincipal();
             }
-            if (!$isMethodPost && $this->societe->isNegociant() && count($this->societe->getEtablissementsObj()) > 1 && !$this->choixEtablissement) {
-                return $this->redirect('vrac_societe_choix_etablissement', array('identifiant' => $this->societe->identifiant));
+            if (!$isMethodPost && $this->getUser()->getCompte()->getSociete()->isNegociant() && count($this->getUser()->getCompte()->getSociete()->getEtablissementsObj()) > 1 && !$this->choixEtablissement) {
+                return $this->redirect('vrac_societe_choix_etablissement', array('identifiant' => $this->getUser()->getCompte()->getSociete()->identifiant));
             }
         }
         $this->form = new VracSoussigneForm($this->vrac, $this->isTeledeclarationMode, $this->isAcheteurResponsable, $this->isCourtierResponsable, $this->isRepresentantResponsable);

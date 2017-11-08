@@ -2,7 +2,7 @@
 
 . $(dirname $0)/config.inc
 
-DATEREQUETE="2016-01-01"
+DATEREQUETE=$(date --date="last week" +%Y-%m-%d)
 DATE=$(date +%Y%m%d%H%M%S)
 DATEFORMAT=`date '+%Y-%m-%d %H:%M:%S'`
 mkdir -p $TMP"/retoursDouanes" > /dev/null
@@ -23,7 +23,7 @@ echo -e "Du $DATEREQUETE à ce jour\n\n" > $RAPPORTBODY;
 echo -e "   XML identiques = "$NBXMLIDENTIQUES" DRM\n\n" >> $RAPPORTBODY;
 echo -e "   XML différents = "$NBXMLDIFFERENTS" DRM (dont "$NBXMLNONTRANSMIS" DRM télédéclarées qui n'ont pas été transmises aux douanes) \n\n" >> $RAPPORTBODY;
 echo -e "Détails :\n\n" >> $RAPPORTBODY;
-echo -e "   DRM pour lesquelles une modificatrice a été ouverte : \n\n" >> $RAPPORTBODY;
+echo -e "   DRM pour lesquelles une modification est attendue : \n\n" >> $RAPPORTBODY;
 cat $LOGFILE | grep -C 1 "DRM modificatrice ouverte" | grep "XML differents" | cut -d ' ' -f 1 | sed -r "s|DRM-([0-9]+)-([0-9]+)|         $URLDRMINTERNE\1\/visualisation\/\2|" >> $RAPPORTBODY;
 
 echo -e "\n\n   DRM non trouvées sur la plateforme mais existantes sur CIEL = "$NBDRMDOUANEABSENTE" (les identifiants existent sur la plateforme). Liste des Identifiants impacté par ce cas :\n\n" >> $RAPPORTBODY;

@@ -79,70 +79,63 @@ use_helper('PointsAides');
 
                     <td>
         <?php
-            if((isset($teledeclaration) && $teledeclaration)):
-              if($v->vendeur_identifiant):
-                if($v->teledeclare):
-                  echo ($v->valide->date_signature_vendeur)?
-                        '<span class="glyphicon glyphicon-check" ></span>&nbsp;' : '<span class="glyphicon glyphicon-pencil" ></span>&nbsp;';
-                endif;
-                echo 'Vendeur : ' . $v->vendeur->nom;
-              endif;
-            else:
-              echo ($v->vendeur_identifiant) ?
-                  'Vendeur : ' . link_to($v->vendeur->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->vendeur_identifiant)) : '';
-            endif;
+          if ($v->vendeur_identifiant):
+            echo '<div class="vrac_nom">';
+            if($v->teledeclare) {
+              echo ($v->valide->date_signature_vendeur)?
+              '<span class="glyphicon glyphicon-check" ></span>&nbsp;' : '<span class="glyphicon glyphicon-pencil" ></span>&nbsp;';
+            }else{
+              echo '<span class="glyphicon glyphicon-minus"></span>&nbsp;';
+            }
+            echo (!isset($teledeclaration) || !$teledeclaration) ?
+                  'Vendeur : ' . link_to($v->vendeur->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->vendeur_identifiant)) : 'Vendeur : ' . $v->vendeur->nom;
+            echo "</div>";
+           endif;
         ?>
         <br />
         <?php
-          if((isset($teledeclaration) && $teledeclaration)):
-            if($v->acheteur_identifiant):
-              if($v->teledeclare):
-                echo ($v->valide->date_signature_acheteur)?
-                      '<span class="glyphicon glyphicon-check" ></span>&nbsp;' : '<span class="glyphicon glyphicon-pencil" ></span>&nbsp;';
-              endif;
-              echo 'Acheteur : ' . $v->acheteur->nom;
-            endif;
-          else:
-              echo ($v->acheteur_identifiant) ?
-                  'Acheteur : ' . link_to($v->acheteur->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->acheteur_identifiant)) : '';
-          endif;
-                  ?>
+        if ($v->acheteur_identifiant):
+          echo '<div class="vrac_nom">';
+          if($v->teledeclare) {
+            echo ($v->valide->date_signature_acheteur)?
+            '<span class="glyphicon glyphicon-check" ></span>&nbsp;' : '<span class="glyphicon glyphicon-pencil" ></span>&nbsp;';
+          }else{
+            echo '<span class="glyphicon glyphicon-minus"></span>&nbsp;';
+          }
+          echo (!isset($teledeclaration) || !$teledeclaration) ?
+                'Acheteur : ' . link_to($v->acheteur->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->acheteur_identifiant)) : 'Acheteur : ' . $v->acheteur->nom;
+          echo "</div>";
+         endif; ?>
         <?php
             $has_representant = ($v->representant_identifiant != $v->vendeur_identifiant) ? $v->representant_identifiant : 0;
-            if ($has_representant) echo '<br/>';
-
-            if((isset($teledeclaration) && $teledeclaration)):
-              if($has_representant && $v->vendeur_identifiant):
-                if($v->teledeclare):
+            if ($has_representant) {
+              echo '<br/>';
+              if($v->vendeur_identifiant) {
+                if($v->teledeclare) {
                   echo ($v->valide->date_signature_vendeur)?
                         '<span class="glyphicon glyphicon-check" ></span>&nbsp;' : '<span class="glyphicon glyphicon-pencil" ></span>&nbsp;';
-                endif;
-                echo ($has_representant) ? 'Representant : ' . $v->representant->nom : '';
-              endif;
-            else:
-              echo ($has_representant) ?
-                'Representant : ' . link_to($v->representant->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->representant_identifiant)) : '';
-            endif;
+                } else {
+                  echo '<span class="glyphicon glyphicon-minus"></span>&nbsp;';
+                }
+                echo (!isset($teledeclaration) || !$teledeclaration) ?
+                'Representant : ' . link_to($v->representant->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->representant_identifiant)) : 'Representant : ' . $v->representant_identifiant;
+              }
+            }
             ?>
         <?php if($v->mandataire_identifiant): ?>
             <br />
+            <div class="vrac_nom">
         <?php
-          if((isset($teledeclaration) && $teledeclaration)):
-            if($v->mandataire_identifiant):
-              if($v->teledeclare):
+              if($v->teledeclare) {
                 echo ($v->valide->date_signature_courtier)?
-                      '<span class="glyphicon glyphicon-check" ></span>&nbsp;' : '<span class="glyphicon glyphicon-pencil" ></span>&nbsp;';
-              endif;
-              echo 'Courtier : ' . $v->mandataire->nom;
-            endif;
-          else:
-          echo ($v->mandataire_identifiant) ?
-                'Courtier : ' . link_to($v->mandataire->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->mandataire_identifiant)) : '';
-          endif;
-        ?>
-                            </li>
-        <?php endif; ?>
-                        </ul>
+                '<span class="glyphicon glyphicon-check" ></span>&nbsp;' : '<span class="glyphicon glyphicon-pencil" ></span>&nbsp;';
+              }else{
+                echo '<span class="glyphicon glyphicon-minus"></span>&nbsp;';
+              }
+              echo (!isset($teledeclaration) || !$teledeclaration) ?
+                    'Courtier : ' . link_to($v->mandataire->nom, 'vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $v->mandataire_identifiant)) : 'Courtier : ' . $v->mandataire->nom;
+              echo "</div>";
+             endif; ?>
                     </td>
 
                     <td><?php
