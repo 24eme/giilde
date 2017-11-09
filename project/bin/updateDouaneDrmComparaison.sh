@@ -13,7 +13,7 @@ bash $(dirname $0)/retrieveXMLAndCompare.sh $DATEREQUETE > $LOGFILE
 
 RAPPORTBODY=$TMP"/retoursDouanes/retrieveXMLAndCompare_rapport_"$DATE".txt"
 NBXMLIDENTIQUES=`cat $LOGFILE | grep "XML sont identiques" | wc -l`
-NBXMLDIFFERENTS=`cat $LOGFILE | grep "XML differents" | wc -l`
+NBXMLDIFFERENTS=`cat $LOGFILE | grep -C 1 "XML differents" | sed "s|--|#|g" | tr "\n" " " | tr "#" "\n" | grep -v "il existe une DRM Suivante" | wc -l`
 NBXMLNONTRANSMIS=`cat $LOGFILE | grep -C 1 "n'a pas été transmise aux douanes" | grep "XML differents" | wc -l`
 
 NBDRMDOUANEABSENTE=`cat $LOGFILE | grep "n'a pas été trouvée" | wc -l`
@@ -28,7 +28,7 @@ echo -e "Détails des différences :\n\n" >> $RAPPORTBODY;
 
 echo -e "   DRM non transmises aux douanes : \n" >> $RAPPORTBODY;
 
-cat $LOGFILE | grep -C 1 "n'a pas été transmise aux douanes" | grep "XML differents" | cut -d ' ' -f 1 | sort | uniq | sed -r "s|(.*)|         $URLDRMINTERNE\1|g" >> $RAPPORTBODY;
+cat $LOGFILE | grep -C 1 "n'a pas été transmise aux douanes" | grep "XML differents" | cut -d ' ' -f 1 | sort | uniq | sed -r "s|DRM-([0-9]+)-([0-9]+)|         $URLDRMINTERNE\1\/visualisation\/\2|" >> $RAPPORTBODY;
 
 echo -e "\n\n   DRM pour lesquelles une modificatrice devrai être ouverte : \n\n" >> $RAPPORTBODY;
 
