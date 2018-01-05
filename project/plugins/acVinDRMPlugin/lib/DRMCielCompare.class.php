@@ -66,15 +66,15 @@ class DRMCielCompare
 		$diff = array();
 		foreach ($arrIn as $key => $value) {
 			if (!isset($arrOut[$key]) && $value) {
-				$diff[$key] = $value;
+				$diff[$key] = array($value, null);
 			}
 			if (isset($arrOut[$key]) && $arrOut[$key] != $value) {
-				$diff[$key] = $value;
+				$diff[$key] = array($value, $arrOut[$key]);
 			}
 		}
 		foreach ($arrOut as $key => $value) {
 			if (!isset($arrIn[$key]) && $value) {
-				$diff[$key] = null;
+				$diff[$key] = array(null, $value);
 			}
 		}
 
@@ -174,14 +174,14 @@ class DRMCielCompare
 
 	    public function getFormattedXMLComparaison() {
 	      $str_arr = array();
-	      foreach ($this->getDiff() as $key => $value) {
+	      foreach ($this->getDiff() as $key => $values) {
 	        $keyArr = explode("/",$key);
 	        if(strpos($key,"{array}/produit/{array}")){
 	          $probleme = "[Problème de ".((isset($keyArr[7]))? str_replace("-"," ",$keyArr[7]) : "???")." en ".str_replace("-"," ",$keyArr[1])."]";
 	          $produit = "".str_replace("_"," ",str_replace("-"," ",$keyArr[5]));
 	          $catMvt = (isset($keyArr[9]))? "".str_replace(array("-periode"),array(""),$keyArr[9]) : "";
 						$mvt = (isset($keyArr[11]))? " ".str_replace("-"," ",$keyArr[11]) : '';
-	          $str_arr[$probleme." ".$produit." ".$catMvt.$mvt] = (is_null($value))? "valeur nulle" : $value;
+	          $str_arr[$probleme." ".$produit." ".$catMvt.$mvt] = $values;
 	        }elseif(strpos($key,"{array}/compte-crd/{array}")){
 						$keyArr = explode("/",$key);
 	          $probleme = "[Problème de CRD ".str_replace(array("T_PERSONNALISEES","M_PERSONNALISEES"),array("TRANQ","MOUSSEUX"),$keyArr[3])."]";
@@ -190,12 +190,13 @@ class DRMCielCompare
 
 	          $mvt = (isset($keyArr[9]))? " ".str_replace(array("-capsules"),array(""),$keyArr[9]) : '';
 						$mvt .= (isset($keyArr[11]))? " ".$keyArr[11] : '';
-	          $str_arr[$probleme." ".$origine.$mvt] = (is_null($value))? "valeur nulle" : $value;
+	          $str_arr[$probleme." ".$origine.$mvt] = $values;
 	        }else{
-	          $str_arr[$key] = $value;
+	          $str_arr[$key] = $values;
 	        }
 
 	      }
+		  krsort($str_arr);
 	      return $str_arr;
 	    }
 }

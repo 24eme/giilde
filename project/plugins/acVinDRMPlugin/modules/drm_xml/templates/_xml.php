@@ -92,11 +92,11 @@
 <?php if ($crd->entrees_achats): ?>
 				<achats><?php echo $crd->entrees_achats ?></achats>
 <?php endif; ?>
-<?php if ($crd->entrees_excedents): ?>
-				<retours><?php echo $crd->entrees_excedents ?></retours>
-<?php endif; ?>
 <?php if ($crd->entrees_retours): ?>
-				<excedents><?php echo $crd->entrees_retours ?></excedents>
+				<retours><?php echo $crd->entrees_retours ?></retours>
+<?php endif; ?>
+<?php if ($crd->entrees_excedents): ?>
+				<excedents><?php echo $crd->entrees_excedents ?></excedents>
 <?php endif; ?>
         		</entrees-capsules>
 <?php endif; ?>
