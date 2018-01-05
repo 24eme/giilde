@@ -69,7 +69,7 @@ class SocieteModificationForm extends CompteGeneriqueForm {
 
         if ($this->getObject()->isNegoOrViti()) {
             if (is_null($this->getObject()->cooperative)) {
-                $this->setDefault('cooperative', 0);
+                $this->setDefault('cooperative', false);
             }
         }
     }
@@ -83,6 +83,9 @@ class SocieteModificationForm extends CompteGeneriqueForm {
             $values['code_comptable_client'] = ($this->getObject()->getIdentifiant()*1)."";
         }
         parent::doUpdateObject($values);
+        if ($this->getObject()->isNegoOrViti()) {
+          $this->getObject()->cooperative = boolval($this->getObject()->cooperative);
+        }
     }
 
     public function getSocieteTypes() {

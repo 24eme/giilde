@@ -58,6 +58,35 @@
         </div>
     </div>
 
+    <?php if (!$isTeledeclarationMode && $drm->exist('transmission_douane') && $drm->transmission_douane->coherente === false): ?>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title text-center">Rapport du retour XML proDou@ane</h3>
+            </div>
+            <div class="panel-content>">
+                <table class="table table-striped table-condensed">
+                    <tbody>
+                      <tr>
+                        <td>Identification du problème rencontré (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td>
+                        <td>Valeur proDou@ne</td>
+                      </tr>
+                    <?php foreach ($drm->getXMLComparison()->getFormattedXMLComparaison() as $problemeSrc => $valeur): ?>
+                    <tr>
+                      <td><?php echo preg_replace('/(\[.+\]) (.+)/',"$1 $2",$problemeSrc); ?></td>
+                      <td><?php echo $valeur; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php endif; ?>
+
+
     <div class="row">
         <div class="col-xs-4 text-left">
             <a tabindex="-1" href="<?php echo ($isTeledeclarationMode) ? url_for('drm_annexes', $drm) : url_for('drm_edition_details', array('sf_subject' => $drm, 'details' => DRM::DETAILS_KEY_SUSPENDU)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>

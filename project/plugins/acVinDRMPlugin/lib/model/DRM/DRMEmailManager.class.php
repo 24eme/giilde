@@ -117,7 +117,7 @@ La DRM " . getFrPeriodeElision($this->drm->periode) . " de " . $etablissement->n
 
 La version PDF de cette DRM est également disponible en pièce jointe dans ce mail.
 ";
-$mess .= ($transmission_douane)? "
+$mess .= (!$transmission_douane)? "
 Dans l'attente de votre acceptation du contrat de service douane, la DRM doit être signée manuellement avant transmission par mail ou courrier postal à votre service local douanier.
 " : "
 ";
