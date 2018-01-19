@@ -36,14 +36,12 @@ EOF;
     $drm = DRMClient::getInstance()->find($arguments['drmid']);
     if ($drm->areXMLIdentical()) {
       $drm->getOrAdd('transmission_douane')->add("coherente", true);
-      $drm->getOrAdd('transmission_douane')->add("diff",null);
       echo $drm->_id." : XML sont identiques\n";
       $drm->save();
     }else{
       echo $drm->_id." : XML differents\n";
       $comp = $drm->getXMLComparison();
       $drm->getOrAdd('transmission_douane')->add("coherente",false);
-      $drm->getOrAdd('transmission_douane')->add("diff", serialize($comp->getDiff()));
       $drm->save();
       try {
         if($suivante = $drm->getSuivante()){
@@ -60,8 +58,8 @@ EOF;
       }
 
         $diffArrStr = $comp->getFormattedXMLComparaison();
-        foreach ($diffArrStr as $key => $value) {
-            echo "      ".$key . " [" . $value . "]\n";
+        foreach ($diffArrStr as $key => $values) {
+            echo "      ".$key . " [" . ((is_null($values[0])) ? "valeur nulle" : $values[0]) . "]\n";
         }
 
 

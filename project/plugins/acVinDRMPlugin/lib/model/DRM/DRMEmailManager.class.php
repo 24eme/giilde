@@ -83,8 +83,8 @@ L’application de télédéclaration de votre interprofession.";
         $mess = "La DRM de ".$this->drm->declarant->nom." (".$this->drm->identifiant.") période:".$this->drm->getPeriode()." a été transmise sur CIEL et possède des différences avec celle d'Interloire. ";
 
         $diffArrStr = $this->drm->getXMLComparison()->getFormattedXMLComparaison();
-        foreach ($diffArrStr as $key => $value) {
-            $mess .= $key . " [" . $value . "]
+        foreach ($diffArrStr as $key => $values) {
+            $mess .= $key . " [" . ((is_null($values[0])) ? "valeur nulle" : $values[0]) . "]
 ";
         }
         $mess .= "

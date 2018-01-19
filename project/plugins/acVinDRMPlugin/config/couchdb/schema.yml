@@ -627,7 +627,7 @@ DRM:
             'horodatage': string
             'id_declaration': string
             'coherente': boolean
-            'diff': string
+            diff: { required: false }
 
 CSVDRM:
   definition:
