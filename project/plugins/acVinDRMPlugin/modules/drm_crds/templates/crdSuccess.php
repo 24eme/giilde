@@ -43,7 +43,7 @@
                                 </thead>
                                 <tbody class="drm_crds_list">
                                     <?php foreach ($crds as $crdKey => $crd): ?>
-                                        <tr class="crd_row" id="<?php echo $crdKey; ?>">
+                                        <tr class="crd_row" id="<?php echo str_replace('.', '', $regime . '_' .$crdKey); ?>">
                                             <td class="vertical-center"><?php echo $crd->getShortLibelle(); ?></td>
                                             <td class="crds_debut_de_mois  text-center vertical-center"><?php if ($crd->stock_debut && !$isUsurpationMode) { echo $crd->stock_debut; }  echo $crdsForms['stock_debut_' . $regime . '_' . $crdKey]->render(); ?></td>
                                             <td class="crds_entreesAchats"><?php echo $crdsForms['entrees_achats_' . $regime . '_' . $crdKey]->render(); ?></td>
