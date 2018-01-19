@@ -46,6 +46,10 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                                     </tr>
                                 </thead>
                                 <tbody class="drm_adminitration">
+                                        <tr>
+                                          <td style="vertical-align: middle;" class="drm_annexes_type">DAE</td>
+                                          <td colspan="3" style="text-align: center;"><b>Déclaration non nécessaire pour les documents életroniques réalisés sous Gamma</b></td>
+                                      </tr>
                                     <?php foreach ($annexesForm->getDocTypes() as $typeDoc): ?>
                                         <tr>
                                             <td style="vertical-align: middle;" class="drm_annexes_type"><?php echo DRMClient::$drm_documents_daccompagnement[$typeDoc]; ?><?php echo getPointAideHtml('drm','annexe_'.strtolower($typeDoc)) ?></td>
@@ -72,12 +76,12 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                             </div>
                             <div class="col-xs-1 text-right">
                               <a role="button">
-                                &nbsp;<span class="glyphicon  <?php echo (count($annexesForm['releve_non_apurement']))? 'glyphicon-chevron-down' : 'glyphicon-chevron-right' ?> " style="padding-top: 4px;" ></span>
+                                &nbsp;<span class="glyphicon  glyphicon-chevron-right" style="padding-top: 4px;" ></span>
                               </a>
                             </div>
                           </div>
                         </div>
-                        <div id="collapse_apurement" class="panel-collapse collapse <?php echo (count($annexesForm['releve_non_apurement']))? 'in' : '' ?>" role="tabpanel" aria-labelledby="drm_annexes_apurement">
+                        <div id="collapse_apurement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="drm_annexes_apurement">
                         <div class="panel-body">
                         <p><?php echo getPointAideText('drm','annexe_nonapurement'); ?><p/>
                           <table id="table_drm_non_apurement" class="table table-bordered table-striped">
