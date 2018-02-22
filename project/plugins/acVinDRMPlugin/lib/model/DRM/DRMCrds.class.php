@@ -13,7 +13,9 @@ class DRMCrds extends BaseDRMCrds {
     }
 
     public function getOrAddCrdNode($genre, $couleur, $litrage, $libelle = null, $stock_debut = null, $litrageInHl = false) {
+
         $crd = $this->add($this->constructKey($genre, $couleur, $litrage, $libelle));
+
         if(!$litrageInHl) {
             $crd->centilitrage = $litrage / self::FACTLITRAGE;
         } else {
@@ -32,6 +34,7 @@ class DRMCrds extends BaseDRMCrds {
           $crd->detail_libelle = ($contenances)? array_search($crd->centilitrage, $contenances) : '';
         }
         $this->constructKey($genre, $couleur, $litrage, $crd->detail_libelle);
+        return $crd;
     }
 
     public function constructKey($genre, $couleur, $litrage, $libelle = null) {

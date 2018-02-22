@@ -122,7 +122,7 @@ Dans l'attente de votre acceptation du contrat de service douane, la DRM doit ê
 " : "
 ";
 $mess .= "
-Pour toutes questions, veuillez contacter: le service économie de l'".$interpro." " . $contact->email . " .
+Pour toutes questions, veuillez contacter le service économie de ".$interpro." : " . $contact->email . " .
 
 --
 

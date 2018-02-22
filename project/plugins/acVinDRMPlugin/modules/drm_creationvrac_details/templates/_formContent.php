@@ -8,10 +8,10 @@ echo $form->renderGlobalErrors();
 <table id="drm_creationvrac_details_table" class="table table-striped">
     <thead>
         <tr class="row">
-            <th>Acheteur</th>
-            <th>Volume<?php echo getPointAideHtml('drm','mouvements_contrats_doc_accompagnement_num') ?></th>
-            <th>Prix en €/hl<?php echo getPointAideHtml('drm','mouvements_contrats_type_doc') ?></th>
-            <th>Numéro contrat<?php echo getPointAideHtml('drm','mouvements_contrats_numero') ?></th>
+            <th>Acheteur<?php echo getPointAideHtml('drm','mouvements_contrats_acheteur') ?></th>
+            <th>Volume<?php echo getPointAideHtml('drm','mouvements_contrats_volume') ?></th>
+            <th>Prix en €/hl<?php echo getPointAideHtml('drm','mouvements_contrats_prix') ?></th>
+            <th>N° contrat Interloire<?php echo getPointAideHtml('drm','mouvements_contrats_numero_interloire') ?></th>
             <th></th>
         </tr>
     </thead>
