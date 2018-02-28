@@ -158,6 +158,9 @@
                   				"volume" : {
                     				"type" : "double"
                   				},
+                  				"cvo" : {
+                    				"type" : "double"
+                  				},
                   				"vrac_destinataire" : {
                     				"type" : "string",
                     				"index" : "not_analyzed"
