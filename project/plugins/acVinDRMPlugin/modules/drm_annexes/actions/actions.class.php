@@ -6,6 +6,9 @@ class drm_annexesActions extends drmGeneriqueActions {
         $this->initSocieteAndEtablissementPrincipal();
         $this->drm = $this->getRoute()->getDRM();
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
+        if (!$this->isTeledeclarationMode) {
+          $this->redirect('drm_etablissement', $this->drm);
+        }
 
         $this->drm->update();
 
