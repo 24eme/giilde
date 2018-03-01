@@ -176,6 +176,7 @@ class StatistiqueStatsFilterForm extends BaseForm
     	if (!$values) {
     		$values = $this->getValues();
     	}
+    	$statistique = $values['statistiques'];
     	if ($values['doc.mouvements.date/from'] || $values['doc.mouvements.date/to']) {
     		$values['doc.mouvements.date'] = array();
     		$values['doc.mouvements.date']['from'] = $values['doc.mouvements.date/from'];
@@ -188,8 +189,8 @@ class StatistiqueStatsFilterForm extends BaseForm
     	}
     	unset($values['statistiques'], $values['lastyear'], $values['pdf'], $values['doc.mouvements.date/from'], $values['doc.mouvements.date/to'], $values['doc.date_campagne/from'], $values['doc.date_campagne/to']);
     	$rangeFields = self::$rangeFields;
-    	$nbFilters = 0;
-    	$filters = array();
+    	$filters = $this->getQueryFilters($statistique);
+    	$nbFilters = count($filters);
     	foreach ($values as $field => $value) {
     		if (in_array($field, $rangeFields)) {
     			$range = array('format' => 'yyyy-MM-dd');
@@ -208,6 +209,11 @@ class StatistiqueStatsFilterForm extends BaseForm
     		}
     	}
     	return ($nbFilters > 0)? ($nbFilters > 1)? array('filtered' => array('filter' => array('and' => $filters))) : array('filtered' => array('filter' => current($filters))) : null;
+    }
+    
+    protected function getQueryFilters($statistique)
+    {
+    	return (isset($this->config['statistiques'][$statistique]) && isset($this->config['statistiques'][$statistique]['query_filters']))? array($this->config['statistiques'][$statistique]['query_filters']) : array();
     }
     
     public function getStatistiquesConf()
