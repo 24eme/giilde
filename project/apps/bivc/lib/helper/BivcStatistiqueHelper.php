@@ -5,9 +5,9 @@ function getAppellationLibelle($key)
 	$items = ConfigurationClient::getCurrent()->declaration->getKeys('appellation');
 	if (isset($items[$key])) {
 		$item = $items[$key];
-		return $item->getLibelle();
+		return ($item->getLibelle())? $item->getLibelle() : ' ';
 	}
-	return null;
+	return ' ';
 }
 
 function getFamilleLibelle($key) 
@@ -19,7 +19,7 @@ function getFamilleLibelle($key)
 function getCouleurLibelle($key)
 {
 	$couleurs = array('blanc' => 'Blanc', 'rose' => 'Rosé', 'rouge' => 'Rouge');
-	return ($couleurs[$key])? $couleurs[$key] : null;
+	return (isset($couleurs[$key]))? $couleurs[$key] : null;
 }
 
 function getConditionnementLibelle($key)

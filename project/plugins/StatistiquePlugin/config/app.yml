@@ -214,6 +214,10 @@ all:
           libelle: "Sorties de l'appellation"
           index: "DRMMVT"
           hashkeysize: 2
+          query_filters:
+            range:
+              'doc.mouvements.cvo':
+                gte: 0
           aggregation:
             filter:
               terms:
