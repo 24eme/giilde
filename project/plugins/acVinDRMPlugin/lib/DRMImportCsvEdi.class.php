@@ -201,7 +201,6 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                     $produitConfLibelle = $this->slugifyProduitConf($produit);
                     if (count(array_diff($csvLibelleProductArray, $produitConfLibelle)) < count(array_diff($produitConfLibelle, $csvLibelleProductArray))) {
                         continue;
-                      }
                     }elseif((count(array_diff($csvLibelleProductArray, $produitConfLibelleAOC))) && (count(array_diff($csvLibelleProductArray, $produitConfLibelleAOP)))
                         && ($libelleCompletConfAOC != $csvLibelleProductComplet) && ($libelleCompletConfAOP != $csvLibelleProductComplet)
                         && ($libelleCompletConfAOC != $libelleCompletEnCsv) && ($libelleCompletConfAOP != $libelleCompletEnCsv)
