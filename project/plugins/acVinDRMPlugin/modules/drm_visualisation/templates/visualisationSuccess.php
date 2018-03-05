@@ -102,7 +102,11 @@
                           La transmission a été réalisée avec succès le <?php echo $drm->getTransmissionDate(); ?> avec l'accusé reception numéro <?php echo $drm->transmission_douane->id_declaration ?>.
                         <?php else: ?>
                           La transmission a échouée. Le(s) message(s) d'erreur envoyé(s) par le portail des douanes sont :
-                          <ul><li> «&nbsp;<?php echo implode('&nbsp;»</li><li>«&nbsp;', explode('.', $drm->getTransmissionErreur())); ?>&nbsp;» </li></ul>.
+                          <ul>
+                            <?php foreach(explode('.', $drm->getTransmissionErreur()) as $li) if ($li) : ?>
+                              <li> «&nbsp;<?php echo $li ?>&nbsp;» </li>
+                            <?php endif; ?>
+                          </ul>
                         <?php endif; ?>
                       </td>
                   </tr>
