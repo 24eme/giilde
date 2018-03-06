@@ -295,7 +295,8 @@
         $('.popup_contenu a#drm_nouvelle_popup_close').click(function () {
         });
 
-        $('.popup_creation_drm div.type_creation input').change(function () {
+        $('.modal-body div.type_creation input').change(function () {
+            console.log('ici');
             var value = $(this).attr('value');
             var id_drm = $(this).parents('div').attr('id').replace('type_creation_div_', '');
 

@@ -34,12 +34,14 @@
                         </li>
                     </ul>
                 </div>
-              <div style="display: none;" class="ligne_form" id="file_edi_div_<?php echo $periode . '_' . $identifiant; ?>">
-                <span>
-                    <?php echo $drmCreationForm['file']->renderError(); ?>
-                    <?php echo $drmCreationForm['file']->renderLabel() ?>
-                    <?php echo $drmCreationForm['file']->render(); ?>
-                </span>
+                <div class="col-xs-10 col-xs-offset-1">
+                  <div style="display: none;" class="ligne_form" id="file_edi_div_<?php echo $periode . '_' . $identifiant; ?>">
+                    <span>
+                        <?php echo $drmCreationForm['file']->renderError(); ?>
+                        <?php echo $drmCreationForm['file']->renderLabel() ?>
+                        <?php echo $drmCreationForm['file']->render(); ?>
+                    </span>
+                  </div>
             </div>
           </div>
         </div>
