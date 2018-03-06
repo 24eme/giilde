@@ -214,8 +214,7 @@ class DRMValidation extends DocumentValidation {
         foreach ($sortiesDocAnnexes as $type_doc => $num) {
             $doc_annexe = $this->document->documents_annexes;
             foreach (array_keys(DRMClient::$drm_documents_daccompagnement) as $document_accompagnement_type) {
-
-                if (($type_doc == $document_accompagnement_type) &&
+                if (($type_doc == $document_accompagnement_type) && ($type_doc != DRMClient::DRM_DOCUMENTACCOMPAGNEMENT_DAE) &&
                         ((!$doc_annexe->exist($document_accompagnement_type)) || (!$doc_annexe->$document_accompagnement_type->fin) || (!$doc_annexe->$document_accompagnement_type->debut)
                         )) {
                     $this->addPoint('vigilance', 'documents_annexes_erreur', 'retour aux annexes', $this->generateUrl('drm_annexes', $this->document));
