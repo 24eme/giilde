@@ -11,7 +11,7 @@ echo $form->renderGlobalErrors();
             <th>Acheteur<?php echo getPointAideHtml('drm','mouvements_contrats_acheteur') ?></th>
             <th>Volume<?php echo getPointAideHtml('drm','mouvements_contrats_volume') ?></th>
             <th>Prix en €/hl<?php echo getPointAideHtml('drm','mouvements_contrats_prix') ?></th>
-            <th>N° contrat Interloire<?php echo getPointAideHtml('drm','mouvements_contrats_numero_interloire') ?></th>
+            <th>N° contrat IGP-Interloire<?php echo getPointAideHtml('drm','mouvements_contrats_numero_interloire') ?></th>
             <th></th>
         </tr>
     </thead>
