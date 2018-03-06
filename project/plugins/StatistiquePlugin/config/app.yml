@@ -217,7 +217,7 @@ all:
           query_filters:
             range:
               'doc.mouvements.cvo':
-                gte: 0
+                gt: 0
           aggregation:
             filter:
               terms:
