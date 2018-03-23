@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd $(dirname $0)/.. > /dev/null 2>&1
+
+. bin/config.inc
+
+if test $(hostname) = "$(curl -s $PROJETURL"/master.php")" ; then
+	exit 0;
+else
+	exit 1;
+fi
