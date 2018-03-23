@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($drmCsvEdi->getCsvDoc()->erreurs as $erreur) : ?>
+        <?php foreach ($erreurs as $erreur) : ?>
             <tr class="<?php echo ($drmCsvEdi->getCsvDoc()->getStatut() == DRMCsvEdi::STATUT_ERREUR) ? "danger" : "warning"; ?>">
                 <td><?php echo $erreur->num_ligne; ?></td>
                 <td><?php echo $erreur->csv_erreur; ?></td>
