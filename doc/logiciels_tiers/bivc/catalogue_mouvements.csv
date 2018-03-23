@@ -26,12 +26,10 @@ Suspendu,sorties,destructionperte,12. Destruction/perte
 Suspendu,sorties,manquant,13. Manquants
 Suspendu,sorties,cession,14. Cession d'exploitation
 Suspendu,stocks_fin,final,Final
-Acquitté,stocks_debut,instance,En instance
 Acquitté,stocks_debut,initial,Initial
 Acquitté,entrees,achat,Achats
 Acquitté,entrees,autre,Autres
 Acquitté,sorties,autre,Autres
 Acquitté,sorties,replacementsuspension,Replacement en suspension
 Acquitté,sorties,vente,Ventes de produits
-Acquitté,stocks_fin,instance,En instance
 Acquitté,stocks_fin,final,Final
