@@ -69,23 +69,27 @@
                 <table class="table table-striped table-condensed">
                     <tbody>
                       <tr>
-                        <td>Identification du problème rencontré (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td>
+                        <td colspan="3">Identification du problème rencontré (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td>
                         <td>Valeur proDou@ne</td>
+                        <th>Valeur Interpro</th>
                       </tr>
-                    <?php foreach ($drm->getXMLComparison()->getFormattedXMLComparaison() as $problemeSrc => $valeur): ?>
-                    <tr>
-                      <td><?php echo preg_replace('/(\[.+\]) (.+)/',"$1 $2",$problemeSrc); ?></td>
-                      <td><?php echo $valeur; ?></td>
-                    </tr>
-                    <?php endforeach; ?>
+                      <?php foreach ($drm->getXMLComparison()->getFormattedXMLComparaison() as $problemeSrc => $values): ?>
+                          <?php preg_match('/^(\[.+\]) (.+)((entree|sortie|stock).+)$/', $problemeSrc, $matches); ?>
+                        <tr>
+                          <td><?php echo $matches[1]; ?></td>
+                          <td><?php echo $matches[2]; ?></td>
+                          <td><?php echo $matches[3]; ?></td>
+                          <td><?php echo $values[0]; ?></td>
+                          <td><?php echo $values[1]; ?></td></tr>
+                      <?php endforeach; ?>
                     </tbody>
                 </table>
+
           </div>
         </div>
       </div>
     </div>
     <?php endif; ?>
-
 
     <div class="row">
         <div class="col-xs-4 text-left">

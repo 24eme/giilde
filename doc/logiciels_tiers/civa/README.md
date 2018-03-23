@@ -46,12 +46,12 @@ Ce fichier reprend l'ensemble des spécificités décrites ci-dessus.
 | bsi-info              | Oui |  |  |  |  |
 | capvision             | Oui |  |  |  |  |
 | cegar                 | Oui |  |  |  |  |
-| cfg67                 | Oui |  |  |  |  |
+| cfg67                 | Oui  | Oui  |  |  |  |
 | graineinfo            | Oui |  |  |  |  |
 | idsystemes            | Oui |  |  |  |  |
 | info-log              | Oui |  |  |  |  |
-| ingeteldata           | Oui |  |  |  |  |
-| isagri                | Oui |  |  |  |  |
+| ingeteldata           | Oui | Oui  |  |  |  |
+| isagri                | Oui | Oui |  |  |  |
 | nsi-sadimo            | Oui |  |  |  |  |
 | pac-informatique      | Oui |  |  |  |  |
 | solumatic             | Oui |  |  |  |  |

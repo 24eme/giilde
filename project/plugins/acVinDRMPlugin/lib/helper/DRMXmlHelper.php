@@ -54,7 +54,7 @@ function multiArray2XML($preXML) {
 }
 
 function details2XmlDouane($detail) {
-	$detailKey = preg_replace('/ACQUITTE/', '', $detail->getParent()->getKey());
+	$detailKey = $detail->getParent()->getKey();
 	$confDetail = null;
 	if(!$detail->getConfig()->getDocument()->declaration->exist($detailKey)){
 		$confDetail = $detail->getConfig()->getDocument()->declaration->details;

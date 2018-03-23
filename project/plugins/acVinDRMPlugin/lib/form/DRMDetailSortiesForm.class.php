@@ -16,7 +16,7 @@ class DRMDetailSortiesForm  extends acCouchdbObjectForm {
             if ($key == 'contrat' && !preg_match('/AOC/', $certif)) {
                 $disabled = true;
             }
-            if (preg_match('/AUTRES/', $certif) && ($key != 'distillationusageindustriel') && ($key != 'destructionperte') && ($key != 'manquant') && ($key != 'vracsanscontratsuspendu')) {
+            if (($certif == 'AUTRES') && ($key != 'distillationusageindustriel') && ($key != 'destructionperte') && ($key != 'manquant') && ($key != 'vracsanscontratsuspendu')) {
                 $disabled = true;
             }
     		if ($value->readable) {

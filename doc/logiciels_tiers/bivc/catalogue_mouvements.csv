@@ -1,0 +1,39 @@
+TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,EXPLICATION MOUVEMENT
+Suspendu,stocks_debut,instance,En instance de revendication
+Suspendu,stocks_debut,initial,Initial
+Suspendu,entrees,recolte,01. Récolte
+Suspendu,entrees,declassement,02. Issu d'un déclassement
+Suspendu,entrees,retourembouteillage,03. Retour conditionnement
+Suspendu,entrees,transfertcomptamatierecession,04. Transfert de produits
+Suspendu,entrees,travailafacon,05. Retour Travail à façon
+Suspendu,entrees,retourmarchandisetaxees,06. Retour vin CRD acquittées
+Suspendu,entrees,retourmarchandisenontaxees,07. Retour vin en suspension
+Suspendu,entrees,achatcrd,08. Achat CRD acquittées
+Suspendu,entrees,achatnoncrd,09. Achat suspension
+Suspendu,entrees,regularisation,10. Excédent constaté
+Suspendu,entrees,cooperative,11. Coopérative
+Suspendu,sorties,export,01. Export
+Suspendu,sorties,creationvrac,02. Vrac négoce
+Suspendu,sorties,creationvractirebouche,03. Bouteilles négoce
+Suspendu,sorties,apportgroupement,04. Livraison coopérative
+Suspendu,sorties,vracsanscontratacquitte,05. Petit vrac France
+Suspendu,sorties,ventefrancecrd,06. Vente sous CRD
+Suspendu,sorties,transfertcomptamatiere,07. Transfert de produits
+Suspendu,sorties,declassement,08. Déclassement
+Suspendu,sorties,travailafacon,09. Travail à façon
+Suspendu,sorties,embouteillage,10. Conditionnement
+Suspendu,sorties,consommationfamilialedegustation,11. Conso. fam./Dégustation
+Suspendu,sorties,destructionperte,12. Destruction/perte
+Suspendu,sorties,manquant,13. Manquants
+Suspendu,sorties,cession,14. Cession d'exploitation
+Suspendu,stocks_fin,instance,En instance de revendication
+Suspendu,stocks_fin,final,Final
+Acquitté,stocks_debut,instance,En instance
+Acquitté,stocks_debut,initial,Initial
+Acquitté,entrees,achat,Achats
+Acquitté,entrees,autre,Autres
+Acquitté,sorties,autre,Autres
+Acquitté,sorties,replacementsuspension,Replacement en suspension
+Acquitté,sorties,vente,Ventes de produits
+Acquitté,stocks_fin,instance,En instance
+Acquitté,stocks_fin,final,Final

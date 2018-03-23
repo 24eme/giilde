@@ -99,11 +99,18 @@ class DRMESDetails extends BaseDRMESDetails {
         $mouvement->type_hash .= $this->getKey();
         $mouvement->volume = $volume;
 
-        if ($config->isVrac()) {
+        if ($config->isVrac() && !$this->getProduitDetail()->isContratExterne()) {
+            $vrac = $detail->getVrac();
             $mouvement->categorie = FactureClient::FACTURE_LIGNE_PRODUIT_TYPE_VINS;
-            $mouvement->vrac_numero = $detail->getVrac()->numero_contrat;
-            $mouvement->vrac_destinataire = $detail->getVrac()->acheteur->nom;
+            $mouvement->vrac_numero = $vrac->numero_contrat;
+            $mouvement->vrac_destinataire = $vrac->acheteur->nom;
             $mouvement->cvo = $this->getProduitDetail()->getCVOTaux() * $detail->getVrac()->getRepartitionCVOCoef($detail->getVrac()->vendeur_identifiant, $detail->getDocument()->getDate());
+        }
+
+        if ($config->isVrac() && $this->getProduitDetail()->isContratExterne()) {
+            $mouvement->categorie = FactureClient::FACTURE_LIGNE_PRODUIT_TYPE_VINS_EXTERNE;
+            $mouvement->vrac_numero = null;
+            $mouvement->vrac_destinataire = null;
         }
 
         $mouvement->date = $detail->date_enlevement;
@@ -115,6 +122,11 @@ class DRMESDetails extends BaseDRMESDetails {
         $config = $this->getProduitDetail()->getConfig()->get($this->getNoeud()->getKey() . '/' . $this->getTotalHash());
 
         if (!$config->isVrac()) {
+
+            return null;
+        }
+
+        if(!$detail->getVrac()) {
 
             return null;
         }
@@ -135,6 +147,11 @@ class DRMESDetails extends BaseDRMESDetails {
         $config = $this->getProduitDetail()->getConfig()->get($this->getNoeud()->getKey() . '/' . $this->getTotalHash());
 
         if (!$config->isVrac()) {
+            return null;
+        }
+
+        if(!$detail->getVrac()) {
+
             return null;
         }
 

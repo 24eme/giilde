@@ -10,11 +10,11 @@ class DRMDetailEntreesForm extends acCouchdbObjectForm {
         $declassementIgp = (DRMConfiguration::getInstance()->hasDeclassementIgp())?  '/AOC/' :'/AOC|IGP/';
         foreach ($configurationDetail->getEntreesSorted() as $key => $value) {
             if ($value->readable) {
-                if (!$value->writable
-                   || (preg_match($declassementIgp, $certif) && ($key == 'declassement'))
- || ( preg_match('/AUTRES/', $certif) && ($key != 'recolte') && ($key != 'revendication') && ($key != 'transfertsrecolte'))
-                   || (preg_match('/USAGESINDUSTRIELS/', $appellation) && (!$value->restriction_lies))
-		              ||  (preg_match('/VINSSIG/', $certif) && ($key == 'repli'))) {
+                if (!$value->writable || (preg_match($declassementIgp, $certif) && ($key == 'declassement'))
+                    || (($certif == 'AUTRES') && ($key != 'recolte') && ($key != 'revendication') && ($key != 'transfertsrecolte'))
+                    || (preg_match('/USAGESINDUSTRIELS/', $appellation) && (!$value->restriction_lies))
+		                || (preg_match('/VINSSIG/', $certif) && ($key == 'repli')))
+                {
                     $this->setWidget($key, new bsWidgetFormInputFloat(array(), array('readonly' => 'readonly')));
                 } else {
                     $this->setWidget($key, new bsWidgetFormInputFloat());

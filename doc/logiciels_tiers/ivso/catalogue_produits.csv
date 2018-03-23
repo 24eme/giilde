@@ -132,5 +132,36 @@ Vin sans IG,Tranquille,,,,Blanc doux,,Vin sans IG Blanc doux
 Vin sans IG,Mousseux,,,,Rouge,,Vin sans IG Rouge Mousseux
 Vin sans IG,Mousseux,,,,Blanc,,Vin sans IG Blanc Mousseux
 Vin sans IG,Mousseux,,,,Rosé,,Vin sans IG Rosé Mousseux
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Blanc,,Vin de Liqueur AOP (Sup 18°) Blanc
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rosé,,Vin de Liqueur AOP (Sup 18°) Rosé
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rouge,,Vin de Liqueur AOP (Sup 18°) Rouge
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Blanc,,Vin de Liqueur AOP (Inf 18°) Blanc
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rosé,,Vin de Liqueur AOP (Inf 18°) Rosé
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rouge,,Vin de Liqueur AOP (Inf 18°) Rouge
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Blanc,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Blanc
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rosé,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rosé
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rouge
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,Blanc,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Blanc
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,Rosé,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rosé
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rouge
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°)
+VDN-VDL,,Floc de Gascogne,,,Rosé,,Floc de Gascogne Rosé
+VDN-VDL,,Floc de Gascogne,,,Blanc,,Floc de Gascogne Blanc
+Alcools,,Alcools supérieur 18° (autres que Rhum),,,,,Alcools supérieur 18° (autres que Rhum)
+Alcools,,Alcool inférieur 18° (autres que Rhum),,,,,Alcool inférieur 18° (autres que Rhum)
+Alcools,,PREMIX Alcool inférieur 18°,,,,,PREMIX Alcool inférieur 18°
+Alcools,,Matières premières spiritueux,,,,,Matières premières spiritueux
+Alcools,,Matières premières alcools,,,,,Matières premières alcools
+Autres Vins,,Pétillants,,,Rosé,,Pétillants Rosé
+Autres Vins,,Pétillants,,,Rouge,,Pétillants Rouge
+Autres Vins,,Pétillants,,,Blanc,,Pétillants Blanc
+Autres Vins,,Pétillants Prémix,,,,,Pétillants Prémix
+Autres Vins,,Vins tranquilles étrangers,,,Rouge,,Vins tranquilles étrangers Rouge
+Autres Vins,,Vins tranquilles étrangers,,,Rosé,,Vins tranquilles étrangers Rosé
+Autres Vins,,Vins tranquilles étrangers,,,Blanc sec,,Vins tranquilles étrangers Blanc sec
+Autres Vins,,Vins tranquilles étrangers,,,Blanc doux,,Vins tranquilles étrangers Blanc doux
+Autres Vins,,Vins mousseux étrangers,,,,,Vins mousseux étrangers
 Autres,,Lies et Bourbes,,,,,Lies et Bourbes
-Autres,,DPLC,,,,,DPLC
+Autres,,"Lies, bourbes et vins à éliminer",,,,,"Lies, bourbes et vins à éliminer"
+Autres,,DPLC,,,Blanc,,DPLC Blanc
+Autres,,DPLC,,,Rouge,,DPLC Rouge

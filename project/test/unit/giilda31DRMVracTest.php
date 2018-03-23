@@ -8,13 +8,21 @@ if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration-
     exit(0);
 }
 
-$t = new lime_test(18);
+$t = new lime_test(27);
 
 $nego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
 $nego_horsregion = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_horsregion')->getEtablissement();
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();
-$produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
-$produit_hash = array_shift($produits);
+$produit_hash = null;
+$produitSansCvo_hash = null;
+foreach(ConfigurationClient::getInstance()->getCurrent()->getProduits() as $produit) {
+    if($produit->getTauxCVO(date("Y-m-d")) > 0 && !$produit_hash) {
+        $produit_hash = $produit->getHash();
+    }
+    if($produit->getTauxCVO(date("Y-m-d")) <= 0 && !$produitSansCvo_hash) {
+        $produitSansCvo_hash = $produit->getHash();
+    }
+}
 $periode = date('Ym');
 
 //Suppression des DRM précédentes
@@ -24,12 +32,16 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
 }
 
 //Début des tests
-$t->comment("création d'une DRM avec une sortie vrac");
+$t->comment("création d'une DRM");
 
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode, true);
 $drm->save();
 $details = $drm->addProduit($produit_hash, 'details');
 $details->stocks_debut->initial = 1000;
+
+$t->comment("Ajout d'une sortie vrac");
+
+$t->ok(!$details->isContratExterne(), "Le produit ne permet pas des sorties de contrats externe");
 
 $vrac = array_shift(VracClient::getInstance()->getBySoussigne($drm->campagne, $nego->identifiant)->rows);
 $vracObj = VracClient::getInstance()->find($vrac->value[VracSoussigneIdentifiantView::VRAC_VIEW_VALUE_ID]);
@@ -37,7 +49,7 @@ $vracObj = VracClient::getInstance()->find($vrac->value[VracSoussigneIdentifiant
 $contrat = DRMESDetailVrac::freeInstance($drm);
 $contrat->identifiant = $vrac->value[VracSoussigneIdentifiantView::VRAC_VIEW_VALUE_ID];
 $contrat->volume = 100;
-$details->sorties->vrac_details->addDetail($contrat);
+$contrat = $details->sorties->vrac_details->addDetail($contrat);
 $details->sorties->ventefrancecrd = 100;
 $contrat_key = $contrat->getKey();
 if (!$contrat_key) {
@@ -45,25 +57,48 @@ if (!$contrat_key) {
 }else {
   $t->is($drm->getProduit($produit_hash, 'details')->get("sorties/vrac_details")->get($contrat_key)->getKey(), $contrat_key, $drm->_id." : les clés de contrat sont conservées");
 }
+
+$t->is($contrat->getIdentifiantLibelle(), $vrac->value[VracSoussigneIdentifiantView::VRAC_VIEW_VALUE_NUMERO_ARCHIVE], "Construction du libellé du détail avec le numéro d'archive");
+
+//Début des tests
+$t->comment("Ajout d'une sortie vrac sans CVO");
+$detailsSansCvo = $drm->addProduit($produitSansCvo_hash, 'details');
+$detailsSansCvo->stocks_debut->initial = 1000;
+
+$t->ok($detailsSansCvo->isContratExterne(), "Le produit permet des sorties de contrats externe");
+
+$contrat = DRMESDetailVrac::freeInstance($drm);
+$contrat->identifiant = "4587416";
+$contrat->volume = 100;
+$contrat = $detailsSansCvo->sorties->vrac_details->addDetail($contrat);
+
+$t->is($contrat->getIdentifiantLibelle(), "externe ".$contrat->identifiant, "Construction du libellé du détail avec \"externe\"");
+
+$t->comment("Mise à jour et sauvegarde la DRM");
 $drm->update();
 $drm->save();
 
 $drm = DRMClient::getInstance()->findMasterByIdentifiantAndPeriode($viti->identifiant, $periode);
 $t->is($drm->getProduit($produit_hash, 'details')->get('stocks_fin/final'), 800, $drm->_id." : le stock final est impacté");
-$t->is(count($drm->getProduit($produit_hash, 'details')->get('sorties/vrac_details')), 1, $drm->_id." : la DRM a bien une sortie vrac");
+$t->is(count($drm->getProduit($produit_hash, 'details')->get('sorties/vrac_details')), 1, $drm->_id." : le produit avec CVO a bien 1 sortie vrac");
+$t->is(count($drm->getProduit($produit_hash, 'details')->get('sorties/vrac_details')), 1, $drm->_id." : le produit sans CVO a bien 1 sortie vrac");
 
 $t->comment("validation de la DRM et génération des mouvements");
 $drm->validate();
 $drm->save();
 
 $mvts_viti = $drm->mouvements->{$drm->identifiant};
-$t->is(count($mvts_viti), 2, $drm->_id." : la validation a généré trois mouvements (viti + négo)");
+$t->is(count($mvts_viti), 3, $drm->_id." : la validation a généré trois mouvements viti");
 foreach ($mvts_viti as $mvt) {
-  if ($mvt->type_hash == 'sorties/ventefrancecrd') {
-    $mvt_crd = $mvt;
-  }elseif ($mvt->type_hash == 'vrac_details') {
-    $mvt_vrac = $mvt;
-  }
+    if ($mvt->type_hash == 'sorties/ventefrancecrd') {
+        $mvt_crd = $mvt;
+    }
+    if ($mvt->type_hash == 'vrac_details' && $mvt->vrac_numero) {
+        $mvt_vrac = $mvt;
+    }
+    if ($mvt->type_hash == 'vrac_details' && !$mvt->vrac_numero) {
+        $mvt_vrac_externe = $mvt;
+    }
 }
 
 if($application == "ivbd") {
@@ -73,6 +108,11 @@ if($application == "ivbd") {
     $t->is($mvt_vrac->facturable, 1, $drm->_id." : le mouvement de sortie vrac est facturable");
     $t->is($mvt_vrac->cvo, $mvt_crd->cvo / 2, $drm->_id." : la cvo du mouvement de sortie vrac est de 50%");
 }
+
+$t->ok(!$mvt_vrac_externe->isVrac(), $drm->_id." : Le mouvement de vrac externe n'est pas considéré comme du vrac");
+$t->is($mvt_vrac_externe->categorie, FactureClient::FACTURE_LIGNE_PRODUIT_TYPE_VINS_EXTERNE, $drm->_id." : La catégorie du mouvement de vrac externe est ".FactureClient::FACTURE_LIGNE_PRODUIT_TYPE_VINS_EXTERNE);
+$t->is($mvt_vrac_externe->facturable, 0, $drm->_id." : le mouvement de vrac externe n'est pas facturable");
+$t->is($mvt_vrac_externe->cvo, 0, $drm->_id." : la cvo du mouvement de vrac externe est de 0");
 
 $mvts_nego = $drm->mouvements->{$nego->identifiant};
 $t->is(count($mvts_nego), 1, $drm->_id." : la validation a généré un mouvement chez le nego");
@@ -108,7 +148,7 @@ $enlevement = array_shift($enlevements);
 $t->is($enlevement->volume, 100, $vracObj->_id." : on retrouve l'enlévement de volume 100 hl.");
 
 $vracObj = VracClient::getInstance()->find($vrac->value[VracSoussigneIdentifiantView::VRAC_VIEW_VALUE_ID]);
-$t->is($vracObj->volume_enleve, 100, $vracObj->_id." : Le contrat a bien pour volume enlevé : 100");
+$t->is($vracObj->volume_enleve, 100, $vracObj->_id." : Le contrat a pour volume enlevé : 100");
 
 $t->comment("Génère une nouvelle modificatrice et change le contrat pour un contrat hors region");
 $drm_mod = $drm->generateModificative();
