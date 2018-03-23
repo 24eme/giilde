@@ -45,11 +45,11 @@ if($lastPeriode) {
 			$totalTotal = (formatNumber($appellation['total_total']['value']) != 0)? formatNumber($appellation['total_total']['value']) : null;
 			foreach ($appellation['agg_line']['buckets'] as $couleur) {
 				$couleurLibelle = getCouleurLibelle($couleur['key']);
-				$france = (formatNumber($couleur['france']['agg_column']['value']) != 0)? formatNumber($couleur['france']['agg_column']['value']) : null;
-				$export = (formatNumber($couleur['export']['agg_column']['value']) != 0)? formatNumber($couleur['export']['agg_column']['value']) : null;
-				$negoce = (formatNumber($couleur['negoce']['agg_column']['agg_column']['value']) != 0)? formatNumber($couleur['negoce']['agg_column']['agg_column']['value']) : null;
-				$total = (formatNumber($couleur['total']['value']) != 0)? formatNumber($couleur['total']['value']) : null;
-				if (!$france && !$export && !$negoce) {
+				$france = ($couleur['france']['agg_column']['value'] != 0)? formatNumber($couleur['france']['agg_column']['value']) : null;
+				$export = ($couleur['export']['agg_column']['value'] != 0)? formatNumber($couleur['export']['agg_column']['value']) : null;
+				$negoce = ($couleur['negoce']['agg_column']['agg_column']['value'] != 0)? formatNumber($couleur['negoce']['agg_column']['agg_column']['value']) : null;
+				$total = ($couleur['total']['value'] != 0)? formatNumber($couleur['total']['value']) : null;
+				if ($france === null && $export === null && $negoce === null) {
 					continue;
 				}
 				$csv .= $appellationLibelle.';'.$couleurLibelle.';'.$france.';'.$export.';'.$negoce.';'.$total."\n";
