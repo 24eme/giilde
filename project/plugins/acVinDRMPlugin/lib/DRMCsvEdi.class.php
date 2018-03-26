@@ -39,7 +39,7 @@ class DRMCsvEdi extends CsvFile {
     const CSV_CRD_GENRE = 5;
     const CSV_CRD_CENTILITRAGE = 6;
 
-    const CSV_CRD_TYPE_DRM = 13;
+    const CSV_CRD_REGIME = 13;
     const CSV_CRD_CATEGORIE_KEY = 14;
     const CSV_CRD_TYPE_KEY = 15;
     const CSV_CRD_QUANTITE = 16;

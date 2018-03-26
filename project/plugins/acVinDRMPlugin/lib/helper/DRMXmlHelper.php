@@ -126,11 +126,11 @@ function drm2CrdCiel($drm) {
 }
 
 function crdGenre2CategorieFiscale($g) {
-	$crdGenre2CategorieFiscaleArray = array('TRANQ' => 'T', 'MOUSSEUX' => 'M');
+	$crdGenre2CategorieFiscaleArray = array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'T', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'M');
 	return $crdGenre2CategorieFiscaleArray[$g];
 }
 function crdType2TypeCapsule($t) {
-	$crdType2TypeCapsuleArray = array('COLLECTIFSUSPENDU'=>'COLLECTIVES_DROITS_SUSPENDUS', 'COLLECTIFACQUITTE' => 'COLLECTIVES_DROITS_ACQUITTES', 'PERSONNALISE'=>'PERSONNALISEES');
+	$crdType2TypeCapsuleArray = array(DRMClient::DRM_CRD_TYPE_COLLECTIFSUSPENDU=>'COLLECTIVES_DROITS_SUSPENDUS', DRMClient::DRM_CRD_TYPE_COLLECTIFACQUITTE => 'COLLECTIVES_DROITS_ACQUITTES', DRMClient::DRM_CRD_TYPE_PERSONNALISESUSPENDU=>'PERSONNALISEES');
 	return $crdType2TypeCapsuleArray[$t];
 }
 function documentAnnexeKey2XMLTag($d) {

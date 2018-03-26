@@ -17,9 +17,11 @@ class DRMClient extends acCouchdbClient {
     const VALIDE_STATUS_VALIDEE = 'VALIDEE';
     const VALIDE_STATUS_VALIDEE_ENVOYEE = 'ENVOYEE';
     const VALIDE_STATUS_VALIDEE_RECUE = 'RECUE';
-    const DRM_VERT = 'VERT';
-    const DRM_BLEU = 'BLEU';
-    const DRM_LIEDEVIN = 'LIEDEVIN';
+    const DRM_CRD_VERT = 'VERT';
+    const DRM_CRD_BLEU = 'BLEU';
+    const DRM_CRD_LIEDEVIN = 'LIEDEVIN';
+    const DRM_CRD_CATEGORIE_TRANQ = 'TRANQ';
+    const DRM_CRD_CATEGORIE_MOUSSEUX = 'MOUSSEUX';
     const DRM_DOCUMENTACCOMPAGNEMENT_DAADAC = 'DAADAC';
     const DRM_DOCUMENTACCOMPAGNEMENT_DAE = 'DAE';
     const DRM_DOCUMENTACCOMPAGNEMENT_DSADSAC = 'DSADSAC';
@@ -40,7 +42,7 @@ class DRMClient extends acCouchdbClient {
     public static $types_libelles = array(DRM::DETAILS_KEY_SUSPENDU => 'Suspendu', DRM::DETAILS_KEY_ACQUITTE => 'Acquitté');
     public static $types_node_from_libelles = array(self::TYPE_DRM_SUSPENDU => DRM::DETAILS_KEY_SUSPENDU, self::TYPE_DRM_ACQUITTE => DRM::DETAILS_KEY_ACQUITTE);
     public static $drm_etapes = array(self::ETAPE_CHOIX_PRODUITS, self::ETAPE_SAISIE_SUSPENDU, self::ETAPE_SAISIE_ACQUITTE, self::ETAPE_CRD, self::ETAPE_ADMINISTRATION, self::ETAPE_VALIDATION);
-    public static $drm_crds_couleurs = array(self::DRM_VERT => 'Vert', self::DRM_BLEU => 'Bleu', self::DRM_LIEDEVIN => 'Lie de vin');
+    public static $drm_crds_couleurs = array(self::DRM_CRD_VERT => 'Vert', self::DRM_CRD_BLEU => 'Bleu', self::DRM_CRD_LIEDEVIN => 'Lie de vin');
     public static $drm_max_favoris_by_types_mvt = array(self::DRM_TYPE_MVT_ENTREES => 3, self::DRM_TYPE_MVT_SORTIES => 6);
     public static $drm_documents_daccompagnement = array(
         self::DRM_DOCUMENTACCOMPAGNEMENT_DAADAC => 'DAA/DAC',
@@ -639,4 +641,80 @@ class DRMClient extends acCouchdbClient {
         return $mouvementsSorted;
     }
 
+    public static function convertCRDCouleur($s) {
+      switch (preg_replace('[ _]', '', strtoupper($s))) {
+        case self::DRM_CRD_BLEU:
+          return self::DRM_CRD_BLEU;
+        case self::DRM_CRD_VERT:
+        case '':
+          return self::DRM_CRD_VERT;
+        case self::DRM_CRD_LIEDEVIN:
+          return self::DRM_CRD_LIEDEVIN;
+      }
+      return '';
+    }
+
+    public static function convertCRDGenre($s) {
+      $s = strtoupper(KeyInflector::slugify($s));
+      if (preg_match('/^TRANQ/', $s)) {
+        return self::DRM_CRD_CATEGORIE_TRANQ;
+      }
+      if (preg_match('/^MOU/', $s)) {
+        return self::DRM_CRD_CATEGORIE_MOUSSEUX;
+      }
+      return '';
+    }
+    public static function convertCRDRegime($s) {
+      $s = strtoupper(KeyInflector::slugify($s));
+      if (preg_match('/PERSONNALISE/', $s)) {
+        return EtablissementClient::REGIME_CRD_PERSONNALISE;
+      }
+      if (preg_match('/ACQUIT/', $s)) {
+        return EtablissementClient::REGIME_CRD_COLLECTIF_ACQUITTE;
+      }
+      if (preg_match('/SUSPEND/', $s)) {
+        return EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU;
+      }
+      return '';
+    }
+    public static function convertCRDLitrage($s) {
+      return VracConfiguration::slugifyContenances($s);
+    }
+    public static function convertCRDCategorie($s) {
+      $s = strtolower(KeyInflector::slugify($s));
+      if (preg_match('/^entr/', $s)) {
+        return 'entrees';
+      }
+      if (preg_match('/^sortie/', $s)) {
+        return 'sorties';
+      }
+      if (preg_match('/debut$/', $s)) {
+        return 'stock_debut';
+      }
+      if (preg_match('/fin$/', $s)) {
+        return 'stock_fin';
+      }
+    }
+    public static function convertCRDType($s) {
+      $s = strtolower(KeyInflector::slugify($s));
+      switch ($s) {
+        case "fin":
+            return "fin";
+        case "debut":
+            return "debut";
+        case "achats":
+            return "achats";
+        case "retours":
+            return "retours";
+        case "excedents":
+            return "excedents";
+        case "utilisations":
+            return "utilisations";
+        case "destructions":
+            return "destructions";
+        case "manquants":
+            return "manquants";
+      }
+      return '';
+    }
 }

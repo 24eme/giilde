@@ -62,9 +62,9 @@ class DRMCrds extends BaseDRMCrds {
         $contenance75 = $contenances['Bouteille 75 cl'] * self::FACTLITRAGE;
 
         foreach ($genres as $genre) {
-            $this->getOrAddCrdNode($genre, DRMClient::DRM_VERT, $contenance75);
-            $this->getOrAddCrdNode($genre, DRMClient::DRM_BLEU, $contenance75);
-            $this->getOrAddCrdNode($genre, DRMClient::DRM_LIEDEVIN, $contenance75);
+            $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_VERT, $contenance75);
+            $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_BLEU, $contenance75);
+            $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_LIEDEVIN, $contenance75);
         }
     }
 
