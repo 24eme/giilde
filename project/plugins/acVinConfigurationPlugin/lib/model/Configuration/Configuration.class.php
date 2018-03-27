@@ -68,12 +68,13 @@ class Configuration extends BaseConfiguration {
         foreach($this->getProduits() as $produit) {
             $codeProduitSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($produit->getCodeDouane())));
             if($codeSlugify == $codeProduitSlugify) {
-                $this->identifyCodeDouaneProduct[$code] = $produit;
-                return $produit;
+                $this->identifyCodeDouaneProduct[$code][] = $produit;
             }
         }
-
-        return false;
+        if (isset($this->identifyCodeDouaneProduct[$code])) {
+          return $this->identifyCodeDouaneProduct[$code];
+        }
+        return array();
     }
 
     public function getTemplatesFactures() {

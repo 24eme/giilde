@@ -182,9 +182,18 @@ class DRMImportCsvEdi extends DRMCsvEdi {
             if(!$founded_produit && ($keys_libelle != '      ')) {
                 $founded_produit = $this->configuration->identifyProductByLibelle($keys_libelle);
             }
-            if(!$founded_produit && preg_match('/\(([^\)]+)\)/', $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT], $m)) {
-              var_dump($m);
-              $founded_produit = $this->configuration->identifyProductByCodeDouane(trim($m[1]));
+            if(!$founded_produit && preg_match('/(.*) *\(([^\)]+)\)/', $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT], $m)) {
+              $produits = $this->configuration->identifyProductByCodeDouane(trim($m[2]));
+              if (count($produits) == 1) {
+                $founded_produit = $produits[0];
+              }else {
+                foreach($produits as $p) {
+                  if (preg_match('/'.preg_replace('/[\/\(\)]/', '.', $m[1]).'/', $p->getLibelleFormat())) {
+                    $founded_produit = $p;
+                    break;
+                  }
+                }
+              }
             }
             if(!$founded_produit) {
                 $founded_produit = $this->configuration->identifyProductByLibelle(trim(preg_replace('/ *\(.*/', '', preg_replace("/[ ]+/", " ", $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT]))));
