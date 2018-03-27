@@ -288,11 +288,13 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                     if($type_key == 'creationvrac' || $type_key == 'creationvractirebouche'){
                         $creationvrac = DRMESDetailCreationVrac::freeInstance($this->drm);
                         $creationvrac->volume = $volume;
-                        $creationvrac->prixhl = floatval($csvRow[18]);
-                        $creationvrac->acheteur = $csvRow[17];
+                        $creationvrac->prixhl = floatval($csvRow[self::CSV_CAVE_CONTRAT_PRIXHL]);
+                        $nego = EtablissementClient::getInstance()->findByNoAccise($csvRow[self::CSV_CAVE_CONTRAT_ACHETEUR_ACCISES]);
+                        if (!$nego) {
+                          $nego = EtablissementClient::getInstance()->retrieveByName($csvRow[self::CSV_CAVE_CONTRAT_ACHETEUR_NOM]);
+                        }
+                        $creationvrac->acheteur = $nego->identifiant;
                         $creationvrac->type_contrat = ($type_key == 'creationvrac')? VracClient::TYPE_TRANSACTION_VIN_VRAC : VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE;
-                        $creationvrac->date_enlevement = DateTime::createFromFormat('Ymd',$csvRow[19])->format('Y-m-d');
-
                         $drmDetails->getOrAdd($cat_key)->getOrAdd($type_key . '_details')->addDetail($creationvrac);
                     }
                 } else {

@@ -35,6 +35,11 @@ class DRMCsvEdi extends CsvFile {
     const CSV_CAVE_CONTRATID = 18;
     const CSV_CAVE_COMMENTAIRE = 19;
 
+    const CSV_CAVE_CONTRAT_PRIXHL = 20;
+    const CSV_CAVE_CONTRAT_ACHETEUR_ACCISES = 21;
+    const CSV_CAVE_CONTRAT_ACHETEUR_NOM = 22;
+
+
     const CSV_CRD_COULEUR = 4;
     const CSV_CRD_GENRE = 5;
     const CSV_CRD_CENTILITRAGE = 6;
