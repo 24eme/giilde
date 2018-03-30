@@ -4,6 +4,7 @@ class FactureClient extends acCouchdbClient {
 
     const FACTURE_LIGNE_ORIGINE_TYPE_DRM = "DRM";
     const FACTURE_LIGNE_ORIGINE_TYPE_SV12 = "SV12";
+    const FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO = "SV12NEGO";
     const FACTURE_LIGNE_ORIGINE_TYPE_MOUVEMENTSFACTURE = "MouvementsFacture";
     const FACTURE_LIGNE_MOUVEMENT_TYPE_PROPRIETE = "propriete";
     const FACTURE_LIGNE_MOUVEMENT_TYPE_CONTRAT = "contrat";
@@ -16,10 +17,11 @@ class FactureClient extends acCouchdbClient {
     const STATUT_NONREDRESSABLE = 'NON_REDRESSABLE';
     const TYPE_FACTURE_MOUVEMENT_DRM = "MOUVEMENTS_DRM";
     const TYPE_FACTURE_MOUVEMENT_SV12 = "MOUVEMENTS_SV12";
+    const TYPE_FACTURE_MOUVEMENT_SV12_NEGO = "MOUVEMENTS_SV12_NEGO";
     const TYPE_FACTURE_MOUVEMENT_DIVERS = "MOUVEMENTS_DIVERS";
 
-    public static $origines = array(self::FACTURE_LIGNE_ORIGINE_TYPE_DRM, self::FACTURE_LIGNE_ORIGINE_TYPE_SV12, self::FACTURE_LIGNE_ORIGINE_TYPE_MOUVEMENTSFACTURE);
-    public static $type_facture_mouvement = array(self::TYPE_FACTURE_MOUVEMENT_DRM => 'Facturation DRM',self::FACTURE_LIGNE_ORIGINE_TYPE_SV12 => 'Facturation SV12', self::TYPE_FACTURE_MOUVEMENT_DIVERS => 'Facturation libre');
+    public static $origines = array(self::FACTURE_LIGNE_ORIGINE_TYPE_DRM, self::FACTURE_LIGNE_ORIGINE_TYPE_SV12, self::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO, self::FACTURE_LIGNE_ORIGINE_TYPE_MOUVEMENTSFACTURE);
+    public static $type_facture_mouvement = array(self::TYPE_FACTURE_MOUVEMENT_DRM => 'Facturation DRM',self::FACTURE_LIGNE_ORIGINE_TYPE_SV12 => 'Facturation SV12 gloabale',self::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO => 'Facturation SV12 Négociants', self::TYPE_FACTURE_MOUVEMENT_DIVERS => 'Facturation libre');
 
     public static function getInstance() {
         return acCouchdbManager::getClient("Facture");
@@ -77,11 +79,11 @@ class FactureClient extends acCouchdbClient {
         $facture->storeOrigines();
         if ($modele == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_DRM) {
             $facture->arguments->add(FactureClient::TYPE_FACTURE_MOUVEMENT_DRM, FactureClient::TYPE_FACTURE_MOUVEMENT_DRM);
-        }
-        elseif ($modele == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12) {
+        } elseif ($modele == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12) {
               $facture->arguments->add(FactureClient::TYPE_FACTURE_MOUVEMENT_SV12, FactureClient::TYPE_FACTURE_MOUVEMENT_SV12);
-        }
-        elseif ($modele == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_MOUVEMENTSFACTURE) {
+        } elseif ($modele == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO) {
+              $facture->arguments->add(FactureClient::TYPE_FACTURE_MOUVEMENT_SV12_NEGO, FactureClient::TYPE_FACTURE_MOUVEMENT_SV12_NEGO);
+        } elseif ($modele == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_MOUVEMENTSFACTURE) {
             $facture->arguments->add(FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS, FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS);
         }
         if (trim($message_communication)) {
@@ -188,6 +190,9 @@ class FactureClient extends acCouchdbClient {
         $modele = null;
         if (isset($parameters['modele']) && $parameters['modele']) {
             $modele = $parameters['modele'];
+            if ($modele == self::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO) {
+                $modele = self::FACTURE_LIGNE_ORIGINE_TYPE_SV12;
+            }
         }
         foreach ($mouvementsBySoc as $identifiant => $mouvements) {
             foreach ($mouvements as $key => $mouvement) {
@@ -197,12 +202,12 @@ class FactureClient extends acCouchdbClient {
                     $mouvementsBySoc[$identifiant] = $mouvements;
                     continue;
                 }
-                if ($modele && !in_array($parameters['modele'], self::$origines)) {
+                if ($modele && !in_array($modele, self::$origines)) {
                     unset($mouvements[$key]);
                     $mouvementsBySoc[$identifiant] = $mouvements;
                     continue;
                 }
-                if ($modele && $parameters['modele'] != $mouvement->key[MouvementfactureFacturationView::KEYS_ORIGIN]) {
+                if ($modele && $modele != $mouvement->key[MouvementfactureFacturationView::KEYS_ORIGIN]) {
                     unset($mouvements[$key]);
                     $mouvementsBySoc[$identifiant] = $mouvements;
                     continue;
@@ -474,6 +479,7 @@ class FactureClient extends acCouchdbClient {
 
         if(!SV12Configuration::getInstance()->isActif()) {
             unset($type_mouvement[FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12]);
+            unset($type_mouvement[FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO]);
         }
 
         return $type_mouvement;

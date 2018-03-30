@@ -22,7 +22,6 @@ class GenerationFacturePDF extends GenerationPDF {
 
         $allMouvementsByRegion = FactureClient::getInstance()->getMouvementsForMasse(null);
         $mouvementsBySoc = FactureClient::getInstance()->getMouvementsNonFacturesBySoc($allMouvementsByRegion);
-
         $arguments = $this->generation->arguments->toArray();
         if (!isset($arguments['modele']) || !$arguments['modele']) {
             throw new sfException("Le modele n'existe pas dans les arguments de la génération");
@@ -30,17 +29,24 @@ class GenerationFacturePDF extends GenerationPDF {
         $mouvementsBySoc = FactureClient::getInstance()->filterWithParameters($mouvementsBySoc, $arguments);
         $message_communication = (array_key_exists('message_communication', $arguments)) ? $arguments['message_communication'] : null;
         if (!$this->generation->exist('somme'))
-            $this->generation->somme = 0;
+          $this->generation->somme = 0;
         $cpt = count($this->generation->documents);
         foreach ($mouvementsBySoc as $societeID => $mouvementsSoc) {
-            $societe = SocieteClient::getInstance()->find($societeID);
-            if (!$societe)
-                throw new sfException($societeID . " unknown :(");
-            $facture = FactureClient::getInstance()->createDocFromMouvements($mouvementsSoc, $societe, $arguments['modele'], $arguments['date_facturation'], $message_communication);
-            $facture->save();
-            $this->generation->somme += $facture->total_ht;
-            $this->generation->documents->add($cpt, $facture->_id);
-            $cpt++;
+          $societe = SocieteClient::getInstance()->find($societeID);
+          if (!$societe)
+              throw new sfException($societeID . " unknown :(");
+          $modele = $arguments['modele'];
+          if ($modele == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO) {
+              if (!$societe->isNegociant()) {
+                continue;
+              }
+              $modele = FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12;
+          }
+          $facture = FactureClient::getInstance()->createDocFromMouvements($mouvementsSoc, $societe, $modele, $arguments['date_facturation'], $message_communication);
+          $facture->save();
+          $this->generation->somme += $facture->total_ht;
+          $this->generation->documents->add($cpt, $facture->_id);
+          $cpt++;
         }
     }
 

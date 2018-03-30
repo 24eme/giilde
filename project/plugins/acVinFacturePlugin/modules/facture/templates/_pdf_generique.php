@@ -28,34 +28,40 @@ include_partial('facture/pdf_generique_entete', array('facture' => $facture, 'av
                       ~ & ~ & ~ & ~ &\\
 
 <?php
-$line_nb_current_page = FactureLatex::NB_LIGNES_ENTETE * ($nb_pages > 1);
-$current_avg_nb_lines_per_page = floor($nb_lines / $nb_pages);
-$max_line_nb_current_page = FactureLatex::MAX_LIGNES_PERPAGE - FactureLatex::NB_LIGNES_ENTETE;
-$current_total_line_nb = 0;
-$current_nb_pages = 0;
+
+//Pour chaque ligne de facture :
 foreach ($facture->lignes as $type => $typeLignes) {
-    $line_nb_current_page++;
-    ?>
+  $line_nb++;
+?>
     \small{\textbf{<?php echo $typeLignes->getLibellePrincipal(); ?>}<?php if($typeLignes->getLibelleSecondaire()): ?> <?php echo $typeLignes->getLibelleSecondaire(); ?><?php endif; ?>} &
     \multicolumn{1}{r|}{~} &
     \multicolumn{1}{r|}{~} &
     \multicolumn{1}{r}{~}
     \\
     <?php
+    $nb_pages = 0;
     foreach ($typeLignes->details as $prodHash => $produit) {
+        $line_nb++;
         include_partial('facture/pdf_generique_tableRow', array('produit' => $produit->getRawValue(), 'facture' => $facture));
-        $line_nb_current_page++;
-        if ($line_nb_current_page > $current_avg_nb_lines_per_page || $line_nb_current_page >= $max_line_nb_current_page) {
-            for($i = 0 ; $i < ($max_line_nb_current_page - $line_nb_current_page); $i++):  ?>
+        //cas d'un besoin de changement de page
+        if ($line_nb >= $lines_per_page) {
+            //on ajoute des blancs
+            ?>
             ~ & ~ & ~ & ~ &\\
-            <?php endfor;?>
-                ~ & ~ & ~ & ~ & \\
+            ~ & ~ & ~ & \multicolumn{1}{r}{\textbf{.../...}} &\\
+            <?php for( ; $line_nb <= FactureLatex::MAX_LIGNES_PERPAGE - 1; $line_nb++):
+            ?>
+            ~ & ~ & ~ & ~ &\\
+          <?php endfor; ?>
+          ~ & ~ & ~ & ~ &\\
                             \end{tabular}
-                    };
+                          };
             \node[draw=gray, inner sep=-2pt, rounded corners=3pt, line width=2pt, fit=(tab1.north west) (tab1.north east) (tab1.south east) (tab1.south west)] {};
             \end{tikzpicture}
             <?php
+            //on fait un saut de page
             pdf_newpage();
+            //on remet les entete du tableau
             ?>
             \centering
             \fontsize{8}{10}\selectfont
@@ -72,29 +78,19 @@ foreach ($facture->lignes as $type => $typeLignes) {
               			\hline
                                   ~ & ~ & ~ & ~ &\\
             <?php
-            $current_total_line_nb += $line_nb_current_page;
-            $line_nb_current_page = 0;
-            $current_nb_pages++;
-            $max_line_nb_current_page = FactureLatex::MAX_LIGNES_PERPAGE;
-            $current_avg_nb_lines_per_page = ($nb_lines - $current_total_line_nb) / ($nb_pages - $current_nb_pages);
-        }
+            $nb_pages++;
+            $line_nb = 0;
+        } // fin de nouvelle page
     }
 }
-$nb_blank = FactureLatex::MAX_LIGNES_PERPAGE - $line_nb_current_page - FactureLatex::NB_LIGNES_REGLEMENT;
-$nb_echeances = count($facture->getEcheancesPapillon());
-if ($nb_echeances)
-    $nb_blank += - FactureLatex::NB_LIGNES_PAPILLONS_PAR_ECHEANCE * $nb_echeances - FactureLatex::NB_LIGNES_PAPILLONS_FIXE;
-if (!$current_nb_pages)
-    $nb_blank -= FactureLatex::NB_LIGNES_ENTETE;
 
-    for($i=0; $i<$nb_blank;$i++):
+$nb_blank = FactureLatex::MAX_LIGNES_PERPAGE - $line_nb - $total_lines_footer;
+for($i=0; $i<$nb_blank;$i++):
     ?>
 ~ & ~ & ~ & ~ &\\
-    <?php
-    endfor;
-    ?>
+<?php endfor; ?>
     \end{tabular}
-    };
+  };
     \node[draw=gray, inner sep=-2pt, rounded corners=3pt, line width=2pt, fit=(tab1.north west) (tab1.north east) (tab1.south east) (tab1.south west)] {};
 \end{tikzpicture}
 <?php
