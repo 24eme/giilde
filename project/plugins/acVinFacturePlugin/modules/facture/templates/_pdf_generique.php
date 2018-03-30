@@ -49,7 +49,7 @@ foreach ($facture->lignes as $type => $typeLignes) {
             ?>
             ~ & ~ & ~ & ~ &\\
             ~ & ~ & ~ & \multicolumn{1}{r}{\textbf{.../...}} &\\
-            <?php for( ; $line_nb <= FactureLatex::MAX_LIGNES_PERPAGE - 1; $line_nb++):
+            <?php for( ; $line_nb <= FactureLatex::MAX_LIGNES_PERPAGE - 3; $line_nb++):
             ?>
             ~ & ~ & ~ & ~ &\\
           <?php endfor; ?>
