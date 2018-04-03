@@ -54,7 +54,7 @@ function multiArray2XML($preXML) {
 }
 
 function details2XmlDouane($detail) {
-	$detailKey = preg_replace('/ACQUITTE/', '', $detail->getParent()->getKey());
+	$detailKey = $detail->getParent()->getKey();
 	$confDetail = null;
 	if(!$detail->getConfig()->getDocument()->declaration->exist($detailKey)){
 		$confDetail = $detail->getConfig()->getDocument()->declaration->details;
@@ -126,11 +126,11 @@ function drm2CrdCiel($drm) {
 }
 
 function crdGenre2CategorieFiscale($g) {
-	$crdGenre2CategorieFiscaleArray = array('TRANQ' => 'T', 'MOUSSEUX' => 'M');
+	$crdGenre2CategorieFiscaleArray = array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'T', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'M');
 	return $crdGenre2CategorieFiscaleArray[$g];
 }
 function crdType2TypeCapsule($t) {
-	$crdType2TypeCapsuleArray = array('COLLECTIFSUSPENDU'=>'COLLECTIVES_DROITS_SUSPENDUS', 'COLLECTIFACQUITTE' => 'COLLECTIVES_DROITS_ACQUITTES', 'PERSONNALISE'=>'PERSONNALISEES');
+	$crdType2TypeCapsuleArray = array(EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU=>'COLLECTIVES_DROITS_SUSPENDUS',  EtablissementClient::REGIME_CRD_COLLECTIF_ACQUITTE=> 'COLLECTIVES_DROITS_ACQUITTES', EtablissementClient::REGIME_CRD_PERSONNALISE=>'PERSONNALISEES');
 	return $crdType2TypeCapsuleArray[$t];
 }
 function documentAnnexeKey2XMLTag($d) {

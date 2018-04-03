@@ -1,38 +1,38 @@
 certification,genre,appellation,mention,lieu,couleur,cepage,libelle complet
-AOC  ,Tranquille  ,Bergerac  ,  ,  ,Rosé  ,,Bergerac Rosé  
-AOC  ,Tranquille  ,Bergerac  ,  ,  ,Blanc sec  ,,Bergerac Blanc sec  
-AOC  ,Tranquille  ,Côtes de Bergerac  ,  ,  ,Rouge  ,,Côtes de Bergerac Rouge  
-AOC  ,Tranquille  ,Côtes de Bergerac  ,  ,  ,Blanc  ,,Côtes de Bergerac Blanc  
-AOC  ,Tranquille  ,Côtes de Duras  ,  ,  ,Rouge  ,,Côtes de Duras Rouge  
-AOC  ,Tranquille  ,Côtes de Duras  ,  ,  ,Rosé  ,,Côtes de Duras Rosé  
-AOC  ,Tranquille  ,Côtes de Duras  ,  ,  ,Blanc sec  ,,Côtes de Duras Blanc sec  
-AOC  ,Tranquille  ,Côtes de Duras  ,  ,  ,Blanc moelleux  ,,Côtes de Duras Blanc moelleux  
-AOC  ,Tranquille  ,Montravel  ,  ,  ,Rouge  ,,Montravel Rouge  
-AOC  ,Tranquille  ,Montravel  ,  ,  ,Blanc sec  ,,Montravel Blanc sec  
-AOC  ,Tranquille  ,Côtes de Montravel  ,  ,  ,Blanc doux  ,,Côtes de Montravel  
-AOC  ,Tranquille  ,Pécharmant  ,  ,  ,Rouge  ,,Pécharmant  
-AOC  ,Tranquille  ,Rosette  ,  ,  ,Blanc moelleux  ,,Rosette  
-AOC  ,Tranquille  ,Haut Montravel  ,  ,  ,Blanc doux  ,,Haut Montravel  
-AOC  ,Tranquille  ,Monbazillac  ,  ,  ,Blanc doux  ,,Monbazillac  
-AOC  ,Tranquille  ,Monbazillac  ,Sélection de Grains Nobles  ,  ,Blanc doux  ,,Monbazillac Sélection de Grains Nobles  
-AOC  ,Tranquille  ,Saussignac  ,  ,  ,Blanc doux  ,,Saussignac  
-AOC  ,Tranquille  ,Bordeaux  ,  ,  ,Rouge  ,,Bordeaux Rouge  
-AOC  ,Tranquille  ,Bordeaux  ,  ,  ,Rosé  ,,Bordeaux Rosé  
-AOC  ,Tranquille  ,Bordeaux  ,  ,  ,Blanc sec  ,,Bordeaux Blanc sec  
-AOC  ,Tranquille  ,Bordeaux Supérieur  ,  ,  ,Rouge  ,,Bordeaux Supérieur Rouge  
-AOC  ,VCI  ,Bergerac  ,  ,  ,Rouge  ,,VCI Bergerac Rouge  
-AOC  ,VCI  ,Côtes de Bergerac  ,  ,  ,Blanc  ,,VCI Côtes de Bergerac Blanc  
-IGP  ,Tranquille  ,Périgord  ,  ,  ,Rosé  ,,IGP Périgord Rosé  
-IGP  ,Tranquille  ,Périgord  ,  ,  ,Rouge  ,,IGP Périgord Rouge  
-IGP  ,Tranquille  ,Périgord  ,  ,  ,Blanc  ,,IGP Périgord Blanc  
-IGP  ,Tranquille  ,Atlantique  ,  ,  ,Rosé  ,,IGP Atlantique Rosé  
-IGP  ,Tranquille  ,Atlantique  ,  ,  ,Rouge  ,,IGP Atlantique Rouge  
-IGP  ,Tranquille  ,Atlantique  ,  ,  ,Blanc  ,,IGP Atlantique Blanc  
-Vin sans IG  ,Tranquille  ,  ,  ,  ,Rosé  ,,Vin sans IG Rosé  
-Vin sans IG  ,Tranquille  ,  ,  ,  ,Rouge  ,,Vin sans IG Rouge  
-Vin sans IG  ,Tranquille  ,  ,  ,  ,Blanc  ,,Vin sans IG Blanc  
-Vin sans IG  ,Mousseux  ,  ,  ,  ,Rosé  ,,Vin sans IG Rosé Mousseux  
-Vin sans IG  ,Mousseux  ,  ,  ,  ,Rouge  ,,Vin sans IG Rouge Mousseux  
-Vin sans IG  ,Mousseux  ,  ,  ,  ,Blanc  ,,Vin sans IG Blanc Mousseux  
-Autres  ,  ,Lies et Bourbes  ,  ,  ,  ,,Lies et Bourbes  
-Autres  ,  ,DPLC  ,  ,  ,  ,,DPLC  
+AOC,Tranquille,Bergerac,,,Rosé,,Bergerac Rosé
+AOC,Tranquille,Bergerac,,,Blanc sec,,Bergerac Blanc sec
+AOC,Tranquille,Côtes de Bergerac,,,Rouge,,Côtes de Bergerac Rouge
+AOC,Tranquille,Côtes de Bergerac,,,Blanc,,Côtes de Bergerac Blanc
+AOC,Tranquille,Côtes de Duras,,,Rouge,,Côtes de Duras Rouge
+AOC,Tranquille,Côtes de Duras,,,Rosé,,Côtes de Duras Rosé
+AOC,Tranquille,Côtes de Duras,,,Blanc sec,,Côtes de Duras Blanc sec
+AOC,Tranquille,Côtes de Duras,,,Blanc moelleux,,Côtes de Duras Blanc moelleux
+AOC,Tranquille,Montravel,,,Rouge,,Montravel Rouge
+AOC,Tranquille,Montravel,,,Blanc sec,,Montravel Blanc sec
+AOC,Tranquille,Côtes de Montravel,,,Blanc doux,,Côtes de Montravel
+AOC,Tranquille,Pécharmant,,,Rouge,,Pécharmant
+AOC,Tranquille,Rosette,,,Blanc moelleux,,Rosette
+AOC,Tranquille,Haut Montravel,,,Blanc doux,,Haut Montravel
+AOC,Tranquille,Monbazillac,,,Blanc doux,,Monbazillac
+AOC,Tranquille,Monbazillac,Sélection de Grains Nobles,,Blanc doux,,Monbazillac Sélection de Grains Nobles
+AOC,Tranquille,Saussignac,,,Blanc doux,,Saussignac
+AOC,Tranquille,Bordeaux,,,Rouge,,Bordeaux Rouge
+AOC,Tranquille,Bordeaux,,,Rosé,,Bordeaux Rosé
+AOC,Tranquille,Bordeaux,,,Blanc sec,,Bordeaux Blanc sec
+AOC,Tranquille,Bordeaux Supérieur,,,Rouge,,Bordeaux Supérieur Rouge
+AOC,VCI,Bergerac,,,Rouge,,VCI Bergerac Rouge
+AOC,VCI,Côtes de Bergerac,,,Blanc,,VCI Côtes de Bergerac Blanc
+IGP,Tranquille,Périgord,,,Rosé,,IGP Périgord Rosé
+IGP,Tranquille,Périgord,,,Rouge,,IGP Périgord Rouge
+IGP,Tranquille,Périgord,,,Blanc,,IGP Périgord Blanc
+IGP,Tranquille,Atlantique,,,Rosé,,IGP Atlantique Rosé
+IGP,Tranquille,Atlantique,,,Rouge,,IGP Atlantique Rouge  
+IGP,Tranquille,Atlantique,,,Blanc,,IGP Atlantique Blanc
+Vin sans IG,Tranquille,,,,Rosé,,Vin sans IG Rosé
+Vin sans IG,Tranquille,,,,Rouge,,Vin sans IG Rouge
+Vin sans IG,Tranquille,,,,Blanc,,Vin sans IG Blanc
+Vin sans IG,Mousseux,,,,Rosé,,Vin sans IG Rosé Mousseux
+Vin sans IG,Mousseux,,,,Rouge,,Vin sans IG Rouge Mousseux
+Vin sans IG,Mousseux,,,,Blanc,,Vin sans IG Blanc Mousseux
+Autres,,Lies et Bourbes,,,,,Lies et Bourbes
+Autres,,DPLC,,,,,DPLC

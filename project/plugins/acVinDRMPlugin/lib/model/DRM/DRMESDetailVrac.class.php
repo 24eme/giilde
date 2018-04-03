@@ -8,6 +8,10 @@ class DRMESDetailVrac extends BaseDRMESDetailVrac {
 
     protected $vrac = null;
 
+    public function getProduitDetail() {
+
+        return $this->getParent()->getProduitDetail();
+    }
 
     public function getVrac() {
         if (is_null($this->vrac)) {
@@ -25,7 +29,16 @@ class DRMESDetailVrac extends BaseDRMESDetailVrac {
         return $this->_get('date_enlevement');
     }
 
+    public function isContratExterne() {
+
+        return $this->getProduitDetail()->isContratExterne();
+    }
+
     public function getIdentifiantLibelle() {
+        if($this->getProduitDetail()->isContratExterne()) {
+
+            return "externe ".$this->identifiant;
+        }
 
         return $this->getVrac()->getNumeroArchive();
     }

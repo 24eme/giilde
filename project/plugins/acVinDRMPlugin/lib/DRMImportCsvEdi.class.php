@@ -62,10 +62,11 @@ class DRMImportCsvEdi extends DRMCsvEdi {
         if ($this->csvDoc->hasErreurs()) {
             $this->csvDoc->setStatut(self::STATUT_WARNING);
             $this->csvDoc->save();
-            return;
+            return false;
         }
         $this->csvDoc->setStatut(self::STATUT_VALIDE);
         $this->csvDoc->save();
+        return true;
     }
 
     /**
@@ -90,6 +91,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
         if($withSave) {
             $this->drm->save();
         }
+        return true;
     }
 
     public function updateAndControlCoheranceStocks() {
@@ -174,30 +176,37 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                 $num_ligne++;
                 continue;
             }
-
             $csvLibelleProductArray = $this->buildLibellesArrayWithRow($csvRow, true);
-
             $founded_produit = false;
-
-            if(!$founded_produit) {
-                $founded_produit = $this->configuration->identifyProductByLibelle(preg_replace("/[ ]+/", " ", sprintf("%s %s %s %s %s %s %s", $csvRow[self::CSV_CAVE_CERTIFICATION], $csvRow[self::CSV_CAVE_GENRE], $csvRow[self::CSV_CAVE_APPELLATION], $csvRow[self::CSV_CAVE_MENTION], $csvRow[self::CSV_CAVE_LIEU], $csvRow[self::CSV_CAVE_COULEUR], $csvRow[self::CSV_CAVE_CEPAGE])));
+            $keys_libelle = preg_replace("/[ ]+/", " ", sprintf("%s %s %s %s %s %s %s", $csvRow[self::CSV_CAVE_CERTIFICATION], $csvRow[self::CSV_CAVE_GENRE], $csvRow[self::CSV_CAVE_APPELLATION], $csvRow[self::CSV_CAVE_MENTION], $csvRow[self::CSV_CAVE_LIEU], $csvRow[self::CSV_CAVE_COULEUR], $csvRow[self::CSV_CAVE_CEPAGE]));
+            if(!$founded_produit && ($keys_libelle != '      ')) {
+                $founded_produit = $this->configuration->identifyProductByLibelle($keys_libelle);
             }
-
+            if(!$founded_produit && preg_match('/(.*) *\(([^\)]+)\)/', $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT], $m)) {
+              $produits = $this->configuration->identifyProductByCodeDouane(trim($m[2]));
+              if (count($produits) == 1) {
+                $founded_produit = $produits[0];
+              }else {
+                foreach($produits as $p) {
+                  if (preg_match('/'.preg_replace('/[\/\(\)]/', '.', $m[1]).'/', $p->getLibelleFormat())) {
+                    $founded_produit = $p;
+                    break;
+                  }
+                }
+              }
+            }
             if(!$founded_produit) {
-                $founded_produit = $this->configuration->identifyProductByLibelle(trim(preg_replace("/[ ]+/", " ", $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT])));
+                $founded_produit = $this->configuration->identifyProductByLibelle(trim(preg_replace('/ *\(.*/', '', preg_replace("/[ ]+/", " ", $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT]))));
             }
 
             if (!$founded_produit) {
-                $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
-                $num_ligne++;
-                continue;
+              $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
             }
 
             if (!$founded_produit) {
                 foreach ($all_produits as $produit) {
-                    if ($founded_produit) {
-                        break;
-                    }
                     $produitConfLibelle = $this->slugifyProduitConf($produit);
                     if (count(array_diff($csvLibelleProductArray, $produitConfLibelle)) < count(array_diff($produitConfLibelle, $csvLibelleProductArray))) {
                         continue;
@@ -216,6 +225,9 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                       }else{
                         $founded_produit = $produit->getProduitSiblingWithTaux($date);
                       }
+                    }
+                    if ($founded_produit) {
+                      break;
                     }
                 }
             }
@@ -241,8 +253,8 @@ class DRMImportCsvEdi extends DRMCsvEdi {
             if (!$just_check) {
                 $drmDetails = $this->drm->addProduit($founded_produit->getHash(), $type_douane_drm_key);
 
-                $detailTotalVol = round(floatval($csvRow[self::CSV_CAVE_VOLUME]), 2);
-                $volume = round(floatval($csvRow[self::CSV_CAVE_VOLUME]), 2);
+                $detailTotalVol = round(floatval($csvRow[self::CSV_CAVE_VOLUME]), 4);
+                $volume = round(floatval($csvRow[self::CSV_CAVE_VOLUME]), 4);
 
                 $cat_key = $confDetailMvt->getParent()->getKey();
                 $type_key = $confDetailMvt->getKey();
@@ -276,11 +288,13 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                     if($type_key == 'creationvrac' || $type_key == 'creationvractirebouche'){
                         $creationvrac = DRMESDetailCreationVrac::freeInstance($this->drm);
                         $creationvrac->volume = $volume;
-                        $creationvrac->prixhl = floatval($csvRow[18]);
-                        $creationvrac->acheteur = $csvRow[17];
+                        $creationvrac->prixhl = floatval($csvRow[self::CSV_CAVE_CONTRAT_PRIXHL]);
+                        $nego = EtablissementClient::getInstance()->findByNoAccise($csvRow[self::CSV_CAVE_CONTRAT_ACHETEUR_ACCISES]);
+                        if (!$nego) {
+                          $nego = EtablissementClient::getInstance()->retrieveByName($csvRow[self::CSV_CAVE_CONTRAT_ACHETEUR_NOM]);
+                        }
+                        $creationvrac->acheteur = $nego->identifiant;
                         $creationvrac->type_contrat = ($type_key == 'creationvrac')? VracClient::TYPE_TRANSACTION_VIN_VRAC : VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE;
-                        $creationvrac->date_enlevement = DateTime::createFromFormat('Ymd',$csvRow[19])->format('Y-m-d');
-
                         $drmDetails->getOrAdd($cat_key)->getOrAdd($type_key . '_details')->addDetail($creationvrac);
                     }
                 } else {
@@ -336,34 +350,67 @@ class DRMImportCsvEdi extends DRMCsvEdi {
         $etablissementObj = $this->drm->getEtablissementObject();
 
         $crd_regime = ($etablissementObj->exist('crd_regime'))? $etablissementObj->get('crd_regime') : EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU;
-        $all_contenances = VracConfiguration::getInstance()->getContenances();
+        $all_contenances = VracConfiguration::getInstance()->getContenancesSlugified();
         foreach ($this->getDocRows() as $csvRow) {
             if (KeyInflector::slugify($csvRow[self::CSV_TYPE] != self::TYPE_CRD)) {
                 $num_ligne++;
                 continue;
             }
-            $genre = KeyInflector::slugify($csvRow[self::CSV_CRD_GENRE]);
-            $couleur = KeyInflector::slugify($csvRow[self::CSV_CRD_COULEUR]);
-            $litrageLibelle = $csvRow[self::CSV_CRD_CENTILITRAGE];
-            $categorie_key = $csvRow[self::CSV_CRD_CATEGORIE_KEY];
-            $type_key = $csvRow[self::CSV_CRD_TYPE_KEY];
+            $genre = DRMClient::convertCRDGenre($csvRow[self::CSV_CRD_GENRE]);
+            $couleur = DRMClient::convertCRDCouleur($csvRow[self::CSV_CRD_COULEUR]);
+            $litrageLibelle = DRMClient::convertCRDLitrage($csvRow[self::CSV_CRD_CENTILITRAGE]);
+
+            $crd_regime = DRMClient::convertCRDRegime($csvRow[self::CSV_CRD_REGIME]);
+            $categorie_key = DRMClient::convertCRDCategorie($csvRow[self::CSV_CRD_CATEGORIE_KEY]);
+            $type_key = DRMClient::convertCRDtype($csvRow[self::CSV_CRD_TYPE_KEY]);
+
             $quantite = KeyInflector::slugify($csvRow[self::CSV_CRD_QUANTITE]);
             $fieldNameCrd = $categorie_key;
             if ($categorie_key != "stock_debut" && $categorie_key != "stock_fin") {
                 $fieldNameCrd.="_" . $type_key;
             }
+            if (!isset($all_contenances[$litrageLibelle]))  {
+              $this->csvDoc->addErreur($this->centiCRDNotFoundError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
+            }
+            if ($csvRow[self::CSV_CRD_COULEUR] && !$couleur) {
+              $this->csvDoc->addErreur($this->couleurCRDNotFoundError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
+            }
+            if (!$genre) {
+              $this->csvDoc->addErreur($this->genreCRDNotFoundError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
+            }
+            if (!$categorie_key) {
+              $this->csvDoc->addErreur($this->categorieCRDNotFoundError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
+            }
+            if (!$type_key) {
+              $this->csvDoc->addErreur($this->typeCRDNotFoundError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
+            }
+            if (!$type_key) {
+              $this->csvDoc->addErreur($this->typeCRDNotFoundError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
+            }
             if (!$just_check) {
-
                 $centilitrage = $all_contenances[$litrageLibelle] * 100000;
                 $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
                 $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
                 if (!$regimeNode->exist($keyNode)) {
                     $regimeNode->getOrAddCrdNode($genre, $couleur, $centilitrage, $litrageLibelle);
                 }
-                $regimeNode->getOrAdd($keyNode)->$fieldNameCrd = intval($quantite);
+                $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} += intval($quantite);
                 $num_ligne++;
             }
         }
+        return $this->csvDoc->hasErreurs();
     }
 
     private function importAnnexesFromCSV($just_check = false) {
@@ -503,19 +550,30 @@ class DRMImportCsvEdi extends DRMCsvEdi {
     private function typeMouvementNotFoundError($num_ligne, $csvRow) {
         return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le type de mouvement n'a pas été trouvé");
     }
-
+    private function centiCRDNotFoundError($num_ligne, $csvRow) {
+        return $this->createError($num_ligne, $csvRow[self::CSV_CRD_CENTILITRAGE], "La centilisation de CRD n'a pas été trouvée");
+    }
+    private function couleurCRDNotFoundError($num_ligne, $csvRow) {
+        return $this->createError($num_ligne, $csvRow[self::CSV_CRD_COULEUR], "La couleur de CRD n'a pas été trouvée");
+    }
+    private function genreCRDNotFoundError($num_ligne, $csvRow) {
+        return $this->createError($num_ligne, $csvRow[self::CSV_CRD_GENRE], "Le genre de CRD n'a pas été trouvé");
+    }
+    private function categorieCRDNotFoundError($num_ligne, $csvRow) {
+        return $this->createError($num_ligne, $csvRow[self::CSV_CRD_CATEGORIE_KEY], "La categorie de CRD n'a pas été trouvée");
+    }
+    private function typeCRDNotFoundError($num_ligne, $csvRow) {
+        return $this->createError($num_ligne, $csvRow[self::CSV_CRD_TYPE_KEY], "Le type de CRD n'a pas été trouvé");
+    }
     private function exportPaysNotFoundError($num_ligne, $csvRow) {
         return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_EXPORTPAYS], "Le pays d'export n'a pas été trouvé");
     }
-
     private function contratIDEmptyError($num_ligne, $csvRow) {
         return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_CONTRATID], "L'id du contrat ne peut pas être vide");
     }
-
     private function contratIDNotFoundError($num_ligne, $csvRow) {
         return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_CONTRATID], "Le contrat n'a pas été trouvé");
     }
-
     private function observationsEmptyError($num_ligne, $csvRow) {
         return $this->createError($num_ligne, "Observations", "Les observations sont vides.");
     }

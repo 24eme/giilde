@@ -47,6 +47,21 @@ class VracConfiguration
 		return $this->configuration['contenances'];
 	}
 
+	public static function slugifyContenances($s) {
+		return strtoupper(str_replace(" ","",str_replace(",",".", $s)));
+	}
+
+	public function getContenancesSlugified()
+	{
+		$contenances = $this->configuration['contenances'];
+		$contenaces_retour = array();
+		foreach ($contenances as $l => $c) {
+			$contenances_retour[self::slugifyContenances($l)] = $c;
+			$contenances_retour[self::slugifyContenances(preg_replace('/(Bouteilles? *|BIB)/i', '', $l))] = $c;
+		}
+		return $contenances_retour;
+	}
+
 	public function getDelaisPaiement()
 	{
 		return $this->configuration['delais_paiement'];

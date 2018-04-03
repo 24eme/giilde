@@ -20,7 +20,6 @@ $mvtsSortiesForPdf = $drmLatex->getMvtsSortiesForPdf($detailsNodes);
     $nb_produits_displayed = 0;
     $produits_for_certifs = array_values($produitsDetailsByCertifications->produits->getRawValue());
     ?>
-    \quad{\setlength{\extrarowheight}{1pt}
     <?php
     for ($index_page = 0; $index_page < $nb_pages; $index_page++):
 

@@ -1,0 +1,70 @@
+certification,genre,appellation,mention,lieu,couleur,cepage,libelle complet
+AOC,Tranquille,Sancerre,,,Blanc,,AOC Sancerre Blanc
+AOC,Tranquille,Sancerre,,,Rouge,,AOC Sancerre Rouge
+AOC,Tranquille,Sancerre,,,Rosé,,AOC Sancerre Rosé
+AOC,Tranquille,Pouilly-Fumé,,,Blanc,,AOC Pouilly-Fumé
+AOC,Tranquille,Pouilly-sur-Loire,,,Blanc,,AOC Pouilly-sur-Loire
+AOC,Tranquille,Menetou-Salon,,,Blanc,,AOC Menetou-Salon Blanc
+AOC,Tranquille,Menetou-Salon,,,Rouge,,AOC Menetou-Salon Rouge
+AOC,Tranquille,Menetou-Salon,,,Rosé,,AOC Menetou-Salon Rosé
+AOC,Tranquille,Quincy,,,Blanc,,AOC Quincy
+AOC,Tranquille,Reuilly,,,Blanc,,AOC Reuilly Blanc
+AOC,Tranquille,Reuilly,,,Rouge,,AOC Reuilly Rouge
+AOC,Tranquille,Reuilly,,,Rosé,,AOC Reuilly Rosé
+AOC,Tranquille,Coteaux du Giennois,,,Blanc,,AOC Coteaux du Giennois Blanc
+AOC,Tranquille,Coteaux du Giennois,,,Rouge,,AOC Coteaux du Giennois Rouge
+AOC,Tranquille,Coteaux du Giennois,,,Rosé,,AOC Coteaux du Giennois Rosé
+AOC,Tranquille,Châteaumeillant,,,Rouge,,AOC Châteaumeillant Rouge
+AOC,Tranquille,Châteaumeillant,,,Rosé,,AOC Châteaumeillant Rosé
+Vin de France,Tranquille,,,,Blanc,,Vin de France Tranquille Blanc
+Vin de France,Tranquille,,,,Rouge,,Vin de France Tranquille Rouge
+Vin de France,Tranquille,,,,Rosé,,Vin de France Tranquille Rosé
+Vin de France,Mousseux,,,,Blanc,,Vin de France Mousseux Blanc
+Vin de France,Mousseux,,,,Rosé,,Vin de France Mousseux Rosé
+IGP,Tranquille,Côtes de la Charité,,,Blanc,,IGP Côtes de la Charité Blanc
+IGP,Tranquille,Côtes de la Charité,,,Rouge,,IGP Côtes de la Charité Rouge
+IGP,Tranquille,Côtes de la Charité,,,Rosé,,IGP Côtes de la Charité Rosé
+IGP,Tranquille,Coteaux de Tannay,,,Blanc,,IGP Coteaux de Tannay Blanc
+IGP,Tranquille,Coteaux de Tannay,,,Rouge,,IGP Coteaux de Tannay Rouge
+IGP,Tranquille,Coteaux de Tannay,,,Rosé,,IGP Coteaux de Tannay Rosé
+IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Blanc,,IGP Coteaux du Cher et de l'Arnon Blanc
+IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Rouge,,IGP Coteaux du Cher et de l'Arnon Rouge
+IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Rosé,,Tranquille Coteaux du Cher et de l'Arnon Rosé
+IGP,Tranquille,Val de Loire,,,Blanc,,IGP Val de Loire Blanc
+IGP,Tranquille,Val de Loire,,,Blanc,Multi cépage,IGP Val de Loire Blanc Multi cépage
+IGP,Tranquille,Val de Loire,,,Blanc,Pinot blanc,IGP Val de Loire Blanc Pinot blanc
+IGP,Tranquille,Val de Loire,,,Blanc,Pinot gris,IGP Val de Loire Blanc Pinot gris
+IGP,Tranquille,Val de Loire,,,Blanc,Sauvignon blanc,IGP Val de Loire Blanc Sauvignon blanc
+IGP,Tranquille,Val de Loire,,,Blanc,Sauvignon gris,IGP Val de Loire Blanc Sauvignon gris
+IGP,Tranquille,Val de Loire,,,Blanc,Chardonnay,IGP Val de Loire Blanc Chardonnay
+IGP,Tranquille,Val de Loire,,,Blanc,Chenin,IGP Val de Loire Blanc Chenin
+IGP,Tranquille,Val de Loire,,,Blanc,Folle blanche,IGP Val de Loire Blanc Folle blanche
+IGP,Tranquille,Val de Loire,,,Blanc,Grolleau gris,IGP Val de Loire Blanc Grolleau gris
+IGP,Tranquille,Val de Loire,,,Blanc,Melon,IGP Val de Loire Blanc Melon
+IGP,Tranquille,Val de Loire,,,Rosé,,IGP Val de Loire Rosé
+IGP,Tranquille,Val de Loire,,,Rosé,Multi cépage,IGP Val de Loire Rosé Multi cépage
+IGP,Tranquille,Val de Loire,,,Rosé,Pinot noir,IGP Val de Loire Rosé Pinot noir
+IGP,Tranquille,Val de Loire,,,Rosé,Egiodola,IGP Val de Loire Rosé Egiodola
+IGP,Tranquille,Val de Loire,,,Rosé,Cabernet franc,IGP Val de Loire Rosé Cabernet franc
+IGP,Tranquille,Val de Loire,,,Rosé,Cabernet sauvignon,IGP Val de Loire Rosé Cabernet sauvignon
+IGP,Tranquille,Val de Loire,,,Rosé,Gamay noir,IGP Val de Loire Rosé Gamay noir
+IGP,Tranquille,Val de Loire,,,Rosé,Grolleau noir,IGP Val de Loire Rosé Grolleau noir
+IGP,Tranquille,Val de Loire,,,Rosé,Cot,IGP Val de Loire Rosé Cot
+IGP,Tranquille,Val de Loire,,,Rosé,Merlot,IGP Val de Loire Rosé Merlot
+IGP,Tranquille,Val de Loire,,,Rosé,Abouriou,IGP Val de Loire Rosé Abouriou
+IGP,Tranquille,Val de Loire,,,Rosé,Pineau d'Aunis,IGP Val de Loire Rosé Pineau d'Aunis
+IGP,Tranquille,Val de Loire,,,Rouge,,IGP Val de Loire Rouge
+IGP,Tranquille,Val de Loire,,,Rouge,Multi cépage,IGP Val de Loire Rouge Multi cépage
+IGP,Tranquille,Val de Loire,,,Rouge,Pinot noir,IGP Val de Loire Rouge Pinot noir
+IGP,Tranquille,Val de Loire,,,Rouge,Cabernet franc,IGP Val de Loire Rouge Cabernet franc
+IGP,Tranquille,Val de Loire,,,Rouge,Cabernet sauvignon,IGP Val de Loire Rouge Cabernet sauvignon
+IGP,Tranquille,Val de Loire,,,Rouge,Gamay noir,IGP Val de Loire Rouge Gamay noir
+IGP,Tranquille,Val de Loire,,,Rouge,Grolleau noir,IGP Val de Loire Rouge Grolleau noir
+IGP,Tranquille,Val de Loire,,,Rouge,Cot,IGP Val de Loire Rouge Cot
+IGP,Tranquille,Val de Loire,,,Rouge,Merlot,IGP Val de Loire Rouge Merlot
+IGP,Tranquille,Val de Loire,,,Rouge,Abouriou,IGP Val de Loire Rouge Abouriou
+IGP,Tranquille,Val de Loire,,,Rouge,Pineau d'Aunis,IGP Val de Loire Rouge Pineau d'Aunis
+Autres,,Lies et Bourbes,,,,,Lies et Bourbes
+Autres,,DPLC,,,,,DPLC
+Autres,,DPLC,,,Blanc,,DPLC Blanc
+Autres,,DPLC,,,Rouge,,DPLC Rouge

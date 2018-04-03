@@ -412,6 +412,11 @@ class DRMDetail extends BaseDRMDetail {
         return $mouvement;
     }
 
+    public function isContratExterne() {
+
+        return !$this->getCVOTaux();
+    }
+
     public function getCVOTaux() {
         $this->cvo->calcul();
 

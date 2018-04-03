@@ -1,48 +1,48 @@
-TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT
-suspendu,stocks_debut,instance
-suspendu,stocks_debut,initial
-suspendu,stocks_debut,dont_revendique
-suspendu,entrees,recolte
-suspendu,entrees,revendication
-suspendu,entrees,repli
-suspendu,entrees,declassement
-suspendu,entrees,transfertsrecolte
-suspendu,entrees,retourembouteillage
-suspendu,entrees,transfertcomptamatierecession
-suspendu,entrees,travailafacon
-suspendu,entrees,retourmarchandiseacquitte
-suspendu,entrees,retourmarchandisetaxees
-suspendu,entrees,retourmarchandisenontaxees
-suspendu,entrees,achatcrd
-suspendu,entrees,achatnoncrd
-suspendu,entrees,regularisation
-suspendu,sorties,consommationfamilialedegustation
-suspendu,sorties,ventefrancecrd
-suspendu,sorties,ventefrancecrdacquitte
-suspendu,sorties,vracsanscontratacquitte
-suspendu,sorties,vrac
-suspendu,sorties,vracsanscontratsuspendu
-suspendu,sorties,export
-suspendu,sorties,repli
-suspendu,sorties,declassement
-suspendu,sorties,transfertsrecolte
-suspendu,sorties,embouteillage
-suspendu,sorties,transfertcomptamatiere
-suspendu,sorties,travailafacon
-suspendu,sorties,distillationusageindustriel
-suspendu,sorties,destructionperte
-suspendu,sorties,manquant
-suspendu,sorties,cession
-suspendu,sorties,apportgroupement
-suspendu,stocks_fin,instance
-suspendu,stocks_fin,final
-suspendu,stocks_fin,dont_revendique
-acquitte,stocks_debut,instance
-acquitte,stocks_debut,initial
-acquitte,entrees,achat
-acquitte,entrees,autre
-acquitte,sorties,autre
-acquitte,sorties,replacementsuspension
-acquitte,sorties,vente
-acquitte,stocks_fin,instance
-acquitte,stocks_fin,final
+TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,EXPLICATION MOUVEMENT
+suspendu,stocks_debut,instance,en instance de revendication
+suspendu,stocks_debut,initial,initial récolté
+suspendu,stocks_debut,dont_revendique,dont revendiqué
+suspendu,entrees,recolte,01. récolte
+suspendu,entrees,revendication,02. revendiqué à l'odg
+suspendu,entrees,repli,03. issu d'un repli
+suspendu,entrees,declassement,04. issu d'un déclassement
+suspendu,entrees,transfertsrecolte,05. transfert de produit
+suspendu,entrees,retourembouteillage,06. retour conditionnmt
+suspendu,entrees,transfertcomptamatierecession,07. retour logement ext.
+suspendu,entrees,travailafacon,08. retour travail à façon
+suspendu,entrees,retourmarchandiseacquitte,09. retour de vin crd acq.
+suspendu,entrees,retourmarchandisetaxees,09. retour de vin sous crd
+suspendu,entrees,retourmarchandisenontaxees,10. retour de vin hors crd
+suspendu,entrees,achatcrd,11. achat sous crd
+suspendu,entrees,achatnoncrd,12. achat hors crd
+suspendu,entrees,regularisation,13. excédent constaté
+suspendu,sorties,consommationfamilialedegustation,01. conso. familiale
+suspendu,sorties,ventefrancecrd,02. vente sous crd
+suspendu,sorties,ventefrancecrdacquitte,02. vente sous crd acquittée
+suspendu,sorties,vracsanscontratacquitte,03. vente sous dsa/factures
+suspendu,sorties,vrac,04. vrac sous contrat
+suspendu,sorties,vracsanscontratsuspendu,05. vrac hors contrat
+suspendu,sorties,export,06. export
+suspendu,sorties,repli,07. repli
+suspendu,sorties,declassement,08. déclassement
+suspendu,sorties,transfertsrecolte,09. transfert de produit
+suspendu,sorties,embouteillage,10. conditionnement
+suspendu,sorties,transfertcomptamatiere,11. logement externe
+suspendu,sorties,travailafacon,12. travail à façon
+suspendu,sorties,distillationusageindustriel,13. usages industriel
+suspendu,sorties,destructionperte,14. destruction/perte
+suspendu,sorties,manquant,15. manquant
+suspendu,sorties,cession,16. cession d'exploitation
+suspendu,sorties,apportgroupement,17. apport à groupement
+suspendu,stocks_fin,instance,en instance de revendication
+suspendu,stocks_fin,final,final récolté
+suspendu,stocks_fin,dont_revendique,dont revendiqué
+acquitte,stocks_debut,instance,en instance
+acquitte,stocks_debut,initial,initial
+acquitte,entrees,achat,achats
+acquitte,entrees,autre,autres
+acquitte,sorties,autre,autres
+acquitte,sorties,replacementsuspension,replacement en suspension
+acquitte,sorties,vente,ventes de produits
+acquitte,stocks_fin,instance,en instance
+acquitte,stocks_fin,final,final

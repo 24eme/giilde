@@ -22,7 +22,7 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('vigilance', 'total_negatif', "Le stock revendiqué théorique fin de mois est négatif");
         $this->addControle('vigilance', 'vrac_detail_negatif', "Le volume qui sera enlevé sur le contrat est supérieur au volume restant");
         $this->addControle('vigilance', 'crd_negatif', "Le nombre de CRD ne dois pas être négatif");
-        $this->addControle('vigilance', 'documents_annexes_erreur', "Les numéros de document sont mal renseignés.");
+        $this->addControle('vigilance', 'documents_annexes_erreur', "Les numéros de document d'accompagnement saisis en annexe sont mal renseignés.");
         $this->addControle('vigilance', 'siret_absent', "Le numéro de siret n'a pas été renseigné");
         $this->addControle('erreur', 'no_accises_absent', "Le numéro d'accise n'a pas été renseigné");
         $this->addControle('vigilance', 'caution_absent', "Le type de caution n'a pas été renseigné");

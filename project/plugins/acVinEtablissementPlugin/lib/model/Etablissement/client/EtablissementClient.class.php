@@ -147,6 +147,14 @@ class EtablissementClient extends acCouchdbClient {
         return $this->find($rows[0]->id);
     }
 
+    public function retrieveByName($name) {
+      $e = EtablissementAllView::getInstance()->findByInterproStatutAndFamilles('INTERPRO-declaration', EtablissementClient::STATUT_ACTIF, array(EtablissementFamilles::FAMILLE_NEGOCIANT), $name, 1);
+      if (count($e) == 1){
+        return $this->find($e[0]->id);
+      }
+      return null;
+    }
+
     public function getId($id_or_identifiant) {
         $id = $id_or_identifiant;
         if (strpos($id_or_identifiant, 'ETABLISSEMENT-') === false) {

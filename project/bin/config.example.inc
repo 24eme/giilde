@@ -1,4 +1,5 @@
 PROJET=giilda
+PROJETURL=https://declaration.giilda.com/
 TMP=/tmp/giilda
 SYMFONYTASKOPTIONS="--application=generique --env=dev"
 WORKINGDIR=/home/giilda/project/

@@ -9,4 +9,4 @@ Pour le redéfinir merci de cliquer sur le lien suivant : <?php echo $lien ?>
 
 Cordialement,
 
-L'espace professionnel de l'<?php echo $interpro; ?>
+L'espace professionnel <?php echo $interpro; ?>

@@ -14,6 +14,15 @@ class DRMDetailVracItemForm extends DRMESDetailsItemForm {
         return "drm_detail_vrac_item";
     }
 
+    public function configure() {
+        parent::configure();
+
+        if(!$this->getProduitDetail()->getCVOTaux()) {
+            $this->setWidget('identifiant', new bsWidgetFormInput(array(), array("placeholder" => "Saisissez le numéro de votre contrat")));
+            $this->setValidator('identifiant', new sfValidatorRegex(array('required' => true, 'pattern' => '/^[0-9]+$/')));
+        }
+    }
+
     public function getIdentifiantChoices() {
         $vracs = $this->getProduitDetail()->getContratsVrac();
         if ($this->getObject()->identifiant && !array_key_exists($this->getObject()->identifiant, $vracs) && $this->getObject()->getVrac()) {
