@@ -36,5 +36,10 @@ EOF;
 
     $facture = FactureClient::getInstance()->find($options['factureid']);
     $avoir = FactureClient::getInstance()->defactureCreateAvoirAndSaveThem($facture);
+    if($avoir){
+        echo $avoir->_id."\n";
+    }else{
+        echo "déjà décloturé\n";
+    }
   }
 }
