@@ -19,7 +19,7 @@ class GenerationVracsSansPrixPDF extends GenerationPDF {
     public function preGeneratePDF() {
         parent::preGeneratePDF();
         $arguments = $this->generation->arguments->toArray();
-        $this->sansprix = new VracsSansPrixData($arguments['date_facturation']);
+        $this->sansprix = new VracsSansPrixData($arguments['date_mouvement']);
         $cpt = 0;
         foreach ($this->sansprix->getCSVs() as $id => $csv) {
             $this->generation->documents->add($cpt, $id);
