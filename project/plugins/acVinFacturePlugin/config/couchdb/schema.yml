@@ -40,7 +40,7 @@ Facture:
             ville: {}
             service_facturation: {}
             telephone: {}
-            email: {required: false}
+            email: {}
       declarant:
         type: collection
         definition:
