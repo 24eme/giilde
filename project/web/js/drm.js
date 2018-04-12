@@ -301,9 +301,11 @@
             var id_drm = $(this).parents('div').attr('id').replace('type_creation_div_', '');
 
             if (value == 'CREATION_EDI') {
+                $('#file_edi_div_' + id_drm+ " .drmChoixCreation_file").prop('required',true);
                 $('#file_edi_div_' + id_drm).show();
             } else {
                 $('#file_edi_div_' + id_drm).hide();
+                $('#file_edi_div_' + id_drm+ " .drmChoixCreation_file").prop('required',false);
             }
 
         });

@@ -30,7 +30,7 @@ $t->comment("DRM qui crée des vracs");
 $drm = DRMClient::getInstance()->createDoc($nego->identifiant, $periode, true);
 $drm->save();
 
-$t->is($drm->isDRMNegoce(), "C'est une DRM Négoce");
+$t->ok($drm->isDRMNegoce(), "C'est une DRM Négoce");
 
 $t->is(count(VracClient::getInstance()->retrieveBySoussigne($nego2->identifiant)->rows), 0, $drm->_id." : Pas de vrac pour le nego 2");
 

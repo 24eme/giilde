@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
 $t = new lime_test(18);
-$viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();
+$viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
 $produit1_hash = array_shift($produits);
 $produit1 = ConfigurationClient::getInstance()->getCurrent()->get($produit1_hash);

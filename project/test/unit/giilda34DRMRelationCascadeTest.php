@@ -243,7 +243,7 @@ $drm->save();
 
 $t->is($details->stocks_fin->final, 1401, "Le stock de fin de mois est cohérent");
 $cascades = DRMClient::getInstance()->generateVersionCascade($drm);
-$t->is(count($cascades) == 1 && $cascades[0], $drm02Id."-M01", "La génération en cascade génère une modificatrice pour la DRM de février uniquement");
+$t->ok(count($cascades) == 1 && $cascades[0] == $drm02Id."-M01", "La génération en cascade génère une modificatrice pour la DRM de février uniquement");
 
 
 $t->comment("Test sur la modificatrice de Février");
@@ -308,7 +308,7 @@ $drm->save();
 
 $t->is($details->stocks_fin->final, 3401, "Le stock de fin de mois est cohérent");
 $cascades = DRMClient::getInstance()->generateVersionCascade($drm);
-$t->is(count($cascades) == 1 && $cascades[0], $drm07Id."-M01", "La génération en cascade génère une modificatrice pour la DRM de Juillet uniquement");
+$t->ok(count($cascades) == 1 && $cascades[0] == $drm07Id."-M01", "La génération en cascade génère une modificatrice pour la DRM de Juillet uniquement");
 
 $t->comment("Test sur la modificatrice de Juillet");
 
@@ -336,4 +336,4 @@ $drm->validate();
 $drm->save();
 
 $cascades = DRMClient::getInstance()->generateVersionCascade($drm);
-$t->is(count($cascades) == 1 && $cascades[0], $drm09Id."-M01", "La génération en cascade génère une modificatrice pour la DRM de septembre");
+$t->ok(count($cascades) == 1 && $cascades[0] == $drm09Id."-M01", "La génération en cascade génère une modificatrice pour la DRM de septembre");

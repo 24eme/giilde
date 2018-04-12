@@ -38,6 +38,16 @@ $compteviti->save();
 $t->is($compteviti->tags->automatique->toArray(true, false), array('societe', 'ressortissant', 'producteur', 'etablissement'), "Création d'un etablissement viti met à jour le compte");
 $t->is($etablissementviti->region, EtablissementClient::REGION_CVO, "L'établissement est en région CVO après le save");
 
+$societeviti = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getSociete();
+$etablissementviti = $societeviti->createEtablissement(EtablissementFamilles::FAMILLE_PRODUCTEUR);
+$etablissementviti->region = EtablissementClient::REGION_CVO;
+$etablissementviti->nom = "Etablissement viticulteur 2";
+$etablissementviti->save();
+$id = $etablissementviti->getSociete()->getidentifiant();
+$compteviti = CompteClient::getInstance()->findByIdentifiant($id.'01');
+$compteviti->addTag('test', 'test');
+$compteviti->save();
+
 $societenego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getSociete();
 $etablissementnego = $societenego->createEtablissement(EtablissementFamilles::FAMILLE_NEGOCIANT);
 $etablissementnego->region = EtablissementClient::REGION_CVO;

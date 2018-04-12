@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 sfContext::createInstance($configuration);
 
-$t = new lime_test(25);
+$t = new lime_test(26);
 
 $t->comment("Création d'une facture à partir des DRM pour une société");
 
@@ -21,8 +21,10 @@ $societeViti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_
 $mouvementsFacture = array($societeViti->identifiant => FactureClient::getInstance()->getFacturationForSociete($societeViti));
 $mouvementsFacture = FactureClient::getInstance()->filterWithParameters($mouvementsFacture, $paramFacturation);
 $prixHt = 0.0;
+if(isset($mouvementsFacture[$societeViti->identifiant])) {
 foreach ($mouvementsFacture[$societeViti->identifiant] as $mvt) {
   $prixHt += $mvt->value[MouvementfactureFacturationView::VALUE_VOLUME] * $mvt->value[MouvementfactureFacturationView::VALUE_CVO];
+}
 }
 $prixHt = $prixHt * -1;
 $prixTaxe = $prixHt * 0.2;
@@ -34,6 +36,8 @@ $facture->save();
 $t->ok($facture, "La facture est créée");
 
 $t->is($facture->identifiant, $societeViti->identifiant, "La facture appartient à la société demandé");
+
+$t->ok($facture->emetteur->adresse, "L'adresse de l'emetteur est rempli");
 
 $t->is($facture->total_ht, $prixHt, "Le total HT est de ".$prixHt." €");
 $t->is($facture->total_ttc, $prixTTC, "Le total TTC est de ".$prixTTC."  €");

@@ -39,7 +39,7 @@
                     <span>
                         <?php echo $drmCreationForm['file']->renderError(); ?>
                         <?php echo $drmCreationForm['file']->renderLabel() ?>
-                        <?php echo $drmCreationForm['file']->render(); ?>
+                        <?php echo $drmCreationForm['file']->render(array('class' => 'drmChoixCreation_file')); ?>
                     </span>
                   </div>
             </div>

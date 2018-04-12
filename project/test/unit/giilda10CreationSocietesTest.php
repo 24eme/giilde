@@ -42,6 +42,18 @@ $compteviti->addTag('test', 'test_viti');
 $compteviti->save();
 $t->is($compteviti->tags->automatique->toArray(true, false), array('societe', 'ressortissant'), "Création de société viti crée un compte du même type");
 
+$societeviti = SocieteClient::getInstance()->createSociete("société viti test 2", SocieteClient::TYPE_OPERATEUR);
+$societeviti->pays = "FR";
+$societeviti->code_postal = $codePostalRegion;
+$societeviti->commune = "Neuilly sur seine";
+$societeviti->insee = "94512";
+$societeviti->save();
+$id = $societeviti->getidentifiant();
+$compteviti = CompteClient::getInstance()->findByIdentifiant($id.'01');
+$compteviti->addTag('test', 'test');
+$compteviti->addTag('test', 'test_viti_2');
+$compteviti->save();
+
 $societenegocvo = SocieteClient::getInstance()->createSociete("société négo de la région test", SocieteClient::TYPE_OPERATEUR);
 $societenegocvo->pays = "FR";
 $societenegocvo->code_postal = $codePostalRegion;

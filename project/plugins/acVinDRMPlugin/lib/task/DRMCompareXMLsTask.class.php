@@ -1,6 +1,6 @@
 <?php
 
-class DRMCcompareXMLsTask extends sfBaseTask
+class DRMCompareXMLsTask extends sfBaseTask
 {
 
   protected function configure()
@@ -41,7 +41,10 @@ EOF;
     }else{
       echo $drm->_id." : XML differents\n";
       $comp = $drm->getXMLComparison();
-      $drm->getOrAdd('transmission_douane')->add("coherente",false);
+      $drm->getOrAdd('transmission_douane')->add("coherente", 0);
+      $drm->save();
+      $drm = DRMClient::getInstance()->find($drm->_id);
+      $drm->getOrAdd('transmission_douane')->add("coherente", false);
       $drm->save();
       try {
         if($suivante = $drm->getSuivante()){
@@ -49,8 +52,8 @@ EOF;
         }elseif(!$drm->transmission_douane->success){
           echo "      DRM modificatrice non ouverte : la DRM n'a pas été transmise aux douanes\n";
         }else{
-          $drm_modificatrice = $drm->generateModificative();
-          $drm_modificatrice->save();
+          //$drm_modificatrice = $drm->generateModificative();
+          //$drm_modificatrice->save();
           echo "      DRM modificatrice ouverte : ".sfConfig::get('app_vinsi_url').sfContext::getInstance()->getRouting()->generate("drm_etablissement",array("identifiant" => $drm->identifiant))."\n";
         }
       } catch (Exception $e) {

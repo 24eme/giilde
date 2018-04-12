@@ -48,10 +48,11 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
         }
         if ($this->hasArgument(FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS)) {
             $this->emetteur = $configs['emetteur_libre'];
+
+            return;
         }
-        if ($this->hasArgument(FactureClient::TYPE_FACTURE_MOUVEMENT_DRM)) {
-            $this->emetteur = $configs['emetteur_cvo'];
-        }
+
+        $this->emetteur = $configs['emetteur_cvo'];
     }
 
     public function getCoordonneesBancaire() {

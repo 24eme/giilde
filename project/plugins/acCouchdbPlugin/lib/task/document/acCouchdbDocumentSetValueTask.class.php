@@ -6,9 +6,8 @@ class acCouchdbDocumentSetValueTask extends sfBaseTask
   {
     // // add your own arguments here
     $this->addArguments(array(
-       new sfCommandArgument('doc_id', sfCommandArgument::REQUIRED, 'ID du document'),
-       new sfCommandArgument('hash', sfCommandArgument::REQUIRED, 'Hash'),
-       new sfCommandArgument('value', sfCommandArgument::REQUIRED, 'Value'),
+       new sfCommandArgument('doc_id', sfCommandArgument::REQUIRED, 'Document ID'),
+       new sfCommandArgument('hash_values', sfCommandArgument::IS_ARRAY, 'Hash or values'),
     ));
 
     $this->addOptions(array(
@@ -35,10 +34,59 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
 
+    $values = array();
+    $hash = null;
+    $value = null;
+    foreach($arguments['hash_values'] as $i => $arg) {
+        if($i % 2 == 0) {
+            $hash = $arg;
+        } else {
+            $value = $arg;
+        }
+
+
+        if($hash && $value) {
+            $values[$hash] = $value;
+            $hash = null;
+            $value = null;
+        }
+    }
+
+
     $doc = acCouchdbManager::getClient()->find($arguments['doc_id']);
-    $doc->set($arguments['hash'], $arguments['value']);
+
+    if(!$doc) {
+
+        return;
+    }
+
+    $output = array();
+    foreach($values as $hash => $value) {
+        if(!$doc->exist($hash)) {
+
+            return;
+        }
+        if($doc->get($hash) instanceof acCouchdbJson) {
+
+            return;
+        }
+        if($doc->get($hash) === $value) {
+
+            continue;
+        }
+
+        $output[] = $hash.":\"".$value."\" (".$doc->get($hash).")";
+        $doc->set($hash, $value);
+    }
+
+    $oldrev = $doc->_rev;
+
     $doc->save();
 
-    echo "Document ".$doc->_id." set ".$arguments['hash']. " = ".$arguments['value']."\n";
+    if($oldrev == $doc->_rev) {
+        return;
+    }
+
+    echo "Le document ".$doc->_id."@".$oldrev." a été sauvé @".$doc->_rev.", les valeurs suivantes ont été changés : ".implode(",", $output)."\n";
   }
 }
