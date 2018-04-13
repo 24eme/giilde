@@ -121,7 +121,6 @@ class factureActions extends sfActions {
         }
 
         $parameters = $this->constructFactureFiltersParameters();
-
         $f = FactureClient::getInstance()->createAndSaveFacturesBySociete($this->societe, $parameters);
 
         if(!$f) {
@@ -196,7 +195,6 @@ class factureActions extends sfActions {
         $filters_parameters['message_communication'] = "";
         $filters_parameters['type_document'] = GenerationClient::TYPE_DOCUMENT_FACTURES;
         $filters_parameters['modele'] = $values['modele'];
-
         if (isset($values['date_facturation']) && $values['date_facturation']) {
             $filters_parameters['date_facturation'] = DATE::getIsoDateFromFrenchDate($values['date_facturation']);
         }
@@ -213,7 +211,9 @@ class factureActions extends sfActions {
                 $filters_parameters['modele'] = 'MouvementsFacture';
             }elseif($values['modele'] == FactureClient::TYPE_FACTURE_MOUVEMENT_DRM){
               $filters_parameters['modele'] = "DRM";
-            }elseif ($values['modele'] == FactureGenerationForm::TYPE_GENERATION_EXPORT) {
+          }elseif($values['modele'] == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO){
+              $filters_parameters['modele'] = "SV12";
+          }elseif ($values['modele'] == FactureGenerationForm::TYPE_GENERATION_EXPORT) {
                 $filters_parameters['type_document'] = GenerationClient::TYPE_DOCUMENT_EXPORT_SHELL;
                 $filters_parameters['modele'] = null;
             }elseif ($values['modele'] == GenerationClient::TYPE_DOCUMENT_VRACSSANSPRIX) {
