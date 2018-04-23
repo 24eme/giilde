@@ -35,7 +35,7 @@ class drmGeneriqueActions extends sfActions {
         }
     }
 
-    private function redirect403Unless($bool) {
+    protected function redirect403Unless($bool) {
         if (!$bool) {
           $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
         }

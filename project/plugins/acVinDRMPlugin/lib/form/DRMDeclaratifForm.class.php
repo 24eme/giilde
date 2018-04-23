@@ -73,7 +73,8 @@ class DRMDeclaratifForm extends acCouchdbForm {
                 'choices' => array(
                     'Numéraire' => "Numéraire",
                     'Chèque' => "Chèque",
-                    'Virement' => "Virement"
+                    'Virement' => "Virement",
+                    'Prélèvement' => "Prélèvement"
                 ),
                     //'renderer_options' => array('formatter' => array($this, 'formatter'))
             )),

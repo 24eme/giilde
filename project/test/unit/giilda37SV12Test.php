@@ -27,7 +27,7 @@ $t->comment("Création d'une SV12 ".$nego->identifiant);
 $sv12 = SV12Client::getInstance()->createOrFind($nego->identifiant, $periode);
 
 $sv12->save();
-$t->is($sv12->_id,"SV12-00137201-2017-2018","LA sv12 a pour ID SV12-00137201-2017-2018");
+$t->is($sv12->_id,"SV12-".$nego->identifiant."-2017-2018","LA sv12 a pour ID SV12-'.$nego->identifiant.'-2017-2018");
 
 $sv12Contrat = $sv12->contrats->add(SV12Client::SV12_KEY_SANSVITI.'-'.$nego->identifiant.'-'.SV12Client::SV12_TYPEKEY_VENDANGE.'-'.str_replace('/', '-', $produit1_hash));
 $sv12Contrat->updateNoContrat($config->get($produit1_hash), array('vendeur_identifiant' => $viti->identifiant, 'vendeur_nom' => $viti->nom, 'contrat_type' => SV12Client::SV12_TYPEKEY_VENDANGE,'volume' => 1.0));

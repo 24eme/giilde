@@ -144,7 +144,10 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
     public function getContactsObj() {
       if (!$this->comptes || !count($this->comptes)) {
         foreach ($this->contacts as $id => $obj) {
-          $this->addToComptes(CompteClient::getInstance()->find($id));
+          $compte = CompteClient::getInstance()->find($id);
+          if ($compte) {
+            $this->addToComptes($compte);
+          }
         }
       }
       return $this->comptes;

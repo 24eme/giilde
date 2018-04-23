@@ -8,6 +8,7 @@ if (!($conf->declaration->exist('details/sorties/creationvrac')) || ($conf->decl
     exit(0);
 }
 
+
 $t = new lime_test(7);
 
 $nego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
@@ -20,10 +21,21 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($nego->identifiant) as $k =>
   $drm = DRMClient::getInstance()->find($k);
   $drm->delete(false);
 }
-foreach(VracClient::getInstance()->retrieveBySoussigne($nego2->identifiant)->rows as $r) {
-  $vrac = DRMClient::getInstance()->find($r->id);
+foreach(DRMClient::getInstance()->viewByIdentifiant($nego2->identifiant) as $k => $v) {
+  $drm = DRMClient::getInstance()->find($k);
+  $drm->delete(false);
+}
+foreach(VracClient::getInstance()->retrieveBySoussigne($nego->identifiant)->rows as $r) {
+  $vrac = VracClient::getInstance()->find($r->id);
   $vrac->delete();
 }
+foreach(VracClient::getInstance()->retrieveBySoussigne($nego2->identifiant)->rows as $r) {
+  $vrac = VracClient::getInstance()->find($r->id);
+  $vrac->delete();
+}
+
+$nb_mvts_nego_init = count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego->getSociete()));
+$nb_mvts_nego2_init = count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego2->getSociete()));
 
 $t->comment("DRM qui crée des vracs");
 
@@ -55,11 +67,6 @@ $contrat = VracClient::getInstance()->find(VracClient::getInstance()->retrieveBy
 $t->is($contrat->type_transaction, VracClient::TYPE_TRANSACTION_VIN_VRAC, "Une sortie contrat de type vrac produit un contrat de type vrac");
 
 $mvts_nego = MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego->getSociete());
-foreach($mvts_nego as $key => $mouv) {
-    if($mouv->numero != $drm->_id) {
-        unset($mvts_nego[$key]);
-    }
-}
 $mvts_nego_2 = MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego2->getSociete());
-$t->is(count($mvts_nego), 0, $drm->_id." : on retrouve aucun mouvement facturable dans la vue facture du nego");
-$t->is(count($mvts_nego_2), 0, $drm->_id." : on retrouve aucun mouvement facturable dans la vue facture du négo 2");
+$t->is(count($mvts_nego) - $nb_mvts_nego_init, 0, $drm->_id." : on retrouve aucun mouvement facturable dans la vue facture du nego");
+$t->is(count($mvts_nego_2) - $nb_mvts_nego2_init, 0, $drm->_id." : on retrouve aucun mouvement facturable dans la vue facture du négo 2");

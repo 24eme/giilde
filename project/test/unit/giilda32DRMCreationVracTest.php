@@ -22,9 +22,21 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
   $drm->delete(false);
 }
 foreach(VracClient::getInstance()->retrieveBySoussigne($viti->identifiant)->rows as $r) {
-  $vrac = DRMClient::getInstance()->find($r->id);
+  $vrac = VracClient::getInstance()->find($r->id);
   $vrac->delete();
 }
+foreach(VracClient::getInstance()->retrieveBySoussigne($nego->identifiant)->rows as $r) {
+  $vrac = VracClient::getInstance()->find($r->id);
+  $vrac->delete();
+}
+foreach(VracClient::getInstance()->retrieveBySoussigne($nego_horsregion->identifiant)->rows as $r) {
+  $vrac = VracClient::getInstance()->find($r->id);
+  $vrac->delete();
+}
+
+$nb_mvts_viti_init = count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($viti->getSociete()));
+$nb_mvts_nego_init = count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego->getSociete()));
+$nb_mvts_negohr_init = count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego_horsregion->getSociete()));
 
 $t->comment("DRM qui crée des vracs");
 
@@ -59,8 +71,8 @@ $t->is($contrat->type_transaction, VracClient::TYPE_TRANSACTION_VIN_VRAC, "Une s
 
 $mvts_viti = MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($viti->getSociete());
 $mvts_nego = MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego->getSociete());
-$t->is(count($mvts_viti), 1, $drm->_id." : on retrouve le mouvement facturable dans la vue facture du viti");
-$t->is(count($mvts_nego), 1, $drm->_id." : on retrouve le mouvement facturable dans la vue facture du négo");
+$t->is(count($mvts_viti) - $nb_mvts_viti_init, 1, $drm->_id." : on retrouve le mouvement facturable dans la vue facture du viti");
+$t->is(count($mvts_nego) - $nb_mvts_nego_init, 1, $drm->_id." : on retrouve le mouvement facturable dans la vue facture du négo");
 $t->is($mvts_nego[0]->volume * $mvts_nego[0]->cvo, $mvts_viti[0]->volume * $mvts_viti[0]->cvo, $drm->_id." : la cvo est partagée entre le viti et le nego");
 $t->isnt($mvts_viti[0]->detail_libelle, null, $drm->_id." : le mouvement a un detail_libelle");
 
@@ -79,9 +91,9 @@ $t->is(count(VracClient::getInstance()->retrieveBySoussigne($nego_horsregion->id
 $mvts_viti = MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($viti->getSociete());
 $mvts_nego = MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego->getSociete());
 $mvts_nego_horscvo = MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($nego_horsregion->getSociete());
-$t->is(count($mvts_viti), 3, $drm_mod->_id." : on retrouve le mouvement dans la vue facture du viti");
-$t->is(count($mvts_nego), 2, $drm_mod->_id." : on obtient deux mouvements dans la vue facture du négo");
-$t->is(count($mvts_nego_horscvo), 0, $drm_mod->_id." : on n'obtient pas de mouvement facturable dans la vue facture du négo hors region");
+$t->is(count($mvts_viti) - $nb_mvts_viti_init, 3, $drm_mod->_id." : on retrouve le mouvement dans la vue facture du viti");
+$t->is(count($mvts_nego) - $nb_mvts_nego_init, 2, $drm_mod->_id." : on obtient deux mouvements dans la vue facture du négo");
+$t->is(count($mvts_nego_horscvo) - - $nb_mvts_negohr_init, 0, $drm_mod->_id." : on n'obtient pas de mouvement facturable dans la vue facture du négo hors region");
 
 
 $drm_mod = $drm_mod->generateModificative();

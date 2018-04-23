@@ -47,12 +47,14 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
             throw new sfException(sprintf('Config "configuration/facture/emetteur" not found in app.yml'));
         }
         if ($this->hasArgument(FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS)) {
-            $this->emetteur = $configs['emetteur_libre'];
+            $config_emetteur = $configs['emetteur_libre'];
 
             return;
         }
+        $config_emetteur = $configs['emetteur_cvo'];
+        unset($config_emetteur['fax']);
+        $this->emetteur = $config_emetteur;
 
-        $this->emetteur = $configs['emetteur_cvo'];
     }
 
     public function getCoordonneesBancaire() {

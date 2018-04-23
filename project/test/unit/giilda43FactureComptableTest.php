@@ -3,7 +3,6 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 sfContext::createInstance($configuration);
 
-$nbLignes = 4;
 $prefixComptable = null;
 $codeCompteEcheance = null;
 $codeCompteTVA = null;
@@ -29,10 +28,6 @@ if($application == "bivc") {
     $codeCompteTVA = "44571000";
 }
 
-$t = new lime_test(1 + $nbLignes * 9);
-
-$t->comment("Création d'un export de facturation à partir des facture pour une société");
-
 $societeViti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getSociete();
 $facture = null;
 foreach (FactureSocieteView::getInstance()->findBySociete($societeViti) as $id => $facture) {
@@ -40,12 +35,19 @@ foreach (FactureSocieteView::getInstance()->findBySociete($societeViti) as $id =
 }
 
 if($facture){
+  $nbLignes = 2;
+  foreach ($facture->lignes as $id => $mvt ) {
+    $nbLignes += count($mvt->details);
+  }
   $export = ExportFactureCSVFactory::getObject($application);
   ob_start();
   $export->printFacture($facture->_id);
   $exportCompta = ob_get_contents();
   ob_end_clean();
 }
+
+$t = new lime_test(1 + $nbLignes * 9);
+$t->comment("Création d'un export de facturation à partir des facture pour une société");
 
 
 $arrayCompta = explode("\n",$exportCompta);

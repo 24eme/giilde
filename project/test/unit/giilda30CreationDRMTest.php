@@ -16,6 +16,8 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
   $drm->delete(false);
 }
 
+$nb_mouvements_facture = count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($viti->getSociete()));
+
 // Début des tests
 
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode, true);
@@ -75,7 +77,7 @@ $t->is($mvt_crd->facturable, 1, $drm->_id." : le mouvement de sortie crd est fac
 $t->is($mvt_dest->facturable, 0, $drm->_id." : le mouvement de sortie destruction n'est pas facturable");
 $t->isnt($mvt_export->date, null, $drm->_id." : le mouvement d'export a une date ".$mvt_export->date);
 
-$t->is(count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($viti->getSociete())), 3, $drm->_id." : on retrouve le mouvement facturable dans la vue facture");
+$t->is(count(MouvementfactureFacturationView::getInstance()->getMouvementsNonFacturesBySociete($viti->getSociete())) - $nb_mouvements_facture, 3, $drm->_id." : on retrouve le mouvement facturable dans la vue facture");
 
 $t->comment("Génère une modificatrice et change les exports");
 $drm_mod = $drm->generateModificative();
