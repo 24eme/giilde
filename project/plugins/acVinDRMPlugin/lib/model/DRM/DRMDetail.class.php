@@ -23,6 +23,10 @@ class DRMDetail extends BaseDRMDetail {
 
         return $this->getCepage()->getConfig()->getCodeProduit();
     }
+    
+    public function hasLibelleModified() {
+    	return ($this->produit_libelle && $this->produit_libelle !== $this->getLibelle())? true : false;
+    }
 
     /**
      *

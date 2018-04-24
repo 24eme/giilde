@@ -53,7 +53,9 @@ class drm_validationActions extends drmGeneriqueActions {
             $d->total_facturable = $produit->total_facturable;
             $this->produits[] = $d;
         }
-
+        
+        $this->isUsurpationMode = $this->isUsurpationMode();
+        
         $this->form = new DRMValidationCommentaireForm($this->drm);
 
         if (!$request->isMethod(sfWebRequest::POST)) {

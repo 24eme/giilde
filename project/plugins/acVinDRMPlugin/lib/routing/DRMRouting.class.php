@@ -108,6 +108,10 @@ class DRMRouting {
             'action' => 'validation'), array('sf_method' => array('get', 'post')), array('model' => 'DRM',
             'type' => 'object')));
 
+        $r->prependRoute('drm_edition_libelles', new DRMRoute('/drm/:identifiant/edition/:periode_version/libelles', array('module' => 'drm_edition',
+            'action' => 'libelles'), array('sf_method' => array('get', 'post')), array('model' => 'DRM',
+            'type' => 'object')));
+
 
         $r->prependRoute('drm_redirect_to_visualisation', new sfRoute('/drm/redirect/:identifiant_drm', array('module' => 'drm', 'action' => 'redirect'), array('sf_method' => array('get'))
         ));

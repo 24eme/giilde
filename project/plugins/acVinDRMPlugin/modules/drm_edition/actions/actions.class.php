@@ -37,6 +37,30 @@ class drm_editionActions extends drmGeneriqueActions {
             }
         }
     }
+    
+
+
+    public function executeLibelles(sfWebRequest $request) {
+    	$this->isTeledeclarationMode = $this->isTeledeclarationDrm();
+    	$this->init();
+    	$actionPermitted = false;
+    	if (($this->getUser()->hasCredential(myUser::CREDENTIAL_ADMIN) || $this->isUsurpationMode()) && $this->getUser()->hasCredential(Roles::TELEDECLARATION_DOUANE) && $this->getUser()->getCompte()->hasDroit("teledeclaration_douane")) {
+    		$actionPermitted = true;
+    	}
+    	if (!$actionPermitted) {
+    		$this->redirect404();
+    	}
+    	
+    	$this->form = new DRMLibellesForm($this->drm);
+    	
+    	if ($request->isMethod(sfRequest::POST)) {
+        	$this->form->bind($request->getParameter($this->form->getName()));
+        	if ($this->form->isValid()) {
+                $drm = $this->form->save();
+                $this->redirect('drm_validation', $drm);
+        	}
+    	}
+    }
 
     public function executeDetail(sfWebRequest $request) {
         $this->init();
