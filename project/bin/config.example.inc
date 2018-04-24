@@ -3,9 +3,11 @@ PROJETURL=https://declaration.giilda.com/
 TMP=/tmp/giilda
 SYMFONYTASKOPTIONS="--application=generique --env=dev"
 WORKINGDIR=/home/giilda/project/
+XMLTESTDIR=$WORKINGDIR/web/test/xml/
 COUCHHOST=localhost
 COUCHPORT=5984
 COUCHBASE=giilda
+COUCHTEST=http://localhost:5984/giilda_test
 ELASTHOST=localhost
 ELASTPORT=9200
 ELASTBASE=giilda

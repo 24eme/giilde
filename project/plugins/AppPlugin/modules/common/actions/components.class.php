@@ -9,6 +9,11 @@ class commonComponents extends sfComponents {
         }elseif ($this->getRoute() instanceof InterfaceSocieteRoute) {
             $this->etablissement = $this->getRoute()->getSociete()->getEtablissementPrincipal();
         }
+
+        if($request->getParameter('etablissement')) {
+            $this->etablissement = EtablissementClient::getInstance()->find($request->getParameter('etablissement'));
+        }
+
         $this->module = $this->getRequest()->getParameter('module');
     }
 

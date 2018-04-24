@@ -1,4 +1,4 @@
-all: project/cache project/log project/config/app.yml project/config/databases.yml project/bin/config.inc project/web/declaration_dev.php project/web/components/vins/vins-preview.html .views/vrac.json .views/etablissements.json .views/archivage.json .views/mouvements.json .views/ds.json .views/societe.json .views/compte.json .views/generation.json .views/drm.json .views/sv12.json project/data/latex .views/mouvementfacture.json .views/alerte.json
+all: project/cache project/log project/config/app.yml project/config/databases.yml project/bin/config.inc project/web/components/vins/vins-preview.html .views/vrac.json .views/etablissements.json .views/archivage.json .views/mouvements.json .views/ds.json .views/societe.json .views/compte.json .views/generation.json .views/drm.json .views/sv12.json project/data/latex .views/mouvementfacture.json .views/alerte.json
 
 project/cache:
 	mkdir project/cache
@@ -21,9 +21,6 @@ project/config/databases.yml:
 
 project/bin/config.inc:
 	cp project/bin/config.example.inc project/bin/config.inc
-
-project/web/declaration_dev.php:
-	cp project/web/declaration_dev.php.example project/web/declaration_dev.php
 
 project/web/components/vins/vins-preview.html: project/web/components/vins/fontcustom.yml project/web/components/vins/svg/bouteille.svg  project/web/components/vins/svg/mouts.svg  project/web/components/vins/svg/raisins.svg  project/web/components/vins/svg/vrac.svg
 	cd project/web/components/vins ; fontcustom compile -c fontcustom.yml
@@ -65,4 +62,4 @@ project/web/components/vins/vins-preview.html: project/web/components/vins/fontc
 	perl bin/generate_views.pl project/config/databases.yml project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.history.map.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.history.reduce.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.recherche.map.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.recherche.reduce.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.relance.map.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.relance.reduce.view.js > $@ || rm >@
 
 clean:
-	rm -f .views/*
+	rm -f .views/*;mkdir .views
