@@ -19,11 +19,6 @@
 
             <?php include_partial('drm_visualisation/recap_stocks_mouvements', array('drm' => $drm, 'mouvements' => $mouvements, 'no_link' => $no_link, 'isTeledeclarationMode' => $isTeledeclarationMode, 'visualisation' => false, 'mouvementsByProduit' => $mouvementsByProduit, 'typeDetailKey' => DRM::DETAILS_KEY_SUSPENDU, 'typeKey' => DRMClient::TYPE_DRM_SUSPENDU)); ?>
             <?php include_partial('drm_visualisation/recap_stocks_mouvements', array('drm' => $drm, 'mouvements' => $mouvements, 'no_link' => $no_link, 'isTeledeclarationMode' => $isTeledeclarationMode, 'visualisation' => false, 'mouvementsByProduit' => $mouvementsByProduit, 'typeDetailKey' => DRM::DETAILS_KEY_ACQUITTE, 'typeKey' => DRMClient::TYPE_DRM_ACQUITTE)); ?>
-
-			
-      		<?php if (($sf_user->hasCredential(myUser::CREDENTIAL_ADMIN) || $isUsurpationMode) && $sf_user->hasCredential(Roles::TELEDECLARATION_DOUANE) && $sf_user->getCompte()->hasDroit("teledeclaration_douane")): ?>
-            <a class="btn btn-warning pull-right" href="<?php echo url_for('drm_edition_libelles', $drm) ?>">Modifier les libellés produits</a>
-            <?php endif; ?>
             
             <?php if ($isTeledeclarationMode): ?>
                 <?php include_partial('drm_visualisation/recap_crds', array('drm' => $drm)); ?>

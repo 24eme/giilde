@@ -65,6 +65,8 @@
 
         <?php include_partial('drm_visualisation/recap_stocks_mouvements', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode, 'no_link' => $no_link, 'mouvementsByProduit' => $mouvementsByProduit, 'visualisation' => true, 'typeDetailKey' => DRM::DETAILS_KEY_SUSPENDU, 'typeKey' => DRMClient::TYPE_DRM_SUSPENDU)) ?>
         <?php include_partial('drm_visualisation/recap_stocks_mouvements', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode, 'no_link' => $no_link, 'mouvementsByProduit' => $mouvementsByProduit, 'visualisation' => true, 'typeDetailKey' => DRM::DETAILS_KEY_ACQUITTE, 'typeKey' => DRMClient::TYPE_DRM_ACQUITTE)) ?>
+    	
+      	
     </div>
 </div>
 
@@ -90,7 +92,7 @@
   <div class="col-xs-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title text-center">Transmission proDou@ane</h3>
+          <h3 class="panel-title text-center"<?php if (!$isTeledeclarationMode): ?> style="padding: 0 0 5px 0;"<?php endif; ?>>Transmission proDou@ane <?php if (!$isTeledeclarationMode): ?><a class="btn btn-warning btn-xs pull-right" href="<?php echo url_for('drm_edition_libelles', $drm) ?>">Modifier les libellés prodouane</a><?php endif; ?></h3>
         </div>
         <div class="panel-content>">
             <table class="table table-striped table-condensed">

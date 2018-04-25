@@ -8,7 +8,9 @@ class DRMLibellesForm extends acCouchdbForm {
 			$this->setWidget($hash, new sfWidgetFormInput());
 			$this->widgetSchema->setLabel($hash, $detail->getLibelle());
 			$this->setValidator($hash, new sfValidatorString(array('required' => false)));
-			$this->setDefault($hash, $detail->produit_libelle);
+			if ($detail->hasLibelleModified()) {
+				$this->setDefault($hash, $detail->produit_libelle);
+			}
 		}
 		$this->widgetSchema->setNameFormat('drm_libelles[%s]');
 	}
@@ -17,7 +19,7 @@ class DRMLibellesForm extends acCouchdbForm {
         $values = $this->getValues();
         $drm = $this->getObject();
         foreach ($values as $hash => $value) {
-        	if ($drm->exist($hash) && preg_match('/^\/declaration\/certifications\//', $hash)) {
+        	if ($drm->exist($hash) && preg_match('/^\/declaration\/certifications\//', $hash) && $value) {
         		$detail = $drm->get($hash);
         		$detail->produit_libelle = $value;
         	}

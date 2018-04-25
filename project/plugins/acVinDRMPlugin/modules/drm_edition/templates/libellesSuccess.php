@@ -7,7 +7,6 @@
 
 <section id="principal" class="drm">
 
-<?php include_partial('drm/etapes', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode, 'etape_courante' => DRMClient::ETAPE_VALIDATION)); ?>
 
 <form action="<?php echo url_for('drm_edition_libelles', $form->getObject()) ?>" method="post">
 	<?php echo $form->renderGlobalErrors(); ?>
@@ -31,7 +30,11 @@
 				?>
 				<tr>
 					<td><?php echo $form[$hash]->renderLabel() ?></td>
-					<td<?php if ($drm->get($hash)->hasLibelleModified()): ?> class="has-warning"<?php endif; ?>><?php echo $form[$hash]->render(array('class' => 'form-control')) ?><?php echo $form[$hash]->renderError() ?></td>
+					<?php if ($drm->get($hash)->hasLibelleModified()): ?>
+					<td class="has-warning"><?php echo $form[$hash]->render(array('class' => 'form-control')) ?><?php echo $form[$hash]->renderError() ?></td>
+					<?php else: ?>
+					<td><?php echo $form[$hash]->render(array('class' => 'form-control', 'placeholder' => strip_tags(trim($form[$hash]->renderLabel())))) ?><?php echo $form[$hash]->renderError() ?></td>
+					<?php endif; ?>
 				</tr>
 				<?php endif; endforeach; ?>
 		</tbody>
@@ -54,7 +57,11 @@
 				?>
 				<tr>
 					<td><?php echo $form[$hash]->renderLabel() ?></td>
-					<td<?php if ($drm->get($hash)->hasLibelleModified()): ?> class="has-warning"<?php endif; ?>><?php echo $form[$hash]->render(array('class' => 'form-control')) ?><?php echo $form[$hash]->renderError() ?></td>
+					<?php if ($drm->get($hash)->hasLibelleModified()): ?>
+					<td class="has-warning"><?php echo $form[$hash]->render(array('class' => 'form-control')) ?><?php echo $form[$hash]->renderError() ?></td>
+					<?php else: ?>
+					<td><?php echo $form[$hash]->render(array('class' => 'form-control', 'placeholder' => strip_tags(trim($form[$hash]->renderLabel())))) ?><?php echo $form[$hash]->renderError() ?></td>
+					<?php endif; ?>
 				</tr>
 				<?php endif; endforeach; ?>
 		</tbody>
@@ -63,7 +70,7 @@
     
     <div class="row">
     	<div class="col-xs-6 text-left">
-        	<a tabindex="-1" href="<?php echo url_for('drm_validation', $drm) ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+        	<a tabindex="-1" href="<?php echo url_for('drm_visualisation', $drm) ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la visualisation</a>
         </div>
         <div class="col-xs-6 text-right">
         	<button type="submit" class="btn btn-success">Valider</button>

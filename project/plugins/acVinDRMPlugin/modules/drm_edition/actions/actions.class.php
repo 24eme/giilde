@@ -43,11 +43,7 @@ class drm_editionActions extends drmGeneriqueActions {
     public function executeLibelles(sfWebRequest $request) {
     	$this->isTeledeclarationMode = $this->isTeledeclarationDrm();
     	$this->init();
-    	$actionPermitted = false;
-    	if (($this->getUser()->hasCredential(myUser::CREDENTIAL_ADMIN) || $this->isUsurpationMode()) && $this->getUser()->hasCredential(Roles::TELEDECLARATION_DOUANE) && $this->getUser()->getCompte()->hasDroit("teledeclaration_douane")) {
-    		$actionPermitted = true;
-    	}
-    	if (!$actionPermitted) {
+    	if ($this->isTeledeclarationMode || !$this->drm->exist('transmission_douane') || !$this->drm->transmission_douane) {
     		$this->redirect404();
     	}
     	
@@ -57,7 +53,7 @@ class drm_editionActions extends drmGeneriqueActions {
         	$this->form->bind($request->getParameter($this->form->getName()));
         	if ($this->form->isValid()) {
                 $drm = $this->form->save();
-                $this->redirect('drm_validation', $drm);
+                $this->redirect('drm_visualisation', $drm);
         	}
     	}
     }
