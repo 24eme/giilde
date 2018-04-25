@@ -251,7 +251,8 @@ class DRMImportCsvEdi extends DRMCsvEdi {
             $confDetailMvt = $this->mouvements[$type_douane_drm_key][$cat_mouvement][$type_mouvement];
 
             if (!$just_check) {
-                $drmDetails = $this->drm->addProduit($founded_produit->getHash(), $type_douane_drm_key);
+                $denomination_complementaire = (trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]))? trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]) : false;
+                $drmDetails = $this->drm->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
 
                 $detailTotalVol = round(floatval($csvRow[self::CSV_CAVE_VOLUME]), 4);
                 $volume = round(floatval($csvRow[self::CSV_CAVE_VOLUME]), 4);
