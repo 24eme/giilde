@@ -43,15 +43,18 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
     public function storeEmetteur() {
         $configs = sfConfig::get('app_configuration_facture');
         $emetteur = new stdClass();
+        $config_emetteur = null;
         if (!$configs && !isset($configs['emetteur_libre']) && !isset($configs['emetteur_cvo'])) {
             throw new sfException(sprintf('Config "configuration/facture/emetteur" not found in app.yml'));
         }
         if ($this->hasArgument(FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS)) {
             $config_emetteur = $configs['emetteur_libre'];
-
-            return;
         }
-        $config_emetteur = $configs['emetteur_cvo'];
+
+        if(!$config_emetteur) {
+            $config_emetteur = $configs['emetteur_cvo'];
+        }
+
         unset($config_emetteur['fax']);
         $this->emetteur = $config_emetteur;
 
