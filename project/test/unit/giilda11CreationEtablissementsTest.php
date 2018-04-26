@@ -42,6 +42,7 @@ $societeviti = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_v
 $etablissementviti = $societeviti->createEtablissement(EtablissementFamilles::FAMILLE_PRODUCTEUR);
 $etablissementviti->region = EtablissementClient::REGION_CVO;
 $etablissementviti->nom = "Etablissement viticulteur 2";
+$etablissementviti->no_accises = "FR123456789";
 $etablissementviti->save();
 $id = $etablissementviti->getSociete()->getidentifiant();
 $compteviti = CompteClient::getInstance()->findByIdentifiant($id.'01');

@@ -100,15 +100,17 @@ class DRMExportCsvEdi extends DRMCsvEdi {
         foreach ($produitsDetails as $hashProduit => $produitDetail) {
 
             foreach ($produitDetail->stocks_debut as $stockdebut_key => $stockdebutValue) {
-                if ($stockdebutValue) {
-                    $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "stocks_debut;" . $stockdebut_key . ";" . $stockdebutValue . ";\n";
+                if (!$stockdebutValue && !$produitDetail->stocks_fin->get(str_replace('initial', 'final', $stockdebut_key))) {
+                    continue;
                 }
+                $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "stocks_debut;" . $stockdebut_key . ";" . $stockdebutValue*1.0 . ";;;\n";
             }
 
             foreach ($produitDetail->entrees as $entreekey => $entreeValue) {
-                if ($entreeValue) {
-                    $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "entrees;" . $entreekey . ";" . $entreeValue . ";\n";
+                if (!$entreeValue) {
+                    continue;
                 }
+                $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "entrees;" . $entreekey . ";" . $entreeValue . ";;;\n";
             }
 
             foreach ($produitDetail->sorties as $sortiekey => $sortieValue) {
@@ -132,16 +134,17 @@ class DRMExportCsvEdi extends DRMCsvEdi {
                         }
                     } else {
                         if (!$produitDetail->getConfig()->get('sorties')->get($sortiekey)->hasDetails()) {
-                            $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "sorties;" . $sortiekey . ";" . $sortieValue . ";\n";
+                            $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "sorties;" . $sortiekey . ";" . $sortieValue . ";;;\n";
                         }
                     }
                 }
             }
 
             foreach ($produitDetail->stocks_fin as $stockfin_key => $stockfinValue) {
-                if ($stockfinValue) {
-                    $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "stocks_fin;" . $stockfin_key . ";" . $stockfinValue . ";\n";
+                if (!$stockfinValue && !$produitDetail->stocks_debut->get(str_replace('final', 'initial', $stockfin_key))) {
+                    continue;
                 }
+                $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "stocks_fin;" . $stockfin_key . ";" . $stockfinValue*1.0 . ";;;\n";
             }
         }
         return $mouvementsEdi;
@@ -181,7 +184,8 @@ class DRMExportCsvEdi extends DRMCsvEdi {
                     $type_mvt_csv = str_replace('_', ';', $type_mvt);
                     break;
             }
-            $crdsEdi.= $debutLigne . $crdDetail->couleur . ";" . $crdDetail->genre . ";" . $crdDetail->detail_libelle . ";;;;;;;".strtolower(EtablissementClient::$regimes_crds_libelles[$regimeKey]).";" . $type_mvt_csv . ";" . $crdDetail->$type_mvt . ";\n";
+            $crdsEdi.= $debutLigne .  DRMClient::$drm_crds_couleurs[$crdDetail->couleur] . ";" . DRMClient::$drm_crds_genre[$crdDetail->genre] . ";" . $crdDetail->detail_libelle . ";;;;;;;".
+            EtablissementClient::$regimes_crds_libelles[$regimeKey].";" . $type_mvt_csv . ";" . $crdDetail->$type_mvt . ";;;\n";
         }
     }
 

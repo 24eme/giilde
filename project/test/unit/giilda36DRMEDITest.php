@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(18);
+$t = new lime_test(21);
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
 $produit1_hash = array_shift($produits);
@@ -15,6 +15,8 @@ $produit2 = ConfigurationClient::getInstance()->getCurrent()->get($produit2_hash
 foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k => $v) {
   $drm = DRMClient::getInstance()->find($k);
   $drm->delete(false);
+  $csv = CSVDRMClient::getInstance()->find(str_replace("DRM", "CSVDRM", $k));
+  $csv->delete(false);
 }
 
 $t->comment("Création d'une DRM via EDI ".$viti->identifiant);
@@ -53,6 +55,9 @@ $t->is($drm->getProduit($produit1_hash, 'details')->get('stocks_fin/final'),944,
 $t->ok($drm->crds->exist('COLLECTIFSUSPENDU'), "CRD : noeud COLLECTIFSUSPENDU reconnu");
 $t->is(count($drm->crds->COLLECTIFSUSPENDU), 2, "CRD possède deux centilisations");
 
+$t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->genre, "TRANQ", "Genre 75 cl OK");
+$t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->couleur, "VERT", "Couleur 75 cl OK");
+$t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->detail_libelle, "Bouteille 75 cl", "Libellé contenant OK");
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->stock_debut, 14742, "stock debut 75 cl OK");
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->sorties_utilisations, 3118, "utilisation 75 cl OK");
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->stock_fin, 11624, "stock fin 75 cl OK");

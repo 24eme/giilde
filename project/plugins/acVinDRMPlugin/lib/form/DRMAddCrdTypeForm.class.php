@@ -99,7 +99,8 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
     }
 
     public function getGenres() {
-        return array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'Vins tranquilles', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'Vins mousseux');
+        
+        return DRMClient::$drm_crds_genre;
     }
 
     public function getRegimeCrds() {

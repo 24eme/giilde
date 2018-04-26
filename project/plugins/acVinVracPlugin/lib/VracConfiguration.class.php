@@ -51,6 +51,12 @@ class VracConfiguration
 		return strtoupper(str_replace(" ","",str_replace(",",".", $s)));
 	}
 
+	public function getContenanceLibelle($value) {
+		$contenances = $this->getContenancesSlugifiedLibelle();
+
+		return $contenances[self::slugifyContenances($value)];
+	}
+
 	public function getContenancesSlugified()
 	{
 		$contenances = $this->configuration['contenances'];
@@ -58,6 +64,17 @@ class VracConfiguration
 		foreach ($contenances as $l => $c) {
 			$contenances_retour[self::slugifyContenances($l)] = $c;
 			$contenances_retour[self::slugifyContenances(preg_replace('/(Bouteilles? *|BIB)/i', '', $l))] = $c;
+		}
+		return $contenances_retour;
+	}
+
+	public function getContenancesSlugifiedLibelle()
+	{
+		$contenances = $this->configuration['contenances'];
+		$contenaces_retour = array();
+		foreach ($contenances as $l => $c) {
+			$contenances_retour[self::slugifyContenances($l)] = $l;
+			$contenances_retour[self::slugifyContenances(preg_replace('/(Bouteilles? *|BIB)/i', '', $l))] = $l;
 		}
 		return $contenances_retour;
 	}
