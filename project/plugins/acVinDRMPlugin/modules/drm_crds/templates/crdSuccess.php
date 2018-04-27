@@ -10,7 +10,7 @@
     <?php include_partial('drm/etapes', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode, 'etape_courante' => DRMClient::ETAPE_CRD)); ?>
     <div class="row" id="application_drm">
         <div class="col-xs-12">
-          <p><?php echo getPointAideText('drm','etape_capsules_crd_description'); ?></p>
+          <p><?php echo getPointAideText('drm','etape_capsules_crd_description'); ?><?php if ($isUsurpationMode): ?><a href="<?php echo url_for('drm_crd_reinit', $drm) ?>" class="btn btn-xs btn-warning pull-right">Réinitialiser le régime CRD</a><?php endif; ?></p>
             <form id="form_crds" action="<?php echo url_for('drm_crd', $crdsForms->getObject()); ?>" method="post">
                 <?php echo $crdsForms->renderGlobalErrors(); ?>
                 <?php echo $crdsForms->renderHiddenFields(); ?>

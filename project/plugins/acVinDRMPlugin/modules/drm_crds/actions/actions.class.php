@@ -33,6 +33,18 @@ class drm_crdsActions extends drmGeneriqueActions {
                   $this->crdRegimeForm = new DRMCrdRegimeChoiceForm($this->drm);
         }
     }
+    
+    public function executeReinitCrd(sfWebRequest $request) {
+        $this->initSocieteAndEtablissementPrincipal();
+    	$this->drm = $this->getRoute()->getDRM();
+    	$etablissement = $this->getRoute()->getEtablissement();
+        $this->forward404Unless($this->isUsurpationMode());
+        if ($etablissement->exist('crd_regime')) {
+        	$etablissement->remove('crd_regime');
+        	$etablissement->save();
+        }
+        $this->redirect('drm_crd', $this->drm);
+    }
 
     public function executeAjoutTypeCrd(sfWebRequest $request) {
         $this->initSocieteAndEtablissementPrincipal();
