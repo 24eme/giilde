@@ -271,8 +271,9 @@ class FactureClient extends acCouchdbClient {
         if (count($mouvementsBySoc) == 0)
             return null;
         foreach ($mouvementsBySoc as $identifiant => $mouvement) {
-            if ($mouvement && !count($mouvement))
+            if (!$mouvement || !count($mouvement)) {
                 unset($mouvementsBySoc[$identifiant]);
+            }
         }
         return $mouvementsBySoc;
     }

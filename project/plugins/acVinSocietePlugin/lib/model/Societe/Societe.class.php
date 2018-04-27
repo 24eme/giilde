@@ -86,7 +86,7 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
         }
         if (!count($regions)) {
             if ($throwexception) {
-                throw new sfException("La societe " . $this->identifiant . " n'a pas de région viti :(");
+                throw new sfException("La societe " . $this->identifiant . " n'a pas de région viti ceci peut être dû au faite que ses établissements sont suspendus");
             }
             return '';
         }
