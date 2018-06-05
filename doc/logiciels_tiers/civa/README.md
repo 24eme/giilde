@@ -32,6 +32,7 @@ Le catalogue des mouvements de DRM admis par le portail du CIVA  [Catalogue mouv
 2. La catégorie du mouvement : stocks_debut, stocks_fin, entrees ou sorties
 3. Le type du mouvement : récolte, achatcrd, vrac, repli...
 
+
 ## Exemple complet de fichier d'import de DRM
 
 Un exemple spécifique de DRM à importer pour le portail du CIVA est disponible ici : [Exemple de fichier d'import pour le CIVA](exemple_export_drm.csv) .

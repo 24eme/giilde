@@ -84,9 +84,15 @@
                 <li>Carte professionnelle : <?php echo $etablissement->carte_pro; ?></li>
             <?php endif; ?>
             <li>Région : <?php echo $etablissement->region; ?></li>
-            <?php if ($etablissement->exist('crd_regime')): ?>
-                <li>Régime CRD : <?php echo $etablissement->crd_regime; ?></li>
-            <?php endif; ?>
+            <?php if ($etablissement->exist('crd_regime') && $etablissement->getCrdRegimeArray()) : ?>
+                <li>Régime CRD :&nbsp;
+                   <?php foreach ($etablissement->getCrdRegimeArray() as $crd_regime):
+                       echo EtablissementClient::$regimes_crds_libelles[$crd_regime].'&nbsp;&nbsp;';
+                    ?>
+                   <br/>
+               <?php endforeach ?>
+               </li>
+           <?php endif; ?>
         </ul>
 
         <?php if ($etablissement->commentaire) : ?>

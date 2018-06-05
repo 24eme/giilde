@@ -3,6 +3,8 @@
 class CSVDRMClient extends acCouchdbClient {
 
     const TYPE_DRM = "DRM";
+    const LEVEL_WARNING = 'WARNING';
+    const LEVEL_ERROR = 'ERROR';
 
     public static function getInstance() {
         return acCouchdbManager::getClient("CSVDRM");

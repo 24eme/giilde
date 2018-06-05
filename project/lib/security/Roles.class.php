@@ -62,6 +62,8 @@ class Roles
                                    self::ALERTE,
                                    self::RELANCE,
                                    self::CONTACT),
+        self::TELEDECLARATION_DRM => array(self::TELEDECLARATION),
+        self::TELEDECLARATION_VRAC => array(self::TELEDECLARATION),
         self::COMPTA => array(self::CONTACT),
         self::PRESSE => array(self::CONTACT),
         self::DIRECTION => array(self::CONTACT),
@@ -77,7 +79,6 @@ class Roles
             foreach(self::$hierarchy[$role] as $r) {
                 $roles = array_merge($roles, self::getRoles($r));
             }
-
         }
 
         return $roles;

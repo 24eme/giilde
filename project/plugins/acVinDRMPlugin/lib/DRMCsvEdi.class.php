@@ -59,6 +59,11 @@ class DRMCsvEdi extends CsvFile {
     const CSV_ANNEXE_NUMERODOCUMENT = 19;
     const CSV_ANNEXE_OBSERVATION = 20;
 
+    const COMPLEMENT = "COMPLEMENT";
+    const COMPLEMENT_OBSERVATIONS = "OBSERVATIONS";
+    const COMPLEMENT_TAV = "TAV";
+    const COMPLEMENT_PREMIX = "PREMIX";
+
     protected static $permitted_types = array(self::TYPE_CAVE,
         self::TYPE_CRD,
         self::TYPE_ANNEXE);

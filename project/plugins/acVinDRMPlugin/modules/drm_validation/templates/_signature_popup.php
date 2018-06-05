@@ -12,7 +12,7 @@
                 <?php if($compte->hasDroit(Roles::TELEDECLARATION_DOUANE)): ?>
           	    <p>Si vous le souhaitez, en cliquant sur l'option ci-dessous, vous pouvez transmettre cette DRM directement sur le portail de la douane, qui apparaitra en mode brouillon sur le portail pro.douane.gouv.fr. Il vous restera alors à la valider en ligne sur le site web douanier.</p>
               <?php endif; ?>
-      	    <p>Si vous décidez de transmettre le document par courrier postal ou par mail, n'oubliez pas que la DRM doit être signée manuellement pour être valable.</p>
+      	   <!--<p>Si vous décidez de transmettre le document par courrier postal ou par mail, n'oubliez pas que la DRM doit être signée manuellement pour être valable.</p>-->
                 <?php if($compte->hasDroit("teledeclaration_douane")): ?>
                 <p>
                   <div class="ligne_form">

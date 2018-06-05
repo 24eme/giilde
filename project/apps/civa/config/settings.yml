@@ -1,0 +1,57 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    cache:                  true
+    no_script_name:         true
+    logging_enabled:        false
+
+dev:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_DEPRECATED)."\n" ?>
+    web_debug:              true
+    cache:                  true
+    no_script_name:         false
+    etag:                   false
+  .action:
+    error_500_includeexception:	true
+
+test:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    cache:                  false
+    web_debug:              false
+    no_script_name:         false
+    etag:                   false
+  .action:
+    error_500_includeexception:	true
+
+all:
+  .settings:
+
+    enabled_modules:        [default, common, auth, vrac, drm, drm_edition, drm_vrac_details, drm_creationvrac_details, drm_export_details, drm_pdf, drm_validation, etablissement, etablissement_autocomplete, facture, ds, generation, revendication, stocks, societe, compte, document, produit, annuaire, compte_teledeclarant, drm_crds, drm_annexes, drm_ajout_produit, drm_visualisation, statistique, drm_xml, sv12, alerte, relance]
+
+    # Form security secret (CSRF protection)
+    csrf_secret:            false
+
+    # Output escaping settings
+    escaping_strategy:      true
+    escaping_method:        ESC_SPECIALCHARS
+
+    # Enable the database manager
+    use_database:           true
+    i18n:                   true
+    default_culture:        fr_FR
+
+  .action:
+    error_500_module:       common
+    error_500_action:       error500
+
+    error_404_module:       common
+    error_404_action:       error404
+
+    login_module:           auth
+    login_action:           login
+    secure_module:          auth
+    secure_action:          forbidden

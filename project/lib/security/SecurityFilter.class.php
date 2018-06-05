@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SecurityFilter extends sfBasicSecurityFilter
 {
@@ -17,7 +17,7 @@ class SecurityFilter extends sfBasicSecurityFilter
         } elseif($auth == "NO_AUTH") {
             $this->filter = new AutoAdminFilter($context, array());
         } else {
-            $this->filter = new sfBasicSecurityFilter($context, array());
+            $this->filter = new BasicSecurityFilter($context, array());
         }
     }
 
@@ -26,4 +26,4 @@ class SecurityFilter extends sfBasicSecurityFilter
 
         return $this->filter->execute($filterChain);
     }
-} 
+}

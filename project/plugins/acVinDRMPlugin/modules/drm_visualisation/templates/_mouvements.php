@@ -14,7 +14,7 @@ $hasDontRevendique = ConfigurationClient::getCurrent()->hasDontRevendique();
         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
             <div class="col-xs-12">
                 <div class="form-group">
-                    <input type="hidden" data-placeholder="Saisissez un produit, un type de mouvement, un numéro de contrat, un pays d'export, etc. :" data-hamzastyle-container="#table_mouvements" class="hamzastyle" />
+                    <input type="hidden" data-placeholder="Saisissez un produit, un type de mouvement, un numéro de contrat, un pays d'export, etc. :" data-hamzastyle-container="#table_mouvements" class="hamzastyle" style="width: 970px"/>
                 </div>
             </div>
         </div>

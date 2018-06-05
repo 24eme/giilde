@@ -10,6 +10,7 @@ Compte:
       prenom: { }
       nom: { }
       mot_de_passe: { }
+      date_creation: { required: false }
       nom_a_afficher: {}
       fonction: { }
       commentaire: { }
@@ -38,6 +39,7 @@ Compte:
       raison_sociale_societe: { required: false }
       type_societe: { required: false }
       teledeclaration_active: { required: false }
+      gecos: { required: false }
       societe_informations:
         type: collection
         definition:
@@ -68,4 +70,9 @@ Compte:
         definition:
           fields:
             '*': { }
- 
+      delegation:
+        type: array_collection
+        required: false
+        definition:
+          fields:
+            '*': { }

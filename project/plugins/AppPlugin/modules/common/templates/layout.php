@@ -7,26 +7,28 @@
         <?php include_http_metas() ?>
         <?php include_metas() ?>
         <?php include_title() ?>
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="<?php echo public_path("/favicon.ico") ?>" />
         <?php include_stylesheets() ?>
         <!-- Bootstrap core CSS -->
         <?php if(file_exists(sfConfig::get('sf_web_dir')."/css/bootstrap_".sfConfig::get('sf_app').'.css')): ?>
-            <link href="/css/bootstrap_<?php echo sfConfig::get('sf_app'); ?>.css?20161004" rel="stylesheet">
+            <link href="<?php echo public_path("/css/bootstrap_".sfConfig::get('sf_app').".css") ?>" rel="stylesheet">
         <?php else: ?>
-            <link href="/css/bootstrap.css?20161004" rel="stylesheet">
+            <link href="<?php echo public_path("/css/bootstrap.css") ?>" rel="stylesheet">
         <?php endif; ?>
-        <link href="/components/select2/select2.css" rel="stylesheet">
-        <link href="/components/select2/select2-bootstrap.min.css" rel="stylesheet">
-        <link href="/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-        <link href="/components/vins/vins.css" rel="stylesheet">
-        <link href="/css/style.css?20170324" rel="stylesheet">
-
+        <link href="<?php echo public_path("/components/select2/select2.css") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/select2/select2-bootstrap.min.css") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/vins/vins.css") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/css/style.css?20170324") ?>" rel="stylesheet">
+        <?php if(file_exists(sfConfig::get('sf_web_dir')."/css/style_".sfConfig::get('sf_app').'.css')): ?>
+            <link href="<?php echo public_path("/css/style_".sfConfig::get('sf_app').".css") ?>" rel="stylesheet">
+        <?php endif; ?>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <script src="/components/jquery/jquery.js"></script>
+        <script src="<?php echo public_path("/components/jquery/jquery.js") ?>"></script>
     </head>
     <body>
         <?php include_partial('common/header'); ?>
@@ -43,23 +45,23 @@
             <?php include_partial('common/footer'); ?>
         </div>
 
-        <script src="/components/bootstrap/bootstrap.js"></script>
-        <script src="/components/select2/select2.min.js"></script>
-        <script src="/components/moment/moment-with-locales.min.js"></script>
-        <script src="/components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="/js/plugins/jquery.plugins.min.js"></script>
-        <script src="/js/lib/jquery-ui-1.8.21.min.js"></script>
-        <script src="/js/ajaxHelper.js"></script>
-        <script src="/js/form.js"></script>
-        <script src="/js/colonnes.js"></script>
-        <script src="/js/main.js?20170223"></script>
-        <script src="/js/teledeclaration.js"></script>
-        <script src="/js/conditionnement.js"></script>
-        <script src="/js/vrac.js"></script>
-        <script src="/js/drm.js?20170706"></script>
-        <script src="/js/contacts.js"></script>
-        <script src="/js/facture.js"></script>
-        <script src="/js/stats.js?20170222"></script>
-        <script src="/js/lib/jquery.sticky.js"></script>
+        <script src="<?php echo public_path("/components/bootstrap/bootstrap.js") ?>"></script>
+        <script src="<?php echo public_path("/components/select2/select2.min.js") ?>"></script>
+        <script src="<?php echo public_path("/components/moment/moment-with-locales.min.js") ?>"></script>
+        <script src="<?php echo public_path("/components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js") ?>"></script>
+        <script src="<?php echo public_path("/js/plugins/jquery.plugins.min.js") ?>"></script>
+        <script src="<?php echo public_path("/js/lib/jquery-ui-1.8.21.min.js") ?>"></script>
+        <script src="<?php echo public_path("/js/ajaxHelper.js") ?>"></script>
+        <script src="<?php echo public_path("/js/form.js") ?>"></script>
+        <script src="<?php echo public_path("/js/colonnes.js") ?>"></script>
+        <script src="<?php echo public_path("/js/main.js?20170223") ?>"></script>
+        <script src="<?php echo public_path("/js/teledeclaration.js") ?>"></script>
+        <script src="<?php echo public_path("/js/conditionnement.js") ?>"></script>
+        <script src="<?php echo public_path("/js/vrac.js") ?>"></script>
+        <script src="<?php echo public_path("/js/drm.js?20170324") ?>"></script>
+        <script src="<?php echo public_path("/js/contacts.js") ?>"></script>
+        <script src="<?php echo public_path("/js/facture.js") ?>"></script>
+        <script src="<?php echo public_path("/js/stats.js?20170222") ?>"></script>
+        <script src="<?php echo public_path("/js/lib/jquery.sticky.js") ?>"></script>
   </body>
 </html>

@@ -13,6 +13,7 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
     private $typesCouleurs = null;
     private $typesLitrages = null;
     private $defaultGenre = null;
+    private $defaultRegime = null;
 
     public function __construct(acCouchdbJson $object, $options = array(), $CSRFSecret = null) {
         $this->drm = $object;
@@ -20,12 +21,15 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
         if(isset($options['genre'])) {
             $this->defaultGenre = $options['genre'];
         }
+        if(isset($options['regime'])) {
+            $this->defaultRegime = $options['regime'];
+            $this->regimeCrds = array($this->defaultRegime);
+        }
         parent::__construct($this->drm, $options, $CSRFSecret);
     }
 
     public function configure() {
         foreach ($this->regimeCrds as $regime) {
-
             $this->setWidget('couleur_crd_' . $regime, new bsWidgetFormChoice(array('expanded' => false, 'multiple' => false, 'choices' => $this->getTypeCouleurs())));
             $this->setWidget('litrage_crd_' . $regime, new bsWidgetFormChoice(array('expanded' => false, 'multiple' => false, 'choices' => $this->getTypeLitrages())));
             $this->setWidget('stock_debut_' . $regime, new bsWidgetFormInputInteger());
@@ -99,7 +103,7 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
     }
 
     public function getGenres() {
-        
+
         return DRMClient::$drm_crds_genre;
     }
 

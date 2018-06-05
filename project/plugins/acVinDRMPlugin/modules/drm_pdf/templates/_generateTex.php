@@ -45,15 +45,15 @@ keepaspectratio]{<?php echo realpath(dirname(__FILE__) . "/../../../../../web/da
 \setlength{\oddsidemargin}{-2cm}
 \setlength{\evensidemargin}{-2cm}
 \setlength{\textwidth}{29.7cm}
-\setlength{\textheight}{16.5cm}
+\setlength{\textheight}{15.5cm}
 \setlength{\headheight}{4.5cm}
 \setlength{\headwidth}{28.2cm}
 \setlength{\topmargin}{-3.5cm}
-\setlength{\footskip}{-1cm}
+\setlength{\footskip}{0cm}
 
 
 <?php include_partial('drm_pdf/generateEnteteTex', array('drm' => $drm, 'nbPages' => $nbPages)); ?>
-\begin{document}
+\begin{document}{~}
 
 <?php if (!$drm->isValidee()): ?>
 \AddToShipoutPicture{\BackgroundPic}

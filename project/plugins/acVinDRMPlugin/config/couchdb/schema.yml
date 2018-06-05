@@ -542,6 +542,7 @@ DRM:
                         cvo: { type: float }
                         facture: { type: integer }
                         facturable: { type: integer }
+                        coefficient_facturation: { type: integer, required: false }
                         region: { }
                         region_destinataire: { }
                         date: {  }

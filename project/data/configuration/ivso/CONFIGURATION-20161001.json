@@ -2849,6 +2849,966 @@
                                                        }
                                                    }
                                                }
+                                           },
+                                           "TDM": {
+                                               "libelle": "Coteaux et Terrasses de Montauban",
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       },
+                                                       "produit_non_interpro": false
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3R824",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "blanc_sec": {
+                                                       "libelle": "Blanc sec",
+                                                       "format_libelle": null,
+                                                       "code": "blanc_sec",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3B824",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3S824",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           },
+                                           "BIG": {
+                                               "libelle": "Bigorre",
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       },
+                                                       "produit_non_interpro": false
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3R652",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "blanc_sec": {
+                                                       "libelle": "Blanc sec",
+                                                       "format_libelle": null,
+                                                       "code": "blanc_sec",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3B652",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3S652",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           },
+                                           "PYA": {
+                                               "libelle": "Pyrénées Atlantiques",
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       },
+                                                       "produit_non_interpro": false
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3R641",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "blanc_sec": {
+                                                       "libelle": "Blanc sec",
+                                                       "format_libelle": null,
+                                                       "code": "blanc_sec",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3B641",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3S641",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           },
+                                           "TEG": {
+                                               "libelle": "Tarn et Garonne",
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       },
+                                                       "produit_non_interpro": false
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3R821",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "blanc_sec": {
+                                                       "libelle": "Blanc sec",
+                                                       "format_libelle": null,
+                                                       "code": "blanc_sec",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3B821",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3S821",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           },
+                                           "HGA": {
+                                               "libelle": "Haute-Garonne",
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       },
+                                                       "produit_non_interpro": false
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3R311",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "blanc_sec": {
+                                                       "libelle": "Blanc sec",
+                                                       "format_libelle": null,
+                                                       "code": "blanc_sec",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3B311",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3S311",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           },
+                                           "CAN": {
+                                               "libelle": "Cantal",
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       },
+                                                       "produit_non_interpro": false
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3R151",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "blanc_sec": {
+                                                       "libelle": "Blanc sec",
+                                                       "format_libelle": null,
+                                                       "code": "blanc_sec",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3B151",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3S151",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
                                            }
                                        }
                                    },
@@ -30641,7 +31601,6 @@
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
                                                                            "douane": [
-
                                                                            ],
                                                                            "cvo": [
                                                                            ]
@@ -32524,6 +33483,125 @@
                                    }
                                }
                            },
+                           "BFE": {
+                               "libelle": "Boissons Fermentées Autres",
+                               "format_libelle": null,
+                               "code": null,
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.5",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       },
+                                       "produit_non_interpro": false
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "BOISSONS_FERMENTEES_AUTRES",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           },
                            "DPLC": {
                                "libelle": "DPLC",
                                "format_libelle": null,
@@ -33210,7 +34288,7 @@
                    "mouvement_coefficient": 0,
                    "facturable": 0,
                    "douane_type": "STOCK",
-                   "douane_cat": null,
+                   "douane_cat": "stock-debut-periode",
                    "taxable_douane": 0
                },
                "instance": {
@@ -33307,7 +34385,7 @@
                    "mouvement_coefficient": 0,
                    "facturable": 0,
                    "douane_type": "STOCK",
-                   "douane_cat": null,
+                   "douane_cat": "stock-fin-periode",
                    "taxable_douane": 0
                },
                "instance": {

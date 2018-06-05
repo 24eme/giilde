@@ -213,6 +213,12 @@ Configuration:
                               douane_type: { }
                               douane_cat: { }
                               taxable_douane: { }
+            attributs:
+              type: collection
+              required: false
+              definition:
+                fields:
+                 '*': { }
             certifications:
               type: collection
               definition:
@@ -230,6 +236,12 @@ Configuration:
                         code_produit: {  }
                         code_comptable: {  }
                         code_douane: {  }
+                        attributs:
+                          type: collection
+                          required: false
+                          definition:
+                            fields:
+                             '*': { }
                         departements:
                           type: array_collection
                           definition:
@@ -311,6 +323,12 @@ Configuration:
                                     code_produit: {  }
                                     code_comptable: {  }
                                     code_douane: {  }
+                                    attributs:
+                                      type: collection
+                                      required: false
+                                      definition:
+                                        fields:
+                                         '*': { }
                                     '*':
                                       required: false
                                       class: ConfigurationDetail
@@ -462,6 +480,12 @@ Configuration:
                                                 code_produit: {  }
                                                 code_comptable: {  }
                                                 code_douane: {  }
+                                                attributs:
+                                                  type: collection
+                                                  required: false
+                                                  definition:
+                                                    fields:
+                                                     '*': { }
                                                 densite: {  }
                                                 detail:
                                                   required: false
@@ -614,6 +638,12 @@ Configuration:
                                                             code_produit: {  }
                                                             code_comptable: {  }
                                                             code_douane: {  }
+                                                            attributs:
+                                                              type: collection
+                                                              required: false
+                                                              definition:
+                                                                fields:
+                                                                 '*': { }
                                                             interpro:
                                                               type: collection
                                                               definition:
@@ -764,6 +794,12 @@ Configuration:
                                                                         code_produit: {  }
                                                                         code_comptable: {  }
                                                                         code_douane: {  }
+                                                                        attributs:
+                                                                          type: collection
+                                                                          required: false
+                                                                          definition:
+                                                                            fields:
+                                                                             '*': { }
                                                                         interpro:
                                                                           type: collection
                                                                           definition:
@@ -915,6 +951,12 @@ Configuration:
                                                                                     code_produit: {  }
                                                                                     code_comptable: {  }
                                                                                     code_douane: {  }
+                                                                                    attributs:
+                                                                                      type: collection
+                                                                                      required: false
+                                                                                      definition:
+                                                                                        fields:
+                                                                                         '*': { }
                                                                                     interpro:
                                                                                       type: collection
                                                                                       definition:
@@ -1066,6 +1108,12 @@ Configuration:
                                                                                                 code_produit: {  }
                                                                                                 code_comptable: {  }
                                                                                                 code_douane: {  }
+                                                                                                attributs:
+                                                                                                  type: collection
+                                                                                                  required: false
+                                                                                                  definition:
+                                                                                                    fields:
+                                                                                                     '*': { }
                                                                                                 cepages_autorises:
                                                                                                   type: array_collection
                                                                                                   definition:

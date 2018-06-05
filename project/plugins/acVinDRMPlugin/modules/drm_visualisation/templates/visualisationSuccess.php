@@ -172,7 +172,7 @@
         <a href="<?php echo url_for('drm_pdf', array('identifiant' => $drm->getIdentifiant(), 'periode_version' => $drm->getPeriodeAndVersion(), 'appellation' => 0)); ?>" class="btn btn-success">Télécharger le PDF</a>
     </div>
     <div class="col-xs-4 text-right">
-    <?php if ($drm->isTeledeclare() && !$isTeledeclarationMode) : ?>
+    <?php if ($drm->isTeledeclare() && (!$isTeledeclarationMode || ($sf_user->hasCredential(AppUser::CREDENTIAL_ADMIN)))) : ?>
           <?php if ($drm->isNonFactures()): ?>
           <a href="<?php echo url_for('drm_reopen', $drm); ?>" class="btn btn-warning">Reouvrir la DRM</a>
           <?php else: ?>
@@ -186,5 +186,5 @@
         <a style="margin-left: 5px;" href="https://pro.douane.gouv.fr/" class="btn btn-success" ><span>Se rendre sur Pro Dou@ne</span></a>
       <?php endif; ?>
     <?php endif; ?>
-  </div>
+    </div>
 </div>

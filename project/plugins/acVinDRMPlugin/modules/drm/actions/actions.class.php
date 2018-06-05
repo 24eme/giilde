@@ -97,9 +97,35 @@ class drmActions extends drmGeneriqueActions {
             $this->creationDrmForm->bind($request->getParameter($this->creationDrmForm->getName()), $request->getFiles($this->creationDrmForm->getName()));
 
             switch ($choixCreation) {
+                case DRMClient::DRM_CREATION_DOCUMENTS :
+                  if(!DRMConfiguration::getInstance()->getRepriseDonneesUrl() || !sfConfig::get('app_url_reprise_donnees_drm')){
+                    throw new sfException("Ce choix n'est pas possible : il n'y a aucune url spécifié pour la reprise");
+                  }
+                  $url_reprise_donnees_drm = sfConfig::get('app_url_reprise_donnees_drm');
+                  $url_reprise_donnees_drm = str_replace(":identifiant",$identifiant,$url_reprise_donnees_drm);
+                  $url_reprise_donnees_drm = str_replace(":periode",$periode,$url_reprise_donnees_drm);
+
+                  $discr = date('YmdHis').'_'.uniqid();
+                  $md5file = md5($discr);
+                  $filename = 'import_'.$identifiant . '_' . $periode.'_'.$md5file.'.csv';
+                  $path = sfConfig::get('sf_data_dir') . '/upload/'.$filename;
+                  if ($stream = fopen($url_reprise_donnees_drm, 'r')) {
+                          // affiche toute la page, en commençant à la position 10
+                          $resultFile = file_put_contents($path, stream_get_contents($stream));
+                          fclose($stream);
+                      }
+                  if(!$resultFile && !file_exists ($path)){
+                    throw new sfException("Enregistrement du fichier EDI échoué : consulter l'url ".$url_reprise_donnees_drm);
+                  }
+                  if(!$resultFile && file_exists($path)){
+                    return $this->redirect('drm_nouvelle', array('identifiant' => $identifiant, 'periode' => $periode));
+                  }
+                  return $this->redirect('drm_creation_fichier_edi',array('identifiant' => $identifiant,'periode' => $periode,'md5' => $md5file));
+                break;
                 case DRMClient::DRM_CREATION_EDI :
                     $md5 = $this->creationDrmForm->getValue('file')->getMd5();
-
+                    $fileName = 'import_'.$identifiant . '_' . $periode.'_'.$md5.'.csv';
+                    rename(sfConfig::get('sf_data_dir') . '/upload/'.$md5,  sfConfig::get('sf_data_dir') . '/upload/'.$fileName);
                     return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => $md5));
 
                 case DRMClient::DRM_CREATION_VIERGE :
@@ -122,7 +148,6 @@ class drmActions extends drmGeneriqueActions {
      * @param sfWebRequest $request
      */
     public function executeVerificationEdi(sfWebRequest $request) {
-
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');
@@ -131,11 +156,13 @@ class drmActions extends drmGeneriqueActions {
         $this->drm->identifiant = $this->identifiant;
         $this->drm->periode = $this->periode;
         $this->drm->teledeclare = true;
+        $fileName = 'import_'.$this->drm->identifiant . '_' . $this->drm->periode.'_'.$this->md5.'.csv';
 
-        $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $this->md5, $this->drm);
+        $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
         $this->drmCsvEdi->checkCSV();
 
         $this->erreurs = $this->drmCsvEdi->getCsvDoc()->erreurs;
+
         if (!count($this->erreurs)) {
           return $this->redirect('drm_creation_fichier_edi', array('periode' => $this->periode, 'md5' => $this->md5,'identifiant' => $this->identifiant));
         }
@@ -147,20 +174,23 @@ class drmActions extends drmGeneriqueActions {
      * @param sfWebRequest $request
      */
     public function executeCreationEdi(sfWebRequest $request) {
-
+        set_time_limit(0);
+        ini_set('memory_limit', '512M');
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');
 
-        $this->drm = new DRM();
-        $this->drm->identifiant = $this->identifiant;
-        $this->drm->periode = $this->periode;
-        $this->drm->teledeclare = true;
+        $this->drm = DRMClient::getInstance()->createDoc($this->identifiant, $this->periode, true);
 
-        $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $this->md5, $this->drm);
+        $fileName = 'import_'.$this->drm->identifiant . '_' . $this->drm->periode.'_'.$this->md5.'.csv';
+        $path = sfConfig::get('sf_data_dir') . '/upload/' . $fileName;
+        $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
         $this->drmCsvEdi->importCSV();
 
-        $this->redirect('drm_validation', $this->drm);
+        $this->drm->etape = DRMClient::ETAPE_CHOIX_PRODUITS;
+        $this->drm->save();
+
+        $this->redirect('drm_choix_produit', $this->drm);
 
     }
 
@@ -240,7 +270,8 @@ class drmActions extends drmGeneriqueActions {
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         $this->etablissement = $this->getRoute()->getEtablissement();
         $this->societe = $this->etablissement->getSociete();
-        $hasDrmRight = ($this->etablissement->famille != EtablissementFamilles::FAMILLE_PRODUCTEUR);
+        $hasDrmRight = ($this->etablissement->famille != EtablissementFamilles::FAMILLE_PRODUCTEUR_VINIFICATEUR) && ($this->etablissement->famille != EtablissementFamilles::FAMILLE_PRODUCTEUR);
+
         if(DRMConfiguration::getInstance()->isDRMNegoce()){
             $hasDrmRight = $hasDrmRight && (($this->etablissement->famille != EtablissementFamilles::FAMILLE_NEGOCIANT) && ($this->etablissement->famille != EtablissementFamilles::FAMILLE_COOPERATIVE));
         }
@@ -420,11 +451,11 @@ class drmActions extends drmGeneriqueActions {
 
         $this->redirect('drm_etablissement', $this->etablissementPrincipal);
     }
-    
+
     public function executeConventionCielPdf(sfWebRequest $request) {
 
 		$conventionCielPdf = $this->generateConventionCielPdf($this->getRoute()->getEtablissement());
-		
+
     	$response = $this->getResponse();
     	$response->setHttpHeader('Content-Type', 'application/pdf');
     	$response->setHttpHeader('Content-disposition', 'attachment; filename="' . basename($conventionCielPdf) . '"');
@@ -432,30 +463,29 @@ class drmActions extends drmGeneriqueActions {
     	$response->setHttpHeader('Pragma', '');
     	$response->setHttpHeader('Cache-Control', 'public');
     	$response->setHttpHeader('Expires', '0');
-    	 
+
     	return $this->renderText(file_get_contents($conventionCielPdf));
     }
-    
+
     protected function generateConventionCielPdf($etablissement) {
-    	
-    	$compte = $etablissement->getSociete()->getMasterCompte();
+
     	$path = sfConfig::get('sf_data_dir').'/convention';
-    	$filename = 'convention_ciel_'.$compte->identifiant.'.pdf';
-    	 
+    	$filename = 'convention_ciel_'.$etablissement->identifiant.'_'.$etablissement->_rev.'.pdf';
+
     	if (!file_exists($path.'/pdf/'.$filename)) {
-    		$template = 'template_convention_'.sfConfig::get('app_teledeclaration_interpro').'.pdf';
+    		$template = 'template_convention_'.sfConfig::get('sf_app').'.pdf';
     		if (!file_exists($path.'/'.$template)) {
     			throw new sfException("Le template de convention ciel ".$path."/".$template." n'existe pas.");
     		}
     		$fdf = tempnam(sys_get_temp_dir(), 'CONVENTIONCIEL');
-    		file_put_contents($fdf, utf8_decode($this->getPartial('common/fdfConvention', array('etablissement' => $etablissement))));
-    		exec('pdftk '.$path.'/'.$template.' fill_form '.$fdf.' output  /dev/stdout flatten |  gs -o '.$path.'/pdf/'.$filename.' -sDEVICE=pdfwrite -dEmbedAllFonts=true -sFONTPATH=\"/usr/share/fonts/truetype/freefont\" - ');
+    		file_put_contents($fdf, sfOutputEscaper::unescape(utf8_decode($this->getPartial('common/fdfConvention', array('etablissement' => $etablissement)))));
+    		exec('pdftk '.$path.'/'.$template.' fill_form '.$fdf.' output  /dev/stdout flatten |  gs -o '.$path.'/pdf/'.$filename.' -sDEVICE=pdfwrite -dEmbedAllFonts=true -sFONTPATH=/usr/share/fonts/truetype/freefont - ');
     		unlink($fdf);
     		if (!file_exists($path.'/pdf/'.$filename)) {
     			throw new sfException("Le pdf ".$filename." n'a pas pu être généré.");
     		}
     	}
-    	
+
     	return $path.'/pdf/'.$filename;
     }
 

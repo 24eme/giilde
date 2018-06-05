@@ -56,7 +56,7 @@ use_helper('Date');
                                 <div class="row">
                                     <div class="col-xs-6" style="padding: 0;">
                                         <span class="text-right">
-                                            <?php echoFloat($mouvement->volume * -1); ?>
+                                            <?php echoFloat($mouvement->quantite); ?>
                                         </span>
                                     </div>
                                     <div class="col-xs-6 text-left" style="padding: 0;">

@@ -28,10 +28,27 @@ class DRMDetailVracItemForm extends DRMESDetailsItemForm {
         if ($this->getObject()->identifiant && !array_key_exists($this->getObject()->identifiant, $vracs) && $this->getObject()->getVrac()) {
             $vrac = $this->getObject()->getVrac();
             if ($vrac->valide->statut != VracClient::STATUS_CONTRAT_ANNULE && $vrac->valide->statut != VracClient::STATUS_CONTRAT_BROUILLON) {
-                $vracs[$this->getObject()->identifiant] = sprintf("%s - %s (%s) - %s hl [%s/%s]", $vrac->acheteur->nom, $vrac->numero_contrat, $vrac->numero_archive, round($vrac->volume_propose - $vrac->volume_enleve, 2), $vrac->volume_enleve, $vrac->volume_propose);
+                $nom = (isset($vrac->acheteur->nom)) ? $vrac->acheteur->nom : $vrac->acheteur->raison_sociale;
+                $volume_propose = 0;
+                $volume_enleve = 0;
+                if(isset($vrac->volume_propose)) {
+                    $volume_propose = $vrac->volume_propose;
+                }
+
+                if(isset($vrac->volume_enleve)) {
+                    $volume_enleve = $vrac->volume_enleve;
+                }
+                $vracs[$this->getObject()->identifiant] = sprintf("%s - %s (%s) - %s hl [%s/%s]", $nom, $vrac->numero_contrat, $vrac->numero_archive, round($volume_propose - $volume_enleve, 2), $volume_enleve, $volume_propose);
             }
         }
-        return array_merge(array("" => ""), $vracs);
+
+        $optionsSansContrat = array();
+
+        if(DRMConfiguration::getInstance()->hasSansContratOption()) {
+            $optionsSansContrat = array(DRMESDetailVrac::CONTRAT_VRAC_SANS_NUMERO => "Contrat Vrac (Sans le numéro)", DRMESDetailVrac::CONTRAT_BOUTEILLE_SANS_NUMERO => "Contrat Bouteille (Sans le numéro)");
+        }
+
+        return array_merge(array("" => ""), $optionsSansContrat, $vracs);
     }
 
     public function getPostValidatorClass() {

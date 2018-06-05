@@ -205,60 +205,77 @@ class Etablissement extends BaseEtablissement implements InterfaceCompteGeneriqu
         }
     }
 
+    public function isSynchroAutoActive() {
+
+        return sfConfig::get('app_compte_synchro', true);
+    }
+
     public function save() {
         $societe = $this->getSociete();
-        if(!$this->getCompte()){
-            $this->compte = $societe->getMasterCompte()->_id;
-        }
+        $this->add('date_modification', date('Y-m-d'));
 
-
-        if(!$this->isSameAdresseThanSociete() || !$this->isSameContactThanSociete()){
-            if ($this->isSameCompteThanSociete()) {
-                $compte = $societe->createCompteFromEtablissement($this);
-                $compte->addOrigine($this->_id);
-            } else {
-                $compte = $this->getMasterCompte();
+        if($this->isSynchroAutoActive()) {
+            if(!$this->getCompte()){
+                $this->setCompte($this->getSociete()->getMasterCompte()->_id);
             }
-
-            $this->pushContactAndAdresseTo($compte);
-
-            $compte->id_societe = $this->getSociete()->_id;
-            $compte->nom = $this->nom;
-
-            $this->compte = $compte->_id;
-        } else if(!$this->isSameCompteThanSociete()){
-            $compteEtablissement = $this->getMasterCompte();
-            $compteSociete = $this->getSociete()->getMasterCompte();
-
-            $this->compte = $compteSociete->_id;
-            $this->getSociete()->removeContact($compteEtablissement->_id);
-            $compteEtablissement = $this->compte;
         }
 
-        if($this->isSameAdresseThanSociete()) {
-            $this->pullAdresseFrom($this->getSociete()->getMasterCompte());
-        }
-        if($this->isSameContactThanSociete()) {
-            $this->pullContactFrom($this->getSociete()->getMasterCompte());
-        }
+        if($this->isSynchroAutoActive()) {
+    		if(!$this->isSameAdresseThanSociete() || !$this->isSameContactThanSociete()){
+    		    if ($this->isSameCompteThanSociete()) {
+    		        $compte = $societe->createCompteFromEtablissement($this);
+    		        $compte->addOrigine($this->_id);
+    		    } else {
+    		        $compte = $this->getMasterCompte();
+    		    }
+
+    		    $this->pushContactAndAdresseTo($compte);
+
+    		    $compte->id_societe = $this->getSociete()->_id;
+    		    $compte->nom = $this->nom;
+
+    		    $this->compte = $compte->_id;
+    		} else if(!$this->isSameCompteThanSociete()){
+    		    $compteEtablissement = $this->getMasterCompte();
+    		    $compteSociete = $this->getSociete()->getMasterCompte();
+
+    		    $this->compte = $compteSociete->_id;
+    		    $this->getSociete()->removeContact($compteEtablissement->_id);
+    		    $compteEtablissement = $this->compte;
+    		}
+
+    		if($this->isSameAdresseThanSociete()) {
+    		    $this->pullAdresseFrom($this->getSociete()->getMasterCompte());
+    		}
+    		if($this->isSameContactThanSociete()) {
+    		    $this->pullContactFrom($this->getSociete()->getMasterCompte());
+    		}
+
+            $this->raison_sociale = $societe->raison_sociale;
+	    }
+
         $this->initFamille();
-        $this->raison_sociale = $societe->raison_sociale;
         $this->interpro = "INTERPRO-declaration";
+
         if(VracConfiguration::getInstance()->getRegionDepartement() !== false) {
             $this->region = EtablissementClient::getInstance()->calculRegion($this);
         }
-        
+
         if($this->isNew()) {
             $societe->addEtablissement($this);
         }
 
         parent::save();
 
-        $societe->save();
+	if($this->isSynchroAutoActive()) {
+        	$societe->save();
 
-        if(!$this->isSameCompteThanSociete()) {
-            $compte->save();
-        }
+	}
+
+	if($this->isSynchroAutoActive() && !$this->isSameCompteThanSociete()) {
+    		$compte->save();
+	}
+
     }
 
     public function delete() {
@@ -374,6 +391,23 @@ class Etablissement extends BaseEtablissement implements InterfaceCompteGeneriqu
             return $this->_set('commentaire', $c . "\n" . $s);
         }
         return $this->_set('commentaire', $s);
+    }
+
+    public function getCrdRegimeArray(){
+      if(!$this->hasRegimeCrd()){
+        return null;
+      }
+      return explode(",",$this->crd_regime);
+    }
+
+    public function hasRegimeCollectifAcquitte(){
+      return in_array(EtablissementClient::REGIME_CRD_COLLECTIF_ACQUITTE, $this->getCrdRegimeArray());
+    }
+    public function hasRegimeCollectifSuspendu(){
+      return in_array(EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU, $this->getCrdRegimeArray());
+    }
+    public function hasRegimePersonnalise(){
+      return in_array(EtablissementClient::REGIME_CRD_PERSONNALISE, $this->getCrdRegimeArray());
     }
 
     public function getNatureLibelle() {

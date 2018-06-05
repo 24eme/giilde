@@ -17,12 +17,19 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
           </div>
           <div class="modal-body">
             <br/>
-            <p><span class="text-danger">Votre chais «&nbsp;<?php echo $drm->getEtablissement()->nom; ?>&nbsp;» ne possède actuellement aucun régime de CRD.</span></p><br/>
-
+            <p><span class="text-danger">Votre chai «&nbsp;<?php echo $drm->getEtablissement()->nom; ?>&nbsp;» ne possède actuellement aucun régime de CRD.</span></p><br/>
             <p>Il est nécessaire pour la suite de la saisie de choisir ici le régime CRD. Une fois choisi ce message n'apparaîtra plus.</p><br/>
-             Si vous achetez des CRD Acquitées auprès de votre ODG (ou auprès d'un autre répartiteur), sélectionnez «&nbsp;banalisées acquittées&nbsp;». Si vous utilisez des CRD personnalisées, cliquez sur «&nbsp;personnalisé&nbsp;». Pour les autres cas, sélectionnez «&nbsp;banalisées suspendues&nbsp;»</p>
+            <?php if(DRMConfiguration::getInstance()->isCrdOnlySuspendus()): ?>
+                 <p>Si vous utilisez des CRD personnalisées, cliquez sur «&nbsp;CRD personnalisées&nbsp;».</p><p>Pour les autres cas ou si vous n'avez pas de CRD, sélectionnez «&nbsp;CRD collectives ou Pas de CRD&nbsp;»</p>
+            <?php else : ?>
+               <p>Si vous achetez des CRD Acquitées auprès de votre ODG (ou auprès d'un autre répartiteur), sélectionnez «&nbsp;banalisées acquittées&nbsp;». Si vous utilisez des CRD personnalisées, cliquez sur «&nbsp;personnalisé&nbsp;». Pour les autres cas, sélectionnez «&nbsp;banalisées suspendues&nbsp;»</p>
+           <?php endif; ?>
             <br/>
+              <?php if(DRMConfiguration::getInstance()->isCrdOnlySuspendus()): ?>
+                  <p>Sur la DRM papier du <?php echo $interpro; ?>, le régime CRD est indiqué&nbsp;:</p>
+              <?php else : ?>
             <p>Sur la DRM papier de l'<?php echo $interpro; ?>, le régime CRD est demandé dans le cadre dédié au stock capsules&nbsp;:</p>
+             <?php endif; ?>
             <center><img src="/images/visuels/regime_crd_papier.jpg" width="600" height="150" ></center>
             <br/>
             <p><b>Votre régime CRD&nbsp;:</b></p>

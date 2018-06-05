@@ -1,7 +1,7 @@
 all:
   configuration:
     drm:
-      negoce: false
+      negoce: true
       details:
         export_detail:
           required: []

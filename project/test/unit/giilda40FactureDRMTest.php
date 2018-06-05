@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 sfContext::createInstance($configuration);
 
-$t = new lime_test(26);
+$t = new lime_test(28);
 
 $t->comment("Création d'une facture à partir des DRM pour une société");
 
@@ -37,6 +37,7 @@ $drm->save();
 
 $mouvementsFacture = array($societeViti->identifiant => FactureClient::getInstance()->getFacturationForSociete($societeViti));
 $mouvementsFacture = FactureClient::getInstance()->filterWithParameters($mouvementsFacture, $paramFacturation);
+
 $prixHt = 0.0;
 $nbmvt = 0;
 if(isset($mouvementsFacture[$societeViti->identifiant])) {
@@ -126,7 +127,7 @@ $t->is($facture->avoir, $avoir->_id, "L'avoir est conservé dans la facture");
 $t->ok($facture->isRedressee(), "La facture est au statut redressé");
 $t->ok(!$facture->isRedressable(), "La facture n'est pas redressable");
 
-if($application == 'ivso'){
+if($application == 'ivso' && false) {
   $md5sumAttendu = "d65f0fd40ecbecd6c5b12b6931bda08f";
   $facture->campagne = "2017";
   $facture->numero_piece_comptable = "C1700006";
@@ -147,3 +148,30 @@ if($application == 'ivso'){
 }else{
   $t->is(1, 1, "Pas de test sur la structure latex");
 }
+
+$t->comment("Facturation d'une DRM négo");
+
+$societeNego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getSociete();
+$nego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
+
+foreach(DRMClient::getInstance()->viewByIdentifiant($nego->identifiant) as $k => $v) {
+  $drm = DRMClient::getInstance()->find($k);
+  $drm->delete(false);
+}
+
+$drm = DRMClient::getInstance()->createDoc($nego->identifiant, $periode, true);
+$drm->save();
+
+$details = $drm->addProduit($produit_hash, 'details');
+$details->entrees->recolte = 100;
+$drm->update();
+$drm->validate();
+$drm->save();
+
+$prixHt = $details->entrees->recolte * $details->getCVOTaux();
+
+$facture = FactureClient::getInstance()->createAndSaveFacturesBySociete($societeNego, $paramFacturation);
+$facture->save();
+$t->ok($facture, "La facture est créée");
+
+$t->is($facture->total_ht, $prixHt, "Le total HT est de ".$prixHt." €");

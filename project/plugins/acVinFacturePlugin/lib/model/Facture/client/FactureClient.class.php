@@ -217,7 +217,7 @@ class FactureClient extends acCouchdbClient {
         foreach ($mouvementsBySoc as $identifiant => $mouvements) {
             $somme = 0;
             foreach ($mouvements as $key => $mouvement) {
-                $prix = $mouvement->value[MouvementfactureFacturationView::VALUE_VOLUME] * $mouvement->value[MouvementfactureFacturationView::VALUE_CVO];
+                $prix = Mouvement::getPrixHtCalcul($mouvement->value[MouvementfactureFacturationView::VALUE_VOLUME],  $mouvement->value[MouvementfactureFacturationView::VALUE_COEFFICIENT_FACTURATION], $mouvement->value[MouvementfactureFacturationView::VALUE_CVO]);
                 if (!$prix) {
                     unset($mouvementsBySoc[$identifiant][$key]);
                     continue;

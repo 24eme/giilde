@@ -96,4 +96,9 @@ class DRMConfiguration {
         return $this->configuration['reprise_stocks_changement_campagne'];
     }
 
+    public function isPdfCvo() {
+
+        return $this->configuration['pdf_cvo'];
+    }
+
 }

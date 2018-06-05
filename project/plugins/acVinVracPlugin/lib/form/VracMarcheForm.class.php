@@ -224,7 +224,7 @@ class VracMarcheForm extends VracForm {
         }
     }
 
-    public function getDomaines() 
+    public function getDomaines()
     {
         $domaines = VracDomainesView::getInstance()->findDomainesByVendeur($this->getObject()->vendeur_identifiant);
         $this->domaines = array('' => '');
@@ -247,7 +247,7 @@ class VracMarcheForm extends VracForm {
         if ($date->format('m') < 8) {
             $annee--;
         }
-        $stop = $annee - 10;
+        $stop = $annee - 15;
         while ($annee >= $stop) {
             $this->millesimes[$annee] = '' . $annee;
             $annee--;

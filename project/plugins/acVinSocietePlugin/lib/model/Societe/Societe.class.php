@@ -182,7 +182,6 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
     public function getCompte($id) {
         $this->getContactsObj();
         if (!isset($this->comptes[$id]) || !$this->comptes[$id]) {
-            var_dump(array_key_exists($id, $this->comptes));
           throw new sfException("Pas de compte ".$id);
         }
         return $this->comptes[$id];
@@ -360,11 +359,16 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
         return $this->_get('date_modification');
     }
 
+    public function isSynchroAutoActive() {
+
+        return sfConfig::get('app_compte_synchro', true);
+    }
+
     public function save() {
         $this->add('date_modification', date('Y-m-d'));
         $this->interpro = "INTERPRO-declaration";
         $compteMaster = $this->getMasterCompte();
-        if (!$compteMaster) {
+        if ($this->isSynchroAutoActive() && !$compteMaster) {
             $compteMaster = $this->createCompteSociete();
         }
 
@@ -372,17 +376,18 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
 
         SocieteClient::getInstance()->setSingleton($this);
 
-        $compteMasterOrigin = clone $compteMaster;
-        $this->pushToCompteOrEtablissementAndSave($compteMaster, $compteMaster);
+	if($this->isSynchroAutoActive()) {
+		$compteMasterOrigin = clone $compteMaster;
+		$this->pushToCompteOrEtablissementAndSave($compteMaster, $compteMaster);
 
-        foreach ($this->etablissements as $id => $obj) {
-            $this->pushToCompteOrEtablissementAndSave($compteMaster, EtablissementClient::getInstance()->find($id), $compteMasterOrigin);
-        }
+		foreach ($this->etablissements as $id => $obj) {
+		    $this->pushToCompteOrEtablissementAndSave($compteMaster, EtablissementClient::getInstance()->find($id), $compteMasterOrigin);
+		}
 
-        foreach ($this->getContactsObj() as $id => $compte) {
-            $this->pushToCompteOrEtablissementAndSave($compteMaster, $compte, $compteMasterOrigin);
-        }
-
+		foreach ($this->getContactsObj() as $id => $compte) {
+		    $this->pushToCompteOrEtablissementAndSave($compteMaster, $compte, $compteMasterOrigin);
+		}
+	}
     }
 
     public function pushToCompteOrEtablissementAndSave($compteMaster, $compteOrEtablissement, $compteMasterOrigin = null) {

@@ -27,6 +27,10 @@ function(doc) {
         var mouv_volume = (mouv.volume)? mouv.volume : mouv.quantite;
         var mouv_prix = (mouv.cvo)? mouv.cvo : mouv.prix_unitaire;
         var type_libelle = (mouv.type_libelle)? mouv.type_libelle : mouv.libelle;
+        var coefficient_facturation = -1;
+        if(mouv.coefficient_facturation) {
+            coefficient_facturation = mouv.coefficient_facturation;
+        }
 
         var docId = doc.type+'-'+doc.identifiant+'-'+doc.periode;
          var vrac_destinataire = mouv.vrac_destinataire;
@@ -35,7 +39,7 @@ function(doc) {
             vrac_destinataire = type_libelle;
          }
 
-                emit([mouv.facture, mouv.facturable, region, identifiant, doc.type,categorie , mouv_hash, doc.periode, mouv.vrac_numero, vrac_destinataire , type_hash , mouv.detail_identifiant], [mouv_produit_libelle , type_libelle, mouv_volume, mouv_prix, mouv.date, mouv.vrac_destinataire, mouv.detail_libelle, docId , doc._id+':'+key]);
+                emit([mouv.facture, mouv.facturable, region, identifiant, doc.type,categorie , mouv_hash, doc.periode, mouv.vrac_numero, vrac_destinataire , type_hash , mouv.detail_identifiant], [mouv_produit_libelle , type_libelle, mouv_volume, mouv_prix, mouv.date, mouv.vrac_destinataire, mouv.detail_libelle, docId, coefficient_facturation, doc._id+':'+key]);
 
 
           }

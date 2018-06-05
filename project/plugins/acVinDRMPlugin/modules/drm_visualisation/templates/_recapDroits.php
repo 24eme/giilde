@@ -10,7 +10,7 @@
     <div class="col-xs-5">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">CVO</h3>
+                <h3 class="panel-title text-center">CVO<br />&nbsp;</h3>
             </div>
             <table id="table_drm_cvo_recap" class="table table-striped table-bordered table-condensed">
                 <thead >
@@ -51,7 +51,7 @@
     <div class="col-xs-7">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">Droits de circulation</h3>
+                <h3 class="panel-title text-center">Droits de circulation <br /><small class="text-muted">(des vins tranquilles et mousseux uniquement)</small></h3>
             </div>
             <table class="table table-bordered table-striped table-condensed">
                 <thead >

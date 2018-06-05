@@ -57,7 +57,7 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <p><a data-form="#form_crds" href="<?php echo url_for('drm_crd', array('sf_subject' => $crdsForms->getObject(), 'add_crd' => $regime, 'genre' => $genre)); ?>" class="link-submit"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter un type de CRD</a></p>
+                            <div><a data-form="#form_crds" href="<?php echo url_for('drm_crd', array('sf_subject' => $crdsForms->getObject(), 'add_crd' => $regime, 'genre' => $genre)); ?>" class="link-submit"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter un type de CRD</a><p>&nbsp;</p></div>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
                 <div class="row">

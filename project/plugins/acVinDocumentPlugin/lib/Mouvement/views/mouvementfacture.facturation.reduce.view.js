@@ -19,7 +19,7 @@ function(keys,values,rereduce) {
         }
 
         merged_field.sort();
-        
+
         for (var i = 1; i < merged_field.length; i++){
             if (merged_field[i-1] === merged_field[i]) {
                     merged_field.splice(i, 1);
@@ -68,7 +68,8 @@ function(keys,values,rereduce) {
     var vrac_destinataire = new Array();
     var details_libelles = new Array();
     var identifiants = new Array();
-    
+    var coefficients_facturation = new Array();
+
     for(item in values)
     {
         produits_libelles = merge_field(values[item][0],item,produits_libelles);
@@ -79,17 +80,20 @@ function(keys,values,rereduce) {
         details_libelles = merge_field(values[item][5],item,details_libelles);
         vrac_destinataire = merge_field(values[item][6],item,vrac_destinataire);
         identifiants = merge_field(values[item][7],item,identifiants);
-        origines = merge_field(values[item][8],item,origines);
+        coefficients_facturation = merge_field(values[item][8],item,coefficients_facturation);
+        origines = merge_field(values[item][9],item,origines);
     }
-    
+
     produits_libelles = reduce_result(produits_libelles);
     types_libelles = reduce_result(types_libelles);
     cvos = reduce_result(cvos);
-    dates = reduce_result(dates);    
+    dates = reduce_result(dates);
     details_libelles = reduce_result(details_libelles);
     vrac_destinataire = reduce_result(vrac_destinataire);
     identifiants = reduce_result(identifiants);
+    coefficients_facturation = reduce_result(coefficients_facturation);
     origines = reduce_origines(origines);
-    result = [produits_libelles, types_libelles, total_volume, cvos, dates, vrac_destinataire, details_libelles, identifiants, origines];
+    result = [produits_libelles, types_libelles, total_volume, cvos, dates, vrac_destinataire, details_libelles, identifiants, coefficients_facturation, origines];
+
     return result;
  }

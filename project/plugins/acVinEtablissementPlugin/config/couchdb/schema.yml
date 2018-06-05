@@ -15,7 +15,7 @@ Etablissement:
        relance_ds: {  }
        teledeclaration_email: {  }
        nature_inao: {  }
-       recette_locale: 
+       recette_locale:
          type: collection
          definition:
            fields:
@@ -58,7 +58,28 @@ Etablissement:
        crd_regime: { }
        adresse_compta: { }
        caution: { }
+       siret: { required: false }
+       intitule: { required: false }
+       declaration_commune: { required: false }
+       declaration_commune: { required: false }
+       declaration_insee: { required: false }
        raison_sociale_cautionneur: { required: false }
+       date_modification: { required: false }
+       acheteur_raisin: { required: false }
+       ds_decembre: { required: false }
+       no_ds_negociant: { required: false }
+       exploitant:
+          type: collection
+          required: false
+          definition:
+            fields:
+              civilite: {  }
+              nom: {  }
+              adresse: {  }
+              code_postal: {  }
+              commune: {  }
+              telephone: {  }
+              date_naissance: {  }
        siege:
            type: collection
            definition:
@@ -76,3 +97,18 @@ Etablissement:
                code_postal: {  }
                commune: {  }
                pays: {}
+       lieux_stockage:
+         type: collection
+         required: false
+         definition:
+           fields:
+             '*':
+               class: EtablissementLieuStockage
+               type: collection
+               definition:
+                 fields:
+                   numero: {  }
+                   nom: {  }
+                   adresse: {  }
+                   commune: {  }
+                   code_postal: {  }

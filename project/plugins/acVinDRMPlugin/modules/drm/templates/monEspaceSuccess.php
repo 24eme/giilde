@@ -30,7 +30,7 @@
             if ($isTeledeclarationMode && !$transmission): ?>
             <div class="row">
                 <div class="col-xs-12" style="margin-top: 10px;">
-                     <?php include_partial('common/blocInscriptionDouane', array('etablissement' => $etablissement)) ?>
+                     <?php include_partial('common/blocInscriptionDouane', array('etablissement' => $etablissement, 'calendrier' => $calendrier)) ?>
                 </div>
             </div>
             <?php endif ?>

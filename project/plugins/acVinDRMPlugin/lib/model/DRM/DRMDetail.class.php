@@ -23,7 +23,7 @@ class DRMDetail extends BaseDRMDetail {
 
         return $this->getCepage()->getConfig()->getCodeProduit();
     }
-    
+
     public function hasLibelleModified() {
     	return ($this->produit_libelle && $this->produit_libelle !== $this->getLibelle())? true : false;
     }
@@ -191,7 +191,7 @@ class DRMDetail extends BaseDRMDetail {
         if (!$hasobs) {
           $this->remove('observations');
         }
-        
+
         if(($this->entrees->exist('retourmarchandisesanscvo') && $this->entrees->retourmarchandisesanscvo)
           || ($this->entrees->exist('retourmarchandisetaxees') && $this->entrees->retourmarchandisetaxees)
           || ($this->entrees->exist('retourmarchandisenontaxees') && $this->entrees->retourmarchandisenontaxees)
@@ -370,8 +370,14 @@ class DRMDetail extends BaseDRMDetail {
             $mouvement->cvo = $this->getCVOTaux();
             $mouvement->facturable = ($this->getConfig()->get($hash . "/" . $key)->facturable && $mouvement->cvo > 0) ? 1 : 0;
             if($this->getDocument()->isDrmNegoce()){
-              $mouvement->facturable = 0;
+                $mouvement->facturable = 0;
             }
+
+            if($this->getDocument()->isDrmNegoce() && $hash . "/" . $key == "entrees/recolte") {
+                $mouvement->facturable = 1;
+                $mouvement->add('coefficient_facturation', 1);
+            }
+
             $mouvement->version = $this->getDocument()->getVersion();
             $mouvement->date_version = ($this->getDocument()->valide->date_saisie) ? ($this->getDocument()->valide->date_saisie) : date('Y-m-d');
             $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_PROPRIETE;
@@ -418,7 +424,7 @@ class DRMDetail extends BaseDRMDetail {
 
     public function isContratExterne() {
 
-        return !$this->getCVOTaux();
+        return $this->getCVOTaux() <= 0;
     }
 
     public function getCVOTaux() {

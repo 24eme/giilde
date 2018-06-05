@@ -48,11 +48,11 @@
                             if (!$produit->hasMovements()): continue;
                             endif;
                             ?>
-                            <a style="position: relative;  overflow:hidden; cursor:pointer;
+                            <a title="<?php echo $produit->getLibelle("%format_libelle%") ?>" style="position: relative;  overflow:hidden; cursor:pointer;
   display: block; height: 30px; padding: 5px 15px;
   margin-bottom: -1px;" data-hash="<?php echo $produit->getHash() ?>" <?php echo (!$produit->hasMovements()) ? 'style="display:none;"' : '' ?> class="list-group-item <?php echo ($produit->isEdited()) ? 'edited list-group-item-success' : '' ?>">
 
-                                <small><?php echo $produit->getLibelle("%format_libelle%"); ?></small>
+                                <small><?php echo str_replace("Alsace Grand Cru","Gd Cru",$produit->getLibelle("%format_libelle%")); ?></small>
                                 <span style="position:absolute; right: 1px; top:5px;" class="btn btn-xs btn-link glyphicon glyphicon-eye-open "></span>
                             </a>
                         <?php endforeach; ?>

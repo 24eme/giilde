@@ -6,7 +6,7 @@
  *
  */
 class HttpAuth2ADSecurityFilter extends sfBasicSecurityFilter
-{    
+{
   /**
    * Execute filter
    *
@@ -14,7 +14,7 @@ class HttpAuth2ADSecurityFilter extends sfBasicSecurityFilter
    */
   public function execute ($filterChain)
   {
-    $context = $this->getContext();     
+    $context = $this->getContext();
     $user = $context->getUser();
     if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] == 'logout') {
       self::logout();
@@ -30,7 +30,7 @@ class HttpAuth2ADSecurityFilter extends sfBasicSecurityFilter
       }
       $rights = $ad->getDescription($_SERVER['PHP_AUTH_USER']);
     }catch(Exception $e) {
-      if (!sfConfig::get('app_ad_basebn')) {    
+      if (!sfConfig::get('app_ad_basebn')) {
           $rights = sfConfig::get('app_no_ad_rights', 'admin');
       }
     }
@@ -42,6 +42,7 @@ class HttpAuth2ADSecurityFilter extends sfBasicSecurityFilter
 
     $user->setAttribute('AUTH_DESC', $rights);
     $user->signInOrigin($this->getCompte($user->getAttribute('AUTH_USER'), $user->getAttribute('AUTH_DESC')));
+
     parent::execute($filterChain);
   }
 
@@ -55,7 +56,7 @@ class HttpAuth2ADSecurityFilter extends sfBasicSecurityFilter
 
     return $compte;
   }
- 
+
 
   /**
    * Sends HTTP Auth headers and exits

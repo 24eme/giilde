@@ -15,3 +15,5 @@ all:
       vrac_multi_produit: false
       declassement_igp: false
       reprise_stocks_changement_campagne: false
+      crd_only_suspendus: false
+      pdf_cvo: false 

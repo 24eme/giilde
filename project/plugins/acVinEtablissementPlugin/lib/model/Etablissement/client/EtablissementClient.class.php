@@ -43,6 +43,8 @@ class EtablissementClient extends acCouchdbClient {
     public static $regimes_crds_libelles_longs = array(self::REGIME_CRD_PERSONNALISE => 'personnalisé (P)',
         self::REGIME_CRD_COLLECTIF_ACQUITTE => 'banalisées acquittées (DA)',
         self::REGIME_CRD_COLLECTIF_SUSPENDU => 'banalisées suspendues (DS)');
+   public static $regimes_crds_libelles_longs_only_suspendu = array(self::REGIME_CRD_PERSONNALISE => 'CRD personnalisées',
+            self::REGIME_CRD_COLLECTIF_SUSPENDU => 'CRD collectives ou Pas de CRD');
     public static $regimes_crds_libelles = array(self::REGIME_CRD_PERSONNALISE => 'Personnalisé',
         self::REGIME_CRD_COLLECTIF_ACQUITTE => 'Banalisées acquittées',
         self::REGIME_CRD_COLLECTIF_SUSPENDU => 'Banalisées suspendues');

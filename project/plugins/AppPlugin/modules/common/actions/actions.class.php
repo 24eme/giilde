@@ -7,6 +7,7 @@ class commonActions extends sfActions {
         if (sfConfig::get('app_auth_mode') != 'HTTP_AD') {
             $this->setTemplate('error500Teledeclaration');
         }
+        $this->getResponse()->setStatusCode(500);
     }
 
     public function executeError404(sfWebRequest $request) {

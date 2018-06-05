@@ -22,22 +22,15 @@ class MouvementfactureFacturationView extends acCouchdbView {
     const VALUE_DETAIL_LIBELLE = 5;
     const VALUE_VRAC_DEST = 6;
     const VALUE_NUMERO = 7;
-    const VALUE_ID_ORIGINE = 8;
+    const VALUE_COEFFICIENT_FACTURATION = 8;
+    const VALUE_ID_ORIGINE = 9;
 
     public static function getInstance() {
 
         return acCouchdbManager::getView('mouvementfacture', 'facturation');
     }
 
-    public function getMouvementsByEtablissement($etablissement, $facturee, $facturable) {
-        return $this->client
-                        ->startkey(array($facturee, $facturable, $etablissement->region_viticole, $etablissement->identifiant))
-                        ->endkey(array($facturee, $facturable, $etablissement->region_viticole, $etablissement->identifiant, array()))
-                        ->reduce(false)
-                        ->getView($this->design, $this->view)->rows;
-    }
-
-    public function getMouvementsBySociete($societe, $facturee, $facturable, $facturationBySoc = false) {
+    protected function getMouvementsBySociete($societe, $facturee, $facturable, $facturationBySoc = false) {
         $identifiantFirstEntity = ($facturationBySoc) ? $societe->identifiant : $societe->identifiant . '00';
         $identifiantLastEntity = ($facturationBySoc) ? $societe->identifiant : $societe->identifiant . '99';
         $paramRegion = ($societe->type_societe != SocieteClient::TYPE_OPERATEUR) ? SocieteClient::TYPE_AUTRE : $societe->getRegionViticole();
@@ -66,9 +59,14 @@ class MouvementfactureFacturationView extends acCouchdbView {
                             ->reduce(false)
                             ->getView($this->design, $this->view)->rows;
 
+            if(!isset($row->value[self::VALUE_COEFFICIENT_FACTURATION]) || !$row->value[self::VALUE_COEFFICIENT_FACTURATION] || !is_int($row->value[self::VALUE_COEFFICIENT_FACTURATION])) {
+                $row->value[self::VALUE_COEFFICIENT_FACTURATION] = Mouvement::DEFAULT_COEFFICIENT_FACTURATION;
+            }
+
             $row->value[self::VALUE_ID_ORIGINE] = array();
             foreach ($rows_mouvements as $row_mouvement) {
-                $row->value[self::VALUE_ID_ORIGINE] = array_merge($row->value[self::VALUE_ID_ORIGINE], array($row_mouvement->value[self::VALUE_ID_ORIGINE]));
+                $lastIndex = count($row_mouvement->value) - 1;
+                $row->value[self::VALUE_ID_ORIGINE] = array_merge($row->value[self::VALUE_ID_ORIGINE], array($row_mouvement->value[$lastIndex]));
             }
         }
 
@@ -117,7 +115,12 @@ class MouvementfactureFacturationView extends acCouchdbView {
         $mouvement->detail_libelle = $row->value[self::VALUE_DETAIL_LIBELLE];
         $mouvement->cvo = $row->value[self::VALUE_CVO];
         $mouvement->numero = $row->value[self::VALUE_NUMERO];
-        $mouvement->prix_ht = $mouvement->cvo * -1 * $mouvement->volume;
+        $mouvement->coefficient_facturation = Mouvement::DEFAULT_COEFFICIENT_FACTURATION;
+        if(isset($row->value[self::VALUE_COEFFICIENT_FACTURATION]) && $row->value[self::VALUE_COEFFICIENT_FACTURATION]) {
+            $mouvement->coefficient_facturation = $row->value[self::VALUE_COEFFICIENT_FACTURATION];
+        }
+        $mouvement->quantite = Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
+        $mouvement->prix_ht = Mouvement::getPrixHtCalcul($mouvement->volume, $mouvement->coefficient_facturation, $mouvement->cvo);
         $mouvement->origine = $row->key[self::KEYS_ORIGIN];
         return $mouvement;
     }

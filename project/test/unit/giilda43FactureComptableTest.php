@@ -7,6 +7,7 @@ $prefixComptable = null;
 $codeCompteEcheance = null;
 $codeCompteTVA = null;
 $codeCompteLigne = null;
+$nbLignes = 2;
 
 if($application == "ivso") {
     $prefixComptable = "02";
@@ -15,7 +16,7 @@ if($application == "ivso") {
 }
 
 if($application == "ivbd") {
-    $nbLignes = 3;
+    $nbLignes = 1;
     $prefixComptable = "VEN";
     $codeCompteEcheance = "41110000";
     $codeCompteLigne = "75815000";
@@ -35,7 +36,6 @@ foreach (FactureSocieteView::getInstance()->findBySociete($societeViti) as $id =
 }
 
 if($facture){
-  $nbLignes = 2;
   foreach ($facture->lignes as $id => $mvt ) {
     $nbLignes += count($mvt->details);
   }

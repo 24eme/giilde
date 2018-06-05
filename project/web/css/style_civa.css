@@ -1,0 +1,198 @@
+body {
+    background: #000 url("https://declaration.vinsalsace.pro/images/fonds/bg_global.jpg") no-repeat scroll center 0px;
+}
+
+body > .navbar {
+    background: transparent url("https://declaration.vinsalsace.pro/images/fonds/bg_header.png") repeat scroll 0px 0px;
+}
+
+#main {
+    background: #fff;
+    border: 1px solid #000;
+    width: 1000px;
+    padding-top: 0;
+    padding-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#content > .container {
+    width: 1000px;
+}
+
+/**
+ * Header
+ ******************************************/
+
+#header
+{
+    background: url("https://declaration.vinsalsace.pro/images/fonds/bg_header.png") 0 0 repeat;
+    border: 1px solid #252303;
+    color: #f1f1f1;
+    margin-bottom: 7px;
+    margin-top: 7px;
+    padding: 10px;
+    width: 1000px;
+    font-size: 12px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Logo */
+#header h1#logo
+{
+    float: left;
+    text-align: center;
+    width: 135px;
+}
+
+/* Titre rubrique */
+#header #titre_rubrique
+{
+    border: solid #fff;
+    border-width: 0 1px;
+    float: left;
+    margin: 0 12px;
+    padding: 0 12px;
+    width: 682px;
+    height: 95px;
+}
+
+#header #titre_rubrique h1
+{
+    font-size: 30px;
+    font-weight: normal;
+    margin: 0 0 5px;
+}
+
+#header #titre_rubrique p.utilisateur
+{
+    background: url(https://declaration.vinsalsace.pro/images/pictos/pi_utilisateur.png) 0 center no-repeat;
+    font-size: 20px;
+    padding: 0 0 0 15px;
+}
+
+#header #titre_rubrique p.utilisateur a
+{
+    background: url(https://declaration.vinsalsace.pro/images/puces/fleche_bas_1.png) right center no-repeat;
+    color: #f1f1f1;
+    padding: 0 12px 0 0;
+}
+
+#header #titre_rubrique p.utilisateur { font-size: 16px; }
+
+/* Accès directs */
+#header #acces_directs
+{
+    float: left;
+    width: 120px;
+}
+
+#header #acces_directs h2
+{
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 5px;
+}
+
+#header #acces_directs ul { margin: 0;  padding: 0; line-height: 1; list-style-type: none }
+
+#header #acces_directs ul li { margin: 0;  padding: 0; }
+
+#header #acces_directs ul li a { color: #c4d00a; }
+
+#header #acces_directs ul li.admin a { color: #ff0000; }
+a.admin { color: #ff0000; }
+
+/**** NAV *****/
+
+#nav {
+    background: #f1f1f1;
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
+#nav #onglets_majeurs {
+    display: block;
+    padding: 0 20px;
+}
+
+#nav #onglets_majeurs li {
+    display: inline-block;
+    background: #bcbdbc;
+    padding: 4px 15px;
+}
+
+#nav #onglets_majeurs li.ui-tabs-selected {
+    background: #ffa913;
+}
+
+#nav #onglets_majeurs li a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#nav #onglets_majeurs li a:hover {
+    text-decoration: none;
+}
+
+#nav #onglets_majeurs li.ui-tabs-selected a {
+    color: #000;
+}
+
+p a {
+    color: #000;
+    text-decoration: underline;
+}
+
+p a:hover, a:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/******* ETAPES DRM ***/
+ul.navbar-nav {
+	padding: 0 0 0 5px;
+}
+ul.navbar-nav li {
+    margin: 0 1px 0 0;
+    width: 159px;
+}
+ul.navbar-nav li a {
+    color: #a8a8a8;
+    display: block;
+    padding: 2px 0 !important;
+}
+ul.navbar-nav li small {
+    background: rgba(0, 0, 0, 0) url("https://declaration.vinsalsace.pro/images/fonds/bg_etapes_declaration.png") repeat-x scroll 0 0;
+    color: #c8ce79;
+    display: block !important;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    margin: 2px 0 0;
+    padding: 6px 0 0;
+}
+
+ul.navbar-nav li.active a {
+    color: #555;
+    text-decoration: none;
+}
+
+ul.navbar-nav li.active small {
+    background-position: 0 -26px;
+    color: #ffb100;
+}
+
+ul.navbar-nav li.visited small {
+    background-position: 0 -52px;
+}
+
+ul.navbar-nav  > .active > a,
+ul.navbar-nav  > .active > a:hover,
+ul.navbar-nav  > .active > a:focus {
+	background-color: transparent !important;
+    color: #555 !important;
+
+}

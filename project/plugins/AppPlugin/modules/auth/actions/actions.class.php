@@ -32,15 +32,20 @@ class authActions extends sfActions {
     }
 
     public function executeLogout(sfWebRequest $request) {
-        $this->getUser()->signOutOrigin();
-        $urlBack = $this->generateUrl('common_homepage', array(), true);
+       $this->getUser()->signOutOrigin();
+       $urlBack = $this->generateUrl('common_homepage', array(), true);
 
-        if (sfConfig::get("app_auth_mode") == 'CAS') {
-            acCas::processLogout($urlBack);
-        }
+       if($request->getParameter('url')) {
+           $urlBack = $request->getParameter('url');
+       }
 
-          return $this->redirect('common_homepage');
+       if (sfConfig::get("app_auth_mode") == 'CAS') {
+           acCas::processLogout($urlBack);
+       }
+
+       return $this->redirect($urlBack);
     }
+
 
     public function executeDeconnexionUsurpation(sfWebRequest $request) {
         $url_back = $this->getUser()->usurpationOff();

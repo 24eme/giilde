@@ -64,9 +64,10 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
             if(!$etb->exist('crd_regime') || !$etb->crd_regime){
                 return false;
             }
-            if(($etb->crd_regime == EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU) || ($etb->crd_regime == EtablissementClient::REGIME_CRD_PERSONNALISE)){
+            if(!$etb->hasRegimeCollectifAcquitte()){
                 return false;
             }
+
         }
          if($this->douane_type == DRMClient::CRD_TYPE_SUSPENDU){
             if(!$isTeledeclaree){
@@ -75,7 +76,8 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
             if(!$etb->exist('crd_regime') || !$etb->crd_regime){
                 return true;
             }
-            if(($etb->crd_regime != EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU) && ($etb->crd_regime != EtablissementClient::REGIME_CRD_PERSONNALISE)){
+            if(!$etb->hasRegimeCollectifSuspendu() &&
+               !$etb->hasRegimePersonnalise()){
                 return false;
             }
         }

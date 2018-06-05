@@ -5,7 +5,7 @@
  * Inspired by James McGlinn <james@mcglinn.org>
  *
  */
-class AutoAdminFilter extends sfBasicSecurityFilter
+class AutoAdminFilter extends BasicSecurityFilter
 {
   /**
    * Execute filter
@@ -14,7 +14,7 @@ class AutoAdminFilter extends sfBasicSecurityFilter
    */
   public function execute ($filterChain)
   {
-    $context = $this->getContext(); 	
+    $context = $this->getContext();
     $user = $context->getUser();
     if ($user->isAuthenticated())
 	return parent::execute($filterChain);
@@ -25,7 +25,7 @@ class AutoAdminFilter extends sfBasicSecurityFilter
 
     $rights = 'admin';
 
-    $user->setAttribute('AUTH_USER', $rights);    
+    $user->setAttribute('AUTH_USER', $rights);
     $user->setAttribute('AUTH_DESC', $rights);
     $user->signInOrigin($this->getCompte($user->getAttribute('AUTH_USER'), $user->getAttribute('AUTH_DESC')));
     parent::execute($filterChain);
@@ -41,7 +41,7 @@ class AutoAdminFilter extends sfBasicSecurityFilter
 
     return $compte;
   }
- 
+
 
   /**
    * Sends HTTP Auth headers and exits

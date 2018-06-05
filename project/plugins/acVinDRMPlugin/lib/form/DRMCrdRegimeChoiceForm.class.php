@@ -38,7 +38,9 @@ class DRMCrdRegimeChoiceForm extends acCouchdbObjectForm {
     }
 
     public function getCRDRegimes() {
-        return EtablissementClient::$regimes_crds_libelles_longs;
+        $regimes = DRMClient::getInstance()->getAllRegimesCrdsChoices(true);
+
+        return $regimes;
     }
 
     public function doUpdateObject($values) {

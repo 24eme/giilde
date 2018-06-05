@@ -3,6 +3,11 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 sfContext::createInstance($configuration);
 
+if(!SV12Configuration::getInstance()->isActif()) {
+    $t = new lime_test(0);
+    exit(0);
+}
+
 $t = new lime_test(4);
 
 $societeViti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getSociete();

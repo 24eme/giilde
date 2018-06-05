@@ -23,6 +23,10 @@ class drm_pdfActions extends drmGeneriqueActions {
         $this->drm = $this->getRoute()->getDrm();
         $this->forward404Unless($this->drm);
 
+        if ($this->drm->teledeclare && !$this->drm->isValidee()) {
+            $this->drm->generateDroitsDouanes();
+            $this->drm->generateMouvements();
+        }
 
         $latex = new DRMLatex($this->drm);
        // $latex->getLatexFileContents();

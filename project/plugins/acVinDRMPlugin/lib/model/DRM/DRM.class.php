@@ -559,6 +559,9 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             }
 
             $vrac = $mouvement->getVrac();
+            if(!$vrac) {
+                continue;
+            }
             $vrac->enleverVolume($mouvement->volume * -1);
             if ($mouvement->type_hash == 'creationvrac_details' && ($vrac->volume_enleve == 0)) {
                 $vrac->delete();
@@ -1359,9 +1362,11 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
         if (!$this->exist('crds') || (!$this->crds)) {
             $this->add('crds');
         }
-        $regimeCrd = ($this->getEtablissement()->exist('crd_regime')) ? $this->getEtablissement()->crd_regime : null;
-        if ($regimeCrd) {
+        $regimesCrd = ($this->getEtablissement()->exist('crd_regime')) ? $this->getEtablissement()->getCrdRegimeArray() : null;
+        if ($regimesCrd) {
+          foreach ($regimesCrd as $regimeCrd) {
             $this->crds->getOrAdd($regimeCrd)->crdsInitDefault($this->getAllGenres());
+          }
         }
     }
 

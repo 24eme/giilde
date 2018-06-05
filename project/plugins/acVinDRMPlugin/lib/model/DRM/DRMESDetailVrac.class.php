@@ -6,6 +6,9 @@
 
 class DRMESDetailVrac extends BaseDRMESDetailVrac {
 
+    const CONTRAT_VRAC_SANS_NUMERO = "VRAC-SANSNUMERO";
+    const CONTRAT_BOUTEILLE_SANS_NUMERO = "BOUTEILLE-SANSNUMERO";
+
     protected $vrac = null;
 
     public function getProduitDetail() {
@@ -15,7 +18,11 @@ class DRMESDetailVrac extends BaseDRMESDetailVrac {
 
     public function getVrac() {
         if (is_null($this->vrac)) {
-            $this->vrac = VracClient::getInstance()->find($this->identifiant);
+            try {
+                $this->vrac = VracClient::getInstance()->find($this->identifiant);
+            } catch(Exception $e) {
+                $this->vrac = VracClient::getInstance()->find($this->identifiant, acCouchdbClient::HYDRATE_JSON);
+            }
         }
 
         return $this->vrac;
@@ -34,17 +41,32 @@ class DRMESDetailVrac extends BaseDRMESDetailVrac {
         return $this->getProduitDetail()->isContratExterne();
     }
 
+    public function isSansContrat() {
+
+        return in_array($this->identifiant, array(self::CONTRAT_VRAC_SANS_NUMERO, self::CONTRAT_BOUTEILLE_SANS_NUMERO));
+    }
+
     public function getIdentifiantLibelle() {
         if($this->getProduitDetail()->isContratExterne()) {
 
             return "externe ".$this->identifiant;
         }
 
-        return $this->getVrac()->getNumeroArchive();
+        if($this->isSansContrat() && $this->identifiant == self::CONTRAT_BOUTEILLE_SANS_NUMERO) {
+
+            return "Bouteille";
+        }
+
+        if($this->isSansContrat() && $this->identifiant == self::CONTRAT_VRAC_SANS_NUMERO) {
+
+            return "Vrac";
+        }
+
+        return $this->getVrac()->numero_archive;
     }
 
     public function setKey($k) {
-      $this->key = $k;
+        $this->key = $k;
     }
 
     public function getKey() {
@@ -53,7 +75,8 @@ class DRMESDetailVrac extends BaseDRMESDetailVrac {
                 $this->key = $this->identifiant.'-'.uniqid();
             }
         }
-      return $this->key;
+        
+        return $this->key;
     }
 
 }

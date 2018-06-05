@@ -170,5 +170,5 @@ all:
         etape_mvt_supendus_description: "Indiquer les mouvements d’entrée et de sortie du stock en droits suspendus."
         etape_mvt_acquittes_description: "Indiquer les mouvements d’entrée et de sortie du stock en droits acquittés."
         etape_capsules_crd_description: "Indiquer les mouvements d’entrée et de sortie du stock de capsules CRD."
-        etape_annexes_description: "Indiquer les documents d’accompagnement utilisés, le sucre utilisé et toute observation obligatoire ou facultative."
+        etape_annexes_description: "Indiquer les documents d’accompagnement utilisés et toute observation obligatoire ou facultative."
         etape_recap_description: "Récapitulatif de la DRM saisie et validation."

@@ -5,7 +5,7 @@
  * Inspired by James McGlinn <james@mcglinn.org>
  *
  */
-class CASSecurityFilter extends sfBasicSecurityFilter
+class CASSecurityFilter extends BasicSecurityFilter
 {
 
   protected $request = null;
@@ -41,5 +41,5 @@ class CASSecurityFilter extends sfBasicSecurityFilter
 
       throw new sfStopException();
   }
- 
+
 }

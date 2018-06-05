@@ -292,13 +292,10 @@
     };
 
     var initCreationDrmPopup = function () {
-        $('.popup_contenu a#drm_nouvelle_popup_close').click(function () {
-        });
 
         $('.modal-body div.type_creation input').change(function () {
-            console.log('ici');
             var value = $(this).attr('value');
-            var id_drm = $(this).parents('div').attr('id').replace('type_creation_div_', '');
+            var id_drm = $(this).parents('div.type_creation').attr('id').replace('type_creation_div_', '');
 
             if (value == 'CREATION_EDI') {
                 $('#file_edi_div_' + id_drm+ " .drmChoixCreation_file").prop('required',true);
@@ -308,9 +305,6 @@
                 $('#file_edi_div_' + id_drm+ " .drmChoixCreation_file").prop('required',false);
             }
 
-        });
-        $('.popup_creation_drm div.type_creation label').click(function () {
-            $(this).siblings('input').click();
         });
 
     };

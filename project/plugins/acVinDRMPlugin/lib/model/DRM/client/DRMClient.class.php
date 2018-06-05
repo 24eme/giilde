@@ -31,6 +31,8 @@ class DRMClient extends acCouchdbClient {
     const DRM_CREATION_EDI = 'CREATION_EDI';
     const DRM_CREATION_VIERGE = 'CREATION_VIERGE';
     const DRM_CREATION_NEANT = 'CREATION_NEANT';
+    const DRM_CREATION_DOCUMENTS = 'CREATION_DOCUMENTS';
+
     const DETAIL_EXPORT_PAYS_DEFAULT = 'inconnu';
     const TYPE_DRM_SUSPENDU = 'SUSPENDU';
     const TYPE_DRM_ACQUITTE = 'ACQUITTE';
@@ -38,6 +40,7 @@ class DRMClient extends acCouchdbClient {
     const CRD_TYPE_SUSPENDU = 'CRD_SUSPENDU';
     const CRD_TYPE_ACQUITTE = 'CRD_ACQUITTE';
     const CRD_TYPE_MIXTE = 'CRD_MIXTE';
+
 
     public static $types_libelles = array(DRM::DETAILS_KEY_SUSPENDU => 'Suspendu', DRM::DETAILS_KEY_ACQUITTE => 'Acquitté');
     public static $types_node_from_libelles = array(self::TYPE_DRM_SUSPENDU => DRM::DETAILS_KEY_SUSPENDU, self::TYPE_DRM_ACQUITTE => DRM::DETAILS_KEY_ACQUITTE);
@@ -501,7 +504,12 @@ class DRMClient extends acCouchdbClient {
             return $drm;
         }
         if (!$drm->getEtablissement()->isNegociant()) {
-            $dsLast = DSClient::getInstance()->findLastByIdentifiant($identifiant);
+            $dsLast = null;
+            try {
+                $dsLast = DSClient::getInstance()->findLastByIdentifiant($identifiant);
+            } catch (Exception $e) {
+
+            }
             if ($dsLast) {
                 $drm->generateByDS($dsLast);
                 return $drm;
@@ -735,4 +743,67 @@ class DRMClient extends acCouchdbClient {
       }
       return '';
     }
+    
+    public function getRecapCvos($identifiant, $periode) {
+
+        return $this->getRecapCvosByMouvements(DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndPeriode($identifiant, $periode));
+    }
+
+    public function getRecapCvosByMouvements($mouvements) {
+        $recapCvos = array();
+
+        $recapCvos["TOTAL"] = new stdClass();
+        $recapCvos["TOTAL"]->totalVolumeDroitsCvo = 0;
+        $recapCvos["TOTAL"]->totalVolumeReintegration = 0;
+        $recapCvos["TOTAL"]->totalPrixDroitCvo = 0;
+        $recapCvos["TOTAL"]->version = null;
+
+        foreach ($mouvements as $mouvement) {
+            $version = $mouvement->version;
+            if(!$version) {
+                $version = "M00";
+            }
+            if(!array_key_exists($version, $recapCvos)) {
+                $recapCvos[$version] = new stdClass();
+                $recapCvos[$version]->totalVolumeDroitsCvo = 0;
+                $recapCvos[$version]->totalVolumeReintegration = 0;
+                $recapCvos[$version]->totalPrixDroitCvo = 0;
+                $recapCvos[$version]->version = $version;
+            }
+            if ($mouvement->facturable) {
+                $recapCvos[$version]->totalPrixDroitCvo += Mouvement::getPrixHtCalcul($mouvement->volume, $mouvement->coefficient_facturation, $mouvement->cvo);
+                $recapCvos["TOTAL"]->totalPrixDroitCvo +=  Mouvement::getPrixHtCalcul($mouvement->volume, $mouvement->coefficient_facturation, $mouvement->cvo);
+                $recapCvos[$version]->totalVolumeDroitsCvo += Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
+                $recapCvos["TOTAL"]->totalVolumeDroitsCvo += Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
+            }
+            if ($mouvement->type_hash == 'entrees/reintegration') {
+                $recapCvos[$version]->totalVolumeReintegration += $mouvement->volume;
+                $recapCvos["TOTAL"]->totalVolumeReintegration += $mouvement->volume;
+            }
+        }
+
+        if(count($recapCvos) <= 2) {
+
+            return array("TOTAL" => $recapCvos["TOTAL"]);
+        }
+
+        ksort($recapCvos);
+
+        return $recapCvos;
+    }
+
+    public function getAllRegimesCrdsChoices($libelleLong = false){
+      $crdsRegimesChoices = array();
+      $crdsRegimesChoices = EtablissementClient::$regimes_crds_libelles;
+
+      if($libelleLong){
+        $crdsRegimesChoices = EtablissementClient::$regimes_crds_libelles_longs;
+      }
+      $onlySuspendus = DRMConfiguration::getInstance()->isCrdOnlySuspendus();
+      if($onlySuspendus){
+        $crdsRegimesChoices = EtablissementClient::$regimes_crds_libelles_longs_only_suspendu;
+      }
+      return $crdsRegimesChoices;
+    }
+
 }

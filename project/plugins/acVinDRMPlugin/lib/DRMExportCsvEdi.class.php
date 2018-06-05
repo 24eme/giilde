@@ -52,7 +52,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
         if($produitDetail instanceof DSDetail){
           $libelle = "";
         }else{
-          $libelle = $produitDetail->getLibelle("%format_libelle%");
+          $libelle = $produitDetail->getLibelle("%format_libelle%") . " (".$produitDetail->getCodeDouane().")";
         }
         $type_drm = ($produitDetail->getParent()->getKey() == 'details')? 'suspendu' : 'acquitte';
         if($force_type_drm){
@@ -78,14 +78,14 @@ class DRMExportCsvEdi extends DRMCsvEdi {
     }
 
     public function createRowStockNullProduit($produitDetail){
-      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . ";" . $this->drm->declarant->no_accises . ";";
+      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
       $lignes = $debutLigne . $this->getProduitCSV($produitDetail,'suspendu') . ";" . "stocks_debut;initial;0;\n";
       $lignes.= $debutLigne . $this->getProduitCSV($produitDetail,'suspendu') . ";" . "stocks_fin;final;0;\n";
       return $lignes;
     }
 
     public function createRowMouvementProduitDetail($produit, $catMouvement,$typeMouvement,$volume, $num_contrat = null){
-      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . ";" . $this->drm->declarant->no_accises . ";";
+      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
       $lignes = $debutLigne . $this->getProduitCSV($produit,'suspendu') . ";" . $catMouvement.";".$typeMouvement.";".$volume.";";
       $lignes .= ($num_contrat)? ";".str_replace("VRAC-","",$num_contrat).";" : "";
       $lignes .= "\n";
@@ -95,7 +95,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
     private function createMouvementsEdi() {
         $mouvementsEdi = "";
         $produitsDetails = $this->drm->declaration->getProduitsDetailsSorted(true);
-        $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . ";" . $this->drm->declarant->no_accises . ";";
+        $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
 
         foreach ($produitsDetails as $hashProduit => $produitDetail) {
 
@@ -152,7 +152,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
 
     private function createCrdsEdi() {
         $crdsEdi = "";
-        $debutLigne = self::TYPE_CRD . ";" . $this->drm->periode . ";" . $this->drm->identifiant . ";" . $this->drm->declarant->no_accises . ";";
+        $debutLigne = self::TYPE_CRD . ";" . $this->drm->periode . ";" .  $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
         foreach ($this->drm->getAllCrdsByRegimeAndByGenre() as $regimeKey => $crdByGenre) {
             foreach ($crdByGenre as $genreKey => $crds) {
                 foreach ($crds as $crdKey => $crdDetail) {
