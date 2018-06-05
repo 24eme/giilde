@@ -170,10 +170,11 @@ function centilisation2Douane($c, $libelle) {
 		'0.050000' => 'BIB_500',
 		'0.080000' => 'BIB_800',
 		'0.100000' => 'BIB_1000');
-		if (preg_match('/bib/i', $libelle) && isset($bib[sprintf('%.f', $c)]) && $bib[sprintf('%.f', $c)]) {
-			return $bib[sprintf('%.f', $c)];
-		}
-		if (isset($bouteilles[sprintf('%.f', $c)]) && $bouteilles[sprintf('%.f', $c)]) {
+		if (preg_match('/bib/i', $libelle)) {
+			if (isset($bib[sprintf('%.f', $c)]) && $bib[sprintf('%.f', $c)]) {
+				return $bib[sprintf('%.f', $c)];
+			}
+		}elseif (isset($bouteilles[sprintf('%.f', $c)]) && $bouteilles[sprintf('%.f', $c)]) {
 			return $bouteilles[sprintf('%.f', $c)];
 		}
 		return "AUTRE";
