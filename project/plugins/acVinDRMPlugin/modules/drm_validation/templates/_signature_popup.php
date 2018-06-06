@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <p>Vous êtes sur le point de valider votre DRM, une fois votre déclaration validée, vous ne pourrez plus la modifier.</p>
-                <p>Après validation vous receverez votre DRM par mail.</p>
+                <p>Après validation vous recevrez votre DRM par mail.</p>
 
                 <?php if($compte->hasDroit(Roles::TELEDECLARATION_DOUANE)): ?>
           	    <p>Si vous le souhaitez, en cliquant sur l'option ci-dessous, vous pouvez transmettre cette DRM directement sur le portail de la douane, qui apparaitra en mode brouillon sur le portail pro.douane.gouv.fr. Il vous restera alors à la valider en ligne sur le site web douanier.</p>

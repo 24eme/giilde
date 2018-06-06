@@ -19,7 +19,7 @@
                         <p>Régime de CRD : <?php echo EtablissementClient::$regimes_crds_libelles_longs[$regime]; ?></p>
                     <?php endif; ?>
                     <?php foreach ($crdAllGenre as $genre => $crds): ?>
-                        <h3>Stocks CRD de vins <?php echo getLibelleForGenre($genre); ?> <small>(en nombre de capsules)</small></h3>
+                        <h3>Stocks CRD de vin<?php if (getLibelleForGenre($genre) == 'MOUSSEUX') { echo 's'; } ?> <?php echo getLibelleForGenre($genre); ?> <small>(en nombre de capsules)</small></h3>
                             <table id="table_drm_crds" class="table table-bordered table-condensed table-striped">
                                 <thead>
                                     <tr>

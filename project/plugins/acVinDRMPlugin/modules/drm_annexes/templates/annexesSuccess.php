@@ -48,7 +48,7 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                                 <tbody class="drm_adminitration">
                                         <tr>
                                           <td style="vertical-align: middle;" class="drm_annexes_type">DAE</td>
-                                          <td colspan="3" style="text-align: center;"><b>Déclaration non nécessaire pour les documents életroniques réalisés sous Gamma</b></td>
+                                          <td colspan="3" style="text-align: center;"><b>Déclaration non nécessaire pour les documents électroniques réalisés sous Gamma</b></td>
                                       </tr>
                                     <?php foreach ($annexesForm->getDocTypes() as $typeDoc): ?>
                                         <tr>
