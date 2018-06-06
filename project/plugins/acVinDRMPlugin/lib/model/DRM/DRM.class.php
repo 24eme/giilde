@@ -1816,7 +1816,7 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
     }
 
     public function hasStatsEuropeennes() {
-      return (($this->declaratif->statistiques->jus != null) && ($this->declaratif->statistiques->mcr != null) && ($this->declaratif->statistiques->vinaigre != null));
+      return (($this->declaratif->statistiques->jus != null) || ($this->declaratif->statistiques->mcr != null) || ($this->declaratif->statistiques->vinaigre != null));
     }
 
 
