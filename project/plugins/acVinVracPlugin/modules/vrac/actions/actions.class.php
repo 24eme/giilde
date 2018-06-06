@@ -169,7 +169,7 @@ class vracActions extends sfActions {
 
         $this->redirect403IfIsNotTeledeclarationAndNotMe();
 
-        $this->contratsSocietesWithInfos = VracClient::getInstance()->retrieveBySocieteWithInfosLimit($this->societe, $this->etablissementPrincipal, true);
+        $this->contratsSocietesWithInfos = VracClient::getInstance()->retrieveBySocieteWithInfosLimit($this->societe, $this->etablissementPrincipal);
     }
 
     public function executeHistory(sfWebRequest $request) {
@@ -194,7 +194,7 @@ class vracActions extends sfActions {
         $this->form = new VracHistoryRechercheForm($this->societe, $this->etablissement, $this->campagne, $this->statut);
         $this->contratsByCampagneEtablissementAndStatut = new stdClass();
         $this->contratsByCampagneEtablissementAndStatut->rows = array();
-        $this->contratsByCampagneEtablissementAndStatut->rows = VracClient::getInstance()->retrieveByCampagneSocieteAndStatut($this->campagne,$this->societe,  $this->etablissement, $this->statut,true);
+        $this->contratsByCampagneEtablissementAndStatut->rows = VracClient::getInstance()->retrieveByCampagneSocieteAndStatut($this->campagne,$this->societe, $this->etablissement, $this->statut);
 
     }
 

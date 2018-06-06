@@ -392,6 +392,10 @@ class drmActions extends drmGeneriqueActions {
     }
 
     public function executeReouvrir(sfWebRequest $request) {
+        $this->redirect403IfIsTeledeclaration();
+        $drm = $this->getRoute()->getDRM();
+        $this->redirect403Unless($drm->isTeledeclareNonFacturee());
+
         $drm = $this->getRoute()->getDRM();
         $drm->devalidate();
         $drm->save();

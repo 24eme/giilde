@@ -254,7 +254,7 @@ class VracClient extends acCouchdbClient {
                         ->getView('vrac', 'history');
     }
 
-    public function retrieveByCampagneSocieteAndStatut($campagne, $societe, $statut, $teledeclare = null, $limit = self::RESULTAT_LIMIT) {
+    public function retrieveByCampagneSocieteAndStatut($campagne, $societe, $statut, $limit = self::RESULTAT_LIMIT) {
         if (!preg_match('/[0-9]*-[0-9]*/', $campagne)){
           throw new sfException("wrong campagne format ($campagne)");
         }
@@ -281,8 +281,7 @@ class VracClient extends acCouchdbClient {
       $local_result = array();
       $statuts = ($statut == 'tous')? array($statut) : self::$statuts_teledeclaration_sorted;
       foreach ($statuts as $statut) {
-            $local_result_view = array_merge($this->retrieveByCampagneSocieteAndStatut($campagne, $societe, $statut, true, self::RESULTAT_LIMIT), $local_result_view);
-            $local_result_view = array_merge($this->retrieveByCampagneSocieteAndStatut($campagne, $societe, $statut, false, self::RESULTAT_LIMIT), $local_result_view);
+            $local_result_view = array_merge($this->retrieveByCampagneSocieteAndStatut($campagne, $societe, $statut, self::RESULTAT_LIMIT), $local_result_view);
       }
       foreach ($local_result_view as $local_r) {
         $result->rows[] = $local_r;
@@ -290,7 +289,7 @@ class VracClient extends acCouchdbClient {
       return $result;
     }
 
-    public function retrieveBySocieteWithInfosLimit($societe, $etbId, $teledeclare_only = false, $limit = self::RESULTAT_LIMIT) {
+    public function retrieveBySocieteWithInfosLimit($societe, $etbId, $limit = self::RESULTAT_LIMIT) {
 
         $result = new stdClass();
         $result->rows = array();
@@ -307,7 +306,7 @@ class VracClient extends acCouchdbClient {
 
         foreach ($statuts as $statut) {
             foreach ($campagnes as $campagne) {
-                $local_result_view = array_merge($this->retrieveByCampagneSocieteAndStatut($campagne, $societe, $statut, $teledeclare_only, $limit), $local_result_view);
+                $local_result_view = array_merge($this->retrieveByCampagneSocieteAndStatut($campagne, $societe, $statut, $limit), $local_result_view);
               }
             }
 
@@ -735,7 +734,7 @@ class VracClient extends acCouchdbClient {
 
         $vrac->setInformations();
         $vrac->update();
-        
+
         return $vrac;
     }
 

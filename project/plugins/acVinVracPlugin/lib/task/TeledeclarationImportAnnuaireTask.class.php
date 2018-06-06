@@ -119,9 +119,9 @@ EOF;
         $societe = SocieteClient::getInstance()->findByIdentifiantSociete(substr($etbId, 0, 6));
 
         $annuaire = AnnuaireClient::getInstance()->findOrCreateAnnuaire($etbId);
-        $contrats = VracClient::getInstance()->retrieveBySocieteWithInfosLimit($societe, $etbId, false);
+        $contrats = VracClient::getInstance()->retrieveBySocieteWithInfosLimit($societe, $etbId);
         echo "Ajout dans annuaire de " . $societe->identifiant . " (" . $societe->type_societe . ")\n ------ \n";
-        
+
         foreach ($contrats->rows as $contrat) {
             $vendeur_typeKey = AnnuaireClient::ANNUAIRE_RECOLTANTS_KEY;
             $vendeurId = $contrat->value[VracClient::VRAC_VIEW_VENDEUR_ID];

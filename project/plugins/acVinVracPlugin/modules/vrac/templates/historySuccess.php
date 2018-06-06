@@ -54,7 +54,7 @@ use_helper('Float');
 <div class="col-xs-12">
 
     <a class="btn btn-default" href="<?php echo url_for('vrac_history_exportCsv', array('identifiant' => $etablissementPrincipal->identifiant, 'campagne' => $campagne, 'etablissement' => $etablissement, 'statut' => $statut)); ?>">
-        Exporter en Tableur
+        <span class="glyphicon glyphicon-save"></span> Exporter en Tableur
     </a>
 </div>
 </div>
