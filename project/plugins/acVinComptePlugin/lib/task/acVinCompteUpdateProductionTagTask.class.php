@@ -82,7 +82,7 @@ class acVinCompteUpdateProductionTagTask extends sfBaseTask {
                 }
                 $tags['produit'][$produit_libelle] = 1;
                 if ($m->detail_libelle && preg_match("/Export/", $m->type_libelle)) {
-                    $tags['export'][$m->detail_libelle] = 1;
+                    $tags['export'][$this->replaceAccents($m->detail_libelle)] = 1;
                 }
             }
             $contratDomaines = VracDomainesView::getInstance()->findDomainesByVendeur(str_replace('ETABLISSEMENT-', '', $id));
@@ -136,6 +136,8 @@ class acVinCompteUpdateProductionTagTask extends sfBaseTask {
 
     public function getProduitLibelle($hash) {
         $configuration = ConfigurationClient::getInstance()->getCurrent();
+
+        $hash = preg_replace('|^(.*)/details[a-zA-Z0-9]*/[a-zA-Z0-9]+$|', '\1', $hash);
 
         if(!$configuration->exist($hash)) {
             echo "Hash non trouvé :".$hash."\n";

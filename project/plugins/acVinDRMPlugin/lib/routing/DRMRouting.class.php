@@ -123,13 +123,6 @@ class DRMRouting {
             'type' => 'object',
             'control' => array('valid'))));
 
-            $r->prependRoute('drm_reopen', new DRMRoute('/drm/:identifiant/reopen/:periode_version/:hide_rectificative',
-                array('module' => 'drm_visualisation',
-                'action' => 'reopen',
-                'hide_rectificative' => "-1"), array('sf_method' => array('get')), array('model' => 'DRM',
-                'type' => 'object',
-                'control' => array('valid'))));
-
         $r->prependRoute('drm_edition', new DRMRoute('/drm/:identifiant/edition/:periode_version/edition', array('module' => 'drm_edition',
             'action' => 'saisieMouvements'), array('sf_method' => array('get', 'post')), array('model' => 'DRM',
             'type' => 'object',
