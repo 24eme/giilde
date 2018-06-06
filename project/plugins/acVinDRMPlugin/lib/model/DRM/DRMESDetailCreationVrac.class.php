@@ -21,6 +21,16 @@ class DRMESDetailCreationVrac extends BaseDRMESDetailCreationVrac {
         return VracClient::getInstance()->createContratFromDrmDetails($this);
     }
 
+    public function isContratExterne() {
+
+        return false;
+    }
+
+    public function isSansContrat() {
+
+        return false;
+    }
+
     public function getDateEnlevement(){
         if(!$this->_get('date_enlevement')){
             return $this->getDocument()->getDate();
