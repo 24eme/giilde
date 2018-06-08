@@ -551,7 +551,7 @@ class VracClient extends acCouchdbClient {
     public static function getCsvBySociete($vracs) {
 
         $result = "\xef\xbb\xbf";
-        $result.= "numero_contrat;numero_archive;produit_libelle;quantite;prix_unitaire;statut;type_transaction;vendeur_identifiant;vendeur_nom;vendeur_signature;";
+        $result.= "numero_contrat;numero_archive;produit_libelle;quantite;prix_unitaire;millesime;statut;type_transaction;vendeur_identifiant;vendeur_nom;vendeur_signature;";
         $result.= "acheteur_identifiant;acheteur_nom;acheteur_signature;courtier_identifiant;courtier_nom;courtier_signature\n";
 
         foreach ($vracs as $vracsRows) {
@@ -578,6 +578,7 @@ class VracClient extends acCouchdbClient {
             $result.= $vrac->produit_libelle . ';';
             $result.= str_replace('.', ',', $quantite) . ';';
             $result.= str_replace('.', ',', $vrac->prix_unitaire) . ';';
+            $result.= $vrac->millesime . ';';
 
             $result.= $vrac->valide->statut . ';';
             $result.= $vrac->type_transaction . ';';

@@ -67,27 +67,6 @@
                                     </div>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($drm->declarant->exist('caution')): ?>
-                                <div class="form-group">
-                                    <?php echo $form['caution']->renderLabel(null, array("class" => "col-sm-4 control-label")); ?>
-                                    <div class="col-sm-8">
-                                        <?php echo $form['caution']->renderError(); ?>
-                                        <?php echo $form['caution']->render(); ?>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                            <?php $hasSocialeCautionneur = (($drm->getEtablissement()->exist('caution') && ($drm->getEtablissement()->caution == EtablissementClient::CAUTION_CAUTION))
-                            || (($drm->declarant->exist('caution')) && ($drm->declarant->caution == EtablissementClient::CAUTION_CAUTION)));
-                            ?>
-                                <?php if ($drm->declarant->exist('raison_sociale_cautionneur')): ?>
-                                <div class="form-group" style="<?php echo (!$hasSocialeCautionneur) ? 'display:none;' : ''; ?>" >
-                                    <?php echo $form['raison_sociale_cautionneur']->renderLabel(null, array("class" => "col-sm-4 control-label")); ?>
-                                    <?php echo $form['raison_sociale_cautionneur']->renderError(); ?>
-                                    <div class="col-sm-8">
-                                        <?php echo $form['raison_sociale_cautionneur']->render(); ?>
-                                    </div>
-                                </div>
-                                <?php endif; ?>
                     </div>
                     <div class="modal-footer">
                         <div class="row">

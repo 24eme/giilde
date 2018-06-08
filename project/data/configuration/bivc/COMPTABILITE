@@ -1,0 +1,101 @@
+{
+   "_id": "COMPTABILITE",
+   "type": "Comptabilite",
+   "identifiants_analytiques": {
+       "70800000_d5622a8c980dcf18519d15f686a66a4e": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Produits Divers"
+       },
+       "62339000_0350fbeddcbf087abf18f3d6aa92cb04": {
+           "identifiant_analytique_numero_compte": 62339000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Espace Libre Dégustation"
+       },
+       "60500000_6c6a8539896370d9d624dfb9807eb369": {
+           "identifiant_analytique_numero_compte": 60500000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Achats Matériel"
+       },
+       "60641000_a83d2f6a4ca12fabf2c6e775a070c32b": {
+           "identifiant_analytique_numero_compte": 60641000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Carnets déclaratifs"
+       },
+       "75800000_b7b858beaee385a0863e8d8c2ae087a8": {
+           "identifiant_analytique_numero_compte": 75800000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Cotisations BIVC"
+       },
+       "62320000_ca021f370ac381dfb8650da414bb9c4c": {
+           "identifiant_analytique_numero_compte": 62320000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Vin"
+       },
+       "62480000_f5f0c488ed56cf789d19a13ffba8abe3": {
+           "identifiant_analytique_numero_compte": 62480000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Transport"
+       },
+       "62330000_b6294b667daf9514a2ebac659cfc22b5": {
+           "identifiant_analytique_numero_compte": 62330000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Oenotourisme"
+       },
+       "62333000_a869d48f761f97eaf6aae0e91304fd81": {
+           "identifiant_analytique_numero_compte": 62333000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Gestion Subventions individuelles"
+       },
+       "62551000_dd5985e268b33885c96c63d223687f1c": {
+           "identifiant_analytique_numero_compte": 62551000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Frais kilométriques"
+       },
+       "62332000_a6abd38218b561b7aef5a9e89bf41552": {
+           "identifiant_analytique_numero_compte": 62332000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Opération USA/CANADA"
+       },
+       "62334007_86a1ba4f618cceaf1bc8ab0c4b2547cf": {
+           "identifiant_analytique_numero_compte": 62334007,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Kit Formation Export"
+       },
+       "62339200_64421217d0e874726b83a1be7c01f148": {
+           "identifiant_analytique_numero_compte": 62339200,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Concours des Vins de Bourges"
+       },
+       "62321300_ae26b7dbcc1d688075ea729c07389e1f": {
+           "identifiant_analytique_numero_compte": 62321300,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Ecoles Hotelières"
+       },
+       "62334004_e9dc42b1b67f2328283dfdd82b3aa4fd": {
+           "identifiant_analytique_numero_compte": 62334004,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Autres Opérations Etranger"
+       },
+       "62610000_2882bb8a758031268ffefa0a3fd3c6c2": {
+           "identifiant_analytique_numero_compte": 62610000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Affranchissement"
+       },
+       "62612000_1974dc6b82c431a4a3f65f76a1d14423": {
+           "identifiant_analytique_numero_compte": 62612000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Location Machine à affranchir"
+       },
+       "62334003_b920c1c1f1fc84a997b2942031159ead": {
+           "identifiant_analytique_numero_compte": 62334003,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Opération Grande Bretagne"
+       },
+       "62512000_94fd36c2257cf0c1a6467dc632b32fd8": {
+           "identifiant_analytique_numero_compte": 62512000,
+           "identifiant_analytique": null,
+           "identifiant_analytique_libelle_compta": "Frais de RESTO/HOTEL"
+       }
+   }
+}

@@ -25,8 +25,6 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('vigilance', 'documents_annexes_erreur', "Les numéros de document d'accompagnement saisis en annexe sont mal renseignés.");
         $this->addControle('vigilance', 'siret_absent', "Le numéro de siret n'a pas été renseigné");
         $this->addControle('erreur', 'no_accises_absent', "Le numéro d'accise n'a pas été renseigné");
-        $this->addControle('vigilance', 'caution_absent', "Le type de caution n'a pas été renseigné");
-        $this->addControle('vigilance', 'moyen_paiement_absent', "Le moyen de paiement aux douanes n'a pas été renseigné");
         $this->addControle('vigilance', 'frequence_paiement_absent', "La fréquence de paiement aux douanes n'a pas été renseigné");
 
         $this->addControle('erreur', 'observations', "Les observations n'ont pas été renseignées");
@@ -180,17 +178,11 @@ class DRMValidation extends DocumentValidation {
 
             $societe = $this->document->getEtablissement()->getSociete();
 
-            if (!$this->document->societe->exist('paiement_douane_moyen') || !$this->document->societe->paiement_douane_moyen) {
-                $this->addPoint('vigilance', 'moyen_paiement_absent', 'Veuillez enregistrer votre moyen de paiement', $this->generateUrl('drm_validation_update_societe', $this->document));
-            }
 
             if (!$this->document->societe->exist('paiement_douane_frequence') || !$this->document->societe->paiement_douane_frequence) {
                 $this->addPoint('vigilance', 'frequence_paiement_absent', 'Veuillez enregistrer votre fréquence de paiement', $this->generateUrl('drm_validation_update_societe', $this->document));
             }
 
-            if (!$this->document->declarant->caution) {
-                $this->addPoint('vigilance', 'caution_absent', 'Veuillez enregistrer votre type de caution', $this->generateUrl('drm_validation_update_etablissement', $this->document));
-            }
 
         }
 

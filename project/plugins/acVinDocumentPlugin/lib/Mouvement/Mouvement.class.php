@@ -136,11 +136,19 @@ abstract class Mouvement extends acCouchdbDocumentTree
     }
 
     public function getPrixUnitaire() {
+        if($this->exist('prix_unitaire')) {
+
+            return $this->_get('prix_unitaire');
+        }
 
         return self::getPrixUnitaireCalcul($cvo);
     }
 
     public function getQuantite() {
+        if($this->exist('quantite')) {
+
+            return $this->_get('quantite');
+        }
 
         return self::getQuantiteCalcul($this->volume, $this->coefficient_facturation);
     }

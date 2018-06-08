@@ -4,14 +4,6 @@ use_helper('DRM');
 use_helper('Orthographe');
 use_helper('DRMPdf');
 use_helper('Display');
-$caution = 'Non défini';
-$organismeCautionneur = null;
-if($drm->declarant->caution){
-   $caution = EtablissementClient::$caution_libelles[$drm->declarant->caution];
-   if($drm->declarant->caution == EtablissementClient::CAUTION_CAUTION){
-       $organismeCautionneur = $drm->declarant->raison_sociale_cautionneur;
-   }
-}
 ?>
 
 \def\InterloireAdresse{<?php echo getAdresseInterpro(); ?>}
@@ -40,11 +32,7 @@ Adresse du siège de l’Entrepôt : \textbf{\DRMAdresseChai} \\
 Code client : \textbf{\DRMIdentifiantIL}~~~CVI : \textbf{\DRMCvi}~~~Siret : \textbf{\DRMSiret} \\
 Numéro d'Accise : \textbf{\DRMNumAccise} \\
 Adresse compta matière : \textbf{\DRMAdresseComptaMatiere} \\
-Caution : \textbf{<?php echo $caution; ?>} \\
-<?php if($organismeCautionneur): ?>
-Organisme cautionneur : \textbf{<?php echo $organismeCautionneur; ?>} \\
-<?php endif; ?>
- }
+}
 
 \rhead{ \\
 \vspace{-2cm}
