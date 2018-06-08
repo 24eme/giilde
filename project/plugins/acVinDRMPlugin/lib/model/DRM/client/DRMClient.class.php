@@ -743,7 +743,7 @@ class DRMClient extends acCouchdbClient {
       }
       return '';
     }
-    
+
     public function getRecapCvos($identifiant, $periode) {
 
         return $this->getRecapCvosByMouvements(DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndPeriode($identifiant, $periode));
@@ -771,8 +771,8 @@ class DRMClient extends acCouchdbClient {
                 $recapCvos[$version]->version = $version;
             }
             if ($mouvement->facturable) {
-                $recapCvos[$version]->totalPrixDroitCvo += Mouvement::getPrixHtCalcul($mouvement->volume, $mouvement->coefficient_facturation, $mouvement->cvo);
-                $recapCvos["TOTAL"]->totalPrixDroitCvo +=  Mouvement::getPrixHtCalcul($mouvement->volume, $mouvement->coefficient_facturation, $mouvement->cvo);
+                $recapCvos[$version]->totalPrixDroitCvo += Mouvement::getPrixHtCalcul(Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation), $mouvement->cvo);
+                $recapCvos["TOTAL"]->totalPrixDroitCvo +=  Mouvement::getPrixHtCalcul(Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation), $mouvement->cvo);
                 $recapCvos[$version]->totalVolumeDroitsCvo += Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
                 $recapCvos["TOTAL"]->totalVolumeDroitsCvo += Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
             }

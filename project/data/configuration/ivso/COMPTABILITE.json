@@ -1,0 +1,581 @@
+{
+   "_id": "COMPTABILITE",
+   "type": "Comptabilite",
+   "identifiants_analytiques": {
+       "70100000_2990116": {
+           "identifiant_analytique_numero_compte": 70100000,
+           "identifiant_analytique": 2990116,
+           "identifiant_analytique_libelle_compta": "GAIL - DOTATION VIN 2016"
+       },
+       "70803800_1999916": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 1999916,
+           "identifiant_analytique_libelle_compta": "IVSO - PARTICIPATION A LA VALORISATION 2016"
+       },
+       "70803800_4999916": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 4999916,
+           "identifiant_analytique_libelle_compta": "MAD - PARTICIPATION A LA VALORISATION 2016"
+       },
+       "70803800_5999916": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 5999916,
+           "identifiant_analytique_libelle_compta": "ST MONT - PARTICIPATION A LA VALORISATION 2016"
+       },
+       "70803800_6999916": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 6999916,
+           "identifiant_analytique_libelle_compta": "GASC - PARTICIPATION A LA VALORISATION 2016"
+       },
+       "70120000_4992116": {
+           "identifiant_analytique_numero_compte": 70120000,
+           "identifiant_analytique": 4992116,
+           "identifiant_analytique_libelle_compta": "MAD - PLV HORS SUBV 2016"
+       },
+       "70801000_10000": {
+           "identifiant_analytique_numero_compte": 70801000,
+           "identifiant_analytique": 10000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO IGP CHAPEAU"
+       },
+       "70610110_1230216": {
+           "identifiant_analytique_numero_compte": 70610110,
+           "identifiant_analytique": 1230216,
+           "identifiant_analytique_libelle_compta": "USA - CLUB ENTREPRISES 2016"
+       },
+       "70130000_3100116": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3100116,
+           "identifiant_analytique_libelle_compta": "FRO - PREST. DIV. HORS SUBV 2016"
+       },
+       "70610190_1220716": {
+           "identifiant_analytique_numero_compte": 70610190,
+           "identifiant_analytique": 1220716,
+           "identifiant_analytique_libelle_compta": "CANADA - CLUB ENTREPRISES 2016"
+       },
+       "70610110_1230116": {
+           "identifiant_analytique_numero_compte": 70610110,
+           "identifiant_analytique": 1230116,
+           "identifiant_analytique_libelle_compta": "USA - HORS CLUB ENTREPRISES 2016"
+       },
+       "70800200_40000": {
+           "identifiant_analytique_numero_compte": 70800200,
+           "identifiant_analytique": 40000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO MADIRAN"
+       },
+       "70620000_2104316": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2994316,
+           "identifiant_analytique_libelle_compta": "GAIL - SIA 2016"
+       },
+       "70800300_20000": {
+           "identifiant_analytique_numero_compte": 70800300,
+           "identifiant_analytique": 20000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION SECTION GAILLAC"
+       },
+       "70800600_60000": {
+           "identifiant_analytique_numero_compte": 70800600,
+           "identifiant_analytique": 60000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO GASCOGNE"
+       },
+       "70800700_50000": {
+           "identifiant_analytique_numero_compte": 70800700,
+           "identifiant_analytique": 50000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO SAINT MONT"
+       },
+       "70800800_10000": {
+           "identifiant_analytique_numero_compte": 70800800,
+           "identifiant_analytique": 10000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO LOT"
+       },
+       "70801200_10000": {
+           "identifiant_analytique_numero_compte": 70801200,
+           "identifiant_analytique": 10000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO IGP AGENAIS"
+       },
+       "70800900_10000": {
+           "identifiant_analytique_numero_compte": 70800900,
+           "identifiant_analytique": 10000,
+           "identifiant_analytique_libelle_compta": "IVSO - COTISATION CVO IGP TARN"
+       },
+       "70610020_1010116": {
+           "identifiant_analytique_numero_compte": 70610020,
+           "identifiant_analytique": 1010116,
+           "identifiant_analytique_libelle_compta": "FRA - VINISUD ESPACE ENTREPRISES 2016"
+       },
+       "70610020_1010216": {
+           "identifiant_analytique_numero_compte": 70610020,
+           "identifiant_analytique": 1010216,
+           "identifiant_analytique_libelle_compta": "FRA - VINISUD ESPACE COLLECTIF 2016"
+       },
+       "70610080_1020116": {
+           "identifiant_analytique_numero_compte": 70610080,
+           "identifiant_analytique": 1020116,
+           "identifiant_analytique_libelle_compta": "ALL - PROWEIN Espace entreprises 2016"
+       },
+       "70610080_1030116": {
+           "identifiant_analytique_numero_compte": 70610080,
+           "identifiant_analytique": 1030116,
+           "identifiant_analytique_libelle_compta": "ALL - PROWEIN espace collectif 2016"
+       },
+       "70610140_1990316": {
+           "identifiant_analytique_numero_compte": 70610140,
+           "identifiant_analytique": 1990316,
+           "identifiant_analytique_libelle_compta": "FRA - CONCOURS VSO inscription 2016"
+       },
+       "70610145_1990316": {
+           "identifiant_analytique_numero_compte": 70610145,
+           "identifiant_analytique": 1990316,
+           "identifiant_analytique_libelle_compta": "FRA - CONCOURS VSO médailles 2016"
+       },
+       "70610320_1990516": {
+           "identifiant_analytique_numero_compte": 70610320,
+           "identifiant_analytique": 1990516,
+           "identifiant_analytique_libelle_compta": "FRA - CONCOURS NATIONAL IGP inscription 2016"
+       },
+       "70610230_1990516": {
+           "identifiant_analytique_numero_compte": 70610230,
+           "identifiant_analytique": 1990516,
+           "identifiant_analytique_libelle_compta": "FRA - CONCOURS NATIONAL IGP médailles 2016"
+       },
+       "70100000_1992116": {
+           "identifiant_analytique_numero_compte": 70100000,
+           "identifiant_analytique": 1992116,
+           "identifiant_analytique_libelle_compta": "FRA - PLV HORS SUBV 2016"
+       },
+       "70120000_2992116": {
+           "identifiant_analytique_numero_compte": 70120000,
+           "identifiant_analytique": 2992116,
+           "identifiant_analytique_libelle_compta": "GAIL - PLV HORS SUBV 2016"
+       },
+       "70805000_10000": {
+           "identifiant_analytique_numero_compte": 70800500,
+           "identifiant_analytique": 10000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO AOP CHAPEAU"
+       },
+       "70800100_30000": {
+           "identifiant_analytique_numero_compte": 70800100,
+           "identifiant_analytique": 30000,
+           "identifiant_analytique_libelle_compta": "IVSO-COTISATION CVO FRONTON"
+       },
+       "70620010_2994116": {
+           "identifiant_analytique_numero_compte": 70620010,
+           "identifiant_analytique": 2074116,
+           "identifiant_analytique_libelle_compta": "GAIL - FETE DES VINS 2016"
+       },
+       "70800000_1998316": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": 1998316,
+           "identifiant_analytique_libelle_compta": "NOMS DE DOMAINES 2016"
+       },
+       "70800000_4999916": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": 4999916,
+           "identifiant_analytique_libelle_compta": "MAD - DIVERS MADIRAN 2016"
+       },
+       "70640020_4994116": {
+           "identifiant_analytique_numero_compte": 70640020,
+           "identifiant_analytique": 4994116,
+           "identifiant_analytique_libelle_compta": "MAD - FETE DES VINS 2016"
+       },
+       "70630020_3994116": {
+           "identifiant_analytique_numero_compte": 70630020,
+           "identifiant_analytique": 3994116,
+           "identifiant_analytique_libelle_compta": "FRO - SAVEURS ET SENTEURS 2016"
+       },
+       "70130000_3102116": {
+           "identifiant_analytique_numero_compte": 70120000,
+           "identifiant_analytique": 3102116,
+           "identifiant_analytique_libelle_compta": "FRO - PLV SUB CG 2016"
+       },
+       "70803800_3999916": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 3999916,
+           "identifiant_analytique_libelle_compta": "FRO - PARTICIPATION A LA VALORISATION 2016"
+       },
+       "70803800_2999916": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 2999916,
+           "identifiant_analytique_libelle_compta": "GAIL - PARTICIPIATION A LA VALORISATION 2016"
+       },
+       "70630000_3101116": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3101116,
+           "identifiant_analytique_libelle_compta": "FRO - PRESTATIONS DE SERVICES 2016"
+       },
+       "70800000_4990116": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": 4990116,
+           "identifiant_analytique_libelle_compta": "MAD - PARTENARIATS VINS 2016"
+       },
+       "70630000_2100116": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2999916,
+           "identifiant_analytique_libelle_compta": "GAIL - PREST. DIV. HORS SUBV. 2016"
+       },
+       "70640040_4994216": {
+           "identifiant_analytique_numero_compte": 70640040,
+           "identifiant_analytique": 4994216,
+           "identifiant_analytique_libelle_compta": "MAD - PORTES OUVERTES 2016"
+       },
+       "70630000_3104316": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3104316,
+           "identifiant_analytique_libelle_compta": "FRO - BAL DES VENDANGES 2016"
+       },
+       "70620000_2260316": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2230316,
+           "identifiant_analytique_libelle_compta": "GAIL - PROMOTION EXPORT 2016"
+       },
+       "70610110_1210316": {
+           "identifiant_analytique_numero_compte": 70610100,
+           "identifiant_analytique": 1210316,
+           "identifiant_analytique_libelle_compta": "IVSO - VINEXPO TOKYO 2016"
+       },
+       "70630000_2100117": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2999917,
+           "identifiant_analytique_libelle_compta": "GAIL - PREST. DIV. HORS SUBV. 2017"
+       },
+       "70610020_1010117": {
+           "identifiant_analytique_numero_compte": 70610020,
+           "identifiant_analytique": 1010117,
+           "identifiant_analytique_libelle_compta": "FRA - VINISUD ESPACE ENTREPRISES 2017"
+       },
+       "70630000_3100117": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3100117,
+           "identifiant_analytique_libelle_compta": "FRO - PREST. DIV. HORS SUBV 2017"
+       },
+       "70610220_1124816": {
+           "identifiant_analytique_numero_compte": 70610220,
+           "identifiant_analytique": 1124816,
+           "identifiant_analytique_libelle_compta": "IVSO - SISQA (hors subv.) 2016"
+       },
+       "70803800_1999917": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 1999917,
+           "identifiant_analytique_libelle_compta": "IVSO - PARTICIPATION A LA VALORISATION 2017"
+       },
+       "70803800_3999917": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 3999917,
+           "identifiant_analytique_libelle_compta": "FRO - PARTICIPATION A LA VALORISATION 2017"
+       },
+       "70610020_1010217": {
+           "identifiant_analytique_numero_compte": 70610020,
+           "identifiant_analytique": 1010217,
+           "identifiant_analytique_libelle_compta": "FRA - VINISUD ESPACE COLLECTIF 2017"
+       },
+       "70610000_7999916": {
+           "identifiant_analytique_numero_compte": 70610000,
+           "identifiant_analytique": 7999916,
+           "identifiant_analytique_libelle_compta": "UIVC - CONVENTION 2016"
+       },
+       "70800000_4990117": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": 4990117,
+           "identifiant_analytique_libelle_compta": "MAD - VINS 2017"
+       },
+       "70610320_1990517": {
+           "identifiant_analytique_numero_compte": 70610320,
+           "identifiant_analytique": 1990517,
+           "identifiant_analytique_libelle_compta": "FRA-CONCOURS NATIONAL IGP (hors subv.) inscription 2017"
+       },
+       "70610230_1990517": {
+           "identifiant_analytique_numero_compte": 70610230,
+           "identifiant_analytique": 1990517,
+           "identifiant_analytique_libelle_compta": "FRA-CONCOURS NATIONAL IGP (hors subv.) médailles 2017"
+       },
+       "70610080_1020117": {
+           "identifiant_analytique_numero_compte": 70610080,
+           "identifiant_analytique": 1020117,
+           "identifiant_analytique_libelle_compta": "ALL - PROWEIN 2017 - Espace entreprises"
+       },
+       "70610080_1020217": {
+           "identifiant_analytique_numero_compte": 70610080,
+           "identifiant_analytique": 1020217,
+           "identifiant_analytique_libelle_compta": "ALL - PROWEIN 2017 - Espace collectif"
+       },
+       "70610140_1990317": {
+           "identifiant_analytique_numero_compte": 70610140,
+           "identifiant_analytique": 1990317,
+           "identifiant_analytique_libelle_compta": "FRA - CONCOURS VSO INSCRIPTION 2017"
+       },
+       "70610145_1990317": {
+           "identifiant_analytique_numero_compte": 70610145,
+           "identifiant_analytique": 1990317,
+           "identifiant_analytique_libelle_compta": "FRA - CONCOURS VSO MEDAILLES 2017"
+       },
+       "70620000_2994317": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2994317,
+           "identifiant_analytique_libelle_compta": "GAIL - SIA 2017"
+       },
+       "70100000_2990117": {
+           "identifiant_analytique_numero_compte": 70100000,
+           "identifiant_analytique": 2990117,
+           "identifiant_analytique_libelle_compta": "GAIL - VINS 2017"
+       },
+       "70120000_4992117": {
+           "identifiant_analytique_numero_compte": 70120000,
+           "identifiant_analytique": 4992117,
+           "identifiant_analytique_libelle_compta": "MAD - PLV HORS SUBV. 2017"
+       },
+       "70630000_3104417": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3104417,
+           "identifiant_analytique_libelle_compta": "FRO - Fronton fête le printemps"
+       },
+       "70120000_2992117": {
+           "identifiant_analytique_numero_compte": 70120000,
+           "identifiant_analytique": 2992117,
+           "identifiant_analytique_libelle_compta": "GAIL - PLV HORS SUBV. 2017"
+       },
+       "70630000_3100316": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3100316,
+           "identifiant_analytique_libelle_compta": "FRO - Nuit de la solidarité 2016"
+       },
+       "70800000_1998317": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": 1998317,
+           "identifiant_analytique_libelle_compta": "Noms de domaine 2017"
+       },
+       "70610110_1230217": {
+           "identifiant_analytique_numero_compte": 70610110,
+           "identifiant_analytique": 1231317,
+           "identifiant_analytique_libelle_compta": "USA -CLUB WORLD WINE MEETING 2017"
+       },
+       "70620010_2074117": {
+           "identifiant_analytique_numero_compte": 70620010,
+           "identifiant_analytique": 2074117,
+           "identifiant_analytique_libelle_compta": "GAIL - FETE DES VINS 2017"
+       },
+       "70630000_3100317": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3100317,
+           "identifiant_analytique_libelle_compta": "FRO - Nuit de la solidarité 2017"
+       },
+       "70610110_1231417": {
+           "identifiant_analytique_numero_compte": 70610110,
+           "identifiant_analytique": 1231417,
+           "identifiant_analytique_libelle_compta": "USA - CLUB ECRM 2017"
+       },
+       "70610070_1070117": {
+           "identifiant_analytique_numero_compte": 70610070,
+           "identifiant_analytique": 1070117,
+           "identifiant_analytique_libelle_compta": "UK - Trade day Londres 2017"
+       },
+       "70610100_1030117": {
+           "identifiant_analytique_numero_compte": 70610100,
+           "identifiant_analytique": 1030117,
+           "identifiant_analytique_libelle_compta": "FRA - Vinexpo 2017"
+       },
+       "70630020_3994117": {
+           "identifiant_analytique_numero_compte": 70630020,
+           "identifiant_analytique": 3994117,
+           "identifiant_analytique_libelle_compta": "FRO - Saveurs et senteurs 2017"
+       },
+       "70803800_6999917": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 6999917,
+           "identifiant_analytique_libelle_compta": "GASC - PARTICIPATION A LA VALORISATION 2017 "
+       },
+       "70803800_7999917": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 7999917,
+           "identifiant_analytique_libelle_compta": "UIVC - PARTICIPATION A LA VALORISATION 2017"
+       },
+       "70610000_1999917": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1999917,
+           "identifiant_analytique_libelle_compta": "IVSO - Prestation de service"
+       },
+       "70803800_5999917": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 5999917,
+           "identifiant_analytique_libelle_compta": "SMT - Participation à la valorisation 2017"
+       },
+       "70640020_4094117": {
+           "identifiant_analytique_numero_compte": 70640020,
+           "identifiant_analytique": 4094117,
+           "identifiant_analytique_libelle_compta": "MAD - Fête des vins 2017"
+       },
+       "70600000_1070317": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1070317,
+           "identifiant_analytique_libelle_compta": "All + Pays-Bas - Mission Düsseldorf-Amsterdam (SFD)"
+       },
+       "70610070_1070217": {
+           "identifiant_analytique_numero_compte": 70610070,
+           "identifiant_analytique": 1070217,
+           "identifiant_analytique_libelle_compta": "UK - Vins bio Londres (SFD)"
+       },
+       "70600000_1990117": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1990117,
+           "identifiant_analytique_libelle_compta": "IVSO - Dotations vins 2017"
+       },
+       "70610000_1992117": {
+           "identifiant_analytique_numero_compte": 70610000,
+           "identifiant_analytique": 1992117,
+           "identifiant_analytique_libelle_compta": "Opération cavistes 2017"
+       },
+       "70600000_1070517": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1070517,
+           "identifiant_analytique_libelle_compta": "Hong-Kong - Wine & spirits fair (SFD)"
+       },
+       "70600000_1070417": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1070417,
+           "identifiant_analytique_libelle_compta": "Chine - Mission prospection + salon (SFD)"
+       },
+       "70610000_1160117": {
+           "identifiant_analytique_numero_compte": 70610000,
+           "identifiant_analytique": 1160117,
+           "identifiant_analytique_libelle_compta": "IVSO - GD Occitanie"
+       },
+       "70640040_4094217": {
+           "identifiant_analytique_numero_compte": 70640040,
+           "identifiant_analytique": 4094217,
+           "identifiant_analytique_libelle_compta": "MAD - Portes ouvertes 2017"
+       },
+       "70630000_3104317": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3104317,
+           "identifiant_analytique_libelle_compta": "FRO - Bal des vendanges 2017"
+       },
+       "70620020_2074717": {
+           "identifiant_analytique_numero_compte": 70620020,
+           "identifiant_analytique": 2074717,
+           "identifiant_analytique_libelle_compta": "GAIL - Gaillac Primeur 2017"
+       },
+       "70620000_2070317": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2070317,
+           "identifiant_analytique_libelle_compta": "GAIL - Apéro concerts"
+       },
+       "70600000_1231317": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1231317,
+           "identifiant_analytique_libelle_compta": "IVSO - Club entreprises Japon"
+       },
+       "70803800_4999917": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 4999917,
+           "identifiant_analytique_libelle_compta": "MAD - Participation à la valorisation 2017"
+       },
+       "70620000_2994417": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2994417,
+           "identifiant_analytique_libelle_compta": "GAIL - Marché de Noël2017"
+       },
+       "70610020_1010118": {
+           "identifiant_analytique_numero_compte": 70610020,
+           "identifiant_analytique": 1010118,
+           "identifiant_analytique_libelle_compta": "FRA - VINISUD 2018 - Espace collectif"
+       },
+       "70600000_1124817": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1124817,
+           "identifiant_analytique_libelle_compta": "Salon Régal 2017"
+       },
+       "70600000_1144017": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1144017,
+           "identifiant_analytique_libelle_compta": "Animation GD - Région - 2017"
+       },
+       "70610080_1020118": {
+           "identifiant_analytique_numero_compte": 70610080,
+           "identifiant_analytique": 1020118,
+           "identifiant_analytique_libelle_compta": "IVSO - Prowein 2018 - Espace collectif"
+       },
+       "70610190_1220717": {
+           "identifiant_analytique_numero_compte": 70610190,
+           "identifiant_analytique": 1220717,
+           "identifiant_analytique_libelle_compta": "CANADA - CLUB ENTREPRISES 2017"
+       },
+       "70800000_4990118": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": 4990118,
+           "identifiant_analytique_libelle_compta": "MAD - Vins ambassadeurs 2018"
+       },
+       "70120000_3992118": {
+           "identifiant_analytique_numero_compte": 70120000,
+           "identifiant_analytique": 3992118,
+           "identifiant_analytique_libelle_compta": "FRO - PLV hors subvention 2018"
+       },
+       "7061040_1990318": {
+           "identifiant_analytique_numero_compte": 70610400,
+           "identifiant_analytique": 1990318,
+           "identifiant_analytique_libelle_compta": "Concours VSO 2018 - Inscription"
+       },
+       "7061045_1990318": {
+           "identifiant_analytique_numero_compte": 70610145,
+           "identifiant_analytique": 1990318,
+           "identifiant_analytique_libelle_compta": "Concours VSO 2018 - Médailles"
+       },
+       "70600000_1999918": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1999918,
+           "identifiant_analytique_libelle_compta": "IVSO - Prestation de service 2018"
+       },
+       "70610070_1070118": {
+           "identifiant_analytique_numero_compte": 70610070,
+           "identifiant_analytique": 1070118,
+           "identifiant_analytique_libelle_compta": "Top100 Royaume-Uni"
+       },
+       "70100000_2990118": {
+           "identifiant_analytique_numero_compte": 70100000,
+           "identifiant_analytique": 2990118,
+           "identifiant_analytique_libelle_compta": "GAIL - Vins de Gaillac 2018"
+       },
+       "70620000_2994318": {
+           "identifiant_analytique_numero_compte": 70620000,
+           "identifiant_analytique": 2994318,
+           "identifiant_analytique_libelle_compta": "GAIL - Salon de l'agriculture SIA"
+       },
+       "70803800_7999918": {
+           "identifiant_analytique_numero_compte": 70803800,
+           "identifiant_analytique": 7999918,
+           "identifiant_analytique_libelle_compta": "UIVC - Participation valorisation 2018"
+       },
+       "70600000_1070218": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1070218,
+           "identifiant_analytique_libelle_compta": "ProWine Asia 2018 (Singapour)"
+       },
+       "70600000_1070318": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1070318,
+           "identifiant_analytique_libelle_compta": "Vinexpo Hong Kong"
+       },
+       "70630000_3104418": {
+           "identifiant_analytique_numero_compte": 70630000,
+           "identifiant_analytique": 3104418,
+           "identifiant_analytique_libelle_compta": "FRO - Fronton fête le printemps"
+       },
+       "70800000_1998318": {
+           "identifiant_analytique_numero_compte": 70800000,
+           "identifiant_analytique": 1998318,
+           "identifiant_analytique_libelle_compta": "Noms de domaines 2018"
+       },
+       "70680000_8994918": {
+           "identifiant_analytique_numero_compte": 70680000,
+           "identifiant_analytique": 8994918,
+           "identifiant_analytique_libelle_compta": "Terr'Aveyron 2018"
+       },
+       "70600000_1070418": {
+           "identifiant_analytique_numero_compte": 70600000,
+           "identifiant_analytique": 1070418,
+           "identifiant_analytique_libelle_compta": "Prospection USA / Canada 2018"
+       },
+       "70680000_71ca6c8a40ec25d9d83897d539e09a1e": {
+           "identifiant_analytique_numero_compte": 70680000,
+           "identifiant_analytique": 8994818,
+           "identifiant_analytique_libelle_compta": "Aveyron - Opération blogueurs 2018"
+       }
+   }
+}

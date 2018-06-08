@@ -120,7 +120,7 @@ class MouvementfactureFacturationView extends acCouchdbView {
             $mouvement->coefficient_facturation = $row->value[self::VALUE_COEFFICIENT_FACTURATION];
         }
         $mouvement->quantite = Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
-        $mouvement->prix_ht = Mouvement::getPrixHtCalcul($mouvement->volume, $mouvement->coefficient_facturation, $mouvement->cvo);
+        $mouvement->prix_ht = Mouvement::getPrixHtCalcul($mouvement->quantite, $mouvement->cvo);
         $mouvement->origine = $row->key[self::KEYS_ORIGIN];
         return $mouvement;
     }
