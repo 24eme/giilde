@@ -101,4 +101,19 @@ class DRMConfiguration {
         return $this->configuration['pdf_cvo'];
     }
 
+    public function isMouvementDivisable() {
+
+        return $this->getMouvementDivisableSeuil() !== false;
+    }
+
+    public function getMouvementDivisableSeuil() {
+
+        return $this->configuration['mouvement_divisable_seuil'];
+    }
+
+    public function getMouvementDivisableNbMonth() {
+
+        return $this->configuration['mouvement_divisable_nb_month'];
+    }
+
 }

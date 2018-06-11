@@ -164,6 +164,7 @@ Configuration:
                               mouvement_coefficient: { type: integer }
                               vrac: { type: integer, required: false }
                               facturable: { type: integer }
+                              facturable_negociant: { type: integer, required: false }
                               douane_type: { }
                               douane_cat: { }
                               taxable_douane: { }
@@ -187,6 +188,7 @@ Configuration:
                               mouvement_coefficient: { type: integer }
                               vrac: { type: integer, required: false }
                               facturable: { type: integer }
+                              facturable_negociant: { type: integer, required: false }
                               douane_type: { }
                               douane_cat: { }
                               taxable_douane: { }

@@ -13,3 +13,4 @@ all:
       crd_only_suspendus: false
       aggregate_edi: [ ]
       declassement_igp: true
+      mouvement_divisable_seuil: 0

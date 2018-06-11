@@ -16,4 +16,6 @@ all:
       declassement_igp: false
       reprise_stocks_changement_campagne: false
       crd_only_suspendus: false
-      pdf_cvo: false 
+      pdf_cvo: false
+      mouvement_divisable_seuil: false
+      mouvement_divisable_nb_month: 12

@@ -3,6 +3,19 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 sfContext::createInstance($configuration);
 
+$conf = ConfigurationClient::getInstance()->getCurrent();
+
+$hasCVONegociant = false;
+foreach ($conf->declaration->filter('details') as $configDetails) {
+    foreach ($configDetails as $details) {
+        foreach($conf->declaration->details->getDetailsSorted($details) as $detail) {
+            if($detail->isFacturableNegociant()) {
+                $hasCVONegociant = true;
+            }
+        }
+    }
+}
+
 $t = new lime_test(28);
 
 $t->comment("Création d'une facture à partir des DRM pour une société");
@@ -23,7 +36,7 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
   $drm->delete(false);
 }
 
-$produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
+$produits = array_keys($conf->getProduits());
 $produit_hash = array_shift($produits);
 $periode = date('Ym');
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode, true);
@@ -171,7 +184,11 @@ $drm->save();
 $prixHt = $details->entrees->recolte * $details->getCVOTaux();
 
 $facture = FactureClient::getInstance()->createAndSaveFacturesBySociete($societeNego, $paramFacturation);
-$facture->save();
-$t->ok($facture, "La facture est créée");
 
-$t->is($facture->total_ht, $prixHt, "Le total HT est de ".$prixHt." €");
+if($hasCVONegociant) {
+    $t->ok($facture, "La facture est créée");
+    $t->is($facture->total_ht, $prixHt, "Le total HT est de ".$prixHt." €");
+} else {
+    $t->ok(!$facture, "La facture n'est pas créée");
+    $t->pass("Rien à facturer");
+}

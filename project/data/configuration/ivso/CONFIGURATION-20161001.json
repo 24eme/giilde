@@ -33820,6 +33820,7 @@
                    "recolte": 1,
                    "mouvement_coefficient": 1,
                    "facturable": 0,
+                   "facturable_negociant": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "entrees-periode/volume-produit",
                    "taxable_douane": 0
@@ -34203,6 +34204,7 @@
                    "recolte": 1,
                    "mouvement_coefficient": -1,
                    "facturable": 0,
+                   "facturable_negociant": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
                    "taxable_douane": 0

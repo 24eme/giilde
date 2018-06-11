@@ -56,6 +56,16 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
         return $this->getDocument()->exist("mvts_favoris/".$this->getParent()->getParent()->getKey()."_".$this->getParent()->getKey()."_".$this->getKey());
     }
 
+    public function isFacturable() {
+
+        return $this->exist('facturable') && $this->get('facturable');
+    }
+
+    public function isFacturableNegociant() {
+
+        return $this->exist('facturable_negociant') && $this->get('facturable_negociant');
+    }
+
     public function isWritableForEtablissement($etb, $isTeledeclaree = false) {
         if($this->douane_type == DRMClient::CRD_TYPE_ACQUITTE){
             if(!$isTeledeclaree){

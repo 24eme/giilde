@@ -115,7 +115,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
 
     public function updateAndControlCoheranceStocks() {
         $this->drm->update();
-
+        $this->drm->updateStockFinDeMoisAllCrds();
         if ($this->csvDoc->hasErreurs()) {
             $this->csvDoc->setStatut(self::STATUT_WARNING);
             $this->csvDoc->save();
@@ -296,6 +296,12 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                     $num_ligne++;
                     continue;
                 }
+
+                if (preg_match('/^2\d\d\d-\d\d-\d\d$/', $csvRow[self::CSV_CAVE_EXPORTPAYS])) {
+                  $drmDetails->add("replacement_date", $csvRow[self::CSV_CAVE_EXPORTPAYS]);
+                  $drmDetails->add('observations', $type_key);
+                }
+
                 if ($confDetailMvt->hasDetails()) {
                    $detailTotalVol += $this->convertNumber($drmDetails->getOrAdd($cat_key)->getOrAdd($type_key));
 
@@ -383,13 +389,13 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                 if(!in_array($type_complement, self::$types_complement)){
                   $this->csvDoc->addErreur($this->typeComplementNotFoundError($num_ligne, $csvRow));
                   $num_ligne++;
-                  continue;
+                  return;
                 }
                 $valeur_complement = $csvRow[self::CSV_CAVE_VALEUR_COMPLEMENT_PRODUIT];
                 if(!$valeur_complement){
                   $this->csvDoc->addErreur($this->valueComplementVide($num_ligne, $csvRow));
                   $num_ligne++;
-                  continue;
+                  return;
                 }
                 if(!$just_check){
                   $valeur_complement = $csvRow[self::CSV_CAVE_VALEUR_COMPLEMENT_PRODUIT];
@@ -473,7 +479,9 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                 if (!$regimeNode->exist($keyNode)) {
                     $regimeNode->getOrAddCrdNode($genre, $couleur, $centilitrage, $litrageLibelle);
                 }
-                $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} += intval($quantite);
+                if (!preg_match('/^stock/', $fieldNameCrd) || $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} == null) {
+                    $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} += intval($quantite);
+                }
                 $num_ligne++;
             }
         }
