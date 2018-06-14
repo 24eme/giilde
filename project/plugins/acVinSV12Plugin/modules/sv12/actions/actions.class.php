@@ -95,6 +95,7 @@ class sv12Actions extends sfActions {
         if ($request->isMethod(sfWebRequest::POST)) {
             $this->sv12->validate();
             $this->sv12->save();
+            $this->sv12->updateVracs();
             $this->redirect('sv12_visualisation', $this->sv12);
         }
 

@@ -8,7 +8,7 @@ if(!count(ComptabiliteClient::getInstance()->findCompta()->getAllIdentifiantsAna
     exit(0);
 }
 
-$t = new lime_test(13);
+$t = new lime_test(15);
 
 if($doc = MouvementsFactureClient::getInstance()->find("MOUVEMENTSFACTURE-TEST")) {
     $doc->delete();
@@ -48,8 +48,14 @@ $totalHT = 30;
 $totalTTC = 36;
 $totalTaxe = 6;
 
+$mouvement = $docMouvementsLibres->mouvements->getFirst()->getFirst();
+$form = new FactureMouvementsEditionForm($docMouvementsLibres);
+$defaultValues = $form->getDefaults();
+
 $t->ok($docMouvementsLibres->_rev, "Le document a été enregistré");
 $t->is($docMouvementsLibres->libelle, "Test opération", "Le libellé est bien enregistré");
+$t->is($defaultValues["mouvements"][$mouvement->getParent()->getKey()."_".$mouvement->getKey()]["quantite"], $values["mouvements"]["nouveau_1"]["quantite"], "La quantité du formulaire n'a pas bougé");
+$t->is($mouvement->quantite, $values["mouvements"]["nouveau_1"]["quantite"], "La quantité est celle saisie dans le formulaire");
 $t->is($docMouvementsLibres->getNbMvts(), 2, "Le document à 2 mouvements de facturation");
 $t->is($docMouvementsLibres->getNbSocietes(), 1, "La document à 1 société");
 $t->is($docMouvementsLibres->getTotalHt(), $totalHT, "Le montant total HT est de 30 €");

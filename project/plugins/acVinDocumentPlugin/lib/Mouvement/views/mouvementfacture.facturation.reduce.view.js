@@ -30,14 +30,14 @@ function(keys,values,rereduce) {
             if (merged_field[i] != null) {
                     result.push(merged_field[i]);
             }
-        }       
-        return result;  
+        }
+        return result;
     }
 
     var in_array = function(value, tab) {
         for(key in tab) {
             if(tab[key] == value) {
-                
+
                 return true;
             }
         }
@@ -48,14 +48,14 @@ function(keys,values,rereduce) {
     var reduce_result = function(tab)
     {
         if(tab.length) return tab[0];
-        
+
         return null;
     }
 
     var reduce_origines = function(tab)
     {
         if(tab.length == 1) return tab[0];
-        
+
         return false;
     }
 
@@ -64,11 +64,9 @@ function(keys,values,rereduce) {
     var types_libelles = new Array();
     var total_volume = 0;
     var cvos = new Array();
-    var dates = new Array();
     var vrac_destinataire = new Array();
     var details_libelles = new Array();
     var identifiants = new Array();
-    var coefficients_facturation = new Array();
 
     for(item in values)
     {
@@ -76,24 +74,20 @@ function(keys,values,rereduce) {
         types_libelles = merge_field(values[item][1],item,types_libelles);
         total_volume += values[item][2];
         cvos = merge_field(values[item][3],item,cvos);
-        dates = merge_field(values[item][4],item,dates);
         details_libelles = merge_field(values[item][5],item,details_libelles);
         vrac_destinataire = merge_field(values[item][6],item,vrac_destinataire);
         identifiants = merge_field(values[item][7],item,identifiants);
-        coefficients_facturation = merge_field(values[item][8],item,coefficients_facturation);
         origines = merge_field(values[item][9],item,origines);
     }
 
     produits_libelles = reduce_result(produits_libelles);
     types_libelles = reduce_result(types_libelles);
     cvos = reduce_result(cvos);
-    dates = reduce_result(dates);
     details_libelles = reduce_result(details_libelles);
     vrac_destinataire = reduce_result(vrac_destinataire);
     identifiants = reduce_result(identifiants);
-    coefficients_facturation = reduce_result(coefficients_facturation);
     origines = reduce_origines(origines);
-    result = [produits_libelles, types_libelles, total_volume, cvos, dates, vrac_destinataire, details_libelles, identifiants, coefficients_facturation, origines];
+    result = [produits_libelles, types_libelles, total_volume, cvos, vrac_destinataire, details_libelles, identifiants, origines];
 
     return result;
  }

@@ -13,7 +13,7 @@ class FactureMouvementEditionLigneForm extends acCouchdbObjectForm {
 
     public function configure() {
         parent::configure();
-        
+
         $this->widgetSchema->setNameFormat('facture_mouvement_edition_ligne[%s]');
         //  $this->validatorSchema->setPreValidator(new FactureMouvementsEditionValidator());
     }
@@ -34,19 +34,12 @@ class FactureMouvementEditionLigneForm extends acCouchdbObjectForm {
     public function getSociete() {
         return $this->getValidator('identifiant')->getDocument();
     }
-    
+
     public function getIdentifiantsAnalytiques() {
         return  ComptabiliteClient::getInstance()->findCompta()->getAllIdentifiantsAnalytiquesArrayForCompta();
     }
-    
+
     public function doUpdateObject($values) {
-     //   parent::doUpdateObject($values);
-//        $numero_document = $values['numero_document'];
-//        $date_emission = $values['date_emission'];
-//        $numero_accise = $values['numero_accise'];
-//        if ($numero_document && $date_emission && $numero_accise) {
-//            $this->getObject()->getParent()->updateNonApurement($this->keyNonApurement, $numero_document, $date_emission, $numero_accise);
-//        }
     }
 
 }

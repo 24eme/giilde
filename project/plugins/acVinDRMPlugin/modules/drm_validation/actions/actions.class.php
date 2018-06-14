@@ -53,9 +53,9 @@ class drm_validationActions extends drmGeneriqueActions {
             $d->total_facturable = $produit->total_facturable;
             $this->produits[] = $d;
         }
-        
+
         $this->isUsurpationMode = $this->isUsurpationMode();
-        
+
         $this->form = new DRMValidationCommentaireForm($this->drm);
 
         if (!$request->isMethod(sfWebRequest::POST)) {
@@ -76,6 +76,8 @@ class drm_validationActions extends drmGeneriqueActions {
         $this->drm->validate(array('isTeledeclarationMode' => $this->isTeledeclarationMode));
         $this->drm->save();
 
+        $this->drm->updateVracs();
+
         if(!$this->isUsurpationMode() && $this->isTeledeclarationMode){
             $mailManager = new DRMEmailManager($this->getMailer());
             $mailManager->setDRM($this->drm);
@@ -91,6 +93,7 @@ class drm_validationActions extends drmGeneriqueActions {
       	            'hide_rectificative' => 1));
       	}
     }
+
 
     public function executeUpdateEtablissement(sfWebRequest $request) {
         $this->drm = $this->getRoute()->getDRM();

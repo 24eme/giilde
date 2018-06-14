@@ -141,16 +141,16 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
         return $this->contrats->add($vrac->numero_contrat, $contrat);
     }
 
-    public function solderContrats() {
+    public function updateVracs() {
         $contrats_to_save = array();
 
         foreach ($this->contrats as $c) {
-            if ($c->enleverVolume()) {
-                $contrats_to_save[] = $c->getVrac();
-            }
+            $contrats_to_save[] = $c->getVrac();
+
         }
 
         foreach($contrats_to_save as $vrac)  {
+            $vrac->updateVolumesEnleves();
             $vrac->save();
         }
     }
@@ -222,10 +222,6 @@ class SV12 extends BaseSV12 implements InterfaceMouvementDocument, InterfaceVers
         $this->updateTotaux();
 
         $this->archivage_document->archiver();
-
-        if(!isset($options['pas_solder'])) {
-            $this->solderContrats();
-        }
 
         if($this->isAllContratsCanBeSoldable()) {
             $this->valide->statut = SV12Client::STATUT_VALIDE;

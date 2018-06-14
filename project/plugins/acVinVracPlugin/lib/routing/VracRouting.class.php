@@ -102,6 +102,11 @@ class VracRouting {
                                                         array('sf_method' => array('get','post')),
                                                         array('model' => 'Vrac', 'type' => 'object')));
 
+        $r->prependRoute('vrac_updateVolumeEnleve', new VracRoute('/vrac/:numero_contrat/calculeVolumeEnleve',
+                                                        array('module' => 'vrac','action' => 'updateVolumeEnleve'),
+                                                        array('sf_method' => array('get')),
+                                                        array('model' => 'Vrac', 'type' => 'object')));
+
         $r->prependRoute('vrac_export_etiquette', new sfRoute('/vrac/export-etiquette', array('module' => 'vrac',
                                                                         'action' => 'exportEtiquette')));
 

@@ -55,7 +55,7 @@ class FactureMouvementEtablissementEditionLigneForm extends acCouchdbObjectForm 
             }
         }
         if (array_key_exists('quantite', $defaults) && $defaults['quantite']) {
-            $this->setDefault('quantite', -1 * $defaults['quantite']);
+            $this->setDefault('quantite', $defaults['quantite']);
         }
     }
 

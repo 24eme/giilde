@@ -8,7 +8,7 @@ if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration-
     exit(0);
 }
 
-$t = new lime_test(27);
+$t = new lime_test(30);
 
 $nego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
 $nego_horsregion = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_horsregion')->getEtablissement();
@@ -86,6 +86,8 @@ $t->is(count($drm->getProduit($produit_hash, 'details')->get('sorties/vrac_detai
 $t->comment("validation de la DRM et génération des mouvements");
 $drm->validate();
 $drm->save();
+
+$drm->updateVracs();
 
 $mvts_viti = $drm->mouvements->{$drm->identifiant};
 $t->is(count($mvts_viti), 3, $drm->_id." : la validation a généré trois mouvements viti");
@@ -181,3 +183,27 @@ foreach($drm_mod->mouvements->{$viti->identifiant} as $k => $mvt) {
   $somme_cvo += $mvt->cvo * $mvt->volume;
 }
 $t->is($somme_cvo, 0, $drm_mod->_id." : Le viti est facturé de toute la cvo");
+
+$drm_mod = DRMClient::getInstance()->find($drm_mod->_id);
+$drm_mod->devalide();
+$drm_mod->save();
+$t->is($drm_mod->isValidee(), false, $drm_mod->_id." : La DRM est réouverte");
+
+$drm_mod = DRMClient::getInstance()->find($drm_mod->_id);
+$vrac_details = $drm_mod->getProduit($produit_hash, 'details')->get('sorties/vrac_details');
+$vrac_details->remove($contrat_key);
+$contrat = DRMESDetailVrac::freeInstance($drm_mod);
+$contrat->identifiant = $vrac->value[VracSoussigneIdentifiantView::VRAC_VIEW_VALUE_ID];
+$contrat->volume = 50;
+$detailVrac = $vrac_details->addDetail($contrat);
+
+$drm_mod->update();
+$drm_mod->validate();
+$drm_mod->save();
+
+$drm_mod->updateVracs();
+
+$t->is(boolval($drm_mod->isValidee()), true, $drm_mod->_id." : La DRM est de nouveau validée");
+
+$vracObj = VracClient::getInstance()->find($vrac->value[VracSoussigneIdentifiantView::VRAC_VIEW_VALUE_ID]);
+$t->is($vracObj->volume_enleve, 150, $vracObj->_id." : Le contrat a pour volume enlevé : 150");

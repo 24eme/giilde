@@ -771,10 +771,10 @@ class DRMClient extends acCouchdbClient {
                 $recapCvos[$version]->version = $version;
             }
             if ($mouvement->facturable) {
-                $recapCvos[$version]->totalPrixDroitCvo += Mouvement::getPrixHtCalcul(Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation), $mouvement->cvo);
-                $recapCvos["TOTAL"]->totalPrixDroitCvo +=  Mouvement::getPrixHtCalcul(Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation), $mouvement->cvo);
-                $recapCvos[$version]->totalVolumeDroitsCvo += Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
-                $recapCvos["TOTAL"]->totalVolumeDroitsCvo += Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
+                $recapCvos[$version]->totalVolumeDroitsCvo += $mouvement->quantite;
+                $recapCvos["TOTAL"]->totalVolumeDroitsCvo += $mouvement->quantite;
+                $recapCvos[$version]->totalPrixDroitCvo += $mouvement->prix_ht;
+                $recapCvos["TOTAL"]->totalPrixDroitCvo +=  $mouvement->prix_ht;
             }
             if ($mouvement->type_hash == 'entrees/reintegration') {
                 $recapCvos[$version]->totalVolumeReintegration += $mouvement->volume;

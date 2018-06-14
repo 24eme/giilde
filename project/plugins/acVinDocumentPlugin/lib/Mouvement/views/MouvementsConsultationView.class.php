@@ -106,10 +106,13 @@ class MouvementsConsultationView extends acCouchdbView
         $mouvement->facturable =  $row->value[self::VALUE_FACTURABLE];
         $mouvement->facture =  $row->value[self::VALUE_FACTURE];
         $mouvement->coefficient_facturation = Mouvement::DEFAULT_COEFFICIENT_FACTURATION;
-
         if(isset($row->value[self::VALUE_COEFFICIENT_FACTURATION]) && $row->value[self::VALUE_COEFFICIENT_FACTURATION]) {
             $mouvement->coefficient_facturation = $row->value[self::VALUE_COEFFICIENT_FACTURATION];
         }
+        $mouvement->quantite = $mouvement->volume * $mouvement->coefficient_facturation;
+        $mouvement->prix_unitaire = $mouvement->cvo;
+        $mouvement->prix_ht = $mouvement->quantite * $mouvement->prix_unitaire;
+
         $mouvement->id = $row->value[self::VALUE_MOUVEMENT_ID];
 	if ($mouvement->vrac_numero) {
 	  $mouvement->numero_archive = $row->value[self::VALUE_TYPE_LIBELLE];

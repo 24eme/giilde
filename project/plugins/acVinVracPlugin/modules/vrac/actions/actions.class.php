@@ -634,6 +634,14 @@ class vracActions extends sfActions {
         }
     }
 
+    public function executeUpdateVolumeEnleve(sfWebRequest $request) {
+        $this->vrac = VracClient::getInstance()->findByNumContrat($request['numero_contrat']);
+        $this->redirect403IfIsTeledeclaration();
+        $this->vrac->updateVolumesEnleves();
+        $this->vrac->save();
+        $this->redirect('vrac_visualisation', $this->vrac);
+    }
+
     private function createCsvFilename($request) {
 
         $etablissement = EtablissementClient::getInstance()->find($request['identifiant']);

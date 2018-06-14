@@ -21,7 +21,7 @@ class FactureClient extends acCouchdbClient {
     const TYPE_FACTURE_MOUVEMENT_DIVERS = "MOUVEMENTS_DIVERS";
 
     public static $origines = array(self::FACTURE_LIGNE_ORIGINE_TYPE_DRM, self::FACTURE_LIGNE_ORIGINE_TYPE_SV12, self::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO, self::FACTURE_LIGNE_ORIGINE_TYPE_MOUVEMENTSFACTURE);
-    public static $type_facture_mouvement = array(self::TYPE_FACTURE_MOUVEMENT_DRM => 'Facturation DRM',self::FACTURE_LIGNE_ORIGINE_TYPE_SV12 => 'Facturation SV12 gloabale',self::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO => 'Facturation SV12 Négociants', self::TYPE_FACTURE_MOUVEMENT_DIVERS => 'Facturation libre');
+    public static $type_facture_mouvement = array(self::TYPE_FACTURE_MOUVEMENT_DRM => 'Facturation DRM',self::FACTURE_LIGNE_ORIGINE_TYPE_SV12 => 'Facturation SV12 globale',self::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO => 'Facturation SV12 Négociants', self::TYPE_FACTURE_MOUVEMENT_DIVERS => 'Facturation libre');
 
     public static function getInstance() {
         return acCouchdbManager::getClient("Facture");
@@ -171,7 +171,7 @@ class FactureClient extends acCouchdbClient {
     public function getMouvementsNonFacturesBySoc($mouvements) {
         $generationFactures = array();
         foreach ($mouvements as $mouvement) {
-            $societe_id = substr($mouvement->key[MouvementfactureFacturationView::KEYS_ETB_ID], 0, -2);
+            $societe_id = substr($mouvement->etablissement_identifiant, 0, -2);
             if (isset($generationFactures[$societe_id])) {
                 $generationFactures[$societe_id][] = $mouvement;
             } else {
@@ -194,9 +194,10 @@ class FactureClient extends acCouchdbClient {
                 $modele = self::FACTURE_LIGNE_ORIGINE_TYPE_SV12;
             }
         }
+
         foreach ($mouvementsBySoc as $identifiant => $mouvements) {
             foreach ($mouvements as $key => $mouvement) {
-                $farDateMvt = $this->getGreatestDate($mouvement->value[MouvementfactureFacturationView::VALUE_DATE]);
+                $farDateMvt = $this->getGreatestDate($mouvement->date);
                 if ($date_mouvement && Date::sup($farDateMvt, $date_mouvement)) {
                     unset($mouvements[$key]);
                     $mouvementsBySoc[$identifiant] = $mouvements;
@@ -207,7 +208,7 @@ class FactureClient extends acCouchdbClient {
                     $mouvementsBySoc[$identifiant] = $mouvements;
                     continue;
                 }
-                if ($modele && $modele != $mouvement->key[MouvementfactureFacturationView::KEYS_ORIGIN]) {
+                if ($modele && $modele != $mouvement->origine) {
                     unset($mouvements[$key]);
                     $mouvementsBySoc[$identifiant] = $mouvements;
                     continue;
@@ -217,8 +218,7 @@ class FactureClient extends acCouchdbClient {
         foreach ($mouvementsBySoc as $identifiant => $mouvements) {
             $somme = 0;
             foreach ($mouvements as $key => $mouvement) {
-                $quantite = Mouvement::getQuantiteCalcul($mouvement->value[MouvementfactureFacturationView::VALUE_VOLUME],  $mouvement->value[MouvementfactureFacturationView::VALUE_COEFFICIENT_FACTURATION]);
-                $prix = Mouvement::getPrixHtCalcul($quantite, $mouvement->value[MouvementfactureFacturationView::VALUE_CVO]);
+                $prix = $mouvement->prix_ht;
                 if (!$prix) {
                     unset($mouvementsBySoc[$identifiant][$key]);
                     continue;

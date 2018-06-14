@@ -23,6 +23,7 @@ use_helper('Date');
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th style="width: 90px;">Date</th>
                         <th>Document</th>
                         <th>Produits</th>
                         <th>Type</th>
@@ -37,6 +38,9 @@ use_helper('Date');
                         $sv12Mvt = (strstr($mouvement->numero, 'SV12') !== false);
                          ?>
                         <tr class="vertical-center">
+                            <td class="text-left">
+                                <?php echo format_date($mouvement->date); ?>
+                            </td>
                             <td class="text-left">
                                 <?php
                                 if(isset($mouvement->nom_facture)) {

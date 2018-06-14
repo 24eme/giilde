@@ -278,7 +278,8 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
     <?php if (!$template_validation && !$isTeledeclarationMode): ?>
         <div class="col-xs-12">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Enlèvements depuis les DRM</strong> <small>(Répartition de la CVO : <?php echo VracClient::$cvo_repartition[$vrac->cvo_repartition] ?>)</small></div>
+                <div class="panel-heading"><strong>Enlèvements depuis les DRM</strong> <small>(Répartition de la CVO : <?php echo VracClient::$cvo_repartition[$vrac->cvo_repartition] ?>)</small>
+                    <a href="<?php echo url_for('vrac_updateVolumeEnleve',$vrac); ?>" class="btn btn-sm btn-default pull-right" >Re-calculer enlèvements</a></div>
                     <?php if (count($enlevements)): ?>
                 <ul class="list-group">
                         <?php foreach ($enlevements as $mvt_id => $enlevement): ?>

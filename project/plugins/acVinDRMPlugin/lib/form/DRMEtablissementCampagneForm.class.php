@@ -26,8 +26,16 @@ class DRMEtablissementCampagneForm extends BaseForm {
     }
 
     private function getChoiceCampagnes() {
-
-        $campagnes = ($this->isTeledeclarationMode) ? array('2016-2017' => '2016-2017','2015-2016' => '2015-2016', '2014-2015' => '2014-2015') : DRMClient::getInstance()->listCampagneByEtablissementId($this->etablissement_id);
+        $campagnes = DRMClient::getInstance()->listCampagneByEtablissementId($this->etablissement_id);
+        if($this->isTeledeclarationMode) {
+            $campagnes = array();
+            $currentCampagne = ConfigurationClient::getInstance()->getCurrentCampagne();
+            $campages[$currentCampagne] = $currentCampagne;
+            for($i = date('Y'); $i > date('Y') - 4; $i--) {
+                $campagne = ($i - 1)."-".$i;
+                $campagnes[$campagne] = $campagne;
+            }
+        }
 
         return array_merge(array('-1' => 'les derniers mois'), $campagnes);
     }

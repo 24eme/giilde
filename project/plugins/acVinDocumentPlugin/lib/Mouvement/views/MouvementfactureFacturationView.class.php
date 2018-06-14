@@ -10,20 +10,19 @@ class MouvementfactureFacturationView extends acCouchdbView {
     const KEYS_MATIERE = 5;
     const KEYS_PRODUIT_ID = 6;
     const KEYS_PERIODE = 7;
-    const KEYS_CONTRAT_ID = 8;
-    const KEYS_VRAC_DEST = 9;
-    const KEYS_MVT_TYPE = 10;
-    const KEYS_DETAIL_ID = 11;
+    const KEYS_DATE = 8;
+    const KEYS_CONTRAT_ID = 9;
+    const KEYS_VRAC_DEST = 10;
+    const KEYS_MVT_TYPE = 11;
+    const KEYS_DETAIL_ID = 12;
     const VALUE_PRODUIT_LIBELLE = 0;
     const VALUE_TYPE_LIBELLE = 1;
-    const VALUE_VOLUME = 2;
-    const VALUE_CVO = 3;
-    const VALUE_DATE = 4;
-    const VALUE_DETAIL_LIBELLE = 5;
-    const VALUE_VRAC_DEST = 6;
-    const VALUE_NUMERO = 7;
-    const VALUE_COEFFICIENT_FACTURATION = 8;
-    const VALUE_ID_ORIGINE = 9;
+    const VALUE_QUANTITE = 2;
+    const VALUE_PRIX_UNITAIRE = 3;
+    const VALUE_DETAIL_LIBELLE = 4;
+    const VALUE_VRAC_DEST = 5;
+    const VALUE_NUMERO = 6;
+    const VALUE_ID_ORIGINE = 7;
 
     public static function getInstance() {
 
@@ -44,11 +43,11 @@ class MouvementfactureFacturationView extends acCouchdbView {
 
     public function getMouvementsBySocieteWithReduce($societe, $facturee, $facturable, $level) {
         $paramRegion = ($societe->type_societe != SocieteClient::TYPE_OPERATEUR)? SocieteClient::TYPE_AUTRE : $societe->getRegionViticole();
-        return $this->consolidationMouvements($this->client
+        return $this->buildMouvements($this->consolidationMouvements($this->client
                                 ->startkey(array($facturee, $facturable, $paramRegion, $societe->identifiant . '00'))
                                 ->endkey(array($facturee, $facturable, $paramRegion, $societe->identifiant . '99', array()))
                                 ->reduce(true)->group_level($level)
-                                ->getView($this->design, $this->view)->rows);
+                                ->getView($this->design, $this->view)->rows));
     }
 
     protected function consolidationMouvements($rows) {
@@ -57,11 +56,7 @@ class MouvementfactureFacturationView extends acCouchdbView {
                             ->startkey($row->key)
                             ->endkey(array_merge($row->key, array(array())))
                             ->reduce(false)
-                            ->getView($this->design, $this->view)->rows;
-
-            if(!isset($row->value[self::VALUE_COEFFICIENT_FACTURATION]) || !$row->value[self::VALUE_COEFFICIENT_FACTURATION] || !is_int($row->value[self::VALUE_COEFFICIENT_FACTURATION])) {
-                $row->value[self::VALUE_COEFFICIENT_FACTURATION] = Mouvement::DEFAULT_COEFFICIENT_FACTURATION;
-            }
+                        ->getView($this->design, $this->view)->rows;
 
             $row->value[self::VALUE_ID_ORIGINE] = array();
             foreach ($rows_mouvements as $row_mouvement) {
@@ -96,33 +91,72 @@ class MouvementfactureFacturationView extends acCouchdbView {
 
     protected function buildMouvements($rows) {
         $mouvements = array();
+        $i = 0;
         foreach ($rows as $row) {
-            $mouvements[] = $this->buildMouvement($row);
+            $mouvement = $this->buildMouvement($row);
+            $mouvements[str_replace("-", "", $mouvement->date).sprintf("%05d",$i).uniqid()] = $mouvement;
+            $i++;
         }
+
+        ksort($mouvements);
 
         return $mouvements;
     }
 
     protected function buildMouvement($row) {
         $mouvement = new stdClass();
-        $mouvement->date = $row->value[self::VALUE_DATE];
+        $mouvement->date = $row->key[self::KEYS_DATE];
+        $mouvement->etablissement_identifiant = $row->key[self::KEYS_ETB_ID];
+        $mouvement->produit_hash = $row->key[self::KEYS_PRODUIT_ID];
         $mouvement->produit_libelle = $row->value[self::VALUE_PRODUIT_LIBELLE];
+        $mouvement->vrac_destinataire = $row->key[self::KEYS_VRAC_DEST];
         $mouvement->type_libelle = $row->value[self::VALUE_TYPE_LIBELLE];
-        if ($row->key[self::KEYS_ORIGIN] == "MouvementsFacture") {
-            $mouvement->nom_facture = $row->key[self::KEYS_MATIERE];
-        }
-        $mouvement->volume = $row->value[self::VALUE_VOLUME];
-        $mouvement->detail_libelle = $row->value[self::VALUE_DETAIL_LIBELLE];
-        $mouvement->cvo = $row->value[self::VALUE_CVO];
-        $mouvement->numero = $row->value[self::VALUE_NUMERO];
-        $mouvement->coefficient_facturation = Mouvement::DEFAULT_COEFFICIENT_FACTURATION;
-        if(isset($row->value[self::VALUE_COEFFICIENT_FACTURATION]) && $row->value[self::VALUE_COEFFICIENT_FACTURATION]) {
-            $mouvement->coefficient_facturation = $row->value[self::VALUE_COEFFICIENT_FACTURATION];
-        }
-        $mouvement->quantite = Mouvement::getQuantiteCalcul($mouvement->volume, $mouvement->coefficient_facturation);
-        $mouvement->prix_ht = Mouvement::getPrixHtCalcul($mouvement->quantite, $mouvement->cvo);
         $mouvement->origine = $row->key[self::KEYS_ORIGIN];
+        $mouvement->matiere = $row->key[self::KEYS_MATIERE];
+        $mouvement->detail_libelle = $row->value[self::VALUE_DETAIL_LIBELLE];
+        $mouvement->quantite = $row->value[self::VALUE_QUANTITE];
+        $mouvement->prix_unitaire = $row->value[self::VALUE_PRIX_UNITAIRE];
+        $mouvement->prix_ht = $mouvement->quantite * $row->value[self::VALUE_PRIX_UNITAIRE];
+        $mouvement->numero = $row->value[self::VALUE_NUMERO];
+        $mouvement->vrac_numero = $row->key[self::KEYS_CONTRAT_ID];
+        $mouvement->origines = $row->value[self::VALUE_ID_ORIGINE];
+        if ($mouvement->origine == "MouvementsFacture") {
+            $mouvement->nom_facture = $mouvement->matiere;
+        }
+
         return $mouvement;
+    }
+
+
+    public function createOrigine($famille, $mouvement) {
+        $isProduitFirst = FactureConfiguration::getInstance()->isPdfProduitFirst();
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers(array('Date'));
+        if (($mouvement->origine == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_DRM)
+          || ($mouvement->origine == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12)) {
+
+            $type_contrat = "";
+            if($mouvement->origine == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12){
+              $type_contrat =  'Achat ';
+            }else{
+              $type_contrat = 'Contrat ';
+            }
+
+            if ($famille == SocieteClient::TYPE_OPERATEUR) {
+                if ( sfConfig::get('app_configuration_facture_idcontrat') == 'ID' ) {
+                    $idContrat = intval(substr($mouvement->vrac_numero, -6));
+                }else{
+                    $idContrat = $mouvement->detail_libelle;
+                }
+                $origine_libelle = 'Contrat n° ' . $idContrat;
+            }
+            $origine_libelle .= ' (' . $mouvement->vrac_destinataire . ') ';
+
+            if($isProduitFirst){
+              $origine_libelle = $type_contrat . $mouvement->vrac_destinataire;
+            }
+            return $origine_libelle;
+        }
     }
 
 }

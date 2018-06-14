@@ -82,7 +82,7 @@ use_helper('Date');
                             <button onclick='return confirm("Étes-vous sur de vouloir supprimer ce contrat ?")' id="btn_annuler_contrat" type="submit" class="btn btn-danger">Annuler</button>
                         <?php endif; ?>
                     <?php elseif($vrac->isVracCreation() && !$isTeledeclarationMode): ?>
-                      <a id="btn_editer_contrat" href="<?php echo url_for('vrac_marche', array('numero_contrat' => $vrac->numero_contrat, 
+                      <a id="btn_editer_contrat" href="<?php echo url_for('vrac_marche', array('numero_contrat' => $vrac->numero_contrat,
                                                                           'urlretour' => url_for('vrac_visualisation', array('numero_contrat' => $vrac->numero_contrat)))); ?>" class="btn btn-warning">Modifier</a>
                     <?php endif; ?>
                 </div>

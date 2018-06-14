@@ -395,10 +395,12 @@ EOF;
     $drm->valide->date_saisie = date('Y-m-d', strtotime($drm->getDate()));
     $drm->valide->date_signee = date('Y-m-d', strtotime($drm->getDate()));
 
-    $drm->validate(array('no_vracs' => true));
+    $drm->validate();
     $drm->facturerMouvements();
 
     $drm->save();
+
+    $drm->updateVracs();
   }
 
   public function importLigne($drm, $line) {

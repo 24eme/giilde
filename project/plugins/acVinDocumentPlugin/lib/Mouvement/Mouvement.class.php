@@ -24,6 +24,11 @@ abstract class Mouvement extends acCouchdbDocumentTree
         $this->facture = 0;
     }
 
+    public function getEtablissementIdentifiant() {
+
+        return $this->getParent()->getKey();
+    }
+
     public function getMD5Key() {
         $key = $this->getDocument()->identifiant . $this->produit_hash . $this->type_hash . $this->detail_identifiant;
         $key.= uniqid();
@@ -141,38 +146,21 @@ abstract class Mouvement extends acCouchdbDocumentTree
             return $this->_get('prix_unitaire');
         }
 
-        return self::getPrixUnitaireCalcul($this->cvo);
+        return $this->cvo;
     }
 
     public function getQuantite() {
         if($this->exist('quantite')) {
-            $quantiteInverse = $this->_get('quantite');
-        } else {
-            $quantiteInverse = $this->volume;
+
+            return $this->_get('quantite');
         }
 
-        return self::getQuantiteCalcul($quantiteInverse, $this->getCoefficientFacturation());
+        return $this->volume * $this->getCoefficientFacturation();
     }
 
     public function getPrixHt() {
 
-        return self::getPrixHtCalcul($this->getQuantite(), $this->getPrixUnitaire());
+        return $this->getQuantite() * $this->getPrixUnitaire();
     }
 
-    public static function getPrixHtCalcul($quantite, $prixUnitaire) {
-
-        return $prixUnitaire * $quantite;
-    }
-
-
-    public static function getPrixUnitaireCalcul($prixUnitaire) {
-
-        return $prixUnitaire;
-    }
-
-    public static function getQuantiteCalcul($quantiteInverse, $coeffecientFacturation) {
-
-        return $quantiteInverse * $coeffecientFacturation;
-
-    }
 }
