@@ -62,7 +62,7 @@ class drm_xmlActions extends drmGeneriqueActions {
     $numeroAccise = $etb->getNoAccises();
     $cvi = $etb->getCvi();
     $cmd = 'bash '.$pathScript." ".$dateRequete." ".$periode." ".$numeroAccise." ".$cvi;
-    $retour = exec($cmd);
+    $retour = shell_exec($cmd);
     return $this->redirect('drm_visualisation', $this->drm);
   }
 
