@@ -1,7 +1,7 @@
 all:
   configuration:
     drm:
-      negoce: false
+      familles: ["PRODUCTEUR", "PRODUCTEUR_VINIFICATEUR"]
       details:
         export_detail:
           required: ["identifiant"]

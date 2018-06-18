@@ -64,7 +64,7 @@ class stocksComponents extends sfComponents {
 
     protected function getMouvementsNegociant() {
         $negoceRecapArr = SV12MouvementsConsultationView::getInstance()->getByIdentifiantAndCampagne($this->etablissement->identifiant, $this->campagne);
-        if(DRMConfiguration::getInstance()->isDRMNegoce()){
+        if(in_array($this->etablissement->famille, DRMConfiguration::getInstance()->getFamilles())){
           $negoceRecapArr = array_merge($negoceRecapArr,DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndCampagne($this->etablissement->identifiant, $this->campagne));
         }
         return $negoceRecapArr;

@@ -13,11 +13,7 @@ class DRMEtablissementChoiceForm extends EtablissementChoiceForm {
 
     public function configure() {
         parent::configure();
-        $familles = array(EtablissementFamilles::FAMILLE_PRODUCTEUR);
-        if(DRMConfiguration::getInstance()->isDRMNegoce()){
-          $familles = array_merge($familles,array(EtablissementFamilles::FAMILLE_NEGOCIANT,EtablissementFamilles::FAMILLE_COOPERATIVE));
-        }
-        $this->configureFamilles($familles);
+        $this->configureFamilles(DRMConfiguration::getInstance()->getFamilles());
         if ($this->autofocus) {
             $this->configureAutfocus();
         }

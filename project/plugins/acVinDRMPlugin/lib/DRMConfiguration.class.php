@@ -36,9 +36,10 @@ class DRMConfiguration {
 
         return boolval($this->configuration['details']['vrac_detail']['creation']);
     }
-    public function isDRMNegoce() {
 
-        return boolval($this->configuration['negoce']);
+    public function getFamilles() {
+
+        return $this->configuration['familles'];
     }
 
     public function getExportPaysDebut() {

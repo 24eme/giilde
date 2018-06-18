@@ -28,14 +28,10 @@ class stocksActions extends sfActions {
             $this->campagne = ConfigurationClient::getInstance()->getCurrentCampagne();
         }
 
-        if ($this->etablissement->isNegociant()) {
-              if(DRMConfiguration::getInstance()->isDRMNegoce()){
-                $this->formCampagne = new DRMEtablissementCampagneForm($this->etablissement->identifiant, $this->campagne);
-              }else{
-                $this->formCampagne = new VracEtablissementCampagneForm($this->etablissement->identifiant, $this->campagne);
-              }
-        } elseif($this->etablissement->isViticulteur()) {
-            $this->formCampagne = new DRMEtablissementCampagneForm($this->etablissement->identifiant, $this->campagne);
+        if(in_array($this->etablissement->famille, DRMConfiguration::getInstance()->getFamilles())) {
+          $this->formCampagne = new DRMEtablissementCampagneForm($this->etablissement->identifiant, $this->campagne);
+        } else {
+          $this->formCampagne = new VracEtablissementCampagneForm($this->etablissement->identifiant, $this->campagne);
         }
 
         if ($request->isMethod(sfWebRequest::POST)) {
