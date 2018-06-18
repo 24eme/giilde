@@ -116,9 +116,16 @@
                     <?php if (is_null($drm->transmission_douane->coherente)) : ?>
                       <tr><td>Retour XML</td><td>Aucun retour de la part de proDou@ne n'a été effectué</td></tr>
                     <?php elseif($drm->transmission_douane->coherente): ?>
-                      <tr><td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM est <strong>conforme</strong> à celle de proDou@ne</td></tr>
+                      <tr><td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM est <strong>conforme</strong> à celle de proDou@ne
+                              <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span>&nbsp;Rafraîchir le retour douane</a>
+                          </td>
+                      </tr>
                     <?php else: ?>
-                      <tr><td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM n'est <strong>pas conforme</strong> à celle de proDou@ne</td></tr>
+                      <tr>
+                          <td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM n'est <strong>pas conforme</strong> à celle de proDou@ne
+                              <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span>&nbsp;Rafraîchir le retour douane</a>
+                          </td>
+                      </tr>
                     <?php endif; ?>
                   <?php endif; ?>
                 </tbody>
@@ -128,7 +135,6 @@
   </div>
 </div>
 <?php endif; ?>
-
 <?php if (!$isTeledeclarationMode && $drm->exist('transmission_douane') && $drm->transmission_douane->coherente === false): ?>
 <div class="row">
   <div class="col-xs-12">
@@ -155,7 +161,6 @@
                   <?php endforeach; ?>
                 </tbody>
             </table>
-
       </div>
     </div>
   </div>

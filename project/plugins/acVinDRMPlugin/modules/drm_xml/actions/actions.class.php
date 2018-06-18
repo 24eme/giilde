@@ -49,6 +49,23 @@ class drm_xmlActions extends drmGeneriqueActions {
     $this->getResponse()->setHttpHeader('Content-Type', 'text/xml');
   }
 
+  public function executeRetourRefresh(sfWebRequest $request) {
+    $this->drm = $this->getRoute()->getDRM();
+    $this->setLayout(false);
+    $pathScript = realpath('../bin/updateOneDouaneDrmComparaison.sh');
+    if(!$pathScript){
+        throw new sfException("Le script de mis à jour n'existe pas");
+    }
+    $dateRequete = ConfigurationClient::getInstance()->buildDate(ConfigurationClient::getInstance()->getPeriodePrecedente($this->drm->periode));
+    $periode = $this->drm->periode;
+    $etb = $this->drm->getEtablissement();
+    $numeroAccise = $etb->getNoAccises();
+    $cvi = $etb->getCvi();
+    $cmd = 'bash '.$pathScript." ".$dateRequete." ".$periode." ".$numeroAccise." ".$cvi;
+    $retour = exec($cmd);
+    return $this->redirect('drm_visualisation', $this->drm);
+  }
+
   public function executeMain()
   {
   }

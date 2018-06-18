@@ -59,7 +59,7 @@
                             <?php if ($societe->getMasterCompte()->getStatutTeledeclarant() == CompteClient::STATUT_TELEDECLARANT_NOUVEAU) : ?>
                                 <span class="text-muted">(code de création : <?php echo str_replace('{TEXT}', '', $societe->getMasterCompte()->mot_de_passe); ?>)</span>
                             <?php else: ?>
-                                <span class="text-muted">(code de création : Compte déjà crée</span>
+                                <span class="text-muted">(code de création : Compte déjà crée)</span>
                             <?php endif; ?>
                             <?php
                             if ($societe->isTransaction()):
@@ -119,7 +119,7 @@
     <?php endforeach; ?>
 
     <?php foreach ($interlocuteurs as $interlocuteurId => $compte) : ?>
-        <?php if(!$compte): continue; endif; ?> 
+        <?php if(!$compte): continue; endif; ?>
             <?php if ($compte->isSocieteContact() || $compte->isEtablissementContact()): ?><?php continue; ?><?php endif; ?>
         <div class="col-xs-4" style="<?php if (isset($etablissement) || (isset($interlocuteur) && $interlocuteur->_id != $compte->_id)): ?>opacity: 0.6<?php endif; ?>">
     <?php include_partial('compte/visualisation', array('compte' => $compte, 'modification' => $modification, 'reduct_rights' => $reduct_rights)); ?>
