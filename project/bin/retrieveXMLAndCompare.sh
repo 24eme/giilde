@@ -8,7 +8,7 @@ curl -s $CIEL_URL_RETOURXML"/?from="$1 | sort -r | while read url ; do
     echo "L'xml d'url "$url" n'est pas la version la plus récente";
     continue;
   fi
-	OUT=$(php5 symfony $SYMFONYTASKOPTIONS drm:storeXMLRetour $url)
+	OUT=$(php5 symfony $SYMFONYTASKOPTIONS drm:storeXMLRetour --force-update="1" $url)
 	RET=$?
 	DRM=$(echo $OUT | sed 's/ .*//')
 	echo $OUT
