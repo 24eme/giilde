@@ -74,19 +74,19 @@ class MouvementfactureFacturationView extends acCouchdbView {
     }
 
     public function getMouvements($facturee, $facturable, $level) {
-        return $this->consolidationMouvements($this->client
+        return $this->buildMouvements($this->consolidationMouvements($this->client
                                 ->startkey(array($facturee, $facturable))
                                 ->endkey(array($facturee, $facturable, array()))
                                 ->reduce(true)->group_level($level)
-                                ->getView($this->design, $this->view)->rows);
+                                ->getView($this->design, $this->view)->rows));
     }
 
     public function getMouvementsFacturablesByRegions($facturee, $facturable, $region, $level) {
-        return $this->consolidationMouvements($this->client
+        return $this->buildMouvements($this->consolidationMouvements($this->client
                                 ->startkey(array($facturee, $facturable, $region))
                                 ->endkey(array($facturee, $facturable, $region, array()))
                                 ->reduce(true)->group_level($level)
-                                ->getView($this->design, $this->view)->rows);
+                                ->getView($this->design, $this->view)->rows));
     }
 
     protected function buildMouvements($rows) {

@@ -165,6 +165,9 @@ class FactureClient extends acCouchdbClient {
         foreach ($regions as $region) {
             $mouvementsByRegions = array_merge(MouvementfactureFacturationView::getInstance()->getMouvementsFacturablesByRegions(0, 1, $region, $this->getReduceLevelForFacturation()), $mouvementsByRegions);
         }
+
+        ksort($mouvementsByRegions);
+
         return $mouvementsByRegions;
     }
 
