@@ -114,16 +114,16 @@
                   </tr>
                   <?php if (!$isTeledeclarationMode): ?>
                     <?php if (is_null($drm->transmission_douane->coherente)) : ?>
-                      <tr><td>Retour XML</td><td>Aucun retour de la part de proDou@ne n'a été effectué<a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span>&nbsp;Rafraîchir le retour douane</a></td></tr>
+                      <tr><td>Retour XML</td><td>Aucun retour de la part de proDou@ne n'a été effectué<a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span></a></td></tr>
                     <?php elseif($drm->transmission_douane->coherente): ?>
                       <tr><td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM est <strong>conforme</strong> à celle de proDou@ne
-                              <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span>&nbsp;Rafraîchir le retour douane</a>
+                              <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span></a>
                           </td>
                       </tr>
                     <?php else: ?>
                       <tr>
                           <td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM n'est <strong>pas conforme</strong> à celle de proDou@ne
-                              <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span>&nbsp;Rafraîchir le retour douane</a>
+                              <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span></a>
                           </td>
                       </tr>
                     <?php endif; ?>

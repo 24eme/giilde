@@ -1,15 +1,15 @@
 #!/bin/bash
 . $(dirname $0)/config.inc
 
-DATEREQUETE=$1
+DATEREQUETE=$(cat $WORKINGDIR"/data/dateDrmDouane");
 PERIODE=$2
 NUMEROACCISE=$3
 CVI=$4
 
 APPLICATION=$(echo $SYMFONYTASKOPTIONS | sed -r 's|--application=(.+) (.*)|\1|');
-LAST=""
-PATHFILETMP=$WORKINGDIR"/cache/"$APPLICATION"/prod/majDrmUrl";
 
+PATHFILETMP=$WORKINGDIR"/cache/"$APPLICATION"/prod/majDrmUrl";
+LAST=""
 echo "" > $PATHFILETMP;
 
 curl -s $CIEL_URL_RETOURXML"/?from="$DATEREQUETE | sort -r | while read url ; do
@@ -57,7 +57,7 @@ URLFOUND=$(cat $PATHFILETMP);
 echo "url:"$URLFOUND;
 if test $URLFOUND ; then
     cd $WORKINGDIR;
-    OUT=$(php5 symfony $SYMFONYTASKOPTIONS drm:storeXMLRetour $URLFOUND)
+    OUT=$(php5 symfony $SYMFONYTASKOPTIONS drm:storeXMLRetour --force-update="1" $URLFOUND)
 	RET=$?
 	DRM=$(echo $OUT | sed 's/ .*//')
 	echo $OUT
