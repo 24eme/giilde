@@ -53,7 +53,7 @@ EOF;
           echo "      DRM modificatrice non ouverte : la DRM n'a pas été transmise aux douanes\n";
         }else{
           $drm_modificatrice = $drm->generateModificative();
-          $drm_modificatrice->type_creation = self::DRM_CREATION_AUTO;
+          $drm_modificatrice->type_creation = DRMClient::DRM_CREATION_AUTO;
           $drm_modificatrice->save();
           echo "      DRM modificatrice ouverte : ".sfConfig::get('app_vinsi_url').sfContext::getInstance()->getRouting()->generate("drm_etablissement",array("identifiant" => $drm->identifiant))."\n";
         }

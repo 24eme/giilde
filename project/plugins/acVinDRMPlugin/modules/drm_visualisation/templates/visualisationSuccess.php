@@ -58,7 +58,7 @@
 
             <?php if (!$drm->isMaster()): ?>
                 <div class="alert alert-warning">
-                    Ce n'est pas la <a href="<?php echo url_for('drm_visualisation', $drm->getMaster()) ?>">dernière version</a> de la DRM, le tableau récapitulatif des stocks n'est donc pas à jour.
+                    Ce n'est pas la <a href="<?php echo ($drm->getMaster()->isValidee())? url_for('drm_visualisation', $drm->getMaster()) :  url_for('drm_redirect_etape', $drm->getMaster()) ?>">dernière version</a> de la DRM, le tableau récapitulatif des stocks n'est donc pas à jour.
                 </div>
             <?php endif; ?>
         <?php endif; ?>
