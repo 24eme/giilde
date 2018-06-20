@@ -63,6 +63,9 @@ class drm_xmlActions extends drmGeneriqueActions {
     $cvi = $etb->getCvi();
     $cmd = 'bash '.$pathScript." ".$dateRequete." ".$periode." ".$numeroAccise." ".$cvi;
     $retour = shell_exec($cmd);
+    if(!$this->drm->isValidee()){
+        return $this->redirect('drm_validation', $this->drm);
+    }
     return $this->redirect('drm_visualisation', $this->drm);
   }
 

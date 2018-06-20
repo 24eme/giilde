@@ -94,7 +94,7 @@ class MouvementfactureFacturationView extends acCouchdbView {
         $i = 0;
         foreach ($rows as $row) {
             $mouvement = $this->buildMouvement($row);
-            $mouvements[str_replace("-", "", $mouvement->date).sprintf("%05d",$i).uniqid()] = $mouvement;
+            $mouvements[str_replace("-", "", $mouvement->date).sprintf("%05d",$i).md5(serialize($mouvement))] = $mouvement;
             $i++;
         }
 
