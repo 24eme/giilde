@@ -104,10 +104,32 @@ L’application de télédéclaration des contrats d’InterLoire";
         return true;
     }
 
-    public function sendMailValidation() {
+    public function sendMailValidation($send = true) {
+        $messages = $this->composeMailValidation();
+        $emails = array();
+        foreach($messages as $message) {
+            try {
+                if($send) {
+                    $this->getMailer()->send($messages);
+                }
+                $emails = array_merge($emails, array_keys($message->getTo()));
+            } catch(Exception $e) {
+
+            }
+        }
+
+        return $emails;
+    }
+    public function composeMailValidation() {
+        $messages = array();
 
         $etablissement = EtablissementClient::getInstance()->find($this->drm->identifiant);
         $contact = EtablissementClient::getInstance()->buildInfosContact($etablissement);
+        if (!$contact || !isset($contact->email) || !$contact->email) {
+            $email = sfConfig::get('app_mail_from_email');
+        } else {
+            $email = $contact->email;
+        }
         $transmission_douane = $etablissement->getSociete()->getMasterCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE);
 
         $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
@@ -122,7 +144,7 @@ Dans l'attente de votre acceptation du contrat de service douane, la DRM doit ê
 " : "
 ";
 $mess .= "
-Pour toutes questions, veuillez contacter le service économie de ".$interpro." : " . $contact->email . " .
+Pour toutes questions, veuillez contacter le service économie de ".$interpro." : " . $email . " .
 
 --
 
@@ -138,24 +160,15 @@ L’application de télédéclaration des DRM ". sfConfig::get('app_teledeclarat
 
         $message->attach(new Swift_Attachment($pdfContent, $pdfName, 'application/pdf'));
 
-//            $attachment = new Swift_Attachment(file_get_contents(dirname(__FILE__) . '/../../../../../web/data/reglementation_generale_des_transactions.pdf'), 'reglementation_generale_des_transactions.pdf', 'application/pdf');
-//            $message->attach($attachment);
+        $messages[] = $message;
 
-        try {
-            $this->getMailer()->send($message);
-            $resultEmailArr[] = $etablissement->getEmailTeledeclaration();
-            if ($this->drm->email_transmission) {
-                $message_transmission = $this->getMailer()->compose(array(sfConfig::get('app_mail_from_email') => sfConfig::get('app_mail_from_name')), $this->drm->email_transmission, $subject, $mess);
-                $message_transmission->attach(new Swift_Attachment($pdfContent, $pdfName, 'application/pdf'));
-                $this->getMailer()->send($message_transmission);
-                $resultEmailArr[] = $this->drm->email_transmission;
-            }
-        } catch (Exception $e) {
-          //  $this->getUser()->setFlash('error', 'Erreur de configuration : Mail de confirmation non envoyé, veuillez contacter ');
-            return null;
+        if ($this->drm->email_transmission) {
+            $message_transmission = $this->getMailer()->compose(array(sfConfig::get('app_mail_from_email') => sfConfig::get('app_mail_from_name')), $this->drm->email_transmission, $subject, $mess);
+            $message_transmission->attach(new Swift_Attachment($pdfContent, $pdfName, 'application/pdf'));
+            $messages[] = $message_transmission;
         }
 
-        return $resultEmailArr;
+        return $messages;
     }
 
     private function getMailer() {
