@@ -1725,6 +1725,10 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
         return $this->isDRMNegociant();
     }
 
+    public function isCreationAuto(){
+      return $this->type_creation == DRMClient::DRM_CREATION_AUTO;
+    }
+
     public function getXML() {
       if (!function_exists('get_partial')) {
         sfContext::getInstance()->getConfiguration()->loadHelpers(array('Partial'));

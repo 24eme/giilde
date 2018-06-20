@@ -284,12 +284,13 @@ class EtablissementClient extends acCouchdbClient {
 
         if ($etb->famille == EtablissementFamilles::FAMILLE_COURTIER) {
             $region = self::REGION_HORS_CVO;
-
-            $result->nom = $contacts[$region]['nom'];
-            $result->email = $contacts[$region]['email'];
-            $result->telephone = $contacts[$region]['telephone'];
-            return $result;
         }
+
+        if(!isset($contacts[$region])) {
+
+            return null;
+        }
+
         $result->nom = $contacts[$region]['nom'];
         $result->email = $contacts[$region]['email'];
         $result->telephone = $contacts[$region]['telephone'];

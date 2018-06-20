@@ -7,8 +7,8 @@ NUMEROACCISE=$3
 CVI=$4
 
 APPLICATION=$(echo $SYMFONYTASKOPTIONS | sed -r 's|--application=(.+) (.*)|\1|');
-
 PATHFILETMP=$WORKINGDIR"/cache/"$APPLICATION"/prod/majDrmUrl";
+
 LAST=""
 echo "" > $PATHFILETMP;
 
