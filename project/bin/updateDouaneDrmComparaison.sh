@@ -52,6 +52,6 @@ echo -e "\n\nAvaries : Numéros d'accise mal référencés = "$NBNUMACCISEMALDRM
 cat $LOGFILE | grep "Le numéro d'accise" | cut -d ":" -f 3 | sed "s/ Le numéro d'accise //" | sed "s/ ne correspond pas a celui de l'établissement (/;/g" | sed "s/ | /;/" | sed "s/)//" | sort | uniq | sed -r "s|(FR.+);(.+);(.*)|         $URLDRMINTERNE\2 \1 (obtenu des douanes) Accise référencée sur le portail de $APPLICATION  : \3|g" >> $RAPPORTBODY;
 
 
-cat $RAPPORTBODY  | iconv -t ISO-8859-1 | mail -s "[RAPPORT RETOUR DOUANE de $APPLICATION du $DATEFORMAT]" $MAILRETOURDOUANE;
+cat $RAPPORTBODY  | iconv -t ISO-8859-1 | mail -s "[RAPPORT RETOUR DOUANE de $APPLICATION du $DATEFORMAT]" $MAILFROMDOUANE $MAILRETOURDOUANE;
 
 echo $(date +%Y-%m-%d) > $FILEDATE
