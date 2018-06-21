@@ -30,7 +30,10 @@ COUCHDISTANTHOST=distantnode
 #SAMBA_XLSOFT_DIR=
 #DEV_EMAILS="test@example.org test2@example.org"
 EXPORTDIR=MYDIR
+
+#Retour douane
 CIEL_URL_RETOURXML=http://10.10.10.10/reception_douanes/SIRENINTERPO/
-URLDRMINTERNE=http://url_interne_acces_drm
+EMAILS_RETOURXML=""
+URLDRMINTERNE=http://urlinterpro/drm/
 
 mkdir -p $TMP > /dev/null
