@@ -10,6 +10,10 @@ if ($lastPeriode) {
 	$resultPartKeys = array();
 	$resultFirstKeys = array();
 	foreach ($result as $key => $values) {
+		$key = sfOutputEscaper::unescape($key);
+		if (strpos($key, '/') === false) {
+			$key = '/'.$key;
+		}
 		$tabKey = explode('/', $key);
 		if (!in_array($tabKey[0], $resultFirstKeys)) {
 			$resultFirstKeys[] = $tabKey[0];

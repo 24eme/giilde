@@ -57,8 +57,9 @@ $categories = (isset($options['categories']))? $options['categories'] : array();
 <?php 
 	$i = ($compare)? 2 : 1;
 	foreach ($items as $item):
+		$item = sfOutputEscaper::unescape($item);
 		$values = explode(';', $item);
-		if (!$values[0]) {
+		if (!$values[0] && (!isset($values[1]) || !$values[1])) {
 			continue;
 		}
 		$isTotal = preg_match('/total/i', $item);
@@ -68,6 +69,7 @@ $categories = (isset($options['categories']))? $options['categories'] : array();
 ?>
 <?php 
 	if ($i == $maxTableRowsPerPage): 
+	$newSection = true;
 ?>
 \end{tabularx}
 \end{table}
