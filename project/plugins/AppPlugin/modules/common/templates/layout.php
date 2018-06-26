@@ -15,7 +15,7 @@
         <?php else: ?>
             <link href="<?php echo public_path("/css/bootstrap.css") ?>" rel="stylesheet">
         <?php endif; ?>
-        <link href="<?php echo public_path("/components/select2/select2.css") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/select2/select2.css?201806260925") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/select2/select2-bootstrap.min.css") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/vins/vins.css") ?>" rel="stylesheet">

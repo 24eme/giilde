@@ -283,8 +283,8 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                 $denomination_complementaire = (trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]))? trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]) : false;
                 $drmDetails = $this->drm->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
 
-                $detailTotalVol = $this->convertNumber(floatval($csvRow[self::CSV_CAVE_VOLUME]));
-                $volume = $this->convertNumber(floatval($csvRow[self::CSV_CAVE_VOLUME]));
+                $detailTotalVol = $this->convertNumber($csvRow[self::CSV_CAVE_VOLUME]);
+                $volume = $this->convertNumber($csvRow[self::CSV_CAVE_VOLUME]);
 
                 $cat_key = $confDetailMvt->getParent()->getKey();
                 $type_key = $confDetailMvt->getKey();
