@@ -27,7 +27,7 @@
 
 <p class="text-center lead">
     <?php echo $generation->nb_documents; ?> document<?php if($generation->nb_documents > 1): ?>s<?php endif; ?>
-    <?php if($generation->somme): ?><small class="text-muted">(<?php echo echoFloat($generation->somme) ?> €)</small><?php endif; ?>
+    <?php if($generation->somme): ?><small class="text-muted">(<?php echo echoFloat($generation->somme) ?> € HT)</small><?php endif; ?>
 </p>
 
 <p class="text-center lead">

@@ -588,7 +588,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             throw new sfException("La DRM doit être validée pour pouvoir créer les contrats vracs à partir des sorties vracs");
         }
         foreach ($this->getDetailsAvecCreationVracs() as $details) {
-            foreach ($details as $keyVrac => $vracCreation) {   
+            foreach ($details as $keyVrac => $vracCreation) {
               $newVrac = $vracCreation->getVrac();
               $newVrac->createVisa();
 
@@ -1380,8 +1380,8 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
         $genres = array();
         foreach ($this->getProduitsDetails(true) as $hash => $detail) {
             $genre = $detail->getCepage()->getCouleur()->getLieu()->getMention()->getAppellation()->getGenre()->getConfig();
-            if ($genre->getKey() == 'TRANQ') {
-                $genres[$genre->getKey()] = $genre->getKey();
+            if ($genre->getKey() == 'TRANQ' || $genre->getKey() == 'DEFAUT') {
+                $genres['TRANQ'] = 'TRANQ';
             } else {
                 $genres['MOUSSEUX'] = 'MOUSSEUX';
             }
