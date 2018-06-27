@@ -126,4 +126,10 @@ class DRMConfiguration {
         return boolval($this->configuration['default_auto_checked']);
     }
 
+    public function getPdfFontSize(){
+        return $this->configuration['pdf_font_size'];
+    }
+
+
+
 }

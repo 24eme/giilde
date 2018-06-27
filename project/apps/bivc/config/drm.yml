@@ -13,5 +13,5 @@ all:
       aggregate_edi: [ ]
       declassement_igp: false
       reprise_stocks_changement_campagne: true
-      defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 375 },{ 'couleur' : 'VERT', 'contenance' : 750 },{ 'couleur' : 'VERT', 'contenance' : 1000 } ]
+      defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 375 },{ 'couleur' : 'VERT', 'contenance' : 750 },{ 'couleur' : 'VERT', 'contenance' : 1500 } ]
       default_auto_checked: false

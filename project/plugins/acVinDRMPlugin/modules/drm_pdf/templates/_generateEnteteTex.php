@@ -27,6 +27,7 @@ use_helper('Display');
 \fancyhf{}
 
 \lhead{
+\vspace{-2cm}
 Raison sociale : \textbf{\DRMSocieteRaisonSociale} \\
 Adresse du siège de l’Entrepôt : \textbf{\DRMAdresseChai} \\
 Code client : \textbf{\DRMIdentifiantIL}~~~CVI : \textbf{\DRMCvi}~~~Siret : \textbf{\DRMSiret} \\
@@ -34,7 +35,7 @@ Numéro d'Accise : \textbf{\DRMNumAccise} \\
 Adresse compta matière : \textbf{\DRMAdresseComptaMatiere} \\
 }
 
-\rhead{ \\
+\rhead{
 \vspace{-2cm}
 \InterloireAdresse
  \begin{small} \InterloireContact \\

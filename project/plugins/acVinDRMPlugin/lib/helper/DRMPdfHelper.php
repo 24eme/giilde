@@ -35,7 +35,13 @@ function sprintFloat($float, $format = "%01.02f") {
 }
 
 function echoFloatWithHl($float) {
-    echo ($float)? sprintFloat($float).' hl' : '';
+    if(!$float){
+        echo '';
+    }elseif(intval(substr(sprintFloat($float,"%01.04f"),-2))){
+        echo sprintFloat($float,"%01.04f").' hl';
+    }else{
+        echo sprintFloat($float,"%01.02f").' hl';
+    }
 }
 
 
