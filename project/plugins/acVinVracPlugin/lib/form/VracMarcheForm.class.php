@@ -238,9 +238,7 @@ class VracMarcheForm extends VracForm {
     }
 
     public function getMillesimes() {
-        if ($this->getObject()->type_transaction != VracClient::TYPE_TRANSACTION_RAISINS) {
-            $this->millesimes = array('0' => self::NONMILLESIMELABEL);
-        }
+
 
         $date = new DateTime();
         $annee = $date->format('Y');
@@ -251,6 +249,10 @@ class VracMarcheForm extends VracForm {
         while ($annee >= $stop) {
             $this->millesimes[$annee] = '' . $annee;
             $annee--;
+        }
+
+        if ($this->getObject()->type_transaction != VracClient::TYPE_TRANSACTION_RAISINS) {
+            $this->millesimes['0'] = self::NONMILLESIMELABEL;
         }
     }
 

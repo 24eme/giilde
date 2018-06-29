@@ -9,7 +9,7 @@
             </div>
             <div class="col-xs-2 <?php if($mvtForm["identifiant_analytique"]->hasError()): ?>text-danger<?php endif; ?>" style="padding-left: 0; padding-right: 0;">
                 <?php echo $mvtForm['identifiant_analytique']->renderError(); ?>
-                <?php echo $mvtForm['identifiant_analytique']->render(array('class' => 'form-control input-md text-right select2 identifiant_analytique')); ?>
+                <?php echo $mvtForm['identifiant_analytique']->render(array('class' => 'form-control input-md select2 identifiant_analytique')); ?>
                 <?php if(isset($item) && $item && $item->facture): ?>
                 <input class="form-control input-md" disabled="disabled" type="text" value="<?php echo $item->identifiant_analytique_libelle_compta; ?>" />
                 <?php endif; ?>
