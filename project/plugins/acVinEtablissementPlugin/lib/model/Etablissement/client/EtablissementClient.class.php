@@ -150,9 +150,17 @@ class EtablissementClient extends acCouchdbClient {
 
     public function findByNoAccise($accise,$withSuspendu = true) {
         $rows = EtablissementFindByCviView::getInstance()->findByAccise($accise);
-
         if (!count($rows)) {
             return null;
+        }
+        if(!$withSuspendu){
+          foreach ($rows as $row) {
+            $etb = $this->find($row->id);
+            if($etb->isActif()){
+              return $etb;
+            }
+          }
+          return null;
         }
 
         return $this->find($rows[0]->id);
