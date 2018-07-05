@@ -31,9 +31,9 @@ fwrite($temp, "CAVE,201801,".$viti->identifiant.",".$viti->no_accises.",".$produ
 fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,14742,,,,\n");
 fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,3118,,,,\n");
 fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11624,,,,\n");
-fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille150cl,,,,,,,collectif suspendu,stock_debut,debut,56,,,,\n");
-fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 150 cl,,,,,,,collectif suspendu,sorties,utilisations,3,,,,\n");
-fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 150cl,,,,,,,collectif suspendu,stock_fin,fin,53,,,,\n");
+fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",BLEU,tranquille,Bouteille150cl,,,,,,,collectif suspendu,stock_debut,debut,56,,,,\n");
+fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",BLEU,tranquille,Bouteille 150 cl,,,,,,,collectif suspendu,sorties,utilisations,3,,,,\n");
+fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",BLEU,tranquille,Bouteille 150cl,,,,,,,collectif suspendu,stock_fin,fin,53,,,,\n");
 fclose($temp);
 
 $periode = (date('Y'))."01";
@@ -61,7 +61,7 @@ $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->detail_libelle, "Bo
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->stock_debut, 14742, "stock debut 75 cl OK");
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->sorties_utilisations, 3118, "utilisation 75 cl OK");
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->stock_fin, 11624, "stock fin 75 cl OK");
-$t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-1500')->stock_fin, 53, "stock fin 150 cl OK");
+$t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-BLEU-1500')->stock_fin, 53, "stock fin 150 cl OK");
 unlink($tmpfname);
 $drm->delete();
 
@@ -125,9 +125,9 @@ $temp = fopen($tmpfname, "w");
 fwrite($temp, "CAVE,201802,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,945,,,,,,\n");
 fwrite($temp, "CAVE,201802,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,sorties,ventefrancecrd,4,,,,,,\n");
 fwrite($temp, "CAVE,201802,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,941,,,,,,\n");
-fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,11625,,,,\n");
-fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,24,,,,\n");
-fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11601,,,,\n");
+fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,11625,,,,\n");
+fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,24,,,,\n");
+fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11601,,,,\n");
 fclose($temp);
 $periode = (date('Y'))."02";
 $drm3 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
@@ -142,13 +142,13 @@ $t->ok($import->importCSV(),"Import de la DRM");
 $drm3->save();
 
 $t->is($drm3->getProduit($produit1_hash, 'details')->get('sorties/ventefrancecrd'), 4, "Sortie ok");
-$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->sorties_utilisations, 24, "Utilisation CRD 75 cl OK");
+$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-LIEDEVIN-750')->sorties_utilisations, 24, "Utilisation CRD 75 cl OK");
 
 $t->is($drm3->getProduit($produit1_hash, 'details')->get('stocks_debut/initial'), 944, "le stock initial est celui attendu");
-$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->stock_debut, 11624, "stock debut 75 cl OK");
+$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-LIEDEVIN-750')->stock_debut, 11625, "stock debut 75 cl OK");
 
 $t->is($drm3->getProduit($produit1_hash, 'details')->get('stocks_fin/final'), 940, "le stock final est celui attendu");
-$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->stock_fin, 11600, "stock fin 75 cl OK");
+$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-LIEDEVIN-750')->stock_fin, 11601, "stock fin 75 cl OK");
 
 $drm3->delete();
 $drm2->devalide();

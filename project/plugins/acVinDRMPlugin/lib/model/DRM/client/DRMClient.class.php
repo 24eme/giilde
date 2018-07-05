@@ -671,7 +671,7 @@ class DRMClient extends acCouchdbClient {
     }
 
     public static function convertCRDCouleur($s) {
-      switch (preg_replace('[ _]', '', strtoupper($s))) {
+      switch (preg_replace('/[\s_]/', '', strtoupper($s))) {
         case self::DRM_CRD_BLEU:
           return self::DRM_CRD_BLEU;
         case self::DRM_CRD_VERT:
