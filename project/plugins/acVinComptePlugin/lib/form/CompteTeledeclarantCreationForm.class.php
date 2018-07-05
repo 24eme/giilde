@@ -5,7 +5,19 @@ class CompteTeledeclarantCreationForm extends CompteTeledeclarantForm {
     private $typeCompte;
 
     public function __construct($doc, $defaults = array(), $options = array(), $CSRFSecret = null) {
-        $this->typeCompte = $doc->getSociete()->type_societe;
+        $societe = $doc->getSociete();
+
+        $this->typeCompte = $societe->type_societe;
+
+        $defaults["siret"] = $societe->siret;
+
+        if($this->typeCompte == SocieteClient::TYPE_OPERATEUR) {
+            $defaults["num_accises"] = $societe->getEtablissementPrincipal()->no_accises;
+        }
+
+        if($this->typeCompte == SocieteClient::TYPE_COURTIER) {
+            $defaults["carte_pro"] = $societe->getEtablissementPrincipal()->carte_pro;
+        }
 
         parent::__construct($doc, $defaults, $options, $CSRFSecret);
     }

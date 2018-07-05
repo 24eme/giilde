@@ -15,7 +15,7 @@
         <?php else: ?>
             <link href="<?php echo public_path("/css/bootstrap.css") ?>" rel="stylesheet">
         <?php endif; ?>
-        <link href="<?php echo public_path("/components/select2/select2.css") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/select2/select2.css?201806260925") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/select2/select2-bootstrap.min.css") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/vins/vins.css") ?>" rel="stylesheet">
@@ -58,7 +58,7 @@
         <script src="<?php echo public_path("/js/teledeclaration.js") ?>"></script>
         <script src="<?php echo public_path("/js/conditionnement.js") ?>"></script>
         <script src="<?php echo public_path("/js/vrac.js") ?>"></script>
-        <script src="<?php echo public_path("/js/drm.js?20170324") ?>"></script>
+        <script src="<?php echo public_path("/js/drm.js?201806291748") ?>"></script>
         <script src="<?php echo public_path("/js/contacts.js") ?>"></script>
         <script src="<?php echo public_path("/js/facture.js") ?>"></script>
         <script src="<?php echo public_path("/js/stats.js?20170222") ?>"></script>

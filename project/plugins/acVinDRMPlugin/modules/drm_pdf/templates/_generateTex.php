@@ -1,4 +1,4 @@
-\documentclass[a4paper,oneside, landscape, 9pt]{extarticle}
+\documentclass[a4paper,oneside, landscape, <?php echo ($fontSize = DRMConfiguration::getInstance()->getPdfFontSize())? $fontSize : "9pt"; ?>]{extarticle}
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
@@ -46,7 +46,7 @@ keepaspectratio]{<?php echo realpath(dirname(__FILE__) . "/../../../../../web/da
 \setlength{\evensidemargin}{-2cm}
 \setlength{\textwidth}{29.7cm}
 \setlength{\textheight}{15.5cm}
-\setlength{\headheight}{4.5cm}
+\setlength{\headheight}{<?php echo (DRMConfiguration::getInstance()->getPdfFontSize())? "3.5cm" : "4.5cm" ?>}
 \setlength{\headwidth}{28.2cm}
 \setlength{\topmargin}{-3.5cm}
 \setlength{\footskip}{0cm}

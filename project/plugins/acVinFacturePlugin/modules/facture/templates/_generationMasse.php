@@ -50,11 +50,11 @@
 
             </div>
             <div class="col-xs-6 text-right">
-                <button class="btn btn-success" type="submit">Générer les factures</button>
+                <button class="btn btn-success" type="submit" >Générer les factures</button>
             </div>
             <?php else: ?>
              <div class="col-xs-offset-4 col-xs-6 text-left">
-                <button class="btn btn-success" type="submit">Générer les factures</button>
+                <button class="btn btn-success" type="submit" onclick='return confirm("Étes vous sûr de vouloir effectuer cette génération?");'>Générer les factures</button>
             </div>
             <?php endif; ?>
         </div>

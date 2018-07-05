@@ -58,6 +58,7 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 <?php 
 	$i = ($compare)? 2 : 1;
 	foreach ($items as $item):
+		$item = sfOutputEscaper::unescape($item);
 		$values = explode(';', $item);
 		if (!$values[0]) {
 			continue;

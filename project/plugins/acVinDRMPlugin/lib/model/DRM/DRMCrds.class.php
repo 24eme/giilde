@@ -59,12 +59,20 @@ class DRMCrds extends BaseDRMCrds {
             return;
         }
         $contenances = VracConfiguration::getInstance()->getContenances();
-        $contenance75 = $contenances['Bouteille 75 cl'] * self::FACTLITRAGE;
+        $contenanceDefault = $contenances['Bouteille 75 cl'] * self::FACTLITRAGE;
+
+        $default_crds_config = DRMConfiguration::getInstance()->getDefaultCrds();
 
         foreach ($genres as $genre) {
-            $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_VERT, $contenance75);
-            $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_BLEU, $contenance75);
-            $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_LIEDEVIN, $contenance75);
+            if(count($default_crds_config)){
+                foreach ($default_crds_config as $key => $default) {
+                    $this->getOrAddCrdNode($genre, $default['couleur'], $default['contenance']);
+                }
+            }else{
+                $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_VERT, $contenanceDefault);
+                $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_BLEU, $contenanceDefault);
+                $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_LIEDEVIN, $contenanceDefault);
+            }
         }
     }
 

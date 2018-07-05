@@ -4,7 +4,7 @@ require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
 sfContext::createInstance($configuration);
 
-sfConfig::set('app_teldeclaration_contact_contrat', array());
+sfConfig::set('app_teledeclaration_contact_contrat', array());
 sfConfig::set('app_mail_from_email', "test_from_mail@mail.org");
 sfConfig::set('app_teledeclaration_interpro', "Interpro");
 

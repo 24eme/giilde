@@ -117,4 +117,19 @@ class DRMConfiguration {
         return $this->configuration['mouvement_divisable_nb_month'];
     }
 
+    public function getDefaultCrds() {
+
+        return $this->configuration['defaults_crds_nodes'];
+    }
+
+    public function isProduitAutoChecked(){
+        return boolval($this->configuration['default_auto_checked']);
+    }
+
+    public function getPdfFontSize(){
+        return $this->configuration['pdf_font_size'];
+    }
+
+
+
 }

@@ -614,7 +614,7 @@ class DRMClient extends acCouchdbClient {
         }
       }
       if(!$etablissement && $aggrement){
-        $etablissement = EtablissementClient::getInstance()->findByNoAccise($aggrement);
+        $etablissement = EtablissementClient::getInstance()->findByNoAccise($aggrement,false);
       }
       if (!$etablissement) {
         $idebntifiantCVI = (isset($m[1]))? $m[1] : "VIDE";

@@ -16,7 +16,7 @@ foreach ($conf->declaration->filter('details') as $configDetails) {
     }
 }
 
-$t = new lime_test(30);
+$t = new lime_test(31);
 
 $t->comment("Création d'une facture à partir des DRM pour une société");
 
@@ -47,6 +47,11 @@ $drm->update();
 $drm->save();
 $drm->validate();
 $drm->save();
+
+$mouvementsFactureMasse = FactureClient::getInstance()->getMouvementsNonFacturesBySoc(FactureClient::getInstance()->getMouvementsForMasse(null));
+$mouvementsFactureMasse = FactureClient::getInstance()->filterWithParameters($mouvementsFactureMasse, array_merge($paramFacturation, array('seuil' => 999999)));
+
+$t->is(count($mouvementsFactureMasse), 0, "Avec un seuil à 99999 aucune société à facturer");
 
 $mouvementsFactureMasse = FactureClient::getInstance()->getMouvementsNonFacturesBySoc(FactureClient::getInstance()->getMouvementsForMasse(null));
 $mouvementsFactureMasse = FactureClient::getInstance()->filterWithParameters($mouvementsFactureMasse, $paramFacturation);

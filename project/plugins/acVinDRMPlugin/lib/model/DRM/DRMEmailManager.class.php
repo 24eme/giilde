@@ -110,7 +110,7 @@ L’application de télédéclaration des contrats d’InterLoire";
         foreach($messages as $message) {
             try {
                 if($send) {
-                    $this->getMailer()->send($messages);
+                    $this->getMailer()->send($message);
                 }
                 $emails = array_merge($emails, array_keys($message->getTo()));
             } catch(Exception $e) {

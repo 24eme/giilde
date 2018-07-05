@@ -228,13 +228,11 @@ class FactureClient extends acCouchdbClient {
                 }
                 $somme += $prix;
             }
-            $somme = $somme * -1;
             $somme = $this->ttc($somme);
 
             if (count($mouvementsBySoc[$identifiant]) == 0) {
                 $mouvementsBySoc[$identifiant] = null;
             }
-
             if (isset($parameters['seuil']) && $parameters['seuil']) {
                 if (($somme < $parameters['seuil']) && ($somme >= 0)) {
                     $mouvementsBySoc[$identifiant] = null;

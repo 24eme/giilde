@@ -19,3 +19,6 @@ all:
       pdf_cvo: false
       mouvement_divisable_seuil: false
       mouvement_divisable_nb_month: 12
+      defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 750 },{ 'couleur' : 'BLEU', 'contenance' : 750 },{ 'couleur' : 'LIEDEVIN', 'contenance' : 750 } ]
+      default_auto_checked: true
+      pdf_font_size: false

@@ -502,7 +502,7 @@
         var vol = 0;
         $('.drm_details_tableBody td.volume').each(function ()
         {
-            var vol_val = $(this).find('div input').val();
+            var vol_val = $(this).find('div input').val().replace(',', '.');
             if (vol_val == '')
                 vol_val = 0;
             var vol_val_float = parseFloat(vol_val);
