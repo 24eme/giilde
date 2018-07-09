@@ -14,3 +14,4 @@ all:
       aggregate_edi: [ ]
       declassement_igp: true
       pdf_font_size: "8pt"
+      delai_ouverture_teledeclaration: "-3 month"

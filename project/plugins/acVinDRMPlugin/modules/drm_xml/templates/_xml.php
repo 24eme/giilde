@@ -44,7 +44,7 @@
 				</balance-stocks>
 			</produit>
 <?php endforeach; ?>
-			<stockEpuise><?php echo (!$drm->getTotalStockSuspendu())? "true" : "false"; ?></stockEpuise>
+			<stockEpuise>false</stockEpuise>
 		</droits-suspendus>
 <?php if ($drm->hasExportableProduitsAcquittes()): ?>
 		<droits-acquittes>
@@ -74,7 +74,7 @@
 				</balance-stocks>
 			</produit>
 <?php endforeach; ?>
-			<stockEpuise><?php echo (!$drm->getTotalStockAcquitte())? "true" : "false"; ?></stockEpuise>
+			<stockEpuise>false</stockEpuise>
     	</droits-acquittes>
 <?php endif; ?>
 <?php endif; ?>
