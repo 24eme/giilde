@@ -34,8 +34,8 @@ use_helper('Date');
                 <tbody>
                     <?php foreach ($mouvements as $mouvement): ?>
                         <?php
-                        $drmMvt = (strstr($mouvement->numero, 'DRM') !== false);
-                        $sv12Mvt = (strstr($mouvement->numero, 'SV12') !== false);
+                        $drmMvt = (strstr($mouvement->id_doc, 'DRM') !== false);
+                        $sv12Mvt = (strstr($mouvement->id_doc, 'SV12') !== false);
                          ?>
                         <tr class="vertical-center">
                             <td class="text-left">
@@ -47,11 +47,11 @@ use_helper('Date');
                                     $numeroFormatted = $mouvement->nom_facture;
                                 }
                                 if ($drmMvt) {
-                                  $numeroFormatted = DRMClient::getInstance()->getLibelleFromId($mouvement->numero);
+                                  $numeroFormatted = DRMClient::getInstance()->getLibelleFromId($mouvement->id_doc);
                                 }else if ($sv12Mvt) {
-                                  $numeroFormatted = SV12Client::getInstance()->getLibelleFromId($mouvement->numero);
+                                  $numeroFormatted = SV12Client::getInstance()->getLibelleFromId($mouvement->id_doc);
                                 }
-                                echo link_to($numeroFormatted, 'facture_redirect_to_doc', array('iddocument' => $mouvement->numero));
+                                echo link_to($numeroFormatted, 'facture_redirect_to_doc', array('iddocument' => $mouvement->id_doc));
                                 ?>
                             </td>
                             <td class="text-left"><?php echo ($drmMvt || $sv12Mvt) ? $mouvement->produit_libelle : $mouvement->type_libelle; ?></td>

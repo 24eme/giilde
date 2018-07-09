@@ -59,7 +59,6 @@ function(keys,values,rereduce) {
         return false;
     }
 
-    var origines = new Array();
     var produits_libelles = new Array();
     var types_libelles = new Array();
     var total_volume = 0;
@@ -74,10 +73,9 @@ function(keys,values,rereduce) {
         types_libelles = merge_field(values[item][1],item,types_libelles);
         total_volume += values[item][2];
         cvos = merge_field(values[item][3],item,cvos);
+        vrac_destinataire = merge_field(values[item][4],item,vrac_destinataire);
         details_libelles = merge_field(values[item][5],item,details_libelles);
-        vrac_destinataire = merge_field(values[item][6],item,vrac_destinataire);
-        identifiants = merge_field(values[item][7],item,identifiants);
-        origines = merge_field(values[item][9],item,origines);
+        identifiants = merge_field(values[item][6],item,identifiants);
     }
 
     produits_libelles = reduce_result(produits_libelles);
@@ -86,8 +84,7 @@ function(keys,values,rereduce) {
     details_libelles = reduce_result(details_libelles);
     vrac_destinataire = reduce_result(vrac_destinataire);
     identifiants = reduce_result(identifiants);
-    origines = reduce_origines(origines);
-    result = [produits_libelles, types_libelles, total_volume, cvos, vrac_destinataire, details_libelles, identifiants, origines];
+    result = [produits_libelles, types_libelles, total_volume, cvos, vrac_destinataire, details_libelles, identifiants];
 
     return result;
  }

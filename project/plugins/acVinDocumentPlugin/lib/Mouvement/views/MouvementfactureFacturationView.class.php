@@ -19,9 +19,9 @@ class MouvementfactureFacturationView extends acCouchdbView {
     const VALUE_TYPE_LIBELLE = 1;
     const VALUE_QUANTITE = 2;
     const VALUE_PRIX_UNITAIRE = 3;
-    const VALUE_DETAIL_LIBELLE = 4;
-    const VALUE_VRAC_DEST = 5;
-    const VALUE_NUMERO = 6;
+    const VALUE_VRAC_DEST = 4;
+    const VALUE_DETAIL_LIBELLE = 5;
+    const VALUE_ID_DOC = 6;
     const VALUE_ID_ORIGINE = 7;
 
     public static function getInstance() {
@@ -117,7 +117,7 @@ class MouvementfactureFacturationView extends acCouchdbView {
         $mouvement->quantite = $row->value[self::VALUE_QUANTITE];
         $mouvement->prix_unitaire = $row->value[self::VALUE_PRIX_UNITAIRE];
         $mouvement->prix_ht = $mouvement->quantite * $row->value[self::VALUE_PRIX_UNITAIRE];
-        $mouvement->numero = $row->value[self::VALUE_NUMERO];
+        $mouvement->id_doc = $row->value[self::VALUE_ID_DOC];
         $mouvement->vrac_numero = $row->key[self::KEYS_CONTRAT_ID];
         $mouvement->origines = $row->value[self::VALUE_ID_ORIGINE];
         if ($mouvement->origine == "MouvementsFacture") {
@@ -131,7 +131,6 @@ class MouvementfactureFacturationView extends acCouchdbView {
     public function createOrigine($famille, $mouvement) {
         $isProduitFirst = FactureConfiguration::getInstance()->isPdfProduitFirst();
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers(array('Date'));
         if (($mouvement->origine == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_DRM)
           || ($mouvement->origine == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12)) {
 
