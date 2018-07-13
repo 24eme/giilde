@@ -12,7 +12,6 @@ all:
         identifiant_prefix: ""
       type_libre:
         identifiant_prefix: ""
-      idcontrat: "ARCHIVE"
       stockage_code_produit: "identifiant_analytique"
       prefix_code_comptable: "4110"
       pdf_produit: true

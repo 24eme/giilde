@@ -9,7 +9,6 @@ all:
         identifiant_prefix: "1"
       type_libre:
         identifiant_prefix: "1"
-      idcontrat: "ARCHIVE"
       stockage_code_produit: "identifiant_analytique"
       pdf_produit: false
       pdf_nom_ref_client: "N° IVBD"

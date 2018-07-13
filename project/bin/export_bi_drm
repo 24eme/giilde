@@ -8,10 +8,10 @@ curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/drm/_view/all?reduce=fal
 rm $TMP/export_bi_drm.csv.temp > /dev/null 2>&1
 touch $TMP/export_bi_drm.csv.temp
 cat $TMP/all_drm.csv | while read line; do
-   LINEETBID=`echo $line | cut -d "," -f 2`;
-   CMD=`cat $TMP/export_bi_etablissements.csv | grep $LINEETBID | cut -d ";" -f 6`;
-   echo $CMD","$line >> $TMP/export_bi_drm.csv.temp
+   LINEETBID=`echo $line | cut -d "," -f 2 | sed 's/\"//g'`;
+   ETB=$(cat $TMP/export_bi_etablissements.csv | grep $LINEETBID | cut -d ";" -f 6);
+   echo $ETB","$line >> $TMP/export_bi_drm.csv.temp
 done
 
-echo "#DRM ID;identifiant etablissement;nom etablissement;campagne;periode;numéro archivage;teledeclare" > $TMP/export_bi_drm.csv
-cat $TMP/export_bi_drm.csv.temp | awk -F "," '{print $2";"$3";"$1";"$4";"$5";"$11";"$12}' | sed 's/"value":1}//g'  >> $TMP/export_bi_drm.csv
+echo "#DRM ID;identifiant etablissement;nom etablissement;campagne;periode;numéro archivage;teledeclare;Transfert douane;Retour douane" > $TMP/export_bi_drm.csv
+cat $TMP/export_bi_drm.csv.temp | awk -F "," '{ retour="KO"; if($15=="true"){ retour="OK"; } print $2";"$3";"$1";"$4";"$5";"$11";"$12";"$13";"retour}' | sed 's/"value":1}//g' | sed 's/\"//g'  >> $TMP/export_bi_drm.csv

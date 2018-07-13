@@ -179,8 +179,13 @@ $mouvement->origine = FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_DRM;
 $mouvement->vrac_destinataire = "Test destinaire";
 $mouvement->detail_libelle = "000001";
 $mouvement->vrac_destinataire = date('Ymd')."000001";
+$mouvement->vrac_numero = "VRAC-2018000099999";
 
-$origine = (FactureConfiguration::getInstance()->isPdfProduitFirst()) ? "Contrat ".$mouvement->vrac_destinataire : "Contrat n° ".$mouvement->detail_libelle." (".$mouvement->vrac_destinataire.") ";
+if($application == "ivso") {
+    $origine = (FactureConfiguration::getInstance()->isPdfProduitFirst()) ? "Contrat ".$mouvement->vrac_destinataire : "Contrat n° 99999 (".$mouvement->vrac_destinataire.") ";
+} else {
+    $origine = (FactureConfiguration::getInstance()->isPdfProduitFirst()) ? "Contrat ".$mouvement->vrac_destinataire : "Contrat n° ".$mouvement->detail_libelle." (".$mouvement->vrac_destinataire.") ";
+}
 
 $t->is(MouvementfactureFacturationView::getInstance()->createOrigine(SocieteClient::TYPE_OPERATEUR, $mouvement), $origine, "Le calcule de l'origine est correct");
 

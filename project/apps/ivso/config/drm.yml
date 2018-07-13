@@ -13,3 +13,4 @@ all:
       aggregate_edi: [ ]
       declassement_igp: true
       mouvement_divisable_seuil: 0
+      xml_transfert_echec: "Le transfert de votre DRM a échoué:\n\nDESCRIPTION_ERREUR\n\nNous vous remercions de prendre contact avec l'IVSO soit par courriel à l'adresse assistance@france-sudouest.com soit par téléphone au numéro 05 61 73 87 06"

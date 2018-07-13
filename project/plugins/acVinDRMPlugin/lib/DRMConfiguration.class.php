@@ -130,6 +130,9 @@ class DRMConfiguration {
         return $this->configuration['pdf_font_size'];
     }
 
-
+    public function getXmlTransfertEchec($cielResponse){
+        $erreur = preg_replace('/<\/erreur-fonctionnelle>/' ,'<br/></erreur-fonctionnelle>', html_entity_decode($cielResponse));
+        return "<p>".str_replace("DESCRIPTION_ERREUR",$erreur,nl2br($this->configuration['xml_transfert_echec']))."</p>";
+    }
 
 }

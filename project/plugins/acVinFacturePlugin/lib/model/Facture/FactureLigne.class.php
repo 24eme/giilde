@@ -117,11 +117,11 @@ class FactureLigne extends BaseFactureLigne {
     public function setLibelle($l) {
         $this->_set('libelle', str_replace('"','', $l));
     }
-    
+
     public function getLibelle() {
        return str_replace('"','', $this->_get('libelle'));
     }
-    
+
     public function getLibellePrincipal() {
 
         return trim(preg_replace("/\(.*\)/", "", $this->libelle));

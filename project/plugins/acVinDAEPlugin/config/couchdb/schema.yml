@@ -1,0 +1,30 @@
+#schema des DAE
+DAE:
+  definition:
+    fields:
+      _id: {}
+      _rev: {}
+      type: {}
+      identifiant: {  }
+      date: {  }
+      declarant:
+        type: collection
+        definition:
+          fields:
+            nom: {  }
+            raison_sociale: {  }
+            cvi: {  }
+            no_accises: {   }
+            adresse: {  }
+            commune: {  }
+            code_postal: {   }
+            region: {  }
+      produit_hash: {  }
+      label: {  }
+      millesime: {  }
+      type_acheteur: {  }
+      destination: {  }
+      volume: {  }
+      volume_hl: {  }
+      contenance: {  }
+      prix_ht: {  }

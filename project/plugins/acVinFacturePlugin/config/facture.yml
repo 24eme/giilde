@@ -9,7 +9,7 @@ all:
         identifiant_prefix: "1"
       type_libre:
         identifiant_prefix: "1"
-      idcontrat: "ID"
+      idcontrat: "ARCHIVE"
       stockage_code_produit: "code_compte"
       prefix_code_comptable: ""
       pdf_produit: false

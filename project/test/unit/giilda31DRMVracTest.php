@@ -242,7 +242,11 @@ $t->is($mouvementVrac->type_libelle, $conf->declaration->get('details/sorties/vr
 $t->is($mouvementVrac->origine, "DRM", "L'origine est OK");
 $t->is($mouvementVrac->matiere, "contrat_vins", "La matière est OK");
 $t->is($mouvementVrac->detail_libelle, $vracObj->numero_archive, "Le detail libellé est OK");
-$t->is(MouvementfactureFacturationView::getInstance()->createOrigine(SocieteClient::TYPE_OPERATEUR, $mouvementVrac), "Contrat n° ".$vracObj->numero_archive." (".$nego_horsregion->nom.") ", "Le libellé vrac pour la facture est OK");
+if($application == "ivso") {
+    $t->is(MouvementfactureFacturationView::getInstance()->createOrigine(SocieteClient::TYPE_OPERATEUR, $mouvementVrac), "Contrat n° ".intval(substr($vracObj->_id, -6))." (".$nego_horsregion->nom.") ", "Le libellé vrac pour la facture est OK");
+} else {
+    $t->is(MouvementfactureFacturationView::getInstance()->createOrigine(SocieteClient::TYPE_OPERATEUR, $mouvementVrac), "Contrat n° ".$vracObj->numero_archive." (".$nego_horsregion->nom.") ", "Le libellé vrac pour la facture est OK");
+}
 $t->is($mouvementVrac->quantite, $vracObj->volume_enleve, "La quantité est OK");
 $t->is($mouvementVrac->prix_unitaire, $conf->get($produit_hash)->getTauxCVO(date('Y-m-d')), "Le prix unitaire est OK");
 $t->is($mouvementVrac->prix_ht, $vracObj->volume_enleve * $conf->get($produit_hash)->getTauxCVO(date('Y-m-d')), "Le prix HT est OK");

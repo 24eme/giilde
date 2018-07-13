@@ -142,7 +142,7 @@ class MouvementfactureFacturationView extends acCouchdbView {
             }
 
             if ($famille == SocieteClient::TYPE_OPERATEUR) {
-                if ( sfConfig::get('app_configuration_facture_idcontrat') == 'ID' ) {
+                if (FactureConfiguration::getInstance()->getIdContrat() == 'ID' ) {
                     $idContrat = intval(substr($mouvement->vrac_numero, -6));
                 }else{
                     $idContrat = $mouvement->detail_libelle;
