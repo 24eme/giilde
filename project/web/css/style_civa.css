@@ -1,9 +1,9 @@
 body {
-    background: #000 url("https://declaration.vinsalsace.pro/images/fonds/bg_global.jpg") no-repeat scroll center 0px;
+    background: #000 url("/images/fonds/bg_global.jpg") no-repeat scroll center 0px;
 }
 
 body > .navbar {
-    background: transparent url("https://declaration.vinsalsace.pro/images/fonds/bg_header.png") repeat scroll 0px 0px;
+    background: transparent url("/images/fonds/bg_header.png") repeat scroll 0px 0px;
 }
 
 #main {

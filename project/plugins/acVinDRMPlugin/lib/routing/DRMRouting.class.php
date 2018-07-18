@@ -286,6 +286,8 @@ class DRMRouting {
         		));
         $r->prependRoute('drm_retour', new DRMRoute('/drm/:identifiant/retour/:periode_version', array('module' => 'drm_xml', 'action' => 'retour'), array('sf_method' => array('get', 'post')), array('model' => 'DRM', 'type' => 'object')));
 
+        $r->prependRoute('drm_xml_table', new DRMRoute('/drm/:identifiant/xml-table/:periode_version/:retour', array('module' => 'drm_xml', 'action' => 'table'), array('sf_method' => array('get')), array('model' => 'DRM', 'type' => 'object')));
+
         $r->prependRoute('drm_retour_refresh', new DRMRoute('/drm/:identifiant/maj-retour/:periode_version', array('module' => 'drm_xml', 'action' => 'retourRefresh'), array('sf_method' => array('get', 'post')), array('model' => 'DRM', 'type' => 'object')));
 
 

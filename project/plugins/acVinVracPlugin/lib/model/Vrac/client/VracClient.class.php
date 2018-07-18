@@ -805,19 +805,18 @@ class VracClient extends acCouchdbClient {
     }
 
     public function buildEnlevements($vrac) {
-        $all_mouvements_vendeur = DRMMouvementsConsultationView::getInstance()->findByEtablissement($vrac->vendeur_identifiant);
         $enlevements = array();
-        foreach ($all_mouvements_vendeur->rows as $rowView) {
-            $vrac_view_id = "VRAC-".$rowView->key[DRMMouvementsConsultationView::KEY_VRAC_NUMERO];
-            if ($vrac_view_id && $vrac_view_id == $vrac->_id) {
-
-                $index = $rowView->value[DRMMouvementsConsultationView::VALUE_MOUVEMENT_ID];
-                $enlevements[$index] = new stdClass();
-                $enlevements[$index]->drm_id = $rowView->id;
-                $enlevements[$index]->periode = $rowView->key[DRMMouvementsConsultationView::KEY_PERIODE];
-                $enlevements[$index]->volume = $rowView->value[DRMMouvementsConsultationView::VALUE_VOLUME] * -1;
-
-            }
+        $mvts = $vrac->getMouvementsFromDrmOrSV12ImpactVolumeEnleve();
+        foreach ($mvts as $key => $mvt) {
+                $enlevements[$mvt->doc_id] = new stdClass();
+                $enlevements[$mvt->doc_id]->doc_id = $mvt->doc_id;
+                $enlevements[$mvt->doc_id]->type = $mvt->type;
+                if($mvt->type == "DRM"){
+                    $enlevements[$mvt->doc_id]->periode = preg_replace('/DRM-([0-9]+)-/','',$mvt->doc_id);
+                }else{
+                    $enlevements[$mvt->doc_id]->periode = preg_replace('/(-M[0-9]+)/','',preg_replace('/SV12-([0-9]+)-/','',$mvt->doc_id));
+                }
+                $enlevements[$mvt->doc_id]->volume = $mvt->volume * -1;
         }
 
         return $enlevements;

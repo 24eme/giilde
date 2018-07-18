@@ -179,3 +179,114 @@ function centilisation2Douane($c, $libelle) {
 		}
 		return "AUTRE";
 }
+
+
+function xmlGetNodesToTable($flatXmlNodes){
+	$str = "";
+	if(is_string($flatXmlNodes)){
+		return "<tr><td colspan='2' class='text-center'><strong>".$flatXmlNodes."</strong></td></tr>";
+	}
+	foreach ($flatXmlNodes as $key => $value) {
+		if($value === NULL){ continue; }
+		if(preg_match("/^produit|volume$/",$key)){
+			$str .="<tr><td colspan='2' class=''><strong>".$value."</strong></td></tr>";
+
+		}elseif(preg_match("/^categorie-fiscale-capsules$/",$key) || preg_match("/^type-capsule$/",$key)){
+			$str .="<tr><td class='text-center'><strong>".str_ireplace("/"," => ",preg_replace("/\/[0-9]+\//"," => ",$key))."</strong></td>"
+			."<td  >".$value."</td></tr>";
+		}else{
+			$str .="<tr><td  style='min-width:400px;max-width:400px; text-align: left;'>".str_ireplace("/"," => ",preg_replace("/\/[0-9]+\//"," => ",$key))."</td>"
+			."<td  >".$value."</td></tr>";
+		}
+	}
+	return $str;
+}
+
+function xmlProduitsToTable($flatXml,$reg){
+	$produits = array();
+	foreach ($flatXml as $key => $value) {
+		if(preg_match("/^$reg\/produit\/[0-9]+\//",$key)){
+			$oneNode = true;
+			$match = array();
+			preg_match("/($reg\/produit\/[0-9]+\/)(.*)/",$key,$match);
+			$radix = $match[1];
+			$inaoCode = isset($flatXml[$radix."code-inao"])? $flatXml[$radix."code-inao"] : $flatXml[$radix."libelle-fiscal"];
+			$inaoKey = $radix.$inaoCode;
+
+			if(!array_key_exists($inaoKey,$produits)){
+				$produits[$inaoKey] = array();
+				$produits[$inaoKey]["produit"] = $flatXml[$radix."libelle-personnalise"]." (".$inaoCode.")";
+			}
+			if(!preg_match("/libelle-personnalise/",$key) && !preg_match("/code-inao/",$key)){
+				$produits[$inaoKey][str_ireplace($radix,"",$key)] = $value;
+			}
+		}
+	}
+	$str = "";
+	foreach ($produits as $inaoKey => $produit) {
+		$str.= xmlGetNodesToTable($produit);
+	}
+	if(!count($produits)){
+		$str.= xmlGetNodesToTable("Pas de noeud");
+	}
+	return $str;
+}
+
+function xmlCrdsToTable($flatXml,$reg){
+
+	$crds = array();
+	foreach ($flatXml as $key => $value) {
+		if(preg_match("/^$reg\/([0-9]+\/)?/",$key)){
+			$match = array();
+			preg_match("/($reg\/([0-9]+\/)?)(.*)/",$key,$match);
+			$radix = $match[1];
+			if(!array_key_exists($radix,$crds)){
+				$crds[$radix] = array();
+				$crds[$radix]["crd"] = $flatXml[$radix."type-capsule"]." (".$flatXml[$radix."categorie-fiscale-capsules"].")";
+			}
+			if(!preg_match("/type-capsule/",$key) && !preg_match("/categorie-fiscale-capsules/",$key)){
+				$p_rad = str_ireplace("/","\/",$radix)."centilisation\/([0-9]+\/)?";
+
+				$match2 = array();
+				preg_match("/$p_rad/",$key,$match2);
+				if(count($match2)){
+					$c_key = $flatXml[$match2[0]."@attributes/volume"];
+					if(!array_key_exists($c_key,$crds[$radix])){
+						$crds[$radix][$c_key] = array();
+						$crds[$radix][$c_key]['volume'] = $c_key;
+					}
+					if(!preg_match("/@attributes\/volume/",$key) && $value){
+					$crds[$radix][$c_key][preg_replace("/$p_rad/","",$key)] = $value;
+					}
+				}
+			}
+		}
+	}
+	$str = "";
+	foreach ($crds as $rad => $crdCat) {
+		foreach ($crdCat as $k => $crdVol) {
+			$str.= xmlGetNodesToTable($crdVol);
+		}
+	}
+	if(!count($crds)){
+		$str.= xmlGetNodesToTable("Pas de noeud");
+	}
+	return $str;
+}
+
+function xmlPartOfToTable($flatXml,$regexs = array(),$withRemove = false){
+	$partOfFlatXml = array();
+	foreach ($flatXml as $key => $value) {
+		foreach ($regexs as $reg) {
+			if(preg_match("/^$reg/",$key)){
+				$newKey = $key;
+				if($withRemove) $newKey = str_ireplace($reg."/","",$key);
+				if($reg != "compte-crd" || $value){
+					$partOfFlatXml[$newKey] = $value;
+
+				}
+			}
+		}
+	}
+	return xmlGetNodesToTable($partOfFlatXml);
+}

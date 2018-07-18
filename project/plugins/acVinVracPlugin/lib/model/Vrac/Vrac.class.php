@@ -538,22 +538,12 @@ class Vrac extends BaseVrac {
 
     public function updateVolumesEnleves() {
         $this->volume_enleve = 0;
-        $mvts_drm = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissement($this->vendeur_identifiant);
-        $mvts_sv12 = SV12MouvementsConsultationView::getInstance()->getMouvementsByEtablissement($this->acheteur_identifiant);
-        foreach ($mvts_drm as $key => $mvt) {
-            $pos = strpos($mvt->produit_hash, $this->produit);
-            if(($mvt->type_hash == "vrac_details" && ($pos !== false) && $mvt->detail_identifiant == $this->_id) || (preg_match("/^creationvrac/",$mvt->type_hash) && ($pos !== false) && ("VRAC-".$mvt->vrac_numero == $this->_id))){                
-                $volume_enleve = $mvt->volume * -1;
-                $this->volume_enleve += $volume_enleve;
-            }
+        $mvts = $this->getMouvementsFromDrmOrSV12ImpactVolumeEnleve();
+        foreach ($mvts as $mvt) {
+            $volume_enleve = $mvt->volume * -1;
+            $this->volume_enleve += $volume_enleve;
         }
-        foreach ($mvts_sv12 as $key => $mvt) {
-            $pos = strpos($mvt->produit_hash, $this->produit);
-            if($pos !== false && $mvt->detail_identifiant == $this->_id){
-                $volume_enleve = $mvt->volume * -1;
-                $this->volume_enleve += $volume_enleve;
-            }
-        }
+
         $seuil_contrat = VracConfiguration::getInstance()->getSoldeSeuil();
         if (strpos($seuil_contrat, '%') !== FALSE) {
             $seuil_contrat_pourcent = 1 - floatval(trim(str_replace('%', "", $seuil_contrat))) / 100;
@@ -569,6 +559,26 @@ class Vrac extends BaseVrac {
                 $this->desolder();
             }
         }
+
+    }
+
+    public function getMouvementsFromDrmOrSV12ImpactVolumeEnleve(){
+        $mvts = array();
+        $mvts_drm = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissement($this->vendeur_identifiant);
+        $mvts_sv12 = SV12MouvementsConsultationView::getInstance()->getMouvementsByEtablissement($this->acheteur_identifiant);
+        foreach ($mvts_drm as $key => $mvt) {
+            $pos = strpos($mvt->produit_hash, $this->produit);
+            if(($mvt->type_hash == "vrac_details" && ($pos !== false) && $mvt->detail_identifiant == $this->_id) || (preg_match("/^creationvrac/",$mvt->type_hash) && ($pos !== false) && ("VRAC-".$mvt->vrac_numero == $this->_id))){
+                $mvts[] = $mvt;
+            }
+        }
+        foreach ($mvts_sv12 as $key => $mvt) {
+            $pos = strpos($mvt->produit_hash, $this->produit);
+            if($pos !== false && $mvt->detail_identifiant == $this->_id){
+                $mvts[] = $mvt;
+            }
+        }
+        return $mvts;
     }
 
 

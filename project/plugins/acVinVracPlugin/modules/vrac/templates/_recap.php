@@ -287,7 +287,7 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
                                 <li class="list-group-item clearfix">
                                     <div class="row">
                                         <span class="col-xs-6">
-                                            <strong><a href="<?php echo url_for('drm_redirect_to_visualisation', array('identifiant_drm' => $enlevement->drm_id)); ?>"> <?php echo "DRM ".preg_replace("/^DRM-[0-9]+-[0-9]+-?(M[0-9]+)?$/","$1 ",$enlevement->drm_id) . getFrPeriodeElision($enlevement->periode); ?></a></strong>
+                                            <strong><a href="<?php echo url_for('drm_redirect_to_visualisation', array('identifiant_drm' => $enlevement->doc_id)); ?>"> <?php echo "DRM ".preg_replace("/^DRM-[0-9]+-[0-9]+-?(M[0-9]+)?$/","$1 ",$enlevement->doc_id) . getFrPeriodeElision($enlevement->periode); ?></a></strong>
                                         </span>
                                         <span class="col-xs-6 text-right">
                                                 <?php echoFloat($enlevement->volume, true) ; echo " hl"; ?>

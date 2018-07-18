@@ -8,7 +8,7 @@ class DRMEDIImportTask extends sfBaseTask
         $this->addArguments(array(
             new sfCommandArgument('file', sfCommandArgument::REQUIRED, "Fichier csv pour l'import"),
             new sfCommandArgument('periode', sfCommandArgument::REQUIRED, "Periode de la DRM"),
-            new sfCommandArgument('identifiant', sfCommandArgument::REQUIRED, "Identifiant de l'établissement"),
+            new sfCommandArgument('identifiant', sfCommandArgument::REQUIRED, "Identifiant de l'établissement (identifiant, cvi ou n° accises"),
             new sfCommandArgument('numero_archive', sfCommandArgument::OPTIONAL, "Numéro d'archive"),
         ));
 
@@ -17,7 +17,6 @@ class DRMEDIImportTask extends sfBaseTask
             new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
             new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'default'),
             new sfCommandOption('date-validation', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', false),
-            new sfCommandOption('creation-depuis-precedente', null, sfCommandOption::PARAMETER_REQUIRED, 'Création depuis la précédente', false),
             new sfCommandOption('facture', null, sfCommandOption::PARAMETER_REQUIRED, 'Flag automatiquement les mouvements comme facturé', true),
         ));
 
@@ -39,23 +38,29 @@ EOF;
         $databaseManager = new sfDatabaseManager($this->configuration);
         $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
 
-        if(DRMClient::getInstance()->find('DRM-'.$arguments['identifiant'].'-'.$arguments['periode'], acCouchdbClient::HYDRATE_JSON)) {
-            echo "Existe : ".'DRM-'.$arguments['identifiant'].'-'.$arguments['periode']."\n";
-            return;
+        $etablissement = EtablissementClient::getInstance()->find($arguments['identifiant'], acCouchdbClient::HYDRATE_JSON);
+
+        if(!$etablissement) {
+            $etablissement = EtablissementClient::getInstance()->findByNoAccise($arguments['identifiant']);
         }
 
-        if(!EtablissementClient::getInstance()->find($arguments['identifiant'], acCouchdbClient::HYDRATE_JSON)) {
+        if(!$etablissement) {
+            $etablissement = EtablissementClient::getInstance()->findByCvi($arguments['identifiant']);
+        }
+
+        if(!$etablissement) {
             echo "L'établissement n'existe pas;".$arguments['identifiant']."\n";
             return;
         }
 
-        if($options['creation-depuis-precedente']) {
-            $drm = DRMClient::getInstance()->createDocByPeriode($arguments['identifiant'], $arguments['periode']);
-        } else {
-            $drm = new DRM();
-            $drm->identifiant = $arguments['identifiant'];
-            $drm->periode = $arguments['periode'];
+        $identifiant = $etablissement->identifiant;
+
+        if(DRMClient::getInstance()->find('DRM-'.$identifiant.'-'.$arguments['periode'], acCouchdbClient::HYDRATE_JSON)) {
+            echo "Existe : ".'DRM-'.$identifiant.'-'.$arguments['periode']."\n";
+            return;
         }
+
+        $drm = DRMClient::getInstance()->createDocByPeriode($identifiant, $arguments['periode']);
 
         if($arguments['numero_archive']) {
             $drm->numero_archive = $arguments['numero_archive'];
@@ -100,7 +105,7 @@ EOF;
             DRMClient::getInstance()->generateVersionCascade($drm);
 
         } catch(Exception $e) {
-            echo $e->getMessage().";#".$arguments['periode'].";".$arguments['identifiant']."\n";
+            echo $e->getMessage().";#".$arguments['periode'].";".$identifiant."\n";
             if(isset($options['trace'])) {
                 throw $e;
             }
