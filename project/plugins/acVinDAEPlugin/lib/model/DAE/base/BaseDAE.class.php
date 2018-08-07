@@ -18,7 +18,7 @@
  * @property string $volume
  * @property string $volume_hl
  * @property string $contenance
- * @property string $prix_ht
+ * @property string $prix_hl
 
  * @method string getId()
  * @method string setId()

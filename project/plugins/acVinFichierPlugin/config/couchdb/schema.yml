@@ -1,0 +1,45 @@
+
+Fichier:
+  definition:
+    fields:
+      _id: {  }
+      _rev: {  }
+      _attachments:
+        type: collection
+        definition:
+          fields:
+            '*':
+              type: collection
+              definition:
+                fields:
+                  '*': { }
+      type: {  }
+      fichier_id: { }
+      identifiant: { }
+      date_depot: { }
+      date_import: { }
+      libelle: { }
+      mime: { required: false }
+      visibilite: { type: integer }
+      papier: { required: false, type: integer }
+      pieces:
+        type: array_collection
+        definition:
+          fields:
+            '*':
+              class: FichierPiece
+              inheritance: Piece
+              type: collection
+              definition:
+                fields:
+                  identifiant: { }
+                  date_depot: { }
+                  libelle: { }
+                  mime: { }
+                  visibilite: { type: integer }
+                  source: { }
+                  fichiers:
+                    type: array_collection
+                    definition:
+                      fields:
+                        '*': { }

@@ -388,7 +388,11 @@ class drmActions extends drmGeneriqueActions {
     }
 
     public function executeReouvrir(sfWebRequest $request) {
-        $this->redirect403IfIsTeledeclaration();
+        if(sfConfig::get('app_force_usurpation_mode')) {
+            $this->redirect403Unless($this->getUser()->isUsurpationCompte());
+        } else {
+            $this->redirect403IfIsTeledeclaration();
+        }
         $drm = $this->getRoute()->getDRM();
         $this->redirect403Unless($drm->isTeledeclareNonFacturee());
 

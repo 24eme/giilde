@@ -16,7 +16,7 @@
 
 
         <h3 style="margin-bottom: 30px">DRM <?php echo getFrPeriodeElision($drm->periode); ?> <?php if ($drm->isTeledeclare()): ?><small>(Validée le <?php echo format_date($drm->valide->date_signee, "dd/MM/yyyy", "fr_FR"); ?>)</small><?php endif; ?>
-        <?php if (!$isTeledeclarationMode): ?>
+        <?php if (!$isTeledeclarationMode || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())): ?>
           <?php if ($drm->isModifiable()): ?>
             <div class="pull-right">
               <a class="btn btn-warning" href="<?php echo url_for('drm_modificative', $drm) ?>">Modifier la DRM</a>

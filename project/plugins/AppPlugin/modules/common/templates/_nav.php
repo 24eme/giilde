@@ -64,6 +64,19 @@
             'etablissement' => $etablissement,
             'target' => '_self'
        ));*/
+
+
+       if(FichierConfiguration::getInstance()->isActif()):
+       include_component('common', 'navItem', array(
+       		'libelle' => 'Documents',
+       		'prefix' => 'fichier',
+       		'route' => 'fichiers',
+       		'route_etablissement' => 'fichiers_etablissement',
+       		'etablissement' => $etablissement,
+       		'target' => '_self'
+       ));
+       endif;
+       
    endif;
 
 
@@ -99,6 +112,16 @@
        'target' => '_self'
 ));
 endif; ?>
+<?php if(FichierConfiguration::getInstance()->isActif()):
+       include_component('common', 'navItem', array(
+       		'libelle' => 'Documents',
+       		'prefix' => 'fichier',
+       		'route' => 'fichiers_societe',
+       		'teledeclaration' => true,
+       		'identifiant' => $sf_user->getCompte()->getSociete()->getEtablissementPrincipal()->identifiant,
+       		'target' => '_self'
+       ));
+ endif; ?>
 <?php endif; ?>
 <?php include_partial('common/navExtra'); ?>
 </ul>
@@ -133,6 +156,8 @@ endif; ?>
      <li><a tabindex="-1" href="<?php echo url_for('drm_debrayage', array('identifiant' => $etablissement->identifiant)) ?>"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
 <?php elseif (preg_match('/vrac/', $module)): ?>
      <li><a tabindex="-1" href="<?php echo url_for('vrac_debrayage', array('identifiant' => $etablissement->identifiant)) ?>"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
+<?php elseif (preg_match('/fichier/', $module)): ?>
+     <li><a tabindex="-1" href="<?php echo url_for('fichiers_debrayage', array('identifiant' => $etablissement->identifiant)) ?>"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
 <?php endif; ?>
 <?php endif; ?>
 <?php endif; ?>

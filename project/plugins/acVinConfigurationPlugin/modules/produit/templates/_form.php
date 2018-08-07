@@ -86,7 +86,7 @@
 
             </div>
         <?php endif; ?>
-        <?php if ($form->getObject()->hasDroit(ConfigurationDroits::DROIT_DOUANE)): ?>
+        <?php if ($form->getObject()->hasDroit(ConfigurationDroits::DROIT_DOUANE) && is_a($form->getObject(), "ConfigurationGenre")): ?>
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">

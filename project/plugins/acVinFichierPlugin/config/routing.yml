@@ -1,0 +1,127 @@
+# PIECE
+
+get_piece:
+  url: /fichier/piece/get/:doc_id/:piece_id
+  param: { module: fichier, action: getPiece }
+
+# FICHIER
+
+fichiers:
+  url: /fichier
+  param: { module: fichier, action: index }
+
+fichiers_etablissement_selection:
+  url: /fichier/etablissement-selection
+  param: { module: fichier, action: etablissementSelection }
+  requirements:
+    sf_method: [post]
+
+fichiers_etablissement:
+  url: /fichier/etablissement/:identifiant
+  param: { module: fichier, action: monEspace }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+fichiers_societe:
+  url: /fichier/societe/:identifiant
+  param: { module: fichier, action: societe }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+    
+fichiers_debrayage:
+  url: /fichier/connexion/:identifiant
+  param: { module: fichier, action: connexion }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+pieces_historique:
+  url: /fichier/historique-documents/:identifiant
+  param: { module: fichier, action: piecesHistorique }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get]
+
+get_fichier:
+  url: /fichier/get/:id
+  param: { module: fichier, action: get }
+  class: FichierRoute
+  options:
+    model:    Fichier
+    type:     object
+  requirements:
+    sf_method: [get]
+
+delete_fichier:
+  url: /fichier/delete/:id
+  param: { module: fichier, action: delete }
+  class: FichierRoute
+  options:
+    model:    Fichier
+    type:     object
+  requirements:
+    sf_method: [get]
+
+upload_fichier:
+  url: /fichier/upload/:identifiant
+  param: { module: fichier, action: upload }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+csvgenerate_fichier:
+  url: /fichier/csvgenerate/:id
+  param: { module: fichier, action: csvgenerate }
+  class: FichierRoute
+  options:
+    model:    Fichier
+    type:     object
+  requirements:
+    sf_method: [get]
+
+edit_fichier:
+  url: /fichier/edit/:id
+  param: { module: fichier, action: edit }
+  class: FichierRoute
+  options:
+    model:    Fichier
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+new_fichier:
+  url: /fichier/new/:identifiant
+  param: { module: fichier, action: new }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+scrape_fichier:
+  url: /fichier/scrape/:identifiant
+  param: { module: fichier, action: scrape }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]

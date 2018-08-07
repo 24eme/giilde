@@ -19,12 +19,25 @@ DAE:
             commune: {  }
             code_postal: {   }
             region: {  }
-      produit_hash: {  }
-      label: {  }
+      produit_key: {  }
+      produit_libelle: {  }
+      label_key: {  }
+      label_libelle: {  }
+      mention_key: {  }
+      mention_libelle: {  }
       millesime: {  }
-      type_acheteur: {  }
-      destination: {  }
-      volume: {  }
+      no_accises_acheteur: {   }
+      nom_acheteur: {   }
+      type_acheteur_key: {  }
+      type_acheteur_libelle: {  }
+      destination_key: {  }
+      destination_libelle: {  }
+      conditionnement_key: {  }
+      conditionnement_libelle: {  }
+      contenance_key: {  }
+      contenance_hl: {  }
+      contenance_libelle: {  }
+      quantite: {  }
+      prix_unitaire: {  }
       volume_hl: {  }
-      contenance: {  }
-      prix_ht: {  }
+      prix_hl: {  }
