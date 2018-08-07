@@ -8,10 +8,11 @@ if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration-
     exit(0);
 }
 
-$t = new lime_test(30);
+$t = new lime_test(49);
 
 $nego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
 $nego_horsregion = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_horsregion')->getEtablissement();
+$nego2 =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region_2')->getEtablissement();
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();
 $produit_hash = null;
 $produitSansCvo_hash = null;
@@ -29,6 +30,16 @@ $periode = date('Ym');
 foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k => $v) {
   $drm = DRMClient::getInstance()->find($k);
   $drm->delete(false);
+}
+
+foreach(DRMClient::getInstance()->viewByIdentifiant($nego->identifiant) as $k => $v) {
+  $drm = DRMClient::getInstance()->find($k);
+  $drm->delete(false);
+}
+
+foreach(SV12Client::getInstance()->viewByIdentifiant($nego2->identifiant) as $k => $v) {
+  $sv12 = SV12Client::getInstance()->find($k);
+  SV12Client::getInstance()->deleteDocument($sv12);
 }
 
 //Début des tests
@@ -135,6 +146,7 @@ foreach($mouvementsFacturable as $key => $mouvement) {
     }
 }
 
+
 if($application == "ivbd") {
     $t->is(count($mouvementsFacturable), 1, $drm->_id." : on retrouve uns seul mouvement facturable dans la vue facture du viti");
 } else {
@@ -207,3 +219,52 @@ $t->is(boolval($drm_mod->isValidee()), true, $drm_mod->_id." : La DRM est de nou
 
 $vracObj = VracClient::getInstance()->find($vrac->value[VracSoussigneIdentifiantView::VRAC_VIEW_VALUE_ID]);
 $t->is($vracObj->volume_enleve, 150, $vracObj->_id." : Le contrat a pour volume enlevé : 150");
+
+$t->comment("Test sur les mouvements de facturation");
+
+$mouvementsFacturation = FactureClient::getInstance()->getFacturationForSociete($viti->getSociete());
+$t->is(count($mouvementsFacturation), (($application == "ivbd") ? 2 : 3), "Il y a ".(($application == "ivbd") ? 2 : 3)." mouvements de facturation");
+
+$mouvementVrac = null;
+foreach($mouvementsFacturation as $mouvement) {
+    if($mouvement->matiere == "contrat_vins") {
+        $mouvementVrac = $mouvement;
+        break;
+    }
+}
+
+$t->is($mouvementVrac->date, date('Y-m-31'), "La date est OK");
+$t->is($mouvementVrac->etablissement_identifiant, $viti->identifiant, "L'identifiant de l'établissement est OK");
+$t->is($mouvementVrac->produit_hash, $drm->getProduit($produit_hash, 'details')->getHash(), "La hash produit est OK");
+$t->is($mouvementVrac->produit_libelle, $drm->getProduit($produit_hash, 'details')->getLibelle(), "Le libellé produit est OK");
+$t->is($mouvementVrac->vrac_destinataire, $nego_horsregion->nom, "Le destinataire vrac est OK");
+$t->is($mouvementVrac->type_libelle, $conf->declaration->get('details/sorties/vrac')->getLibelle(), "Le libellé du mouvement est OK");
+$t->is($mouvementVrac->origine, "DRM", "L'origine est OK");
+$t->is($mouvementVrac->matiere, "contrat_vins", "La matière est OK");
+$t->is($mouvementVrac->detail_libelle, $vracObj->numero_archive, "Le detail libellé est OK");
+if($application == "ivso") {
+    $t->is(MouvementfactureFacturationView::getInstance()->createOrigine(SocieteClient::TYPE_OPERATEUR, $mouvementVrac), "Contrat n° ".intval(substr($vracObj->_id, -6))." (".$nego_horsregion->nom.") ", "Le libellé vrac pour la facture est OK");
+} else {
+    $t->is(MouvementfactureFacturationView::getInstance()->createOrigine(SocieteClient::TYPE_OPERATEUR, $mouvementVrac), "Contrat n° ".$vracObj->numero_archive." (".$nego_horsregion->nom.") ", "Le libellé vrac pour la facture est OK");
+}
+$t->is($mouvementVrac->quantite, $vracObj->volume_enleve, "La quantité est OK");
+$t->is($mouvementVrac->prix_unitaire, $conf->get($produit_hash)->getTauxCVO(date('Y-m-d')), "Le prix unitaire est OK");
+$t->is($mouvementVrac->prix_ht, $vracObj->volume_enleve * $conf->get($produit_hash)->getTauxCVO(date('Y-m-d')), "Le prix HT est OK");
+$t->is($mouvementVrac->id_doc, $drm->_id, "L'id DRM est OK");
+$t->is($mouvementVrac->vrac_numero, str_replace("VRAC-", "", $vracObj->_id), "L'identifiant du contrat est ok");
+
+$mouvKeyOrigine1 = null;
+$mouvKeyOrigine2 = null;
+foreach($drm_mod->mouvements->get($viti->identifiant) as $mouv) {
+    if($mouv->detail_identifiant == $vracObj->_id && !$mouvKeyOrigine2) {
+        $mouvKeyOrigine2 = $mouv->getKey();
+        continue;
+    }
+    if($mouv->detail_identifiant == $vracObj->_id && !$mouvKeyOrigine1) {
+        $mouvKeyOrigine1 = $mouv->getKey();
+        continue;
+    }
+}
+$t->is(count($mouvementVrac->origines), 2, "Il y a 2 origines");
+$t->is($mouvementVrac->origines[0], $drm_mod->_id.":".$mouvKeyOrigine1, "L'origine n°1 est ok");
+$t->is($mouvementVrac->origines[1], $drm_mod->_id.":".$mouvKeyOrigine2, "L'origine n°2 est ok");

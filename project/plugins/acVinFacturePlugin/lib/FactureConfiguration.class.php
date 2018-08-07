@@ -121,6 +121,11 @@ class FactureConfiguration {
         return $this->configuration['export_shell'];
     }
 
+    public function getIdContrat() {
+
+        return $this->configuration['idcontrat'];
+    }
+
     public function getReglement() {
       if (isset($this->configuration['reglement'])) {
         return $this->configuration['reglement'];

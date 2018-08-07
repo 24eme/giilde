@@ -8,7 +8,7 @@ class EtablissementRoute extends sfObjectRoute implements InterfaceEtablissement
         $this->etablissement = EtablissementClient::getInstance()->find($parameters['identifiant']);
         $myUser = sfContext::getInstance()->getUser();
         if ($myUser->hasTeledeclaration() &&
-                $myUser->getCompte()->identifiant != $this->getEtablissement()->getSociete()->getMasterCompte()->identifiant) {
+                $myUser->getCompte()->id_societe != $this->getEtablissement()->id_societe) {
             throw new sfError404Exception("Vous n'avez pas le droit d'accéder à cette page");
         }
         $module = sfContext::getInstance()->getRequest()->getParameterHolder()->get('module');
@@ -22,11 +22,11 @@ class EtablissementRoute extends sfObjectRoute implements InterfaceEtablissement
     }
 
     public function getEtablissement() {
-      
+
 	if (!$this->etablissement) {
            $this->etablissement = $this->getObject();
       	}
-      	
+
 	return $this->etablissement;
     }
 }

@@ -98,7 +98,7 @@
             <table class="table table-striped table-condensed">
                 <tbody>
                   <tr>
-                      <td class="col-xs-4">Transmission (<?php echo link_to('XML transmis', 'drm_xml', $drm); ?>)</td>
+                      <td class="col-xs-4">Transmission (<?php echo link_to('XML transmis', 'drm_xml_table', array("identifiant" => $drm->identifiant,"periode_version" => $drm->getPeriodeAndVersion(), "retour" => "0")); ?>)</td>
                       <td class="col-xs-8">
                         <?php if ($drm->transmission_douane->success) : ?>
                           La transmission a été réalisée avec succès le <?php echo $drm->getTransmissionDate(); ?> avec l'accusé reception numéro <?php echo $drm->transmission_douane->id_declaration ?>.
@@ -116,13 +116,13 @@
                     <?php if (is_null($drm->transmission_douane->coherente)) : ?>
                       <tr><td>Retour XML</td><td>Aucun retour de la part de proDou@ne n'a été effectué<a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span></a></td></tr>
                     <?php elseif($drm->transmission_douane->coherente): ?>
-                      <tr><td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM est <strong>conforme</strong> à celle de proDou@ne
+                      <tr><td>Retour XML (<a href="<?php echo url_for('drm_xml_table', array('identifiant' => $drm->identifiant,"periode_version" => $drm->getPeriodeAndVersion(), 'retour' => "1")); ?>">XML reçu</a>)</td><td>La DRM est <strong>conforme</strong> à celle de proDou@ne
                               <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span></a>
                           </td>
                       </tr>
                     <?php else: ?>
                       <tr>
-                          <td>Retour XML (<a href="<?php echo url_for('drm_retour', $drm); ?>">XML reçu</a>)</td><td>La DRM n'est <strong>pas conforme</strong> à celle de proDou@ne
+                          <td>Retour XML (<a href="<?php echo url_for('drm_xml_table', array('identifiant' => $drm->identifiant,"periode_version" => $drm->getPeriodeAndVersion(), 'retour' => "1")); ?>">XML reçu</a>)</td><td>La DRM n'est <strong>pas conforme</strong> à celle de proDou@ne
                               <a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span></a>
                           </td>
                       </tr>

@@ -22,3 +22,4 @@ all:
       defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 750 },{ 'couleur' : 'BLEU', 'contenance' : 750 },{ 'couleur' : 'LIEDEVIN', 'contenance' : 750 } ]
       default_auto_checked: true
       pdf_font_size: false
+      xml_transfert_echec: "Une erreur s'est produite lors du transfert de votre DRM :\n\nDESCRIPTION_ERREUR"

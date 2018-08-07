@@ -37,7 +37,7 @@ class drm_editionActions extends drmGeneriqueActions {
             }
         }
     }
-    
+
 
 
     public function executeLibelles(sfWebRequest $request) {
@@ -46,9 +46,9 @@ class drm_editionActions extends drmGeneriqueActions {
     	if ($this->isTeledeclarationMode || !$this->drm->exist('transmission_douane') || !$this->drm->transmission_douane) {
     		$this->redirect404();
     	}
-    	
+
     	$this->form = new DRMLibellesForm($this->drm);
-    	
+
     	if ($request->isMethod(sfRequest::POST)) {
         	$this->form->bind($request->getParameter($this->form->getName()));
         	if ($this->form->isValid()) {
@@ -59,7 +59,11 @@ class drm_editionActions extends drmGeneriqueActions {
     }
 
     public function executeDetail(sfWebRequest $request) {
+        $this->detail = $this->getRoute()->getDRMDetail();
+        $this->getRequest()->setParameter('details', $this->detail->getParent()->getKey());
         $this->init();
+        $drmdetailtype = $this->getRequest()->getParameter('details');
+        $this->saisieSuspendu = ($drmdetailtype == str_replace('SAISIE_','',DRMClient::ETAPE_SAISIE_SUSPENDU));
         $this->initSocieteAndEtablissementPrincipal();
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         $this->loadFavoris();

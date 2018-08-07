@@ -17,9 +17,9 @@ $periode = "2017-2018";
 $idSV12 = SV12Client::getInstance()->buildId($nego->identifiant, $periode);
 
 //Suppression de la SV12 précédentes
-
-if($sv12 = SV12Client::getInstance()->find($idSV12)) {
-  acCouchdbManager::getClient()->delete($sv12);
+foreach(SV12Client::getInstance()->viewByIdentifiant($nego->identifiant) as $k => $v) {
+  $sv12 = SV12Client::getInstance()->find($k);
+  SV12Client::getInstance()->deleteDocument($sv12);
 }
 
 $t->comment("Création d'une SV12 ".$nego->identifiant);

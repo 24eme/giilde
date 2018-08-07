@@ -82,8 +82,12 @@ class DRMValidation extends DocumentValidation {
               }
             }
 
+            if ($detail->total < 0) {
+                $this->addPoint('vigilance', 'total_negatif', $detail->getLibelle(), $this->generateUrl('drm_edition_detail', $detail));
+            }
+
             if (!$detail->getConfig()->entrees->exist('declassement')) {
-                break;
+                continue;
             }
             if($detail->entrees->exist('repli') && $detail->sorties->exist('repli')){
               $total_entrees_replis += $detail->entrees->repli;
@@ -98,11 +102,8 @@ class DRMValidation extends DocumentValidation {
 
             $total_sorties_destructionperte += ($detail->sorties->exist('destructionperte')) ? $detail->sorties->destructionperte : 0;
 
-            if ($detail->total < 0) {
-                $this->addPoint('vigilance', 'total_negatif', $detail->getLibelle(), $this->generateUrl('drm_edition_detail', $detail));
-            }
             if (!$detail->getConfig()->entrees->exist('transfertsrecolte')) {
-                break;
+                continue;
             }
 
             $total_entrees_transfert_appellation += $detail->entrees->transfertsrecolte;

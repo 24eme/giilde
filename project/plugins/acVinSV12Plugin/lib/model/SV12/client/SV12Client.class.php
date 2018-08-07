@@ -130,6 +130,25 @@ class SV12Client extends acCouchdbClient {
       return VracClient::getInstance()->retrieveBySoussigneAndType($identifiant,  $campagne, array('start' => VracClient::TYPE_TRANSACTION_MOUTS, 'end' => VracClient::TYPE_TRANSACTION_RAISINS), 10000)->rows;
     }
 
+    public function viewByIdentifiant($identifiant) {
+        $rows = acCouchdbManager::getClient()
+                        ->startkey(array($identifiant))
+                        ->endkey(array($identifiant, array()))
+                        ->reduce(false)
+                        ->getView("sv12", "all")
+                ->rows;
+
+        $drms = array();
+
+        foreach ($rows as $row) {
+            $drms[$row->id] = $row->key;
+        }
+
+        krsort($drms);
+
+        return $drms;
+    }
+
     public function getLibelleFromId($id) {
 
         if (!preg_match('/^SV12-[0-9]+-([0-9]{4})-([0-9]{4})/', $id, $matches)) {
