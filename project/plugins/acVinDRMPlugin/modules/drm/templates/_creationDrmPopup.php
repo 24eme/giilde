@@ -23,12 +23,11 @@
                                         <input type="radio" checked="checked" id="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_DOCUMENTS.'_'.$periode . '_' . $identifiant; ?>" value="<?php echo DRMClient::DRM_CREATION_DOCUMENTS; ?>" name="drmChoixCreation[type_creation]">&nbsp;<label for="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_DOCUMENTS.'_'.$periode . '_' . $identifiant; ?>">Création d'une drm pré-remplie</label>
                                             <div class="pull-right"><?php echo getPointAideHtml('drm','creation_nouvelle') ?></div>
                                     </li>
-                                <?php else: ?>
+                                <?php endif; ?>
                                     <li class="col-xs-10 col-xs-offset-1">
-                                            <input type="radio" checked="checked" id="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_VIERGE.'_'.$periode . '_' . $identifiant; ?>" value="<?php echo DRMClient::DRM_CREATION_VIERGE; ?>" name="drmChoixCreation[type_creation]">&nbsp;<label for="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_VIERGE.'_'.$periode . '_' . $identifiant; ?>">Création d'une drm vierge</label>
+                                            <input type="radio" <?php if(!DRMConfiguration::getInstance()->getRepriseDonneesUrl()): ?>checked="checked"<?php endif; ?> id="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_VIERGE.'_'.$periode . '_' . $identifiant; ?>" value="<?php echo DRMClient::DRM_CREATION_VIERGE; ?>" name="drmChoixCreation[type_creation]">&nbsp;<label for="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_VIERGE.'_'.$periode . '_' . $identifiant; ?>">Création d'une drm vierge</label>
                                                 <div class="pull-right"><?php echo getPointAideHtml('drm','creation_nouvelle') ?></div>
                                     </li>
-                                <?php endif; ?>
                                     <li class="col-xs-10 col-xs-offset-1" >
                                         <input type="radio" id="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_NEANT.'_'.$periode . '_' . $identifiant; ?>" value="<?php echo DRMClient::DRM_CREATION_NEANT; ?>" name="drmChoixCreation[type_creation]">&nbsp;<label for="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_NEANT.'_'.$periode . '_' . $identifiant; ?>">Création d'une drm à néant</label>
                                         <div class="pull-right"><?php echo getPointAideHtml('drm','creation_vierge') ?></div>

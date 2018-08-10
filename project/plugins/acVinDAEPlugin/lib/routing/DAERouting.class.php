@@ -24,13 +24,25 @@ class DAERouting {
             'action' => 'nouveau'), array('sf_method' => array('get', 'post')), array('model' => 'Etablissement',
             'type' => 'object')));
 
-        $r->prependRoute('dae_export', new EtablissementRoute('/dae/:identifiant/export', array('module' => 'dae',
-                    'action' => 'export'),
+        $r->prependRoute('dae_export_edi', new EtablissementRoute('/dae/:identifiant/export/:campagne', array('module' => 'dae',
+                    'action' => 'exportEdi'),
                         array('sf_method' => array('get', 'post')),
                         array('model' => 'Etablissement',
                             'type' => 'object')));
 
-        
+        $r->prependRoute('dae_upload_fichier_edi', new EtablissementRoute('/dae/:identifiant/upload-edi/:periode/:md5', array('module' => 'dae',
+                            'action' => 'uploadEdi'),
+                                array('sf_method' => array('get', 'post')),
+                                array('model' => 'Etablissement',
+                                    'type' => 'object')));
+
+        $r->prependRoute('dae_creation_fichier_edi', new EtablissementRoute('/dae/:identifiant/creation-edi/:periode/:md5', array('module' => 'dae',
+                                'action' => 'creationEdi'),
+                                    array('sf_method' => array('get', 'post')),
+                                    array('model' => 'Etablissement',
+                                        'type' => 'object')));
+
+
 
     }
 }

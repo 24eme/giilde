@@ -24,7 +24,7 @@ $societe->save();
 
 $id = $societe->getidentifiant();
 $compte01 = $societe->getMasterCompte();
-$compte01->add('droits', array('teledeclaration'));
+$compte01->add('droits', array('teledeclaration', 'teledeclaration_drm'));
 $compte01->addTag('test', 'test');
 $compte01->addTag('test', 'test_teledeclaration');
 $compte01->save();
@@ -47,7 +47,7 @@ $etablissement3->telephone = "0101010101";
 $etablissement3->no_accises = "FR1215";
 $etablissement3->save();
 
-$etablissement4 = $societe->createEtablissement(EtablissementFamilles::FAMILLE_PRODUCTEUR);
+$etablissement4 = $societe->createEtablissement(EtablissementFamilles::FAMILLE_PRODUCTEUR_VINIFICATEUR);
 $etablissement4->nom = "établissement viti test télédéclaration 4";
 $etablissement4->save();
 

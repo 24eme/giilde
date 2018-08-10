@@ -700,12 +700,18 @@ AOC,Tranquille,Alsace Pinot noir,,,,Pinot Noir,AOC Alsace Pinot noir Pinot Noir
 AOC,Tranquille,Alsace PN rouge,,,,Pinot Noir,AOC Alsace PN rouge Pinot Noir
 AOC,Mousseux,Crémant d'Alsace,,,,Blanc,AOC Crémant d'Alsace Blanc
 AOC,Mousseux,Crémant d'Alsace,,,,Rosé,AOC Crémant d'Alsace Rosé
-Vins sans IG,Tranquille,Vins sans IG,,,,Blanc,Vins sans IG Blanc
-Vins sans IG,Tranquille,Vins sans IG,,,,Rosé,Vins sans IG Rosé
-Vins sans IG,Tranquille,Vins sans IG,,,,Rouge,Vins sans IG Rouge
-Vins sans IG,Mousseux,Vins sans IG,,,Blanc,,Vins sans IG Mousseux Blanc
-Vins sans IG,Mousseux,Vins sans IG,,,Rouge,,Vins sans IG Mousseux Rouge
-Vins sans IG,Mousseux,Vins sans IG,,,Rosé,,Vins sans IG Mousseux Rosé
+Vins sans IG,Tranquille,,,,Blanc,,Vins sans IG Blanc
+Vins sans IG,Tranquille,,,,Rosé,,Vins sans IG Rosé
+Vins sans IG,Tranquille,,,,Rouge,,Vins sans IG Rouge
+Vins sans IG,Tranquille,CEE,,,Blanc,,Vins sans IG CEE Blanc
+Vins sans IG,Tranquille,CEE,,,Rouge,,Vins sans IG CEE Rouge
+Vins sans IG,Tranquille,CEE,,,Rosé,,Vins sans IG CEE Rosé
+Vins sans IG,Tranquille,Hors UE,,,Rouge,,Vins sans IG Hors UE Rouge
+Vins sans IG,Tranquille,Hors UE,,,Blanc,,Vins sans IG Hors UE Blanc
+Vins sans IG,Tranquille,Hors UE,,,Rosé,,Vins sans IG Hors UE Rosé
+Vins sans IG,Mousseux,,,,Blanc,,Vins sans IG Mousseux Blanc
+Vins sans IG,Mousseux,,,,Rouge,,Vins sans IG Mousseux Rouge
+Vins sans IG,Mousseux,,,,Rosé,,Vins sans IG Mousseux Rosé
 Vins AOP,Tranquille,France,,,Blanc,,Vins AOP France Blanc
 Vins AOP,Tranquille,France,,,Rouge,,Vins AOP France Rouge
 Vins AOP,Tranquille,France,,,Rosé,,Vins AOP France Rosé

@@ -6,6 +6,8 @@ use_helper('DRMPdf');
 use_helper('Display');
 ?>
 
+<?php $etablissement = $drm->getEtablissementObject(); ?>
+
 \def\InterloireAdresse{<?php echo getAdresseInterpro(); ?>}
 \def\InterloireContact{<?php echo getInfosInterpro($drm); ?>}
 
@@ -19,7 +21,7 @@ use_helper('Display');
 \def\DRMCvi{<?php echo $drm->declarant->cvi; ?>}
 
 \def\DRMSiret{<?php echo $drm->societe->siret; ?>}
-\def\DRMIdentifiantIL{<?php echo $drm->identifiant; ?>}
+\def\DRMIdentifiantIL{<?php echo ($etablissement && $etablissement->exist('num_interne') && $etablissement->num_interne) ? $etablissement->num_interne : $drm->identifiant; ?>}
 \def\DRMAdresseComptaMatiere{<?php echo ($drm->declarant->adresse_compta)? $drm->declarant->adresse_compta : $drm->societe->raison_sociale; ?>}
 
 \pagestyle{fancy}

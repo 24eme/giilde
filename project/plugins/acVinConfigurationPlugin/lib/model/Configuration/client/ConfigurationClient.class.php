@@ -8,6 +8,8 @@ class ConfigurationClient extends acCouchdbClient {
     protected $campagne_vinicole_manager = null;
     protected $campagne_facturation_manager = null;
 
+	protected $saltToken = null;
+
     const CAMPAGNE_DATE_DEBUT = '%s-08-01';
     const CAMPAGNE_DATE_FIN = '%s-07-31';
 
@@ -361,6 +363,24 @@ class ConfigurationClient extends acCouchdbClient {
 		}
 		return $newHashesProduits;
 	}
+
+	public static function generateSaltToken() {
+
+        return uniqid().rand();
+    }
+
+	public function getSaltToken() {
+		if(!$this->saltToken) {
+			$this->saltToken = CacheFunction::cache('model', "ConfigurationClient::generateSaltToken");
+		}
+
+		return $this->saltToken;
+    }
+
+    public function anonymisation($value) {
+
+        return hash("ripemd128", $value.$this->getSaltToken());
+    }
 }
 
 

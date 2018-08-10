@@ -40,17 +40,23 @@ function echoLongFloatFr($number, $milliSeparate = false)
     echo formatFloatFr($number, 4, 4, null, $milliSeparate);
 }
 
-function echoSignedFloat($number) 
+function echoSignedFloat($number)
 {
     echo ($number>0)? '+'.formatFloat($number) : formatFloat($number);
 }
 
 function echoArialFloat($number) {
-    
+
     echo number_format($number, 2, '.', ' ');
 }
 
 function getArialFloat($number) {
-    
+
     return number_format($number, 2, '.', ' ');
+}
+
+function sprintInt($float) {
+    if (is_null($float))
+        $float = 0;
+    return round($float);
 }

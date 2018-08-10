@@ -7,6 +7,7 @@ DAE:
       type: {}
       identifiant: {  }
       date: {  }
+      date_saisie: {  }
       declarant:
         type: collection
         definition:
@@ -19,6 +20,8 @@ DAE:
             commune: {  }
             code_postal: {   }
             region: {  }
+            famille: {  }
+            sous_famille: {  }
       produit_key: {  }
       produit_libelle: {  }
       label_key: {  }
@@ -41,3 +44,37 @@ DAE:
       prix_unitaire: {  }
       volume_hl: {  }
       prix_hl: {  }
+
+CSVDAE:
+  definition:
+    fields:
+      _id: {  }
+      _rev: {  }
+      type: {  }
+      _attachments:
+        type: collection
+        definition:
+          fields:
+            '*':
+              type: collection
+              definition:
+                fields:
+                  content_type: { }
+                  revpos: { }
+                  length: { }
+                  stub: { }
+                  digest: { }
+      identifiant: {  }
+      periode: {  }
+      statut: {  }
+      erreurs:
+        type: collection
+        definition:
+          fields:
+            '*':
+              type: collection
+              definition:
+                fields:
+                  num_ligne: { type: integer }
+                  csv_erreur: { }
+                  diagnostic: { }

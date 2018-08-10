@@ -1,6 +1,6 @@
 {
    "_id": "CONFIGURATION-20170801",
-   "type": "Configuration",
+     "type": "Configuration",
    "campagne": null,
    "labels": {
    },
@@ -9,12 +9,13 @@
    "droits": {
    },
    "mvts_favoris": {
-       "details_entrees_recolte": "details_entrees_recolte",
        "details_entrees_achatnoncrd": "details_entrees_achatnoncrd",
        "details_sorties_consommationfamilialedegustation": "details_sorties_consommationfamilialedegustation",
        "details_sorties_ventefrancecrd": "details_sorties_ventefrancecrd",
        "details_sorties_vrac": "details_sorties_vrac",
+       "details_sorties_bouteillenue": "details_sorties_bouteillenue",
        "details_sorties_exporttaxe": "details_sorties_exporttaxe",
+       "details_sorties_export": "details_sorties_export",
        "detailsACQUITTE_entrees_achat": "detailsACQUITTE_entrees_achat",
        "detailsACQUITTE_entrees_reintegration": "detailsACQUITTE_entrees_reintegration",
        "detailsACQUITTE_sorties_ventefrancecrd": "detailsACQUITTE_sorties_ventefrancecrd",
@@ -93,6 +94,11 @@
                    "libelle": "Repli/déclassement",
                    "libelle_long": "Repli/déclassement",
                    "description": "Repli/déclassement"
+               },
+               "autre": {
+                   "libelle": "Autres",
+                   "libelle_long": "Autres",
+                   "description": ""
                }
            },
            "sorties": {
@@ -142,9 +148,14 @@
                    "description": "Sorties en suspension hors France"
                },
                "vrac": {
-                   "libelle": "Contrats Alsace",
+                   "libelle": "Contrat Vrac",
                    "libelle_long": "Sorties en suspension vrac",
                    "description": "Sorties en suspension contrats d’Alsace"
+               },
+               "bouteillenue": {
+                   "libelle": "Contrat Bouteille",
+                   "libelle_long": "Contrats bouteilles nues",
+                   "description": ""
                },
                "destructionperte": {
                    "libelle": "Pertes et manquants",
@@ -175,6 +186,11 @@
                    "libelle": "VCI",
                    "libelle_long": "VCI",
                    "description": "VCI"
+               },
+               "autre": {
+                   "libelle": "Autres",
+                   "libelle_long": "Autres",
+                   "description": ""
                }
            },
            "stocks_fin": {
@@ -394,22 +410,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -430,22 +430,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -466,22 +450,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -502,22 +470,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -538,22 +490,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -574,22 +510,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -611,22 +531,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -646,22 +550,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -681,22 +569,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -716,22 +588,7 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
+
                                                                        }
                                                                    }
                                                                },
@@ -751,22 +608,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -1073,22 +914,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -1108,22 +933,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -1143,22 +952,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -1178,22 +971,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -1213,22 +990,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -1248,22 +1009,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -1284,22 +1029,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                }
@@ -1316,22 +1045,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                }
@@ -1348,22 +1061,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                }
@@ -1380,22 +1077,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                }
@@ -1412,22 +1093,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                }
@@ -1477,22 +1142,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-                                                                           "douane": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": null,
-                                                                                   "libelle": null
-                                                                               }
-                                                                           ],
-                                                                           "cvo": [
-                                                                               {
-                                                                                   "date": "1900-01-01",
-                                                                                   "taux": "-1",
-                                                                                   "code": "CVO",
-                                                                                   "libelle": "Cvo"
-                                                                               }
-                                                                           ]
                                                                        }
                                                                    }
                                                                },
@@ -15485,7 +15134,7 @@
                    },
                    "VCI": {
                        "libelle": "VCI",
-                       "format_libelle": null,
+                       "format_libelle": "%g% %a% %l% %ce% %m%",
                        "code": "VCI",
                        "code_produit": null,
                        "code_comptable": null,
@@ -15563,7 +15212,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "",
+                                                               "code_douane": "1B001S99",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15635,7 +15284,7 @@
                                                                "code": "DEFAUT",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "1B001M90",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15899,6 +15548,256 @@
                                    "exclude_total": "1",
                                    "no_vtsgn": "1"
                                }
+                           },
+                           "CEE": {
+                               "libelle": "CEE",
+                               "format_libelle": "%c% %a% %co%",
+                               "code": "CEE",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                               },
+                               "attributs": {
+                                   "no_dr": "1",
+                                   "no_ds": "1"
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "blanc": {
+                                                       "libelle": "Blanc",
+                                                       "format_libelle": null,
+                                                       "code": "blanc",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "4B900S",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": "rouge",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "4R900S",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "4S900S",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           },
+                           "HORSUE": {
+                               "libelle": "Hors UE",
+                               "format_libelle": "%c% %a% %co%",
+                               "code": "HORSUE",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                               },
+                               "departements": [
+                               ],
+                               "attributs": {
+                                   "no_dr": "1",
+                                   "no_ds": "1"
+                               },
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "blanc": {
+                                                       "libelle": "Blanc",
+                                                       "format_libelle": null,
+                                                       "code": "blanc",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "4B911S",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": null,
+                                                       "code": "rouge",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "4R911S",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                               }
+                                                           }
+                                                       }
+                                                   },
+                                                   "rose": {
+                                                       "libelle": "Rosé",
+                                                       "format_libelle": null,
+                                                       "code": "rose",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "4S911S",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
                            }
                        }
                    },
@@ -15991,7 +15890,7 @@
                                                                "code": "DEFAUT",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4M999",
+                                                               "code_douane": "4B998M",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16017,7 +15916,7 @@
                                                                "code": "DEFAUT",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4M999",
+                                                               "code_douane": "4R998M",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16043,7 +15942,7 @@
                                                                "code": "DEFAUT",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4M999",
+                                                               "code_douane": "4S998M",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16174,7 +16073,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "1B998S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16200,7 +16099,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "1R998S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16226,7 +16125,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "1S998S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16295,7 +16194,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "1B900S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16321,7 +16220,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "1R900S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16347,128 +16246,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           },
-                           "HORSUE": {
-                               "libelle": "Hors UE",
-                               "format_libelle": null,
-                               "code": "HORSUE",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "blanc": {
-                                                       "libelle": "Blanc",
-                                                       "format_libelle": null,
-                                                       "code": "blanc",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": null,
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                               }
-                                                           }
-                                                       }
-                                                   },
-                                                   "rouge": {
-                                                       "libelle": "Rouge",
-                                                       "format_libelle": null,
-                                                       "code": "rouge",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": null,
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                               }
-                                                           }
-                                                       }
-                                                   },
-                                                   "rose": {
-                                                       "libelle": "Rosé",
-                                                       "format_libelle": null,
-                                                       "code": "rose",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "1S900S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16561,7 +16339,7 @@
                                                        "code": "blanc",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": null,
+                                                       "code_douane": "1B080M",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16692,7 +16470,7 @@
                                                        "code": "blanc",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": null,
+                                                       "code_douane": "3B998S",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16718,7 +16496,7 @@
                                                        "code": "rouge",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": null,
+                                                       "code_douane": "3R998S",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16744,7 +16522,7 @@
                                                        "code": "rose",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": null,
+                                                       "code_douane": "3S998S",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16813,7 +16591,7 @@
                                                        "code": "blanc",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": null,
+                                                       "code_douane": "3B900S",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16851,7 +16629,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "3R900S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16877,128 +16655,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": null,
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           },
-                           "HORSUE": {
-                               "libelle": "Hors UE",
-                               "format_libelle": null,
-                               "code": "HORSUE",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "blanc": {
-                                                       "libelle": "Blanc",
-                                                       "format_libelle": null,
-                                                       "code": "blanc",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": null,
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                               }
-                                                           }
-                                                       }
-                                                   },
-                                                   "rouge": {
-                                                       "libelle": "Rouge",
-                                                       "format_libelle": null,
-                                                       "code": "rouge",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": null,
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                               }
-                                                           }
-                                                       }
-                                                   },
-                                                   "rose": {
-                                                       "libelle": "Rosé",
-                                                       "format_libelle": null,
-                                                       "code": "rose",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": null,
+                                                               "code_douane": "3S900S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -17713,7 +17370,7 @@
                    "restriction_lies": 0,
                    "recolte": 1,
                    "mouvement_coefficient": 1,
-                   "facturable": 1,
+                   "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
@@ -17742,6 +17399,19 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation",
+                   "taxable_douane": 0
+               },
+               "autre": {
+                   "readable": 1,
+                   "writable": 1,
+                   "details": "",
+                   "revendique": 1,
+                   "restriction_lies": 0,
+                   "recolte": 1,
+                   "mouvement_coefficient": 1,
+                   "facturable": 0,
+                   "douane_type": "SUSPENDU",
+                   "douane_cat": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
                }
            },
@@ -17876,6 +17546,19 @@
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
+               "bouteillenue": {
+                   "readable": 1,
+                   "writable": 1,
+                   "details": "VRAC",
+                   "revendique": 1,
+                   "restriction_lies": 1,
+                   "recolte": 1,
+                   "mouvement_coefficient": -1,
+                   "facturable": 0,
+                   "douane_type": "SUSPENDU",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "taxable_douane": 0
+               },
                "destructionperte": {
                    "readable": 1,
                    "writable": 1,
@@ -17952,6 +17635,19 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci",
+                   "taxable_douane": 0
+               },
+               "autre": {
+                   "readable": 1,
+                   "writable": 1,
+                   "details": "",
+                   "revendique": 1,
+                   "restriction_lies": 0,
+                   "recolte": 1,
+                   "mouvement_coefficient": -1,
+                   "facturable": 0,
+                   "douane_type": "SUSPENDU",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
                    "taxable_douane": 0
                }
            },

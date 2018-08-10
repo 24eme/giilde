@@ -20,7 +20,7 @@
         <?php if($recapCvos["TOTAL"]->totalVolumeReintegration) : ?>
                         <th class="text-right">Volumes réintégrés</th>
         <?php endif; ?>
-                        <th class="text-right">Montant<?php echo getPointAideHtml('drm','visualisation_cvo_montant'); ?></th>
+                        <th class="text-right">Montant HT<?php echo getPointAideHtml('drm','visualisation_cvo_montant'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,17 +29,17 @@
                         <td><?php if($recapCvo->version): ?><small class="text-muted"><?php echo $recapCvo->version ?></small> <?php endif; ?>CVO<?php echo ($recapCvo->version)? '' : ' Totale'; ?></td>
                         <td class="text-right"><?php
                             echoFloat($recapCvo->totalVolumeDroitsCvo);
-                            echo " hl";
+                            echo "&nbsp;hl";
                             ?></td>
         <?php if($recapCvo->totalVolumeReintegration) : ?>
                         <td class="text-right"><?php
                             echoFloat($recapCvo->totalVolumeReintegration);
-                            echo " hl";
+                            echo "&nbsp;hl";
                             ?></td>
         <?php endif; ?>
                         <td class="text-right"><?php
-                            echoFloat($recapCvo->totalPrixDroitCvo);
-                            echo " €";
+                            echo formatFloat($recapCvo->totalPrixDroitCvo, 2, 2);
+                            echo "&nbsp;€";
                             ?></td>
                     </tr>
                 <?php endforeach; ?>
@@ -74,16 +74,16 @@
                             <td><?php echoFloat($droitDouane->volume_taxe - $droitDouane->volume_reintegre); echo " hl" ?></td>
                             <td><?php
                                 echoFloat($droitDouane->taux);
-                                echo " €/hl";
+                                echo "&nbsp;€/hl";
                                 ?></td>
                             <td><?php
-                                echoFloat($droitDouane->total);
-                                echo " €";
+                                echo sprintInt($droitDouane->total);
+                                echo "&nbsp;€";
                                 ?></td>
                                 <?php if ($drm->isPaiementAnnualise()): ?>
                             <td><?php
-                                echoFloat($droitDouane->cumul);
-                                echo " €";
+                                echo sprintInt($droitDouane->cumul);
+                                echo "&nbsp;€";
                                 ?></td>
             <?php endif; ?>
                         </tr>

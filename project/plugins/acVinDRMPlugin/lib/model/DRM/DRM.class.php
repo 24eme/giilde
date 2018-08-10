@@ -182,25 +182,6 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         return $this->declaration->getProduitsDetails($teledeclarationMode, $detailsKey);
     }
 
-    public function getDetailsAvecVrac() {
-        $details = array();
-        foreach ($this->getProduitsDetails() as $d) {
-            if ($d->sorties->vrac)
-                $details[] = $d;
-        }
-
-        return $details;
-    }
-
-    public function getVracs() {
-        $vracs = array();
-        foreach ($this->getProduitsDetails() as $d) {
-            if ($vrac = $d->sorties->vrac_details)
-                $vracs[] = $vrac;
-        }
-        return $vracs;
-    }
-
     public function getDetailsAvecCreationVracs(){
       $creationvracs = array();
       foreach ($this->getProduitsDetails($this->teledeclare) as $d) {
@@ -226,14 +207,15 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
     public function generateByDRM(DRM $drm) {
 
-        foreach ($drm->getProduits() as $produit) {
-            $produitConfig = $this->getConfig()->getProduitWithCorrespondanceInverse($produit->hash);
+        foreach ($drm->getProduitsDetails() as $produit) {
+            $produitCepage = $produit->getCepage();
+            $produitConfig = $this->getConfig()->getProduitWithCorrespondanceInverse($produitCepage->getHash());
             if (!$produitConfig || !$produitConfig->isActif($this->getDate())) {
 
                 continue;
             }
 
-            $p = $this->addProduit($produitConfig->getHash(), DRM::DETAILS_KEY_SUSPENDU);
+            $p = $this->addProduit($produitConfig->getHash(), DRM::DETAILS_KEY_SUSPENDU,$produit->denomination_complementaire);
 
             if(DRMConfiguration::getInstance()->isRepriseStocksChangementCampagne() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
             	$p->total_debut_mois = $produit->total;

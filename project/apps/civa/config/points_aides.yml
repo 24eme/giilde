@@ -1,0 +1,10 @@
+all:
+  configuration:
+    points_aides:
+      drm:
+        menu_list : "Permet d’accéder directement à la dernière DRM pour la créer, la finaliser ou la visualiser ."
+        etats : "Indique l’état de la DRM: à créer, à finaliser, ou validée. "
+        produits_coche_suspendu : "C’est le régime général. Les capsules CRD que vous utilisez peuvent être personnalisées ou collectives. Le montant des droits d’accise pour ces capsules est comptabilisé à la sortie du chai, c’est-à-dire en fin de DRM.  Le paiement de ces droits d’accise aux douanes peut alors se faire annuellement pour les opérateurs dispensés de caution, ou bien chaque mois pour tous les autres."
+        annexe_paiement_douane_condition: "Les conditions de paiement sont liées au montant cumulé de vos droits d’accise (y compris la taxe sur le sucre) pour une campagne.  Le seuil de référence pour ce montant cumulé est modifié à chaque nouvelle campagne. Si le cumul annuel de vos droits est inférieur ou égal  au seuil de référence, vous êtes dispensé de caution et pouvez payer vos droits de manière annuelle en fin de campagne. Si le cumul annuel de vos droits est supérieur au seuil de référence, vous devez être cautionné et payer vos droits chaque mois."
+        annexe_paiement_douane_frequence: "Indiquer la fréquence de paiement pour la campagne en cours. Pour la campagne 2017-2018, le seuil de référence est de 4 342 €."
+        visualisation_cvo_volume_fact: "Le volume indiqué est la somme des volumes soumis à CVO, tous vins confondus, à payer par le déclarant."

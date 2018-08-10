@@ -33,7 +33,7 @@ Voici le détails de chacune des colonnes attendues :
 
  - A (colonne n°1) : date de la commercialisation (format AAAA-MM-JJ)
  - B (colonne n°2) : identifiant declarvins du déclarant (le vendeur)
- - C (colonne n°3) : numéro d'accises du déclaration (le vendeur)
+ - C (colonne n°3) : numéro d'accises du déclarant (le vendeur)
  - D (colonne n°4) : nom du déclarant (le vendeur)
  - E (colonne n°5) : champs réservé (stat famille)
  - F (colonne n°6) : champs réservé (stat sous famille)
