@@ -48,7 +48,8 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 
     <?php endforeach; ?>
     \end{tabular}
-    \vspace{0.2cm}
+    \\~\\~\\~
+    \hspace{1cm}
 <?php endif; ?>
 <?php if ($hasNonApurement) : ?>
     \begin{tabular}{C{90mm} |C{90mm}|C{90mm}|}
@@ -94,6 +95,7 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 \\
 \hline
 <?php foreach ($droitsDouane as $droitDouane): ?>
+    <?php if(!$droitDouane->code){ continue; } ?>
     \multicolumn{1}{|l}{\small{\textbf{<?php echo $droitDouane->code; ?>}}} &
     \multicolumn{1}{|l}{\small{\textbf{<?php echo $droitDouane->libelle; ?>}}} &
     \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($droitDouane->getVolume()).' hl';  ?>}}} &

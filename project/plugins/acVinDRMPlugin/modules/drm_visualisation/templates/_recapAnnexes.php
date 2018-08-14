@@ -24,6 +24,9 @@
                 <?php
                 endforeach;
                 ?>
+                <?php foreach ($drm->getReplacementDateArray() as $produitLibelle => $date): ?>
+                    <li class="list-group-item"><strong>Replacement de <?php echo $produitLibelle; ?> sorti en date du </strong> <?php echo $date; ?> </li>
+                <?php endforeach; ?>
                 <?php if($drm->hasTavs()): ?>
                   <li class="list-group-item"><h4>TAV enregistrée(s) :</h4></li>
                 <?php
@@ -42,14 +45,13 @@
                   <?php
                   endforeach;
                 endif;
-                foreach ($drm->getReplacementDateArray() as $produitLibelle => $date): ?>
-                    <li class="list-group-item"><strong>Replacement de <?php echo $produitLibelle; ?> sorti en date du </strong> <?php echo $date; ?> </li>
-                <?php endforeach; if ($drm->quantite_sucre): ?>
+                ?>
+                <?php if ($drm->quantite_sucre): ?>
                     <li class="list-group-item"><strong>Quantité de sucres :</strong> <?php echo $drm->quantite_sucre ?> quintals</li>
                     <?php endif; ?>
                     <?php if ($drm->observations): ?>
                     <li class="list-group-item"><strong>Observations sur les mouvements :</strong> <?php echo $drm->observations; ?></li>
-    <?php endif; ?>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
