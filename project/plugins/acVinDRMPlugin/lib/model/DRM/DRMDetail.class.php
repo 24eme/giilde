@@ -173,7 +173,7 @@ class DRMDetail extends BaseDRMDetail {
             if (preg_match('/autres-entrees|replacement/', $this->getConfig()->get('entrees')->get($entree)->douane_cat) && $v) {
                 $hasobs = true;
                 if (!$this->exist('observations')) {
-                  $this->add('observations',$entree);
+                  $this->add('observations'," ");
                 }
             }
           }
@@ -183,7 +183,7 @@ class DRMDetail extends BaseDRMDetail {
             if (!preg_match('/details/', $sortie) && preg_match('/autres-sorties/', $this->getConfig()->get('sorties')->get($sortie)->douane_cat) && $v) {
                 $hasobs = true;
                 if (!$this->exist('observations')) {
-                  $this->add('observations',$sortie);
+                  $this->add('observations'," ");
                 }
             }
           }

@@ -8,3 +8,7 @@ all:
         annexe_paiement_douane_condition: "Les conditions de paiement sont liées au montant cumulé de vos droits d’accise (y compris la taxe sur le sucre) pour une campagne.  Le seuil de référence pour ce montant cumulé est modifié à chaque nouvelle campagne. Si le cumul annuel de vos droits est inférieur ou égal  au seuil de référence, vous êtes dispensé de caution et pouvez payer vos droits de manière annuelle en fin de campagne. Si le cumul annuel de vos droits est supérieur au seuil de référence, vous devez être cautionné et payer vos droits chaque mois."
         annexe_paiement_douane_frequence: "Indiquer la fréquence de paiement pour la campagne en cours. Pour la campagne 2017-2018, le seuil de référence est de 4 342 €."
         visualisation_cvo_volume_fact: "Le volume indiqué est la somme des volumes soumis à CVO, tous vins confondus, à payer par le déclarant."
+        visualisation_pdf: "Permet de télécharger un fichier PDF pour pouvoir imprimer la DRM."
+        visualisation_cvo_montant: "Le montant indiqué correspond au total Hors Taxes de la CVO due pour le mois par le déclarant."
+        visualisation_droit_montant: "Le montant indiqué correspond au total des droits d’accise dus pour le mois par le déclarant. Les montants sont arrondis à l'Euro le plus proche par ligne."
+        annexe_tavs : "Veuillez indiquer ci-dessous le TAV pour chacun de vos alcools."

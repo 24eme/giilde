@@ -207,14 +207,15 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
     public function generateByDRM(DRM $drm) {
 
-        foreach ($drm->getProduits() as $produit) {
-            $produitConfig = $this->getConfig()->getProduitWithCorrespondanceInverse($produit->hash);
+        foreach ($drm->getProduitsDetails() as $produit) {
+            $produitCepage = $produit->getCepage();
+            $produitConfig = $this->getConfig()->getProduitWithCorrespondanceInverse($produitCepage->getHash());
             if (!$produitConfig || !$produitConfig->isActif($this->getDate())) {
 
                 continue;
             }
 
-            $p = $this->addProduit($produitConfig->getHash(), DRM::DETAILS_KEY_SUSPENDU);
+            $p = $this->addProduit($produitConfig->getHash(), DRM::DETAILS_KEY_SUSPENDU,$produit->denomination_complementaire);
 
             if(DRMConfiguration::getInstance()->isRepriseStocksChangementCampagne() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
             	$p->total_debut_mois = $produit->total;

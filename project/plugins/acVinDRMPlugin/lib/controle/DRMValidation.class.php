@@ -52,14 +52,17 @@ class DRMValidation extends DocumentValidation {
             $entrees_retourmarchandisetaxees = ($detail->entrees->exist('retourmarchandisetaxees'))? $detail->entrees->retourmarchandisetaxees : 0.0;
             $entrees_retourmarchandiseacquitte = ($detail->entrees->exist('retourmarchandiseacquitte'))? $detail->entrees->retourmarchandiseacquitte : 0.0;
             $entrees_retourmarchandisesanscvo = ($detail->entrees->exist('retourmarchandisesanscvo'))? $detail->entrees->retourmarchandisesanscvo : 0.0;
-            $sorties_destructionperte = ($detail->sorties->exist('destructionperte'))? $detail->sorties->destructionperte : 0.0;
+            $entrees_autre = ($detail->entrees->exist('autre'))? $detail->entrees->autre : 0.0;
 
-            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $sorties_destructionperte;
+            $sorties_destructionperte = ($detail->sorties->exist('destructionperte'))? $detail->sorties->destructionperte : 0.0;
+            $sorties_autre = ($detail->sorties->exist('autre'))? $detail->sorties->autre : 0.0;
+
+            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $sorties_destructionperte + $entrees_autre + $sorties_autre;
 
             $produitLibelle = " pour le produit ".$detail->getLibelle();
 
             if ($this->isTeledeclarationDrm) {
-              if($total_observations_obligatoires && (!$detail->exist('observations') || !$detail->observations))
+              if($total_observations_obligatoires && (!$detail->exist('observations') || !trim($detail->observations)))
               {
                 if($entrees_excedents){
                   $this->addPoint('erreur', 'observations', "Entrée excédents (".sprintf("%.2f",$entrees_excedents)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
@@ -76,6 +79,12 @@ class DRMValidation extends DocumentValidation {
                 if($sorties_destructionperte){
                   $this->addPoint('erreur', 'observations', "Sortie manquant (".sprintf("%.2f",$sorties_destructionperte)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
                 }
+                if($entrees_autre){
+                  $this->addPoint('erreur', 'observations', "Entrée autre (".sprintf("%.2f",$entrees_autre)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
+                if($sorties_autre){
+                  $this->addPoint('erreur', 'observations', "Sortie autre (".sprintf("%.2f",$sorties_autre)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
               }
               if(($entrees_retourmarchandisetaxees + $entrees_retourmarchandiseacquitte + $entrees_retourmarchandisesanscvo) && (!$detail->exist('replacement_date') || !$detail->replacement_date)) {
                 $this->addPoint('erreur', 'replacement_date', $produitLibelle, $this->generateUrl('drm_annexes', $this->document));
@@ -86,16 +95,14 @@ class DRMValidation extends DocumentValidation {
                 $this->addPoint('vigilance', 'total_negatif', $detail->getLibelle(), $this->generateUrl('drm_edition_detail', $detail));
             }
 
-            if (!$detail->getConfig()->entrees->exist('declassement')) {
-                continue;
+            if($detail->getConfig()->entrees->exist('repli') && $detail->entrees->exist('repli') && $detail->sorties->exist('repli')){
+                  $total_entrees_replis += $detail->entrees->repli;
+                  $total_sorties_replis += $detail->sorties->repli;
             }
-            if($detail->entrees->exist('repli') && $detail->sorties->exist('repli')){
-              $total_entrees_replis += $detail->entrees->repli;
-              $total_sorties_replis += $detail->sorties->repli;
+            if($detail->getConfig()->entrees->exist('declassement')){
+                $total_entrees_declassement += $detail->entrees->declassement;
+                $total_sorties_declassement += $detail->sorties->declassement;
             }
-
-            $total_entrees_declassement += $detail->entrees->declassement;
-            $total_sorties_declassement += $detail->sorties->declassement;
 
             $total_entrees_excedents += ($detail->entrees->exist('excedents')) ? $detail->entrees->excedents : 0;
             $total_entrees_manipulation += ($detail->entrees->exist('manipulation')) ? $detail->entrees->manipulation : 0;
