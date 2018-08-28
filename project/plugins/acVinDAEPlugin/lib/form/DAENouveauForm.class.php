@@ -14,7 +14,7 @@ class DAENouveauForm extends acCouchdbObjectForm
     	$this->setWidget('produit_key', new bsWidgetFormChoice(array('choices' => $this->getProduits()), array('class' => 'select2 form-control')));
     	$this->setWidget('label_key', new bsWidgetFormChoice(array('choices' => $this->getLabels()), array('class' => 'select2 form-control')));
     	$this->setWidget('mention_key', new bsWidgetFormChoice(array('choices' => $this->getMentions()), array('class' => 'select2 form-control')));
-    	$this->setWidget('millesime', new bsWidgetFormChoice(array('choices' => $this->getMillesimes()), array('class' => 'select2 form-control select2permissifNoAjax')));
+    	$this->setWidget('millesime', new bsWidgetFormInput());
     	$this->setWidget('type_acheteur_key', new bsWidgetFormChoice(array('choices' => $this->getTypes()), array('class' => 'select2 form-control')));
     	$this->setWidget('destination_key', new bsWidgetFormChoice(array('choices' => $this->getDestinations()), array('class' => 'select2 form-control')));
     	$this->setWidget('contenance_key', new bsWidgetFormChoice(array('choices' => $this->getContenances()), array('class' => 'select2 form-control')));
@@ -40,17 +40,19 @@ class DAENouveauForm extends acCouchdbObjectForm
         $this->setValidator('produit_key', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getProduits()))));
         $this->setValidator('label_key', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getLabels()))));
         $this->setValidator('mention_key', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getMentions()))));
-        $this->setValidator('millesime', new sfValidatorInteger(array('required' => false)));
+        $this->setValidator('millesime', new sfValidatorRegex(array('required' => false, 'pattern' => '/^[0-9]{4}$/')));
         $this->setValidator('type_acheteur_key', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getTypes()))));
         $this->setValidator('destination_key', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getDestinations()))));
-        $this->setValidator('quantite', new sfValidatorNumber(array('required' => true)));
+        $this->setValidator('quantite', new sfValidatorNumber(array('required' => true, 'min' => 0.1), array('min' => 'La quantité ne peut pas être nul')));
         $this->setValidator('contenance_key', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getContenances()))));
-        $this->setValidator('prix_unitaire', new sfValidatorNumber(array('required' => true)));
+        $this->setValidator('prix_unitaire', new sfValidatorNumber(array('required' => true, 'min' => 0.1), array('min' => 'Le prix ne peut pas être nul')));
         $this->setValidator('no_accises_acheteur', new sfValidatorRegex(array('required' => false, 'pattern' => '/^[0-9A-Za-z]{13}$/')));
         $this->setValidator('nom_acheteur', new sfValidatorString(array('required' => false)));
         $this->setValidator('label_libelle', new sfValidatorString(array('required' => false)));
         
         $this->widgetSchema->setNameFormat('dae[%s]');
+        
+        $this->validatorSchema->setPostValidator(new DAENouveauFormValidator($this->getObject()->getEtablissementObject()));
     }
 
     public function getProduits() {
@@ -76,7 +78,7 @@ class DAENouveauForm extends acCouchdbObjectForm
 
     public function getMillesimes() {
         if (is_null($this->_choices_millesimes)) {
-        	$this->_choices_millesimes = array(null => null);
+        	$this->_choices_millesimes = array();
         	$date = new DateTime();
         	$annee = $date->format('Y');
         	if ($date->format('m') < 8) {
@@ -93,7 +95,7 @@ class DAENouveauForm extends acCouchdbObjectForm
 
     public function getTypes() {
         if (is_null($this->_choices_types)) {
-            $this->_choices_types = array(null => null, 'IMPORTATEUR' => 'Importateur', 'NEGOCIANT_REGION' => 'Négociant/Union Vallée du Rhône', 'NEGOCIANT_HORS_REGION' => 'Négociant hors région', 'GD' => 'Grande Distribution', 'DISCOUNT' => 'Hard Discount', 'GROSSISTE' => 'Grossiste-CHR', 'CAVISTE' => 'Caviste', 'VD' => 'Vente directe', 'AUTRE' => 'Autre');
+            $this->_choices_types = array_merge(array(null => null), $this->getObject()->getTypes()); 
         }
         return $this->_choices_types;
     }
@@ -111,7 +113,7 @@ class DAENouveauForm extends acCouchdbObjectForm
 
     public function getContenances() {
         if (is_null($this->_choices_contenances)) {
-            $this->_choices_contenances = array_merge(array('HL' => 'HL'), VracConfiguration::getInstance()->getContenances());
+            $this->_choices_contenances = $this->getObject()->getContenances();
         }
         return $this->_choices_contenances;
     }
@@ -122,6 +124,7 @@ class DAENouveauForm extends acCouchdbObjectForm
 	        $defaults = $this->getDefaults();
 	        $defaults['contenance_key'] = 'HL'; 
 	        $defaults['destination_key'] = 'FR'; 
+	        $defaults['label_key'] = 'CONV';
 	        $this->setDefaults($defaults);
     	}
     }

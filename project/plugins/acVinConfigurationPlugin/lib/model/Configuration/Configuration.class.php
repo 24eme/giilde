@@ -21,6 +21,11 @@ class Configuration extends BaseConfiguration {
         return $this->_get('labels');
     }
 
+    public function getProduit($hash) {
+
+        return $this->get($hash);
+    }
+
     public function getProduits() {
 
         return $this->declaration->getProduits();

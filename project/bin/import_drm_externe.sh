@@ -2,7 +2,7 @@
 
 . bin/config.inc
 
-mdir $DRMEXTERNEIMPORTDIR 2> /dev/null
+mkdir $DRMEXTERNEIMPORTDIR 2> /dev/null
 
 
 for u in "${GETDRMEXTERNECMD[@]}"

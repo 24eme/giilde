@@ -106,6 +106,9 @@ function getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $et
     if ($statut == DRMCalendrier::STATUT_NOUVELLE) {
         return 'A créer';
     }
+    if ($statut == DRMCalendrier::STATUT_NOUVELLE_BLOQUEE) {
+        return "Saisie impossible";
+    }
     if ($isTeledeclarationMode) {
         return 'Saisie interne';
     }
@@ -202,6 +205,10 @@ function getEtatDRMLibelleCalendrier($isTeledeclarationMode, $calendrier, $perio
     if ($statut == DRMCalendrier::STATUT_NOUVELLE) {
 
         return !$picto ? 'A créer': '<span class="glyphicon glyphicon-plus"></span>';
+    }
+    if ($statut == DRMCalendrier::STATUT_NOUVELLE_BLOQUEE) {
+
+        return !$picto ? "Une DRM est en cours d'édition": '<span style="opacity: 0.5;" class="glyphicon glyphicon-ban-circle"></span>';
     }
 
     return $statut;

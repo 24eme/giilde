@@ -2,6 +2,7 @@
 
 PRODUIT=$1
 EXPORT_PATH=$2
+IP_AUTHORIZED=$3
 NUMEROSEQUENCE=0
 COUCHDBSEQFILE=$EXPORT_PATH/.couchdbseq
 CHANGESFILE=$TMP/$(date +%Y%m%d%H%M%S)_export_changes
@@ -32,6 +33,7 @@ do
     curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/$id | jq -c '[._id,.teledeclare,.valide.date_signee,.declarant.no_accises]' | sed 's/\[//' | sed 's/\]//' | sed 's/"//g' | grep "true" | sed 's/null//' >> $LISTDRMFILE
 done
 
+mkdir -p $EXPORT_PATH 2> /dev/null
 
 cat $LISTDRMFILE | while read ligne
 do
@@ -43,7 +45,6 @@ do
     php symfony drm:export-csv $ID $SYMFONYTASKOPTIONS | grep $PRODUIT > $DRMFILE
     if test $(cat $DRMFILE | grep -E "^CAVE;" | grep $PRODUIT | wc -l | sed -r 's/^0$//'); then
         echo $ID
-        mkdir -p $EXPORT_PATH 2> /dev/null
         cp $DRMFILE $EXPORT_PATH/"$DATE"_"$PERIODE"_"$NOACCISES"_"$ID".csv
     fi
     rm $DRMFILE
@@ -52,6 +53,14 @@ done
 echo $LASTNUMEROSEQUENCE > $COUCHDBSEQFILE
 rm $CHANGESFILE
 rm $LISTDRMFILE
+
+if test "$IP_AUTHORIZED"; then
+    echo "<RequireAny>" > $EXPORT_PATH/.htaccess.tmp
+    echo $IP_AUTHORIZED | tr " " "\n" | while read ip; do echo "    Require ip $ip" >> $EXPORT_PATH/.htaccess.tmp; done;
+    echo "</RequireAny>" >> $EXPORT_PATH/.htaccess.tmp
+    mv $EXPORT_PATH/.htaccess{.tmp,}
+fi
+
 echo "<?php
 header(\"Content-Type: text/plain\");
 

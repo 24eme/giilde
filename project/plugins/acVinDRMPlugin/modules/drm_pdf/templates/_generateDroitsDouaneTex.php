@@ -98,8 +98,8 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
     \multicolumn{1}{|l}{\small{\textbf{<?php echo $droitDouane->libelle; ?>}}} &
     \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($droitDouane->getVolume()).' hl';  ?>}}} &
     \multicolumn{1}{|r|}{\small{\textbf{<?php echo $droitDouane->taux.' €/hl'; ?>}}} &
-    \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($droitDouane->total).' €'; ?>}}} &
-    \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($droitDouane->cumul).' €'; ?>}}}
+    \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintDroitDouane($droitDouane->total).' €'; ?>}}} &
+    \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintDroitDouane($droitDouane->cumul).' €'; ?>}}}
     \\
     \hline
 <?php endforeach; ?>
@@ -116,6 +116,7 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 <?php if(DRMConfiguration::getInstance()->isPdfCvo()): ?>
 <?php include_partial('drm_pdf/generateCvoTex', array('drm' => $drm)); ?>
 <?php endif; ?>
+<?php if(false): ?>
 \fcolorbox{white}{white}{
 \hspace{-0.25cm}
 \begin{minipage}[t]{0.6\textwidth}
@@ -163,3 +164,4 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 \end{tabular}
 \end{minipage}
 }
+<?php endif; ?>

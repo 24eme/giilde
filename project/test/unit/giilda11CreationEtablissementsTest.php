@@ -52,6 +52,7 @@ $compteviti->save();
 $societenego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getSociete();
 $etablissementnego = $societenego->createEtablissement(EtablissementFamilles::FAMILLE_NEGOCIANT);
 $etablissementnego->region = EtablissementClient::REGION_CVO;
+$etablissementnego->no_accises = 'FR12345678912';
 $etablissementnego->nom = "Etablissement negociant de la région";
 $etablissementnego->save();
 $id = $etablissementnego->getSociete()->getidentifiant();

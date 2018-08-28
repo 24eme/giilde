@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of DRMImportCsvEdi
+ * Description of DRMExportCsvEdi
  *
  * @author mathurin
  */

@@ -105,6 +105,8 @@ all:
         "GENERIQUE": "Générique"
         "MENTION": "Avec mention"
       contenances:
+        "Bouteille 18,7 cl": 0.00187
+        "Bouteille 25 cl": 0.0025
         "Bouteille 37 cl": 0.0037
         "Bouteille 37,5 cl": 0.00375
         "Bouteille 50 cl": 0.005

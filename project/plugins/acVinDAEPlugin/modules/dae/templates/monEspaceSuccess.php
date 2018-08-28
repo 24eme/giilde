@@ -1,10 +1,6 @@
 <?php use_helper('Date'); ?>
 <?php include_partial('dae/preTemplate'); ?>
-<ol class="breadcrumb">
-    <li><a href="<?php echo url_for('dae') ?>">Activités mensuelle</a></li>
-    <li><a href="<?php echo url_for('dae_etablissement', array('identifiant' => $etablissement->identifiant)) ?>"><?php echo $etablissement->nom ?> (<?php echo $etablissement->identifiant ?>)</a></li>
-    <li><a href="<?php echo url_for('dae_etablissement', array('identifiant' => $etablissement->identifiant)) ?>" class="active">XX</a></li>
-</ol>
+<?php include_partial('dae/breadcrum', array('etablissement' => $etablissement)); ?>
 
 <div class="row">
     <div class="col-xs-12" id="daeFormEtablissement">
@@ -16,6 +12,7 @@
 
 
     <div class="col-xs-12">
+    	<div class="row"><a class="btn btn-sm btn-default pull-right" href="<?php echo url_for('dae_export_edi', array('sf_subject' => $etablissement, 'campagne' => $campagne)) ?>"><span class=" glyphicon glyphicon-cloud-download"></span> Export des ventes <?php echo $campagne ?></a></div>
         <div class="row">
         	<h4>
         		Liste des ventes de <strong><?php echo ucfirst(format_date($periode->format('Y-m-d'), 'MMMM yyyy', 'fr_FR')) ?></strong>
@@ -30,14 +27,26 @@
 	            </form>
             </h4>
         </div>
+
+        <p>&nbsp;</p>
+
+        <div class="row form-horizontal">
+        	<div class="form-group">
+        		<label class="col-xs-1 control-label" for="quickfind">Filtres</label>
+        		<div class="col-xs-5">
+	        		<input type="text" id="quickfind" class="input-sm form-control" placeholder="Filtrer les ventes" />
+	        	</div>
+	        </div>
+    	</div>
+
         <div class="row">
         	<?php include_partial('dae/recap', array('etablissement' => $etablissement, 'periode' => $periode, 'daes' => $daes)); ?>
         </div>
     </div>
-    
+
 	<div class="col-xs-6">
         <div class="row text-right">
-        	<a class="btn btn-default" href="#"><span class="glyphicon glyphicon-download-alt"></span> Importer</a>
+        	<a class="btn btn-default" href="<?php echo url_for('dae_upload_fichier_edi', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d'), 'md5' => "0")); ?>"><span class="glyphicon glyphicon-cloud-upload"></span> Importer</a>
         </div>
     </div>
 	<div class="col-xs-6">
@@ -46,4 +55,9 @@
 		</div>
 	</div>
 
+
+	<script type="text/javascript">
+	$('.table-filter').tableFilter({additionalFilterTriggers: [$('#quickfind')]});
+	</script>
+<?php use_javascript('lib/picnet.table.filter.min.js') ?>
 <?php include_partial('dae/postTemplate'); ?>

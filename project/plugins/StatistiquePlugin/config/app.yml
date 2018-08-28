@@ -90,8 +90,8 @@ all:
               agg_page:
                 terms:
                   size: 0,
-                  field: 'doc.mouvements.produit_libelle'
-                  order: 
+                  field: 'doc.mouvements.produit_hash'
+                  order:
                     "_term": asc
                 aggs:
                   total_stock_initial:

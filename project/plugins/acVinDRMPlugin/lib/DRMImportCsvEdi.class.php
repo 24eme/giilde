@@ -19,7 +19,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
     protected $fromEdi = false;
 
       public function __construct($file, DRM $drm = null) {
-            $this->initConf();
+            $this->initConf($drm);
 
             if(is_null($this->csvDoc)) {
                 $this->csvDoc = CSVDRMClient::getInstance()->createOrFindDocFromDRM($file, $drm);
@@ -48,8 +48,11 @@ class DRMImportCsvEdi extends DRMCsvEdi {
           return $csvErreurs;
         }
 
-        protected function initConf() {
+        protected function initConf($drm) {
             $this->configuration = ConfigurationClient::getCurrent();
+            if($drm) {
+                $this->configuration = $drm->getConfig();
+            }
             $this->mouvements = $this->buildAllMouvements();
         }
 

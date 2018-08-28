@@ -783,7 +783,7 @@ class DRMClient extends acCouchdbClient {
                 $recapCvos[$version]->totalPrixDroitCvo += $mouvement->prix_ht;
                 $recapCvos["TOTAL"]->totalPrixDroitCvo +=  $mouvement->prix_ht;
             }
-            if ($mouvement->type_hash == 'entrees/reintegration') {
+            if ($mouvement->type_hash == 'entrees/reintegration' && $mouvement->facturable) {
                 $recapCvos[$version]->totalVolumeReintegration += $mouvement->volume;
                 $recapCvos["TOTAL"]->totalVolumeReintegration += $mouvement->volume;
             }

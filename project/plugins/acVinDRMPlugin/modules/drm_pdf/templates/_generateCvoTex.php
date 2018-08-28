@@ -17,7 +17,7 @@ if ($drm->mouvements->exist($drm->identifiant)) {
 	    	$totalPrixDroitCvo += $mouvement->volume * -1 * $mouvement->cvo;
 	        $totalVolumeDroitsCvo += $mouvement->volume * -1;
 		}
-	    if ($mouvement->type_hash == 'entrees/reintegration') {
+	    if ($mouvement->type_hash == 'entrees/reintegration' && $mouvement->facturable) {
 			$totalVolumeReintegration += $mouvement->volume;
 	    }
 	}
@@ -38,7 +38,7 @@ if ($drm->mouvements->exist($drm->identifiant)) {
 \multicolumn{1}{|C{43mm}|}{\small{\textbf{Réintégré}}} &
 <?php endif; ?>
 \multicolumn{1}{|C{43mm}|}{\small{\textbf{Taux}}} &
-\multicolumn{1}{|C{43mm}|}{\small{\textbf{Total}}}
+\multicolumn{1}{|C{43mm}|}{\small{\textbf{Total~HT}}}
 \\
 \hline
 \multicolumn{1}{|l}{\small{\textbf{CVO Totale}}} &

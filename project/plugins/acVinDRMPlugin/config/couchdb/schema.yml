@@ -317,6 +317,22 @@ DRM:
                                                                                                                               date_enlevement: {  }
                                                                                                                               numero_document: {  }
                                                                                                                               type_document: {  }
+                                                                                                                  bouteillenue_details:
+                                                                                                                    class: DRMESDetails
+                                                                                                                    type:  collection
+                                                                                                                    required: false
+                                                                                                                    definition:
+                                                                                                                      fields:
+                                                                                                                        '*':
+                                                                                                                          type: collection
+                                                                                                                          class: DRMESDetailVrac
+                                                                                                                          definition:
+                                                                                                                            fields:
+                                                                                                                              identifiant: {  }
+                                                                                                                              volume: { type: float }
+                                                                                                                              date_enlevement: {  }
+                                                                                                                              numero_document: {  }
+                                                                                                                              type_document: {  }
                                                                                                                   creationvrac_details:
                                                                                                                     class: DRMESDetails
                                                                                                                     type:  collection

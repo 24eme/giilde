@@ -1,13 +1,13 @@
 <?php
 setlocale(LC_TIME, 'fr_FR');
-$items = explode(PHP_EOL, $csv);
+$items = explode(PHP_EOL, html_entity_decode($csv, ENT_QUOTES));
 array_shift($items);
 $headers = array();
 $maxTableRowsPerPage = 30;
 $nbPage = 0;
 foreach ($items as $item) {
 $values = explode(';', $item);
-$appellation = str_replace(array('Rouge', 'Rosé', 'Blanc'), '', $values[0]);
+$appellation = $values[0];
 if (!$appellation || preg_match('/total/i', $appellation)) { continue; }
 $headers[$appellation] = $appellation;
 }
@@ -55,22 +55,23 @@ $headers[$appellation] = $appellation;
 \begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 \hline
 \rowcolor{gray!40} Article & \multicolumn{1}{c |}{Catégorie} & \multicolumn{1}{c |}{Stock initial} & \multicolumn{1}{c |}{Stock actuel} & \multicolumn{1}{c |}{Total mouvement} \tabularnewline \hline
-<?php 
+<?php
 	$i = 1;
 	$page = null;
 	foreach ($items as $item):
 		$values = explode(';', $item);
-		if (!$values[0]) {
+		if (!$values[1]) {
 			continue;
 		}
 		$isTotal = preg_match('/total/i', $item);
-		$current = str_replace(array('Rouge', 'Rosé', 'Blanc'), '', $values[0]);
+		$current = $values[0];
 		if (!$page) {
-			$page = str_replace(array('Rouge', 'Rosé', 'Blanc'), '', $values[0]);
+			$page = $values[0];
 		}
+		array_shift($values);
 ?>
-<?php 
-	if ($i == $maxTableRowsPerPage || ($page != $current && !preg_match('/total/i', $current))): 
+<?php
+	if ($i == $maxTableRowsPerPage || ($page != $current && !preg_match('/total/i', $current))):
 	$newSection = false;
 	if ($page != $current) {
 		$fstyle++;

@@ -23,6 +23,7 @@ class DRMCalendrier {
     const VIEW_NUMERO_ARCHIVAGE = 8;
     const STATUT_EN_COURS_NON_TELEDECLARE = 'STATUT_EN_COURS_NON_TELEDECLARE';
     const STATUT_NOUVELLE = 'NOUVELLE';
+    const STATUT_NOUVELLE_BLOQUEE = 'NOUVELLE BLOQUÉE';
     const STATUT_EN_COURS = 'EN_COURS';
     const STATUT_VALIDEE = 'VALIDEE';
     const STATUT_VALIDEE_NON_TELEDECLARE = 'STATUT_VALIDEE_NON_TELEDECLARE';
@@ -160,7 +161,6 @@ class DRMCalendrier {
         if (!$etablissement) {
             $etablissement = $this->etablissement;
         }
-
         return $this->statuts[$etablissement->identifiant][$periode];
     }
 
@@ -193,6 +193,7 @@ class DRMCalendrier {
             $hasteledeclaree = false;
             $periodes = $this->periodes;
             sort($periodes);
+            $has_en_cours = false;
             foreach ($periodes as $periode) {
                 $statut = $this->computeStatut($periode, $etablissement);
                 if ($this->isTeledeclarationMode) {
@@ -204,6 +205,15 @@ class DRMCalendrier {
                         if ($this->isTeledeclarationMode && $this->computeStatut($periode, $etablissement) === self::STATUT_NOUVELLE && ($periode >= $lastPeriode)) {
                             $statut = self::STATUT_NOUVELLE;
                         }
+                    }
+                    if ($statut == self::STATUT_EN_COURS &&  !$hasteledeclaree) {
+                      $statut = self::STATUT_VALIDEE_NON_TELEDECLARE;
+                    }
+                    if ($statut == self::STATUT_NOUVELLE && $has_en_cours) {
+                      $statut = self::STATUT_NOUVELLE_BLOQUEE;
+                    }
+                    if ($statut == self::STATUT_EN_COURS &&  $hasteledeclaree) {
+                      $has_en_cours = true;
                     }
                 }
                 $this->statuts[$etbIdentifiant][$periode] = $statut;
