@@ -19,5 +19,5 @@ foreach ($result['agg_page']['buckets'] as $appellation) {
 	}
 	$csv .= $globalLibelle.';'.$appellationLibelle.';TOTAL;'.$totalStockInitial.';'.$totalStockFinal.';'.$totalTotal."\n";
 }
-$csv .= 'TOTAL;TOTAL;TOTAL;'.formatNumber($result['totaux_stock_initial']['value']).';'.formatNumber($result['totaux_stock_final']['value']).';'.formatNumber($result['totaux_total']['value'])."\n";
+#$csv .= 'TOTAL;TOTAL;TOTAL;'.formatNumber($result['totaux_stock_initial']['value']).';'.formatNumber($result['totaux_stock_final']['value']).';'.formatNumber($result['totaux_total']['value'])."\n";
 echo $csv;
