@@ -103,8 +103,13 @@ class DRMESDetails extends BaseDRMESDetails {
             $vrac = $detail->getVrac();
             $mouvement->categorie = FactureClient::FACTURE_LIGNE_PRODUIT_TYPE_VINS;
             $mouvement->vrac_numero = $vrac->numero_contrat;
-            $mouvement->vrac_destinataire = $vrac->acheteur->nom;
-            $mouvement->cvo = $this->getProduitDetail()->getCVOTaux() * $vrac->getRepartitionCVOCoef($vrac->vendeur_identifiant, $detail->getDocument()->getDate());
+            if($vrac instanceof stdClass){
+                $mouvement->vrac_destinataire = $vrac->acheteur->raison_sociale;
+                $mouvement->cvo = 0;
+            }else{
+                $mouvement->vrac_destinataire = $vrac->acheteur->nom;
+                $mouvement->cvo = $this->getProduitDetail()->getCVOTaux() * $vrac->getRepartitionCVOCoef($vrac->vendeur_identifiant, $detail->getDocument()->getDate());
+            }
         }
 
         if ($config->isVrac() && $detail->isSansContrat()) {

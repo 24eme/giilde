@@ -59,7 +59,7 @@ class drmGeneriqueActions extends sfActions {
     }
 
     protected function processProduitDetails($request, $formClass) {
-        $this->detail = $this->getRoute()->getDRMDetail();
+        $this->detail = $this->getRoute()->getDRMDetail();        
         $this->drm = $this->detail->getDocument();
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         $this->catKey = $request->getParameter('cat_key');

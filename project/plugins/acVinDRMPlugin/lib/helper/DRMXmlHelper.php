@@ -290,3 +290,33 @@ function xmlPartOfToTable($flatXml,$regexs = array(),$withRemove = false){
 	}
 	return xmlGetNodesToTable($partOfFlatXml);
 }
+
+function xmlProduitLibelle($produit) {
+	return trim(html_entity_decode((($produit->produit_libelle) ? $produit->produit_libelle : $produit->getLibelle('%format_libelle% %la%')), ENT_QUOTES | ENT_HTML401));
+}
+
+function xmlGetProduitsDetails($drm, $bool, $suspendu_acquitte) {
+	$produits = array();
+	$produits_faits = array();
+	foreach ($drm->getProduitsDetails($bool, $suspendu_acquitte) as $produit) {
+		$produit_libelle = xmlProduitLibelle($produit);
+		if (isset($produits_faits[$produit_libelle])) {
+			continue;
+		}
+		$produits_faits[$produit_libelle] = $produit_libelle;
+		$produits[] = $produit;
+	}
+	if (preg_match('/08$/', $drm->periode)) {
+		$drm_juillet = DRMClient::getInstance()->find(preg_replace('/08$/', '07', $drm->_id));
+		$drm_juillet->init(array("keepStock" => false));
+		foreach ($drm_juillet->getProduitsDetails($bool, $suspendu_acquitte) as $produit) {
+			$produit_libelle = xmlProduitLibelle($produit);
+			if (isset($produits_faits[$produit_libelle])) {
+				continue;
+			}
+			$produits_faits[$produit_libelle] = $produit_libelle;
+			$produits[] = $produit;
+		}
+	}
+	return $produits;
+}

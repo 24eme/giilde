@@ -135,4 +135,8 @@ class DRMConfiguration {
         return "<p>".str_replace("DESCRIPTION_ERREUR",$erreur,nl2br($this->configuration['xml_transfert_echec']))."</p>";
     }
 
+    public function isCampagneListeMinimale(){
+        return $this->configuration['campagne_liste_minimale'];
+    }
+
 }

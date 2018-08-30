@@ -77,89 +77,57 @@ class DRMDeclaration extends BaseDRMDeclaration {
         return $produitsDetailsByCertifications;
     }
 
-    public function getProduitsDetailsByCertificationsForPdf($aggregateAppellation = false, $detailsKey = null){
-      $produitsDetailsByCertifications = $this->getProduitsDetailsByCertifications(true, $detailsKey);
-      $produitsDetailsForPdf = array();
+    public function getProduitsDetailsAggregateByAppellation($isTeledeclarationMode = false, $detailsKey = null) {
+        $recap = array();
+        foreach ($this->certifications as $certification) {
+            $recap[$certification->getHash()] = new stdClass();
+            $recap[$certification->getHash()]->certification_libelle = $certification->getConfig()->getLibelle();
+            $recap[$certification->getHash()]->produits = array();
+            foreach ($certification->genres as $genre) {
+                foreach ($genre->appellations as $appellation) {
+                    $produit = new stdClass();
+                    $produit->libelle = $appellation->getConfig()->getLibelle();
+                    foreach($appellation->getProduitsDetailsSorted($isTeledeclarationMode, $detailsKey) as $detail) {
+                        foreach($detail as $key => $value) {
+                            if(!preg_match('/^total/', $key)) {
+                                continue;
+                            }
 
-      if($aggregateAppellation){
-          $this->aggregateProduitsByAppellation($produitsDetailsByCertifications,$detailsKey,$produitsDetailsForPdf);
-      }else{
-          $this->aggregateProduitsByCepage($produitsDetailsByCertifications,$detailsKey,$produitsDetailsForPdf);
-      }
-      return $produitsDetailsForPdf;
-    }
+                            if(!isset($produit->{$key})) {
+                                $produit->{$key} = 0;
+                            }
 
-    public function aggregateProduitsByAppellation($produitsDetailsByCertifications,$detailsKey,&$produitsDetailsForPdf){
-      foreach ($produitsDetailsByCertifications as $keyCertif => $produitsByCertif) {
-        if(!count($produitsByCertif->produits)){
-          continue;
-        }
-        if(!array_key_exists($detailsKey,$produitsDetailsForPdf)){
-          $produitsDetailsForPdf[$detailsKey] = array();
-        }
-        $produitsByCertif->produitsByAppellation = array();
-        $produitsDetailsForPdf[$detailsKey][$keyCertif] = $produitsByCertif;
-        foreach ($produitsByCertif->produits as $hash => $produitDrm) {
-          if(!$produitDrm->hasStockEpuise()){
-            if(!array_key_exists($produitDrm->getAppellation()->getLibelle(),$produitsDetailsForPdf[$detailsKey][$keyCertif]->produitsByAppellation)){
-              $produitsDetailsForPdf[$detailsKey][$keyCertif]->produitsByAppellation[$produitDrm->getAppellation()->getLibelle()] = $produitDrm;
-            }else{
-              $produit = $produitsDetailsForPdf[$detailsKey][$keyCertif]->produitsByAppellation[$produitDrm->getAppellation()->getLibelle()];
-              $produit->stocks_debut->initial += $produitDrm->stocks_debut->initial;
-              if($this->getConfig()->getDocument()->hasDontRevendique()){
-                $produit->stocks_debut->dont_revendique += $produitDrm->stocks_debut->dont_revendique;
-              }
-              $produit->total_debut_mois += $produitDrm->total_debut_mois;
+                            $produit->{$key} += $value;
+                        }
+                        $nodes = array('stocks_debut', 'entrees', 'sorties', 'stocks_fin');
+                        foreach($nodes as $node) {
+                            foreach ($detail->{$node} as $key => $value) {
+                                if(is_object($value)) {
+                                    continue;
+                                }
 
-              $produit->total_entrees += $produitDrm->total_entrees;
-              $produit->total_entrees_revendique += $produitDrm->total_entrees_revendique;
-              $produit->total_recolte += $produitDrm->total_recolte;
+                                if(!isset($produit->{$node})) {
+                                    $produit->{$node} = new stdClass();
+                                }
 
-              $produit->total_sorties += $produitDrm->total_sorties;
-              $produit->total_facturable += $produitDrm->total_facturable;
-              $produit->total_revendique += $produitDrm->total_revendique;
+                                if(!isset($produit->{$node}->{$key})) {
+                                    $produit->{$node}->{$key} = null;
+                                }
 
-              $produit->stocks_fin->final += $produitDrm->stocks_fin->final;
-              if($this->getConfig()->getDocument()->hasDontRevendique()){
-                $produit->stocks_fin->dont_revendique += $produitDrm->stocks_fin->dont_revendique;
-              }
+                                if(!$value) {
+                                    continue;
+                                }
 
-              $produit->total += $produitDrm->total;
-              foreach ($produitDrm->getEntrees() as $entreeKey => $entreeValue) {
-                $produit->entrees->$entreeKey += $produitDrm->entrees->$entreeKey;
-              }
-               foreach ($produitDrm->getSorties() as $sortieKey => $sortieValue) {
-                 if ($sortieValue) {
-                     if (!($sortieValue instanceof DRMESDetails)) {
-                        $produit->sorties->$sortieKey += $produitDrm->sorties->$sortieKey;
-                     }
-                 }
-               }
-              $produitsDetailsForPdf[$detailsKey][$keyCertif]->produitsByAppellation[$produit->getAppellation()->getLibelle()] = $produit;
+                                $produit->{$node}->{$key} += $value;
+                            }
+                        }
+                    }
+                    $recap[$certification->getHash()]->produits[$appellation->getHash()] = $produit;
+                }
             }
-          }
         }
-      }
+
+        return $recap;
     }
 
-    public function aggregateProduitsByCepage($produitsDetailsByCertifications,$detailsKey,&$produitsDetailsForPdf){
-      foreach ($produitsDetailsByCertifications as $keyCertif => $produitsByCertif) {
-        if(!count($produitsByCertif->produits)){
-          continue;
-        }
-        if(!array_key_exists($detailsKey,$produitsDetailsForPdf)){
-          $produitsDetailsForPdf[$detailsKey] = array();
-        }
-        $produitsByCertif->produitsByAppellation = array();
-        $produitsDetailsForPdf[$detailsKey][$keyCertif] = $produitsByCertif;
-        foreach ($produitsByCertif->produits as $hash => $produit) {
-          if(!$produit->hasStockEpuise()){
-            if(!array_key_exists($produit->getAppellation()->getLibelle(),$produitsDetailsForPdf[$detailsKey][$keyCertif]->produitsByAppellation)){
-              $produitsDetailsForPdf[$detailsKey][$keyCertif]->produitsByAppellation[$produit->getAppellation()->getLibelle()] = array();
-            }
-            $produitsDetailsForPdf[$detailsKey][$keyCertif]->produitsByAppellation[$produit->getAppellation()->getLibelle()][$hash] = $produit;
-          }
-        }
-      }
-    }
 }

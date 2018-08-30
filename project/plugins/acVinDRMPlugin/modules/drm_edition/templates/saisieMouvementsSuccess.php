@@ -35,7 +35,7 @@
                 ?>
             </div>
             <div class="col-sm-3">
-                <div class="panel panel-default stickyHeader">
+                <div class="panel panel-default <?php echo (count($details) < 25)? 'stickyHeader' : 'resize-produits-col'; ?>" >
                     <div class="panel-heading">Édition des Produits<?php echo getPointAideHtml('drm','mouvements_choix_produits') ?></div>
                       <?php if(!$isTeledeclarationMode): ?>
                         <div class="panel-body">

@@ -16,6 +16,7 @@ class drm_validationActions extends drmGeneriqueActions {
     public function executeValidation(sfWebRequest $request) {
 
         set_time_limit(180);
+        ini_set('memory_limit',"1024M");
         $this->drm = $this->getRoute()->getDRM();
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         if($this->drm->isValidee()){

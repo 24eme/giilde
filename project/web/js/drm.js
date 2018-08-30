@@ -115,6 +115,8 @@
                 }
             });
             initRaccourcis();
+            $(".resize-produits-col").attr('style',"max-height : "+$('#col_saisies_cont').height()+"px; overflow-y : auto;");
+
         }
 
 

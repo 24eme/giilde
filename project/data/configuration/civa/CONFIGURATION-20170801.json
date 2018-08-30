@@ -1,6 +1,6 @@
 {
    "_id": "CONFIGURATION-20170801",
-     "type": "Configuration",
+   "type": "Configuration",
    "campagne": null,
    "labels": {
    },
@@ -98,7 +98,7 @@
                "autre": {
                    "libelle": "Autres",
                    "libelle_long": "Autres",
-                   "description": ""
+                   "description": "Autres entrées que celles-ci-dessous, nécessite la saisie obligatoire d'un commentaire dans la rubrique Observations."
                }
            },
            "sorties": {
@@ -145,17 +145,17 @@
                "export": {
                    "libelle": "Blles susp. hors Alsace",
                    "libelle_long": "Sorties en suspension hors France",
-                   "description": "Sorties en suspension hors France"
+                   "description": "Sorties en suspension hors France CRD ou capsules neutres"
                },
                "vrac": {
                    "libelle": "Contrat Vrac",
                    "libelle_long": "Sorties en suspension vrac",
-                   "description": "Sorties en suspension contrats d’Alsace"
+                   "description": "Sorties contrat Vrac"
                },
                "bouteillenue": {
                    "libelle": "Contrat Bouteille",
                    "libelle_long": "Contrats bouteilles nues",
-                   "description": ""
+                   "description": "Sorties contrats Bouteilles nues."
                },
                "destructionperte": {
                    "libelle": "Pertes et manquants",
@@ -190,7 +190,7 @@
                "autre": {
                    "libelle": "Autres",
                    "libelle_long": "Autres",
-                   "description": ""
+                   "description": "Autres sorties que celles-ci-dessous, nécessite la saisie obligatoire d'un commentaire dans la rubrique Observations."
                }
            },
            "stocks_fin": {
@@ -588,7 +588,6 @@
                                                                "interpro": {
                                                                    "INTERPRO-declaration": {
                                                                        "droits": {
-
                                                                        }
                                                                    }
                                                                },

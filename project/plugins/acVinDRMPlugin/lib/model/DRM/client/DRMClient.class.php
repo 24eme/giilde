@@ -253,6 +253,9 @@ class DRMClient extends acCouchdbClient {
             $list[$c] = $c;
         }
         krsort($list);
+        if(DRMConfiguration::getInstance()->isCampagneListeMinimale()){
+            return $list;
+        }
         return ConfigurationClient::getInstance()->getCampagneVinicole()->consoliderCampagnesList($list);
     }
 

@@ -192,9 +192,16 @@ class DRMImportCsvEdi extends DRMCsvEdi {
  	    $csvLibelleProductComplet = $this->slugifyProduitArrayOrString($csvLibelleProductArray);
             $founded_produit = false;
             $keys_libelle = preg_replace("/[ ]+/", " ", sprintf("%s %s %s %s %s %s %s", $csvRow[self::CSV_CAVE_CERTIFICATION], $csvRow[self::CSV_CAVE_GENRE], $csvRow[self::CSV_CAVE_APPELLATION], $csvRow[self::CSV_CAVE_MENTION], $csvRow[self::CSV_CAVE_LIEU], $csvRow[self::CSV_CAVE_COULEUR], $csvRow[self::CSV_CAVE_CEPAGE]));
+
+            $keys_libelle_mention_fin = preg_replace("/[ ]+/", " ", sprintf("%s %s %s %s %s %s %s", $csvRow[self::CSV_CAVE_CERTIFICATION], $csvRow[self::CSV_CAVE_GENRE], $csvRow[self::CSV_CAVE_APPELLATION], $csvRow[self::CSV_CAVE_LIEU], $csvRow[self::CSV_CAVE_COULEUR], $csvRow[self::CSV_CAVE_CEPAGE],$csvRow[self::CSV_CAVE_MENTION]));
+
             if(!$founded_produit && ($keys_libelle != '      ')) {
-                $founded_produit = $this->configuration->identifyProductByLibelle($keys_libelle);
+                $founded_produit = $this->configuration->identifyProductByLibelle(KeyInflector::slugify(str_replace("AOC AOC","AOC",$keys_libelle)));
             }
+            if(!$founded_produit && ($keys_libelle != '      ')) {
+                $founded_produit = $this->configuration->identifyProductByLibelle(KeyInflector::slugify(str_replace("AOC AOC","AOC",$keys_libelle_mention_fin)));
+            }
+            
             if(!$founded_produit && preg_match('/(.*) *\(([^\)]+)\)/', $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT], $m)) {
               $produits = $this->configuration->identifyProductByCodeDouane(trim($m[2]));
               if (count($produits) == 1) {
@@ -252,7 +259,16 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                 }
             }
 
- 	   if (!$founded_produit) {
+            if($founded_produit && $aggregatedEdiList && count($aggregatedEdiList) && count($aggregatedEdiList[0])
+            && isset($aggregatedEdiList[0][$founded_produit->getHash()])){
+              $founded_produit = $all_produits[$aggregatedEdiList[0][$founded_produit->getHash()]];
+            }
+
+            if($founded_produit && !$founded_produit->isDouaneActif($this->drm->getDate()) && !$founded_produit->isCVOActif($this->drm->getDate())) {
+                $founded_produit = null;
+            }
+
+ 	        if (!$founded_produit) {
               $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
               $num_ligne++;
               continue;
@@ -759,7 +775,11 @@ class DRMImportCsvEdi extends DRMCsvEdi {
             $libellesSlugified[] = strtoupper(KeyInflector::slugify($libelle));
         }
         $genreKey = $produit->getGenre()->getKey();
-        $genreLibelle = self::$genres[$genreKey];
+        if(isset(self::$genres[$genreKey])) {
+            $genreLibelle = self::$genres[$genreKey];
+        } else {
+            $genreLibelle = null;
+        }
         $libellesSlugified[1] = strtoupper(KeyInflector::slugify($genreLibelle));
         if(($libellesSlugified[0] == "AOC") && $withAOP){
             $libellesSlugified[0]="AOP";

@@ -48,7 +48,7 @@ class DAEExportCsv {
 
     public function exportDAE($dae) {
         $cp = ($dae->declarant->code_postal)? preg_replace("/([0-9]{2})[0-9]{3}/","$1",$dae->declarant->code_postal) : "";
-        $produit = ConfigurationClient::getConfiguration($dae->date)->get($dae->produit_key);
+        $produit = ConfigurationClient::getConfiguration($dae->date)->getConfigurationProduit($dae->produit_key);
         $complement = "";
 
         return $dae->date.";".
@@ -64,7 +64,7 @@ class DAEExportCsv {
         $produit->getMention()->getLibelle().";".
         $produit->getLieu()->getLibelle().";".
         $produit->getCouleur()->getLibelle().";".
-        $produit->getCepage()->getLibelle().";".
+        ";".
         $complement.";".
         $dae->produit_libelle.";".
         $dae->label_libelle.";".
@@ -91,7 +91,7 @@ class DAEExportCsv {
         }
 
         $date = DRMClient::getInstance()->buildDate(preg_replace("/DRM-[0-9]+-([0-9]{6}).*/", '\1', $mouvement->doc_id));
-        $produit = ConfigurationClient::getConfiguration($date)->get($vrac->produit);
+        $produit = ConfigurationClient::getConfiguration($date)->getConfigurationProduit($vrac->produit);
         $cp = ($vrac->vendeur->code_postal)? preg_replace("/([0-9]{2})[0-9]{3}/","$1",$vrac->vendeur->code_postal) : "";
         $complement = "";
 

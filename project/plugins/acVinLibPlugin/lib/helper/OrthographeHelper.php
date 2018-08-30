@@ -1,10 +1,11 @@
 <?php
 
-function elision($motPrec,$chaine) 
+function elision($motPrec,$chaine)
 {
-    $c = in_array($chaine[0],array('a','e','i','o','u','h'));
-    
-    $mp = in_array($motPrec[strlen($motPrec)-1],array('a','e','i','o','u','h'));
+    $elisionsLetters = array('a','e','i','o','u','h', 'A', 'E', 'I', 'O', 'U', 'H');
+    $c = in_array($chaine[0], $elisionsLetters);
+
+    $mp = in_array($motPrec[strlen($motPrec)-1], $elisionsLetters);
     if($c && $mp){
         $motPrec[strlen($motPrec)-1] = "'";
         return $motPrec.$chaine;

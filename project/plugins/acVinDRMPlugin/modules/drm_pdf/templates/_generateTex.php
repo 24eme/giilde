@@ -62,6 +62,7 @@ keepaspectratio]{<?php echo realpath(dirname(__FILE__) . "/../../../../../web/da
 <?php foreach (DRMClient::$types_libelles as $typeDetailsNodes => $libelle) : ?>
   <?php include_partial('drm_pdf/generateRecapMvtTex', array('drm' => $drm,'drmLatex' => $drmLatex, 'detailsNodes' => $typeDetailsNodes, "libelleDetail" => $libelle)); ?>
 <?php endforeach; ?>
+<?php include_partial('drm_pdf/generatePostRecapMvtTex', array('drm' => $drm,'drmLatex' => $drmLatex)); ?>
 <?php include_partial('drm_pdf/generateCRDTex', array('drm' => $drm)); ?>
 <?php include_partial('drm_pdf/generateDroitsDouaneTex', array('drm' => $drm)); ?>
 \end{document}

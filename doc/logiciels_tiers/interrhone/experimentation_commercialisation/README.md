@@ -59,15 +59,15 @@ la description du produit sujet à commercialisation se fait sous le même forma
 ### section commercialisation
 
  - T (colonne n°20) : n° accise de l'acheteur (champ facultatif)
- - U (colonne n°20) : nom acheteur (champ facultatif)
- - V (colonne n°20) : type acheteur ("Importateur", "Négociant région" ou "Négociant/Union Vallée du Rhône", négociant hors région, "GD" ou "Grande Distribution", "Discount", "Grossiste", "Caviste", "VD" ou "Vente directe", "Autre", ...)
- - W (colonne n°20) : nom du pays de destination ou son code ISO 3166
- - X (colonne n°20) : type de conditionnement (VRAC ou HL, Bouteille, BIB)
- - Y (colonne n°20) : libellé conditionnement
- - Z (colonne n°20) : contenance conditionnement en litres
- - AA (colonne n°20) : quantité de conditionnement (en nombre de bib, de bouteille ou, pour le vrac, en hl)
- - AB (colonne n°20) : prix unitaire (prix en € par bouteille, bib ou hl)
- - AC (colonne n°20) : champ réservé (stat qtt hl)
- - AD (colonne n°20) : champ réservé (stat prix hl)
+ - U (colonne n°21) : nom acheteur (champ facultatif)
+ - V (colonne n°22) : type acheteur ("Importateur", "Négociant région" ou "Négociant/Union Vallée du Rhône", négociant hors région, "GD" ou "Grande Distribution", "Discount", "Grossiste", "Caviste", "VD" ou "Vente directe", "Autre", ...)
+ - W (colonne n°23) : nom du pays de destination ou son code ISO 3166
+ - X (colonne n°24) : type de conditionnement (VRAC ou HL, Bouteille, BIB)
+ - Y (colonne n°25) : libellé conditionnement
+ - Z (colonne n°26) : contenance conditionnement en litres
+ - AA (colonne n°27) : quantité de conditionnement (en nombre de bib, de bouteille ou, pour le vrac, en hl)
+ - AB (colonne n°28) : prix unitaire (prix en € par bouteille, bib ou hl)
+ - AC (colonne n°29) : champ réservé (stat qtt hl)
+ - AD (colonne n°30) : champ réservé (stat prix hl)
 
 Il est possible de déclarer en une seule ligne plusieurs commercialisations.
