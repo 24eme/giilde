@@ -123,14 +123,17 @@ class drmActions extends drmGeneriqueActions {
                   return $this->redirect('drm_creation_fichier_edi',array('identifiant' => $identifiant,'periode' => $periode,'md5' => $md5file));
                 break;
                 case DRMClient::DRM_CREATION_EDI :
-                    $drmfile = $this->creationDrmForm->getValue('file')
-                    if (!$drmfile) {
-                      return $this->redirect('drm_societe', array('identifiant' => $identifiant));
+                    if ($this->creationDrmForm->isValid()) {
+                      $drmfile = $this->creationDrmForm->getValue('file');
+                      if (!$drmfile) {
+                        return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => "error"));
+                      }
+                      $md5 = $drmfile->getMd5();
+                      $fileName = 'import_'.$identifiant . '_' . $periode.'_'.$md5.'.csv';
+                      rename(sfConfig::get('sf_data_dir') . '/upload/'.$md5,  sfConfig::get('sf_data_dir') . '/upload/'.$fileName);
+                      return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => $md5));
                     }
-                    $md5 = $drmfile->getMd5();
-                    $fileName = 'import_'.$identifiant . '_' . $periode.'_'.$md5.'.csv';
-                    rename(sfConfig::get('sf_data_dir') . '/upload/'.$md5,  sfConfig::get('sf_data_dir') . '/upload/'.$fileName);
-                    return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => $md5));
+                    return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => "error"));
 
                 case DRMClient::DRM_CREATION_VIERGE :
                     return $this->redirect('drm_nouvelle', array('identifiant' => $identifiant, 'periode' => $periode));
@@ -156,17 +159,20 @@ class drmActions extends drmGeneriqueActions {
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');
 
-        $this->drm = new DRM();
-        $this->drm->identifiant = $this->identifiant;
-        $this->drm->periode = $this->periode;
-        $this->drm->teledeclare = true;
-        $fileName = 'import_'.$this->drm->identifiant . '_' . $this->drm->periode.'_'.$this->md5.'.csv';
+        if ($this->md5 == 'error') {
+            $this->erreurs = array( (object) array("diagnostic" => "Mauvais format de fichier EDI", "num_ligne" => "", "csv_erreur" => ""));
+        }else{
+          $this->drm = new DRM();
+          $this->drm->identifiant = $this->identifiant;
+          $this->drm->periode = $this->periode;
+          $this->drm->teledeclare = true;
+          $fileName = 'import_'.$this->drm->identifiant . '_' . $this->drm->periode.'_'.$this->md5.'.csv';
 
-        $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
-        $this->drmCsvEdi->checkCSV();
+          $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
+          $this->drmCsvEdi->checkCSV();
 
-        $this->erreurs = $this->drmCsvEdi->getCsvDoc()->erreurs;
-
+          $this->erreurs = $this->drmCsvEdi->getCsvDoc()->erreurs;
+        }
         if (!count($this->erreurs)) {
           return $this->redirect('drm_creation_fichier_edi', array('periode' => $this->periode, 'md5' => $this->md5,'identifiant' => $this->identifiant));
         }

@@ -201,7 +201,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
             if(!$founded_produit && ($keys_libelle != '      ')) {
                 $founded_produit = $this->configuration->identifyProductByLibelle(KeyInflector::slugify(str_replace("AOC AOC","AOC",$keys_libelle_mention_fin)));
             }
-            
+
             if(!$founded_produit && preg_match('/(.*) *\(([^\)]+)\)/', $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT], $m)) {
               $produits = $this->configuration->identifyProductByCodeDouane(trim($m[2]));
               if (count($produits) == 1) {
@@ -626,6 +626,11 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                                       "Le numéro de compte n'est pas celui du ressortissant attendu",
                                       CSVDRMClient::LEVEL_ERROR);
      }
+
+     private function createWrongFormatTypeError($num_ligne, $csvRow) {
+          return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_TYPE]), "Choix possible type : " . implode(', ', self::$permitted_types));
+     }
+
      private function createWrongFormatFieldCountError($num_ligne, $csvRow) {
          return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_TYPE]), "La ligne possède trop peu de colonnes.");
      }
