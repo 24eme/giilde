@@ -123,7 +123,11 @@ class drmActions extends drmGeneriqueActions {
                   return $this->redirect('drm_creation_fichier_edi',array('identifiant' => $identifiant,'periode' => $periode,'md5' => $md5file));
                 break;
                 case DRMClient::DRM_CREATION_EDI :
-                    $md5 = $this->creationDrmForm->getValue('file')->getMd5();
+                    $drmfile = $this->creationDrmForm->getValue('file')
+                    if (!$drmfile) {
+                      return $this->redirect('drm_societe', array('identifiant' => $identifiant));
+                    }
+                    $md5 = $drmfile->getMd5();
                     $fileName = 'import_'.$identifiant . '_' . $periode.'_'.$md5.'.csv';
                     rename(sfConfig::get('sf_data_dir') . '/upload/'.$md5,  sfConfig::get('sf_data_dir') . '/upload/'.$fileName);
                     return $this->redirect('drm_verification_fichier_edi', array('identifiant' => $identifiant, 'periode' => $periode, 'md5' => $md5));
