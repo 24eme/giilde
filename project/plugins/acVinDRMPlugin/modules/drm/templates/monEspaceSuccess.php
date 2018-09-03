@@ -22,7 +22,11 @@
               <span class="icon-drm" style="font-size: 46px;"></span>
             </div>
             <div class="col-xs-11">
-                <h3>Espace DRM de <?php echo $societe->raison_sociale; ?> (<?php echo $societe->identifiant; ?>)</h3>
+                <h3>Espace DRM de <?php echo $societe->raison_sociale; ?> (<?php echo $societe->identifiant; ?>) <?php
+$notice = sfConfig::get('app_drm_notice');
+if ($notice):
+                 ?><small class="btn btn-warning pull-right"><a href="<?php echo $notice; ?>">Notice d'aide</a></small>
+<?php endif; ?></h3>
             </div>
           </div>
             <?php

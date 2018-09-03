@@ -308,14 +308,16 @@ function xmlGetProduitsDetails($drm, $bool, $suspendu_acquitte) {
 	}
 	if (preg_match('/08$/', $drm->periode)) {
 		$drm_juillet = DRMClient::getInstance()->find(preg_replace('/08$/', '07', $drm->_id));
-		$drm_juillet->init(array("keepStock" => false));
-		foreach ($drm_juillet->getProduitsDetails($bool, $suspendu_acquitte) as $produit) {
-			$produit_libelle = xmlProduitLibelle($produit);
-			if (isset($produits_faits[$produit_libelle])) {
-				continue;
+		if ($drm_juillet) {
+			$drm_juillet->init(array("keepStock" => false));
+			foreach ($drm_juillet->getProduitsDetails($bool, $suspendu_acquitte) as $produit) {
+				$produit_libelle = xmlProduitLibelle($produit);
+				if (isset($produits_faits[$produit_libelle])) {
+					continue;
+				}
+				$produits_faits[$produit_libelle] = $produit_libelle;
+				$produits[] = $produit;
 			}
-			$produits_faits[$produit_libelle] = $produit_libelle;
-			$produits[] = $produit;
 		}
 	}
 	return $produits;
