@@ -19,7 +19,7 @@ class DRMValidation extends DocumentValidation {
             $this->addControle('vigilance', 'vrac_detail_nonsolde', "Le contrat est soldé (ou annulé)");
             $this->addControle('erreur', 'vrac_detail_exist', "Le contrat n'existe plus");
         }
-        $this->addControle('vigilance', 'total_negatif', "Le stock revendiqué théorique fin de mois est négatif");
+        $this->addControle('erreur', 'total_negatif', "Le stock revendiqué théorique fin de mois est négatif");
         $this->addControle('vigilance', 'vrac_detail_negatif', "Le volume qui sera enlevé sur le contrat est supérieur au volume restant");
         $this->addControle('vigilance', 'crd_negatif', "Le nombre de CRD ne dois pas être négatif");
         $this->addControle('vigilance', 'documents_annexes_erreur', "Les numéros de document d'accompagnement saisis en annexe sont mal renseignés.");
@@ -92,7 +92,7 @@ class DRMValidation extends DocumentValidation {
             }
 
             if ($detail->total < 0) {
-                $this->addPoint('vigilance', 'total_negatif', $detail->getLibelle(), $this->generateUrl('drm_edition_detail', $detail));
+                $this->addPoint('erreur', 'total_negatif', $detail->getLibelle(), $this->generateUrl('drm_edition_detail', $detail));
             }
 
             if($detail->getConfig()->entrees->exist('repli') && $detail->entrees->exist('repli') && $detail->sorties->exist('repli')){
