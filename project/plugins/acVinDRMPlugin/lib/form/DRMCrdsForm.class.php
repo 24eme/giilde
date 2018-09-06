@@ -25,7 +25,7 @@ class DRMCrdsForm extends acCouchdbObjectForm {
             foreach ($crdAllGenre as $genre => $crds) {
                 foreach ($crds as $key => $crd) {
                     $keyWidgetsSuffixe = '_' . $regime . '_' . $key;
-                    if ($crd->stock_debut && !$this->isUsurpationMode)
+                    if ($crd->stock_debut && !$this->isUsurpationMode && !$this->drm->isDebutCampagne())
                         $this->setWidget('stock_debut' . $keyWidgetsSuffixe, new sfWidgetFormInputHidden());
                     else
                         $this->setWidget('stock_debut' . $keyWidgetsSuffixe, new bsWidgetFormInputInteger());
