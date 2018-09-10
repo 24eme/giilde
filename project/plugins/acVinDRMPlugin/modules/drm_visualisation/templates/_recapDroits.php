@@ -61,9 +61,6 @@
                         <th>Volumes imposables<?php echo getPointAideHtml('drm','visualisation_droit_volume'); ?></th>
                         <th>Taux<?php echo getPointAideHtml('drm','visualisation_droit_taux'); ?></th>
                         <th>Montant<?php echo getPointAideHtml('drm','visualisation_droit_montant'); ?></th>
-                        <?php if ($drm->isPaiementAnnualise()): ?>
-                            <th>Cumul annuel</th>
-                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,12 +77,6 @@
                                 echo sprintInt($droitDouane->total);
                                 echo "&nbsp;€";
                                 ?></td>
-                                <?php if ($drm->isPaiementAnnualise()): ?>
-                            <td><?php
-                                echo sprintInt($droitDouane->cumul);
-                                echo "&nbsp;€";
-                                ?></td>
-            <?php endif; ?>
                         </tr>
         <?php endforeach; ?>
                 </tbody>

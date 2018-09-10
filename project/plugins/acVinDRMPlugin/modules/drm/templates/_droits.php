@@ -9,10 +9,6 @@
     			<th><strong>Volume réintégré</strong></th>
     			<th><strong>Taux</strong></th>
     			<th><strong>Droits à payer</strong></th>
-    			<?php if ($drm->isPaiementAnnualise()): ?>
-    			<th><strong>Report</strong></th>
-    			<th><strong>Total cumulé</strong></th>    			
-    			<?php endif; ?>
     		</tr>
              </thead>
              <tbody>
@@ -35,12 +31,6 @@
                                             
                 </td>
         	<td class="<?php echo (isRectifier($droit, 'volume_taxe') || isRectifier($droit, 'volume_reintegre')) ? rectifierCssClass() : null ?>"><strong><?php echoFloat($droit->payable); ?>&nbsp;</strong>&nbsp;<span class="unite">€</span></td>
-        			<?php if ($drm->isPaiementAnnualise()): ?>
-        	<td class="<?php echo (isRectifier($droit, 'volume_taxe') || isRectifier($droit, 'volume_reintegre')) ? rectifierCssClass() : null ?>">
-                    <?php if($droit->isTotal()): ?><strong><?php echoFloat($droit->report); ?>&nbsp;</strong><span class="unite">€</span><?php endif; ?>
-                    </td>
-                    <td class="<?php echo (isRectifier($droit, 'volume_taxe') || isRectifier($droit, 'volume_reintegre')) ? rectifierCssClass() : null ?>"><?php if($droit->isTotal()): ?><strong><?php echoFloat($droit->cumulable); ?></strong>&nbsp;<span class="unite">€</span><?php endif; ?>&nbsp;</td>
-        			<?php endif; ?>
         		</tr>
         		<?php endforeach; ?>
             </tbody>

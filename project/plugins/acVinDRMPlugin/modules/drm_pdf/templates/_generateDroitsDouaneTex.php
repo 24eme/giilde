@@ -81,8 +81,8 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 \textbf{Liquidation des droits}
 \end{large}
 \end{center}
-\begin{tabular}{C{43mm} |C{43mm}|C{43mm}|C{43mm}|C{43mm}|C{43mm}|}
-\multicolumn{6}{|c}{\cellcolor[gray]{0.3}\small{\color{white}{\textbf{Droits de circulation (des vins tranquilles et mousseux uniquement)}}}}
+\begin{tabular}{C{43mm}|C{43mm}|C{43mm}|C{43mm}|C{43mm}|}
+\multicolumn{5}{|c}{\cellcolor[gray]{0.3}\small{\color{white}{\textbf{Droits de circulation (des vins tranquilles et mousseux uniquement)}}}}
 \\
 \hline
 \rowcolor{lightgray}
@@ -90,8 +90,7 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 \multicolumn{1}{|C{43mm}}{\small{\textbf{Libellé}}} &
 \multicolumn{1}{|C{43mm}|}{\small{\textbf{Volume}}} &
 \multicolumn{1}{|C{43mm}|}{\small{\textbf{Taux}}} &
-\multicolumn{1}{|C{43mm}|}{\small{\textbf{Total}}} &
-\multicolumn{1}{|C{43mm}|}{\small{\textbf{Cumul}}}
+\multicolumn{1}{|C{43mm}|}{\small{\textbf{Total}}}
 \\
 \hline
 <?php foreach ($droitsDouane as $droitDouane): ?>
@@ -100,8 +99,7 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
     \multicolumn{1}{|l}{\small{\textbf{<?php echo $droitDouane->libelle; ?>}}} &
     \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($droitDouane->getVolume()).' hl';  ?>}}} &
     \multicolumn{1}{|r|}{\small{\textbf{<?php echo $droitDouane->taux.' €/hl'; ?>}}} &
-    \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintDroitDouane($droitDouane->total).' €'; ?>}}} &
-    \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintDroitDouane($droitDouane->cumul).' €'; ?>}}}
+    \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintDroitDouane($droitDouane->total).' €'; ?>}}}
     \\
     \hline
 <?php endforeach; ?>
