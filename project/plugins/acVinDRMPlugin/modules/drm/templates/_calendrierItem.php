@@ -11,7 +11,7 @@
                 <div class="text-center">
                     <p class="etablissement_nom"><?php echo $etb->nom; ?></p>
                     <p class="etablissement_identifiant"><?php echo $etb->identifiant; ?></p>
-                    <p class="lignestatut">Etat : <span class="statut"><?php echo getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?></span>&nbsp;<?php echo getPointAideHtml('drm','etats') ?><br/>&nbsp;<?php echo getTeledeclareeLabelCalendrier($isTeledeclarationMode, $calendrier, $periode) ?></p>
+                    <p class="lignestatut">Etat : <span class="statut"><?php echo getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?></span>&nbsp;<?php echo getPointAideHtml('drm','etats') ?><br/>&nbsp;<?php echo getTeledeclareeLabelCalendrier($isTeledeclarationMode && !(sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte()), $calendrier, $periode) ?></p>
                     <?php $lien = getEtatDRMHrefCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?>
                     <?php if ($lien) : ?>
                     <a <?php if(preg_match("/^#/", $lien)): ?>data-toggle="modal"<?php endif; ?>

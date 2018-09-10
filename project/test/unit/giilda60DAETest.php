@@ -3,6 +3,12 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 sfContext::createInstance($configuration);
 
+if(!method_exists(ConfigurationClient::getConfiguration(date('Y-m-d')),'getConfigurationProduit')){
+    $t = new lime_test(0);
+    $t->comment("Le module DAE n'est pas disponible dans cette environnement : La class Configuration ne possède pas de méthode getConfigurationProduit");
+    return;
+}
+
 $conf = ConfigurationClient::getInstance()->getCurrent();
 
 $t = new lime_test(14);

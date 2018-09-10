@@ -43,7 +43,7 @@ class drm_editionActions extends drmGeneriqueActions {
     public function executeLibelles(sfWebRequest $request) {
     	$this->isTeledeclarationMode = $this->isTeledeclarationDrm();
     	$this->init();
-    	if ($this->isTeledeclarationMode) {
+    	if ($this->isTeledeclarationMode && !(sfConfig::get('app_force_usurpation_mode') && $this->getUser()->isUsurpationCompte())) {
     		$this->redirect404();
     	}
 

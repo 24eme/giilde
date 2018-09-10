@@ -55,11 +55,6 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
         $tavs = new DRMTavsCollectionForm($this->drm);
         $this->embedForm('tavsProduits', $tavs);
 
-        $this->setWidget('paiement_douane_frequence', new bsWidgetFormChoice(array('expanded' => true, 'multiple' => false,'inline' => true,  'choices' => $this->getPaiementDouaneFrequence())));
-        $this->setValidator('paiement_douane_frequence', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getPaiementDouaneFrequence())), array('required' => "Aucune fréquence de paiement des droits douane n'a été choisie")));
-        $this->widgetSchema->setLabel('paiement_douane_frequence', 'Fréquence de paiement');
-
-
         $this->setWidget('statistiques_jus', new bsWidgetFormInputFloat());
         $this->setWidget('statistiques_mcr', new bsWidgetFormInputFloat());
         $this->setWidget('statistiques_vinaigre', new bsWidgetFormInputFloat());
@@ -103,22 +98,6 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
             }
         }
 
-        $paiement_douane_frequence = $values['paiement_douane_frequence'];
-        $this->drm->setPaiementDouaneFrequence($values['paiement_douane_frequence']);
-        if ($paiement_douane_frequence == DRMPaiement::FREQUENCE_ANNUELLE) {
-            foreach ($this->drm->getProduits() as $produit) {
-                $genre = $produit->getConfig()->getGenre();
-                if(!isset(DRMDroits::$correspondanceGenreKey[$genre->getKey()])) {
-                    continue;
-                }
-                $genreKey = DRMDroits::$correspondanceGenreKey[$genre->getKey()];
-                $localCumul = $values['cumul_' . $genreKey];
-
-                if ($localCumul && $localCumul > 0) {
-                    $this->drm->getOrAdd('droits')->getOrAdd('douane')->getOrAdd($genreKey)->set('report', $localCumul);
-                }
-            }
-        }
         if ($observations = $values['observationsProduits']) {
           foreach ($observations as $hash => $observation) {
             $this->drm->addObservationProduit($hash, $observation['observations']);
@@ -140,9 +119,6 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
         $this->drm->etape = DRMClient::ETAPE_VALIDATION;
         $this->drm->save();
 
-        $societe = $this->drm->getEtablissement()->getSociete();
-        $societe->add('paiement_douane_frequence', $paiement_douane_frequence);
-        $societe->save();
     }
 
     public function updateDefaultsFromObject() {
@@ -158,23 +134,6 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
                     $this->setDefault($docType . '_nb', $docNode->nb);
                 }
             }
-        }
-
-        $societe = $this->drm->getEtablissement()->getSociete();
-        if ($societe->exist('paiement_douane_frequence') && $societe->paiement_douane_frequence) {
-            $this->setDefault('paiement_douane_frequence', $societe->paiement_douane_frequence);
-            if ($societe->paiement_douane_frequence == DRMPaiement::FREQUENCE_ANNUELLE) {
-                $droitsDouane = $this->drm->getOrAdd('droits')->getOrAdd('douane');
-                foreach ($this->drm->getProduits() as $produit) {
-                  $genre = $produit->getConfig()->getGenre();
-                  if (isset(DRMDroits::$correspondanceGenreKey[$genre->getKey()])) {
-                    $genreKey = DRMDroits::$correspondanceGenreKey[$genre->getKey()];
-                    $this->setDefault('cumul_' . $genreKey, $droitsDouane->getOrAdd($genreKey)->get('report'));
-                  }
-                }
-            }
-        } else {
-            $this->setDefault('paiement_douane_frequence', null);
         }
 
         $this->setDefault('statistiques_jus' , $this->drm->declaratif->statistiques->jus);

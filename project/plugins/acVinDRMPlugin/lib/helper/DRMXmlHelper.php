@@ -292,7 +292,7 @@ function xmlPartOfToTable($flatXml,$regexs = array(),$withRemove = false){
 }
 
 function xmlProduitLibelle($produit) {
-	return trim(html_entity_decode((($produit->produit_libelle) ? $produit->produit_libelle : $produit->getLibelle('%format_libelle% %la%')), ENT_QUOTES | ENT_HTML401));
+	return str_replace('&', ' et ', trim(html_entity_decode((($produit->produit_libelle) ? $produit->produit_libelle : $produit->getLibelle('%format_libelle% %la%')), ENT_QUOTES | ENT_HTML401)));
 }
 
 function xmlGetProduitsDetails($drm, $bool, $suspendu_acquitte) {

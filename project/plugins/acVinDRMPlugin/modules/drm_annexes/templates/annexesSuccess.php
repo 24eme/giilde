@@ -272,63 +272,6 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
             <?php endif; ?>
 
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                      <div class="panel-heading" style="cursor:pointer;" id="drm_annexes_douanes" data-toggle="collapse" data-parent="#accordion" href="#collapse_douanes" aria-expanded="true" aria-controls="collapse_douanes">
-                        <div class="row">
-                          <div class="col-xs-11">
-                            <h3 class="panel-title text-center"><strong>Paiement Douane</strong></h3>
-                          </div>
-                          <div class="col-xs-1 text-right">
-                            <a role="button" >
-                              &nbsp;<span class="glyphicon <?php echo (!$drm->hasPaiementDouane())? 'glyphicon-chevron-down' : 'glyphicon-chevron-right' ?> " style="padding-top: 4px;" ></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    <div id="collapse_douanes" class="panel-collapse collapse <?php echo (!$drm->hasPaiementDouane())? 'in' : '' ?>" role="tabpanel" aria-labelledby="drm_annexes_douanes">
-                      <div class="panel-body">
-                        <p><?php echo getPointAideText('drm','annexe_paiement_douane'); ?></p>
-                    <table class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th colspan="3">Condition de paiement des douanes<?php echo getPointAideHtml('drm','annexe_paiement_douane_condition'); ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                              <td class="col-xs-3">
-                                <?php echo $annexesForm['paiement_douane_frequence']->renderLabel(); ?><?php echo getPointAideHtml('drm','annexe_paiement_douane_frequence'); ?>
-                              </td>
-                              <td class="col-xs-9" colspan="2" >
-                                <?php echo $annexesForm['paiement_douane_frequence']->renderError(); ?>
-                                <?php echo $annexesForm['paiement_douane_frequence']->render(); ?>
-                              </td>
-                          </tr>
-                          <tr style="vertical-align: middle;" class="drm_paiement_douane_cumul" <?php echo ($paiement_douane_frequence && ($paiement_douane_frequence == DRMPaiement::FREQUENCE_ANNUELLE)) ? '' : 'style="display:none;"'; ?>  >
-                              <td class="col-xs-4">
-                                  Cumul <strong>début de mois</strong> des droits douaniers (en €) <?php echo getPointAideHtml('drm','annexe_paiement_douane_cumul'); ?>
-                              </td>
-                              <?php foreach ($drm->getAllGenres() as $genre): ?>
-                                <?php if(isset($annexesForm['cumul_' . $genre])): ?>
-                                    <td class="col-xs-4">
-                                        <?php echo $annexesForm['cumul_' . $genre]->renderError(); ?>
-                                        <div>
-                                        <div class="col-xs-6"><?php echo $annexesForm['cumul_' . $genre]->renderLabel(); ?></div>
-                                        <div class="col-xs-6"><?php echo $annexesForm['cumul_' . $genre]->render(); ?></div>
-                                        </div>
-                                    </td>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                          </tr>
-                        </tbody>
-                      </table>
-                   </div>
-                 </div>
-               </div>
-             </div>
-            </div>
-            <div class="row">
                 <div class="col-xs-4 text-left">
                     <a tabindex="-1" href="<?php echo url_for('drm_crd', $drm); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
                 </div>

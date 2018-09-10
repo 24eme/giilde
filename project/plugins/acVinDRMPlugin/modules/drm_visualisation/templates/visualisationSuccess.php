@@ -46,7 +46,7 @@
             </div>
         </div>-->
 
-        <?php if (!$isTeledeclarationMode): ?>
+        <?php if (!$isTeledeclarationMode || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())): ?>
             <?php if ($drm_suivante && $drm_suivante->isRectificative() && !$drm_suivante->isValidee()):
                 ?>
                 <div class="vigilance_list">
@@ -70,7 +70,7 @@
     </div>
 </div>
 
-<?php if (!$isTeledeclarationMode && $drm->commentaire): ?>
+<?php if ((!$isTeledeclarationMode  || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())) && $drm->commentaire): ?>
     <div class="row">
         <div class="col-xs-12">
             <h4>Commentaire interne</h4>
@@ -92,7 +92,7 @@
   <div class="col-xs-12">
     <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title text-center"<?php if (!$isTeledeclarationMode): ?> style="padding: 0 0 5px 0;"<?php endif; ?>>Transmission proDou@ane <?php if (!$isTeledeclarationMode): ?><a class="btn btn-warning btn-xs pull-right" href="<?php echo url_for('drm_edition_libelles', $drm) ?>">Modifier les libellés prodouane</a><?php endif; ?></h3>
+          <h3 class="panel-title text-center"<?php if (!$isTeledeclarationMode || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())): ?> style="padding: 0 0 5px 0;"<?php endif; ?>>Transmission proDou@ane <?php if (!$isTeledeclarationMode || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())): ?><a class="btn btn-warning btn-xs pull-right" href="<?php echo url_for('drm_edition_libelles', $drm) ?>">Modifier les libellés prodouane</a><?php endif; ?></h3>
         </div>
         <div class="panel-content>">
             <table class="table table-striped table-condensed">
@@ -112,7 +112,7 @@
                         <?php endif; ?>
                       </td>
                   </tr>
-                  <?php if (!$isTeledeclarationMode): ?>
+                  <?php if (!$isTeledeclarationMode  || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())): ?>
                     <?php if (is_null($drm->transmission_douane->coherente)) : ?>
                       <tr><td>Retour XML</td><td>Aucun retour de la part de proDou@ne n'a été effectué<a href="<?php echo url_for('drm_retour_refresh', $drm); ?>"  class="pull-right btn btn-xs btn-default" ><span class="glyphicon glyphicon-repeat"></span></a></td></tr>
                     <?php elseif($drm->transmission_douane->coherente): ?>

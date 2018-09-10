@@ -1135,7 +1135,7 @@
                                                                "code": "PR",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1R070S 1",
+                                                               "code_douane": "1R070S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1427,7 +1427,7 @@
                                                                "code": "SY",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B055S 1",
+                                                               "code_douane": "1B055S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1473,7 +1473,7 @@
                                                                "code": "GW",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B065S01",
+                                                               "code_douane": "1B065S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1516,7 +1516,7 @@
                                                                "code": "SY",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B056S 1",
+                                                               "code_douane": "1B056S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1615,7 +1615,7 @@
                                                                "code": "PR",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1R057S 1",
+                                                               "code_douane": "1R057S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1716,7 +1716,7 @@
                                                                "code": "KL",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B054S 1",
+                                                               "code_douane": "1B054S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1762,7 +1762,7 @@
                                                                "code": "PR",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1R058S 1",
+                                                               "code_douane": "1R058S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1808,7 +1808,7 @@
                                                                "code": "PR",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1R059S 1",
+                                                               "code_douane": "1R059S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -1854,7 +1854,7 @@
                                                                "code": "PR",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1R060S 1",
+                                                               "code_douane": "1R060S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -2040,7 +2040,7 @@
                                                                "code": "RI",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B061S 4",
+                                                               "code_douane": "1B061S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -2083,7 +2083,7 @@
                                                                "code": "RI",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B064S 4",
+                                                               "code_douane": "1B064S",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15013,7 +15013,7 @@
                                                                "code": "PN",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1S001M ",
+                                                               "code_douane": "1S001M00",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15090,7 +15090,7 @@
                                                                "code": "BL",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B001M ",
+                                                               "code_douane": "1B001M00",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15105,7 +15105,7 @@
                                                                "code": "RS",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1S001M ",
+                                                               "code_douane": "1S001M00",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -17425,7 +17425,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
-                   "douane_cat": "sorties-periode/sorties-avec-paiement-droits",
+                   "douane_cat": "sorties-periode/ventes-france-crd-suspendus/annee-courante",
                    "taxable_douane": 1
                },
                "exporttaxe": {
@@ -17438,7 +17438,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
-                   "douane_cat": "sorties-periode/sorties-avec-paiement-droits",
+                   "douane_cat": "sorties-periode/ventes-france-crd-suspendus/annee-courante",
                    "taxable_douane": 1
                },
                "exoversutilisateurauto": {
@@ -17719,7 +17719,7 @@
                    "mouvement_coefficient": 1,
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
-                   "douane_cat": "entrees-periode/volume-produit",
+                   "douane_cat": "entrees-periode/achats",
                    "taxable_douane": 0
                },
                "reintegration": {
@@ -17732,7 +17732,7 @@
                    "mouvement_coefficient": 1,
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
-                   "douane_cat": "entrees-periode/volume-produit",
+                   "douane_cat": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
                }
            },
@@ -17747,7 +17747,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
-                   "douane_cat": "sorties-periode/sorties-avec-paiement-droits",
+                   "douane_cat": "sorties-periode/ventes",
                    "taxable_douane": 0
                },
                "export": {
@@ -17760,7 +17760,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits",
+                   "douane_cat": "sorties-periode/ventes",
                    "taxable_douane": 0
                },
                "consommationfamilialedegustation": {
@@ -17773,7 +17773,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/consomation-familiale-degustation",
+                   "douane_cat": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                },
                "destructionperte": {
@@ -17786,7 +17786,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
+                   "douane_cat": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                }
            },
