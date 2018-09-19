@@ -11,7 +11,7 @@
  *
  * @author mathurin
  */
-class maintenanceDRMMouvementsRebuildTask extends sfBaseTask {
+class DRMMouvementsRebuildTask extends sfBaseTask {
 
     protected function configure() {
         // // add your own arguments here
@@ -26,8 +26,8 @@ class maintenanceDRMMouvementsRebuildTask extends sfBaseTask {
                 // add your own options here
         ));
 
-        $this->namespace = 'maintenance';
-        $this->name = 'drm-mouvements-rebuild';
+        $this->namespace = 'drm';
+        $this->name = 'mouvements-rebuild';
         $this->briefDescription = '';
         $this->detailedDescription = <<<EOF
 The [maintenanceDRMMouvementsUpdate|INFO] task does things.

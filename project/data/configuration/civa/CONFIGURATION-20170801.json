@@ -15607,7 +15607,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4B900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15633,7 +15633,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4R900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15659,7 +15659,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4S900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15732,7 +15732,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4B911S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15758,7 +15758,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4R911S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15784,7 +15784,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4S911S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15889,7 +15889,7 @@
                                                                "code": "DEFAUT",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4B998M",
+                                                               "code_douane": "4B999M",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15915,7 +15915,7 @@
                                                                "code": "DEFAUT",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4R998M",
+                                                               "code_douane": "4R999M",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -15941,7 +15941,7 @@
                                                                "code": "DEFAUT",
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "4S998M",
+                                                               "code_douane": "4S999M",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16072,7 +16072,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B998S",
+                                                               "code_douane": "VT_IG_AOP",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16098,7 +16098,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1R998S",
+                                                               "code_douane": "VT_IG_AOP",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16124,7 +16124,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1S998S",
+                                                               "code_douane": "VT_IG_AOP",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16193,7 +16193,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1B900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16219,7 +16219,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1R900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16245,7 +16245,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "1S900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16469,7 +16469,7 @@
                                                        "code": "blanc",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": "3B998S",
+                                                       "code_douane": "VT_IG_IGP",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16495,7 +16495,7 @@
                                                        "code": "rouge",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": "3R998S",
+                                                       "code_douane": "VT_IG_IGP",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16521,7 +16521,7 @@
                                                        "code": "rose",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": "3S998S",
+                                                       "code_douane": "VT_IG_IGP",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16590,7 +16590,7 @@
                                                        "code": "blanc",
                                                        "code_produit": null,
                                                        "code_comptable": null,
-                                                       "code_douane": "3B900S",
+                                                       "code_douane": "VT_ETRANGERS",
                                                        "interpro": {
                                                        },
                                                        "departements": [
@@ -16628,7 +16628,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "3R900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -16654,7 +16654,7 @@
                                                                "code": null,
                                                                "code_produit": null,
                                                                "code_comptable": null,
-                                                               "code_douane": "3S900S",
+                                                               "code_douane": "VT_ETRANGERS",
                                                                "cepages_autorises": [
                                                                ],
                                                                "interpro": {
@@ -17490,7 +17490,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement/sorties-definitives",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
                    "taxable_douane": 0
                },
                "rebeches": {
@@ -17516,7 +17516,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement/sorties-definitives",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
                    "taxable_douane": 0
                },
                "export": {

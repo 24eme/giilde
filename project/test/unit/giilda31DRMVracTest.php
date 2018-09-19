@@ -233,7 +233,7 @@ foreach($mouvementsFacturation as $mouvement) {
     }
 }
 
-$t->is($mouvementVrac->date, date('Y-m-31'), "La date est OK");
+$t->is($mouvementVrac->date, date('Y-m-t'), "La date est OK");
 $t->is($mouvementVrac->etablissement_identifiant, $viti->identifiant, "L'identifiant de l'établissement est OK");
 $t->is($mouvementVrac->produit_hash, $drm->getProduit($produit_hash, 'details')->getHash(), "La hash produit est OK");
 $t->is($mouvementVrac->produit_libelle, $drm->getProduit($produit_hash, 'details')->getLibelle(), "Le libellé produit est OK");
