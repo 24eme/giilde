@@ -23,7 +23,7 @@ foreach (CompteTagsView::getInstance()->listByTags('test', 'test') as $k => $v) 
 }
 
 
-$t = new lime_test(10);
+$t = new lime_test(12);
 $t->comment('création des différentes établissements');
 
 $societeviti = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getSociete();
@@ -72,6 +72,31 @@ $comptenego = CompteClient::getInstance()->findByIdentifiant($id.'01');
 $comptenego->addTag('test', 'test');
 $comptenego->save();
 $t->is($comptenego->tags->automatique->toArray(true, false), array('societe', 'ressortissant', 'negociant', 'etablissement'), "Création d'un etablissement nego 2 met à jour le compte");
+
+$societemixte = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_viti_region')->getSociete();
+$etablissementnegoinmixte = $societemixte->createEtablissement(EtablissementFamilles::FAMILLE_NEGOCIANT);
+$etablissementnegoinmixte->region = EtablissementClient::REGION_CVO;
+$etablissementnegoinmixte->nom = "Etablissement negociant dans societe mixte de la région";
+$etablissementnegoinmixte->save();
+$id = $etablissementnegoinmixte->getSociete()->getidentifiant();
+$comptenegoinmixte = CompteClient::getInstance()->findByIdentifiant($id.'01');
+$comptenegoinmixte->addTag('test', 'test');
+$comptenegoinmixte->addTag('test', 'test_mixte_nego_region');
+$comptenegoinmixte->save();
+$t->is($comptenegoinmixte->tags->automatique->toArray(true, false), array('societe', 'ressortissant', 'negociant', 'etablissement'), "Création d'un etablissement nego dans une societe mixte met à jour le compte");
+
+SocieteClient::getInstance()->clearSingleton();
+$societemixte = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_viti_region')->getSociete();
+$etablissementvitiinmixte = $societemixte->createEtablissement(EtablissementFamilles::FAMILLE_PRODUCTEUR);
+$etablissementvitiinmixte->region = EtablissementClient::REGION_CVO;
+$etablissementvitiinmixte->email = "viti@email.com";
+$etablissementvitiinmixte->nom = "Etablissement negociant dans societe mixte de la région";
+$etablissementvitiinmixte->save();
+$comptevitiinmixte = $etablissementvitiinmixte->getMasterCompte();
+$comptevitiinmixte->addTag('test', 'test');
+$comptevitiinmixte->addTag('test', 'test_mixte_viti_region');
+$comptevitiinmixte->save();
+$t->is($comptevitiinmixte->tags->automatique->toArray(true, false), array('etablissement', 'producteur'), "Création d'un etablissement viti dans une societe mixte met à jour le compte");
 
 $societenego_horsregion = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_horsregion')->getSociete();
 $etablissementnego_horsregion = $societenego_horsregion->createEtablissement(EtablissementFamilles::FAMILLE_NEGOCIANT);

@@ -42,11 +42,11 @@ class DAE extends BaseDAE implements InterfaceDeclarantDocument {
     }
     
     public function getLabels() {    
-    	return array('CONV' => 'Conventionnel', 'BIO' => 'Biologique', 'AUTRE' => 'Autre');
+    	return array('CONV' => 'Conventionnel', 'BIO' => 'Biologique', 'HVE' => 'Haute Valeur Envrionnementale (HVE - niveau 3)', 'DEMETER' => 'Demeter', 'NATURE_PROGRES' => 'Nature et Progrès', 'BIODYVIN' => 'Biodyvin', 'BIO_COHERENCE' => 'Bio Cohérence', 'TERRA_VITIS' => 'Terra Vitis', 'AUTRE' => 'Autre');
     }
     
     public function getMentions() {    
-    	return array('PRIM' => 'Primeurs', 'CHDO' => 'Château ou domaine');
+    	return array('PRIM' => 'Primeurs', 'DOMAINE' => 'Domaine', 'CHATEAU' => 'Château', 'CLOS' => 'Clos', 'MAS' => 'Mas', 'AUTRE' => 'Autre');
     }
     
     public function getTypes() {

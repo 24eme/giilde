@@ -268,6 +268,12 @@
                                    "taux": "3",
                                    "code": "CVO",
                                    "libelle": "Cvo"
+                               },
+                               {
+                                   "date": "2018-08-01",
+                                   "taux": "3.5",
+                                   "code": "CVO",
+                                   "libelle": "Cvo"
                                }
                            ]
                        }
@@ -2084,14 +2090,14 @@
                                        {
                                            "date": "2016-01-01T00:00:00+01:00",
                                            "taux": "3.77",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L387",
+                                           "libelle": "Vins Tranquilles"
                                        },
                                        {
                                            "date": "2018-01-01T00:00:00+01:00",
                                            "taux": "3.78",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L387",
+                                           "libelle": "Vins Tranquilles"
                                        }
                                    ],
                                    "cvo": [
@@ -4684,20 +4690,20 @@
                                        {
                                            "date": "2015-01-08T00:00:00+01:00",
                                            "taux": "9.29",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L385",
+                                           "libelle": "Vins Mousseux"
                                        },
                                        {
                                            "date": "2016-01-01T00:00:00+01:00",
                                            "taux": "9.33",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L385",
+                                           "libelle": "Vins Mousseux"
                                        },
                                        {
                                            "date": "2018-01-01T00:00:00+01:00",
                                            "taux": "9.35",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L385",
+                                           "libelle": "Vins Mousseux"
                                        }
                                    ],
                                    "cvo": [
@@ -5171,20 +5177,20 @@
                                {
                                    "date": "2015-01-08T00:00:00+01:00",
                                    "taux": "3.75",
-                                   "code": "DOUANE",
-                                   "libelle": "Douane"
+                                   "code": "L387",
+                                   "libelle": "Vins Tranquilles"
                                },
                                {
                                    "date": "2016-01-01T00:00:00+01:00",
                                    "taux": "3.77",
-                                   "code": "DOUANE",
-                                   "libelle": "Douane"
+                                   "code": "L387",
+                                   "libelle": "Vins Tranquilles"
                                },
                                {
                                    "date": "2018-01-01T00:00:00+01:00",
                                    "taux": "3.78",
-                                   "code": "DOUANE",
-                                   "libelle": "Douane"
+                                   "code": "L387",
+                                   "libelle": "Vins Tranquilles"
                                }
                            ],
                            "cvo": [
@@ -5216,20 +5222,20 @@
                                        {
                                            "date": "2015-08-01T00:00:00+02:00",
                                            "taux": "3.75",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L387",
+                                           "libelle": "Vins Tranquilles"
                                        },
                                        {
                                            "date": "2016-01-01T00:00:00+01:00",
                                            "taux": "3.77",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L387",
+                                           "libelle": "Vins Tranquilles"
                                        },
                                        {
                                            "date": "2018-01-01T00:00:00+01:00",
                                            "taux": "3.78",
-                                           "code": "DOUANE",
-                                           "libelle": "Douane"
+                                           "code": "L387",
+                                           "libelle": "Vins Tranquilles"
                                        }
                                    ],
                                    "cvo": [
@@ -6732,12 +6738,6 @@
                        ],
                        "droits": {
                            "douane": [
-                               {
-                                   "date": "2016-01-01T00:00:00+01:00",
-                                   "taux": "3.77",
-                                   "code": "L387",
-                                   "libelle": "Vins Tranquilles"
-                               }
                            ],
                            "cvo": [
                                {
@@ -7631,12 +7631,6 @@
                        ],
                        "droits": {
                            "douane": [
-                               {
-                                   "date": "2016-01-01T00:00:00+01:00",
-                                   "taux": "0",
-                                   "code": "DOUANE",
-                                   "libelle": "Douane"
-                               }
                            ],
                            "cvo": [
                                {
@@ -7911,7 +7905,7 @@
                                    "douane": [
                                        {
                                            "date": "2016-01-01T00:00:00+01:00",
-                                           "taux": "9.33",
+                                           "taux": "9.35",
                                            "code": "L385",
                                            "libelle": "Vins Mousseux"
                                        }
@@ -8716,7 +8710,7 @@
                    "facturable": 1,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "sorties-periode/ventes-france-crd-suspendus/annee-courante",
-                   "taxable_douane": 0
+                   "taxable_douane": 1
                },
                "ventefrancecrd": {
                    "readable": 1,

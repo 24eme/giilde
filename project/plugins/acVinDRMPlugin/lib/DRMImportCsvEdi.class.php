@@ -491,7 +491,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
               continue;
             }
             if (!$just_check) {
-                $centilitrage = $all_contenances[$litrageKey] * 100000;
+                $centilitrage = $all_contenances[$litrageKey];
                 $litrageLibelle = DRMClient::getInstance()->getLibelleCRD($litrageKey);
                 $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
                 $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
@@ -536,7 +536,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                         $num_ligne++;
                         break;
                     }
-                    if (!preg_match('/^FR0[0-9A-Z]{10}$/', $numero_accise)) {
+                    if (!preg_match('/^[A-Z]{2}[0-9A-Z]{11}$/', $numero_accise)) {
                         if ($just_check) {
                             $this->csvDoc->addErreur($this->annexesNonApurementWrongNumAcciseError($num_ligne, $csvRow));
                         }

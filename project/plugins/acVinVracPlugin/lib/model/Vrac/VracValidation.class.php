@@ -133,16 +133,16 @@ class VracValidation extends DocumentValidation {
         $produits = ConfigurationClient::getCurrent()->getProduits();
         $produit = null;
         foreach ($produits as $hash => $produitConf) {
-            if ($this->document->produit == $hash) {
-                $produit = $produitConf;
-                break;
-            }
+                if ($this->document->produit == $hash) {
+                    $produit = $produitConf;
+                    break;
+                }
         }
         $millesime = null;
         if (!($millesime = $this->document->millesime)) {
             return;
         }
-        if (!$produit->getDateCirulation($millesime)) {
+        if (!$produit || !$produit->getDateCirulation($millesime)) {
             return;
         }
         $date_debut = $produit->getDateCirulation($millesime)->date_debut;

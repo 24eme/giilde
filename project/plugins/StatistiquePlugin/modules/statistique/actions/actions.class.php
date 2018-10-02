@@ -10,11 +10,11 @@
  */
 class statistiqueActions extends sfActions {
 
-    
+
 	public function executeIndex(sfWebRequest $request) {
-		
+
 	}
-	
+
 	protected function getFields($key, $value)
 	{
 		if (!isset($value['properties'])) {
@@ -26,16 +26,16 @@ class statistiqueActions extends sfActions {
 		}
 		return $result;
 	}
-	
-	public function executeStatsStatistiques(sfWebRequest $request) 
+
+	public function executeStatsStatistiques(sfWebRequest $request)
 	{
 		$this->statistiquesConfig = sfConfig::get('app_statistiques_stats');
 		if (!$this->statistiquesConfig) {
 			throw new sfException('No configuration set for statistiques type stats');
 		}
-		
+
 		$this->form = new StatistiqueStatsFilterForm($this->statistiquesConfig);
-		
+
 		if (!$request->isMethod(sfWebRequest::POST)) {
 			return sfView::SUCCESS;
 		}
@@ -60,16 +60,16 @@ class statistiqueActions extends sfActions {
 			}
 		}
 	}
-	
-	protected function renderPdf($csv, $type, $options = array()) 
+
+	protected function renderPdf($csv, $type, $options = array())
 	{
 		$latex = new StatistiqueLatex($csv, $type, $options);
 		$latex->echoWithHTTPHeader();
 		exit;
 	}
-	
+
 	protected function getAggsResult($index, $filters, $agg)
-	{		
+	{
 		$index = acElasticaManager::getType($index);
 		$params = ($filters)? array('aggs' => $agg, 'query' => $filters) : array('aggs' => $agg);
 		$elasticaQuery = new acElasticaQuery();
@@ -78,7 +78,7 @@ class statistiqueActions extends sfActions {
 		//print_r(json_encode($elasticaQuery->toArray()));exit;
 		return $index->search($elasticaQuery)->getFacets();
 	}
-	
+
 	protected function getAggsResultCsv($type, $current, $lastPeriode = null)
 	{
 		return ($lastPeriode !== null)? $this->getPartial('statistique/'.$type, array('lastPeriode' => $lastPeriode, 'result' => $current)) : $this->getPartial('statistique/'.$type, array('lastPeriode' => null, 'result' => $current[$type]));
@@ -107,7 +107,7 @@ class statistiqueActions extends sfActions {
 		array_shift($array);
 		return $array;
 	}
-	
+
 	protected function getLibelles($noeud) {
         $libelles = array();
         $items = ConfigurationClient::getCurrent()->declaration->getKeys($noeud);
@@ -117,20 +117,20 @@ class statistiqueActions extends sfActions {
         }
 
         return $libelles;
-    }	
+    }
     protected function formatNumber($number) {
     	return ($number && $number != 0)? number_format($number, 2, ',', '') : null;
     }
-	
+
     public function executeDrmStatistiques(sfWebRequest $request) {
         $this->page = $request->getParameter('p', 1);
         $this->statistiquesConfig = sfConfig::get('app_statistiques_drm');
         if (!$this->statistiquesConfig) {
             throw new sfException('No configuration set for elasticsearch type drm');
         }
-        
+
         $index = acElasticaManager::getType($this->statistiquesConfig['elasticsearch_type']);
-        
+
         $this->fields = array();
         $mapping = $index->getMapping()[acElasticaManager::getClient()->dbname]['mappings'][$this->statistiquesConfig['elasticsearch_type']]['properties']['doc']['properties'];
 
@@ -143,7 +143,7 @@ class statistiqueActions extends sfActions {
         $this->query = $this->form->getDefaultQuery();
         $this->collapseIn = false;
         $this->filters = array();
-        
+
         if ($request->hasParameter($this->form->getName())) {
         	$this->form->bind($request->getParameter($this->form->getName()));
         	if ($this->form->isValid()) {
@@ -154,7 +154,7 @@ class statistiqueActions extends sfActions {
         		}
         	}
         }
-        
+
         $elasticaQuery = new acElasticaQuery();
         $elasticaQuery->setQuery($this->query);
         $elasticaQuery->setLimit($this->statistiquesConfig['nb_resultat']);
@@ -173,19 +173,19 @@ class statistiqueActions extends sfActions {
         }
 
         $index = $index = acElasticaManager::getType($this->statistiquesConfig['elasticsearch_type']);
-        
+
         $this->fields = array();
         $mapping = $index->getMapping()[acElasticaManager::getClient()->dbname]['mappings'][$this->statistiquesConfig['elasticsearch_type']]['properties']['doc']['properties'];
         foreach ($mapping as $propertie => $value) {
         	$key = 'doc.'.$propertie;
         	$this->fields = array_merge($this->fields, $this->getFields($key, $value));
         }
-        
+
         $this->form = new StatistiqueVracFilterForm($this->fields);
         $this->query = $this->form->getDefaultQuery();
         $this->collapseIn = false;
         $this->filters = array();
-        
+
         if ($request->hasParameter($this->form->getName())) {
             $this->form->bind($request->getParameter($this->form->getName()));
             if ($this->form->isValid()) {
@@ -196,7 +196,7 @@ class statistiqueActions extends sfActions {
                 }
             }
         }
-        
+
         $elasticaQuery = new acElasticaQuery();
         $elasticaQuery->setQuery($this->query);
 
@@ -218,7 +218,7 @@ class statistiqueActions extends sfActions {
         }
 
         $index = $index = acElasticaManager::getType($this->statistiquesConfig['elasticsearch_type']);
-        
+
         $this->fields = array();
         $mapping = $index->getMapping()[acElasticaManager::getClient()->dbname]['mappings'][$this->statistiquesConfig['elasticsearch_type']]['properties']['doc']['properties'];
 
@@ -226,10 +226,10 @@ class statistiqueActions extends sfActions {
         	$key = 'doc.'.$propertie;
         	$this->fields = array_merge($this->fields, $this->getFields($key, $value));
         }
-        
+
         $this->form = new StatistiqueDRMFilterForm($this->fields);
         $this->query = $this->form->getDefaultQuery();
-        
+
         if ($request->hasParameter($this->form->getName())) {
             $this->form->bind($request->getParameter($this->form->getName()));
             if ($this->form->isValid()) {
@@ -238,16 +238,16 @@ class statistiqueActions extends sfActions {
                 }
             }
         }
-        
+
         $elasticaQuery = new acElasticaQuery();
         $elasticaQuery->setQuery($this->query);
         $elasticaQuery->setLimit(5000);
         $result = $index->search($elasticaQuery);
         $hits = $result->getResults();
         /**
-         * 
+         *
          */
-        
+
         $csv_file = '';
         $csv_file .= "#Periode;Date saisie;Declarant id;Declarant nom;Total debut mois;Total entrees;Total recolte;Total sorties;Total facturable;Total;";
         $csv_file .= "\n";
@@ -287,17 +287,17 @@ class statistiqueActions extends sfActions {
         }
 
         $index = $index = acElasticaManager::getType($this->statistiquesConfig['elasticsearch_type']);
-        
+
         $this->fields = array();
         $mapping = $index->getMapping()[acElasticaManager::getClient()->dbname]['mappings'][$this->statistiquesConfig['elasticsearch_type']]['properties']['doc']['properties'];
         foreach ($mapping as $propertie => $value) {
         	$key = 'doc.'.$propertie;
         	$this->fields = array_merge($this->fields, $this->getFields($key, $value));
         }
-        
+
         $this->form = new StatistiqueVracFilterForm($this->fields);
         $this->query = $this->form->getDefaultQuery();
-        
+
         if ($request->hasParameter($this->form->getName())) {
             $this->form->bind($request->getParameter($this->form->getName()));
             if ($this->form->isValid()) {
@@ -346,7 +346,7 @@ class statistiqueActions extends sfActions {
 	        	$csv_file .= null;
         		$csv_file .= ";";
 	        	$csv_file .= null;
-        		
+
         	}
         	$csv_file .= ";";
         	$csv_file .= $item['doc']['mandataire_identifiant'];

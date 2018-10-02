@@ -268,15 +268,19 @@ foreach ($mvts_viti as $mvt) {
 $drm_mvts_sorted = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndPeriode($drmNext->identifiant, $drmNext->periode);
 $mvts_sorted = DRMClient::getInstance()->sortMouvementsForDRM($drm_mvts_sorted);
 $cpt = 0;
+$baseLibelleFound = false;
+$denomComplLibelleFound = false;
 foreach ($mvts_sorted as $type_mvt_drm => $mvts_grouped) {
   foreach ($mvts_grouped as $hash_produit => $mvts) {
     foreach ($mvts as $key => $mvt) {
-      if(!$cpt){
-        $t->is($mvt->produit_libelle, $denomComplLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $denomComplLibelle");
-      }else{
-        $t->is($mvt->produit_libelle, $baseLibelle, $drmNext->_id." : le libelle du mvt du produit est bien $baseLibelle");
-      }
-      $cpt++;
+        if($mvt->produit_libelle == $baseLibelle){
+            $baseLibelleFound = true;
+        }
+        if($mvt->produit_libelle == $baseLibelle){
+            $denomComplLibelleFound = true;
+        }
+        }
     }
-  }
 }
+$t->ok($baseLibelleFound, $drmNext->_id." : le libelle du mvt du produit est bien $baseLibelle");
+$t->ok($denomComplLibelleFound, $drmNext->_id." : le libelle du mvt du produit est bien $denomComplLibelle");

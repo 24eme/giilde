@@ -77,6 +77,46 @@ class DRMDeclaration extends BaseDRMDeclaration {
         return $produitsDetailsByCertifications;
     }
 
+    public function getMouvementsAggregateByAppellation($mouvementsFilter, $produitsFilter) {
+        $recap = array();
+        $produits = array();
+        $nodes = array('stocks_debut', 'entrees', 'sorties', 'stocks_fin');
+        foreach ($this->certifications as $certification) {
+            foreach ($certification->genres as $genre) {
+                foreach ($genre->appellations as $appellation) {
+                    $produits[$appellation->getHash()] = $appellation->getLibelle();
+                }
+            }
+        }
+        foreach($this->getProduitsDetailsSorted(true, null) as $detail) {
+            foreach($nodes as $node) {
+                foreach($detail->{$node} as $key => $item) {
+                    if(!preg_match("/".$mouvementsFilter."/", $key)) {
+                        continue;
+                    }
+                    if(!preg_match("|".$produitsFilter."|", $detail->getHash())) {
+                        continue;
+                    }
+
+                    foreach($item as $value) {
+                        if(!$value->volume) {
+                            continue;
+                        }
+
+                        if(!isset($recap[$value->identifiant])) {
+                            foreach($produits as $produitLibelle) {
+                                $recap[$value->identifiant][$produitLibelle] = 0;
+                            }
+                        }
+                        $recap[$value->identifiant][$detail->getAppellation()->getConfig()->getLibelle()] += $value->volume;
+                    }
+                }
+            }
+        }
+
+        return $recap;
+    }
+
     public function getProduitsDetailsAggregateByAppellation($isTeledeclarationMode = false, $detailsKey = null) {
         $recap = array();
         foreach ($this->certifications as $certification) {

@@ -74,14 +74,21 @@
 			        </div>
 			    	<div class="<?php if($form['mention_key']->hasError()): ?> has-error<?php endif; ?>">
 				        <?php echo $form['mention_key']->renderLabel(null, array("class" => "col-xs-1 control-label")); ?>
-				        <div class="col-xs-5"><?php echo $form['mention_key']->render(array()); ?></div>
+				        <div class="col-xs-5 bloc_condition" data-condition-cible="#bloc_mention_libelle"><?php echo $form['mention_key']->render(array()); ?></div>
 			        </div>
 			    </div>
 
-        		<div class="form-group<?php if($form['label_libelle']->hasError()): ?> has-error<?php endif; ?>" id="bloc_label_libelle" data-condition-value="AUTRE">
-        			<?php echo $form['label_libelle']->renderError(); ?>
-				    <?php echo $form['label_libelle']->renderLabel(null, array("class" => "col-xs-1 control-label")); ?>
-				    <div class="col-xs-5"><?php echo $form['label_libelle']->render(); ?></div>
+        		<div class="form-group">
+        			<div class="<?php if($form['label_libelle']->hasError()): ?> has-error<?php endif; ?>" id="bloc_label_libelle" data-condition-value="AUTRE">
+	        			<?php echo $form['label_libelle']->renderError(); ?>
+					    <?php echo $form['label_libelle']->renderLabel(null, array("class" => "col-xs-1 control-label")); ?>
+					    <div class="col-xs-5"><?php echo $form['label_libelle']->render(); ?></div>
+				    </div>
+        			<div class="<?php if($form['mention_libelle']->hasError()): ?> has-error<?php endif; ?>" id="bloc_mention_libelle" data-condition-value="AUTRE">
+	        			<?php echo $form['mention_libelle']->renderError(); ?>
+					    <?php echo $form['mention_libelle']->renderLabel(null, array("class" => "col-xs-1 control-label")); ?>
+					    <div class="col-xs-5"><?php echo $form['mention_libelle']->render(); ?></div>
+				    </div>
 			    </div>
 			</div>
 

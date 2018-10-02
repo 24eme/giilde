@@ -25,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-6"><a href="<?php echo url_for('dsnegoce_mon_espace', $etablissement) ?>" class="btn btn-default">Annuler</a></div>
+		<div class="col-xs-6"><a href="<?php echo url_for('dae_etablissement', array('identifiant' => $etablissement->identifiant)) ?>" class="btn btn-default">Annuler</a></div>
 		<div class="col-xs-6 text-right"><button id="btn_valider" type="submit" class="btn btn-success">Importer vos ventes</button></div>
     </form>
     

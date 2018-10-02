@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cd $(dirname $0)/..
+BASEDIR=$(pwd)
+
 . bin/config.inc
 . bin/import_functions.inc
 
@@ -22,11 +25,11 @@ cat $TMP/export_bi_drm_stock_last_modificatrices.csv | sed 's/"//g' | sed 's|/de
 echo "#REVENDIQUE;campagne;identifiant declarant;certification;genre;appellation;mention;lieu;couleur;cepage;code produit;region;document id;volume;nom declarant;libelle produit" > $TMP/export_bi_revendiques.csv
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/revendication/_view/stocks | sed -f bin/unicode2alpha | sed 's/.*"key":\[/REVENDIQUE;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | grep '^REVENDIQUE;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed 's/";;"/";"/' | sed 's/;"\/declaration/;\0/g' | sed -f $TMP/sed_produit_code | sed 's/"//g' | sed 's|/declaration/certifications/||' | sed 's|/genres/|;|' | sed 's|/appellations/|;|' | sed 's|/mentions/|;|' | sed 's|/lieux/|;|' | sed 's|/couleurs/|;|' | sed 's|/cepages/|;|' >> $TMP/export_bi_revendiques.csv
 
-echo "#ETABLISSEMENT;statut (ACTIF, SUSPENDU);famille;identifiant societe;identifiant interne;nom;identifiant;cvi;region viticole;raison sociale;siege.adresse;siege.commune;siege.code postal;no accises;carte pro;email;telephone;fax" > $TMP/export_bi_etablissements.csv
+echo "#ETABLISSEMENT;statut (ACTIF, SUSPENDU);famille;identifiant societe;identifiant interne;nom;identifiant;cvi;region viticole;raison sociale;siege.adresse;siege.commune;siege.code postal;no accises;carte pro;email;telephone;fax;recette_locale_id_douane;recette_locale_nom;" > $TMP/export_bi_etablissements.csv
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/etablissement/_view/all?reduce=false | sed -f bin/unicode2alpha | sed -r 's/.*"key":\[("INTERPRO-[^"]*"|null),/ETABLISSEMENT;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | sed 's/,"key":./,/' | sed 's/{"id"://' | grep '^ETABLISSEMENT;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed -r 's/"([^"]+);([^"]+)"/"\1 \2"/g' | tr -d '"'  >> $TMP/export_bi_etablissements.csv
 
 echo "#SOCIETE;statut (ACTIF, SUSPENDU);type societe;identifiant interne;identifiant;code_comptable_client;code_comptable_fournisseur;type fournisseur;nom;nom abrege;cave cooperative (OUI, NON);siret;code naf;tva intracommunautaire;domaines;adresse;adresse complementaire;code postal;ville;pays;telephone;fax;email" > $TMP/export_bi_societes.csv
-curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/societe/_view/export | sed -f bin/unicode2alpha | sed 's/.*"key":\["INTERPRO-[^"]*",/SOCIETE;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | grep '^SOCIETE;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed -r 's/"([^"]+); ([^"]+)"/"\1 \2"/g' | tr -d '"' >> $TMP/export_bi_societes.csv
+curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/societe/_view/export | sed -f bin/unicode2alpha | sed 's/.*"key":\["INTERPRO-[^"]*",/SOCIETE;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | grep '^SOCIETE;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed -r 's/"([^"]+); ([^"]+)"/"\1 \2"/g'  >> $TMP/export_bi_societes.csv
 
 
 . bin/export_bi_drm
@@ -71,4 +74,10 @@ sed -i 's/T[0-9]+[0-9:+GMT]+;/;/g' export_bi_contrats.csv
 if test "$SAMBA_XLSOFT_IP" && test "$SAMBA_XLSOFT_SHARE" && test "$SAMBA_AUTH" && test "$SAMBA_XLSOFT_DIR" ; then
     smbclient //$SAMBA_XLSOFT_IP/$SAMBA_XLSOFT_SHARE -A $SAMBA_AUTH -c "cd $SAMBA_XLSOFT_DIR ; put export_bi_mouvements.csv ; put export_bi_contrats.csv; put export_bi_dss.csv ; put export_bi_revendiques.csv ; put export_bi_etablissements.csv ; put export_bi_societes.csv ; put MDV_Fournisseurs.csv ; put PLV_Fournisseurs.csv ; put PLV_Clients.csv ; put export_bi_drm.csv"
 fi
+
+if test "$METABASE_SQLITE"; then
+    python $BASEDIR"/bin/csv2sql.py" $METABASE_SQLITE".tmp"
+    mv $METABASE_SQLITE".tmp" $METABASE_SQLITE
+fi
+
 cd -

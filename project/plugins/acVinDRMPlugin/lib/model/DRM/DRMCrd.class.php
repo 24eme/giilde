@@ -30,4 +30,12 @@ class DRMCrd extends BaseDRMCrd {
       }
       return false;
     }
+
+    public function setContenance($h){
+        $this->centilitrage = $h;
+    }
+    public function getContenance(){
+        return $this->centilitrage;
+    }
+
 }

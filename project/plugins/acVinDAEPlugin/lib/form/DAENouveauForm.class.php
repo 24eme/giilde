@@ -23,10 +23,12 @@ class DAENouveauForm extends acCouchdbObjectForm
     	$this->setWidget('no_accises_acheteur', new bsWidgetFormInput());
     	$this->setWidget('nom_acheteur', new bsWidgetFormInput());
     	$this->setWidget('label_libelle', new bsWidgetFormInput());
+    	$this->setWidget('mention_libelle', new bsWidgetFormInput());
     	$this->widgetSchema->setLabels(array(
     			'produit_key' => 'Produit',
     			'label_key' => 'Label',
     			'label_libelle' => 'Préciser',
+    			'mention_libelle' => 'Préciser',
     			'mention_key' => 'Mention',
     			'millesime' => 'Millesime',
     			'type_acheteur_key' => 'Type',
@@ -49,6 +51,7 @@ class DAENouveauForm extends acCouchdbObjectForm
         $this->setValidator('no_accises_acheteur', new sfValidatorRegex(array('required' => false, 'pattern' => '/^[0-9A-Za-z]{13}$/')));
         $this->setValidator('nom_acheteur', new sfValidatorString(array('required' => false)));
         $this->setValidator('label_libelle', new sfValidatorString(array('required' => false)));
+        $this->setValidator('mention_libelle', new sfValidatorString(array('required' => false)));
         
         $this->widgetSchema->setNameFormat('dae[%s]');
         
@@ -132,13 +135,14 @@ class DAENouveauForm extends acCouchdbObjectForm
     protected function doUpdateObject($values) {
     	$produits = $this->getProduits();
     	$labels = $this->getLabels();
+    	$mentions = $this->getMentions();
     	$types = $this->getTypes();
     	$destinations = $this->getDestinations();
     	$contenances = $this->getContenances();
     	
     	$values['produit_libelle'] = (isset($produits[$values['produit_key']]))? $produits[$values['produit_key']] : null;
     	$values['label_libelle'] = (isset($labels[$values['label_key']]) && !$values['label_libelle'])? $labels[$values['label_key']] : $values['label_libelle'];
-    	$values['mention_libelle'] = (isset($labels[$values['mention_key']]))? $labels[$values['mention_key']] : null;
+    	$values['mention_libelle'] = (isset($mentions[$values['mention_key']]) && !$values['mention_libelle'])? $mentions[$values['mention_key']] : $values['mention_libelle'];
     	$values['type_acheteur_libelle'] = (isset($types[$values['type_acheteur_key']]))? $types[$values['type_acheteur_key']] : null;
     	$values['destination_libelle'] = (isset($destinations[$values['destination_key']]))? $destinations[$values['destination_key']] : null;
     	$values['contenance_libelle'] = (isset($contenances[$values['contenance_key']]))? $contenances[$values['contenance_key']] : null;

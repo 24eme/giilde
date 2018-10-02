@@ -403,6 +403,7 @@ class Vrac extends BaseVrac {
             }else {
               throw new sfException("Créateur obligatoire pour un contrat télédéclaré");
             }
+            $this->autoSignIfIsIntern();
         } else {
             $this->valide->statut = VracClient::STATUS_CONTRAT_NONSOLDE;
         }
@@ -906,6 +907,13 @@ class Vrac extends BaseVrac {
             }
         }
         return false;
+    }
+
+    public function autoSignIfIsIntern(){
+        if($this->getVendeurObject()->getSociete() == $this->getAcheteurObject()->getSociete()){
+            $this->signatureByEtb($this->getVendeurObject());
+            $this->valide->statut = VracClient::STATUS_CONTRAT_NONSOLDE;
+        }
     }
 
     public function getEtbConcerned($societe) {

@@ -31,6 +31,8 @@ COUCHDISTANTHOST=distantnode
 #DEV_EMAILS="test@example.org test2@example.org"
 EXPORTDIR=MYDIR
 
+METABASE=~/metabase/db/bi.sqlite
+
 # Import export des DRM externes
 DRMEXTERNEIMPORTDIR=MYEXTERNEDIR
 GETDRMEXTERNECMD=()

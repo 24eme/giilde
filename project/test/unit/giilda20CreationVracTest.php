@@ -8,7 +8,7 @@ if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration-
     exit(0);
 }
 
-$t = new lime_test(17);
+$t = new lime_test(21);
 $t->comment("création d'un contrat viti/négo/courtier");
 
 $vrac = new Vrac();
@@ -49,6 +49,30 @@ $vrac->signatureByEtb(CompteTagsView::getInstance()->findOneCompteByTag('test', 
 $vrac->save();
 $t->isnt($vrac->valide->date_signature_vendeur, null, $vrac->_id." : signature du vendeur enregistrée");
 $t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_VISE, $vrac->_id." : après 3ème signature (viti), le contrat passe à validé");
+
+$t->comment("création d'un contrat interne viti et même négo");
+
+$vrac = new Vrac();
+$acheteur_identifiant = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_mixte_nego_region')->getEtablissement();
+$vrac->acheteur_identifiant = $acheteur_identifiant->getIdentifiant();
+$vrac->initCreateur($acheteur_identifiant->getIdentifiant());
+$vrac->teledeclare = true;
+$vrac->vendeur_identifiant =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_mixte_viti_region')->getEtablissement()->getIdentifiant();
+$produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
+$vrac->setProduit(array_shift($produits));
+$vrac->type_transaction = VracClient::TYPE_TRANSACTION_VIN_VRAC;
+$vrac->jus_quantite = 100;
+$vrac->setPrixUnitaire(70);
+$vrac->save();
+$t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_BROUILLON, $vrac->_id." : Création d'un brouillon");
+
+$vrac->validate();
+$vrac->save();
+
+$t->isnt($vrac->valide->date_signature_acheteur, null, $vrac->_id." : signature de de l'acheteur enregistrée");
+$t->isnt($vrac->valide->date_signature_vendeur, null, $vrac->_id." : signature du vendeur enregistrée");
+$t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_NONSOLDE, $vrac->_id." : le contrat interne est en non soldé");
+
 
 $t->comment("cas d'un contrat sans courtier avec négo hors région");
 $vrac = new Vrac();

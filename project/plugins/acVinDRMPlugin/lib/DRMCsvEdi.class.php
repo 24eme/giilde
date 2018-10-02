@@ -36,10 +36,13 @@ class DRMCsvEdi extends CsvFile {
     const CSV_CAVE_CONTRATID = 18;
     const CSV_CAVE_COMMENTAIRE = 19;
 
+    const CSV_CAVE_COMPLEMENT_PRODUIT = 14;
+    const CSV_CAVE_TYPE_COMPLEMENT_PRODUIT = 15;
+    const CSV_CAVE_VALEUR_COMPLEMENT_PRODUIT = 16;
+
     const CSV_CAVE_CONTRAT_PRIXHL = 20;
     const CSV_CAVE_CONTRAT_ACHETEUR_ACCISES = 21;
     const CSV_CAVE_CONTRAT_ACHETEUR_NOM = 22;
-
 
     const CSV_CRD_COULEUR = 4;
     const CSV_CRD_GENRE = 5;
@@ -72,6 +75,8 @@ class DRMCsvEdi extends CsvFile {
     protected $csv = null;
     protected static $genres = array('MOU' => 'Mousseux', 'EFF' => 'Effervescent', 'TRANQ' => 'Tranquille');
     protected $type_annexes = array(self::TYPE_ANNEXE_NONAPUREMENT => 'Non Apurement',  self::TYPE_ANNEXE_STATS_EUROPEENES => 'Statistiques Européenes');
+    protected static  $types_complement = array(self::COMPLEMENT_OBSERVATIONS, self::COMPLEMENT_TAV, self::COMPLEMENT_PREMIX);
+
 
     public function __construct($file, DRM $drm = null) {
         $this->drm = $drm;

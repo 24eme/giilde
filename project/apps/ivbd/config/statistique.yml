@@ -1,4 +1,4 @@
 all:
   configuration:
     statistique:
-      actif: false
+      actif: true

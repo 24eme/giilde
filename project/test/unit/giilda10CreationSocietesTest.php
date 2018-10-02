@@ -22,7 +22,7 @@ foreach (CompteTagsView::getInstance()->listByTags('test', 'test') as $k => $v) 
 }
 
 
-$t = new lime_test(9);
+$t = new lime_test(10);
 $t->comment('création des différentes sociétés');
 
 $codePostalRegion = "92100";
@@ -91,6 +91,20 @@ $compte->addTag('test', 'test');
 $compte->addTag('test', 'test_nego_horsregion');
 $compte->save();
 $t->is($compte->tags->automatique->toArray(true, false), array('societe', 'ressortissant'), "Création de société négo hors région crée un compte du même type");
+
+
+$societevitinego = SocieteClient::getInstance()->createSociete("société négo viti région test", SocieteClient::TYPE_OPERATEUR);
+$societevitinego->pays = "FR";
+$societevitinego->code_postal = $codePostalRegion;
+$societevitinego->commune = "Paris";
+$societevitinego->save();
+$id = $societevitinego->getidentifiant();
+$compte = CompteClient::getInstance()->findByIdentifiant($id.'01');
+$compte->addTag('test', 'test');
+$compte->addTag('test', 'test_nego_viti_region');
+$compte->save();
+$t->is($compte->tags->automatique->toArray(true, false), array('societe', 'ressortissant'), "Création de société mixte région crée un compte du même type");
+
 
 $societecourtier = SocieteClient::getInstance()->createSociete("société courtier test", SocieteClient::TYPE_COURTIER);
 $societecourtier->pays = "FR";

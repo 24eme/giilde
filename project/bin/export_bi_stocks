@@ -4,7 +4,7 @@
 . bin/import_functions.inc
 
 # I - Récupération DS négoce/Caves Coop
-echo "#DS;campagne;identifiant declarant;certification;genre;appellation;mention;lieu;couleur;cepage;code produit;periode;identifiant;volume stock;volume stock élaboration;vci;reserve_qualitative;nom declarant;libelle produit" > $TMP/export_bi_dss.csv
+echo "#DS;campagne;identifiant declarant;certification;genre;appellation;mention;lieu;couleur;cepage;code produit;periode;identifiant;volume stock;volume stock elaboration;vci;reserve_qualitative;nom declarant;libelle produit" > $TMP/export_bi_dss.csv
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/ds/_view/stocks | sed -f bin/unicode2alpha | sed 's/.*"key":\[/DS;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | grep '^DS;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed 's/";;"/";"/' | sed 's/;"\/declaration/;\0/g' | sed -f $TMP/sed_produit_code | sed 's|/declaration/certifications/||' | sed 's|/genres/|;|' | sed 's|/appellations/|;|' | sed 's|/mentions/|;|' | sed 's|/lieux/|;|' | sed 's|/couleurs/|;|' | sed 's|/cepages/|;|' >> $TMP/export_bi_dss.csv
 
 

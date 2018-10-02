@@ -39,7 +39,7 @@ EOF;
       $hashesToRemove = array();
       foreach ($drm->getCrds() as $firstKey => $subNode) {
         foreach ($subNode as $key => $nodeToMove) {
-            $newNode = $drm->crds->get($firstKey)->getOrAddCrdNode($nodeToMove->genre,$nodeToMove->couleur,$nodeToMove->centilitrage * DRMCrds::FACTLITRAGE,$nodeToMove->detail_libelle,$nodeToMove->stock_debut);
+            $newNode = $drm->crds->get($firstKey)->getOrAddCrdNode($nodeToMove->genre,$nodeToMove->couleur,$nodeToMove->centilitrage, $nodeToMove->detail_libelle,$nodeToMove->stock_debut);
             $newNode->genre = $nodeToMove->genre;
             $newNode->stock_debut = $nodeToMove->stock_debut;
             $newNode->stock_fin = $nodeToMove->stock_fin;

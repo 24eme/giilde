@@ -59,7 +59,7 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
             $couleur = $values['couleur_crd_' . $regime];
             $litrage_libelle = $values['litrage_crd_' . $regime];
             $contenances = VracConfiguration::getInstance()->getContenances();
-            $litrage = $contenances[$litrage_libelle] * 100000;
+            $litrage = $contenances[$litrage_libelle];
             $genre = $values['genre_crd_' . $regime];
             $stock_debut = $values['stock_debut_' . $regime];
             if ($genre && $couleur && $litrage) {

@@ -145,12 +145,12 @@ class DRMDetail extends BaseDRMDetail {
         $this->total_entrees = $this->getTotalByKey('entrees', 'recolte');
         $this->total_sorties = $this->getTotalByKey('sorties', 'recolte');
 
-        $this->stocks_fin->final = $this->stocks_debut->initial + $this->total_entrees - $this->total_sorties;
+        $this->stocks_fin->final = round($this->stocks_debut->initial + $this->total_entrees - $this->total_sorties, FloatHelper::getInstance()->getMaxDecimalAuthorized());
 
         $this->total_entrees_revendique = $this->getTotalByKey('entrees', 'revendique');
         $this->total_sorties_revendique = $this->getTotalByKey('sorties', 'revendique');
         if($this->getConfig()->getDocument()->hasDontRevendique() && $this->stocks_fin->exist('dont_revendique')){
-          $this->stocks_fin->dont_revendique = $this->stocks_debut->dont_revendique + $this->total_entrees_revendique - $this->total_sorties_revendique;
+          $this->stocks_fin->dont_revendique = round($this->stocks_debut->dont_revendique + $this->total_entrees_revendique - $this->total_sorties_revendique, FloatHelper::getInstance()->getMaxDecimalAuthorized());
         }
         if ($this->entrees->exist('recolte')) {
             $this->total_recolte = $this->entrees->recolte;

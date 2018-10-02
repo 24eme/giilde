@@ -4,11 +4,11 @@ require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
 $t = new lime_test(32);
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
-$produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
+$produits = array_keys(ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->getProduits());
 $produit1_hash = array_shift($produits);
-$produit1 = ConfigurationClient::getInstance()->getCurrent()->get($produit1_hash);
+$produit1 = ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->get($produit1_hash);
 $produit2_hash = array_shift($produits);
-$produit2 = ConfigurationClient::getInstance()->getCurrent()->get($produit2_hash);
+$produit2 = ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->get($produit2_hash);
 
 
 //Suppression des DRM précédentes
@@ -104,6 +104,7 @@ fclose($temp);
 $periode = (date('Y'))."01";
 $drm2 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
 $import = new DRMImportCsvEdi($tmpfname, $drm2);
+
 $t->ok($import->checkCSV(), "Vérification de l'import");
 if ($import->getCsvDoc()->hasErreurs()) {
   foreach ($import->getCsvDoc()->erreurs as $k => $err) {
@@ -129,6 +130,7 @@ fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",Lie de vi
 fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,24,,,,\n");
 fwrite($temp, "CRD,201802,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11601,,,,\n");
 fclose($temp);
+
 $periode = (date('Y'))."02";
 $drm3 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
 $import = new DRMImportCsvEdi($tmpfname, $drm3);

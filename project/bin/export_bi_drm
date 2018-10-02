@@ -13,5 +13,5 @@ cat $TMP/all_drm.csv | while read line; do
    echo $ETB","$line >> $TMP/export_bi_drm.csv.temp
 done
 
-echo "#DRM ID;identifiant etablissement;nom etablissement;campagne;periode;numéro archivage;teledeclare;Transfert douane;Retour douane" > $TMP/export_bi_drm.csv
+echo "#DRM ID;identifiant etablissement;nom etablissement;campagne;periode;numero archivage;teledeclare;Transfert douane;Retour douane" > $TMP/export_bi_drm.csv
 cat $TMP/export_bi_drm.csv.temp | awk -F "," '{ retour="KO"; if($15=="true"){ retour="OK"; } print $2";"$3";"$1";"$4";"$5";"$11";"$12";"$13";"retour}' | sed 's/"value":1}//g' | sed 's/\"//g'  >> $TMP/export_bi_drm.csv

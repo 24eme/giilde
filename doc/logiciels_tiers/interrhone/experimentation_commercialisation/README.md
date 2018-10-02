@@ -71,3 +71,88 @@ la description du produit sujet à commercialisation se fait sous le même forma
  - AD (colonne n°30) : champ réservé (stat prix hl)
 
 Il est possible de déclarer en une seule ligne plusieurs commercialisations.
+
+### Valeurs fermées
+
+Les différentes valeurs fermées sont listées ci-dessous.
+Les codes ou libellés peuvent être renseignés dans le fichier mais l'utilisation des codes est préconisée car les libellés sont susceptibles d'évoluer à la différence des codes.
+
+#### Types Acheteur
+
+| Code                  | Libellé                                      |
+|-----------------------|----------------------------------------------|
+| IMPORTATEUR           | Importateur                                  |
+| NEGOCIANT_REGION      | Négociant/Union Vallée du Rhône              |
+| NEGOCIANT_HORS_REGION | Négociant hors région                        |
+| GD                    | Grande Distribution (Leclerc, Carrefour...)  |
+| DISCOUNT              | Hard Discount  (LIDL, ALDI, Leader Price...) |
+| GROSSISTE             | Grossiste-CHR                                |
+| CAVISTE               | Caviste                                      |
+| VSITE                 | Vente sur site                               |
+| VSALON                | Vente sur salon                              |
+| VNET                  | Vente par correspondance / internet          |
+| AUTRE                 | Autre                                        |
+
+#### Labels
+
+| Code           | Libellé                                        |
+|----------------|------------------------------------------------|
+| CONV           | Conventionnel                                  |
+| BIO            | Biologique                                     |
+| HVE            | Haute Valeur Envrionnementale (HVE - niveau 3) |
+| DEMETER        | Demeter                                        |
+| NATURE_PROGRES | Nature et Progrès                              |
+| BIODYVIN       | Biodyvin                                       |
+| BIO_COHERENCE  | Bio Cohérence                                  |
+| TERRA_VITIS    | Terra Vitis                                    |
+| AUTRE          | Autre                                          |
+
+#### Mentions
+
+| Code    | Libellé  |
+|---------|----------|
+| PRIM    | Primeurs |
+| DOMAINE | Domaine  |
+| CHATEAU | Château  |
+| CLOS    | Clos     |
+| MAS     | Mas      |
+| AUTRE   | Autre    |
+
+#### Centilisations
+
+| Code     | Libellé           |
+|----------|-------------------|
+| HL       | HL                |
+| CL_10    | Bouteille 10 cL   |
+| CL_12_5  | Bouteille 12.5 cL |
+| CL_18_7  | Bouteille 18.7 cL |
+| CL_20    | Bouteille 20 cL   |
+| CL_25    | Bouteille 25 cL   |
+| CL_35    | Bouteille 35 cL   |
+| CL_37_5  | Bouteille 37.5 cL |
+| CL_50    | Bouteille 50 cL   |
+| CL_62    | Bouteille 62 cL   |
+| CL_70    | Bouteille 70 cL   |
+| CL_75    | Bouteille 75 cL   |
+| CL_100   | Bouteille 1 L     |
+| CL_150   | Bouteille 1.5 L   |
+| CL_175   | Bouteille 1.75 L  |
+| CL_200   | Bouteille 2 L     |
+| BIB_225  | BIB 2.25 L        |
+| BIB_300  | BIB 3 L           |
+| BIB_400  | BIB 4 L           |
+| BIB_500  | BIB 5 L           |
+| BIB_800  | BIB 8 L           |
+| BIB_1000 | BIB 10 L          |
+
+#### Pays
+
+La liste des pays au format ISO 3166-1 est disponible ici : [Wikipedia | ISO 3166-1 | Table de codage](https://fr.wikipedia.org/wiki/ISO_3166-1#Table_de_codage)
+
+| Code              | Libellé                |
+|-------------------|------------------------|
+| Colonne "alpha-2" | Colonne "Nom français" |
+
+#### Catalogue produit
+
+Le catalogue produit est disponible sur la documentation de l'EDI DRM ici : [Catalogue produit DeclarVins](https://github.com/24eme/declarvins/blob/master/doc/logiciels-tiers/catalogue_produits_declarvins.csv)

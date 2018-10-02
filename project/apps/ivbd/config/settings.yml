@@ -30,7 +30,7 @@ test:
 all:
   .settings:
 
-    enabled_modules:        [default, common, auth, vrac, drm, drm_edition, drm_vrac_details, drm_creationvrac_details, drm_export_details, drm_pdf, drm_validation, etablissement, etablissement_autocomplete, facture, ds, generation, revendication, stocks, societe, compte, document, produit, annuaire, compte_teledeclarant, drm_crds, drm_annexes, drm_ajout_produit, drm_visualisation, statistique, drm_xml, fichier]
+    enabled_modules:        [default, common, auth, vrac, drm, drm_edition, drm_vrac_details, drm_creationvrac_details, drm_export_details, drm_pdf, drm_validation, etablissement, etablissement_autocomplete, facture, ds, generation, revendication, stocks, societe, compte, document, produit, annuaire, compte_teledeclarant, drm_crds, drm_annexes, drm_ajout_produit, drm_visualisation, statistique, drm_xml, fichier,statistique]
 
     # Form security secret (CSRF protection)
     csrf_secret:            false
