@@ -1,0 +1,523 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  statistiques:
+    stats:
+      statistiques:
+        exportations:
+          libelle: "Exportations"
+          index: "DRMMVT"
+          hashkeysize: 1
+          aggregation:
+            filter:
+              term:
+                doc.mouvements.type_hash: 'export_details'
+            aggs:
+              totaux_blanc:
+                sum_bucket:
+                  buckets_path: "agg_line>blanc>agg_column"
+              totaux_rose:
+                sum_bucket:
+                  buckets_path: "agg_line>rose>agg_column"
+              totaux_rouge:
+                sum_bucket:
+                  buckets_path: "agg_line>rouge>agg_column"
+              totaux_total:
+                sum_bucket:
+                  buckets_path: "agg_line>total>agg_column"
+              agg_line:
+                terms:
+                  size: 0,
+                  field: 'doc.mouvements.detail_libelle'
+                  order:
+                    "total>agg_column": desc
+                aggs:
+                  blanc:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'blanc'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  rose:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'rose'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  rouge:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'rouge'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  total:
+                    filter:
+                      terms:
+                        doc.mouvements.couleur: ['blanc', 'rose', 'rouge']
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+        stocks:
+          libelle: "Stocks"
+          index: "DRMMVT"
+          aggregation:
+            filter:
+              term:
+                doc.mouvements.categorie: 'stocks'
+            aggs:
+              totaux_stock_initial:
+                sum_bucket:
+                  buckets_path: "agg_page>total_stock_initial"
+              totaux_stock_final:
+                sum_bucket:
+                  buckets_path: "agg_page>total_stock_final"
+              totaux_total:
+                sum_bucket:
+                  buckets_path: "agg_page>total_total"
+              agg_page:
+                terms:
+                  size: 0,
+                  field: 'doc.mouvements.produit_hash'
+                  order:
+                    "_term": asc
+                aggs:
+                  total_stock_initial:
+                    sum_bucket:
+                      buckets_path: "agg_line>stock_initial>agg_column"
+                  total_stock_final:
+                    sum_bucket:
+                      buckets_path: "agg_line>stock_final>agg_column"
+                  total_total:
+                    sum_bucket:
+                      buckets_path: "agg_line>total"
+                  agg_line:
+                    terms:
+                      size: 0,
+                      field: 'doc.declarant.famille'
+                      "order" : { "_term" : "desc" }
+                    aggs:
+                      stock_initial:
+                        filter:
+                          term:
+                            doc.mouvements.type_hash: 'total_debut_mois'
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                      stock_final:
+                        filter:
+                          term:
+                            doc.mouvements.type_hash: 'total'
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                      total:
+                        bucket_script:
+                          buckets_path:
+                            stock_initial_sum: "stock_initial>agg_column"
+                            stock_final_sum: "stock_final>agg_column"
+                          script: "stock_initial_sum - stock_final_sum"
+        sorties_categorie:
+          libelle: "Sorties par catégorie"
+          index: "DRMMVT"
+          hashkeysize: 2
+          aggregation:
+            filter:
+              terms:
+                doc.mouvements.type_hash: ['export_details', 'sorties/ventefrancecrd', 'creationvrac_details', 'creationvractirebouche_details', 'entrees/achatcrd', 'entrees/achatnoncrd']
+            aggs:
+              totaux_france:
+                sum_bucket:
+                  buckets_path: "agg_page>total_france"
+              totaux_export:
+                sum_bucket:
+                  buckets_path: "agg_page>total_export"
+              totaux_negoce:
+                sum_bucket:
+                  buckets_path: "agg_page>total_negoce"
+              totaux_total:
+                sum_bucket:
+                  buckets_path: "agg_page>total_total"
+              agg_page:
+              agg_page:
+                terms:
+                  size: 0,
+                  field: 'doc.mouvements.appellation'
+                aggs:
+                  total_france:
+                    sum_bucket:
+                      buckets_path: "agg_line>france>agg_column"
+                  total_export:
+                    sum_bucket:
+                      buckets_path: "agg_line>export>agg_column"
+                  total_negoce:
+                    sum_bucket:
+                      buckets_path: "agg_line>negoce>agg_column"
+                  total_total:
+                    sum_bucket:
+                      buckets_path: "agg_line>total"
+                  agg_line:
+                    terms:
+                      size: 0,
+                      field: 'doc.mouvements.couleur'
+                      "order" : { "_term" : "asc" }
+                    aggs:
+                      france:
+                        filter:
+                          term:
+                            doc.mouvements.type_hash: 'sorties/ventefrancecrd'
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                      export:
+                        filter:
+                          term:
+                            doc.mouvements.type_hash: 'export_details'
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                      negoce:
+                        filter:
+                          terms:
+                            doc.mouvements.type_hash: ['creationvrac_details', 'creationvractirebouche_details']
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                      total:
+                        bucket_script:
+                          buckets_path:
+                            france_sum: "france>agg_column"
+                            export_sum: "export>agg_column"
+                            negoce_sum: "negoce>agg_column"
+                          script: "france_sum + export_sum + negoce_sum"
+        sorties_appellation:
+          libelle: "Sorties de l'appellation"
+          index: "DRMMVT"
+          hashkeysize: 2
+          query_filters:
+            range:
+              'doc.mouvements.cvo':
+                gt: 0
+          aggregation:
+            filter:
+              terms:
+                doc.mouvements.type_hash: ['export_details', 'sorties/ventefrancecrd', 'creationvrac_details', 'creationvractirebouche_details', 'entrees/achatcrd', 'entrees/achatnoncrd']
+            aggs:
+              totaux_france:
+                sum_bucket:
+                  buckets_path: "agg_page>total_france"
+              totaux_export:
+                sum_bucket:
+                  buckets_path: "agg_page>total_export"
+              totaux_negoce:
+                sum_bucket:
+                  buckets_path: "agg_page>total_negoce"
+              totaux_total:
+                sum_bucket:
+                  buckets_path: "agg_page>total_total"
+              agg_page:
+                terms:
+                  size: 0,
+                  field: 'doc.mouvements.appellation'
+                aggs:
+                  total_france:
+                    sum_bucket:
+                      buckets_path: "agg_line>france>agg_column"
+                  total_export:
+                    sum_bucket:
+                      buckets_path: "agg_line>export>agg_column"
+                  total_negoce:
+                    sum_bucket:
+                      buckets_path: "agg_line>negoce>agg_column>agg_column"
+                  total_total:
+                    sum_bucket:
+                      buckets_path: "agg_line>total"
+                  agg_line:
+                    terms:
+                      size: 0,
+                      field: 'doc.mouvements.couleur'
+                      "order" : { "_term" : "asc" }
+                    aggs:
+                      france:
+                        filter:
+                          term:
+                            doc.mouvements.type_hash: 'sorties/ventefrancecrd'
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                      export:
+                        filter:
+                          term:
+                            doc.mouvements.type_hash: 'export_details'
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                      negoce:
+                        filter:
+                          terms:
+                            doc.mouvements.type_hash: ['creationvrac_details', 'creationvractirebouche_details']
+                        aggs:
+                          agg_column:
+                            filter:
+                              term:
+                                doc.mouvements.region_destinataire: 'REGION_HORS_CVO'
+                            aggs:
+                              agg_column:
+                                sum:
+                                  field: 'doc.mouvements.volume'
+                                  script: '_value * -1'
+                      total:
+                        bucket_script:
+                          buckets_path:
+                            france_sum: "france>agg_column"
+                            export_sum: "export>agg_column"
+                            negoce_sum: "negoce>agg_column>agg_column"
+                          script: "france_sum + export_sum + negoce_sum"
+        prix:
+          libelle: "Prix moyen de vente"
+          index: "VRAC"
+          aggregation:
+            filter:
+              term:
+                type: 'vrac'
+            aggs:
+              agg_page:
+                terms:
+                  size: 0,
+                  field: 'doc.type_transaction'
+                aggs:
+                  agg_page:
+                    terms:
+                      size: 0,
+                      field: 'doc.appellation'
+                    aggs:
+                      total_sans_prix:
+                        sum_bucket:
+                          buckets_path: "agg_line>vol_sans_prix>agg_column"
+                      total_avec_prix:
+                        sum_bucket:
+                          buckets_path: "agg_line>vol_avec_prix>agg_column"
+                      total_ca:
+                        sum_bucket:
+                          buckets_path: "agg_line>ca>agg_column"
+                      total_moyenne:
+                        avg_bucket:
+                          buckets_path: "agg_line>moyenne"
+                      agg_line:
+                        terms:
+                          field: 'doc.couleur'
+                        aggs:
+                          vol_avec_prix:
+                            filter:
+                              range:
+                                "doc.prix_initial_unitaire_hl":
+                                  gt: 0
+                            aggs:
+                              agg_column:
+                                sum:
+                                  field: 'doc.volume_propose'
+                          vol_sans_prix:
+                            filter:
+                              range:
+                                "doc.prix_initial_unitaire_hl":
+                                  lte: 0
+                            aggs:
+                              agg_column:
+                                sum:
+                                  field: 'doc.volume_propose'
+                          ca:
+                            filter:
+                              range:
+                                "doc.prix_initial_unitaire_hl":
+                                  gt: 0
+                            aggs:
+                              agg_column:
+                                sum:
+                                  script: "doc['doc.volume_propose'].value * doc['doc.prix_initial_unitaire_hl'].value"
+                          moyenne:
+                            bucket_script:
+                              buckets_path:
+                                vol_avec_prix_sum: "vol_avec_prix>agg_column"
+                                ca_sum: "ca>agg_column"
+                              script: "ca_sum / vol_avec_prix_sum / 100"
+    drm:
+      title: "Etat des lieux de saisie des DRMs"
+      nb_resultat: 20
+      elasticsearch_type: "DRM"
+      champs:
+        id:
+          libelle: "Identifiant"
+          noeud: "_id"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        mode_de_saisie:
+          libelle: "Saisie"
+          noeud: "mode_de_saisie"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        etablissement_raison_sociale:
+          libelle: "Raison sociale"
+          noeud: "declarant.raison_sociale"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        etablissement_nom_commerical:
+          libelle: "Nom"
+          noeud: "declarant.nom"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        total_debut_mois:
+          libelle: "Total début de mois"
+          noeud: "%declaration%.total_debut_mois"
+          need_replace: true
+          replace: "%declaration%"
+          var_replace: "hashProduitFilter"
+          print_number: true
+        total_entrees_nettes:
+          libelle: "Total entrées nettes"
+          noeud: "%declaration%.total_entrees_nettes"
+          need_replace: true
+          replace: "%declaration%"
+          var_replace: "hashProduitFilter"
+          print_number: true
+        total_entrees_reciproque:
+          libelle: "Total entrées avec réciproque"
+          noeud: "%declaration%.total_entrees_reciproque"
+          need_replace: true
+          replace: "%declaration%"
+          var_replace: "hashProduitFilter"
+          print_number: true
+        total_sorties_nettes:
+          libelle: "Total sorties nettes"
+          noeud: "%declaration%.total_sorties_nettes"
+          need_replace: true
+          replace: "%declaration%"
+          var_replace: "hashProduitFilter"
+          print_number: true
+        total_sorties_reciproque:
+          libelle: "Total sorties avec réciproque"
+          noeud: "%declaration%.total_sorties_reciproque"
+          need_replace: true
+          replace: "%declaration%"
+          var_replace: "hashProduitFilter"
+          print_number: true
+        total_fin_de_mois:
+          libelle: "Total fin de mois"
+          noeud: "%declaration%.total"
+          need_replace: true
+          replace: "%declaration%"
+          var_replace: "hashProduitFilter"
+          print_number: true
+    vrac:
+      title: "Etat des lieux de saisie des contrats interprofessionnels"
+      nb_resultat: 20
+      elasticsearch_type: "VRAC"
+      champs:
+        id:
+          libelle: "Visa"
+          noeud: "_id"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        produit:
+          libelle: "Produit"
+          noeud: "produit_libelle"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        label:
+          libelle: "Label"
+          noeud: "labels_libelle"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        mentions:
+          libelle: "Mentions"
+          noeud: "mentions_libelle"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        volume:
+          libelle: "Volume"
+          noeud: "volume_propose"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: true
+        prix_unitaire:
+          libelle: "Prix unitaire"
+          noeud: "prix_unitaire"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: true
+        date_saisie:
+          libelle: "Saisie"
+          noeud: "valide.date_saisie"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        vendeur:
+          libelle: "Vendeur"
+          noeud: "vendeur.raison_sociale"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        acheteur:
+          libelle: "Acheteur"
+          noeud: "acheteur.raison_sociale"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        courtier:
+          libelle: "Courtier"
+          noeud: "mandataire.raison_sociale"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false
+        statut:
+          libelle: "Statut"
+          noeud: "valide.statut"
+          need_replace: false
+          replace: null
+          var_replace: null
+          print_number: false

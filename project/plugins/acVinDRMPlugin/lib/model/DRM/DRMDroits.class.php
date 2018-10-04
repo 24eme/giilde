@@ -17,7 +17,7 @@ class DRMDroits extends BaseDRMDroits {
     }
 
     public function initDroitsDouane() {
-        $conf = ConfigurationClient::getCurrent();
+        $conf = $this->getDocument()->getConfig();
         $date = $this->getDocument()->getDate();
         foreach ($conf->declaration->certifications as $keyCertif => $certification) {
             foreach ($certification->genres as $keyGenre => $genre) {
@@ -33,7 +33,6 @@ class DRMDroits extends BaseDRMDroits {
                 $droitDouane->libelle = self::$correspondanceGenreLibelle[$keyGenre];
                 $droitDouane->updateTotal();
             }
-            return;
         }
     }
 

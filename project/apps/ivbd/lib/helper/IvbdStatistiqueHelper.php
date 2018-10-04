@@ -1,16 +1,16 @@
 <?php
 
-function getAppellationLibelle($key) 
+function getAppellationLibelle($key)
 {
 	$items = ConfigurationClient::getCurrent()->declaration->getKeys('appellation');
 	if (isset($items[$key])) {
 		$item = $items[$key];
-		return ($item->getLibelle())? $item->getLibelle() : ' ';
+		return ($item->getLibelle())? $item->getLibelle() : $item->getLibelleFormat();
 	}
 	return ' ';
 }
 
-function getFamilleLibelle($key) 
+function getFamilleLibelle($key)
 {
 	$familles = EtablissementFamilles::getFamilles();
 	return (isset($familles[$key]))? $familles[$key] : null;
@@ -18,7 +18,7 @@ function getFamilleLibelle($key)
 
 function getCouleurLibelle($key)
 {
-	$couleurs = array('blanc' => 'Blanc', 'rose' => 'Rosé', 'rouge' => 'Rouge');
+	$couleurs = array('blanc' => 'Blanc','blanc_sec' => 'Blanc Sec','blanc_moelleux' => 'Blanc Moelleux','blanc_doux' => 'Blanc Doux', 'rose' => 'Rosé', 'rouge' => 'Rouge');
 	return (isset($couleurs[$key]))? $couleurs[$key] : null;
 }
 

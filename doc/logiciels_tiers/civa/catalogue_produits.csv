@@ -696,8 +696,8 @@ AOC,Tranquille,Alsace Grand Cru,SGN,Zinnkoepflé,,Gewurztraminer,AOC Alsace Gran
 AOC,Tranquille,Alsace Grand Cru,SGN,Zotzenberg,,Riesling,AOC Alsace Grand Cru Zotzenberg Riesling SGN
 AOC,Tranquille,Alsace Grand Cru,SGN,Zotzenberg,,Pinot Gris,AOC Alsace Grand Cru Zotzenberg Pinot Gris SGN
 AOC,Tranquille,Alsace Grand Cru,SGN,Zotzenberg,,Gewurztraminer,AOC Alsace Grand Cru Zotzenberg Gewurztraminer SGN
-AOC,Tranquille,Alsace Pinot noir,,,,Pinot Noir,AOC Alsace Pinot noir Pinot Noir
-AOC,Tranquille,Alsace PN rouge,,,,Pinot Noir,AOC Alsace PN rouge Pinot Noir
+AOC,Tranquille,Alsace Pinot noir,,,,Pinot Noir Rosé,AOC Alsace Pinot noir
+AOC,Tranquille,Alsace PN rouge,,,,Pinot Noir Rouge,AOC Alsace PN rouge
 AOC,Mousseux,Crémant d'Alsace,,,,Blanc,AOC Crémant d'Alsace Blanc
 AOC,Mousseux,Crémant d'Alsace,,,,Rosé,AOC Crémant d'Alsace Rosé
 Vins sans IG,Tranquille,,,,Blanc,,Vins sans IG Blanc
@@ -731,8 +731,8 @@ Vins à IGP,Tranquille,CEE,,,Rosé,,Vins à IGP CEE Rosé
 Vins à IGP,Tranquille,Hors UE,,,Blanc,,Vins à IGP Hors UE Blanc
 Vins à IGP,Tranquille,Hors UE,,,Rouge,,Vins à IGP Hors UE Rouge
 Vins à IGP,Tranquille,Hors UE,,,Rosé,,Vins à IGP Hors UE Rosé
-Autre,Tranquille,Lies,,,,,Lies
 Autre,Tranquille,BFAV,,,,,BFAV
-Autre,Tranquille,DRA/DPLC,,,Blanc,,DRA/DPLC Blanc
-Autre,Tranquille,DRA/DPLC,,,Rouge,,DRA/DPLC Rouge
-Autre,Tranquille,Rebêches,,,,,Rebêches
+Autre,,Lies et Bourbes,,,,,Lies et Bourbes 
+Autre,,DRA/DPLC,,,Blanc,,DRA/DPLC Blanc
+Autre,,DRA/DPLC,,,Rouge,,DRA/DPLC Rouge
+Autre,,Rebêches,,,,,Rebêches

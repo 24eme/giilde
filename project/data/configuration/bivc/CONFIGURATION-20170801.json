@@ -8748,7 +8748,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/embouteillage",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/embouteillage",
                    "taxable_douane": 0
                },
                "transfertcomptamatiere": {
