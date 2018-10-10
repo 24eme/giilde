@@ -109,12 +109,16 @@ class DRMValidation extends DocumentValidation {
 
             $total_sorties_destructionperte += ($detail->sorties->exist('destructionperte')) ? $detail->sorties->destructionperte : 0;
 
-            if (!$detail->getConfig()->entrees->exist('transfertsrecolte')) {
-                continue;
+            if ($detail->getConfig()->entrees->exist('transfertsrecolte')) {
+              $total_entrees_transfert_appellation += $detail->entrees->transfertsrecolte;
             }
 
-            $total_entrees_transfert_appellation += $detail->entrees->transfertsrecolte;
-            $total_sorties_transfert_appellation += $detail->sorties->transfertsrecolte;
+            if ($detail->getConfig()->sorties->exist('transfertsrecolte')) {
+              $total_sorties_transfert_appellation += $detail->sorties->transfertsrecolte;
+            }
+            if ($detail->getConfig()->sorties->exist('manipulationssoutirages')) {
+              $total_sorties_transfert_appellation += $detail->sorties->manipulationssoutirages;
+            }
             if($detail->total_revendique  > $detail->total){
                 $this->addPoint('vigilance', 'revendique_sup_initial', $detail->getLibelle(), $this->generateUrl('drm_edition_detail', $detail));
             }
