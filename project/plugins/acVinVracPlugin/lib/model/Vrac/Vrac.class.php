@@ -405,6 +405,7 @@ class Vrac extends BaseVrac {
             }
             $this->autoSignIfIsIntern();
         } else {
+            $this->updateVersementFa();
             $this->valide->statut = VracClient::STATUS_CONTRAT_NONSOLDE;
         }
 
@@ -413,12 +414,6 @@ class Vrac extends BaseVrac {
         }
 
         $this->update();
-        if (!$this->exist('versement_fa') || !$this->versement_fa) {
-            $this->versement_fa = VracClient::VERSEMENT_FA_NOUVEAU;
-        }
-        if ($this->exist('versement_fa') && $this->versement_fa == VracClient::VERSEMENT_FA_TRANSMIS) {
-            $this->versement_fa = VracClient::VERSEMENT_FA_MODIFICATION;
-        }
     }
 
     public function getPeriode() {
@@ -849,6 +844,7 @@ class Vrac extends BaseVrac {
         }
         if ($allSignatures) {
             $this->valide->statut = VracClient::STATUS_CONTRAT_VALIDE;
+            $this->updateVersementFa();
             if (!$this->date_signature) {
                 $this->date_signature = date('c');
             }
@@ -862,6 +858,15 @@ class Vrac extends BaseVrac {
 
     public function isTeledeclare() {
         return $this->exist('teledeclare') && $this->teledeclare;
+    }
+
+    public function updateVersementFa(){
+        if (!$this->exist('versement_fa') || !$this->versement_fa) {
+            $this->versement_fa = VracClient::VERSEMENT_FA_NOUVEAU;
+        }
+        if ($this->exist('versement_fa') && $this->versement_fa == VracClient::VERSEMENT_FA_TRANSMIS) {
+            $this->versement_fa = VracClient::VERSEMENT_FA_MODIFICATION;
+        }
     }
 
     public function storeInterlocuteurCommercialInformations($nom, $contact) {

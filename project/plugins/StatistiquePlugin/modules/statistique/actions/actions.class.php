@@ -328,7 +328,12 @@ class statistiqueActions extends sfActions {
         	$csv_file .= ";";
         	$csv_file .= $item['doc']['date_signature'];
         	$csv_file .= ";";
-        	$csv_file .= $item['doc']['valide']['date_saisie'];
+			if(preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}$/',$item['doc']['valide']['date_saisie'])){
+				$csv_file .=  $item['doc']['valide']['date_saisie'] ;
+			}else{
+				$date = new DateTime($item['doc']['valide']['date_saisie']);
+				$csv_file .=  $date->format('Y-m-d')  ;
+			}
         	$csv_file .= ";";
         	$csv_file .= $item['doc']['vendeur_identifiant'];
         	$csv_file .= ";";

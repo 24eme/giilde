@@ -220,6 +220,21 @@ function xmlProduitsToTable($flatXml,$reg){
 			if(!preg_match("/libelle-personnalise/",$key) && !preg_match("/code-inao/",$key)){
 				$produits[$inaoKey][str_ireplace($radix,"",$key)] = $value;
 			}
+		}elseif(preg_match("/^$reg\/produit\//",$key)){
+			$oneNode = true;
+			$match = array();
+			preg_match("/($reg\/produit\/)(.*)/",$key,$match);
+			$radix = $match[1];
+			$inaoCode = isset($flatXml[$radix."code-inao"])? $flatXml[$radix."code-inao"] : $flatXml[$radix."libelle-fiscal"];
+			$inaoKey = $radix.$inaoCode;
+
+			if(!array_key_exists($inaoKey,$produits)){
+				$produits[$inaoKey] = array();
+				$produits[$inaoKey]["produit"] = $flatXml[$radix."libelle-personnalise"]." (".$inaoCode.")";
+			}
+			if(!preg_match("/libelle-personnalise/",$key) && !preg_match("/code-inao/",$key)){
+				$produits[$inaoKey][str_ireplace($radix,"",$key)] = $value;
+			}
 		}
 	}
 	$str = "";

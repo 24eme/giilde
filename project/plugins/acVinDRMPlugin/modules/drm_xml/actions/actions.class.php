@@ -72,18 +72,12 @@ class drm_xmlActions extends drmGeneriqueActions {
   public function executeTable(sfWebRequest $request){
       $this->drm = $this->getRoute()->getDRM();
       $this->retour = $request->getParameter('retour',null);
-      $this->xml = "";
-      if (!$this->drm->exist('_attachments') || !$this->drm->_attachments->exist('drm_transmise.xml')){
-          $this->xml = "";
-      }
-      $uri = $this->drm->getAttachmentUri('drm_transmise.xml');
-      if ($uri) {
-        $this->xml = file_get_contents($uri);
-      }
+      $this->xml = $this->drm->getXML();
 
       if($this->retour && html_entity_decode($this->drm->getXMLRetour())){
           $this->xml = html_entity_decode($this->drm->getXMLRetour());
       }
+
       $compare = new DRMCielCompare($this->xml, null);
       $this->xml_table = $compare->xmlInToArray();
   }
