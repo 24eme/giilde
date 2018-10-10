@@ -28,6 +28,8 @@ class DRMCielCompare
 		ksort($nonnull);
 		$produits = array();
 		$res = array();
+		$inaoUnique = null;
+		$libelleUnique = null;
 		foreach($nonnull as $key => $value) {
 			if (!preg_match('/produit/', $key)) {
 				$res[$key] = $value;
@@ -37,6 +39,12 @@ class DRMCielCompare
 				$idproduit = $m[1];
 			}else{
 				$idproduit = 'produit unique';
+				if (preg_match('/produit\/{array}\/code-inao/', $key)) {
+					$inaoUnique = $value;
+				}
+				if (preg_match('/produit\/{array}\/libelle-personnalise/', $key)) {
+					$libelleUnique = $value;
+				}
 			}
 			if(!array_key_exists($idproduit,$produits)){
 				$produits[$idproduit] = array();
@@ -44,6 +52,16 @@ class DRMCielCompare
 			$produits[$idproduit][$key] = $value;
 		}
 		foreach ($produits as $key => $produitArr) {
+			if(($key == 'produit unique') && $inaoUnique && $libelleUnique){
+				$newId = $inaoUnique.'_'.KeyInflector::slugifyCaseSensitive($libelleUnique);
+				$produitArrFormatted = array();
+				foreach ($produitArr as $keyToChange => $valuetmp) {
+					if(!preg_match('/produit\/{array}\/code-inao/', $keyToChange) && !preg_match('/produit\/{array}\/libelle-personnalise/', $keyToChange)){
+						$produitArrFormatted[str_replace("/produit/{array}/","/produit/{array}/".$newId."/{array}/",$keyToChange)] = $valuetmp;
+					}
+				}
+				$produitArr = $produitArrFormatted;
+			}
 			$somme_balance = 0;
 			foreach ($produitArr as $key_r => $value) {
 				if (preg_match('/balance-stocks/', $key_r)) {
@@ -51,8 +69,8 @@ class DRMCielCompare
 				 	}
 			}
 			if ($somme_balance) {
-		 			$res = array_merge($res, $produitArr);
-		 		}
+				$res = array_merge($res, $produitArr);
+			}
 		}
 		return $res;
 	}
@@ -62,7 +80,6 @@ class DRMCielCompare
 
 		$arrIn = $this->sortAndPurgeNull($this->identifyKey($this->flattenArray($this->xmlToArray($this->xmlIn))));
 		$arrOut = $this->sortAndPurgeNull($this->identifyKey($this->flattenArray($this->xmlToArray($this->xmlOut))));
-
 		$diff = array();
 		foreach ($arrIn as $key => $value) {
 			if (!isset($arrOut[$key]) && $value) {
@@ -77,7 +94,6 @@ class DRMCielCompare
 				$diff[$key] = array(null, $value);
 			}
 		}
-
 		return $diff;
 	}
 
