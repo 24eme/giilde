@@ -24,6 +24,7 @@ class DAENouveauForm extends acCouchdbObjectForm
     	$this->setWidget('nom_acheteur', new bsWidgetFormInput());
     	$this->setWidget('label_libelle', new bsWidgetFormInput());
     	$this->setWidget('mention_libelle', new bsWidgetFormInput());
+    	$this->setWidget('primeur', new bsWidgetFormInputCheckbox());
     	$this->widgetSchema->setLabels(array(
     			'produit_key' => 'Produit',
     			'label_key' => 'Label',
@@ -32,12 +33,13 @@ class DAENouveauForm extends acCouchdbObjectForm
     			'mention_key' => 'Mention',
     			'millesime' => 'Millesime',
     			'type_acheteur_key' => 'Type',
-    			'destination_key' => 'Pays',
+    			'destination_key' => 'Destinat.',
     			'quantite' => 'Quantité',
     			'contenance_key' => 'Condi.',
     			'prix_unitaire' => 'Prix unitaire',
     			'no_accises_acheteur' => 'Accises',
-    			'nom_acheteur' => 'Nom'
+    			'nom_acheteur' => 'Nom',
+    			'primeur' => 'Primeur'
     	));
         $this->setValidator('produit_key', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getProduits()))));
         $this->setValidator('label_key', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getLabels()))));
@@ -52,6 +54,7 @@ class DAENouveauForm extends acCouchdbObjectForm
         $this->setValidator('nom_acheteur', new sfValidatorString(array('required' => false)));
         $this->setValidator('label_libelle', new sfValidatorString(array('required' => false)));
         $this->setValidator('mention_libelle', new sfValidatorString(array('required' => false)));
+        $this->setValidator('primeur', new sfValidatorBoolean(array('required' => false)));
         
         $this->widgetSchema->setNameFormat('dae[%s]');
         

@@ -61,7 +61,10 @@
 				        <div class="col-xs-6"><?php echo $form['produit_key']->render(array()); ?></div>
 			        </div>
 			    	<div class="<?php if($form['millesime']->hasError()): ?> has-error<?php endif; ?>">
-				        <div class="col-xs-5"><?php echo $form['millesime']->render(array('placeholder' => 'Millésime')); ?></div>
+				        <div class="col-xs-3"><?php echo $form['millesime']->render(array('placeholder' => 'Millésime')); ?></div>
+				    </div>
+			    	<div class="<?php if($form['primeur']->hasError()): ?> has-error<?php endif; ?>">
+				        <div class="col-xs-2"><label style="padding-top: 5px;"><?php echo $form['primeur']->render(); ?>&nbsp;Primeur</label></div>
 				    </div>
 			    </div>
 

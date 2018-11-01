@@ -11,7 +11,7 @@ if(!isset($data)) {
     $data = $drm->declaration->getProduitsDetailsByCertifications(true,$detailsNodes);
 }
 if(!isset($tabTitle)) {
-    $tabTitle = "Produits";
+    $tabTitle = "Produits ".$libelleDetail."s";
 }
 ?>
 

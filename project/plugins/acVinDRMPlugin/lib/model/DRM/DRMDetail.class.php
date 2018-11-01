@@ -172,8 +172,8 @@ class DRMDetail extends BaseDRMDetail {
           if ($this->getConfig()->get('entrees')->exist($entree)){
             if (preg_match('/autres-entrees|replacement/', $this->getConfig()->get('entrees')->get($entree)->douane_cat) && $v) {
                 $hasobs = true;
-                if (!$this->exist('observations')) {
-                  $this->add('observations'," ");
+                if (!$this->exist('observations') || ! $this->observations) {
+                  $this->add('observations', $this->getConfig()->getDocument()->libelle_detail_ligne->get($this->getConfig()->getKey())->get('entrees')->get($entree)->libelle_long);
                 }
             }
           }
@@ -182,8 +182,8 @@ class DRMDetail extends BaseDRMDetail {
           if ($this->getConfig()->get('sorties')->exist($sortie)){
             if (!preg_match('/details/', $sortie) && preg_match('/autres-sorties/', $this->getConfig()->get('sorties')->get($sortie)->douane_cat) && $v) {
                 $hasobs = true;
-                if (!$this->exist('observations')) {
-                  $this->add('observations'," ");
+                if (!$this->exist('observations') || ! $this->observations) {
+                  $this->add('observations', $this->getConfig()->getDocument()->libelle_detail_ligne->get($this->getConfig()->getKey())->get('sorties')->get($sortie)->libelle_long);
                 }
             }
           }

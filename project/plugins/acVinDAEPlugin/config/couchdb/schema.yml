@@ -28,6 +28,7 @@ DAE:
       label_libelle: {  }
       mention_key: {  }
       mention_libelle: {  }
+      primeur: {  }
       millesime: {  }
       no_accises_acheteur: {   }
       nom_acheteur: {   }

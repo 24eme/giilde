@@ -122,11 +122,11 @@ class DRMExportCsvEdi extends DRMCsvEdi {
                                 $complement = $sortieDetailValue->getIdentifiant();
 
                                 $numero_doc = ($sortieDetailValue->numero_document) ? $sortieDetailValue->numero_document : '';
-                                if ($sortiekey == 'export_details') {
+                                if (preg_match('/export.*_details/', $sortiekey)) {
                                     $pays = $this->countryList[$sortieDetailValue->getIdentifiant()];
                                     $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "sorties;" . $this->getLibelleDetail($sortiekey) . ";" . $sortieDetailValue->getVolume() . ";" . $pays . ";;" . $numero_doc . "\n";
                                 }
-                                if ($sortiekey == 'vrac_details') {
+                                if (preg_match('/vrac.*_details/', $sortiekey)) {
                                     $numero_vrac = str_replace('VRAC-', '', $sortieDetailValue->getIdentifiant());
                                     $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "sorties;" . $this->getLibelleDetail($sortiekey) . ";" . $sortieDetailValue->getVolume() . ";;" . $numero_vrac . ";" . $numero_doc . "\n";
                                 }

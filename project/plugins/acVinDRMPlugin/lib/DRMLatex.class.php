@@ -46,6 +46,7 @@ class DRMLatex extends GenericLatex {
             $nbPages++;
         }
         $nbPages++;
+        $nbPages += DRMConfiguration::getInstance()->getNbExtraPDFPages();
         return $nbPages;
     }
 

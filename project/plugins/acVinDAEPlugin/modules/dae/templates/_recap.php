@@ -14,7 +14,7 @@
 	<tbody>
 		<?php foreach ($daes as $id => $dae): ?>
 		<tr>
-			<td><strong><?php echo $dae->produit_libelle ?></strong><br /><?php if ($dae->label_libelle): ?><span class="text-muted"><?php echo $dae->label_libelle ?></span><?php endif; ?><?php if ($dae->label_libelle && $dae->mention_libelle): ?> - <?php endif;?><?php if ($dae->mention_libelle): ?><span class="text-muted"><?php echo $dae->mention_libelle ?></span><?php endif; ?></td>
+			<td><strong><?php echo $dae->produit_libelle ?></strong><?php if ($dae->primeur): ?> <span class="text-muted">Primeur</span><?php endif; ?><br /><?php if ($dae->label_libelle): ?><span class="text-muted"><?php echo $dae->label_libelle ?></span><?php endif; ?><?php if ($dae->label_libelle && $dae->mention_libelle): ?> - <?php endif;?><?php if ($dae->mention_libelle): ?><span class="text-muted"><?php echo $dae->mention_libelle ?></span><?php endif; ?></td>
 			<td><?php echo $dae->millesime ?></td>
 			<td><?php echo $dae->destination_libelle ?></td>
 			<td><?php echo $dae->type_acheteur_libelle ?></td>

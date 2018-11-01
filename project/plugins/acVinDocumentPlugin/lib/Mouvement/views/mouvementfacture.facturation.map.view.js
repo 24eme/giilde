@@ -39,7 +39,7 @@ function(doc) {
             vrac_destinataire = type_libelle;
          }
 
-                emit([mouv.facture, mouv.facturable, region, identifiant, doc.type, categorie , mouv_hash, doc.periode, mouv.date, mouv.vrac_numero, vrac_destinataire, type_hash , mouv.detail_identifiant], [mouv_produit_libelle , type_libelle, mouv_quantite, mouv_prix, mouv.vrac_destinataire, mouv.detail_libelle, docId, doc._id+':'+key]);
+                emit([mouv.facture, mouv.facturable, region, identifiant, doc.type, categorie , mouv_hash, doc.periode, mouv.date, mouv.vrac_numero, vrac_destinataire, type_hash , mouv.detail_identifiant, mouv.type_drm], [mouv_produit_libelle , type_libelle, mouv_quantite, mouv_prix, mouv.vrac_destinataire, mouv.detail_libelle, docId, doc._id+':'+key]);
 
 
           }

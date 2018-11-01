@@ -15,6 +15,7 @@ class MouvementfactureFacturationView extends acCouchdbView {
     const KEYS_VRAC_DEST = 10;
     const KEYS_MVT_TYPE = 11;
     const KEYS_DETAIL_ID = 12;
+    const KEYS_TYPE_DRM = 13;
     const VALUE_PRODUIT_LIBELLE = 0;
     const VALUE_TYPE_LIBELLE = 1;
     const VALUE_QUANTITE = 2;
@@ -73,7 +74,17 @@ class MouvementfactureFacturationView extends acCouchdbView {
         return $this->buildMouvements($this->getMouvementsBySociete($societe, 0, 1));
     }
 
+    public function getMouvementsAll($facturee) {
+
+        return $this->buildMouvements($this->client
+                                ->startkey(array($facturee))
+                                ->reduce(false)
+                                ->endkey(array($facturee, array()))
+                                ->getView($this->design, $this->view)->rows);
+    }
+
     public function getMouvements($facturee, $facturable, $level) {
+
         return $this->buildMouvements($this->consolidationMouvements($this->client
                                 ->startkey(array($facturee, $facturable))
                                 ->endkey(array($facturee, $facturable, array()))
@@ -120,8 +131,18 @@ class MouvementfactureFacturationView extends acCouchdbView {
         $mouvement->id_doc = $row->value[self::VALUE_ID_DOC];
         $mouvement->vrac_numero = $row->key[self::KEYS_CONTRAT_ID];
         $mouvement->origines = $row->value[self::VALUE_ID_ORIGINE];
+        $mouvement->facturable = $row->key[self::KEYS_FACTURABLE];
         if ($mouvement->origine == "MouvementsFacture") {
             $mouvement->nom_facture = $mouvement->matiere;
+        }
+        if(array_key_exists(self::KEYS_MVT_TYPE, $row->key)) {
+            $mouvement->type_hash = $row->key[self::KEYS_MVT_TYPE];
+        }
+        if(array_key_exists(self::KEYS_TYPE_DRM, $row->key)) {
+            $mouvement->type_drm = $row->key[self::KEYS_TYPE_DRM];
+        }
+        if(array_key_exists(self::KEYS_DETAIL_ID, $row->key)) {
+            $mouvement->detail_identifiant = $row->key[self::KEYS_DETAIL_ID];
         }
 
         return $mouvement;

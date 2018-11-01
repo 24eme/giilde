@@ -12,7 +12,7 @@ else: ?>
 <br/><br/>
 <div class="row">
     <div class="col-xs-4">
-        <a href="<?php echo url_for('drm_visualisation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->periode)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la visualisation de votre DRM</a>
+        <a href="<?php echo url_for('drm_visualisation', $drm); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Retour à la visualisation de votre DRM</a>
     </div>
 </div>
 </div></div>

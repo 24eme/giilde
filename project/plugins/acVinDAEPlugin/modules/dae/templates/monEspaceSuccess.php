@@ -12,7 +12,7 @@
 
 
     <div class="col-xs-12">
-    	<div class="row"><a class="btn btn-sm btn-default pull-right" href="<?php echo url_for('dae_export_edi', array('sf_subject' => $etablissement, 'campagne' => $campagne)) ?>"><span class=" glyphicon glyphicon-cloud-download"></span> Voir le fichier des mes commercialisations <?php echo $campagne ?></a></div>
+    	<div class="row"><a class="btn btn-sm btn-default pull-right" href="<?php echo url_for('dae_export_edi', array('sf_subject' => $etablissement, 'campagne' => $campagne)) ?>"><span class=" glyphicon glyphicon-cloud-download"></span> Voir le fichier de mes commercialisations <?php echo $campagne ?></a></div>
         <div class="row">
         	<h4>
         		Liste des ventes de <strong><?php echo ucfirst(format_date($periode->format('Y-m-d'), 'MMMM yyyy', 'fr_FR')) ?></strong>
@@ -46,7 +46,7 @@
 
 	<div class="col-xs-6">
         <div class="row text-right">
-        	<a class="btn btn-default" href="<?php echo url_for('dae_upload_fichier_edi', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d'), 'md5' => "0")); ?>"><span class="glyphicon glyphicon-cloud-upload"></span> Déposer le fichier de mes commercialisations <?php echo $campagne ?></a>
+        	<a class="btn btn-default" href="<?php echo url_for('dae_upload_fichier_edi', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d'), 'md5' => "0")); ?>"><span class="glyphicon glyphicon-cloud-upload"></span> Déposer le fichier de mes commercialisations</a>
         </div>
     </div>
 	<div class="col-xs-6">

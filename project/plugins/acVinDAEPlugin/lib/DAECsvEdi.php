@@ -31,18 +31,19 @@ class DAECsvEdi extends CsvFile {
     const CSV_PRODUIT_LABEL = 16; // Q (colonne n°17) : label du produit : "conventionnel", "biologique", ... (champ facultatif)
     const CSV_PRODUIT_DOMAINE = 17; // R (colonne n°18) : mention de domaine ou château revendiqué ("domaine", "château" ou vide)
     const CSV_PRODUIT_MILLESIME = 18; // S (colonne n°19) : millésime (au format AAAA) (champ facultatif)
+    const CSV_PRODUIT_PRIMEUR = 19; // S (colonne n°19) : millésime (au format AAAA) (champ facultatif)
 
-    const CSV_ACHETEUR_NUMACCISE = 19; // T (colonne n°20) : n°accise de l'acheteur (champ facultatif)
-    const CSV_ACHETEUR_NOM = 20; // U (colonne n°20) : nom acheteur (champ facultatif)
-    const CSV_ACHETEUR_TYPE = 21; // V (colonne n°20) : type acheteur ("Importateur", "Négociant région" ou "Négociant/Union Vallée du Rhône", négociant hors région, "GD" ou "Grande Distribution", "Discount", "Grossiste", "Caviste", "VD" ou "Vente directe", "Autre", ...)
-    const CSV_PAYS_NOM = 22; // W (colonne n°20) : nom du pays de destination ou son code ISO 3166
-    const CSV_TYPE_CONDITIONNEMENT = 23; // X (colonne n°20) : type de conditionnement (VRAC ou HL, Bouteille, BIB)
-    const CSV_LIBELLE_CONDITIONNEMENT = 24; // Y (colonne n°20) : libellé conditionnement
-    const CSV_CONTENANCE_CONDITIONNEMENT = 25; // Z (colonne n°20) : contenance conditionnement en litres
-    const CSV_QUANTITE_CONDITIONNEMENT = 26; // AA (colonne n°20) : quantité de conditionnement (en nombre de bib, de bouteille ou, pour le vrac, en hl)
-    const CSV_PRIX_UNITAIRE = 27; // AB (colonne n°20) : prix unitaire (prix en € par bouteille, bib ou hl)
-    const CSV_STAT_QUANTITE = 28; // AC (colonne n°20) : champ réservé (stat qtt hl)
-    const CSV_STAT_PRIX = 29; // AD (colonne n°20) : champ réservé (stat prix hl)
+    const CSV_ACHETEUR_NUMACCISE = 20; // T (colonne n°20) : n°accise de l'acheteur (champ facultatif)
+    const CSV_ACHETEUR_NOM = 21; // U (colonne n°20) : nom acheteur (champ facultatif)
+    const CSV_ACHETEUR_TYPE = 22; // V (colonne n°20) : type acheteur ("Importateur", "Négociant région" ou "Négociant/Union Vallée du Rhône", négociant hors région, "GD" ou "Grande Distribution", "Discount", "Grossiste", "Caviste", "VD" ou "Vente directe", "Autre", ...)
+    const CSV_PAYS_NOM = 23; // W (colonne n°20) : nom du pays de destination ou son code ISO 3166
+    const CSV_TYPE_CONDITIONNEMENT = 24; // X (colonne n°20) : type de conditionnement (VRAC ou HL, Bouteille, BIB)
+    const CSV_LIBELLE_CONDITIONNEMENT = 25; // Y (colonne n°20) : libellé conditionnement
+    const CSV_CONTENANCE_CONDITIONNEMENT = 26; // Z (colonne n°20) : contenance conditionnement en litres
+    const CSV_QUANTITE_CONDITIONNEMENT = 27; // AA (colonne n°20) : quantité de conditionnement (en nombre de bib, de bouteille ou, pour le vrac, en hl)
+    const CSV_PRIX_UNITAIRE = 28; // AB (colonne n°20) : prix unitaire (prix en € par bouteille, bib ou hl)
+    const CSV_STAT_QUANTITE = 29; // AC (colonne n°20) : champ réservé (stat qtt hl)
+    const CSV_STAT_PRIX = 30; // AD (colonne n°20) : champ réservé (stat prix hl)
 
     protected $daes = null;
     protected $csv = null;
