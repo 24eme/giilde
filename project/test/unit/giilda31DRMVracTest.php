@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
 $conf = ConfigurationClient::getCurrent();
-if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration->get('details/sorties/vrac')->details != "VRAC")) {
+if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration->get('details/sorties/vrac')->details != "VRAC") || !$conf->declaration->get('details/sorties/vrac')->facturable) {
     $t = new lime_test(0);
     exit(0);
 }

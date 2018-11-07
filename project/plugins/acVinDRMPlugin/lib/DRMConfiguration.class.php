@@ -146,4 +146,8 @@ class DRMConfiguration {
       return $this->configuration['nb_extra_pdf_pages'];
     }
 
+    public function isObservationsAuto() {
+        return $this->configuration['observations_auto'];
+    }
+
 }

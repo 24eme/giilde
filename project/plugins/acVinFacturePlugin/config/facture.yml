@@ -6,9 +6,9 @@ all:
       tva_compte: "44570100"
       defaut_compte: null
       type_cvo:
-        identifiant_prefix: "1"
+        identifiant_prefix: ""
       type_libre:
-        identifiant_prefix: "1"
+        identifiant_prefix: ""
       idcontrat: "ARCHIVE"
       stockage_code_produit: "code_compte"
       prefix_code_comptable: ""

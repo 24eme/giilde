@@ -53,7 +53,11 @@ $t->is($drm->getProduit($produit1_hash, 'details')->get('sorties/ventefrancecrd'
 $t->is($drm->getProduit($produit1_hash, 'details')->get('sorties/export'),2.8425,"sortie export OK");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('stocks_fin/final'),945,"stock final OK");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('replacement_date'), "31/12/2017","Date de replacement OK");
+if(DRMConfiguration::getInstance()->isObservationsAuto()) {
 $t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->libelle_detail_ligne->details->entrees->retourmarchandisetaxees->libelle_long, "Observations OK");
+} else {
+$t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), "", "Observations OK");
+}
 
 $t->ok($drm->crds->exist('COLLECTIFSUSPENDU'), "CRD : noeud COLLECTIFSUSPENDU reconnu");
 $t->is(count($drm->crds->COLLECTIFSUSPENDU), 2, "CRD possède deux centilisations");

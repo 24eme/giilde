@@ -29,6 +29,12 @@ if($application == "bivc") {
     $codeCompteTVA = "44571000";
 }
 
+if($application == "civa") {
+    $t = new lime_test(0);
+    exit(0);
+}
+
+
 $societeViti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getSociete();
 $facture = null;
 foreach (FactureSocieteView::getInstance()->findBySociete($societeViti) as $id => $facture) {

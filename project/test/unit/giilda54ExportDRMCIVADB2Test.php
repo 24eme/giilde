@@ -11,6 +11,9 @@ $viti = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_teledecl
 $societe = $viti->getSociete();
 $periode = date('Ym');
 $date = date('Ymd');
+$dateFinMois = new DateTime();
+$dateFinMois->modify('last day of this month');
+$dateFinMois = $dateFinMois->format('Ymd');
 
 //Suppression des DRM précédentes
 foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k => $v) {
@@ -34,12 +37,13 @@ $preLigneCaveCSV;AOC;;AOC Alsace Grand Cru;;Sommerberg;;Riesling;;AOC Alsace Gra
 $preLigneCaveCSV;AOC;;AOC Alsace Grand Cru;VT;Sommerberg;;Pinot Gris;;AOC Alsace Grand Cru Sommerberg Pinot Gris VT (1B039D13);suspendu;entrees;recolte;10;;;
 $preLigneCaveCSV;AOC;;AOC Alsace Grand Cru;VT;Sommerberg;;Pinot Gris;;AOC Alsace Grand Cru Sommerberg Pinot Gris VT (1B039D13);suspendu;sorties;export;10;ES;;
 $preLigneCaveCSV;AOC;;AOC Alsace Pinot noir;;;;Pinot Noir Rosé;;AOC Alsace Pinot noir (1S001S 1);suspendu;entrees;recolte;10;;;
+$preLigneCaveCSV;AOC;;AOC Alsace Pinot noir;;;;Pinot Noir Rosé;;AOC Alsace Pinot noir (1S001S 1);suspendu;entrees;repli;10;;;
 $preLigneCaveCSV;AOC;;AOC Crémant d'Alsace;;;;Blanc;;AOC Crémant d'Alsace Blanc (1B001M00);suspendu;entrees;recolte;10;;;
 $preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;stock_debut;debut;100;;;
 $preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;entrees;achats;3;;;
 $preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;entrees;retours;2;;;
 $preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;entrees;excedents;1;;;
-$preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;sorties;utilisations;3;;;
+$preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;sorties;utilisations;100;;;
 $preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;sorties;destructions;2;;;
 $preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;sorties;manquants;1;;;
 $preLigneCRDCSV;Vert;TRANQ;Bouteille 75 cl;;;;;;;Banalisées suspendues;stock_fin;fin;100;;;
@@ -51,14 +55,14 @@ $preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 75 cl;;;;;;;Banalisées suspendues;sorti
 $preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 75 cl;;;;;;;Banalisées suspendues;sorties;destructions;2;;;
 $preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 75 cl;;;;;;;Banalisées suspendues;sorties;manquants;1;;;
 $preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 75 cl;;;;;;;Banalisées suspendues;stock_fin;fin;100;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;stock_debut;debut;100;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;entrees;achats;3;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;entrees;retours;2;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;entrees;excedents;1;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;sorties;utilisations;3;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;sorties;destructions;2;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;sorties;manquants;1;;;
-$preLigneCRDCSV;Bleu;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;stock_fin;fin;100;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;stock_debut;debut;100;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;entrees;achats;3;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;entrees;retours;2;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;entrees;excedents;1;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;sorties;utilisations;100;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;sorties;destructions;2;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;sorties;manquants;1;;;
+$preLigneCRDCSV;Vert;MOUSSEUX;Bouteille 37,5 cl;;;;;;;Banalisées suspendues;stock_fin;fin;100;;;
 EOF;
 
 $tmpfname = tempnam("/tmp", "DRM_");
@@ -92,25 +96,25 @@ $csv = $export->export($mouvements);
 $t->is(count($csv), 9, "L'export genère 9 csv");
 
 $t->is(count($csv["01.DRMDEM"]), 1, "Une seul ligne pour les entrées");
-$t->is($csv["01.DRMDEM"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,40,30,20,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".$date.",\"TELDECLARATION\"", "Les entrées sont bien reportées");
+$t->is($csv["01.DRMDEM"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,40,30,20,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".$date.",\"TELEDECLARATION\"", "Les entrées sont bien reportées");
 
 $t->is(count($csv["02.DRMDSA"]), 1, "Une seul ligne pour les sorties acquittées");
-$t->is($csv["02.DRMDSA"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,0,0,0,0,0,0,0,0,0,0,0,0,".$date.",\"TELDECLARATION\"", "Les sorties acquittées sont bien reportées");
+$t->is($csv["02.DRMDSA"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,0,0,0,0,0,0,0,0,0,0,0,0,".$date.",\"TELEDECLARATION\"", "Les sorties acquittées sont bien reportées");
 
 $t->is(count($csv["03.DRMDSS"]), 1, "Une seul ligne pour les sorties suspendues");
-$t->is($csv["03.DRMDSS"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,10,0,20,0,0,0,0,0,0,0,0,0,".$date.",\"TELDECLARATION\"", "Les sorties suspendues sont bien reportées");
+$t->is($csv["03.DRMDSS"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,10,0,20,0,0,0,0,0,0,0,0,0,".$date.",\"TELEDECLARATION\"", "Les sorties suspendues sont bien reportées");
 
 $t->is(count($csv["04.DRMDSE"]), 1, "Une seul ligne pour les sorties exonérées");
-$t->is($csv["04.DRMDSE"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,0,0,0,0,0,0,0,0,".$date.",\"TELDECLARATION\"", "Les sorties exonérées sont bien reportées");
+$t->is($csv["04.DRMDSE"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,0,0,0,0,0,0,0,0,".$date.",\"TELEDECLARATION\"", "Les sorties exonérées sont bien reportées");
 
 $t->is(count($csv["05.DRMDSO"]), 1, "Une seul ligne pour les sorties autres");
-$t->is($csv["05.DRMDSO"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,0,0,0,0,0,0,0,0,".$date.",\"TELDECLARATION\"", "Les sorties autres sont bien reportées");
+$t->is($csv["05.DRMDSO"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,0,0,0,0,0,0,0,0,".$date.",\"TELEDECLARATION\"", "Les sorties autres sont bien reportées");
 
 $t->is(count($csv["06.DRMAX"]), 2, "2 lignes pour les exports");
 
 $t->is(count($csv["07.DRMCRD"]), 2, "2 lignes pour les CRDS");
 
 $t->is(count($csv["08.DRMENT"]), 1, "Une seul ligne pour le récap");
-$t->is($csv["08.DRMENT"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,\"\",0,0,0,221.4,44.28,265.68,30,265.68,40,30,20,10,0,0,0,0,10,0,20,0,0,0,0,0,0,0,0,0,".$date.",\"TELDECLARATION\",\"\",\"\",0,0,0,0,0", "Le recap est bien reportées");
+$t->is($csv["08.DRMENT"][0], substr($periode,0,4).",".substr($periode,4,2).",".$viti->identifiant.",,0,\"\",0,0,0,221.4,44.28,265.68,30,265.68,40,30,20,10,0,0,0,0,10,0,20,0,0,0,0,0,0,0,0,0,".$dateFinMois.",".$date.",\"TELEDECLARATION\",\"\",\"\",,0.75,0.38,0,0", "Le recap est bien reporté");
 
-$t->is(count($csv["09.ORIGINES"]), 11, "11 lignes de mouvements");
+$t->is(count($csv["09.ORIGINES"]), 12, "12 lignes de mouvements");

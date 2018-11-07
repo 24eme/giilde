@@ -25,3 +25,4 @@ all:
       xml_transfert_echec: "Une erreur s'est produite lors du transfert de votre DRM :\n\nDESCRIPTION_ERREUR"
       campagne_liste_minimale: false
       nb_extra_pdf_pages: 0
+      observations_auto: true

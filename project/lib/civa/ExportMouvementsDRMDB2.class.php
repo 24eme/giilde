@@ -4,6 +4,7 @@ class ExportMouvementsDRMDB2
 {
 
     public $produits = array("01.BLANC", "02.ROUGE", "03.GRDCRU", "04.CREMANT");
+    public $produitsExport = array("01.BLANC", "02.ROUGE", "04.CREMANT", "03.GRDCRU");
 
     public $correspondances = array(
         "entrees/recolte"                    => "01.DRMDEM/06.Entrées",
@@ -62,9 +63,11 @@ class ExportMouvementsDRMDB2
         }
 
         $db2Mouvements = $this->aggregateMouvements($mouvements);
+
+
         $db2MouvementsExport = $this->aggregateMouvementsExport($mouvements);
         $db2CRD = $this->aggregateCRD($drms);
-        $db2Total = $this->aggregateTotal($mouvements);
+        $db2Total = $this->aggregateTotal($mouvements, $db2CRD);
 
         $csv = array();
 
@@ -73,9 +76,12 @@ class ExportMouvementsDRMDB2
             $identifiant = $parts[0];
             $periode = $parts[1];
             foreach($this->structure as $file => $infos) {
-                $ligne = substr($periode, 0, 4).",".substr($periode, 4, 2).",".$identifiant.",,0";
+                $ligne = substr($periode, 0, 4).",".(substr($periode, 4, 2)*1).",".str_replace("C", "", $identifiant).",,0";
                 foreach($infos as $mouvementType => $produits) {
                     foreach($produits as $produit) {
+                        if($file."/".$mouvementType == "01.DRMDEM/26.Replis" && $produit != "01.BLANC") {
+                            continue;
+                        }
                         $volume = 0;
                         if(isset($volumes[$produit][$file."/".$mouvementType])) {
                             $volume = $volumes[$produit][$file."/".$mouvementType];
@@ -83,7 +89,7 @@ class ExportMouvementsDRMDB2
                         $ligne .= ",".$volume;
                     }
                 }
-                $ligne .= ",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELDECLARATION\"";
+                $ligne .= ",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELEDECLARATION\"";
                 $csv[$file][] = $ligne;
             }
         }
@@ -94,15 +100,15 @@ class ExportMouvementsDRMDB2
             $periode = $parts[1];
             $compteur = 1;
             foreach($infos as $pays => $produits) {
-                $ligne = substr($periode, 0, 4).",".substr($periode, 4, 2).",".$identifiant.",,0,".$compteur.",".$pays*1;
-                foreach($this->produits as $produit) {
+                $ligne = substr($periode, 0, 4).",".(substr($periode, 4, 2)*1).",".str_replace("C", "", $identifiant).",,0,".$compteur.",".$pays*1;
+                foreach($this->produitsExport as $produit) {
                     $volume = 0;
                     if(isset($produits[$produit])) {
                         $volume = $produits[$produit];
                     }
                     $ligne .= ",".$volume;
                 }
-                $ligne .= ",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELDECLARATION\"";
+                $ligne .= ",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELEDECLARATION\"";
 
                 $csv["06.DRMAX"][] = $ligne;
                 $compteur++;
@@ -115,11 +121,11 @@ class ExportMouvementsDRMDB2
             $periode = $parts[1];
             $compteur = 1;
             foreach($centilisations as $centilisation => $sorties) {
-                $ligne = substr($periode, 0, 4).",".substr($periode, 4, 2).",".$identifiant.",,0,".$compteur.",\"".$centilisation."\"";
+                $ligne = substr($periode, 0, 4).",".(substr($periode, 4, 2)*1).",".str_replace("C", "", $identifiant).",,0,".$compteur.",\"".$centilisation."\"";
                 foreach($sorties as $sortie) {
                     $ligne .= ",".$sortie;
                 }
-                $ligne .= ",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELDECLARATION\"";
+                $ligne .= ",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELEDECLARATION\"";
 
                 $csv["07.DRMCRD"][] = $ligne;
                 $compteur++;
@@ -130,10 +136,13 @@ class ExportMouvementsDRMDB2
             $parts = explode("-", $identifiantPeriode);
             $identifiant = $parts[0];
             $periode = $parts[1];
-            $total["tva"] = $total["prix_ht"] * 0.20;
+            $annee = substr($periode, 0, 4);
+            $mois = substr($periode, 4, 2);
+            $total["prix_ht"] = round($total["prix_ht"], 2);
+            $total["tva"] = round($total["prix_ht"] * 0.20, 2);
             $total["prix_ttc"] = $total["prix_ht"] + $total["tva"];
 
-            $ligne = substr($periode, 0, 4).",".substr($periode, 4, 2).",".$identifiant.",,0,\"\",0,0,0,".$total["prix_ht"].",".$total["tva"].",".$total["prix_ttc"].",".$total["quantite"].",".$total["prix_ttc"];
+            $ligne = substr($periode, 0, 4).",".(substr($periode, 4, 2)*1).",".str_replace("C", "", $identifiant).",,0,\"\",0,0,0,".$total["prix_ht"].",".$total["tva"].",".$total["prix_ttc"].",".$total["quantite"].",".$total["prix_ttc"];
             foreach($this->structure as $file => $infos) {
                 foreach($this->produits as $produit) {
                     $volume = 0;
@@ -144,7 +153,10 @@ class ExportMouvementsDRMDB2
                 }
             }
 
-            $ligne .= ",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELDECLARATION\",\"\",\"\",0,0,0,0,0";
+            $dateStock = new DateTime($annee."-".$mois."-01");
+            $dateStock->modify('last day of this month');
+
+            $ligne .= ",".$dateStock->format('Ymd').",".str_replace("-", "", $drms[$identifiantPeriode]->valide->date_signee).",\"TELEDECLARATION\",\"\",\"\",,".round($total['crd_tranq_utilisation'], 2).",".round($total['crd_mousseux_utilisation'], 2).",0,0";
 
             $csv["08.DRMENT"][] = $ligne;
         }
@@ -170,6 +182,10 @@ class ExportMouvementsDRMDB2
             }
             if(!isset($db2[$identifiantPeriode][$produit][$mouvementType])) {
                 $db2[$identifiantPeriode][$produit][$mouvementType] = 0;
+            }
+
+            if($mouvementType == "01.DRMDEM/26.Replis" && $produit != "01.BLANC") {
+                continue;
             }
 
             $db2[$identifiantPeriode][$produit][$mouvementType] += $mouvement->quantite * ((preg_match('/entrees/', $mouvement->type_hash)) ? -1 : 1);
@@ -211,26 +227,25 @@ class ExportMouvementsDRMDB2
             }
             foreach($drm->crds as $regimes) {
                 foreach($regimes as $ligne) {
+                    if(!$ligne->sorties_utilisations) {
+                        continue;
+                    }
+                    if($ligne->couleur == "BLEU") {
+                        continue;
+                    }
                     $centilisation = str_replace(".", ",", ($ligne->centilitrage*10000));
                     if(!isset($db2[$identifiantPeriode][$centilisation])) {
                         $db2[$identifiantPeriode][$centilisation]["08.UTILISATION/TRANQ"] = 0;
                         $db2[$identifiantPeriode][$centilisation]["09.UTILISATION/MOUSSEUX"] = 0;
-                        $db2[$identifiantPeriode][$centilisation]["10.DESTRUCTION/TRANQ"] = 0;
-                        $db2[$identifiantPeriode][$centilisation]["11.DESTRUCTION/MOUSSEUX"] = 0;
+                        $db2[$identifiantPeriode][$centilisation]["10.AUTRE/TRANQ"] = 0;
+                        $db2[$identifiantPeriode][$centilisation]["11.AUTRE/MOUSSEUX"] = 0;
                     }
                     if($ligne->genre == "TRANQ" && $ligne->sorties_utilisations) {
                         $db2[$identifiantPeriode][$centilisation]["08.UTILISATION/TRANQ"] += $ligne->sorties_utilisations;
                     }
-                    if($ligne->genre == "TRANQ" && $ligne->sorties_destructions) {
-                        $db2[$identifiantPeriode][$centilisation]["10.DESTRUCTION/TRANQ"] += $ligne->sorties_destructions;
-                    }
                     if($ligne->genre == "MOUSSEUX" && $ligne->sorties_utilisations) {
                         $db2[$identifiantPeriode][$centilisation]["09.UTILISATION/MOUSSEUX"] += $ligne->sorties_utilisations;
-                    }
-                    if($ligne->genre == "MOUSSEUX" && $ligne->sorties_destructions) {
-                        $db2[$identifiantPeriode][$centilisation]["11.DESTRUCTION/MOUSSEUX"] += $ligne->sorties_destructions;
-                    }
-                }
+                    }                }
                 krsort($db2[$identifiantPeriode]);
             }
         }
@@ -238,15 +253,22 @@ class ExportMouvementsDRMDB2
         return $db2;
     }
 
-    protected function aggregateTotal($mouvements) {
+    protected function aggregateTotal($mouvements, $db2CRD) {
         $db2 = array();
 
         foreach($mouvements as $mouvement) {
             $produit = $this->convertProduit($mouvement->produit_hash);
             $file = $this->convertFile($mouvement->type_hash);
+            $mouvementType = $this->convertMouvement($mouvement->type_hash);
+
+            if($mouvementType == "01.DRMDEM/26.Replis" && $produit != "01.BLANC") {
+                continue;
+            }
+
             $identifiantPeriode = preg_replace("/DRM-(.+)-(.+)-?.*$/", '\1-\2', $mouvement->id_doc);
+
             if(!isset($db2[$identifiantPeriode])) {
-                $db2[$identifiantPeriode] = array("prix_ht" => 0, "quantite" => 0);
+                $db2[$identifiantPeriode] = array("prix_ht" => 0, "quantite" => 0, "crd_tranq_utilisation" => 0, "crd_mousseux_utilisation" => 0);
             }
             if(!isset($db2[$identifiantPeriode][$file])) {
                 $db2[$identifiantPeriode][$file] = array();
@@ -262,6 +284,13 @@ class ExportMouvementsDRMDB2
 
             ksort($db2[$identifiantPeriode][$file]);
             ksort($db2[$identifiantPeriode]);
+        }
+
+        foreach($db2CRD as $identifiantPeriode => $centilisations) {
+            foreach($centilisations as $centilisation => $sorties) {
+                $db2[$identifiantPeriode]["crd_tranq_utilisation"] += $sorties["08.UTILISATION/TRANQ"] * (float) str_replace(",", ".", $centilisation) / 10000;
+                $db2[$identifiantPeriode]["crd_mousseux_utilisation"] += $sorties["09.UTILISATION/MOUSSEUX"] * (float) str_replace(",", ".", $centilisation) / 10000;
+            }
         }
 
         return $db2;
