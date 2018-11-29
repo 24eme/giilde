@@ -28,7 +28,7 @@
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fermer</button>
           <?php if (isset($calendrier) && $calendrier->isMultiEtablissement()): ?>
           	<?php foreach ($calendrier->getEtablissements() as $etab): ?>
-          	<a class="btn btn-info" href="<?php echo url_for('drm_convention', $etab) ?>" style="margin-bottom: 10px;">Télécharger la convention d'adhésion à CIEL<br /><small><?php echo $etab->nom ?> (<?php echo $etab->identifiant ?>)</small></a>
+          	<a class="btn btn-info" href="<?php echo url_for('drm_convention', $etab) ?>" style="margin-bottom: 10px;">Télécharger la convention d'adhésion à CIEL<br /><small><?php echo $etab->raison_sociale ?> (<?php echo $etab->identifiant ?>)</small></a>
           	<?php endforeach; ?>
           <?php else: ?>
           <a class="btn btn-info" href="<?php echo url_for('drm_convention', $etablissement) ?>">Télécharger la convention d'adhésion à CIEL</a>

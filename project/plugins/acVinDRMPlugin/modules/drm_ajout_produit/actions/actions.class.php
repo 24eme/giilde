@@ -5,7 +5,7 @@ class drm_ajout_produitActions extends drmGeneriqueActions {
     public function executeChoixProduits(sfWebRequest $request) {
         $this->initSocieteAndEtablissementPrincipal();
         $this->drm = $this->getRoute()->getDRM();
-        $this->certificationsProduits = $this->drm->declaration->getProduitsDetailsByCertifications(true, DRM::DETAILS_KEY_SUSPENDU);
+        $this->certificationsProduits = $this->drm->declaration->getProduitsDetailsByCertifications(true);
         $this->form = new DRMProduitsChoiceForm($this->drm);
         $this->initDeleteForm();
         $this->hasRegimeCrd = $this->drm->getEtablissement()->hasRegimeCrd();

@@ -4,8 +4,6 @@
 
 <div class="col-md-12">
 
-	<h4><?php if ($dae->isNew()): ?>Ajout<?php else: ?>Modification<?php endif; ?> d'une vente de <strong><?php echo ucfirst(format_date($periode->format('Y-m-d'), 'MMMM yyyy', 'fr_FR')) ?></strong></h4>
-
 	<div class="col-md-12" style="margin-top: 20px;">
 
 	<form class="form-horizontal" action="<?php echo ($dae->isNew())? url_for('dae_nouveau', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d'))) : url_for('dae_nouveau', array('identifiant' => $etablissement->identifiant, 'id' => $dae->_id, 'periode' => $periode->format('Y-m-d'))); ?>" method="post">
@@ -13,6 +11,23 @@
 		    echo $form->renderHiddenFields();
 		    echo $form->renderGlobalErrors();
 	    ?>
+	    
+
+			    <div class="form-group">
+				    <?php echo $form['date_mois']->renderError(); ?>
+				    <?php echo $form['date_annee']->renderError(); ?>
+				    <div class="col-xs-6">
+				    	<h4><?php if ($dae->isNew()): ?>Ajout<?php else: ?>Modification<?php endif; ?> d'une vente</h4>
+				    </div>
+				    <div class="<?php if($form['date_mois']->hasError()): ?> has-error<?php endif; ?>">
+				        <?php echo $form['date_mois']->renderLabel(null, array("class" => "col-xs-1 control-label")); ?>
+				        <div class="col-xs-3"><?php echo $form['date_mois']->render(); ?></div>
+			        </div>
+			    	<div class="<?php if($form['date_annee']->hasError()): ?> has-error<?php endif; ?>">
+				        <div class="col-xs-2"><?php echo $form['date_annee']->render(); ?></div>
+				    </div>
+			    </div>
+			    
 		<div class="panel panel-default">
         	<div class="panel-heading"><h4 class="panel-title">Clients</h4></div>
         	<div class="panel-body">
@@ -130,7 +145,7 @@
 
 
 
-		<div class="col-xs-6"><a href="<?php echo url_for('dae_etablissement', array('identifiant' => $etablissement->identifiant)) ?>" class="btn btn-default">Annuler</a></div>
+		<div class="col-xs-6"><a href="<?php echo url_for('dae_etablissement', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d'))) ?>" class="btn btn-default">Annuler</a></div>
 	    <div class="col-xs-6 text-right"><button id="btn_valider" type="submit" class="btn btn-success">Valider & terminer</button></div>
 
 	</form>

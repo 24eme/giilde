@@ -33,6 +33,7 @@ $t->comment("Création de l'établissement");
 
 $etablissement = $societe->createEtablissement(EtablissementFamilles::FAMILLE_PRODUCTEUR);
 $etablissement->nom = "établissement viti test télédéclaration";
+$etablissement->num_interne = $etablissement->identifiant."001";
 $etablissement->save();
 
 $etablissement2 = $societe->createEtablissement(EtablissementFamilles::FAMILLE_NEGOCIANT);

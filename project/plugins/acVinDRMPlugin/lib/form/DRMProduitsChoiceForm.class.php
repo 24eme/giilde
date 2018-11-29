@@ -19,7 +19,7 @@ class DRMProduitsChoiceForm extends acCouchdbObjectForm {
 
     public function __construct(acCouchdbJson $object, $options = array(), $CSRFSecret = null) {
         $this->_drm = $object;
-        $this->_produits = $this->_drm->declaration->getProduitsDetails(true, DRM::DETAILS_KEY_SUSPENDU);
+        $this->_produits = $this->_drm->declaration->getProduitsDetails(true);
         parent::__construct($this->_drm, $options, $CSRFSecret);
     }
 
@@ -82,7 +82,7 @@ class DRMProduitsChoiceForm extends acCouchdbObjectForm {
               if($produit->exist('no_movements') && $produit->get('no_movements')){
                   $this->setDefault('produit' . $produit->getHashForKey(), false);
               }
-              $hashAcquitte = str_replace(DRM::DETAILS_KEY_SUSPENDU, DRM::DETAILS_KEY_ACQUITTE, $produit->getHash());
+              $hashAcquitte = (!preg_match('/'.DRM::DETAILS_KEY_ACQUITTE.'/', $produit->getHash()))? str_replace(DRM::DETAILS_KEY_SUSPENDU, DRM::DETAILS_KEY_ACQUITTE, $produit->getHash()) : $produit->getHash();
               if (!$this->_drm->exist($hashAcquitte) || ($this->_drm->get($hashAcquitte)->exist('no_movements') && $this->_drm->get($hashAcquitte)->get('no_movements'))) {
                   $this->setDefault('acquitte' . $produit->getHashForKey(), false);
               }

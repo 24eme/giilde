@@ -46,7 +46,7 @@ class acVinDAEActions extends sfActions
 			$this->form->bind($request->getParameter($this->form->getName()));
 			if ($this->form->isValid()) {
 				$this->dae = $this->form->save();
-				return ($this->withlast)?  $this->redirect('dae_nouveau', array('sf_subject' => $this->etablissement, 'periode' => $this->periode->format('Y-m-d'), 'withlast' => 1)) : $this->redirect('dae_etablissement', $this->dae);
+				return ($this->withlast)?  $this->redirect('dae_nouveau', array('sf_subject' => $this->etablissement, 'periode' => $this->dae->date, 'withlast' => 1)) : $this->redirect('dae_etablissement', array('identifiant' => $this->dae->identifiant, 'periode' => $this->dae->date));
 			}
 		}
 	}
@@ -66,42 +66,43 @@ class acVinDAEActions extends sfActions
 	}
 	
 	public function executeUploadEdi(sfWebRequest $request) {
+  		set_time_limit(300);
 		$this->etablissement = $this->getRoute()->getEtablissement();
-		$this->md5 = $request->getParameter('md5',null);
 		$this->identifiant = $request->getParameter('identifiant');
 		$this->periode = new DateTime($request->getParameter('periode', date('Y-m-d')));
-		$path =  null;
-		if($this->md5){
-			$fileName = 'import_daes_'.$this->identifiant . '_' . $this->periode->format('Y-m-d').'_'.$this->md5.'.csv';
-			$path = sfConfig::get('sf_data_dir') . '/upload/' . $fileName;
-		}
-		$this->daeCsvEdi = new DAEImportCsvEdi($path, $this->identifiant, $this->periode->format('Y-m-d'));
-		$this->daeCsvEdi->checkCSV();
-		$this->erreurs = $this->daeCsvEdi->getCsvDoc()->erreurs;
-		$this->hasCsvAttachement = $this->daeCsvEdi->getCsvDoc()->hasCsvAttachement();
-	
+		$this->erreurs = array();
 		$this->form = new DAESCSVUploadForm();
-		$files = array();
 		if ($request->isMethod(sfWebRequest::POST)) {
-			$files = $request->getFiles($this->form->getName());
-			$files = $files['file'];
 			$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
 			if ($this->form->isValid()) {
-				$this->md5 = $this->form->getValue('file')->getMd5();
-				$fileName = 'import_daes_'.$this->identifiant . '_' . $this->periode->format('Y-m-d').'_'.$this->md5.'.csv';
-				rename(sfConfig::get('sf_data_dir') . '/upload/'.$this->md5,  sfConfig::get('sf_data_dir') . '/upload/'.$fileName);
-				return $this->redirect('dae_upload_fichier_edi', array('md5' => $this->md5,'identifiant' => $this->identifiant,'periode' => $this->periode->format('Y-m-d')));
+				
+				$file = sfConfig::get('sf_data_dir') . '/upload/' . $this->form->getValue('file')->getMd5();
+				
+				$this->daeCsvEdi = new DAEImportCsvEdi($file, $this->identifiant, $this->periode->format('Y-m-d'));
+				$this->daeCsvEdi->checkCSV();
+				
+				if($this->daeCsvEdi->getCsvDoc()->hasErreurs()) {
+					$this->erreurs = $this->daeCsvEdi->getCsvDoc()->erreurs;
+				} else {
+					
+					$this->daeCsvEdi->importCsv();
+					
+					if($this->daeCsvEdi->getCsvDoc()->hasErreurs()) {
+						$this->erreurs = $this->daeCsvEdi->getCsvDoc()->erreurs;
+					} else {
+						$this->getUser()->setFlash('notice', 'Vos ventes ont bien été importées');
+						return $this->redirect('dae_etablissement', array('identifiant' => $this->identifiant));
+					}
+				}
 			}
-		}
-		if ($this->md5 && !count($this->erreurs) && $this->hasCsvAttachement) {
-			return $this->redirect('dae_creation_fichier_edi', array('md5' => $this->md5,'identifiant' => $this->identifiant,'periode' => $this->periode->format('Y-m-d')));
-		}
-		if (($request->isMethod(sfWebRequest::POST) || $this->md5) && !$this->getUser()->hasCredential(myUser::CREDENTIAL_ADMIN)) {
-			$this->fileErrorUploadEdi($path, $files, $this->etablissement, $this->periode);
+			
+			if (!$this->getUser()->hasCredential(myUser::CREDENTIAL_ADMIN)) {
+				return $this->fileErrorUploadEdi($file, $this->etablissement, $this->periode);
+			}
 		}
 	}
 	
-	public function fileErrorUploadEdi($file, $files, $etablissement, $periode) {
+	public function fileErrorUploadEdi($file, $etablissement, $periode) {
 		return;
 	}
 	

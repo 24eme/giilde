@@ -25,7 +25,6 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('vigilance', 'documents_annexes_erreur', "Les numéros de document d'accompagnement saisis en annexe sont mal renseignés.");
         $this->addControle('vigilance', 'siret_absent', "Le numéro de siret n'a pas été renseigné");
         $this->addControle('erreur', 'no_accises_absent', "Le numéro d'accise n'a pas été renseigné");
-        $this->addControle('vigilance', 'frequence_paiement_absent', "La fréquence de paiement aux douanes n'a pas été renseigné");
 
         $this->addControle('erreur', 'observations', "Les observations n'ont pas été renseignées");
         $this->addControle('erreur', 'replacement_date', "Pour tout replacement, la date de sortie du produit est nécessaire. Vous ne l'avez pas saisi");
@@ -54,10 +53,10 @@ class DRMValidation extends DocumentValidation {
             $entrees_retourmarchandisesanscvo = ($detail->entrees->exist('retourmarchandisesanscvo'))? $detail->entrees->retourmarchandisesanscvo : 0.0;
             $entrees_autre = ($detail->entrees->exist('autre'))? $detail->entrees->autre : 0.0;
 
-            $sorties_destructionperte = ($detail->sorties->exist('destructionperte'))? $detail->sorties->destructionperte : 0.0;
+            $sorties_manquants = ($detail->sorties->exist('manquants'))? $detail->sorties->manquants : 0.0;
             $sorties_autre = ($detail->sorties->exist('autre'))? $detail->sorties->autre : 0.0;
 
-            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $sorties_destructionperte + $entrees_autre + $sorties_autre;
+            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $sorties_manquants + $entrees_autre + $sorties_autre;
 
             $produitLibelle = " pour le produit ".$detail->getLibelle();
 
@@ -76,7 +75,7 @@ class DRMValidation extends DocumentValidation {
                 if($entrees_retourmarchandisesanscvo){
                   $this->addPoint('erreur', 'observations', "Entrée retour de marchandises sans CVO (".sprintf("%.2f",$entrees_retourmarchandisesanscvo)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
                 }
-                if($sorties_destructionperte){
+                if($sorties_manquants){
                   $this->addPoint('erreur', 'observations', "Sortie manquant (".sprintf("%.2f",$sorties_destructionperte)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
                 }
                 if($entrees_autre){
@@ -116,9 +115,7 @@ class DRMValidation extends DocumentValidation {
             if ($detail->getConfig()->sorties->exist('transfertsrecolte') && $detail->sorties->exist('transfertsrecolte')) {
               $total_sorties_transfert_appellation += $detail->sorties->transfertsrecolte;
             }
-            if ($detail->getConfig()->sorties->exist('manipulationssoutirages') && $detail->sorties->exist('manipulationssoutirages')) {
-              $total_sorties_transfert_appellation += $detail->sorties->manipulationssoutirages;
-            }
+
             if($detail->total_revendique  > $detail->total){
                 $this->addPoint('vigilance', 'revendique_sup_initial', $detail->getLibelle(), $this->generateUrl('drm_edition_detail', $detail));
             }
@@ -187,15 +184,6 @@ class DRMValidation extends DocumentValidation {
             if (!$this->document->declarant->no_accises) {
                 $this->addPoint('erreur', 'no_accises_absent', 'Veuillez enregistrer votre numéro d\'accise', $this->generateUrl('drm_validation_update_etablissement', $this->document));
             }
-
-            $societe = $this->document->getEtablissement()->getSociete();
-
-
-            if (!$this->document->societe->exist('paiement_douane_frequence') || !$this->document->societe->paiement_douane_frequence) {
-                $this->addPoint('vigilance', 'frequence_paiement_absent', 'Veuillez enregistrer votre fréquence de paiement', $this->generateUrl('drm_validation_update_societe', $this->document));
-            }
-
-
         }
 
         $sortiesDocAnnexes = array();

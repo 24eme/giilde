@@ -38,7 +38,7 @@ EOF;
         $csv = $export->export(MouvementfactureFacturationView::getInstance()->getMouvementsAll(0));
 
         foreach($csv as $file => $lignes) {
-            file_put_contents($arguments['path']."/".$date."_".preg_replace("/.+\./", "", $file), implode("\n", $lignes));
+            file_put_contents($arguments['path']."/".$date."_".preg_replace("/.+\./", "", $file), implode("\r\n", $lignes));
         }
     }
 }

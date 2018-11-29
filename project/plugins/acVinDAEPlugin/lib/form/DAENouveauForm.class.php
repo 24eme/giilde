@@ -11,6 +11,13 @@ class DAENouveauForm extends acCouchdbObjectForm
 
     public function configure() {
     	
+    	$mois = array('01' => 'Janvier', '02' => 'Février', '03' => 'Mars', '04' => 'Avril', '05' => 'Mai', '06' => 'Juin', '07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
+    	$annees = array();
+    	for($i=date('Y')+1; $i>date('Y')-10; $i--) {
+    		$annees[$i] = $i;
+    	}
+    	$this->setWidget('date_mois', new bsWidgetFormChoice(array('choices' => $mois), array('class' => 'select2 form-control')));
+    	$this->setWidget('date_annee', new bsWidgetFormChoice(array('choices' => $annees), array('class' => 'select2 form-control')));
     	$this->setWidget('produit_key', new bsWidgetFormChoice(array('choices' => $this->getProduits()), array('class' => 'select2 form-control')));
     	$this->setWidget('label_key', new bsWidgetFormChoice(array('choices' => $this->getLabels()), array('class' => 'select2 form-control')));
     	$this->setWidget('mention_key', new bsWidgetFormChoice(array('choices' => $this->getMentions()), array('class' => 'select2 form-control')));
@@ -26,6 +33,7 @@ class DAENouveauForm extends acCouchdbObjectForm
     	$this->setWidget('mention_libelle', new bsWidgetFormInput());
     	$this->setWidget('primeur', new bsWidgetFormInputCheckbox());
     	$this->widgetSchema->setLabels(array(
+    			'date_mois' => 'Période',
     			'produit_key' => 'Produit',
     			'label_key' => 'Label',
     			'label_libelle' => 'Préciser',
@@ -41,6 +49,8 @@ class DAENouveauForm extends acCouchdbObjectForm
     			'nom_acheteur' => 'Nom',
     			'primeur' => 'Primeur'
     	));
+    	$this->setValidator('date_mois', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($mois))));
+    	$this->setValidator('date_annee', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($annees))));
         $this->setValidator('produit_key', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getProduits()))));
         $this->setValidator('label_key', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getLabels()))));
         $this->setValidator('mention_key', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getMentions()))));
@@ -126,13 +136,16 @@ class DAENouveauForm extends acCouchdbObjectForm
 
     protected function updateDefaultsFromObject() {
     	parent::updateDefaultsFromObject();
+	    $defaults = $this->getDefaults();
     	if ($this->getObject()->isNew()) {
-	        $defaults = $this->getDefaults();
 	        $defaults['contenance_key'] = 'HL'; 
 	        $defaults['destination_key'] = 'FR'; 
 	        $defaults['label_key'] = 'CONV';
-	        $this->setDefaults($defaults);
     	}
+    	$date = new DateTime($this->getObject()->date);
+	    $defaults['date_mois'] = $date->format('m');
+	    $defaults['date_annee'] = $date->format('Y');
+	    $this->setDefaults($defaults);
     }
     
     protected function doUpdateObject($values) {
@@ -143,6 +156,7 @@ class DAENouveauForm extends acCouchdbObjectForm
     	$destinations = $this->getDestinations();
     	$contenances = $this->getContenances();
     	
+    	$values['date'] = (isset($values['date_annee']) && isset($values['date_mois']))? sprintf("%04d", $values['date_annee']).'-'.sprintf("%02d", $values['date_mois']).'-01' : date('Y-m').'-01';
     	$values['produit_libelle'] = (isset($produits[$values['produit_key']]))? $produits[$values['produit_key']] : null;
     	$values['label_libelle'] = (isset($labels[$values['label_key']]) && !$values['label_libelle'])? $labels[$values['label_key']] : $values['label_libelle'];
     	$values['mention_libelle'] = (isset($mentions[$values['mention_key']]) && !$values['mention_libelle'])? $mentions[$values['mention_key']] : $values['mention_libelle'];

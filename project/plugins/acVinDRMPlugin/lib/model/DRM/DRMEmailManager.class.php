@@ -134,8 +134,9 @@ L’application de télédéclaration des contrats d’InterLoire";
 
         $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 
-        $mess = "
-La DRM " . getFrPeriodeElision($this->drm->periode) . " de " . $etablissement->nom . " a été validée électroniquement sur le portail de télédeclaration ". sfConfig::get('app_teledeclaration_url')." .
+        $mess = "Bonjour,
+
+Votre DRM " . getFrPeriodeElision($this->drm->periode). " a été validée électroniquement sur le portail de télédeclaration ". sfConfig::get('app_teledeclaration_url')." .
 
 La version PDF de cette DRM est également disponible en pièce jointe dans ce mail.
 ";
@@ -144,17 +145,17 @@ Dans l'attente de votre acceptation du contrat de service douane, la DRM doit ê
 " : "
 ";
 $mess .= "
-Pour toutes questions, veuillez contacter le service économie de ".$interpro." : " . $email . " .
+Pour toutes questions, veuillez contacter le service économie de votre interprofession (".$interpro.") : " . $email . " .
 
 --
 
-L’application de télédéclaration des DRM ". sfConfig::get('app_teledeclaration_url') ." .";
+L’application de télédéclaration des DRM ". sfConfig::get('app_teledeclaration_url') ."";
 
         $pdf = new DRMLatex($this->drm);
         $pdfContent = $pdf->getPDFFileContents();
         $pdfName = $pdf->getPublicFileName();
 
-        $subject = "Validation de la DRM " . getFrPeriodeElision($this->drm->periode) . " créée le " . $this->getDateSaisieDrmFormatted() . " .";
+        $subject = "Validation de la DRM " . getFrPeriodeElision($this->drm->periode) . " créée le " . $this->getDateSaisieDrmFormatted();
 
         $message = $this->getMailer()->compose(array(sfConfig::get('app_mail_from_email') => sfConfig::get('app_mail_from_name')), $etablissement->getEmailTeledeclaration(), $subject, $mess);
 

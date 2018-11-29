@@ -553,6 +553,9 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 continue;
             }
             $vrac = $mouvement->getVrac();
+            if(!$vrac) {
+                continue;
+            }
             $vrac->updateVolumesEnleves();
             $vracs[$vrac->numero_contrat] = $vrac;
         }
