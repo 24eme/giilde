@@ -133,11 +133,13 @@ if (count($documents_annexes)): ?>
 <?php endforeach; ?>
     	</document-accompagnement>
 <?php endif; ?>
-<?php if ($drm->exist('releve_non_apurement')) foreach($drm->releve_non_apurement as $k => $releve) if ($releve->numero_document && $releve->date_emission && $releve->numero_accise): ?>
+<?php if ($drm->exist('releve_non_apurement')) foreach($drm->releve_non_apurement as $k => $releve) if ($releve->numero_document && $releve->date_emission): ?>
     	<releve-non-apurement>
       		<numero-daa-dac-dae><?php echo $releve->numero_document; ?></numero-daa-dac-dae>
       		<date-expedition><?php echo formatDateDouane($releve->date_emission); ?></date-expedition>
-      		<numero-accise-destinataire><?php echo $releve->numero_accise; ?></numero-accise-destinataire>
+					<?php if($releve->numero_accise): ?>
+      			<numero-accise-destinataire><?php echo $releve->numero_accise; ?></numero-accise-destinataire>
+					<?php endif; ?>
     	</releve-non-apurement>
 <?php endif; ?>
 <?php if ($drm->declaratif->exist('statistiques') && ($drm->declaratif->statistiques->jus || $drm->declaratif->statistiques->mcr || $drm->declaratif->statistiques->vinaigre)): ?>
