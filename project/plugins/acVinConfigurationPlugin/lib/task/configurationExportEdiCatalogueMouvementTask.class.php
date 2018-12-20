@@ -3,7 +3,7 @@
 class configurationExportEdiCatalogueMouvementTask extends sfBaseTask
 {
 
-  public static $escaped_mvts_keys = array("dont_revendique");
+  public static $escaped_mvts_keys = array();
 
   protected function configure()
   {
