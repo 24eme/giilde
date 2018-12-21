@@ -36,7 +36,7 @@ EOF;
     if(!$configuration){
       throw new sfException("La configuration courante n'existe pas");
     }
-    echo sprintf("TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,EXPLICATION MOUVEMENT\n");
+    echo sprintf("TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT\n");
 
     $configurationDeclaration = $configuration->getDeclaration();
     $typesMvt = DRMClient::$types_libelles;
@@ -49,7 +49,8 @@ EOF;
         foreach ($categorieValue as $mvtKey => $mvtValue) {
           if(!in_array($mvtKey,self::$escaped_mvts_keys)){
             $libelleMvt = strtolower($libelles->$typesMvtKey->$categorieKey->$mvtKey->libelle);
-            $categorieArray[$libelleMvt] = sprintf("%s,%s,%s,%s\n",strtolower(KeyInflector::slugify($typesMvtValue)),$categorieKey,$mvtKey,$libelleMvt);
+            $description = strtolower($libelles->$typesMvtKey->$categorieKey->$mvtKey->description);
+            $categorieArray[$libelleMvt] = sprintf("%s,%s,%s,%s,%s\n",strtolower(KeyInflector::slugify($typesMvtValue)),$categorieKey,$mvtKey,$libelleMvt,$description);
           }
         }
         ksort($categorieArray);
