@@ -193,6 +193,9 @@ class KeyInflector
             $text = strtolower($text);
         }
 
+		$text = str_replace('<', 'inf', $text);
+		$text = str_replace('>', 'sup', $text);
+
         // Remove all none word characters
         $text = preg_replace('/\W/', ' ', $text);
 
