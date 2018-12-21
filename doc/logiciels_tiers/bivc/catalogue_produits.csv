@@ -1,125 +1,26 @@
-CERTIFICATION,GENRE,APPELLATION,MENTION,LIEU,COULEUR,CEPAGE,LIBELLE_PRODUIT,IDENTIFIANT INAO
-AOC,Tranquille,Sancerre,,,Blanc,,AOC Sancerre Blanc,1B195S
-AOC,Tranquille,Sancerre,,,Rouge,,AOC Sancerre Rouge,1R196S
-AOC,Tranquille,Sancerre,,,Rosé,,AOC Sancerre Rosé,1S196S
-AOC,Tranquille,Pouilly-Fumé,,,Blanc,,AOC Pouilly-Fumé,1B192S
-AOC,Tranquille,Pouilly-sur-Loire,,,Blanc,,AOC Pouilly-sur-Loire,1B191S
-AOC,Tranquille,Menetou-Salon,,,Blanc,,AOC Menetou-Salon Blanc,1B190S
-AOC,Tranquille,Menetou-Salon,,,Rouge,,AOC Menetou-Salon Rouge,1R190S
-AOC,Tranquille,Menetou-Salon,,,Rosé,,AOC Menetou-Salon Rosé,1S190S
-AOC,Tranquille,Quincy,,,Blanc,,AOC Quincy,1B193S
-AOC,Tranquille,Reuilly,,,Blanc,,AOC Reuilly Blanc,1B194S
-AOC,Tranquille,Reuilly,,,Rouge,,AOC Reuilly Rouge,1R194S
-AOC,Tranquille,Reuilly,,,Rosé,,AOC Reuilly Rosé,1S194S
-AOC,Tranquille,Coteaux du Giennois,,,Blanc,,AOC Coteaux du Giennois Blanc,1B197S
-AOC,Tranquille,Coteaux du Giennois,,,Rouge,,AOC Coteaux du Giennois Rouge,1R197S
-AOC,Tranquille,Coteaux du Giennois,,,Rosé,,AOC Coteaux du Giennois Rosé,1S197S
-AOC,Tranquille,Châteaumeillant,,,Rouge,,AOC Châteaumeillant Rouge,1R700
-AOC,Tranquille,Châteaumeillant,,,Rosé,,AOC Châteaumeillant Rosé,1S700
-AOC,VCI,Menetou-Salon,,,Blanc,,AOC Menetou-Salon Blanc VCI,1B190S
-AOC,VCI,Quincy,,,Blanc,,AOC Quincy VCI,1B193S
-AOC,VCI,Reuilly,,,Blanc,,AOC Reuilly Blanc VCI,1B194S
-Autre AOC,Tranquille,Anjou,,,Blanc,,Anjou Blanc,1B200
-Autre AOC,Tranquille,Anjou,,,Rouge,,Anjou Rouge,1R200S
-Autre AOC,Tranquille,Quarts de Chaume,,,Blanc,Chenin,Quarts de Chaume,1B214L
-Autre AOC,Tranquille,Savennières,,,Blanc,Chenin,Savennières,1B216S
-Autre AOC,Tranquille,Vouvray,,,Blanc,,Vouvray,1B226
-Autre AOC,Tranquille,Rosé de Loire,,,Rosé,,Rosé de Loire,1S209S
-Autre AOC,Tranquille,Saumur,,,Blanc,Chenin,Saumur Blanc,1B206
-Autre AOC,Tranquille,Saumur,,,Rouge,,Saumur Rouge,1R206S
-Autre AOC,Tranquille,Saumur Champigny,,,Rouge,,Saumur Champigny,1R208
-Autre AOC,Tranquille,Muscadet Sèvre et Maine,,,Blanc,Melon,Muscadet Sèvre et Maine,1B230
-Autre AOC,Tranquille,Muscadet Sèvre et Maine,Sur lie,,Blanc,Melon,Muscadet Sèvre et Maine Sur lie,1B230 01
-Autre AOC,Tranquille,Rosé d'Anjou,,,Rosé,,Rosé d'Anjou,1S200D
-Autre AOC,Tranquille,Anjou-Villages,,,Rouge,,Anjou-Villages,1R204S
-Autre AOC,Tranquille,Cabernet d'Anjou,,,Rosé,,Cabernet d'Anjou,1S201D
-Autre AOC,Tranquille,Chinon,,,Blanc,Chenin,Chinon Blanc,1B222S
-Autre AOC,Tranquille,Chinon,,,Rouge,Cabernet Franc,Chinon Rouge,1R222S
-Autre AOC,Tranquille,Chinon,,,Rosé,Cabernet Franc,Chinon Rosé,1S222S
-Autre AOC,Tranquille,Coteaux du Layon,,,Blanc,Chenin,Coteaux du Layon,1B212L
-Autre AOC,Tranquille,Coteaux du Layon,,Beaulieu,Blanc,,Coteaux du Layon Beaulieu,1B212L01
-Autre AOC,Tranquille,Gros plant,,,Blanc,Folle blanche,Gros plant,1B708
-Autre AOC,Tranquille,Gros plant,Sur lie,,Blanc,Folle blanche,Gros plant Sur lie,1B708
-Autre AOC,Tranquille,St Nicolas de Bourgueil,,,Rouge,Cabernet Franc,St Nicolas de Bourgueil Rouge,1R221S
-Autre AOC,Tranquille,St Nicolas de Bourgueil,,,Rosé,Cabernet Franc,St Nicolas de Bourgueil Rosé,1S221S
-Autre AOC,Tranquille,Touraine,,,Blanc,,Touraine Blanc,1B235S
-Autre AOC,Tranquille,Touraine,,,Rouge,,Touraine Rouge,1R235S
-Autre AOC,Tranquille,Touraine,,,Rosé,,Touraine Rosé,1S235S
-Autre AOC,Tranquille,Touraine,,Amboise,Blanc,Chenin,Touraine Amboise Blanc,1B236
-Autre AOC,Tranquille,Touraine,,Amboise,Rouge,,Touraine Amboise Rouge,1R236S
-Autre AOC,Tranquille,Coteaux du Vendomois,,,Blanc,,Coteaux du Vendomois Blanc,1B218S
-Autre AOC,Tranquille,Coteaux du Vendomois,,,Rouge,,Coteaux du Vendomois Rouge,1R218S
-Autre AOC,Tranquille,Coteaux du Vendomois,,,Rosé,,Coteaux du Vendomois Rosé,1S218S
-Autre AOC,Mousseux,Crémant de Loire,,,Blanc,,Crémant de Loire Blanc,1B215M
-Autre AOC,Mousseux,Crémant de Loire,,,Rosé,,Crémant de Loire Rosé,1S215M
-Autre AOC,Mousseux,Touraine,,,Blanc,,Touraine Mousseux Blanc,1B235M 1
-Autre AOC,Mousseux,Touraine,,,Rosé,,Touraine Mousseux Rosé,1S235M 1
-Autre AOC,Mousseux,Vouvray,Pétillant,,Blanc,,Vouvray Pétillant,1B226P 1
-Autre AOC,Tranquille,Bourgueil,,,Rouge,Cabernet Franc,Bourgueil Rouge,1S220S
-Autre AOC,Tranquille,Bourgueil,,,Rosé,Cabernet Franc,Bourgueil Rosé,1R220S
-Autre AOC,Tranquille,Cheverny,,,Blanc,,Cheverny Blanc,1B231S
-Autre AOC,Tranquille,Cheverny,,,Rouge,,Cheverny Rouge,1R231S
-Autre AOC,Tranquille,Montlouis sur Loire,,,Blanc,Chenin,Montlouis sur Loire,1B225
-Autre AOC,Tranquille,Saint Pourçain,,,Blanc,,Saint Pourçain Blanc,1B430S 
-Autre AOC,Tranquille,Saint Pourçain,,,Rouge,,Saint Pourçain Rouge,1R430S
-Autre AOC,Tranquille,Valençay,,,Blanc,,Valençay Blanc,1B233S
-Autre AOC,Tranquille,Valençay,,,Rouge,,Valençay Rouge,1R233S
-Autre AOC,Tranquille,Valençay,,,Rosé,,Valençay Rosé,1S233S
-Autre AOC,Tranquille,Côtes du Forez,,,Rouge,,Côtes du Forez Rouge,1R360
-Autre AOC,Tranquille,Côtes du Forez,,,Rosé,,Côtes du Forez Rosé,1S360
-Autre AOC,Mousseux,Montlouis sur Loire,Pétillant,,Blanc,Chenin,Montlouis sur Loire Pétillant,1B225P 1
-Autre AOC,Mousseux,Champagne,,,Blanc,,Champagne Blanc,1B080M 1
-Autre AOC,Mousseux,Champagne,,,Rosé,,Champagne Rosé,1S080M 1
-IGP,Tranquille,Côtes de la Charité,,,Blanc,,IGP Côtes de la Charité Blanc,3B582
-IGP,Tranquille,Côtes de la Charité,,,Rouge,,IGP Côtes de la Charité Rouge,3R582
-IGP,Tranquille,Côtes de la Charité,,,Rosé,,IGP Côtes de la Charité Rosé,3S582
-IGP,Tranquille,Coteaux de Tannay,,,Blanc,,IGP Coteaux de Tannay Blanc,3B583
-IGP,Tranquille,Coteaux de Tannay,,,Rouge,,IGP Coteaux de Tannay Rouge,3R583
-IGP,Tranquille,Coteaux de Tannay,,,Rosé,,IGP Coteaux de Tannay Rosé,3S583
-IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Blanc,,IGP Coteaux du Cher et de l'Arnon Blanc,3B182
-IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Rouge,,IGP Coteaux du Cher et de l'Arnon Rouge,3R182
-IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Rosé,,IGP Coteaux du Cher et de l'Arnon Rosé,3S182
-IGP,Tranquille,Val de Loire,,,Blanc,,IGP Val de Loire Blanc,3B009
-IGP,Tranquille,Val de Loire,,,Blanc,Multi cépage,IGP Val de Loire Blanc Multi cépage,3B009 00
-IGP,Tranquille,Val de Loire,,,Blanc,Pinot blanc,IGP Val de Loire Blanc Pinot blanc,3B009 59
-IGP,Tranquille,Val de Loire,,,Blanc,Pinot gris,IGP Val de Loire Blanc Pinot gris,3B009 AA
-IGP,Tranquille,Val de Loire,,,Blanc,Sauvignon blanc,IGP Val de Loire Blanc Sauvignon blanc,3B009 AE
-IGP,Tranquille,Val de Loire,,,Blanc,Sauvignon gris,IGP Val de Loire Blanc Sauvignon gris,3B009 AF
-IGP,Tranquille,Val de Loire,,,Blanc,Chardonnay,IGP Val de Loire Blanc Chardonnay,3B009 CA
-IGP,Tranquille,Val de Loire,,,Blanc,Chenin,IGP Val de Loire Blanc Chenin,3B009 CF
-IGP,Tranquille,Val de Loire,,,Blanc,Folle blanche,IGP Val de Loire Blanc Folle blanche,3B009 CL
-IGP,Tranquille,Val de Loire,,,Blanc,Grolleau gris,IGP Val de Loire Blanc Grolleau gris,3B009 CU
-IGP,Tranquille,Val de Loire,,,Blanc,Melon,IGP Val de Loire Blanc Melon,3B009 DK
-IGP,Tranquille,Val de Loire,,,Rosé,,IGP Val de Loire Rosé,3S009
-IGP,Tranquille,Val de Loire,,,Rosé,Multi cépage,IGP Val de Loire Rosé Multi cépage,3S009 00
-IGP,Tranquille,Val de Loire,,,Rosé,Pinot noir,IGP Val de Loire Rosé Pinot noir,3S009 AB
-IGP,Tranquille,Val de Loire,,,Rosé,Egiodola,IGP Val de Loire Rosé Egiodola,3S009 AI
-IGP,Tranquille,Val de Loire,,,Rosé,Cabernet franc,IGP Val de Loire Rosé Cabernet franc,3S009 BW
-IGP,Tranquille,Val de Loire,,,Rosé,Cabernet sauvignon,IGP Val de Loire Rosé Cabernet sauvignon,3S009 B
-IGP,Tranquille,Val de Loire,,,Rosé,Gamay noir,IGP Val de Loire Rosé Gamay noir,3S009 CM
-IGP,Tranquille,Val de Loire,,,Rosé,Grolleau noir,IGP Val de Loire Rosé Grolleau noir,3S009 CT
-IGP,Tranquille,Val de Loire,,,Rosé,Cot,IGP Val de Loire Rosé Cot,3S009 CZ
-IGP,Tranquille,Val de Loire,,,Rosé,Merlot,IGP Val de Loire Rosé Merlot,3S009 DE
-IGP,Tranquille,Val de Loire,,,Rosé,Abouriou,IGP Val de Loire Rosé Abouriou,3S009 35
-IGP,Tranquille,Val de Loire,,,Rosé,Pineau d'Aunis,IGP Val de Loire Rosé Pineau d'Aunis,3S009 58
-IGP,Tranquille,Val de Loire,,,Rouge,,IGP Val de Loire Rouge,3R009
-IGP,Tranquille,Val de Loire,,,Rouge,Multi cépage,IGP Val de Loire Rouge Multi cépage,3R009 00
-IGP,Tranquille,Val de Loire,,,Rouge,Pinot noir,IGP Val de Loire Rouge Pinot noir,3R009 AB
-IGP,Tranquille,Val de Loire,,,Rouge,Cabernet franc,IGP Val de Loire Rouge Cabernet franc,3R009 BW
-IGP,Tranquille,Val de Loire,,,Rouge,Cabernet sauvignon,IGP Val de Loire Rouge Cabernet sauvignon,3R009 B
-IGP,Tranquille,Val de Loire,,,Rouge,Gamay noir,IGP Val de Loire Rouge Gamay noir,3R009 CM
-IGP,Tranquille,Val de Loire,,,Rouge,Grolleau noir,IGP Val de Loire Rouge Grolleau noir,3R009 CT
-IGP,Tranquille,Val de Loire,,,Rouge,Cot,IGP Val de Loire Rouge Cot,3R009 CZ
-IGP,Tranquille,Val de Loire,,,Rouge,Merlot,IGP Val de Loire Rouge Merlot,3R009 DE
-IGP,Tranquille,Val de Loire,,,Rouge,Abouriou,IGP Val de Loire Rouge Abouriou,3R009 35
-IGP,Tranquille,Val de Loire,,,Rouge,Pineau d'Aunis,IGP Val de Loire Rouge Pineau d'Aunis,3R009 58
-Vin de France,Tranquille,,,,Blanc,,Vin de France Tranquille Blanc,4B999
-Vin de France,Tranquille,,,,Rouge,,Vin de France Tranquille Rouge,4R999
-Vin de France,Tranquille,,,,Rosé,,Vin de France Tranquille Rosé,4S999
-Vin de France,Mousseux,,,,Blanc,,Vin de France Mousseux Blanc,4B999M
-Vin de France,Mousseux,,,,Rosé,,Vin de France Mousseux Rosé,4S999M
-Vin de France,Mousseux,,,,Rouge,,Vin de France Mousseux Rouge,4R999M
-Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
-Autres,,DPLC,,,,,DPLC,4B988Y
-Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y
-Autres,,DPLC,,,Rouge,,DPLC Rouge,4R988Y
+#TYPE,PERIODE,IDENTIFIANT,ACCISE,CERTIFICATION / COULEUR CAPSULE, GENRE / TYPE PRODUIT, APPELLATION / CENTILISATION,MENTION,LIEU,COULEUR,CEPAGE,COMPLEMENT,LIBELLE,TYPE_DRM,CATEGORIE MOUVEMENT / TYPE DOCUMENT,TYPE MOUVEMENT,VOLUME / QUANTITE,PAYS EXPORT / DATE NON APUREMENT,NUMERO CONTRAT / NUMERO ACCISE DESTINATAIRE NON APUREMENT,NUMERO DOCUMENT ACCOMPAGNEMENT,OBSERVATIONS/PRIX CONTRAT,ACCISES ACHETEUR,NOM ACHETEUR
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rouge,,,Sancerre Rouge,suspendu,stocks_debut,initial,728.83,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rouge,,,Sancerre Rouge,suspendu,entrees,recolte,482,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rouge,,,Sancerre Rouge,suspendu,sorties,creationvrac,60.61,,,,210.0,FR99999999999,M Pierre Negociant Vrac
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rouge,,,Sancerre Rouge,suspendu,stocks_fin,final,1188.74,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rosé,,,Sancerre Rosé,suspendu,stocks_debut,initial,37.25,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rosé,,,Sancerre Rosé,suspendu,entrees,recolte,63,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rosé,,,Sancerre Rosé,suspendu,sorties,ventefrancecrd,20.86,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Rosé,,,Sancerre Rosé,suspendu,stocks_fin,final,79.39,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Blanc,,,Sancerre Blanc,suspendu,stocks_debut,initial,88.1875,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Blanc,,,Sancerre Blanc,suspendu,entrees,recolte,88,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Blanc,,,Sancerre Blanc,suspendu,entrees,regularisation,2.34,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Blanc,,,Sancerre Blanc,suspendu,sorties,creationvractirebouche,23.45,,,,250.0,FR99999999000,M Paul Negociant Bouteille
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Sancerre,,,Blanc,,,Sancerre Blanc,suspendu,stocks_fin,final,155.0775,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Menetou-Salon,,,Blanc,,,Menetou-Salon Blanc,suspendu,stocks_debut,initial,4.02,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Menetou-Salon,,,Blanc,,,Menetou-Salon Blanc,suspendu,sorties,ventefrancecrd,3.06,,,,,, 
+CAVE,201711,99999901,FR00000000000,AOC,Tranquille,Menetou-Salon,,,Blanc,,,Menetou-Salon Blanc,suspendu,stocks_fin,final,0.96,,,,,, 
+CAVE,201711,99999901,FR00000000000,Autres,,DPLC Rouge,,,,,,DPLC Rouge,suspendu,entrees,recolte,9.7,,,,,, 
+CAVE,201711,99999901,FR00000000000,Autres,,DPLC Rouge,,,,,,DPLC Rouge,suspendu,stocks_fin,final,9.7,,,,,, 
+CRD,201711,99999901,FR00000000000,VERT,TRANQ,Bouteille 75 cl,,,,,,,collectif suspendu,stock_debut,debut,18594,,,,,, 
+CRD,201711,99999901,FR00000000000,VERT,TRANQ,Bouteille 75 cl,,,,,,,collectif suspendu,entrees,achats,7500,,,,,, 
+CRD,201711,99999901,FR00000000000,VERT,TRANQ,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,13770,,,,,, 
+CRD,201711,99999901,FR00000000000,VERT,TRANQ,Bouteille 75 cl,,,,,,,collectif suspendu,stock_fin,fin,12324,,,,,, 
+CRD,201711,99999901,FR00000000000,VERT,TRANQ,BIB 5l,,,,,,,collectif suspendu,stock_debut,debut,439,,,,,, 
+CRD,201711,99999901,FR00000000000,VERT,TRANQ,BIB 5l,,,,,,,collectif suspendu,sorties,utilisations,94,,,,,,
+CRD,201711,99999901,FR00000000000,VERT,TRANQ,BIB 5l,,,,,,,collectif suspendu,stock_fin,fin,345,,,,,, 

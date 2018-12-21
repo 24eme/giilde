@@ -1,50 +1,50 @@
-TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,CATEGORIE DOUANE
-suspendu,stocks_debut,instance,
-suspendu,stocks_debut,initial,stock-debut-periode
-suspendu,stocks_debut,dont_revendique,
-suspendu,entrees,recolte,entrees-periode/volume-produit
-suspendu,entrees,revendication,
-suspendu,entrees,repli,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,entrees,declassement,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,entrees,vci,entrees-periode/mouvements-internes/integration-vci-agree
-suspendu,entrees,transfertsrecolte,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,entrees,retourembouteillage,entrees-periode/mouvements-temporaires/relogement
-suspendu,entrees,transfertcomptamatierecession,entrees-periode/mouvements-temporaires/relogement
-suspendu,entrees,travailafacon,entrees-periode/mouvements-temporaires/travail-a-facon
-suspendu,entrees,retourmarchandiseacquitte,entrees-periode/replacements/replacement-suspension/volume
-suspendu,entrees,retourmarchandisetaxees,entrees-periode/replacements/replacement-suspension/volume
-suspendu,entrees,retourmarchandisenontaxees,entrees-periode/achats-reintegrations
-suspendu,entrees,achatcrd,entrees-periode/achats-reintegrations
-suspendu,entrees,achatnoncrd,entrees-periode/achats-reintegrations
-suspendu,entrees,regularisation,entrees-periode/autres-entrees
-suspendu,sorties,contrat,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
-suspendu,sorties,vracsanscontratsuspendu,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
-suspendu,sorties,apportgroupement,sorties-periode/sorties-sans-paiement-droits/autres-sorties
-suspendu,sorties,export,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
-suspendu,sorties,vracsanscontratacquitte,sorties-periode/ventes-france-crd-suspendus/annee-courante
-suspendu,sorties,ventefrancecrd,sorties-periode/ventes-france-crd-suspendus/annee-courante
-suspendu,sorties,ventefrancecrdacquitte,sorties-periode/ventes-france-crd-acquittes
-suspendu,sorties,repli,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,sorties,declassement,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,sorties,vci,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci
-suspendu,sorties,transfertsrecolte,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,sorties,embouteillage,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/embouteillage
-suspendu,sorties,transfertcomptamatiere,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,sorties,travailafacon,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/travail-a-facon
-suspendu,sorties,consommationfamilialedegustation,sorties-periode/sorties-sans-paiement-droits/consommation-familiale-degustation
-suspendu,sorties,distillationusageindustriel,sorties-periode/sorties-sans-paiement-droits/autres-sorties
-suspendu,sorties,destructionperte,sorties-periode/sorties-sans-paiement-droits/autres-sorties
-suspendu,sorties,manquant,sorties-periode/sorties-sans-paiement-droits/autres-sorties
-suspendu,sorties,cession,sorties-periode/sorties-sans-paiement-droits/autres-sorties
-suspendu,stocks_fin,instance,
-suspendu,stocks_fin,final,stock-fin-periode
-suspendu,stocks_fin,dont_revendique,
-acquitté,stocks_debut,instance,
-acquitté,stocks_debut,initial,stock-debut-periode
-acquitté,entrees,achat,entrees-periode/achats
-acquitté,entrees,autre,entrees-periode/autres-entrees
-acquitté,sorties,autre,sorties-periode/autres-sorties
-acquitté,sorties,replacementsuspension,sorties-periode/replacement-suspension
-acquitté,sorties,vente,sorties-periode/ventes
-acquitté,stocks_fin,instance,
-acquitté,stocks_fin,final,stock-fin-periode
+TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT
+suspendu,stocks_debut,dont_revendique,dont revendiqué,pour les aoc & igp. le volume revendiqué correspond à celui effectivement revendiqué auprès de l'odg. pour les vsig. ce volume est identique au volume récolté.
+suspendu,stocks_debut,instance,en instance de revendication,vin en instance de revendication
+suspendu,stocks_debut,initial,initial récolté,le volume récolté correspond à celui indiqué sur la déclaration de récolte (lignes 14 pour les vsig; 15 pour les aoc & igp; 19 pour les vci).
+suspendu,entrees,recolte,01. récolte,indiquer le volume inscrit sur  la déclaration de récolte  (lignes 14 pour les vsig; 15 pour les aoc & igp; 19 pour les vci).
+suspendu,entrees,revendication,02. revendiqué à l'odg,indiquer le volume ayant fait l’objet d'une déclaration de revendication.
+suspendu,entrees,repli,03. issu d'un repli,toute entrée dans cette rubrique pour une colonne doit trouver son équivalent en sortie dans une autre colonne. tout repli doit être autorisé par le cahier des charges (aoc vers une autre aoc; igp de zone ou de département vers une igp régionale).
+suspendu,entrees,declassement,04. issu d'un déclassement,toute entrée dans cette rubrique pour une colonne doit trouver son équivalent en sortie dans une autre colonne. tout déclassement (aoc ou igp vers les vsig) doit être déclaré à l'odg.
+suspendu,entrees,vci,05-bis. intégration vci,indiquer les volumes issus de votre récolte que vous intégrez en vci
+suspendu,entrees,transfertsrecolte,05. transfert de produit,(concerne que les igp. ex: volume récolté en côtes de gascogne et finalement revendiqué en comté tolosan)  indiquer les volumes transférés en provenance d'une autre igp (récoltés mais non encore revendiqués). toute entrée dans cette rubrique pour une colonne doit trouver son équivalent en revendication dans la même colonne et en sortie dans une autre colonne.
+suspendu,entrees,retourembouteillage,06. retour conditionnmt,retour de vins conditionnés  (mis en bouteilles. en bib...) à l'extérieur de votre chai par un prestataire.
+suspendu,entrees,transfertcomptamatierecession,07. retour logement ext.,retour de vins logés temporairement dans un chai extérieur.
+suspendu,entrees,travailafacon,08. retour travail à façon,retour de vins préparés  par un prestataire extérieur (mousseux).
+suspendu,entrees,retourmarchandiseacquitte,09. retour de vin crd acq.,retour de vins préalablement sortis sous crd acquittées (déductible des cvo).
+suspendu,entrees,retourmarchandisetaxees,09. retour de vin sous crd,retour de vins préalablement sortis sous crd (déductible des cvo).
+suspendu,entrees,retourmarchandisenontaxees,10. retour de vin hors crd,retour de vins préalablement sortis sans crd (déductible des cvo).
+suspendu,entrees,achatcrd,11. achat sous crd,indiquer les volumes achetés conditionnés sous crd. cas exceptionnel.
+suspendu,entrees,achatnoncrd,12. achat hors crd,indiquer les volumes achetés sans crd. cas exceptionnel.
+suspendu,entrees,regularisation,13. excédent constaté,indiquer les volumes constatés en excédent à l'occasion d'un inventaire ou d'un contrôle des douanes.
+suspendu,sorties,vrac,01. vrac sous contrat,indiquer les volumes sortis en vrac sous contrat interprofessionnel et sous daa/dac/dca ou dae.
+suspendu,sorties,vracsanscontratsuspendu,02. dca hors contrat,indiquer les volumes sortis en vrac sans contrat interprofessionnel et sous daa/dac/dca ou dae. ex: vsig sous contrat franceagrimer. 
+suspendu,sorties,apportgroupement,03. apport à groupement,indiquer les sorties à destination d'un groupement ou d'une union de coopératives.
+suspendu,sorties,export,04. export,indiquer les volumes commercialisés à l'export  à l'exception des volumes commercialisés à l'export en vrac sous contrat interprofessionnel.
+suspendu,sorties,vracsanscontratacquitte,05. vente sous dsa,inscrire les ventes en france sous dsa/dsac à un débitant. un particulier ou un entrepositaire agréé ne travaillant qu'en droits acquittés (n° d'accise sous la forme fr 000 000 a 0000).
+suspendu,sorties,ventefrancecrd,06. vente sous crd,inscrire les sorties de vins conditionnés (bouteilles. bib. cubi...) avec capsules représentatives de droits (c.r.d.).
+suspendu,sorties,ventefrancecrdacquitte,06. vente sous crd acquittée,inscrire les sorties de vins conditionnés (bouteilles. bib. cubi...) avec capsules représentatives de droits (c.r.d.) acquittées
+suspendu,sorties,repli,07. repli,toute sortie dans cette rubrique pour une colonne doit trouver son équivalent en entrée dans une autre colonne. tout repli doit être autorisé par le cahier des charges (aoc vers une autre aoc
+suspendu,sorties,declassement,08. déclassement,toute sorties dans cette rubrique pour une colonne doit trouver son équivalent en entrée dans une autre colonne. tout déclassement (aoc ou igp vers les vsig) doit être déclaré à l'odg.
+suspendu,sorties,vci,09-bis. revendication vci,indiquer les volumes de vci que vous intégrez dans votre stock revendiqué
+suspendu,sorties,transfertsrecolte,09. transfert de produit,(concerne que les igp. ex : volume récolté en côtes de gascogne et finalement revendiqué en comté tolosan). indiquer les volumes (récoltés mais non encore revendiqués) transférés  vers une autre igp. toute sorties dans cette rubrique pour une colonne doit trouver son équivalent en entrée et devra être revendiquée dans une autre colonne.
+suspendu,sorties,embouteillage,10. conditionnement,indiquer les vins sortis du chai pour conditionnement extérieur par un prestataire. une fois conditionné. le vin devra revenir au chai: il sera alors noté en entrée sur la ligne retour conditionnement.
+suspendu,sorties,transfertcomptamatiere,11. logement externe,indiquer les vins sortis pour être logés temporairement  dans un chai extérieur. ces vins devront réintégrer le chai: ils seront alors notés en entrée sur la ligne retour logement externe.
+suspendu,sorties,travailafacon,12. travail à façon,indiquer les vins sortis du chai pour être travaillés par un prestataire. une fois préparés. ces vins devront réintégrer le chai: ils seront alors notés en entrée sur la ligne retour travail à façon.
+suspendu,sorties,consommationfamilialedegustation,13. conso. familiale,indiquer les volumes de consommation familiale.
+suspendu,sorties,distillationusageindustriel,14. usages industriel,indiquer les sorties vers la distillerie.
+suspendu,sorties,destructionperte,15. destruction/perte,indiquer les pertes et destructions régulières (mise en bouteilles...) ou résultant d'évènements exceptionnels (vol. casse. fuite...) dûment validées par le service des douanes.
+suspendu,sorties,manquant,16. manquant,indiquer les volumes constatés manquants à l'occasion d'un inventaire ou d'un contrôle des douanes. (soumis à cvo).
+suspendu,sorties,cession,17. cession d'exploitation,indiquer les volumes vendus à votre repreneur lors de la vente de l'exploitation.
+suspendu,stocks_fin,dont_revendique,dont revendiqué,stock revendiqué en fin de mois
+suspendu,stocks_fin,instance,en instance de revendication,en instance de revendication
+suspendu,stocks_fin,final,final récolté,stock final récolté
+acquitte,stocks_debut,instance,en instance,stock début en instance de revendication
+acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.
+acquitte,entrees,achat,achats,indiquer les achats du produit.
+acquitte,entrees,autre,autres,autres entrées du produit. ex : correspondant à une sortie de produits en droits suspendus pour lesquels les droits ont été payés.
+acquitte,sorties,autre,autres,indiquer les volumes commercialisés à l'export.
+acquitte,sorties,replacementsuspension,replacement en suspension,indiquer le replacement du produit en suspension de droits.
+acquitte,sorties,vente,ventes de produits ,indiquer les ventes du produit.
+acquitte,stocks_fin,instance,en instance,stock fin en instance de revendication
+acquitte,stocks_fin,final,final,calcul automatique: cette case ne peut être modifiée.

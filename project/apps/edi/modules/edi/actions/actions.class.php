@@ -55,6 +55,7 @@ class ediActions extends sfActions {
     public function importEdiFile($csvFilePath){
 
             $this->drmCsvEdi = new DRMImportCsvEdi($csvFilePath, null, true);
+            if(!$this->save){ $this->drmCsvEdi->setNoSave(true); }
             $drm = $this->drmCsvEdi->getDrm();
             $this->identifiant = $drm->getIdentifiant();
             $this->periode = $drm->getPeriode();

@@ -2,7 +2,7 @@ TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEM
 suspendu,stocks_debut,instance,en instance,stock début en instance de revendication
 suspendu,stocks_debut,initial,initial,stock début de mois
 suspendu,entrees,achatnoncrd,achat (vrac/blles nues),achats vrac + bouteilles sans crd
-suspendu,entrees,autre,autres,autres entrées que celles-ci-dessous, nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.
+suspendu,entrees,autre,autres,autres entrées que celles-ci-dessous. nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.
 suspendu,entrees,excedent,excédents,quantités en excédent
 suspendu,entrees,manipulations,manipulations diverses,manipulations diverses
 suspendu,entrees,repli,repli/déclassement,repli/déclassement
@@ -13,7 +13,7 @@ suspendu,entrees,retourmarchandisetaxees,retour taxé et cvo,quantités réinté
 suspendu,entrees,retourtravailafacon,retour travail à façon,retour de travail à façon
 suspendu,entrees,recolte,récolte,entrées récolte
 suspendu,entrees,vci,vci,vci
-suspendu,sorties,autre,autres,autres sorties que celles-ci-dessous, nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.
+suspendu,sorties,autre,autres,autres sorties que celles-ci-dessous. nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.
 suspendu,sorties,ventefrancecrd,blles crd - dsa france,sortie taxables crd ou dsa/dsac france
 suspendu,sorties,exporttaxe,blles crd hors france,sorties taxables dsa/dsac hors france métropolitaine
 suspendu,sorties,export,blles susp. hors alsace,sorties en suspension hors france crd ou capsules neutres
