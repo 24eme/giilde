@@ -120,7 +120,7 @@ L’application de télédéclaration des contrats d’InterLoire";
 
         return $emails;
     }
-    public function composeMailValidation() {
+    public function composeMailValidation($transmission_douane = null) {
         $messages = array();
 
         $etablissement = EtablissementClient::getInstance()->find($this->drm->identifiant);
@@ -130,22 +130,40 @@ L’application de télédéclaration des contrats d’InterLoire";
         } else {
             $email = $contact->email;
         }
-        $transmission_douane = $etablissement->getSociete()->getMasterCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE);
+
+        if($transmission_douane === null) {
+            $transmission_douane = $etablissement->getSociete()->getMasterCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE);
+        }
 
         $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 
         $mess = "Bonjour,
 
-Votre DRM " . getFrPeriodeElision($this->drm->periode). " a été validée électroniquement sur le portail de télédeclaration ". sfConfig::get('app_teledeclaration_url')." .
+Votre DRM " . getFrPeriodeElision($this->drm->periode). " a été validée électroniquement sur le portail de télédeclaration ". sfConfig::get('app_teledeclaration_url')." .";
+
+if($transmission_douane) {
+    $mess .= "
+
+N'oubliez pas de valider votre DRM sur l'application CIEL de Prodouane.";
+}
+
+$mess .= "
 
 La version PDF de cette DRM est également disponible en pièce jointe dans ce mail.
 ";
-$mess .= (!$transmission_douane)? "
+
+if(!$transmission_douane && DRMConfiguration::getInstance()->getConfig("texte_mail_pas_transmission_douane")) {
+    $mess .= "
+".DRMConfiguration::getInstance()->getConfig("texte_mail_pas_transmission_douane")."
+    ";
+} elseif(!$transmission_douane) {
+    $mess .= "
 Dans l'attente de votre acceptation du contrat de service douane, la DRM doit être signée manuellement avant transmission par mail ou courrier postal à votre service local douanier.
-" : "
-";
+    ";
+}
+
 $mess .= "
-Pour toutes questions, veuillez contacter le service économie de votre interprofession (".$interpro.") : " . $email . " .
+Pour toutes questions, veuillez contacter votre interprofession (".$interpro.") : " . $email . " .
 
 --
 

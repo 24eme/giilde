@@ -51,7 +51,7 @@ EOF;
 
     protected function rebuildMouvements($drmId) {
         $drm = DRMClient::getInstance()->find($drmId);
-        if(!count($drm->mouvements)) {
+        if(!$drm->isValidee()) {
             return;
         }
         foreach ($drm->mouvements as $id => $list) {

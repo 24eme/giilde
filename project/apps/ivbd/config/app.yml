@@ -7,7 +7,7 @@ all:
     stats:
       statistiques:
         exportations:
-          libelle: "Exportations"
+          libelle: "Exports"
           index: "DRMMVT"
           hashkeysize: 1
           aggregation:
@@ -18,6 +18,15 @@ all:
               totaux_blanc:
                 sum_bucket:
                   buckets_path: "agg_line>blanc>agg_column"
+              totaux_blanc_sec:
+                  sum_bucket:
+                    buckets_path: "agg_line>blanc_sec>agg_column"
+              totaux_blanc_moelleux:
+                  sum_bucket:
+                    buckets_path: "agg_line>blanc_moelleux>agg_column"
+              totaux_blanc_doux:
+                  sum_bucket:
+                    buckets_path: "agg_line>blanc_doux>agg_column"
               totaux_rose:
                 sum_bucket:
                   buckets_path: "agg_line>rose>agg_column"
@@ -38,6 +47,33 @@ all:
                     filter:
                       term:
                         doc.mouvements.couleur: 'blanc'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  blanc_sec:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'blanc_sec'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  blanc_moelleux:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'blanc_moelleux'
+                    aggs:
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  blanc_doux:
+                    filter:
+                      term:
+                        doc.mouvements.couleur: 'blanc_doux'
                     aggs:
                       agg_column:
                         sum:
@@ -64,7 +100,7 @@ all:
                   total:
                     filter:
                       terms:
-                        doc.mouvements.couleur: ['blanc', 'rose', 'rouge']
+                        doc.mouvements.couleur: ['blanc', 'blanc_sec', 'blanc_moelleux', 'blanc_doux',  'rose', 'rouge']
                     aggs:
                       agg_column:
                         sum:
@@ -73,6 +109,7 @@ all:
         stocks:
           libelle: "Stocks"
           index: "DRMMVT"
+          hashkeysize: 2
           aggregation:
             filter:
               term:

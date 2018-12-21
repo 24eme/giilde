@@ -13,6 +13,7 @@ class DRMClient extends acCouchdbClient {
     const ETAPE_CRD = 'CRD';
     const ETAPE_ADMINISTRATION = 'ADMINISTRATION';
     const ETAPE_VALIDATION = 'VALIDATION';
+    const ETAPE_VALIDATION_EDI = 'VALIDATION_EDI';
     const VALIDE_STATUS_EN_COURS = '';
     const VALIDE_STATUS_VALIDEE = 'VALIDEE';
     const VALIDE_STATUS_VALIDEE_ENVOYEE = 'ENVOYEE';
@@ -46,7 +47,7 @@ class DRMClient extends acCouchdbClient {
 
     public static $types_libelles = array(DRM::DETAILS_KEY_SUSPENDU => 'Suspendu', DRM::DETAILS_KEY_ACQUITTE => 'Acquitté');
     public static $types_node_from_libelles = array(self::TYPE_DRM_SUSPENDU => DRM::DETAILS_KEY_SUSPENDU, self::TYPE_DRM_ACQUITTE => DRM::DETAILS_KEY_ACQUITTE);
-    public static $drm_etapes = array(self::ETAPE_CHOIX_PRODUITS, self::ETAPE_SAISIE_SUSPENDU, self::ETAPE_SAISIE_ACQUITTE, self::ETAPE_CRD, self::ETAPE_ADMINISTRATION, self::ETAPE_VALIDATION);
+    public static $drm_etapes = array(self::ETAPE_CHOIX_PRODUITS, self::ETAPE_SAISIE_SUSPENDU, self::ETAPE_SAISIE_ACQUITTE, self::ETAPE_CRD, self::ETAPE_ADMINISTRATION, self::ETAPE_VALIDATION, self::ETAPE_VALIDATION_EDI);
     public static $drm_crds_couleurs = array(self::DRM_CRD_VERT => 'Vert', self::DRM_CRD_BLEU => 'Bleu', self::DRM_CRD_LIEDEVIN => 'Lie de vin');
     public static $drm_crds_genre = array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'Vins tranquilles', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'Vins mousseux');
     public static $drm_max_favoris_by_types_mvt = array(self::DRM_TYPE_MVT_ENTREES => 3, self::DRM_TYPE_MVT_SORTIES => 6);
@@ -237,6 +238,21 @@ class DRMClient extends acCouchdbClient {
         $this->getHistorique($identifiant, $periode)->reload();
 
         return $this->createDocByPeriode($identifiant, $periode);
+    }
+
+    public function findOrCreateFromEdiByIdentifiantAndPeriode($identifiant, $periode, $hydrate = acCouchdbClient::HYDRATE_DOCUMENT) {
+        if ($obj = $this->findMasterByIdentifiantAndPeriode($identifiant, $periode, $hydrate)) {
+
+            return $obj;
+        }
+
+        $this->getHistorique($identifiant, $periode)->reload();
+
+        $drm = $this->createDocByPeriode($identifiant, $periode);
+        $drm->type_creation = DRMClient::DRM_CREATION_EDI;
+        $drm->etape = self::ETAPE_VALIDATION_EDI;
+        $drm->teledeclare = true;
+        return $drm;
     }
 
     public function listCampagneByEtablissementId($identifiant) {

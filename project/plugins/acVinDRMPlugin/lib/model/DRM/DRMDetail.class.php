@@ -217,7 +217,7 @@ class DRMDetail extends BaseDRMDetail {
             }
             $config = $this->getConfig()->get($hash . "/" . $key);
 
-            if ($config->facturable && !$this->getDocument()->isDrmNegoce()) {
+            if ($config->facturable && $this->getDocument()->isFacturable()) {
                 $this->total_facturable += $volume * $coefficient_facturable;
             }
         }
@@ -375,11 +375,11 @@ class DRMDetail extends BaseDRMDetail {
             $mouvement->cvo = $this->getCVOTaux();
             $mouvement->facturable = ($config->facturable && $mouvement->cvo > 0) ? 1 : 0;
 
-            if($this->getDocument()->isDrmNegoce()){
+            if(!$this->getDocument()->isFacturable()){
                 $mouvement->facturable = 0;
             }
 
-            if($this->getDocument()->isDrmNegoce() && $config->isFacturableNegociant()) {
+            if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant()) {
                 $mouvement->facturable = 1;
                 $mouvement->add('coefficient_facturation', 1);
             }
@@ -393,7 +393,7 @@ class DRMDetail extends BaseDRMDetail {
                 continue;
             }
 
-            if($this->getDocument()->isDrmNegoce() && $mouvement->facturable && DRMConfiguration::getInstance()->isMouvementDivisable() &&  $volume * $config->mouvement_coefficient > DRMConfiguration::getInstance()->getMouvementDivisableSeuil() ) {
+            if(!$this->getDocument()->isFacturable() && $mouvement->facturable && DRMConfiguration::getInstance()->isMouvementDivisable() &&  $volume * $config->mouvement_coefficient > DRMConfiguration::getInstance()->getMouvementDivisableSeuil() ) {
                 $nbDivision = DRMConfiguration::getInstance()->getMouvementDivisableNbMonth();
                 $date = new DateTime($this->getDocument()->getDate());
                 $volumePart = round($volume / $nbDivision, 4);

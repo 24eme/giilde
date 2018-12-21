@@ -36,7 +36,7 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 \fancyfoot[L]{<?php echo strftime("%e %B %Y", time()) ?>}
 \fancyhead[L]{\includegraphics[scale=0.6]{\LOGO}}
 \fancypagestyle{fstyle_0}{
-\fancyhead[C]{Volume exporté par pays et par couleur pour <?php if (count($appellations) > 1): ?>les appellations : \\ \textbf{<?php echo implode(', ', $appellations); ?>}<?php elseif (count($appellations) > 0): ?>l'appellation \textbf{<?php echo $appellations[0]; ?>}<?php else: ?>les vins du \textbf{Centre-Loire}<?php endif; ?><?php if ($periode): ?>\\Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
+\fancyhead[C]{Volume exporté par pays et par couleur pour <?php if (count($appellations) > 1): ?>les appellations : \\ \textbf{<?php echo implode(', ', $appellations); ?>}<?php elseif (count($appellations) > 0): ?>l'appellation \textbf{<?php echo $appellations[0]; ?>}<?php else: ?>les vins d'\textbf{IVBD}<?php endif; ?><?php if ($periode): ?>\\Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
 }
 
 \begin{document}
@@ -51,11 +51,11 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 \rowcolor{gray!40} & \multicolumn{3}{c |}{Blanc} & \multicolumn{3}{c |}{Rosé} & \multicolumn{3}{c |}{Rouge} & \multicolumn{3}{c |}{Total} \tabularnewline
 \rowcolor{gray!40} Pays & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} \tabularnewline \hline
 <?php else: ?>
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
+\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 \hline
-\rowcolor{gray!40} Pays & \multicolumn{1}{c |}{Blanc} & \multicolumn{1}{c |}{Rosé} & \multicolumn{1}{c |}{Rouge} & \multicolumn{1}{c |}{Total} \tabularnewline \hline
+\rowcolor{gray!40} Pays & \multicolumn{1}{c |}{Blanc} & \multicolumn{1}{c |}{Blanc Sec} & \multicolumn{1}{c |}{Blanc Moelleux} & \multicolumn{1}{c |}{Blanc Doux} & \multicolumn{1}{c |}{Rosé} & \multicolumn{1}{c |}{Rouge} & \multicolumn{1}{c |}{Total} \tabularnewline \hline
 <?php endif; ?>
-<?php 
+<?php
 	$i = ($compare)? 2 : 1;
 	foreach ($items as $item):
 		$item = sfOutputEscaper::unescape($item);
@@ -75,7 +75,7 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 <?php if ($compare): ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | }
 <?php else: ?>
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
+\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 <?php endif; ?>
 \hline
 <?php $i=0; else: $i++; endif; ?>
@@ -84,4 +84,4 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 \end{tabularx}
 \end{table}
 
-\end{document} 
+\end{document}

@@ -1,4 +1,5 @@
-<?php if (!$isTeledeclarationMode && $drm->exist('transmission_douane') && $drm->transmission_douane->coherente === false): ?>
+
+<?php if ((!$isTeledeclarationMode  || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())) && $drm->exist('transmission_douane') && $drm->transmission_douane->coherente === false): ?>
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">

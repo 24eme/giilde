@@ -25,36 +25,34 @@ class DAEExportCsv {
     public function exportOnlyDAEByEtablissementAndCampagne($identifiant, $campagne, $header = true) {
     	$csv = array();
     	$daes = DAEClient::getInstance()->findByIdentifiantCampagne($identifiant, $campagne, acCouchdbClient::HYDRATE_JSON)->getDatas();
-    	
+    	$i = 0;
     	foreach($daes as $dae) {
     		$line = $this->exportDAE($dae);
-    		$csv[$line] = $line;
+    		$csv[$line.';'.$i] = $line;
+    		$i++;
     	}
-    	krsort($csv);
+       krsort($csv);
     	return ($header)? $this->getHeaderEdi().implode("", $csv) : implode("", $csv);
     }
 
     public function exportByEtablissementAndCampagne($identifiant, $campagne) {
-        
     	$csv = array();
     	$daes = DAEClient::getInstance()->findByIdentifiantCampagne($identifiant, $campagne, acCouchdbClient::HYDRATE_JSON)->getDatas();
-    	 
+    	$i = 0;
     	foreach($daes as $dae) {
     		$line = $this->exportDAE($dae);
-    		$csv[$line] = $line;
+    		$csv[$line.';'.$i] = $line;
+    		$i++;
     	}
-    	
         $mouvements = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndCampagne($identifiant, $campagne);
         foreach($mouvements as $mouvement) {
             if(!$mouvement->vrac_numero) {
                 continue;
             }
             $line = $this->exportMouvementDRMContrat($mouvement);
-            $csv[$line] = $line;
+            $csv[$line.';'.$i] = $line;
         }
-
         krsort($csv);
-
         return $this->getHeaderEdi().implode("", $csv);
     }
 
@@ -70,13 +68,13 @@ class DAEExportCsv {
         $dae->declarant->famille.";".
         $dae->declarant->sous_famille.";".
         $cp.";".
-        ($produit->getCertification()->getKey() != 'DEFAUT' ? $produit->getCertification()->getKey() : null).";".
-        ($produit->getGenre()->getKey() != 'DEFAUT' ? $produit->getGenre()->getKey() : null).";".
-        ($produit->getAppellation()->getKey() != 'DEFAUT' ? $produit->getAppellation()->getKey() : null).";".
-        ($produit->getMention()->getKey() != 'DEFAUT' ? $produit->getMention()->getKey() : null).";".
-        ($produit->getLieu()->getKey() != 'DEFAUT' ? $produit->getLieu()->getKey() : null).";".
-        ($produit->getCouleur()->getKey() != 'DEFAUT' ? $produit->getCouleur()->getKey() : null).";".
-        ($produit->getKey() != 'DEFAUT' ? $produit->getKey() : null).";".
+        ($produit && $produit->getCertification()->getKey() != 'DEFAUT' ? $produit->getCertification()->getKey() : null).";".
+        ($produit && $produit->getGenre()->getKey() != 'DEFAUT' ? $produit->getGenre()->getKey() : null).";".
+        ($produit && $produit->getAppellation()->getKey() != 'DEFAUT' ? $produit->getAppellation()->getKey() : null).";".
+        ($produit && $produit->getMention()->getKey() != 'DEFAUT' ? $produit->getMention()->getKey() : null).";".
+        ($produit && $produit->getLieu()->getKey() != 'DEFAUT' ? $produit->getLieu()->getKey() : null).";".
+        ($produit && $produit->getCouleur()->getKey() != 'DEFAUT' ? $produit->getCouleur()->getKey() : null).";".
+        ($produit && $produit->getKey() != 'DEFAUT' ? $produit->getKey() : null).";".
         $complement.";".
         $dae->produit_libelle.";".
         $dae->label_libelle.";".

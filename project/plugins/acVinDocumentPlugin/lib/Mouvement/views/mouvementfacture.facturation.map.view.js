@@ -14,7 +14,7 @@ function(doc) {
       for(identifiant in doc.mouvements) {
           for(key in doc.mouvements[identifiant]) {
               var mouv = doc.mouvements[identifiant][key];
-              if(mouv.facture == 1 || mouv.facturable != 1) {
+              if(mouv.facture == 1) {
                   continue;
               }
               if (mouv.region) {

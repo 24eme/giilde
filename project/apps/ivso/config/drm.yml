@@ -13,4 +13,7 @@ all:
       aggregate_edi: [ ]
       declassement_igp: true
       mouvement_divisable_seuil: 0
+      pdf_font_size: "8pt"
       xml_transfert_echec: "Le transfert de votre DRM a échoué:\n\nDESCRIPTION_ERREUR\n\nNous vous remercions de prendre contact avec l'IVSO soit par courriel à l'adresse assistance@france-sudouest.com soit par téléphone au numéro 05 61 73 87 06"
+      warning_produit:
+        - { regex: "/(appellations\/ARM\/mentions|appellations\/VDE\/mentions|appellations\/VDEBA\/mentions|appellations\/VDEAT\/mentions|appellations\/VDEHA\/mentions|appellations\/VDEA\/mentions)/",message: "<li style='padding-bottom:10px'>Pour les Armagnac conditionnés, les mouvements d'entrées et de sorties doivent être renseignés en HL (et non en HLAP). Dans ce cas, indiquer le Taux d'alcool volumique (TAV) dans le champs \"Libellé libre\".</li><li style='padding-bottom:10px'>Pour les Armagnac non conditionnés, les mouvements d'entrées et de sorties peuvent être renseignés en HLAP en choisissant le produit \"MATIÈRES PREMIÈRES SPIRITUEUX\".</li>" }

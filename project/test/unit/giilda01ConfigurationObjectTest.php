@@ -29,12 +29,12 @@ if($hasCepagesAutorises){
 $detail = $configuration->declaration->details->sorties->add('test');
 $detail->facturable = 1;
 $t->is($detail->isFacturable(), true, "La sortie est facturable pour les viticulteurs");
-$t->is($detail->isFacturableNegociant(), false, "La sortie n'est pas facturable pour les négociants");
+$t->is($detail->isFacturableInverseNegociant(), false, "La sortie n'est pas facturable pour les négociants");
 $detail = $configuration->declaration->details->sorties->remove('test');
 
 $detail = $configuration->declaration->details->entrees->add('test_nego');
 $detail->facturable = 0;
 $detail->add('facturable_negociant', 1);
 $t->is($detail->isFacturable(), false, "L'entrée n'est pas facturable pour les viticulteurs");
-$t->is($detail->isFacturableNegociant(), true, "L'entrée est pas facturable pour les négociants");
+$t->is($detail->isFacturableInverseNegociant(), true, "L'entrée est pas facturable pour les négociants");
 $configuration->declaration->details->entrees->remove('test_nego');

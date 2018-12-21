@@ -111,9 +111,11 @@ class couch {
 	*/
 	public static function parseRawResponse($raw_data, $json_as_array = FALSE) {
 		if ( !strlen($raw_data) ) throw new InvalidArgumentException("no data to parse");
-		while ( !substr_compare($raw_data, "HTTP/1.1 100 Continue\r\n\r\n", 0, 25) ) {
-			$raw_data = substr($raw_data, 25);
-		}
+
+		while (strpos($raw_data, "HTTP/1.1 100 Continue\r\n") !== false) {
+			$raw_data = substr($raw_data, strpos($raw_data, "\r\n\r\n")+4);
+        }
+
 		$response = array('body'=>null);
 		list($headers, $body) = explode("\r\n\r\n", $raw_data,2);
 // 		echo "Headers : $headers , Body : $body\n";

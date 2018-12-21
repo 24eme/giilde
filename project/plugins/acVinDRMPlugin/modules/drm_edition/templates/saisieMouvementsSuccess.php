@@ -6,7 +6,9 @@
 <?php include_partial('drm/breadcrumb', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode)); ?>
 
 <section id="principal" class="drm">
-
+  <?php if($isTeledeclarationMode && DRMConfiguration::getInstance()->hasWarningForProduit()): ?>
+    <?php include_partial('drm_edition/popupWarningsMessagesProduits', array('produits' => $details)); ?>
+  <?php endif; ?>
     <?php include_partial('drm/etapes', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode, 'etape_courante' => DRMClient::ETAPE_SAISIE."_".$detailsKey)); ?>
     <?php include_partial('drm/controlMessage'); ?>
 

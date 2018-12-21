@@ -1,0 +1,10 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+drm_creation_edi:
+  url:   /
+  class: sfRequestRoute
+  param: { module: edi, action: drmCreationEdi}
+  requirements:
+    sf_method: [get,post]

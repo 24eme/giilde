@@ -8,7 +8,7 @@ $hasCVONegociant = false;
 foreach ($conf->declaration->filter('details') as $configDetails) {
     foreach ($configDetails as $details) {
         foreach($conf->declaration->details->getDetailsSorted($details) as $detail) {
-            if($detail->isFacturableNegociant()) {
+            if($detail->isFacturableInverseNegociant()) {
                 $hasCVONegociant = true;
             }
         }
@@ -26,14 +26,19 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($nego->identifiant) as $k =>
 }
 
 if(!$hasCVONegociant) {
-    $t = new lime_test(2);
+    $t = new lime_test(3);
 
     $t->comment("DRM Négociant non facture");
 
     $drm = DRMClient::getInstance()->createDoc($nego->identifiant, $periode, true);
     $drm->save();
 
-    $t->ok($drm->isDRMNegoce(), "C'est une DRM Négoce");
+    $t->ok($drm->isDRMNegociant(), "C'est une DRM Négoce");
+    if($application == "civa") {
+        $t->ok($drm->isFacturable(), "C'est une DRM facturable");
+    } else {
+        $t->ok(!$drm->isFacturable(), "C'est une DRM non facturable");
+    }
 
     $details = $drm->addProduit($produit_hash, 'details');
     $details->entrees->recolte = 100;
@@ -45,19 +50,24 @@ if(!$hasCVONegociant) {
 
     $recapCvos = DRMClient::getInstance()->getRecapCvos($drm->identifiant, $drm->periode);
 
-    $t->is(round($recapCvos["TOTAL"]->totalVolumeDroitsCvo, 4), 0, "Aucun volume n'est facturable");
+    if($application == "civa") {
+        $t->is(round($recapCvos["TOTAL"]->totalVolumeDroitsCvo, 4), 100, "Volume facturation à 100");
+    } else {
+        $t->is(round($recapCvos["TOTAL"]->totalVolumeDroitsCvo, 4), 0, "Aucun volume n'est facturable");
+    }
 
     exit;
 }
 
-$t = new lime_test(9 + 2*12);
+$t = new lime_test(10 + 2*12);
 
 $t->comment("DRM Négociant avec récolte");
 
 $drm = DRMClient::getInstance()->createDoc($nego->identifiant, $periode, true);
 $drm->save();
 
-$t->ok($drm->isDRMNegoce(), "C'est une DRM Négoce");
+$t->ok($drm->isDRMNegociant(), "C'est une DRM Négoce");
+$t->ok(!$drm->isFacturable(), "C'est une DRM non facturable");
 
 $details = $drm->addProduit($produit_hash, 'details');
 $details->entrees->recolte = 100;

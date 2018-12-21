@@ -9,7 +9,7 @@ $hasCVONegociant = false;
 foreach ($conf->declaration->filter('details') as $configDetails) {
     foreach ($configDetails as $details) {
         foreach($conf->declaration->details->getDetailsSorted($details) as $detail) {
-            if($detail->isFacturableNegociant()) {
+            if($detail->isFacturableInverseNegociant()) {
                 $hasCVONegociant = true;
             }
         }

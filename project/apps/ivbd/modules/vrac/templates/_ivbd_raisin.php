@@ -129,7 +129,7 @@ if ($vrac->mandataire_exist) {
 \begin{tabularx}{\textwidth}{|X|}
 \hline
 ~ \\
-		 \textbf{CACHET DE L'IVBD} \\ ~ \\ ~ \\ ~ \\ ~ \\ ~ \\ ~ \\ ~ \\ N° \begin{Large}
+		 \includegraphics[scale=0.7]{<?php echo sfConfig::get('sf_web_dir'); ?>/images/cachet_ivbd.png} \\ N° \begin{Large}
 	  \CONTRATNUMARCHIVE
 \end{Large} ~~~~~~~~~~~~~~~~~~~~~~~ \CONTRATDATEENTETE \\
 \hline

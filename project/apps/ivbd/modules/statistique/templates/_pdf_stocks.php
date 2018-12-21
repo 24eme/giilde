@@ -2,15 +2,11 @@
 setlocale(LC_TIME, 'fr_FR');
 $items = explode(PHP_EOL, html_entity_decode($csv, ENT_QUOTES));
 array_shift($items);
-$headers = array();
 $maxTableRowsPerPage = 30;
 $nbPage = 0;
-foreach ($items as $item) {
-$values = explode(';', $item);
-$appellation = $values[0];
-if (!$appellation || preg_match('/total/i', $appellation)) { continue; }
-$headers[$appellation] = $appellation;
-}
+$compare = (isset($options['compare']))? $options['compare'] : false;
+$appellations = (isset($options['appellations']) && count($options['appellations']))? $options['appellations'] : false;
+
 ?>
 \documentclass[a4paper, landscape, 10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -38,62 +34,85 @@ $headers[$appellation] = $appellation;
 \fancyfoot[R]{\thepage~/~\pageref{LastPage}}
 \fancyfoot[L]{<?php echo strftime("%e %B %Y", time()) ?>}
 \fancyhead[L]{\includegraphics[scale=0.6]{\LOGO}}
+\fancypagestyle{fstyle}{
+	<?php if($appellations): ?>
 
-<?php $i=0; foreach ($headers as $header): ?>
-\fancypagestyle{fstyle_<?php echo $i ?>}{
-\fancyhead[C]{Stocks des articles pour l'appellation \textbf{<?php echo $header ?>}}
+		\fancyhead[R]{Stocks des articles pour les appellations
+		<?php foreach ($appellations as $key => $appellation): ?>
+			\textbf{<?php echo $appellation ?><?php echo ($key < count($appellations)-1)? ",~" :"";?>}
+		<?php endforeach; ?>}
+<?php else: ?>
+		\vspace{1cm}
+		\fancyhead[R]{Stocks des articles pour toutes les appellations}
+<?php endif; ?>
 }
-<?php $i++; endforeach; ?>
 
 \begin{document}
 
-<?php $fstyle = 0; ?>
-
-\pagestyle{fstyle_<?php echo $fstyle ?>}
+\pagestyle{fstyle}
 
 \begin{table}[ht!]
+<?php if ($compare): ?>
+\begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth}| >{\raggedleft}p{0.08\linewidth} | }
+\hline
+\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Stock initial N-1}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Mouvements N-1}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} & \multicolumn{1}{c |}{\textbf{Stock Fin N-1}} \tabularnewline \hline
+<?php else : ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 \hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{Catégorie} & \multicolumn{1}{c |}{Stock initial} & \multicolumn{1}{c |}{Stock actuel} & \multicolumn{1}{c |}{Total mouvement} \tabularnewline \hline
+\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} \tabularnewline \hline
+<?php endif; ?>
 <?php
 	$i = 1;
 	$page = null;
 	foreach ($items as $item):
 		$values = explode(';', $item);
-		if (!$values[1]) {
+		if (!$values[0]) {
 			continue;
 		}
 		$isTotal = preg_match('/total/i', $item);
 		$current = $values[0];
-		if (!$page) {
-			$page = $values[0];
-		}
-		array_shift($values);
-?>
-<?php
-	if ($i == $maxTableRowsPerPage || ($page != $current && !preg_match('/total/i', $current))):
-	$newSection = false;
-	if ($page != $current) {
-		$fstyle++;
-		$page = $current;
-		$newSection = true;
-	}
+		$newSection = false;
+	if ($i >= ($maxTableRowsPerPage - 3) && ($page != $current) && ($page!==null)):
+
+			$page = $current;
+			$newSection = true;
 ?>
 \end{tabularx}
 \end{table}
 \clearpage
-\pagestyle{fstyle_<?php echo $fstyle ?>}
+\pagestyle{fstyle}
 \begin{table}[ht!]
-\begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
-<?php if ($newSection): ?>
-\hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{Catégorie} & \multicolumn{1}{c |}{Stock initial} & \multicolumn{1}{c |}{Stock actuel} & \multicolumn{1}{c |}{Total mouvement} \tabularnewline
+<?php if ($compare): ?>
+\begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth}| >{\raggedleft}p{0.08\linewidth} | }
+<?php else : ?>
+	\begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 <?php endif; ?>
-\hline
-<?php $i=($newSection)? 1 : 0; else: $i++;endif; ?>
-<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if (preg_match('/total/i', $current)) {unset($values[1]); echo 'TOTAL général & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
+	<?php if ($newSection): ?>
+	\hline
+	<?php if ($compare): ?>
+		\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Stock initial N-1}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Mouvements N-1}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} & \multicolumn{1}{c |}{\textbf{Stock Fin N-1}} \tabularnewline \hline
+	<?php else : ?>
+		\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} \tabularnewline
+	<?php endif; ?>
+	<?php endif; ?>
+	\hline
+<?php $i=($newSection)? 1 : 0;
+else:
+$i++;
+$page = $current;
+endif; ?>
+<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?>
+<?php
+foreach ($values as $key => $value) {
+	if ($isTotal): ?> \textbf{<?php endif;
+		echo $value;
+	if ($isTotal): ?>}<?php endif;
+	if($key < count($values) -1 ) echo "&";
+}
+
+?> \tabularnewline \hline
 <?php  endforeach;?>
 \end{tabularx}
 \end{table}
 
-\end{document} 
+\end{document}

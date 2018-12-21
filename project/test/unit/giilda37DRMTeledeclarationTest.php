@@ -8,7 +8,7 @@ sfConfig::set('app_teledeclaration_contact_contrat', array());
 sfConfig::set('app_mail_from_email', "test_from_mail@mail.org");
 sfConfig::set('app_teledeclaration_interpro', "Interpro");
 
-$t = new lime_test(8);
+$t = new lime_test(9);
 
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_teledeclaration')->getEtablissement();
 $periode = date('Ym');
@@ -50,14 +50,21 @@ $mailManager = new DRMEmailManager(sfContext::getInstance()->getMailer());
 $drm->email_transmission = "email_transmission@mail.org";
 $mailManager->setDRM($drm);
 
-$messages = $mailManager->composeMailValidation();
+$messages = $mailManager->composeMailValidation(true);
 
 $t->is(count($messages), 2, "L'envoi compte 2 messages");
 
 @mkdir(sfConfig::get('sf_test_dir')."/output");
-file_put_contents(sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration.eml", $messages[0]);
+file_put_contents(sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration_douane_transmission_douane.eml", $messages[0]);
 $t->ok(strpos($messages[0], " test_from_mail@ma") !== false, "Les infos de contact dans le mail sont bonnes");
 
-$t->ok($messages[0] instanceof Swift_Mime_SimpleMessage, "Mail généré : ".sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration.eml");
+$t->ok($messages[0] instanceof Swift_Mime_SimpleMessage, "Mail généré : ".sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration_douane_transmission_douane.eml");
 
 $t->is($mailManager->sendMailValidation(false), array($viti->getEmailTeledeclaration(), $drm->email_transmission), "Les retours des email sont ok");
+
+$messages = $mailManager->composeMailValidation(false);
+
+@mkdir(sfConfig::get('sf_test_dir')."/output");
+file_put_contents(sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration.eml", $messages[0]);
+
+$t->ok($messages[0] instanceof Swift_Mime_SimpleMessage, "Mail généré : ".sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration.eml");

@@ -2,3 +2,4 @@ all:
   configuration:
     statistique:
       actif: true
+      aggregat_appellation: false

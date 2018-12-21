@@ -150,4 +150,42 @@ class DRMConfiguration {
         return $this->configuration['observations_auto'];
     }
 
+    public function hasWarningForProduit() {
+        return $this->configuration['warning_produit'];
+    }
+
+    public function getWarningsMessagesForProduits($produits) {
+      $messages = array();
+      if(!$this->hasWarningForProduit()){
+        return $messages;
+      }
+      foreach ($this->hasWarningForProduit() as $key => $warnings) {
+        foreach ($produits as $hash => $p) {
+          if(preg_match($warnings["regex"],$hash)){
+            $messages[] = $warnings["message"];
+          }
+        }
+      }
+      return array_unique($messages);
+    }
+
+    public function isMouvementVideNeant() {
+
+        return $this->configuration['mouvement_vide_neant'];
+    }
+
+    public function isNegociantFacturable() {
+
+        return $this->configuration['negociant_facturable'];
+    }
+
+    public function getConfig($name) {
+        if(!isset($this->configuration[$name])) {
+
+            return null;
+        }
+
+        return $this->configuration[$name];
+    }
+
 }

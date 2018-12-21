@@ -69,6 +69,7 @@ class drmActions extends drmGeneriqueActions {
                 return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
 
             case DRMClient::ETAPE_VALIDATION:
+            case DRMClient::ETAPE_VALIDATION_EDI:
                 return $this->redirect('drm_validation', array('identifiant' => $drm->identifiant, 'periode_version' => $drm->getPeriodeAndVersion()));
         }
 

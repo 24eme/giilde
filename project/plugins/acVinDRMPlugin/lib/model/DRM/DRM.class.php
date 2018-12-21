@@ -1071,8 +1071,17 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
     }
 
     public function getMouvementsCalcule($teledeclaration_drm = false) {
+        $mouvements = $this->declaration->getMouvements($teledeclaration_drm);
 
-        return $this->declaration->getMouvements($teledeclaration_drm);
+        if(DRMConfiguration::getInstance()->isMouvementVideNeant() && (!isset($mouvements[$this->getIdentifiant()]) || !count($mouvements[$this->getIdentifiant()]))) {
+            $mouvement = DRMMouvement::freeInstance($this->getDocument());
+            $mouvement->facture = 0;
+            $mouvement->facturable = 0;
+            $mouvement->region = $this->getDocument()->region;
+            $mouvements[$this->getIdentifiant()][$mouvement->getMD5Key()] = $mouvement;
+        }
+
+        return $mouvements;
     }
 
     public function getMouvementsCalculeByIdentifiant($identifiant, $teledeclaration_drm = false) {
@@ -1123,9 +1132,19 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         return $this->getEtablissement();
     }
 
+    public function isFacturable() {
+        if($this->isDRMNegociant() && !DRMConfiguration::getInstance()->isNegociantFacturable()) {
+
+            return false;
+        }
+
+
+        return true;
+    }
+
     public function isDRMNegociant() {
 
-           return ($this->getFamille() == EtablissementFamilles::FAMILLE_NEGOCIANT);
+        return ($this->getFamille() == EtablissementFamilles::FAMILLE_NEGOCIANT);
     }
 
     public function getFamille() {
@@ -1582,6 +1601,7 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
       return true;
     }
 
+
     public function setPaiementDouaneFrequence($p){
       $this->societe->paiement_douane_frequence = $p;
       $soc = $this->getEtablissement()->getSociete();
@@ -1593,6 +1613,11 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
 
     /** Fin Droit de circulation douane */
 
+    public function isCreationEdi(){
+      return $this->etape == DRMClient::ETAPE_VALIDATION_EDI;
+    }
+
+    
     /*
     * Observations
     */
@@ -1702,11 +1727,6 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
             $libelles_detail_ligne->remove($removeNode);
         }
         return $libelles_detail_ligne;
-    }
-
-    public function isDrmNegoce(){
-
-        return $this->isDRMNegociant();
     }
 
     public function isCreationAuto(){

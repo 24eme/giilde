@@ -1,167 +1,202 @@
-certification,genre,appellation,mention,lieu,couleur,cepage,libelle complet
-IGP,Tranquille,Comté Tolosan,,,Rosé,,IGP Comté Tolosan Rosé
-IGP,Tranquille,Comté Tolosan,,,Rouge,,IGP Comté Tolosan Rouge
-IGP,Tranquille,Comté Tolosan,,,Blanc sec,,IGP Comté Tolosan Blanc sec
-IGP,Tranquille,Comté Tolosan,,,Blanc doux,,IGP Comté Tolosan Blanc doux
-IGP,Tranquille,Comté Tolosan,Primeur,,Rosé,,IGP Comté Tolosan Primeur Rosé
-IGP,Tranquille,Comté Tolosan,Primeur,,Rouge,,IGP Comté Tolosan Primeur Rouge
-IGP,Tranquille,Comté Tolosan,Primeur,,Blanc sec,,IGP Comté Tolosan Primeur Blanc sec
-IGP,Tranquille,Côte du Lot,,,Rosé,,IGP Côte du Lot Rosé
-IGP,Tranquille,Côte du Lot,,,Rouge,,IGP Côte du Lot Rouge
-IGP,Tranquille,Côte du Lot,,,Blanc sec,,IGP Côte du Lot Blanc sec
-IGP,Tranquille,Côte du Lot,Primeur,,Rosé,,IGP Côte du Lot Primeur Rosé
-IGP,Tranquille,Côte du Lot,Primeur,,Rouge,,IGP Côte du Lot Primeur Rouge
-IGP,Tranquille,Côte du Lot,Primeur,,Blanc sec,,IGP Côte du Lot Primeur Blanc sec
-IGP,Tranquille,Côtes de Gascogne,,,Blanc sec,,IGP Côtes de Gascogne Blanc sec
-IGP,Tranquille,Côtes de Gascogne,,,Blanc doux,,IGP Côtes de Gascogne Blanc doux
-IGP,Tranquille,Côtes de Gascogne,,,Rosé,,IGP Côtes de Gascogne Rosé
-IGP,Tranquille,Côtes de Gascogne,,,Rouge,,IGP Côtes de Gascogne Rouge
-IGP,Tranquille,Côtes de Gascogne,Primeur,,Rosé,,IGP Côtes de Gascogne Primeur Rosé
-IGP,Tranquille,Côtes de Gascogne,Primeur,,Rouge,,IGP Côtes de Gascogne Primeur Rouge
-IGP,Tranquille,Côtes de Gascogne,Primeur,,Blanc sec,,IGP Côtes de Gascogne Primeur Blanc sec
-IGP,Tranquille,Côtes du Tarn,,,Surmûris Blanc,,IGP Côtes du Tarn Surmûris Blanc
-IGP,Tranquille,Côtes du Tarn,,,Rosé,,IGP Côtes du Tarn Rosé
-IGP,Tranquille,Côtes du Tarn,,,Rouge,,IGP Côtes du Tarn Rouge
-IGP,Tranquille,Côtes du Tarn,,,Blanc sec,,IGP Côtes du Tarn Blanc sec
-IGP,Tranquille,Côtes du Tarn,Primeur,,Blanc doux,,IGP Côtes du Tarn Primeur Blanc doux
-IGP,Tranquille,Côtes du Tarn,Primeur,,Rosé,,IGP Côtes du Tarn Primeur Rosé
-IGP,Tranquille,Côtes du Tarn,Primeur,,Rouge,,IGP Côtes du Tarn Primeur Rouge
-IGP,Tranquille,Côtes du Tarn,Primeur,,Blanc sec,,IGP Côtes du Tarn Primeur Blanc sec
-IGP,Tranquille,Lavilledieu,,,Rosé,,IGP Lavilledieu Rosé
-IGP,Tranquille,Lavilledieu,,,Rouge,,IGP Lavilledieu Rouge
-IGP,Tranquille,Coteaux de Glanes,,,Blanc,,IGP Coteaux de Glanes Blanc
-IGP,Tranquille,Coteaux de Glanes,,,Rosé,,IGP Coteaux de Glanes Rosé
-IGP,Tranquille,Coteaux de Glanes,,,Rouge,,IGP Coteaux de Glanes Rouge
-IGP,Tranquille,Coteaux de Glanes,Primeur,,Blanc,,IGP Coteaux de Glanes Primeur Blanc
-IGP,Tranquille,Coteaux de Glanes,Primeur,,Rosé,,IGP Coteaux de Glanes Primeur Rosé
-IGP,Tranquille,Coteaux de Glanes,Primeur,,Rouge,,IGP Coteaux de Glanes Primeur Rouge
-IGP,Tranquille,Aveyron,,,Rosé,,IGP Aveyron Rosé
-IGP,Tranquille,Aveyron,,,Rouge,,IGP Aveyron Rouge
-IGP,Tranquille,Aveyron,,,Blanc sec,,IGP Aveyron Blanc sec
-IGP,Tranquille,Aveyron,Primeur,,Rosé,,IGP Aveyron Primeur Rosé
-IGP,Tranquille,Aveyron,Primeur,,Rouge,,IGP Aveyron Primeur Rouge
-IGP,Tranquille,Aveyron,Primeur,,Blanc sec,,IGP Aveyron Primeur Blanc sec
-IGP,Tranquille,Ariége,,,Rosé,,IGP Ariége Rosé
-IGP,Tranquille,Ariége,,,Rouge,,IGP Ariége Rouge
-IGP,Tranquille,Ariége,,,Blanc sec,,IGP Ariége Blanc sec
-IGP,Tranquille,Agenais,,,Rosé,,IGP Agenais Rosé
-IGP,Tranquille,Agenais,,,Rouge,,IGP Agenais Rouge
-IGP,Tranquille,Agenais,,,Blanc sec,,IGP Agenais Blanc sec
-IGP,Tranquille,Agenais,Primeur,,Rosé,,IGP Agenais Primeur Rosé
-IGP,Tranquille,Agenais,Primeur,,Rouge,,IGP Agenais Primeur Rouge
-IGP,Tranquille,Agenais,Primeur,,Blanc sec,,IGP Agenais Primeur Blanc sec
-IGP,Tranquille,Thézac-Perricard,,,Blanc,,IGP Thézac-Perricard Blanc
-IGP,Tranquille,Thézac-Perricard,,,Rosé,,IGP Thézac-Perricard Rosé
-IGP,Tranquille,Thézac-Perricard,,,Rouge,,IGP Thézac-Perricard Rouge
-IGP,Tranquille,Thézac-Perricard,Primeur,,Blanc,,IGP Thézac-Perricard Primeur Blanc
-IGP,Tranquille,Thézac-Perricard,Primeur,,Rosé,,IGP Thézac-Perricard Primeur Rosé
-IGP,Tranquille,Thézac-Perricard,Primeur,,Rouge,,IGP Thézac-Perricard Primeur Rouge
-IGP,Tranquille,Landes,,,Blanc doux,,IGP Landes Blanc doux
-IGP,Tranquille,Landes,,,Rosé,,IGP Landes Rosé
-IGP,Tranquille,Landes,,,Rouge,,IGP Landes Rouge
-IGP,Tranquille,Landes,,,Blanc sec,,IGP Landes Blanc sec
-IGP,Tranquille,Landes,Primeur,,Blanc doux,,IGP Landes Primeur Blanc doux
-IGP,Tranquille,Landes,Primeur,,Rosé,,IGP Landes Primeur Rosé
-IGP,Tranquille,Landes,Primeur,,Rouge,,IGP Landes Primeur Rouge
-IGP,Tranquille,Landes,Primeur,,Blanc sec,,IGP Landes Primeur Blanc sec
-IGP,Tranquille,Gers,,,Blanc doux,,IGP Gers Blanc doux
-IGP,Tranquille,Gers,,,Blanc sec,,IGP Gers Blanc sec
-IGP,Tranquille,Gers,,,Rosé,,IGP Gers Rosé
-IGP,Tranquille,Gers,,,Rouge,,IGP Gers Rouge
-IGP,Tranquille,Gers,Primeur,,Blanc doux,,IGP Gers Primeur Blanc doux
-IGP,Tranquille,,,,Blanc sec,,IGP Blanc sec
-IGP,Tranquille,,,,Rosé,,IGP Rosé
-IGP,Tranquille,,,,Rouge,,IGP Rouge
-IGP,Mousseux,Côte du Lot,,,Rosé,,IGP Côte du Lot Rosé
-IGP,Mousseux,Côte du Lot,,,Blanc,,IGP Côte du Lot Blanc
-AOP,Tranquille,Brulhois,,,Rosé,,AOP Brulhois Rosé
-AOP,Tranquille,Brulhois,,,Rouge,,AOP Brulhois Rouge
-AOP,Tranquille,Gaillac,,,Rosé,,AOP Gaillac Rosé
-AOP,Tranquille,Gaillac,,,Rouge,,AOP Gaillac Rouge
-AOP,Tranquille,Gaillac,,,Blanc sec,,AOP Gaillac Blanc sec
-AOP,Tranquille,Gaillac,,,Blanc doux,,AOP Gaillac Blanc doux
-AOP,Tranquille,Gaillac,Vendanges tardives,,Blanc doux,,AOP Gaillac Blanc doux Vendanges tardives
-AOP,Tranquille,Gaillac,Premières côtes,,Blanc sec,,AOP Gaillac Premières côtes Blanc sec
-AOP,Tranquille,Gaillac,Primeur,,Rouge,,AOP Gaillac Primeur Rouge
-AOP,Tranquille,Gaillac,Primeur,,Blanc sec,,AOP Gaillac Primeur Blanc sec
-AOP,Tranquille,Fronton,,,Rosé,,AOP Fronton Rosé
-AOP,Tranquille,Fronton,,,Rouge,,AOP Fronton Rouge
-AOP,Tranquille,Cahors,,,Rouge,,AOP Cahors Rouge
-AOP,Tranquille,Coteaux du Quercy,,,Rosé,,AOP Coteaux du Quercy Rosé
-AOP,Tranquille,Coteaux du Quercy,,,Rouge,,AOP Coteaux du Quercy Rouge
-AOP,Tranquille,Côtes de Millau,,,Rosé,,AOP Côtes de Millau Rosé
-AOP,Tranquille,Côtes de Millau,,,Rouge,,AOP Côtes de Millau Rouge
-AOP,Tranquille,Côtes de Millau,,,Blanc sec,,AOP Côtes de Millau Blanc sec
-AOP,Tranquille,Entraygues - Le Fel,,,Rosé,,AOP Entraygues - Le Fel Rosé
-AOP,Tranquille,Entraygues - Le Fel,,,Rouge,,AOP Entraygues - Le Fel Rouge
-AOP,Tranquille,Entraygues - Le Fel,,,Blanc sec,,AOP Entraygues - Le Fel Blanc sec
-AOP,Tranquille,Estaing,,,Rosé,,AOP Estaing Rosé
-AOP,Tranquille,Estaing,,,Rouge,,AOP Estaing Rouge
-AOP,Tranquille,Estaing,,,Blanc sec,,AOP Estaing Blanc sec
-AOP,Tranquille,Irouleguy,,,Blanc sec,,AOP Irouleguy Blanc sec
-AOP,Tranquille,Irouleguy,,,Rosé,,AOP Irouleguy Rosé
-AOP,Tranquille,Irouleguy,,,Rouge,,AOP Irouleguy Rouge
-AOP,Tranquille,Madiran,,,Rouge,,AOP Madiran Rouge
-AOP,Tranquille,Béarn,,,Rosé,,AOP Béarn Rosé
-AOP,Tranquille,Béarn,,,Rouge,,AOP Béarn Rouge
-AOP,Tranquille,Béarn,,,Blanc sec,,AOP Béarn Blanc sec
-AOP,Tranquille,Marcillac,,,Rosé,,AOP Marcillac Rosé
-AOP,Tranquille,Marcillac,,,Rouge,,AOP Marcillac Rouge
-AOP,Tranquille,Pacherenc du Vic Bilh,,,Blanc moelleux,,AOP Pacherenc du Vic Bilh Blanc moelleux
-AOP,Tranquille,Pacherenc du Vic Bilh,,,Blanc sec,,AOP Pacherenc du Vic Bilh Blanc sec
-AOP,Tranquille,Saint-Mont,,,Rosé,,AOP Saint-Mont Rosé
-AOP,Tranquille,Saint-Mont,,,Rouge,,AOP Saint-Mont Rouge
-AOP,Tranquille,Saint-Mont,,,Blanc sec,,AOP Saint-Mont Blanc sec
-AOP,Tranquille,Saint-Sardos,,,Rosé,,AOP Saint-Sardos Rosé
-AOP,Tranquille,Saint-Sardos,,,Rouge,,AOP Saint-Sardos Rouge
-AOP,Tranquille,Tursan,,,Rosé,,AOP Tursan Rosé
-AOP,Tranquille,Tursan,,,Rouge,,AOP Tursan Rouge
-AOP,Tranquille,Tursan,,,Blanc sec,,AOP Tursan Blanc sec
-AOP,Tranquille,Jurançon,,,Blanc sec,,AOP Jurançon Blanc sec
-AOP,Tranquille,Jurançon,,,Blanc moelleux,,AOP Jurançon Blanc moelleux
-AOP,Tranquille,Côtes du Marmandais,,,Rouge,,AOP Côtes du Marmandais Rouge
-AOP,Tranquille,Côtes du Marmandais,,,Blanc sec,,AOP Côtes du Marmandais Blanc sec
-AOP,Tranquille,Côtes du Marmandais,,,Rosé,,AOP Côtes du Marmandais Rosé
-AOP,Mousseux,Gaillac,,,Blanc,,AOP Gaillac Mousseux
-AOP,Mousseux,Gaillac,Méthode ancestrale,,Blanc,,AOP Gaillac Mousseux Méthode ancestrale
-AOP,Mousseux,Gaillac,Méthode ancestrale,,Doux,,AOP Gaillac Mousseux Méthode ancestrale Doux
-Vin sans IG,Tranquille,,,,Rosé,,Vin sans IG Rosé
-Vin sans IG,Tranquille,,,,Rouge,,Vin sans IG Rouge
-Vin sans IG,Tranquille,,,,Blanc,,Vin sans IG Blanc
-Vin sans IG,Tranquille,,,,Blanc doux,,Vin sans IG Blanc doux
-Vin sans IG,Mousseux,,,,Rouge,,Vin sans IG Rouge Mousseux
-Vin sans IG,Mousseux,,,,Blanc,,Vin sans IG Blanc Mousseux
-Vin sans IG,Mousseux,,,,Rosé,,Vin sans IG Rosé Mousseux
-VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Blanc,,Vin de Liqueur AOP (Sup 18°) Blanc
-VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rosé,,Vin de Liqueur AOP (Sup 18°) Rosé
-VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rouge,,Vin de Liqueur AOP (Sup 18°) Rouge
-VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Blanc,,Vin de Liqueur AOP (Inf 18°) Blanc
-VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rosé,,Vin de Liqueur AOP (Inf 18°) Rosé
-VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rouge,,Vin de Liqueur AOP (Inf 18°) Rouge
-VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Blanc,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Blanc
-VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rosé,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rosé
-VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rouge
-VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,Blanc,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Blanc
-VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,Rosé,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rosé
-VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rouge
-VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°)
-VDN-VDL,,Floc de Gascogne,,,Rosé,,Floc de Gascogne Rosé
-VDN-VDL,,Floc de Gascogne,,,Blanc,,Floc de Gascogne Blanc
-Alcools,,Alcools supérieur 18° (autres que Rhum),,,,,Alcools supérieur 18° (autres que Rhum)
-Alcools,,Alcool inférieur 18° (autres que Rhum),,,,,Alcool inférieur 18° (autres que Rhum)
-Alcools,,PREMIX Alcool inférieur 18°,,,,,PREMIX Alcool inférieur 18°
-Alcools,,Matières premières spiritueux,,,,,Matières premières spiritueux
-Alcools,,Matières premières alcools,,,,,Matières premières alcools
-Autres Vins,,Pétillants,,,Rosé,,Pétillants Rosé
-Autres Vins,,Pétillants,,,Rouge,,Pétillants Rouge
-Autres Vins,,Pétillants,,,Blanc,,Pétillants Blanc
-Autres Vins,,Pétillants Prémix,,,,,Pétillants Prémix
-Autres Vins,,Vins tranquilles étrangers,,,Rouge,,Vins tranquilles étrangers Rouge
-Autres Vins,,Vins tranquilles étrangers,,,Rosé,,Vins tranquilles étrangers Rosé
-Autres Vins,,Vins tranquilles étrangers,,,Blanc sec,,Vins tranquilles étrangers Blanc sec
-Autres Vins,,Vins tranquilles étrangers,,,Blanc doux,,Vins tranquilles étrangers Blanc doux
-Autres Vins,,Vins mousseux étrangers,,,,,Vins mousseux étrangers
-Autres,,Lies et Bourbes,,,,,Lies et Bourbes
-Autres,,"Lies, bourbes et vins à éliminer",,,,,"Lies, bourbes et vins à éliminer"
-Autres,,DPLC,,,Blanc,,DPLC Blanc
-Autres,,DPLC,,,Rouge,,DPLC Rouge
+CERTIFICATION,GENRE,APPELLATION,MENTION,LIEU,COULEUR,CEPAGE,LIBELLE_PRODUIT,IDENTIFIANT INAO
+IGP,Tranquille,,,,Rosé,,IGP Rosé,
+IGP,Tranquille,,,,Rouge,,IGP Rouge,
+IGP,Tranquille,,,,Blanc sec,,IGP Blanc sec,
+IGP,Tranquille,Comté Tolosan,,,Rosé,,IGP Comté Tolosan Rosé,3S003
+IGP,Tranquille,Comté Tolosan,,,Rouge,,IGP Comté Tolosan Rouge,3R003
+IGP,Tranquille,Comté Tolosan,,,Blanc sec,,IGP Comté Tolosan Blanc sec,3B003
+IGP,Tranquille,Comté Tolosan,,,Blanc doux,,IGP Comté Tolosan Blanc doux,3B003
+IGP,Tranquille,Comté Tolosan,,Coteaux et Terrasses de Montauban,Rouge,,IGP Comté Tolosan Coteaux et Terrasses de Montauban Rouge,3R824
+IGP,Tranquille,Comté Tolosan,,Coteaux et Terrasses de Montauban,Blanc sec,,IGP Comté Tolosan Coteaux et Terrasses de Montauban Blanc sec,3B824
+IGP,Tranquille,Comté Tolosan,,Coteaux et Terrasses de Montauban,Rosé,,IGP Comté Tolosan Coteaux et Terrasses de Montauban Rosé,3S824
+IGP,Tranquille,Comté Tolosan,,Bigorre,Rouge,,IGP Comté Tolosan Bigorre Rouge,3R652
+IGP,Tranquille,Comté Tolosan,,Bigorre,Blanc sec,,IGP Comté Tolosan Bigorre Blanc sec,3B652
+IGP,Tranquille,Comté Tolosan,,Bigorre,Rosé,,IGP Comté Tolosan Bigorre Rosé,3S652
+IGP,Tranquille,Comté Tolosan,,Pyrénées Atlantiques,Rouge,,IGP Comté Tolosan Pyrénées Atlantiques Rouge,3R641
+IGP,Tranquille,Comté Tolosan,,Pyrénées Atlantiques,Blanc sec,,IGP Comté Tolosan Pyrénées Atlantiques Blanc sec,3B641
+IGP,Tranquille,Comté Tolosan,,Pyrénées Atlantiques,Rosé,,IGP Comté Tolosan Pyrénées Atlantiques Rosé,3S641
+IGP,Tranquille,Comté Tolosan,,Tarn et Garonne,Rouge,,IGP Comté Tolosan Tarn et Garonne Rouge,3R821
+IGP,Tranquille,Comté Tolosan,,Tarn et Garonne,Blanc sec,,IGP Comté Tolosan Tarn et Garonne Blanc sec,3B821
+IGP,Tranquille,Comté Tolosan,,Tarn et Garonne,Rosé,,IGP Comté Tolosan Tarn et Garonne Rosé,3S821
+IGP,Tranquille,Comté Tolosan,,Haute-Garonne,Rouge,,IGP Comté Tolosan Haute-Garonne Rouge,3R311
+IGP,Tranquille,Comté Tolosan,,Haute-Garonne,Blanc sec,,IGP Comté Tolosan Haute-Garonne Blanc sec,3B311
+IGP,Tranquille,Comté Tolosan,,Haute-Garonne,Rosé,,IGP Comté Tolosan Haute-Garonne Rosé,3S311
+IGP,Tranquille,Comté Tolosan,,Cantal,Rouge,,IGP Comté Tolosan Cantal Rouge,3R151
+IGP,Tranquille,Comté Tolosan,,Cantal,Blanc sec,,IGP Comté Tolosan Cantal Blanc sec,3B151
+IGP,Tranquille,Comté Tolosan,,Cantal,Rosé,,IGP Comté Tolosan Cantal Rosé,3S151
+IGP,Tranquille,Comté Tolosan,Primeur,,Rosé,,IGP Comté Tolosan Primeur Rosé,3S003
+IGP,Tranquille,Comté Tolosan,Primeur,,Rouge,,IGP Comté Tolosan Primeur Rouge,3R003
+IGP,Tranquille,Comté Tolosan,Primeur,,Blanc sec,,IGP Comté Tolosan Primeur Blanc sec,3B003
+IGP,Tranquille,Côte du Lot,,,Rosé,,IGP Côte du Lot Rosé,3S461
+IGP,Tranquille,Côte du Lot,,,Rouge,,IGP Côte du Lot Rouge,3R461
+IGP,Tranquille,Côte du Lot,,,Blanc sec,,IGP Côte du Lot Blanc sec,3B461
+IGP,Tranquille,Côte du Lot,Primeur,,Rosé,,IGP Côte du Lot Primeur Rosé,3S461
+IGP,Tranquille,Côte du Lot,Primeur,,Rouge,,IGP Côte du Lot Primeur Rouge,3R461
+IGP,Tranquille,Côte du Lot,Primeur,,Blanc sec,,IGP Côte du Lot Primeur Blanc sec,3B461
+IGP,Tranquille,Côtes de Gascogne,,,Blanc sec,,IGP Côtes de Gascogne Blanc sec,3B323
+IGP,Tranquille,Côtes de Gascogne,,,Blanc doux,,IGP Côtes de Gascogne Blanc doux,3B323
+IGP,Tranquille,Côtes de Gascogne,,,Rosé,,IGP Côtes de Gascogne Rosé,3S323
+IGP,Tranquille,Côtes de Gascogne,,,Rouge,,IGP Côtes de Gascogne Rouge,3R323
+IGP,Tranquille,Côtes de Gascogne,Primeur,,Rosé,,IGP Côtes de Gascogne Primeur Rosé,3S323
+IGP,Tranquille,Côtes de Gascogne,Primeur,,Rouge,,IGP Côtes de Gascogne Primeur Rouge,3R323
+IGP,Tranquille,Côtes de Gascogne,Primeur,,Blanc sec,,IGP Côtes de Gascogne Primeur Blanc sec,3B323
+IGP,Tranquille,Côtes du Tarn,,,Surmûris Blanc,,IGP Côtes du Tarn Surmûris Blanc,3B812U
+IGP,Tranquille,Côtes du Tarn,,,Rosé,,IGP Côtes du Tarn Rosé,3S812
+IGP,Tranquille,Côtes du Tarn,,,Rouge,,IGP Côtes du Tarn Rouge,3R812
+IGP,Tranquille,Côtes du Tarn,,,Blanc sec,,IGP Côtes du Tarn Blanc sec,3B812
+IGP,Tranquille,Côtes du Tarn,Primeur,,Blanc doux,,IGP Côtes du Tarn Primeur Blanc doux,3B812
+IGP,Tranquille,Côtes du Tarn,Primeur,,Rosé,,IGP Côtes du Tarn Primeur Rosé,3S812
+IGP,Tranquille,Côtes du Tarn,Primeur,,Rouge,,IGP Côtes du Tarn Primeur Rouge,3R812
+IGP,Tranquille,Côtes du Tarn,Primeur,,Blanc sec,,IGP Côtes du Tarn Primeur Blanc sec,3B812
+IGP,Tranquille,Lavilledieu,,,Rosé,,IGP Lavilledieu Rosé,3S040
+IGP,Tranquille,Lavilledieu,,,Rouge,,IGP Lavilledieu Rouge,3R040
+IGP,Tranquille,Coteaux de Glanes,,,Blanc,,IGP Coteaux de Glanes Blanc,3B462
+IGP,Tranquille,Coteaux de Glanes,,,Rosé,,IGP Coteaux de Glanes Rosé,3S462
+IGP,Tranquille,Coteaux de Glanes,,,Rouge,,IGP Coteaux de Glanes Rouge,3R462
+IGP,Tranquille,Coteaux de Glanes,Primeur,,Blanc,,IGP Coteaux de Glanes Primeur Blanc,3B462
+IGP,Tranquille,Coteaux de Glanes,Primeur,,Rosé,,IGP Coteaux de Glanes Primeur Rosé,3S462
+IGP,Tranquille,Coteaux de Glanes,Primeur,,Rouge,,IGP Coteaux de Glanes Primeur Rouge,3R462
+IGP,Tranquille,Aveyron,,,Rosé,,IGP Aveyron Rosé,3S121
+IGP,Tranquille,Aveyron,,,Rouge,,IGP Aveyron Rouge,3R121
+IGP,Tranquille,Aveyron,,,Blanc sec,,IGP Aveyron Blanc sec,3B121
+IGP,Tranquille,Aveyron,Primeur,,Rosé,,IGP Aveyron Primeur Rosé,3S121
+IGP,Tranquille,Aveyron,Primeur,,Rouge,,IGP Aveyron Primeur Rouge,3R121
+IGP,Tranquille,Aveyron,Primeur,,Blanc sec,,IGP Aveyron Primeur Blanc sec,3B121
+IGP,Tranquille,Ariége,,,Rosé,,IGP Ariége Rosé,3S091
+IGP,Tranquille,Ariége,,,Rouge,,IGP Ariége Rouge,3R091
+IGP,Tranquille,Ariége,,,Blanc sec,,IGP Ariége Blanc sec,3B091
+IGP,Tranquille,Ariége,,,Blanc doux,,IGP Ariége Blanc doux,3B091U
+IGP,Tranquille,Agenais,,,Rosé,,IGP Agenais Rosé,3S472
+IGP,Tranquille,Agenais,,,Rouge,,IGP Agenais Rouge,3R472
+IGP,Tranquille,Agenais,,,Blanc sec,,IGP Agenais Blanc sec,3B472
+IGP,Tranquille,Agenais,Primeur,,Rosé,,IGP Agenais Primeur Rosé,3S472
+IGP,Tranquille,Agenais,Primeur,,Rouge,,IGP Agenais Primeur Rouge,3R472
+IGP,Tranquille,Agenais,Primeur,,Blanc sec,,IGP Agenais Primeur Blanc sec,3B472
+IGP,Tranquille,Thézac-Perricard,,,Blanc,,IGP Thézac-Perricard Blanc,3B473
+IGP,Tranquille,Thézac-Perricard,,,Rosé,,IGP Thézac-Perricard Rosé,3S473
+IGP,Tranquille,Thézac-Perricard,,,Rouge,,IGP Thézac-Perricard Rouge,3R473
+IGP,Tranquille,Thézac-Perricard,Primeur,,Blanc,,IGP Thézac-Perricard Primeur Blanc,3B473
+IGP,Tranquille,Thézac-Perricard,Primeur,,Rosé,,IGP Thézac-Perricard Primeur Rosé,3S473
+IGP,Tranquille,Thézac-Perricard,Primeur,,Rouge,,IGP Thézac-Perricard Primeur Rouge,3R473
+IGP,Tranquille,Landes,,,Blanc doux,,IGP Landes Blanc doux,3B401U
+IGP,Tranquille,Landes,,,Rosé,,IGP Landes Rosé,3S401
+IGP,Tranquille,Landes,,,Rouge,,IGP Landes Rouge,3R401
+IGP,Tranquille,Landes,,,Blanc sec,,IGP Landes Blanc sec,3B401
+IGP,Tranquille,Landes,Primeur,,Blanc doux,,IGP Landes Primeur Blanc doux,3B401U
+IGP,Tranquille,Landes,Primeur,,Rosé,,IGP Landes Primeur Rosé,3S401
+IGP,Tranquille,Landes,Primeur,,Rouge,,IGP Landes Primeur Rouge,3R401
+IGP,Tranquille,Landes,Primeur,,Blanc sec,,IGP Landes Primeur Blanc sec,3B401
+IGP,Tranquille,Gers,,,Blanc doux,,IGP Gers Blanc doux,3B321
+IGP,Tranquille,Gers,,,Blanc sec,,IGP Gers Blanc sec,3B321
+IGP,Tranquille,Gers,,,Rosé,,IGP Gers Rosé,3S321
+IGP,Tranquille,Gers,,,Rouge,,IGP Gers Rouge,3R321
+IGP,Tranquille,Gers,Primeur,,Blanc doux,,IGP Gers Primeur Blanc doux,3B321
+IGP,Mousseux,Côte du Lot,,,Rosé,,IGP Côte du Lot Rosé,3S461M
+IGP,Mousseux,Côte du Lot,,,Blanc,,IGP Côte du Lot Blanc,3B461M
+Vin sans IG,Tranquille,,,,Rosé,,Vin sans IG Rosé,4S999
+Vin sans IG,Tranquille,,,,Rouge,,Vin sans IG Rouge,4R999
+Vin sans IG,Tranquille,,,,Blanc,,Vin sans IG Blanc,4B999
+Vin sans IG,Tranquille,,,,Blanc doux,,Vin sans IG Blanc doux,4B999
+Vin sans IG,Tranquille,VDE ARMAGNAC-TENAREZE,,,,,VDE ARMAGNAC-TENAREZE,1B612H
+Vin sans IG,Tranquille,VDE BAS-ARMAGNAC,,,,,VDE BAS-ARMAGNAC,1B613H
+Vin sans IG,Tranquille,VDE BLANCHE ARMAGNAC,,,,,VDE BLANCHE ARMAGNAC,1B614H
+Vin sans IG,Tranquille,VDE HAUT ARMAGNAC,,,,,VDE HAUT ARMAGNAC,1B615H
+Vin sans IG,Tranquille,VDE Armagnac,,,,,VDE Armagnac,1B611H
+Vin sans IG,Mousseux,,,,Rosé,,Vin sans IG Rosé Mousseux,4S999M
+Vin sans IG,Mousseux,,,,Rouge,,Vin sans IG Rouge Mousseux,4R999M
+Vin sans IG,Mousseux,,,,Blanc,,Vin sans IG Blanc Mousseux,4B999M
+Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
+Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y
+Autres,,DPLC,,,Rouge,,DPLC Rouge,4R988Y
+Autres,,Lies. bourbes et vins à éliminer,,,,,Lies. bourbes et vins à éliminer,5X999V
+Autres,,Boissons Fermentées Autres,,,,,Boissons Fermentées Autres,BOISSONS_FERMENTEES_AUTRES
+AOP,Tranquille,Brulhois,,,Rosé,,AOP Brulhois Rosé,1S722S
+AOP,Tranquille,Brulhois,,,Rouge,,AOP Brulhois Rouge,1R722S
+AOP,Tranquille,Gaillac,,,Rosé,,AOP Gaillac Rosé,1S128S
+AOP,Tranquille,Gaillac,,,Rouge,,AOP Gaillac Rouge,1R128S
+AOP,Tranquille,Gaillac,,,Blanc sec,,AOP Gaillac Blanc sec,1B128S
+AOP,Tranquille,Gaillac,,,Blanc doux,,AOP Gaillac Blanc doux,1B128D
+AOP,Tranquille,Gaillac,Vendanges tardives,,Blanc doux,,AOP Gaillac Blanc doux Vendanges tardives,1B128D
+AOP,Tranquille,Gaillac,Premières côtes,,Blanc sec,,AOP Gaillac Premières côtes Blanc sec,1B129S
+AOP,Tranquille,Gaillac,Primeur,,Rouge,,AOP Gaillac Primeur Rouge,1R128S 2
+AOP,Tranquille,Gaillac,Primeur,,Blanc sec,,AOP Gaillac Primeur Blanc sec,1B128S 2
+AOP,Tranquille,Fronton,,,Rosé,,AOP Fronton Rosé,1S121S
+AOP,Tranquille,Fronton,,,Rouge,,AOP Fronton Rouge,1R121S
+AOP,Tranquille,Cahors,,,Rouge,,AOP Cahors Rouge,1R111S
+AOP,Tranquille,Coteaux du Quercy,,,Rosé,,AOP Coteaux du Quercy Rosé,1S723S
+AOP,Tranquille,Coteaux du Quercy,,,Rouge,,AOP Coteaux du Quercy Rouge,1R723S
+AOP,Tranquille,Côtes de Millau,,,Rosé,,AOP Côtes de Millau Rosé,1S720S
+AOP,Tranquille,Côtes de Millau,,,Rouge,,AOP Côtes de Millau Rouge,1R720S
+AOP,Tranquille,Côtes de Millau,,,Blanc sec,,AOP Côtes de Millau Blanc sec,1B720S
+AOP,Tranquille,Entraygues - Le Fel,,,Rosé,,AOP Entraygues - Le Fel Rosé,1S725S
+AOP,Tranquille,Entraygues - Le Fel,,,Rouge,,AOP Entraygues - Le Fel Rouge,1R725S
+AOP,Tranquille,Entraygues - Le Fel,,,Blanc sec,,AOP Entraygues - Le Fel Blanc sec,1B725S
+AOP,Tranquille,Estaing,,,Rosé,,AOP Estaing Rosé,1S726S
+AOP,Tranquille,Estaing,,,Rouge,,AOP Estaing Rouge,1R726S
+AOP,Tranquille,Estaing,,,Blanc sec,,AOP Estaing Blanc sec,1B726S
+AOP,Tranquille,Irouleguy,,,Blanc sec,,AOP Irouleguy Blanc sec,1B134S
+AOP,Tranquille,Irouleguy,,,Rosé,,AOP Irouleguy Rosé,1S134S
+AOP,Tranquille,Irouleguy,,,Rouge,,AOP Irouleguy Rouge,1R134S
+AOP,Tranquille,Madiran,,,Rouge,,AOP Madiran Rouge,1R140S50
+AOP,Tranquille,Béarn,,,Rosé,,AOP Béarn Rosé,1S101S
+AOP,Tranquille,Béarn,,,Rouge,,AOP Béarn Rouge,1R101S
+AOP,Tranquille,Béarn,,,Blanc sec,,AOP Béarn Blanc sec,1B101S
+AOP,Tranquille,Marcillac,,,Rosé,,AOP Marcillac Rosé,1S141S
+AOP,Tranquille,Marcillac,,,Rouge,,AOP Marcillac Rouge,1R141S
+AOP,Tranquille,Pacherenc du Vic Bilh,,,Blanc moelleux,,AOP Pacherenc du Vic Bilh Blanc moelleux,1B166L
+AOP,Tranquille,Pacherenc du Vic Bilh,,,Blanc sec,,AOP Pacherenc du Vic Bilh Blanc sec,1B166S
+AOP,Tranquille,Saint-Mont,,,Rosé,,AOP Saint-Mont Rosé,1S721S
+AOP,Tranquille,Saint-Mont,,,Rouge,,AOP Saint-Mont Rouge,1R721S
+AOP,Tranquille,Saint-Mont,,,Blanc sec,,AOP Saint-Mont Blanc sec,1B721S
+AOP,Tranquille,Saint-Sardos,,,Rosé,,AOP Saint-Sardos Rosé,1S727S
+AOP,Tranquille,Saint-Sardos,,,Rouge,,AOP Saint-Sardos Rouge,1R727S
+AOP,Tranquille,Tursan,,,Rosé,,AOP Tursan Rosé,1S724S
+AOP,Tranquille,Tursan,,,Rouge,,AOP Tursan Rouge,1R724S
+AOP,Tranquille,Tursan,,,Blanc sec,,AOP Tursan Blanc sec,1B724S
+AOP,Tranquille,Jurançon,,,Blanc sec,,AOP Jurançon Blanc sec,1B135S
+AOP,Tranquille,Jurançon,,,Blanc,,AOP Jurançon Blanc,1B13L
+AOP,Tranquille,Côtes du Marmandais,,,Rouge,,AOP Côtes du Marmandais Rouge,1R124S
+AOP,Tranquille,Côtes du Marmandais,,,Blanc sec,,AOP Côtes du Marmandais Blanc sec,1B124S
+AOP,Tranquille,Côtes du Marmandais,,,Rosé,,AOP Côtes du Marmandais Rosé,1S124S
+AOP,Mousseux,Gaillac,,,Blanc,,AOP Gaillac Mousseux,1B128M
+AOP,Mousseux,Gaillac,Méthode ancestrale,,Blanc,,AOP Gaillac Mousseux Méthode ancestrale,1B128M 1
+AOP,Mousseux,Gaillac,Méthode ancestrale,,Doux,,AOP Gaillac Mousseux Méthode ancestrale Doux,1B128M 2
+AOP,VCI,Cahors,,,Rouge,,VCI Cahors Rouge,1R111S99
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Blanc,,Vin de Liqueur AOP (Sup 18°) Blanc,VDN_VDL_AOP_SUP_18
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rosé,,Vin de Liqueur AOP (Sup 18°) Rosé,VDN_VDL_AOP_SUP_18
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rouge,,Vin de Liqueur AOP (Sup 18°) Rouge,VDN_VDL_AOP_SUP_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Blanc,,Vin de Liqueur AOP (Inf 18°) Blanc,VDN_VDL_AOP_INF_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rosé,,Vin de Liqueur AOP (Inf 18°) Rosé,VDN_VDL_AOP_INF_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rouge,,Vin de Liqueur AOP (Inf 18°) Rouge,VDN_VDL_AOP_INF_18
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Blanc,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Blanc,AUTRES_PI_SUP_18
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rosé,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rosé,AUTRES_PI_SUP_18
+VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rouge,AUTRES_PI_SUP_18
+VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Blanc,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Blanc,AUTRES_PI_INF_18
+VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Rosé,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rosé,AUTRES_PI_INF_18
+VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rouge,AUTRES_PI_INF_18
+VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),AUTRES_PI_INF_18
+VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,AUTRES_PI_INF_18_PREMIX
+VDN-VDL,,Floc de Gascogne,,,Rosé,,Floc de Gascogne Rosé,AUTRES_PI_INF_18
+VDN-VDL,,Floc de Gascogne,,,Blanc,,Floc de Gascogne Blanc,AUTRES_PI_INF_18
+Alcools,,Alcools supérieur 18° (autres que Rhum),,,,,Alcools supérieur 18° (autres que Rhum),ALCOOL_AUTRE_SUP_18
+Alcools,,Alcool inférieur 18° (autres que Rhum),,,,,Alcool inférieur 18° (autres que Rhum),ALCOOL_AUTRE_INF_18
+Alcools,,PREMIX Alcool inférieur 18°,,,,,PREMIX Alcool inférieur 18°,ALCOOL_AUTRE_INF_18_PREMIX
+Alcools,,RHUM (hors DOM),,,,,RHUM (hors DOM),RHUM_TIERS_ET_AUTRES
+Alcools,,ARMAGNAC,VSOP,,,,ARMAGNAC VSOP,ALCOOL_AUTRE_SUP_18
+Alcools,,ARMAGNAC,VS,,,,ARMAGNAC VS,ALCOOL_AUTRE_SUP_18
+Alcools,,ARMAGNAC,NAPOLEON,,,,ARMAGNAC NAPOLEON,ALCOOL_AUTRE_SUP_18
+Alcools,,ARMAGNAC,XO,,,,ARMAGNAC XO,ALCOOL_AUTRE_SUP_18
+Alcools,,ARMAGNAC,HORS D'ÂGE,,,,ARMAGNAC HORS D'ÂGE,ALCOOL_AUTRE_SUP_18
+Alcools,,ARMAGNAC,MILLESIMES,,,,ARMAGNAC MILLESIMES,ALCOOL_AUTRE_SUP_18
+Alcools,,ARMAGNAC,BLANCHE,,,,ARMAGNAC BLANCHE,ALCOOL_AUTRE_SUP_18
+Alcools,,Matières premières spiritueux,,,,,Matières premières spiritueux,MATIERES_PREMIERES_SPIRITUEUX
+Alcools,,Matières premières alcools,,,,,Matières premières alcools,MATIERES_PREMIERES_ALCOOLS
+Autres Vins,,Pétillants,,,Rosé,,Pétillants Rosé,PETILLANTS
+Autres Vins,,Pétillants,,,Rouge,,Pétillants Rouge,PETILLANTS
+Autres Vins,,Pétillants,,,Blanc,,Pétillants Blanc,PETILLANTS
+Autres Vins,,Pétillants Prémix,,,,,Pétillants Prémix,PETILLANTS_PREMIX
+Autres Vins,,Vins tranquilles étrangers,,,Rouge,,Vins tranquilles étrangers Rouge,VT_ETRANGERS
+Autres Vins,,Vins tranquilles étrangers,,,Rosé,,Vins tranquilles étrangers Rosé,VT_ETRANGERS
+Autres Vins,,Vins tranquilles étrangers,,,Blanc sec,,Vins tranquilles étrangers Blanc sec,VT_ETRANGERS
+Autres Vins,,Vins tranquilles étrangers,,,Blanc doux,,Vins tranquilles étrangers Blanc doux,VT_ETRANGERS
+Autres Vins,,Vins mousseux étrangers,,,,,Vins mousseux étrangers,VM_ETRANGERS

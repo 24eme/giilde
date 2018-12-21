@@ -27,3 +27,7 @@ function getConditionnementLibelle($key)
 	$conditionnements = VracClient::$types_transaction;
 	return ($conditionnements[$key])? $conditionnements[$key] : null;
 }
+
+function nullify($numberOrNullValue){
+	return ($numberOrNullValue)? $numberOrNullValue : null;
+}

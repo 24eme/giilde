@@ -39,7 +39,7 @@
                         <?php if($detail->douane_type == DRMClient::CRD_TYPE_SUSPENDU): ?>CRD Susp.<?php endif; ?>
                         <?php if($detail->douane_type == DRMClient::CRD_TYPE_ACQUITTE): ?>CRD Acqui.<?php endif; ?>
                     </td>
-                    <td><?php if($detail->facturable): ?>CVO <?php endif; ?><?php if($detail->isFacturableNegociant()): ?>CVO_NEGO<?php endif; ?></td>
+                    <td><?php if($detail->facturable): ?>CVO <?php endif; ?><?php if($detail->isFacturableInverseNegociant()): ?>CVO_NEGO<?php endif; ?></td>
                     <td><?php if($detail->taxable_douane): ?>DOUANE<?php endif; ?></td>
                     <td><?php if($detail->recolte): ?>RECOLTE<?php endif; ?></td>
                     <td><?php if($detail->revendique): ?>REVEND.<?php endif; ?></td>

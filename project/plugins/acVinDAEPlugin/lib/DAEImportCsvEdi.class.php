@@ -130,12 +130,12 @@ class DAEImportCsvEdi extends DAECsvEdi
     }
     
     private function identifyItemKey($csvRows, $type) {
-    	$value = trim($csvRows);
+    	$value = trim($csvRows[$type]);
     	if ($type == self::CSV_PRODUIT_LABEL) {
 			if (isset($this->cache['label_'.$value])) {
 				return $this->cache['label_'.$value];
 			} else {
-				$this->cache['label_'.$value] = $this->getItemKey($this->labels, $csvRow[self::CSV_PRODUIT_LABEL]);
+				$this->cache['label_'.$value] = $this->getItemKey($this->labels, $csvRows[self::CSV_PRODUIT_LABEL]);
 				return $this->cache['label_'.$value];
 			}
     	}
@@ -144,7 +144,7 @@ class DAEImportCsvEdi extends DAECsvEdi
     		if (isset($this->cache['domaine_'.$value])) {
     			return $this->cache['domaine_'.$value];
     		} else {
-    			$this->cache['domaine_'.$value] = $this->getItemKey($this->mentions, $csvRow[self::CSV_PRODUIT_DOMAINE]);
+    			$this->cache['domaine_'.$value] = $this->getItemKey($this->mentions, $csvRows[self::CSV_PRODUIT_DOMAINE]);
     			return $this->cache['domaine_'.$value];
     		}
     	}
@@ -153,7 +153,7 @@ class DAEImportCsvEdi extends DAECsvEdi
     		if (isset($this->cache['type_'.$value])) {
     			return $this->cache['type_'.$value];
     		} else {
-    			$this->cache['type_'.$value] = $this->getItemKey($this->types, $csvRow[self::CSV_ACHETEUR_TYPE]);
+    			$this->cache['type_'.$value] = $this->getItemKey($this->types, $csvRows[self::CSV_ACHETEUR_TYPE]);
     			return $this->cache['type_'.$value];
     		}
     	}
@@ -162,7 +162,7 @@ class DAEImportCsvEdi extends DAECsvEdi
     		if (isset($this->cache['cond_'.$value])) {
     			return $this->cache['cond_'.$value];
     		} else {
-    			$this->cache['cond_'.$value] = $this->getItemKey($this->contenances, $csvRow[self::CSV_LIBELLE_CONDITIONNEMENT]);
+    			$this->cache['cond_'.$value] = $this->getItemKey($this->contenances, $csvRows[self::CSV_LIBELLE_CONDITIONNEMENT]);
     			return $this->cache['cond_'.$value];
     		}
     	}
@@ -171,7 +171,7 @@ class DAEImportCsvEdi extends DAECsvEdi
     		if (isset($this->cache['pays_'.$value])) {
     			return $this->cache['pays_'.$value];
     		} else {
-    			$this->cache['pays_'.$value] = $this->getItemKey($this->countryList, $csvRow[self::CSV_PAYS_NOM]);
+    			$this->cache['pays_'.$value] = $this->getItemKey($this->countryList, $csvRows[self::CSV_PAYS_NOM]);
     			return $this->cache['pays_'.$value];
     		}
     	}
@@ -183,6 +183,7 @@ class DAEImportCsvEdi extends DAECsvEdi
         $num_ligne = 1;
         $daes = array();
         $hasErrors = false;
+        $nbDaes = 0;
         foreach ($this->getDocRows() as $csvRow) {
         	$founded_produit = $this->identifyProduct($csvRow);
         	if (!$founded_produit) {
@@ -195,18 +196,9 @@ class DAEImportCsvEdi extends DAECsvEdi
             $contenance = $this->identifyItemKey($csvRow, self::CSV_LIBELLE_CONDITIONNEMENT);
             $destination = $this->identifyItemKey($csvRow, self::CSV_PAYS_NOM);
             
-            if (!$label) {
-            	$this->csvDoc->addErreur($this->labelNotFoundError($num_ligne, $csvRow));
-            	$hasErrors = true;
-            } else {
-            	$csvRow[self::CSV_PRODUIT_LABEL] = $label;
-            }
-            if (!$mention) {
-            	$this->csvDoc->addErreur($this->mentionNotFoundError($num_ligne, $csvRow));
-            	$hasErrors = true;
-            } else {
-            	$csvRow[self::CSV_PRODUIT_DOMAINE] = $mention;
-            }
+            $csvRow[self::CSV_PRODUIT_LABEL] = $label;
+			$csvRow[self::CSV_PRODUIT_DOMAINE] = $mention;
+
             if (!$type) {
             	$this->csvDoc->addErreur($this->typeNotFoundError($num_ligne, $csvRow));
             	$hasErrors = true;
@@ -228,6 +220,9 @@ class DAEImportCsvEdi extends DAECsvEdi
             if (!$just_check && !$hasErrors) {
                 $daes[] = $this->createDae($csvRow, $founded_produit);
             }
+            if (!$hasErrors) {
+            	$nbDaes++;
+            }
             $num_ligne++;
         }
         if (!$just_check && !$hasErrors) {
@@ -239,31 +234,31 @@ class DAEImportCsvEdi extends DAECsvEdi
         		}
         		$dae->_id = 'DAE-' . $dae->identifiant . '-' . str_replace('-','',$dae->date)."-".$numeros[$dae->identifiant.'_'.$dae->date];
         		$this->client->storeDoc($dae);
-        		$numeros[$dae->identifiant.'_'.$dae->date] = $numeros[$dae->identifiant.'_'.$dae->date] + 1;
+        		$numeros[$dae->identifiant.'_'.$dae->date] = sprintf("%05d", $numeros[$dae->identifiant.'_'.$dae->date] + 1);
         	}
         	return count($daes);
         }
-        return 0;
+        return (!$just_check)? 0 : $nbDaes;
     }
     
     private function getItemKey($items, $value) {
-    	$length = strlen($value);
     	$value = trim($value);
+    	$length = strlen($value);
     	foreach ($items as $k => $v) {
     		if ($value == $k || $value == $v) {
     			return $k;
     		}
-    		if (preg_match('/'.$value.'/i', $k)) {
+    		if ($value && preg_match('/'.$value.'/i', $k)) {
     			return $k;
     		}
-    		if (preg_match('/'.KeyInflector::slugify($value).'/i', KeyInflector::slugify($k))) {
+    		if ($value && preg_match('/'.KeyInflector::slugify($value).'/i', KeyInflector::slugify($k))) {
     			return $k;
     		}
     		if ($length > 3) {
-	    		if (preg_match('/'.$value.'/i', $v)) {
+	    		if ($value && preg_match('/'.$value.'/i', $v)) {
 	    			return $k;
 	    		}
-	    		if (preg_match('/'.KeyInflector::slugify($value).'/i', KeyInflector::slugify($v))) {
+	    		if ($value && preg_match('/'.KeyInflector::slugify($value).'/i', KeyInflector::slugify($v))) {
 	    			return $k;
 	    		}
     		}
@@ -332,6 +327,7 @@ class DAEImportCsvEdi extends DAECsvEdi
         $dae->identifiant = $this->identifiant;
         $dae->date = $date;
         $dae->date_saisie = date('Y-m-d');
+        $dae->type = 'DAE';
         
         if ($this->etablissement) {
 	        $dae->declarant->nom = null;
@@ -349,6 +345,8 @@ class DAEImportCsvEdi extends DAECsvEdi
 	        $dae->declarant->commune = $this->etablissement->siege->commune;
 	        $dae->declarant->code_postal = $this->etablissement->siege->code_postal;
 	        $dae->declarant->region = $this->etablissement->getRegion();
+	        $dae->declarant->famille = $this->etablissement->famille;
+	        $dae->declarant->sous_famille = $this->etablissement->sous_famille;
         }
         
         $this->dates[$date] = $date;

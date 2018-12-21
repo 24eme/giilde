@@ -61,7 +61,7 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
         return $this->exist('facturable') && $this->get('facturable');
     }
 
-    public function isFacturableNegociant() {
+    public function isFacturableInverseNegociant() {
 
         return $this->exist('facturable_negociant') && $this->get('facturable_negociant');
     }

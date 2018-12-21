@@ -31,4 +31,8 @@ class StatistiqueConfiguration {
 
         return $this->configuration['actif'];
     }
+
+    public function isAggregatAppellation(){
+        return $this->configuration['aggregat_appellation'];
+    }
 }

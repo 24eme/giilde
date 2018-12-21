@@ -1,6 +1,6 @@
 <?php
 
-class CsvFile 
+class CsvFile
 {
 
   protected $current_line = 0;
@@ -31,7 +31,7 @@ class CsvFile
     }
     $buffer = fread($handle, 500);
     fclose($handle);
-    
+
     $charset = $this->getCharset($file);
     if($charset != 'utf-8'){
         exec('recode '.$charset.'..utf-8 '.$file);
@@ -50,7 +50,7 @@ class CsvFile
       $this->separator = '\t';
   }
 
-  public function getCsv() 
+  public function getCsv()
   {
     if ($this->csvdata) {
       return $this->csvdata;
@@ -61,14 +61,14 @@ class CsvFile
     }
     $this->csvdata = array();
     while (($data = fgetcsv($handler, 0, $this->separator)) !== FALSE) {
-      if (!preg_match('/^#/', $data[0])) {
-		$this->csvdata[] = $data;           
-      }  
+      if (!preg_match('/^(...)?#/', $data[0]) && !preg_match('/^$/', $data[0])) {
+		$this->csvdata[] = $data;
+      }
     }
     fclose($handler);
     return $this->csvdata;
   }
-  
+
   private function getCharset($file) {
     $ret = exec('file -i '.$file);
     $charset = substr($ret, strpos($ret,'charset='));

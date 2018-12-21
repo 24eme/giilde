@@ -1,4 +1,4 @@
-<?php 
+<?php
 use_helper('Statistique');
 use_helper('IvbdStatistique');
 
@@ -31,21 +31,27 @@ if ($lastPeriode) {
 				$csv .= $tabKey[0].';'.null.';'.$values[0].';'.getEvol(0, $values[0]).';'.null.';'.$values[1].';'.getEvol(0, $values[1]).';'.null.';'.$values[2].';'.getEvol(0, $values[2]).';'.null.';'.$values[3].';'.getEvol(0, $values[3])."\n";
 			}
 		}
-	}	
+	}
 } else {
-	$csv = "Pays;Blanc;Rosé;Rouge;TOTAL\n";
+	$csv = "Pays;Blanc;Blanc Sec;Blanc Moelleux;Blanc Doux;Rosé;Rouge;TOTAL\n";
 	$totalBlanc = formatNumber($result['totaux_blanc']['value'],2);
+	$totalBlancSec = formatNumber($result['totaux_blanc_sec']['value'],2);
+	$totalBlancMoelleux = formatNumber($result['totaux_blanc_moelleux']['value'],2);
+	$totalBlancDoux = formatNumber($result['totaux_blanc_doux']['value'],2);
 	$totalRose = formatNumber($result['totaux_rose']['value'],2);
 	$totalRouge = formatNumber($result['totaux_rouge']['value'],2);
 	$totalTotal = formatNumber($result['totaux_total']['value'],2);
 	foreach ($result['agg_line']['buckets'] as $pays) {
 		$paysLibelle = $pays['key'];
 		$blanc = formatNumber($pays['blanc']['agg_column']['value'],2);
+		$blancSec = formatNumber($pays['blanc_sec']['agg_column']['value'],2);
+		$blancMoelleux = formatNumber($pays['blanc_moelleux']['agg_column']['value'],2);
+		$blancDoux = formatNumber($pays['blanc_doux']['agg_column']['value'],2);
 		$rose = formatNumber($pays['rose']['agg_column']['value'],2);
 		$rouge = formatNumber($pays['rouge']['agg_column']['value'],2);
 		$total = formatNumber($pays['total']['agg_column']['value'],2);
-		$csv .= $paysLibelle.';'.$blanc.';'.$rose.';'.$rouge.';'.$total."\n";
+		$csv .= $paysLibelle.';'.$blanc.';'.$blancSec.";".$blancMoelleux.";".$blancDoux.";".$rose.';'.$rouge.';'.$total."\n";
 	}
-	$csv .= 'TOTAL;'.$totalBlanc.';'.$totalRose.';'.$totalRouge.';'.$totalTotal."\n";
+	$csv .= 'TOTAL;'.$totalBlanc.';'.$totalBlancSec.';'.$totalBlancMoelleux.';'.$totalBlancDoux.';'.$totalRose.';'.$totalRouge.';'.$totalTotal."\n";
 }
 echo $csv;

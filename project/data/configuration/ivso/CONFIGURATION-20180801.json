@@ -8,7 +8,8 @@
    "contenances": {
    },
    "droits": {
-       "CVO": "Cvo"
+       "CVO": "Cvo",
+       "DOUANE": "Douane"
    },
    "mvts_favoris": {
        "details_entrees_recolte": "details_entrees_recolte",
@@ -118,10 +119,10 @@
                    "libelle_long": "Régularisation",
                    "description": "Indiquer les volumes constatés en excédent à l'occasion d'un inventaire ou d'un contrôle des douanes,"
                },
-               "sortie_negative": {
-                   "libelle": "14. Sortie négative",
-                   "libelle_long": "Sortie négative",
-                   "description": "Sortie négative"
+               "integrationvci": {
+                   "libelle": "14. Intégration de VCI",
+                   "libelle_long": "Intégration de VCI",
+                   "description": "Le cumul des entrées de VCI pour les appellations en bénéficiant doit trouver son équivalent en sortie de la colonne produit VCI."
                }
            },
            "sorties": {
@@ -225,15 +226,15 @@
                    "libelle_long": "CRD acuittées offertes",
                    "description": "CRD acuittées offertes"
                },
-               "entree_recolte_negative": {
-                   "libelle": "18. Entrée négative récolte",
-                   "libelle_long": "Entrée négative de récolte",
-                   "description": "Entrée négative de récolte"
+               "manipulationssoutirages": {
+                   "libelle": "18. Manipulations Soutirages",
+                   "libelle_long": "Sorties internes Manipulations Soutirages (notamment vers lies)",
+                   "description": "Sorties internes Manipulations Soutirages (notamment vers lies)"
                },
-               "entree_negative": {
-                   "libelle": "19. Entrée négative",
-                   "libelle_long": "Entrée négative",
-                   "description": "Entrée négative"
+               "revendicationvci": {
+                   "libelle": "19. Revendication de VCI",
+                   "libelle_long": "Revendication de VCI",
+                   "description": "Volume de VCI de l'année N-1 du produit ayant reçu l'agrément à la récolte de l'année N"
                }
            },
            "stocks_fin": {
@@ -503,7 +504,7 @@
                                                                    "COT N",
                                                                    "NOIR FLEURIEN N",
                                                                    "COURBU NOIR N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "COUNOISE N",
                                                                    "MOURVEDRE N",
                                                                    "NÉGRETTE N",
@@ -540,7 +541,7 @@
                                                                    "FEUNATE N",
                                                                    "FUELLA NERA N",
                                                                    "TRESSOT N",
-                                                                   "FRANC NOIR DE LA HAUTE SAONE N",
+                                                                   "FRANC NOIR DE LA HAUTE SAÔNE N",
                                                                    "ABOURIOU N",
                                                                    "ALICANTE HENRI BOUSCHET N",
                                                                    "CINSAUT N",
@@ -585,7 +586,7 @@
                                                                    "LLEDONER PELUT N",
                                                                    "BACHET N",
                                                                    "CARIGNAN N",
-                                                                   "LISTAN",
+                                                                   "LISTÁN",
                                                                    "MANSENG NOIR N",
                                                                    "MANCIN N",
                                                                    "PORTAN N",
@@ -601,12 +602,12 @@
                                                                    "NÉGRET DE BANHARS N",
                                                                    "PLANT DE BRUNET N",
                                                                    "RIVAIRENC N",
-                                                                   "MUSCAT A PETITS GRAINS ROSES RS",
-                                                                   "MUSCAT A PETITS GRAINS BLANCS",
+                                                                   "MUSCAT ? PETITS GRAINS ROSES RS",
+                                                                   "MUSCAT ? PETITS GRAINS BLANCS",
                                                                    "GROLLEAU GRIS",
                                                                    "GRENACHE GRIS",
                                                                    "ROSÉ DU VAR RS",
-                                                                   "GEWURZTRAMINER RS",
+                                                                   "GEWÜRZTRAMINER RS",
                                                                    "SAVAGNIN ROSE RS",
                                                                    "CLAIRETTE ROSE RS",
                                                                    "BARBAROUX RS",
@@ -664,7 +665,7 @@
                                                                    "COT N",
                                                                    "NOIR FLEURIEN N",
                                                                    "COURBU NOIR N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "COUNOISE N",
                                                                    "MOURVEDRE N",
                                                                    "NÉGRETTE N",
@@ -701,7 +702,7 @@
                                                                    "FEUNATE N",
                                                                    "FUELLA NERA N",
                                                                    "TRESSOT N",
-                                                                   "FRANC NOIR DE LA HAUTE SAONE N",
+                                                                   "FRANC NOIR DE LA HAUTE SAÔNE N",
                                                                    "ABOURIOU N",
                                                                    "ALICANTE HENRI BOUSCHET N",
                                                                    "CINSAUT N",
@@ -746,7 +747,7 @@
                                                                    "LLEDONER PELUT N",
                                                                    "BACHET N",
                                                                    "CARIGNAN N",
-                                                                   "LISTAN",
+                                                                   "LISTÁN",
                                                                    "MANSENG NOIR N",
                                                                    "MANCIN N",
                                                                    "PORTAN N",
@@ -762,12 +763,12 @@
                                                                    "NÉGRET DE BANHARS N",
                                                                    "PLANT DE BRUNET N",
                                                                    "RIVAIRENC N",
-                                                                   "MUSCAT A PETITS GRAINS ROSES RS",
-                                                                   "MUSCAT A PETITS GRAINS BLANCS",
+                                                                   "MUSCAT ? PETITS GRAINS ROSES RS",
+                                                                   "MUSCAT ? PETITS GRAINS BLANCS",
                                                                    "GROLLEAU GRIS",
                                                                    "GRENACHE GRIS",
                                                                    "ROSÉ DU VAR RS",
-                                                                   "GEWURZTRAMINER RS",
+                                                                   "GEWÜRZTRAMINER RS",
                                                                    "SAVAGNIN ROSE RS",
                                                                    "CLAIRETTE ROSE RS",
                                                                    "BARBAROUX RS",
@@ -14160,6 +14161,51 @@
                                                                }
                                                            }
                                                        }
+                                                   },
+                                                   "blanc_doux": {
+                                                       "libelle": "Blanc doux",
+                                                       "format_libelle": null,
+                                                       "code": "blanc_doux",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70801000",
+                                                               "code_douane": "3B091U",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
                                                    }
                                                }
                                            }
@@ -14267,7 +14313,7 @@
                                                                    "ABOURIOU N",
                                                                    "ALICANTE BOUSCHET N",
                                                                    "ARINARNOA N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "CABERNET FRANC N",
                                                                    "CABERNET SAUVIGNON N",
                                                                    "COT N",
@@ -14328,7 +14374,7 @@
                                                                    "ABOURIOU N",
                                                                    "ALICANTE BOUSCHET N",
                                                                    "ARINARNOA N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "CABERNET FRANC N",
                                                                    "CABERNET SAUVIGNON N",
                                                                    "COT N",
@@ -14498,7 +14544,7 @@
                                                                    "ABOURIOU N",
                                                                    "ALICANTE BOUSCHET N",
                                                                    "ARINARNOA N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "CABERNET FRANC N",
                                                                    "CABERNET SAUVIGNON N",
                                                                    "COT N",
@@ -14559,7 +14605,7 @@
                                                                    "ABOURIOU N",
                                                                    "ALICANTE BOUSCHET N",
                                                                    "ARINARNOA N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "CABERNET FRANC N",
                                                                    "CABERNET SAUVIGNON N",
                                                                    "COT N",
@@ -21879,7 +21925,7 @@
                                                                    "COT N",
                                                                    "NOIR FLEURIEN N",
                                                                    "COURBU NOIR N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "COUNOISE N",
                                                                    "MOURVEDRE N",
                                                                    "NÉGRETTE N",
@@ -21916,7 +21962,7 @@
                                                                    "FEUNATE N",
                                                                    "FUELLA NERA N",
                                                                    "TRESSOT N",
-                                                                   "FRANC NOIR DE LA HAUTE SAONE N",
+                                                                   "FRANC NOIR DE LA HAUTE SAÔNE N",
                                                                    "ABOURIOU N",
                                                                    "ALICANTE HENRI BOUSCHET N",
                                                                    "CINSAUT N",
@@ -21961,7 +22007,7 @@
                                                                    "LLEDONER PELUT N",
                                                                    "BACHET N",
                                                                    "CARIGNAN N",
-                                                                   "LISTAN",
+                                                                   "LISTÁN",
                                                                    "MANSENG NOIR N",
                                                                    "MANCIN N",
                                                                    "PORTAN N",
@@ -21977,12 +22023,12 @@
                                                                    "NÉGRET DE BANHARS N",
                                                                    "PLANT DE BRUNET N",
                                                                    "RIVAIRENC N",
-                                                                   "MUSCAT A PETITS GRAINS ROSES RS",
-                                                                   "MUSCAT A PETITS GRAINS BLANCS",
+                                                                   "MUSCAT ? PETITS GRAINS ROSES RS",
+                                                                   "MUSCAT ? PETITS GRAINS BLANCS",
                                                                    "GROLLEAU GRIS",
                                                                    "GRENACHE GRIS",
                                                                    "ROSÉ DU VAR RS",
-                                                                   "GEWURZTRAMINER RS",
+                                                                   "GEWÜRZTRAMINER RS",
                                                                    "SAVAGNIN ROSE RS",
                                                                    "CLAIRETTE ROSE RS",
                                                                    "BARBAROUX RS",
@@ -22041,7 +22087,7 @@
                                                                    "COT N",
                                                                    "NOIR FLEURIEN N",
                                                                    "COURBU NOIR N",
-                                                                   "BOUCHALES N",
+                                                                   "BOUCHAL?S N",
                                                                    "COUNOISE N",
                                                                    "MOURVEDRE N",
                                                                    "NÉGRETTE N",
@@ -22078,7 +22124,7 @@
                                                                    "FEUNATE N",
                                                                    "FUELLA NERA N",
                                                                    "TRESSOT N",
-                                                                   "FRANC NOIR DE LA HAUTE SAONE N",
+                                                                   "FRANC NOIR DE LA HAUTE SAÔNE N",
                                                                    "ABOURIOU N",
                                                                    "ALICANTE HENRI BOUSCHET N",
                                                                    "CINSAUT N",
@@ -22123,7 +22169,7 @@
                                                                    "LLEDONER PELUT N",
                                                                    "BACHET N",
                                                                    "CARIGNAN N",
-                                                                   "LISTAN",
+                                                                   "LISTÁN",
                                                                    "MANSENG NOIR N",
                                                                    "MANCIN N",
                                                                    "PORTAN N",
@@ -22139,12 +22185,12 @@
                                                                    "NÉGRET DE BANHARS N",
                                                                    "PLANT DE BRUNET N",
                                                                    "RIVAIRENC N",
-                                                                   "MUSCAT A PETITS GRAINS ROSES RS",
-                                                                   "MUSCAT A PETITS GRAINS BLANCS",
+                                                                   "MUSCAT ? PETITS GRAINS ROSES RS",
+                                                                   "MUSCAT ? PETITS GRAINS BLANCS",
                                                                    "GROLLEAU GRIS",
                                                                    "GRENACHE GRIS",
                                                                    "ROSÉ DU VAR RS",
-                                                                   "GEWURZTRAMINER RS",
+                                                                   "GEWÜRZTRAMINER RS",
                                                                    "SAVAGNIN ROSE RS",
                                                                    "CLAIRETTE ROSE RS",
                                                                    "BARBAROUX RS",
@@ -22361,163 +22407,6 @@
                                                                            ]
                                                                        },
                                                                        "produit_non_interpro": false
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                       }
-                   },
-                   "VCI": {
-                       "libelle": "VCI",
-                       "format_libelle": "%c% %a% %l% %m% %co%",
-                       "code": "MOU",
-                       "code_produit": null,
-                       "code_comptable": null,
-                       "code_douane": null,
-                       "interpro": {
-                           "INTERPRO-declaration": {
-                               "labels": [
-                               ],
-                               "droits": {
-                                   "douane": [
-                                       {
-                                           "date": "1900-01-01",
-                                           "taux": 0,
-                                           "code": null,
-                                           "libelle": null
-                                       }
-                                   ],
-                                   "cvo": [
-                                       {
-                                           "date": "1900-01-01",
-                                           "taux": "0.0",
-                                           "code": "CVO",
-                                           "libelle": "Cvo"
-                                       }
-                                   ]
-                               }
-                           }
-                       },
-                       "departements": [
-                       ],
-                       "appellations": {
-                           "COS": {
-                               "libelle": "Cahors",
-                               "format_libelle": null,
-                               "code": "COS",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       }
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "rouge": {
-                                                       "libelle": "Rouge",
-                                                       "format_libelle": null,
-                                                       "code": "rouge",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": "70800500",
-                                                               "code_douane": "1R111S99",
-                                                               "cepages_autorises": [
-                                                                   "COT N",
-                                                                   "MERLOT N",
-                                                                   "TANNAT N"
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       },
-                                                                       "produit_non_interpro": true
                                                                    }
                                                                }
                                                            }
@@ -31280,6 +31169,165 @@
                                }
                            }
                        }
+                   },
+                   "VCI": {
+                       "libelle": "VCI",
+                       "format_libelle": "%c% %a% %l% %m% %co%",
+                       "code": "VCI",
+                       "code_produit": null,
+                       "code_comptable": null,
+                       "code_douane": null,
+                       "interpro": {
+                           "INTERPRO-declaration": {
+                               "labels": [
+                               ],
+                               "droits": {
+                                   "douane": [
+                                       {
+                                           "date": "1900-01-01T00:00:00+01:00",
+                                           "taux": "0.0",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       }
+                                   ],
+                                   "cvo": [
+                                       {
+                                           "date": "1900-01-01T00:00:00+01:00",
+                                           "taux": "0.0",
+                                           "code": "CVO",
+                                           "libelle": "Cvo"
+                                       }
+                                   ]
+                               },
+                               "produit_non_interpro": false
+                           }
+                       },
+                       "departements": [
+                       ],
+                       "appellations": {
+                           "COS": {
+                               "libelle": "Cahors",
+                               "format_libelle": null,
+                               "code": "COS",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       }
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "rouge": {
+                                                       "libelle": "Rouge",
+                                                       "format_libelle": "%g% %a% %l% %m% %co%",
+                                                       "code": "rouge",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               },
+                                                               "produit_non_interpro": false
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": "70800500",
+                                                               "code_douane": "1R111S99",
+                                                               "cepages_autorises": [
+                                                                   "COT N",
+                                                                   "MERLOT N",
+                                                                   "TANNAT N"
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": true
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       }
                    }
                }
            },
@@ -32931,6 +32979,125 @@
                                        }
                                    }
                                }
+                           },
+                           "RHUM": {
+                               "libelle": "RHUM (hors DOM)",
+                               "format_libelle": null,
+                               "code": null,
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       },
+                                       "produit_non_interpro": true
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "RHUM_TIERS_ET_AUTRES",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
                            }
                        }
                    },
@@ -34255,6 +34422,19 @@
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
+               },
+               "integrationvci": {
+                   "readable": 1,
+                   "writable": 1,
+                   "details": null,
+                   "revendique": 1,
+                   "restriction_lies": 0,
+                   "recolte": 1,
+                   "mouvement_coefficient": 1,
+                   "facturable": 0,
+                   "douane_type": "CRD_SUSPENDU",
+                   "douane_cat": "entrees-periode/mouvements-internes/integration-vci-agree",
+                   "taxable_douane": 0
                }
            },
            "sorties": {
@@ -34413,7 +34593,7 @@
                    "mouvement_coefficient": -1,
                    "facturable": 1,
                    "douane_type": "CRD_MIXTE",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/relogement",
                    "taxable_douane": 0
                },
                "travailafacon": {
@@ -34522,6 +34702,32 @@
                    "douane_cat": "sorties-periode/ventes-france-crd-acquittes",
                    "taxable_douane": 0,
                    "switch_regime": "offrecrdsuspendues"
+               },
+               "manipulationssoutirages": {
+                   "readable": 1,
+                   "writable": 1,
+                   "details": null,
+                   "revendique": 1,
+                   "restriction_lies": 0,
+                   "recolte": 1,
+                   "mouvement_coefficient": -1,
+                   "facturable": 0,
+                   "douane_type": "CRD_MIXTE",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/autres-mouvements-internes",
+                   "taxable_douane": 0
+               },
+               "revendicationvci": {
+                   "readable": 1,
+                   "writable": 1,
+                   "details": null,
+                   "revendique": 1,
+                   "restriction_lies": 0,
+                   "recolte": 1,
+                   "mouvement_coefficient": -1,
+                   "facturable": 0,
+                   "douane_type": "CRD_SUSPENDU",
+                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci",
+                   "taxable_douane": 0
                }
            },
            "stocks_fin": {

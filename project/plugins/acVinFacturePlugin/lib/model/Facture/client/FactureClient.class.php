@@ -149,7 +149,7 @@ class FactureClient extends acCouchdbClient {
         return $this->find('FACTURE-' . $idSociete . '-' . $idFacture);
     }
 
-    private function getReduceLevelForFacturation() {
+    public function getReduceLevelForFacturation() {
         return MouvementfactureFacturationView::KEYS_VRAC_DEST + 1;
     }
 

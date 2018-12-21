@@ -11,7 +11,7 @@ all:
       export_pays_fin: { }
       reprise_donnees_url: false
       sans_contrat_option: false
-      delai_ouverture_teledeclaration: "-1 month"
+      delai_ouverture_teledeclaration: "-2 month"
       vrac_multi_produit: false
       declassement_igp: false
       reprise_stocks_changement_campagne: false
@@ -26,3 +26,6 @@ all:
       campagne_liste_minimale: false
       nb_extra_pdf_pages: 0
       observations_auto: true
+      warning_produit: false
+      mouvement_vide_neant: false
+      negociant_facturable: false

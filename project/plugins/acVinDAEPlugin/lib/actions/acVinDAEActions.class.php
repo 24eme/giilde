@@ -76,9 +76,13 @@ class acVinDAEActions extends sfActions
 			$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
 			if ($this->form->isValid()) {
 				
+				$path = sfConfig::get('sf_data_dir') . '/upload/'.'import_daes_'.$this->etablissement . '_' . $this->periode->format('Y-m-d').'_'.$this->form->getValue('file')->getMd5().$this->form->getValue('file')->getOriginalExtension();
+				
 				$file = sfConfig::get('sf_data_dir') . '/upload/' . $this->form->getValue('file')->getMd5();
 				
-				$this->daeCsvEdi = new DAEImportCsvEdi($file, $this->identifiant, $this->periode->format('Y-m-d'));
+				rename($file,  $path);
+				
+				$this->daeCsvEdi = new DAEImportCsvEdi($path, $this->identifiant, $this->periode->format('Y-m-d'));
 				$this->daeCsvEdi->checkCSV();
 				
 				if($this->daeCsvEdi->getCsvDoc()->hasErreurs()) {
@@ -97,7 +101,7 @@ class acVinDAEActions extends sfActions
 			}
 			
 			if (!$this->getUser()->hasCredential(myUser::CREDENTIAL_ADMIN)) {
-				return $this->fileErrorUploadEdi($file, $this->etablissement, $this->periode);
+				return $this->fileErrorUploadEdi($path, $this->etablissement, $this->periode);
 			}
 		}
 	}
