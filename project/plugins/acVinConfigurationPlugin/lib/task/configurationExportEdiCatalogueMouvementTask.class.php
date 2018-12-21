@@ -16,7 +16,7 @@ class configurationExportEdiCatalogueMouvementTask extends sfBaseTask
     ));
 
     $this->namespace        = 'configuration';
-    $this->name             = 'export-edi-catalogue-produit';
+    $this->name             = 'export-edi-catalogue-mouvement';
     $this->briefDescription = '';
     $this->detailedDescription = <<<EOF
 The [configurationExportEdiCatalogueMouvement|INFO] task does things.
