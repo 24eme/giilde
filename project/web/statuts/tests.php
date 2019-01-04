@@ -22,8 +22,16 @@ foreach($files as $file) {
     $test->commit = $commit;
     $test->branch = $branch;
     $test->file = $file;
-    $test->success = (!($xml['failures']*1) && !($xml['errors']*1));
     $test->nb = $xml['tests']*1;
+    $test->nb_errors = 0;
+    foreach($xml as $item) {
+        if(!$item["errors"]*1) {
+            continue;
+        }
+        $test->nb_errors += $item['failures']*1 + $item['assertions']*1 - count($item);
+        //echo ($xml['failures']*1)."\n";
+    }
+    $test->success = !$test->nb_errors;
 
     $tests[$test->date->format('YmdHis')] = $test;
 }
@@ -49,12 +57,13 @@ krsort($tests);
         <table style="margin-top: 20px;" class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
-                    <th class="col-xs-4">Date</th>
-                    <th class="col-xs-4">Projet</th>
-                    <th class="col-xs-4">Branche</th>
-                    <th class="col-xs-4">Commit</th>
-                    <th class="col-xs-4">NB Tests</th>
-                    <th class="col-xs-4">État</th>
+                    <th class="col-xs-3">Date</th>
+                    <th class="col-xs-2">Projet</th>
+                    <th class="col-xs-2">Branche</th>
+                    <th class="col-xs-3">Commit</th>
+                    <th class="col-xs-2">NB Tests</th>
+                    <th class="col-xs-2">NB Erreurs</th>
+                    <th class="col-xs-2">État</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,7 +74,8 @@ krsort($tests);
                     <td><?php echo $test->branch; ?></td>
                     <td><?php echo $test->commit; ?></td>
                     <td class="text-center"><?php echo $test->nb; ?></td>
-                    <td class="<?php if($test->success): ?>text-success<?php else: ?>text-danger<?php endif; ?>"><?php if($test->success): ?>Succès<?php else: ?>Échec<?php endif; ?></td>
+                    <td class="text-center <?php if($test->success): ?>text-success<?php else: ?>text-danger<?php endif; ?>"><?php echo $test->nb_errors ?></td>
+                    <td class="<?php if($test->success): ?>text-success<?php else: ?>text-danger<?php endif; ?>"><?php if($test->success): ?>Succès<?php else: ?>Échec<?php endif ?></td>
                     <td><a href="/statuts/xml/<?php echo $test->file ?>">Voir</a></td>
                 </tr>
                 <?php endforeach; ?>

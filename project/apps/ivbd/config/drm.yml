@@ -15,4 +15,4 @@ all:
       declassement_igp: true
       pdf_font_size: "8pt"
       delai_ouverture_teledeclaration: "-3 month"
-      xml_transfert_echec: "Le transfert de votre DRM a échoué:\n\nDESCRIPTION_ERREUR\n\nNous vous remercions de prendre contact avec l'IVBD soit par courriel à l'adresse christelle.munoz@vins-bergeracduras.fr soit par téléphone au numéro +33 (0)5 53 63 57 63"
+      xml_transfert_echec: "Le transfert de votre DRM a échoué:\n\nDESCRIPTION_ERREUR\n\nNous vous remercions de prendre contact avec l'IVBD soit par courriel à l'adresse economie@vins-bergeracduras.fr soit par téléphone au numéro +33 (0)5 53 63 57 63"

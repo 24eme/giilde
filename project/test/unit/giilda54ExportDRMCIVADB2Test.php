@@ -76,14 +76,15 @@ $temp = fopen($tmpfname, "w");
 fwrite($temp, $csv);
 fclose($temp);
 
-$t = new lime_test(32);
+$t = new lime_test(31);
 
 $t->comment("Export d'une DRM");
 
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
 $import = new DRMImportCsvEdi($tmpfname, $drm);
 $t->ok($import->checkCSV(), "Vérification de l'import");
-$t->ok($import->importCSV(),"Import de la DRM");
+
+$import->importCSV();
 
 $drm->validate();
 $drm->save();

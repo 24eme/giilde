@@ -25,6 +25,13 @@ class drm_validationActions extends drmGeneriqueActions {
         }
         $this->initSocieteAndEtablissementPrincipal();
         $this->mouvements = $this->drm->getMouvementsCalculeByIdentifiant($this->drm->identifiant);
+        foreach($this->mouvements as $key => $mouvement) {
+            if($mouvement->produit_hash) {
+                continue;
+            }
+
+            unset($this->mouvements[$key]);
+        }
         $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);
 
         $this->drm->cleanDeclaration();

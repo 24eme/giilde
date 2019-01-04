@@ -151,7 +151,7 @@ class ExportMouvementsDRMDB2
             $total["tva"] = round($total["prix_ht"] * 0.20, 2);
             $total["prix_ttc"] = $total["prix_ht"] + $total["tva"];
 
-            $ligne = substr($periode, 0, 4).";".(substr($periode, 4, 2)*1).";". $identifiant.";;0;\"\";0;0;0;".$total["prix_ht"].";".$total["tva"].";".$total["prix_ttc"].";".round($total["quantite"], 2).";".$total["prix_ttc"];
+            $ligne = substr($periode, 0, 4).";".(substr($periode, 4, 2)*1).";". $identifiant.";;0;\"\";0;0;0;".$total["prix_ht"].";".$total["tva"].";".$total["prix_ttc"].";".$total["quantite"].";".$total["prix_ttc"];
 
             foreach($this->structure as $file => $infos) {
                 foreach($this->produits as $produit) {
