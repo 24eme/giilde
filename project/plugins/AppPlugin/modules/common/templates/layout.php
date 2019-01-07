@@ -53,7 +53,7 @@
         <script src="<?php echo public_path("/js/lib/jquery-ui-1.8.21.min.js") ?>"></script>
         <script src="<?php echo public_path("/js/ajaxHelper.js") ?>"></script>
         <script src="<?php echo public_path("/js/form.js") ?>"></script>
-        <script src="<?php echo public_path("/js/colonnes.js") ?>"></script>
+        <script src="<?php echo public_path("/js/colonnes.js?201801071600") ?>"></script>
         <script src="<?php echo public_path("/js/main.js?20170223") ?>"></script>
         <script src="<?php echo public_path("/js/teledeclaration.js") ?>"></script>
         <script src="<?php echo public_path("/js/conditionnement.js") ?>"></script>

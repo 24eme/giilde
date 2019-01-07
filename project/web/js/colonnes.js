@@ -417,7 +417,6 @@
         this.show = function () {
             this.unActive();
             return this.element.show();
-            return true;
         }
 
         this.reinit = function () {
@@ -841,7 +840,6 @@
             var object = this;
 
             this.element_titre.click(function () {
-                console.log('ca marche');
                 var groupes_row = object.getGroupesRow();
                 if (groupes_row.isOpen()) {
                     groupes_row.close();
@@ -1439,7 +1437,13 @@
 
             var colonne = this.colonne;
 
-            this.element.on('keypress', function () {
+            this.element.on('keydown', function (e) {
+                if(e.key == "Tab") {
+                    return;
+                }
+                if(e.key == "Escape") {
+                    return;
+                }
                 colonne.active();
             });
 
