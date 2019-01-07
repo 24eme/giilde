@@ -27,14 +27,13 @@ class DRMProduitsChoiceForm extends acCouchdbObjectForm {
         $produitAutoChecked = DRMConfiguration::getInstance()->isProduitAutoChecked();
         foreach ($this->_produits as $produit) {
           $disabled=array();
-            $checkedAuto = $produitAutoChecked || (!preg_match("/(DPLC|LIES)/",$produit->getHash()));
+            $checkedAuto = $produitAutoChecked || $produit->getTotalDebutMois() > 0 || !preg_match("/(DPLC|LIES)/",$produit->getHash());
             $this->setWidget('produit' . $produit->getHashForKey(), new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => $checkedAuto)));
 
             $this->setWidget('acquitte' . $produit->getHashForKey(), new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => $checkedAuto)));
             if(preg_match("/USAGESINDUSTRIELS/",$produit->getHashForKey())){
                 $this->getWidget('acquitte' . $produit->getHashForKey())->setAttribute('disabled', 'disabled');
-              }
-
+            }
 
             $this->widgetSchema->setLabel('produit' . $produit->getHashForKey(), '');
             $this->widgetSchema->setLabel('acquitte' . $produit->getHashForKey(), '');

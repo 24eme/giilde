@@ -431,7 +431,6 @@ class DRMClient extends acCouchdbClient {
       $results = array();
       $produits = ConfigurationClient::getInstance()->convertHashProduitForDRM($produit, true, $date);
       $vendeur_identifiant = "ETABLISSEMENT-".$vendeur_identifiant;
-      $type_transaction = 'VRAC';
       foreach ($produits as $produit) {
         $results = array_merge($results,$this->getContratsFromProduitAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction));
       }
