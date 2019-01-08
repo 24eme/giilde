@@ -168,6 +168,7 @@ class drmActions extends drmGeneriqueActions {
           $this->drm->identifiant = $this->identifiant;
           $this->drm->periode = $this->periode;
           $this->drm->teledeclare = true;
+          $this->drm->constructId();
           $fileName = 'import_'.$this->drm->identifiant . '_' . $this->drm->periode.'_'.$this->md5.'.csv';
 
           $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
@@ -193,7 +194,7 @@ class drmActions extends drmGeneriqueActions {
         $this->periode = $request->getParameter('periode');
 
         $this->drm = DRMClient::getInstance()->createDoc($this->identifiant, $this->periode, true);
-
+		$this->drm->constructId();
         $fileName = 'import_'.$this->drm->identifiant . '_' . $this->drm->periode.'_'.$this->md5.'.csv';
         $path = sfConfig::get('sf_data_dir') . '/upload/' . $fileName;
         $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
