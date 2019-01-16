@@ -1,9 +1,10 @@
-<?php $warningsMessages = DRMConfiguration::getInstance()->getWarningsMessagesForProduits($produits); ?>
+<?php $warningsMessages = DRMConfiguration::getInstance()->getWarningsMessagesForProduits($produits);
+if (count($warningsMessages)): ?>
 <div class="modal fade" id="warningsProduitsModal" role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Certain produits ajoutés requierts des attentions particulières</h4>
+        <h4 class="modal-title">Certains produits ajoutés requièrent des attentions particulières&nbsp;:</h4>
       </div>
       <div class="modal-body">
         <ul class="text-danger list-unstyled">
@@ -23,3 +24,4 @@
       $('#warningsProduitsModal').modal('show');
     });
 </script>
+<?php endif; ?>

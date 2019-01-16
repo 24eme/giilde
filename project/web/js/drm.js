@@ -130,6 +130,13 @@
         initSignatureDrmPopup();
         initBoldSaisie();
         initAnnexes();
+
+        $("a#retransmission").click(function(){
+          if(confirm("Attention! Vous êtes sur le point d'effectuer une retransmission vers le portail Ciel. Cela peut écraser la DRM si elle est en cours d'édition!")){
+            window.location.href = $(this).data('link');
+          }
+        });
+
     });
 
     var initChoiceProduits = function(){

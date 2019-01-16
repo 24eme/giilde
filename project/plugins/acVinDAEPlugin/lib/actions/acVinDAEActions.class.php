@@ -98,6 +98,12 @@ class acVinDAEActions extends sfActions
 						return $this->redirect('dae_etablissement', array('identifiant' => $this->identifiant));
 					}
 				}
+			} else {
+				$files = $request->getFiles($this->form->getName());
+				if ($files['file']['name'] && $files['file']['tmp_name']) {
+					$path = '/tmp/'.$files['file']['name'];
+					$resultat = move_uploaded_file($files['file']['tmp_name'], $path);
+				}
 			}
 			
 			if (!$this->getUser()->hasCredential(myUser::CREDENTIAL_ADMIN)) {

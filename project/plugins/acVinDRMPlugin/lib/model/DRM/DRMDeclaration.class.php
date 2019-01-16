@@ -117,7 +117,7 @@ class DRMDeclaration extends BaseDRMDeclaration {
         return $recap;
     }
 
-    public function getProduitsDetailsAggregateByAppellation($isTeledeclarationMode = false, $detailsKey = null) {
+    public function getProduitsDetailsAggregateByAppellation($isTeledeclarationMode = false, $detailsKey = null, $exclude = null) {
         $recap = array();
         foreach ($this->certifications as $certification) {
             $recap[$certification->getHash()] = new stdClass();
@@ -125,6 +125,9 @@ class DRMDeclaration extends BaseDRMDeclaration {
             $recap[$certification->getHash()]->produits = array();
             foreach ($certification->genres as $genre) {
                 foreach ($genre->appellations as $appellation) {
+                    if($exclude && preg_match("|$exclude|", $appellation->getHash())) {
+                        continue;
+                    }
                     $produit = new stdClass();
                     $produit->libelle = $appellation->getConfig()->getLibelle();
                     foreach($appellation->getProduitsDetailsSorted($isTeledeclarationMode, $detailsKey) as $detail) {

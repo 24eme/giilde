@@ -167,7 +167,7 @@ function getEtatDRMHrefCalendrier($isTeledeclaration,$calendrier, $periode, $eta
     if ($statut == DRMCalendrier::STATUT_VALIDEE || ($statut == DRMCalendrier::STATUT_VALIDEE_NON_TELEDECLARE && !$isTeledeclaration)) {
         return url_for('drm_visualisation', array('identifiant' => $etablissementId, 'periode_version' => $periode_version));
     }
-    if (($statut == DRMCalendrier::STATUT_EN_COURS) || ($statut == DRMCalendrier::STATUT_EN_COURS_NON_TELEDECLARE)) {
+    if (($statut == DRMCalendrier::STATUT_EN_COURS) || (!$isTeledeclaration && $statut == DRMCalendrier::STATUT_EN_COURS_NON_TELEDECLARE)) {
         return url_for('drm_redirect_etape', array('identifiant' => $etablissementId, 'periode_version' => $periode_version));
     }
     if ($statut == DRMCalendrier::STATUT_NOUVELLE) {
@@ -198,9 +198,13 @@ function getEtatDRMLibelleCalendrier($isTeledeclarationMode, $calendrier, $perio
 
         return !$picto ? '&nbsp;': '<span style="opacity: 0.5;" class="glyphicon glyphicon-ban-circle"></span>';
     }
-    if ($statut == DRMCalendrier::STATUT_EN_COURS_NON_TELEDECLARE) {
+    if ($statut == DRMCalendrier::STATUT_EN_COURS_NON_TELEDECLARE && !$isTeledeclarationMode) {
 
         return !$picto ? 'Continuer': '<span class="glyphicon glyphicon-pencil"></span>';
+    }
+    if ($statut == DRMCalendrier::STATUT_EN_COURS_NON_TELEDECLARE && $isTeledeclarationMode) {
+
+        return !$picto ? '&nbsp;': '<span style="opacity: 0.5;" class="glyphicon glyphicon-ban-circle"></span>';
     }
     if ($statut == DRMCalendrier::STATUT_NOUVELLE) {
 

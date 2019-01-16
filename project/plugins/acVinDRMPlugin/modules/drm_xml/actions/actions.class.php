@@ -11,6 +11,14 @@ class drm_xmlActions extends drmGeneriqueActions {
     $this->drm = $this->getRoute()->getDRM();
   }
 
+  public function executeRetransmission(sfWebRequest $request) {
+    $this->setLayout(false);
+    $this->drm = $this->getRoute()->getDRM();
+    $this->drm->remove('transmission_douane');
+    $this->drm->save();
+    return $this->redirect('drm_transmission',$this->drm);
+  }
+
   public function executeTransfert(sfWebRequest $request) {
     $this->drm = $this->getRoute()->getDRM();
     $this->etablissement = $this->getRoute()->getEtablissement();

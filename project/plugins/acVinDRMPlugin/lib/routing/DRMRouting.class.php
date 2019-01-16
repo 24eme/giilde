@@ -290,7 +290,9 @@ class DRMRouting {
 
         $r->prependRoute('drm_retour_refresh', new DRMRoute('/drm/:identifiant/maj-retour/:periode_version', array('module' => 'drm_xml', 'action' => 'retourRefresh'), array('sf_method' => array('get', 'post')), array('model' => 'DRM', 'type' => 'object')));
 
-
+        $r->prependRoute('drm_retransmission', new DRMRoute('/drm/:identifiant/retransmission/:periode_version',
+            array('module' => 'drm_xml', 'action' => 'retransmission'), array('sf_method' => array('get', 'post')),
+            array('model' => 'DRM', 'type' => 'object')));
     }
 
 }

@@ -18,6 +18,8 @@ class DRMValidation extends DocumentValidation {
         if (!$this->isTeledeclarationDrm) {
             $this->addControle('vigilance', 'vrac_detail_nonsolde', "Le contrat est soldé (ou annulé)");
             $this->addControle('erreur', 'vrac_detail_exist', "Le contrat n'existe plus");
+        }else{
+          $this->addControle('vigilance', 'alcool_hlap', "Pour cet alcool");
         }
         $this->addControle('erreur', 'total_negatif', "Le stock revendiqué théorique fin de mois est négatif");
         $this->addControle('vigilance', 'vrac_detail_negatif', "Le volume qui sera enlevé sur le contrat est supérieur au volume restant");
@@ -61,6 +63,14 @@ class DRMValidation extends DocumentValidation {
             $produitLibelle = " pour le produit ".$detail->getLibelle();
 
             if ($this->isTeledeclarationDrm) {
+
+              if(DRMConfiguration::getInstance()->hasWarningForProduit()){
+                $msgs = DRMConfiguration::getInstance()->getWarningsMessagesForProduits(array($detail->getHash() => ""));
+                if(count($msgs)){
+                  $this->addPoint('vigilance', 'alcool_hlap', $this->generateUrl('drm_edition_detail', $detail)." , les mouvements d'entrées et de sorties doivent être renseignés en HL (et non en HLAP). Un taux d'alcool volumique \"TAV\" doit être renseigné dans les ".$this->generateUrl('drm_annexes', $this->document)."");
+                }
+              }
+
               if($total_observations_obligatoires && (!$detail->exist('observations') || !trim($detail->observations)))
               {
                 if($entrees_excedents){

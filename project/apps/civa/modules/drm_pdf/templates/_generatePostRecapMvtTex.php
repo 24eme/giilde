@@ -1,7 +1,7 @@
 \newpage
 
 <?php
-$dataGlobal = $drm->declaration->getProduitsDetailsAggregateByAppellation(true, 'details');
+$dataGlobal = $drm->declaration->getProduitsDetailsAggregateByAppellation(true, 'details', '/genres/VCI/');
 $data = array();
 
 if(isset($dataGlobal['/declaration/certifications/AOC_ALSACE'])) {
