@@ -17,10 +17,10 @@ function noeudXml($produit, $noeud, &$xml, $exceptions = array()) {
 	}
 }
 
-function storeMultiArray(&$node, $keys, $value) {
+function storeMultiArray(&$node, $keys, $value, $not_sum = false) {
 	$k = array_shift($keys);
 	if (!$k) {
-		if (!is_array($node)) {
+		if (!is_array($node) && !$not_sum) {
 			return $value + $node;
 		}else{
 			return $value;
@@ -29,7 +29,7 @@ function storeMultiArray(&$node, $keys, $value) {
 	if (!is_array($node)) {
 		$node = array();
 	}
-	$node[$k] = storeMultiArray($node[$k], $keys, $value);
+	$node[$k] = storeMultiArray($node[$k], $keys, $value, $not_sum);
 	return $node;
 }
 
@@ -76,8 +76,8 @@ function details2XmlDouane($detail) {
 			if (($v || (($k == 'initial' || $k == 'final') && preg_match('/^stock/', $type))) && $confDetail->get($type)->exist($k) && $confDetail->get($type)->get($k)->douane_cat) {
 				$preXML = storeMultiArray($preXML, explode('/', $confDetail->get($type)->get($k)->douane_cat),  $v);
 				if (preg_match('/replacement/', $confDetail->get($type)->get($k)->douane_cat)) {
-					$preXML = storeMultiArray($preXML, split('/', 'entrees-periode/replacements/replacement-suspension/mois'),  $detail->getReplacementMonth());
-					$preXML = storeMultiArray($preXML, split('/', 'entrees-periode/replacements/replacement-suspension/annee'), $detail->getReplacementYear());
+					$preXML = storeMultiArray($preXML, explode('/', 'entrees-periode/replacements/replacement-suspension/mois'),  $detail->getReplacementMonth(), true);
+					$preXML = storeMultiArray($preXML, explode('/', 'entrees-periode/replacements/replacement-suspension/annee'), $detail->getReplacementYear(),  true);
 				}
 			}
 		}

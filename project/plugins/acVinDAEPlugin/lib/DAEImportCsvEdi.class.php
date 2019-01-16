@@ -309,7 +309,7 @@ class DAEImportCsvEdi extends DAECsvEdi
 	            }
             }
             
-            if (!forceEtablissement && !isset($this->cache['etablissement_'.$etablissement])) {
+            if (!$this->forceEtablissement && !isset($this->cache['etablissement_'.$etablissement])) {
 	            $e = EtablissementClient::getInstance()->findByIdentifiant($etablissement, acCouchdbClient::HYDRATE_JSON);
 	            if(!$e || $e->identifiant != $this->identifiant) {
 	                $this->csvDoc->addErreur($this->createDifferentEtbError($ligne_num, $csvRow));

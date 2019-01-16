@@ -557,7 +557,7 @@ class DRMDetail extends BaseDRMDetail {
     }
     public function getReplacementYear() {
       $d = $this->_get('replacement_date');
-      return preg_replace('/(\d{4})/', '\1', $d);
+      return preg_replace('/.*(\d{4}).*/', '\1', $d);
     }
 
     public function setDenominationComplementaire($denomination_complementaire){
