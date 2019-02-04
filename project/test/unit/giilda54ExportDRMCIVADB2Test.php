@@ -85,8 +85,8 @@ $import = new DRMImportCsvEdi($tmpfname, $drm);
 $t->ok($import->checkCSV(), "Vérification de l'import");
 
 $import->importCSV();
-
 $drm->validate();
+$drm->add('transmission_douane')->success = true;
 $drm->save();
 
 $drm = DRMClient::getInstance()->find('DRM-'.$viti->identifiant.'-'.$periode);
@@ -138,6 +138,7 @@ $dateFinMois = $dateFinMois->format('Ymd');
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
 $drm->save();
 $drm->validate();
+$drm->add('transmission_douane')->success = true;
 $drm->save();
 
 $drm = DRMClient::getInstance()->find('DRM-'.$viti->identifiant.'-'.$periode);

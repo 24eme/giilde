@@ -78,15 +78,22 @@ class DAEClient extends acCouchdbClient {
     }
     
     public function listCampagneByEtablissementId($identifiant) {
-    	$rows = $this->findByIdentifiant($identifiant)->getDatas();
-    	$list = array();
-    	foreach ($rows as $r) {
-    		if ($d = $r->getDateObject())
-    			$list[$d->format('Y-m')] = $r->getLiteralPeriode();
-    	}
+    	$rows = $this->findByIdentifiant($identifiant, acCouchdbClient::HYDRATE_ON_DEMAND)->getDatas();
     	sfApplicationConfiguration::getActive()->loadHelpers(array('Date'));
-    	$list[date('Y-m')] = ucfirst(format_date(date('Y-m-d'), 'MMMM yyyy', 'fr_FR'));
-    	krsort($list);
-    	return $list;
+    	$periodes = array();
+    	foreach ($rows as $k => $v) {
+    		$ex = explode('-', $k);
+    		if (isset($ex[3])) {
+    			$periode = substr($ex[3], 0, 4).'-'.substr($ex[3], 4, 2);
+    			if (!in_array($periode, $periodes)) {
+    				$periodes[$periode] = ucfirst(format_date(substr($ex[3], 0, 4).'-'.substr($ex[3], 4, 2).'-01', 'MMMM yyyy', 'fr_FR'));
+    			}
+    		}
+    	}
+    	if (!in_array(date('Y-m'), $periodes)) {
+    		$periodes[date('Y-m')] = ucfirst(format_date(date('Y-m-d'), 'MMMM yyyy', 'fr_FR'));
+    	}
+    	krsort($periodes);
+    	return $periodes;
     }
 }

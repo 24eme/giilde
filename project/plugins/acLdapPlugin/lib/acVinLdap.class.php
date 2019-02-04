@@ -14,7 +14,7 @@
 
 /**
  * acLdapPlugin lib.
- * 
+ *
  * @package    acLdapPlugin
  * @subpackage lib
  * @author     Jean-Baptiste Le Metayer <lemetayer.jb@gmail.com>
@@ -23,132 +23,179 @@
  * @author     Charlotte De Vichet <c.devichet@gmail.com>
  * @version    0.1
  */
-class acVinLdap
+abstract class acVinLdap
 {
     protected $serveur;
     protected $dn;
     protected $dc;
     protected $pass;
 
+    private $connection = null;
+    private $base_dn = '';
+
+    private $base_identifiant = '';
+
     /**
-     * 
+     * Constructeur.
+     * Défini quelques variables et teste la connection
+     *
      */
     public function __construct()
     {
-		$this->serveur = sfConfig::get('app_ldap_serveur');
-		$this->dn = sfConfig::get('app_ldap_dn');
-		$this->dc = sfConfig::get('app_ldap_dc');
-		$this->pass = sfConfig::get('app_ldap_pass');
+        $this->serveur = sfConfig::get('app_ldap_serveur');
+        $this->dn = sfConfig::get('app_ldap_dn');
+        $this->dc = sfConfig::get('app_ldap_dc');
+        $this->pass = sfConfig::get('app_ldap_pass');
+
+        $this->base_dn = $this->ou . ',' . $this->dc;
+        $this->base_identifiant = $this->id
+                                . '=%s,'
+                                . $this->base_dn;
+        $this->connection = $this->connect();
     }
 
     /**
+     * Tente de se connecter au LDAP
      *
-     * @return bool 
+     * @return bool Connection réussie
      */
-    public function connect() 
+    public function connect()
     {
         $con = ldap_connect($this->serveur);
         ldap_set_option($con, LDAP_OPT_PROTOCOL_VERSION, 3);
-        if ($con && ldap_bind($con, $this->dn, $this->pass)) {
-            return $con;
-        } else {
-            return false;
-        }
+
+        return ($con && ldap_bind($con, $this->dn, $this->pass)) ? $con : false;
     }
-    
+
     /**
+     * Retourne l'identifiant de connection
      *
-     * @param mixed $uid
-     * @param array $infos
-     * @return bool 
+     * @return resource Identifiant LDAP
      */
-    public function save($uid, $infos)
+    protected function getConnection()
     {
-      $con = $this->connect();
-      if($con) {
-	if ($this->exist($uid)) {
-	  return $this->update($uid, $infos);
-	} else {
-	  return $this->add($uid, $infos);
-	}
-      }
-      return false;
+        return $this->connection;
     }
-    
+
     /**
+     * Retourne le DN de base pour la recherche
      *
-     * @param mixed $uid
-     * @param array $infos
-     * @return bool 
+     * @return string Base DN pour la recherche
      */
-    protected function add($uid, $infos) 
+    protected function getBaseDN()
     {
-        $con = $this->connect();
-        if($con) {
-            $add = @ldap_add($con, 'uid='.$uid.',ou=People,'.$this->dc, $infos);
-	    if (!$add) {
-	      throw new sfException(ldap_error($con));
-	    }
-            ldap_unbind($con);
-            return $add;
-        }
-        return false;
+        return $this->base_dn;
     }
-    
+
     /**
+     * Retourne le template d'identification
      *
-     * @param mixed $uid
-     * @param array $infos
-     * @return bool 
+     * @return string Template de la ressource
      */
-    protected function update($uid, $infos)
+    protected function getBaseIdentifiant()
     {
-        $con = $this->connect();
-        if($con) {
-            $update = @ldap_modify($con, 'uid='.$uid.',ou=People,'.$this->dc, $infos);
-	    if (!$update) {
-	      throw new sfException(ldap_error($con));
-	    }
-            ldap_unbind($con);
-            return $update;
+        return $this->base_identifiant;
+    }
+
+    /**
+     * Sauvegarde une entrée dans le LDAP
+     *
+     * @param string $identifiant Identifiant de la ressource. uid ou cn
+     * @param array $attributes Attributs de l'entrée.
+     * @return bool Retourne false si échec de la sauvegarde
+     */
+    public function save($identifiant, $attributes)
+    {
+        if($this->connection) {
+            return ($this->exist($identifiant))
+                ? $this->update($identifiant, $attributes)
+                : $this->add($identifiant, $attributes);
         }
         return false;
     }
 
     /**
+     * Créé une nouvelle entrée.
      *
-     * @param mixed $uid
-     * @return bool 
+     * @param string $identifiant Identifiant de la ressource.
+     * @param array $attributes Attributs de la ressource.
+     * @return bool Retourne True si ajout, false si échec.
+     * @throws sfException Si échec de l'ajout
      */
-    public function exist($uid)
+    protected function add($identifiant, $attributes)
     {
-        $con = $this->connect();
-        if($con) {
-            $search = ldap_search($con, 'ou=People,'.$this->dc, 'uid='.$uid);
-            if($search){
-                $count = ldap_count_entries($con, $search);
-                if($count > 0) {
-                    return true;
-                }
+        if($this->connection) {
+            if (! @ldap_add($this->connection,
+                             sprintf($this->base_identifiant, $identifiant),
+                             $attributes)
+            ) {
+                throw new sfException(ldap_error($this->connection));
             }
+            return true;
         }
         return false;
     }
 
     /**
+     * Met à jour une entrée dans le LDAP
      *
-     * @param mixed $uid
-     * @return bool 
+     * @param string $identifiant Identifiant de la ressource
+     * @param array $attributes Attributs de la ressource
+     * @return bool Réussite de la modification
+     * @throws sfException si la modification échoue
      */
-    public function delete($uid) 
+    protected function update($identifiant, $attributes)
     {
-        $con = $this->connect();
-        if($con) {
-            $delete = ldap_delete($con, 'uid='.$uid.',ou=People,'.$this->dc);
-            ldap_unbind($con);
-            return $delete;
+        if($this->connection) {
+            if (! @ldap_modify($this->connection,
+                               sprintf($this->base_identifiant, $identifiant),
+                               $attributes)
+            ) {
+                throw new sfException(ldap_error($this->connection));
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Supprime une entrée dans le LDAP
+     *
+     * @param string $identifiant Identifiant de la ressource
+     * @return bool Suppression réussie
+     */
+    public function delete($identifiant)
+    {
+        if($this->connection && $this->exist($identifiant)) {
+            return ldap_delete($this->connection, sprintf($this->base_identifiant, $identifiant));
         } else {
             return false;
         }
+    }
+
+    /**
+     * Vérifie l'existence d'une entrée dans le LDAP
+     *
+     * @param string $identifiant Identifiant de la ressource
+     * @return bool La ressource existe
+     */
+    public function exist($identifiant)
+    {
+        if($this->connection) {
+            if (($search = ldap_search($this->connection, $this->base_dn, $this->id.'='.$identifiant)) !== false) {
+                return ldap_count_entries($this->connection, $search) > 0;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Déconstructeur
+     * Ferme la connection au LDAP
+     *
+     */
+    public function __destruct()
+    {
+        ldap_unbind($this->connection);
     }
 }

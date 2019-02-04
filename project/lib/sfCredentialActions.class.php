@@ -59,7 +59,7 @@ class sfCredentialActions extends sfActions {
 
             case self::CREDENTIAL_PRESSE:
                 return array(SocieteClient::TYPE_PRESSE,
-                    SocieteClient::SUB_TYPE_HOTELRESTAURANT,
+                             SocieteClient::SUB_TYPE_HOTELRESTAURANT,
                              SocieteClient::SUB_TYPE_AUTRE);
 
             case self::CREDENTIAL_DIRECTION:

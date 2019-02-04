@@ -5,6 +5,7 @@ nbproject/
 *~
 .~*
 .*#
+*.swp
 project/web/declaration_dev.php
 project/bower_components
 project/web/components/vins/.fontcustom-manifest.json

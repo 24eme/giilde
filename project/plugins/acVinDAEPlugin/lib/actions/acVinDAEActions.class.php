@@ -5,23 +5,17 @@ class acVinDAEActions extends sfActions
 		$this->etablissement = $this->getRoute()->getEtablissement();
 		$this->periode = new DateTime($request->getParameter('periode', date('Y-m-d')));
 		$this->campagne = ConfigurationClient::getInstance()->buildCampagne($this->periode->format('Y-m-d'));
-		$this->formCampagne($request, 'dae_etablissement');
-		$this->daes = DAEClient::getInstance()->findByIdentifiantPeriode($this->etablissement->identifiant, $this->periode->format('Ym'))->getDatas();
-	}
-	
-	private function formCampagne(sfWebRequest $request, $route) {
-		$this->etablissement = $this->getRoute()->getEtablissement();
-		$this->periode = new DateTime($request->getParameter('periode', date('Y-m-d')));
-	
+		
 		$this->formCampagne = new DAEEtablissementCampagneForm($this->etablissement->identifiant, $this->periode->format('Y-m'));
-	
+		
 		if ($request->isMethod(sfWebRequest::POST)) {
 			$param = $request->getParameter($this->formCampagne->getName());
 			if ($param) {
 				$this->formCampagne->bind($param);
-				return $this->redirect($route, array('identifiant' => $this->etablissement->getIdentifiant(), 'campagne' => $this->formCampagne->getValue('campagne')));
+				return $this->redirect('dae_etablissement', array('identifiant' => $this->etablissement->getIdentifiant(), 'campagne' => $this->formCampagne->getValue('campagne')));
 			}
 		}
+		$this->daes = DAEClient::getInstance()->findByIdentifiantPeriode($this->etablissement->identifiant, $this->periode->format('Ym'), acCouchdbClient::HYDRATE_JSON)->getDatas();
 	}
 	
 	public function executeNouveau(sfWebRequest $request) {

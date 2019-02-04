@@ -101,7 +101,6 @@ class CompteClient extends acCouchdbClient {
         $compte = $this->find($e->getNumCompteEtablissement());
 
         if (!$compte) {
-
             $compte = $this->createCompteFromEtablissement($e);
         }
 
@@ -112,7 +111,7 @@ class CompteClient extends acCouchdbClient {
         $compte = new Compte();
         $compte->id_societe = $societe->_id;
         if(!$societe->isNew()) {
-        $societe->pushContactAndAdresseTo($compte);
+            $societe->pushContactAndAdresseTo($compte);
         }
         $compte->identifiant = $this->getNextIdentifiantForSociete($societe);
         $compte->constructId();
