@@ -75,7 +75,7 @@
         <div class="col-xs-4 text-right">
                 <?php if ($isTeledeclarationMode): ?>
                         <?php echo $form['email_transmission']->render(); ?>
-                        <?php if($compte->hasDroit(Roles::TELEDECLARATION_DOUANE)): ?>
+                        <?php if(isset($form['transmission_ciel'])): ?>
                               <?php echo $form['transmission_ciel']->render(); ?>
                         <?php endif; ?>
                         <button <?php if (!$validation->isValide()) : ?>disabled="disabled"<?php endif; ?> type="button" data-toggle="modal" data-target="#signature_drm_popup" <?php if (!$validation->isValide()): ?>disabled="disabled"<?php endif; ?> href="#signature_drm_popup_content" class="btn btn-success"><span>Valider</span></button>

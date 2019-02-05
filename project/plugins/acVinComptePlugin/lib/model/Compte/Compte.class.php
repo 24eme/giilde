@@ -333,26 +333,30 @@ class Compte extends BaseCompte implements InterfaceCompteGenerique {
         if ($this->isActif()) {
             $ldap->saveCompte($this, $verbose);
 
-            $groupes_a_garder = [];
+            if (sfConfig::get('app_ldap_autogroup', false)) {
+                $groupes_a_garder = [];
 
-            foreach ($this->tags as $type => $tags) {
-                foreach ($tags as $group) {
-                    $groupldap->saveGroup($type."_".$group, $compteid);
+                foreach ($this->tags as $type => $tags) {
+                    foreach ($tags as $group) {
+                        $groupldap->saveGroup($type."_".$group, $compteid);
 
-                    // On récupère les groupes
-                    $groupes_a_garder[] = $group;
+                        // On récupère les groupes
+                        $groupes_a_garder[] = $group;
+                    }
+                }
+
+                // ex_groupes contient les groupes qui ne sont plus liés au compte
+                $ex_groupes = array_diff($groupes, $groupes_a_garder);
+
+                foreach ($ex_groupes as $group) {
+                    $groupldap->removeMember($group, $compteid);
                 }
             }
-
-            // ex_groupes contient les groupes qui ne sont plus liés au compte
-            $ex_groupes = array_diff($groupes, $groupes_a_garder);
-
-            foreach ($ex_groupes as $group) {
-                $groupldap->removeMember($group, $compteid);
-            }
         } else {
-            foreach ($groupes as $group) {
-                $groupldap->removeMember($group, $compteid);
+            if (sfConfig::get('app_ldap_autogroup', false)) {
+                foreach ($groupes as $group) {
+                    $groupldap->removeMember($group, $compteid);
+                }
             }
 
             $ldap->deleteCompte($this, $verbose);
