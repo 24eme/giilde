@@ -2,6 +2,10 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
+if($application == "civa") {
+    sfConfig::set('app_compte_synchro', true);
+}
+
 $societe = SocieteClient::getInstance()->findByIdentifiantSociete('999990');
 if ($societe) {
   $societe->delete();

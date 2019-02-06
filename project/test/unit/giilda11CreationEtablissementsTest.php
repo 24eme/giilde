@@ -2,6 +2,9 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
+if($application == "civa") {
+    sfConfig::set('app_compte_synchro', true);
+}
 
 foreach (CompteTagsView::getInstance()->listByTags('test', 'test') as $k => $v) {
     if (preg_match('/SOCIETE-([^ ]*)/', implode(' ', array_values($v->value)), $m)) {

@@ -21,7 +21,7 @@
         <link href="<?php echo public_path("/components/vins/vins.css") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/css/style.css?20170324") ?>" rel="stylesheet">
         <?php if(file_exists(sfConfig::get('sf_web_dir')."/css/style_".sfConfig::get('sf_app').'.css')): ?>
-            <link href="<?php echo public_path("/css/style_".sfConfig::get('sf_app').".css") ?>" rel="stylesheet">
+            <link href="<?php echo public_path("/css/style_".sfConfig::get('sf_app').".css?201902051533") ?>" rel="stylesheet">
         <?php endif; ?>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

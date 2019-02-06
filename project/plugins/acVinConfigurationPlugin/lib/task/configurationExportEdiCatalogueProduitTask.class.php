@@ -34,6 +34,9 @@ class configurationExportEdiCatalogueProduitTask extends sfBaseTask
     		sprintf("CERTIFICATION,GENRE,APPELLATION,MENTION,LIEU,COULEUR,CEPAGE,LIBELLE_PRODUIT,IDENTIFIANT INAO\n");
     	
     	foreach($produits as $hash => $produit) {
+				if (!$produit->isActif(date('Y-m-d'))) {
+					continue;
+				}
     		$certificationKey = $produit->getCertification()->getKey();
     		if ($certificationKey == "DEFAUT")
     			$certificationKey = "";

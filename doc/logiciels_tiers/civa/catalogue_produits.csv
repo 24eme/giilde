@@ -698,31 +698,22 @@ AOC,,AOC Alsace Grand Cru,SGN,Hengst,,Muscat,AOC Alsace Grand Cru Hengst Muscat 
 AOC,,AOC Alsace Grand Cru,SGN,Hengst,,Gewurztraminer,AOC Alsace Grand Cru Hengst Gewurztraminer SGN,1B017D61
 AOC,,AOC Alsace Pinot noir,,,,Pinot Noir Rosé,AOC Alsace Pinot noir,1S001S 1
 AOC,,AOC Alsace PN rouge,,,,Pinot Noir Rouge,AOC Alsace PN rouge,1R001S 1
-AOC,,AOC Crémant d'Alsace,,,,Pinot Blanc,AOC Crémant d'Alsace Pinot Blanc,1B001M07
-AOC,,AOC Crémant d'Alsace,,,,Chardonnay,AOC Crémant d'Alsace Chardonnay,1B001M01
-AOC,,AOC Crémant d'Alsace,,,,Pinot Noir Blanc,AOC Crémant d'Alsace Pinot Noir Blanc,1B001M06
-AOC,,AOC Crémant d'Alsace,,,,Riesling,AOC Crémant d'Alsace Riesling,1B001M04
-AOC,,AOC Crémant d'Alsace,,,,Pinot Gris,AOC Crémant d'Alsace Pinot Gris,1B001M03
-AOC,,AOC Crémant d'Alsace,,,,Pinot Noir Rosé,AOC Crémant d'Alsace Pinot Noir Rosé,1S001M00
-AOC,,AOC Crémant d'Alsace,,,,Rebêches,AOC Crémant d'Alsace Rebêches,4B999B
 AOC,,AOC Crémant d'Alsace,,,,Blanc,AOC Crémant d'Alsace Blanc,1B001M00
 AOC,,AOC Crémant d'Alsace,,,,Rosé,AOC Crémant d'Alsace Rosé,1S001M00
 AOC,VCI,Alsace blanc,,,,,VCI Alsace blanc,1B001S99
 AOC,VCI,Crémant d'Alsace,,,,,VCI Crémant d'Alsace,1B001M90
-Vins sans IG,,Vins sans IG,,,,Blanc,Vins sans IG Blanc,4B999
-Vins sans IG,,Vins sans IG,,,,Rosé,Vins sans IG Rosé,4S999
-Vins sans IG,,Vins sans IG,,,,Rouge,Vins sans IG Rouge,4R999
-Vins sans IG,,Vins sans IG,,,,Sans IG,Vins sans IG Sans IG,4VDT999
-Vins sans IG,,Vins sans IG,,,,Mousseux,Vins sans IG Mousseux,4M999
+Vins sans IG,,Vins sans IG,,,,Blanc,Vins sans IG Blanc,VT_SANS_IG_AUTRES
+Vins sans IG,,Vins sans IG,,,,Rosé,Vins sans IG Rosé,VT_SANS_IG_AUTRES
+Vins sans IG,,Vins sans IG,,,,Rouge,Vins sans IG Rouge,VT_SANS_IG_AUTRES
 Vins sans IG,,CEE,,,Blanc,,Vins sans IG CEE Blanc,VT_ETRANGERS
 Vins sans IG,,CEE,,,Rouge,,Vins sans IG CEE Rouge,VT_ETRANGERS
 Vins sans IG,,CEE,,,Rosé,,Vins sans IG CEE Rosé,VT_ETRANGERS
 Vins sans IG,,Hors UE,,,Blanc,,Vins sans IG Hors UE Blanc,VT_ETRANGERS
 Vins sans IG,,Hors UE,,,Rouge,,Vins sans IG Hors UE Rouge,VT_ETRANGERS
 Vins sans IG,,Hors UE,,,Rosé,,Vins sans IG Hors UE Rosé,VT_ETRANGERS
-Vins sans IG,Mousseux,Vins sans IG,,,Blanc,,Vins sans IG Mousseux Blanc,4B999M
-Vins sans IG,Mousseux,Vins sans IG,,,Rouge,,Vins sans IG Mousseux Rouge,4R999M
-Vins sans IG,Mousseux,Vins sans IG,,,Rosé,,Vins sans IG Mousseux Rosé,4S999M
+Vins sans IG,Mousseux,Vins sans IG,,,Blanc,,Vins sans IG Mousseux Blanc,VM_SANS_IG_AUTRES
+Vins sans IG,Mousseux,Vins sans IG,,,Rouge,,Vins sans IG Mousseux Rouge,VM_SANS_IG_AUTRES
+Vins sans IG,Mousseux,Vins sans IG,,,Rosé,,Vins sans IG Mousseux Rosé,VM_SANS_IG_AUTRES
 Vins AOP,,France,,,Blanc,,Vins AOP France Blanc,VT_IG_AOP
 Vins AOP,,France,,,Rouge,,Vins AOP France Rouge,VT_IG_AOP
 Vins AOP,,France,,,Rosé,,Vins AOP France Rosé,VT_IG_AOP

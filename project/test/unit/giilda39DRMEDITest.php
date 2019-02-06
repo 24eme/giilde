@@ -2,13 +2,13 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(32);
+$t = new lime_test(37);
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
-$produits = array_keys(ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->getProduits());
+$produits = array_keys(ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits());
 $produit1_hash = array_shift($produits);
-$produit1 = ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->get($produit1_hash);
+$produit1 = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->get($produit1_hash);
 $produit2_hash = array_shift($produits);
-$produit2 = ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->get($produit2_hash);
+$produit2 = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->get($produit2_hash);
 
 
 //Suppression des DRM précédentes
@@ -55,7 +55,7 @@ $t->is($drm->getProduit($produit1_hash, 'details')->get('sorties/export'),2.8425
 $t->is($drm->getProduit($produit1_hash, 'details')->get('stocks_fin/final'),945,"stock final OK");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('replacement_date'), "31/12/2017","Date de replacement OK");
 if(DRMConfiguration::getInstance()->isObservationsAuto()) {
-$t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), ConfigurationClient::getInstance()->getConfiguration("2018-01-01")->libelle_detail_ligne->details->entrees->retourmarchandisetaxees->libelle_long, "Observations OK");
+$t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->libelle_detail_ligne->details->entrees->retourmarchandisetaxees->libelle_long, "Observations OK");
 } else {
 $t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), "", "Observations OK");
 }
@@ -149,7 +149,8 @@ $temp = fopen($tmpfname, "w");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,945,,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,sorties,ventefrancecrd,4,,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,941,,,,,,\n");
-fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,11625,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,0,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille75cl,,,,,,,collectif suspendu,entrees,achats,11625,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,24,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",Lie de vin,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11601,,,,\n");
 fclose($temp);
@@ -159,7 +160,7 @@ $import = new DRMImportCsvEdi($tmpfname, $drm3);
 $t->ok($import->checkCSV(), "Vérification de l'import");
 if ($import->getCsvDoc()->hasErreurs()) {
   foreach ($import->getCsvDoc()->erreurs as $k => $err) {
-    $t->ok(false, $err->diagnostic);
+    $t->ok(false, $err->diagnostic." : ".$err->csv_erreur);
   }
 }
 
@@ -171,12 +172,73 @@ $t->is($drm3->getProduit($produit1_hash, 'details')->get('sorties/ventefrancecrd
 $t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-LIEDEVIN-750')->sorties_utilisations, 24, "Utilisation CRD 75 cl OK");
 
 $t->is($drm3->getProduit($produit1_hash, 'details')->get('stocks_debut/initial'), 944, "le stock initial est celui attendu");
-$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-LIEDEVIN-750')->stock_debut, 11625, "stock debut 75 cl OK");
+$t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-LIEDEVIN-750')->stock_debut, 0, "stock debut 75 cl OK");
 
 $t->is($drm3->getProduit($produit1_hash, 'details')->get('stocks_fin/final'), 940, "le stock final est celui attendu");
 $t->is($drm3->crds->COLLECTIFSUSPENDU->get('TRANQ-LIEDEVIN-750')->stock_fin, 11601, "stock fin 75 cl OK");
 
 $drm3->delete();
+
+$t->comment("Conformité aux catalogues ou  ".$viti->identifiant);
+
+$produit_disabled = null;
+
+foreach($produits as $ph) {
+  $p = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->get($ph);
+  if (!$p->isActif(date('Y')."-01-01")) {
+    $produit_disabled = $p;
+    break;
+  }
+}
+$temp = fopen($tmpfname, "w");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit_disabled->getCertification()->getLibelle().",".$produit_disabled->getGenre()->getLibelle().",".$produit_disabled->getAppellation()->getLibelle().",".$produit_disabled->getMention()->getLibelle().",".$produit_disabled->getLieu()->getLibelle().",".$produit_disabled->getCouleur()->getLibelle().",".$produit_disabled->getCepage()->getLibelle().",,".$produit_disabled->getLibelleFormat().",suspendu,stocks_debut,initial,951.4625,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit_disabled->getCertification()->getLibelle().",".$produit_disabled->getGenre()->getLibelle().",".$produit_disabled->getAppellation()->getLibelle().",".$produit_disabled->getMention()->getLibelle().",".$produit_disabled->getLieu()->getLibelle().",".$produit_disabled->getCouleur()->getLibelle().",".$produit_disabled->getCepage()->getLibelle().",,".$produit_disabled->getLibelleFormat().",suspendu,entrees,retourmarchandisetaxees,1,201712,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit_disabled->getCertification()->getLibelle().",".$produit_disabled->getGenre()->getLibelle().",".$produit_disabled->getAppellation()->getLibelle().",".$produit_disabled->getMention()->getLibelle().",".$produit_disabled->getLieu()->getLibelle().",".$produit_disabled->getCouleur()->getLibelle().",".$produit_disabled->getCepage()->getLibelle().",,".$produit_disabled->getLibelleFormat().",suspendu,sorties,ventefrancecrd,4.62,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit_disabled->getCertification()->getLibelle().",".$produit_disabled->getGenre()->getLibelle().",".$produit_disabled->getAppellation()->getLibelle().",".$produit_disabled->getMention()->getLibelle().",".$produit_disabled->getLieu()->getLibelle().",".$produit_disabled->getCouleur()->getLibelle().",".$produit_disabled->getCepage()->getLibelle().",,".$produit_disabled->getLibelleFormat().",suspendu,sorties,export,1.89,PAYS-BAS,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit_disabled->getCertification()->getLibelle().",".$produit_disabled->getGenre()->getLibelle().",".$produit_disabled->getAppellation()->getLibelle().",".$produit_disabled->getMention()->getLibelle().",".$produit_disabled->getLieu()->getLibelle().",".$produit_disabled->getCouleur()->getLibelle().",".$produit_disabled->getCepage()->getLibelle().",,".$produit_disabled->getLibelleFormat().",suspendu,sorties,export,0.9525,BELGIQUE,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit_disabled->getCertification()->getLibelle().",".$produit_disabled->getGenre()->getLibelle().",".$produit_disabled->getAppellation()->getLibelle().",".$produit_disabled->getMention()->getLibelle().",".$produit_disabled->getLieu()->getLibelle().",".$produit_disabled->getCouleur()->getLibelle().",".$produit_disabled->getCepage()->getLibelle().",,".$produit_disabled->getLibelleFormat().",suspendu,stocks_fin,final,945,,,,,,\n");
+fclose($temp);
+
+$drm4 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
+$import = new DRMImportCsvEdi($tmpfname, $drm4);
+$t->ok(!$produit_disabled || !$import->checkCSV(), "Un produit non actif ne doit pas être permis");
+unlink($tmpfname);
+
+$temp = fopen($tmpfname, "w");
+$periode5 = date('Y')."02";
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif acquitte,stock_debut,debut,11624,,,,\n");
+fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif acquitte,stock_fin,fin,11624,,,,\n");
+fclose($temp);
+$drm5 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5);
+$import = new DRMImportCsvEdi($tmpfname, $drm5);
+$t->ok(!$import->checkCSV(), "On ne peut pas changer une CRD avec du stock");
+foreach($import->getCsvDoc()->erreurs as $k => $err) {
+  break;
+}
+$t->is($err->num_ligne, 5, "L'erreur de CRD pointe la bonne ligne");
+
+$temp = fopen($tmpfname, "w");
+$periode5 = date('Y')."02";
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,0,,,,\n");
+fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,entrees,achats,11624,,,,\n");
+fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11624,,,,\n");
+fclose($temp);
+$drm6 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5);
+$import = new DRMImportCsvEdi($tmpfname, $drm6);
+$t->ok(!$import->checkCSV(), "On ne peut pas changer le stock CRD déclaré lors de la DRM précédente");
+foreach($import->getCsvDoc()->erreurs as $k => $err) {
+  break;
+}
+$t->is($err->num_ligne, 5, "L'erreur de CRD pointe la bonne ligne");
+
 $drm2->devalide();
 $drm2->delete();
 unlink($tmpfname);

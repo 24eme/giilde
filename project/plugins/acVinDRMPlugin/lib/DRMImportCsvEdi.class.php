@@ -304,8 +304,10 @@ private function importMouvementsFromCSV($just_check = false) {
         }
         $produitConfLibelleAOC = $this->slugifyProduitConf($produit);
         $produitConfLibelleAOP = $this->slugifyProduitConf($produit,true);
+        $produitConfLibelleAOCWithoutGenre = $this->slugifyProduitConf($produit, false, false);
         $libelleCompletConfAOC = $this->slugifyProduitArrayOrString($produitConfLibelleAOC);
         $libelleCompletConfAOP = $this->slugifyProduitArrayOrString($produitConfLibelleAOP);
+        $libelleCompletConfAOCWithoutGenre = $this->slugifyProduitArrayOrString($produitConfLibelleAOCWithoutGenre);
         $libelleCompletEnCsv = $this->slugifyProduitArrayOrString($csvRow[self::CSV_CAVE_LIBELLE_PRODUIT]);
 
         $isEmptyArray = $this->isEmptyArray($csvLibelleProductArray);
@@ -319,7 +321,9 @@ private function importMouvementsFromCSV($just_check = false) {
         }elseif((count(array_diff($csvLibelleProductArray, $produitConfLibelleAOC))) && (count(array_diff($csvLibelleProductArray, $produitConfLibelleAOP)))
         && ($libelleCompletConfAOC != $csvLibelleProductComplet) && ($libelleCompletConfAOP != $csvLibelleProductComplet)
         && ($libelleCompletConfAOC != $libelleCompletEnCsv) && ($libelleCompletConfAOP != $libelleCompletEnCsv)
-        && ($this->slugifyProduitArrayOrString($produit->getLibelleFormat()) != $libelleCompletEnCsv)) {
+        && ($libelleCompletConfAOCWithoutGenre != $csvLibelleProductComplet)
+        && ($libelleCompletConfAOCWithoutGenre != $libelleCompletEnCsv)
+        && ($this->slugifyProduitArrayOrString($produit->getLibelleFormat()) != $libelleCompletEnCsv) ) {
           continue;
         }
         $founded_produit = $produit;
@@ -348,6 +352,13 @@ private function importMouvementsFromCSV($just_check = false) {
       $this->produits_not_found[$keys_libelle_mention_fin] = 1;
       continue;
     }
+
+    if ($founded_produit && !$founded_produit->isActif($csvRow[self::CSV_PERIODE].'-01')) {
+      $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
+      $num_ligne++;
+      continue;
+    }
+
 
     $this->previous_produits[$keys_libelle] = $founded_produit;
     $this->previous_produits[$keys_libelle_mention_fin] = $founded_produit;
@@ -582,11 +593,32 @@ private function importCrdsFromCSV($just_check = false) {
       $num_ligne++;
       continue;
     }
+
+    $centilitrage = $all_contenances[$litrageKey];
+    $litrageLibelle = DRMClient::getInstance()->getLibelleCRD($litrageKey);
+    $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
+    $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
+
+    if ($this->drm->hasPrecedente()) {
+        if  ($fieldNameCrd == 'stock_debut') {
+          $drmPrecedente = $this->drm->getPrecedente();
+          if ($quantite && (!$drmPrecedente->crds->exist($crd_regime) || !$drmPrecedente->crds->get($crd_regime)->exist($keyNode))) {
+            $this->csvDoc->addErreur($this->previousCRDProductError($num_ligne, $csvRow));
+            $num_ligne++;
+            continue;
+          }
+
+          if ($drmPrecedente->crds->exist($crd_regime)  && $drmPrecedente->crds->get($crd_regime)->exist($keyNode)) {
+            if ($drmPrecedente->crds->get($crd_regime)->get($keyNode)->stock_fin != $quantite) {
+              $this->csvDoc->addErreur($this->previousCRDStockError($num_ligne, $csvRow));
+              $num_ligne++;
+              continue;
+            }
+          }
+        }
+    }
+
     if (!$just_check) {
-      $centilitrage = $all_contenances[$litrageKey];
-      $litrageLibelle = DRMClient::getInstance()->getLibelleCRD($litrageKey);
-      $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
-      $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
       if (!$regimeNode->exist($keyNode)) {
         $regimeNode->getOrAddCrdNode($genre, $couleur, $centilitrage, $litrageLibelle);
       }
@@ -782,6 +814,12 @@ private function categorieCRDNotFoundError($num_ligne, $csvRow) {
 private function typeCRDNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CRD_TYPE_KEY], "Le type de CRD n'a pas été trouvé");
 }
+private function previousCRDProductError($num_ligne, $csvRow) {
+  return $this->createError($num_ligne, $csvRow[self::CSV_CRD_REGIME], "Il n'existe pas de stock pour cette crd dans la DRM précédente");
+}
+private function previousCRDStockError($num_ligne, $csvRow) {
+  return $this->createError($num_ligne, $csvRow[self::CSV_CRD_REGIME], "Le stock initial pour cette crd n'est pas conforme à la DRM précédente");
+}
 private function exportPaysNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_EXPORTPAYS], "Le pays d'export n'a pas été trouvé");
 }
@@ -899,16 +937,19 @@ private function slugifyProduitConf($produit, $withAOP = false, $withGenre = tru
   foreach ($produit->getLibelles() as $key => $libelle) {
     $libellesSlugified[] = strtoupper(KeyInflector::slugify($libelle));
   }
-  $genreKey = $produit->getGenre()->getKey();
-  if(isset(self::$genres[$genreKey])) {
-    $genreLibelle = self::$genres[$genreKey];
-  } else {
-    $genreLibelle = null;
+  if($withGenre) {
+      $genreKey = $produit->getGenre()->getKey();
+      if(isset(self::$genres[$genreKey])) {
+        $genreLibelle = self::$genres[$genreKey];
+      } else {
+        $genreLibelle = null;
+      }
+      $libellesSlugified[1] = strtoupper(KeyInflector::slugify($genreLibelle));
   }
-  $libellesSlugified[1] = strtoupper(KeyInflector::slugify($genreLibelle));
   if(($libellesSlugified[0] == "AOC") && $withAOP){
     $libellesSlugified[0]="AOP";
   }
+  $libellesSlugified[2] = str_replace("AOC-", "", $libellesSlugified[2]);
   foreach ($libellesSlugified as $key => $libelle) {
     if (!$libelle) {
       $libellesSlugified[$key] = null;

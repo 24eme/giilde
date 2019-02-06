@@ -166,6 +166,6 @@ class CompteGroupLdap extends acVinLdap
      */
     private function fdn($member)
     {
-        return "uid=$member,ou=People,dc=ivso,dc=actualys,dc=com";
+        return "uid=$member,ou=People,".sfConfig::get('app_ldap_dc');
     }
 }
