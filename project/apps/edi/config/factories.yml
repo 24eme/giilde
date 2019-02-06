@@ -45,3 +45,6 @@ all:
     class: myUser
     param:
       timeout: 7200
+
+  mailer:
+    class: AppMailer

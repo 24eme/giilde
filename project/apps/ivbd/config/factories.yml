@@ -49,6 +49,7 @@ all:
       timeout: 7200
 
   mailer:
+    class: AppMailer
     param:
       transport:
         class: Swift_MailTransport

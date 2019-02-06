@@ -49,6 +49,7 @@ all:
       timeout: 7200
 
   mailer:
+    class: AppMailer
     param:
       transport:
         class: Swift_MailTransport
@@ -56,7 +57,7 @@ all:
   storage:
     class: sfSessionStorage
     param:
-      session_name: giilda_civa_preprod
+      session_name: giilda_civa
 
   request:
     class: sfWebRequest
