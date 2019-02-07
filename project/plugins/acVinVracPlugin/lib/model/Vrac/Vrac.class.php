@@ -394,6 +394,15 @@ class Vrac extends BaseVrac {
     }
 
     public function validate($options = array()) {
+        if ($this->valide->statut && $this->valide->statut != VracClient::STATUS_CONTRAT_BROUILLON) {
+            if (isset($options['identifiant'])) {
+                $this->valide->identifiant = $options['identifiant'];
+            }
+            $this->valide->add('date_saisie', date('c'));
+            $this->update();
+            return ;
+        }
+
         if ($this->isTeledeclare()) {
             $this->valide->statut = VracClient::STATUS_CONTRAT_ATTENTE_SIGNATURE;
             if ($this->acheteur_identifiant == $this->createur_identifiant) {
