@@ -38,14 +38,14 @@
      ));
     endif;
 
-      include_component('common', 'navItem', array(
-            'libelle' => 'Factures',
-            'prefix' => 'facture',
-            'route' => 'facture',
-            'route_etablissement' => 'facture_etablissement',
-            'etablissement' => $etablissement,
-            'target' => '_self'
-      ));
+        include_component('common', 'navItem', array(
+              'libelle' => 'Factures',
+              'prefix' => 'facture',
+              'route' => 'facture',
+              'route_etablissement' => ($etablissement) ? 'facture_etablissement' : 'facture_societe',
+              'etablissement' => ($etablissement) ? $etablissement : $societe,
+              'target' => '_self'
+        ));
 
        include_component('common', 'navItem', array(
             'libelle' => 'Stocks',
@@ -85,8 +85,8 @@
             'libelle' => 'Contacts',
             'prefix' => 'societe',
             'route' => 'societe',
-            'route_etablissement' => 'etablissement_visualisation',
-            'etablissement' => $etablissement,
+            'route_etablissement' => ($etablissement) ? 'etablissement_visualisation' : 'societe_visualisation',
+            'etablissement' => ($etablissement) ? $etablissement : $societe,
             'target' => '_self'
        ));
 	endif;

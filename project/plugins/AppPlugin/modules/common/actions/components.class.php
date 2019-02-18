@@ -4,10 +4,14 @@ class commonComponents extends sfComponents {
 
     public function executeNav(sfWebRequest $request) {
         $this->etablissement = null;
-        if ($this->getRoute() instanceof InterfaceEtablissementRoute) {
+        $this->societe = null;
+
+        if ($this->getRoute() instanceof InterfaceSocieteRoute) {
+            $this->societe = $this->getRoute()->getSociete();
+        }
+
+        if ($this->getRoute() instanceof InterfaceEtablissementRoute){
             $this->etablissement = $this->getRoute()->getEtablissement();
-        }elseif ($this->getRoute() instanceof InterfaceSocieteRoute) {
-            $this->etablissement = $this->getRoute()->getSociete()->getEtablissementPrincipal();
         }
 
         if($request->getParameter('etablissement')) {
