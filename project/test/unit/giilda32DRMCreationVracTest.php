@@ -8,7 +8,7 @@ if (!($conf->declaration->exist('details/sorties/creationvrac')) || ($conf->decl
     exit(0);
 }
 
-$t = new lime_test(30);
+$t = new lime_test(31);
 
 $nego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
 $nego_horsregion = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_horsregion')->getEtablissement();
@@ -173,3 +173,4 @@ $t->is($vracObj->date_signature, $date_mouvement, $vracObj->_id." : L'objet vrac
 $t->is($vracObj->date_visa, $date_mouvement, $vracObj->_id." : L'objet vrac a bien pour date de visa ".$vracObj->date_visa);
 $date_saisie = (new DateTime($vracObj->valide->date_saisie))->format("Y-m-d");
 $t->is($date_saisie, $date_mouvement, $vracObj->_id." : L'objet vrac a bien pour date de saisie ".$vracObj->valide->date_saisie);
+$t->is($vracObj->valide->statut, "SOLDE", $vracObj->_id." : L'objet vrac est soldé");

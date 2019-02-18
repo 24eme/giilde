@@ -421,19 +421,31 @@ private function importMouvementsFromCSV($just_check = false) {
 
 
 
-    if($just_check) {
-      $num_ligne++;
-      continue;
-    }
-
     $denomination_complementaire = (trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]))? trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]) : false;
-    $drmDetails = $this->drm->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
 
     $detailTotalVol = $this->convertNumber($csvRow[self::CSV_CAVE_VOLUME]);
     $volume = $this->convertNumber($csvRow[self::CSV_CAVE_VOLUME]);
 
     $cat_key = $confDetailMvt->getParent()->getKey();
     $type_key = $confDetailMvt->getKey();
+
+    $drmPrecedente = DRMClient::getInstance()->find("DRM-".$this->drm->identifiant."-".DRMClient::getInstance()->getPeriodePrecedente($this->drm->periode));
+    if ($drmPrecedente) {
+        $details_precedent = $drmPrecedente->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
+        if(($cat_key == "stocks_debut") && ($volume != $details_precedent->getOrAdd('stocks_fin')->getOrAdd('final'))) {
+          $this->csvDoc->addErreur($this->stockVolumeIncoherentError($num_ligne, $csvRow));
+          $num_ligne++;
+          continue;
+        }
+    }
+
+    if($just_check) {
+      $num_ligne++;
+      continue;
+    }
+
+    $drmDetails = $this->drm->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
+
     if($cat_key == "stocks_debut" && !$drmDetails->canSetStockDebutMois()) {
       $num_ligne++;
       continue;
@@ -599,9 +611,9 @@ private function importCrdsFromCSV($just_check = false) {
     $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
     $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
 
-    if ($this->drm->hasPrecedente()) {
+    $drmPrecedente = DRMClient::getInstance()->find("DRM-".$this->drm->identifiant."-".DRMClient::getInstance()->getPeriodePrecedente($this->drm->periode));
+    if ($drmPrecedente) {
         if  ($fieldNameCrd == 'stock_debut') {
-          $drmPrecedente = $this->drm->getPrecedente();
           if ($quantite && (!$drmPrecedente->crds->exist($crd_regime) || !$drmPrecedente->crds->get($crd_regime)->exist($keyNode))) {
             $this->csvDoc->addErreur($this->previousCRDProductError($num_ligne, $csvRow));
             $num_ligne++;
@@ -798,6 +810,9 @@ private function categorieMouvementNotFoundError($num_ligne, $csvRow) {
 
 private function typeMouvementNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le type de mouvement n'a pas été trouvé");
+}
+private function stockVolumeIncoherentError($num_ligne, $csvRow) {
+  return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le stock n'est pas cohérent par rapport à la DRM précédente");
 }
 private function centiCRDNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CRD_CENTILITRAGE], "La centilisation de CRD n'a pas été trouvée");

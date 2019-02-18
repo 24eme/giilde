@@ -580,11 +580,12 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
               $d = (DateTime::createFromFormat('Y-m-d',$newVrac->enlevement_date));
               $enlevement_date = $d->format('c');
-              $newVrac->valide->add('date_saisie', $enlevement_date);
               $newVrac->add('date_signature', $enlevement_date);
               $newVrac->date_visa = $d->format('Y-m-d');
 
               $newVrac->validate();
+
+              $newVrac->valide->add('date_saisie', $enlevement_date);
               $newVrac->save();
             }
         }

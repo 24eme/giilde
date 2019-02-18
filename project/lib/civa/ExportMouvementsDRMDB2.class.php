@@ -210,13 +210,15 @@ class ExportMouvementsDRMDB2
       foreach($origines as $o) {
         $ids = explode(':', $o);
         if (!isset($drm[$ids[0]])){
-          $drms[$ids[0]] = DRMClient::getInstance()->find($ids[0]);
+          $drm = DRMClient::getInstance()->find($ids[0]);
+          $drms[$ids[0]] = $drm->_id;
+          foreach($drm->getMouvements() as $k => $mvts) {
+            foreach($mvts as $key => $m) {
+              $m->facture = 1;
+            }
+          }
+          $drm->save();
         }
-        $m = $drms[$ids[0]]->findMouvement($ids[1]);
-        $m->facture = 1;
-      }
-      foreach($drms as $id => $drm) {
-        $drm->save();
       }
     }
 

@@ -36,10 +36,10 @@ $t->is($crd->centilitrage, 0.0075, "Le centilitrage est en hl");
 $t->comment("Annexe");
 
 $t->ok(!$details->exist('observations'), "Aucune observation de base");
-$details->sorties->destructionperte = 100;
+$details->sorties->manquant = 100;
 $drm->update();
 if(DRMConfiguration::getInstance()->isObservationsAuto()) {
-    $t->is($details->observations, $details->sorties->getConfig()->get('destructionperte')->getLibelleLong(), "Une observation a bien été ajouté automatiquement avec le libellé du mouvement");
+    $t->is($details->observations, $details->sorties->getConfig()->get('manquant')->getLibelleLong(), "Une observation a bien été ajouté automatiquement avec le libellé du mouvement");
 } else {
     $t->is($details->observations, "","Le champs observation a bien été ajouté avec une chaine de caractère vide");
 }

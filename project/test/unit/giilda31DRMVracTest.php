@@ -266,5 +266,5 @@ foreach($drm_mod->mouvements->get($viti->identifiant) as $mouv) {
     }
 }
 $t->is(count($mouvementVrac->origines), 2, "Il y a 2 origines");
-$t->is($mouvementVrac->origines[1], $drm_mod->_id.":".$mouvKeyOrigine1, "L'origine n°1 est ok");
-$t->is($mouvementVrac->origines[0], $drm_mod->_id.":".$mouvKeyOrigine2, "L'origine n°2 est ok");
+$t->ok(in_array($drm_mod->_id.":".$mouvKeyOrigine1, $mouvementVrac->origines) , "L'origine n°1 est ok");
+$t->ok(in_array($drm_mod->_id.":".$mouvKeyOrigine2, $mouvementVrac->origines) , "L'origine n°2 est ok");
