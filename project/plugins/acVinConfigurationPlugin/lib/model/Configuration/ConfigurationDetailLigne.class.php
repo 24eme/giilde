@@ -25,6 +25,24 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
         return ($this->hasDetails() && (($this->getDetails() == self::DETAILS_VRAC) || ($this->getDetails() == self::DETAILS_CREATIONVRAC)));
     }
 
+    public function needDouaneObservation() {
+        if($this->getParent()->getParent()->getKey() != "details") {
+
+            return false;
+        }
+
+        return preg_match('/autres-entrees|autres-sorties|replacement-suspension/', $this->douane_cat);
+    }
+
+    public function needDouaneDateReplacement() {
+        if($this->getParent()->getParent()->getKey() != "details") {
+
+            return false;
+        }
+
+        return preg_match('/replacement-suspension/', $this->douane_cat);
+    }
+
     public function hasDetails() {
 
         return ($this->exist('details') && $this->get('details'));

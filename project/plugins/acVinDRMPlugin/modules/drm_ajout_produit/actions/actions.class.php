@@ -5,8 +5,18 @@ class drm_ajout_produitActions extends drmGeneriqueActions {
     public function executeChoixProduits(sfWebRequest $request) {
         $this->initSocieteAndEtablissementPrincipal();
         $this->drm = $this->getRoute()->getDRM();
-        $this->certificationsProduits = $this->drm->declaration->getProduitsDetailsByCertifications(true, DRM::DETAILS_KEY_SUSPENDU);
-        $this->form = new DRMProduitsChoiceForm($this->drm);
+        $this->certificationsProduits = $this->drm->declaration->getProduitsDetailsByCertifications(true);
+        foreach($this->certificationsProduits as $certifProduit) {
+            foreach($certifProduit->produits as $hash => $produit) {
+                if(preg_match("|/details/|", $hash) && array_key_exists(str_replace("/details/", "/detailsACQUITTE/", $hash), $certifProduit->produits)) {
+                    unset($certifProduit->produits[str_replace("/details/", "/detailsACQUITTE/", $hash)]);
+                }
+                if(preg_match("|/detailsACQUITTE/|", $hash) && array_key_exists(str_replace("/detailsACQUITTE/", "/details/", $hash), $certifProduit->produits)) {
+                    unset($certifProduit->produits[$hash]);
+                }
+            }
+        }
+        $this->form = new DRMProduitsChoiceForm($this->drm, $this->certificationsProduits);
         $this->initDeleteForm();
         $this->hasRegimeCrd = $this->drm->getEtablissement()->hasRegimeCrd();
 

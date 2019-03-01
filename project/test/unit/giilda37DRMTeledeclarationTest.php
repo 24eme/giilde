@@ -8,7 +8,7 @@ sfConfig::set('app_teledeclaration_contact_contrat', array());
 sfConfig::set('app_mail_from_email', "test_from_mail@mail.org");
 sfConfig::set('app_teledeclaration_interpro', "Interpro");
 
-$t = new lime_test(9);
+$t = new lime_test(13);
 
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_teledeclaration')->getEtablissement();
 $periode = date('Ym');
@@ -23,8 +23,11 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
 
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode, true);
 
-$details = $drm->addProduit($produit_hash, 'details');
+$drm->addProduit($produit_hash, 'details');
+$drm->addProduit($produit_hash, 'detailsACQUITTE');
 
+$details = $drm->getProduit($produit_hash, 'details');
+$detailsAcquitte = $drm->getProduit($produit_hash, 'detailsACQUITTE');
 
 $t->comment("CRD");
 
@@ -43,6 +46,34 @@ if(DRMConfiguration::getInstance()->isObservationsAuto()) {
 } else {
     $t->is($details->observations, "","Le champs observation a bien été ajouté avec une chaine de caractère vide");
 }
+
+$details->sorties->manquant = null;
+$drm->update();
+
+$t->ok(!$details->exist('observations'), "Si le volume est supprimé le champ observation aussi");
+
+$t->comment("Validation");
+
+$details->entrees->retourmarchandisetaxees = 100;
+$drm->update();
+if(DRMConfiguration::getInstance()->isObservationsAuto()) {
+    $details->observations = null;
+}
+
+$validation = new DRMValidation($drm, true);
+
+$t->ok($validation->hasErreur('observations'), "Un point bloquant obligeant la saisie des observations est levé");
+$t->ok($validation->hasErreur('replacement_date'), "Un point bloquant obligeant la saisie de la date de replacement est levé");
+
+$details->entrees->retourmarchandisetaxees = null;
+$details->sorties->manquant = null;
+$detailsAcquitte->sorties->autre = 100;
+$drm->update();
+
+$validation = new DRMValidation($drm, true);
+
+$t->ok(!$validation->hasErreur('observations'), "Le point bloquant obligeant la saisie des observations n'est pas levé si le produit est acquitte");
+
 
 $t->comment("Mail");
 

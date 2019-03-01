@@ -13,6 +13,8 @@
  */
 class DRMExportCsvEdi extends DRMCsvEdi {
 
+    protected $declarantInfos = null;
+
     public function __construct(DRM $drm = null) {
         parent::__construct(null, $drm);
     }
@@ -35,6 +37,27 @@ class DRMExportCsvEdi extends DRMCsvEdi {
         $body.= $this->createCrdsEdi();
         $body.= $this->createAnnexesEdi();
         return $body;
+    }
+
+    public function getCSVDeclarantInfos() {
+        if(!is_null($this->declarantInfos)) {
+
+            return $this->declarantInfos;
+        }
+        $cvi = $this->drm->declarant->cvi;
+        $no_accises = $this->drm->declarant->no_accises;
+
+        if(!$cvi) {
+            $cvi = $this->drm->getEtablissementObject()->cvi;
+        }
+
+        if(!$no_accises) {
+            $no_accises = $this->drm->getEtablissementObject()->no_accises;
+        }
+
+        $this->declarantInfos = $this->drm->identifiant . " (" . $cvi . ");" . $no_accises;
+
+        return $this->declarantInfos;
     }
 
     public function getProduitCSV($produitDetail, $force_type_drm = null) {
@@ -78,14 +101,14 @@ class DRMExportCsvEdi extends DRMCsvEdi {
     }
 
     public function createRowStockNullProduit($produitDetail){
-      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
+      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->getCSVDeclarantInfos() . ";";
       $lignes = $debutLigne . $this->getProduitCSV($produitDetail,'suspendu') . ";" . "stocks_debut;initial;0;\n";
       $lignes.= $debutLigne . $this->getProduitCSV($produitDetail,'suspendu') . ";" . "stocks_fin;final;0;\n";
       return $lignes;
     }
 
     public function createRowMouvementProduitDetail($produit, $catMouvement,$typeMouvement,$volume, $num_contrat = null){
-      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
+      $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->getCSVDeclarantInfos() . ";";
       $lignes = $debutLigne . $this->getProduitCSV($produit,'suspendu') . ";" . $catMouvement.";".$typeMouvement.";".$volume.";";
       $lignes .= ($num_contrat)? ";".str_replace("VRAC-","",$num_contrat).";" : "";
       $lignes .= "\n";
@@ -95,7 +118,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
     private function createMouvementsEdi() {
         $mouvementsEdi = "";
         $produitsDetails = $this->drm->declaration->getProduitsDetailsSorted(true);
-        $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
+        $debutLigne = self::TYPE_CAVE . ";" . $this->drm->periode . ";" . $this->getCSVDeclarantInfos() . ";";
 
         foreach ($produitsDetails as $hashProduit => $produitDetail) {
 
@@ -152,7 +175,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
 
     private function createCrdsEdi() {
         $crdsEdi = "";
-        $debutLigne = self::TYPE_CRD . ";" . $this->drm->periode . ";" .  $this->drm->identifiant . " (" . $this->drm->declarant->cvi . ");" . $this->drm->declarant->no_accises . ";";
+        $debutLigne = self::TYPE_CRD . ";" . $this->drm->periode . ";" .  $this->getCSVDeclarantInfos() . ";";
         foreach ($this->drm->getAllCrdsByRegimeAndByGenre() as $regimeKey => $crdByGenre) {
             foreach ($crdByGenre as $genreKey => $crds) {
                 foreach ($crds as $crdKey => $crdDetail) {
@@ -191,7 +214,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
 
     private function createAnnexesEdi() {
         $annexesEdi = "";
-        $debutLigneAnnexe = self::TYPE_ANNEXE . ";" . $this->drm->periode . ";" . $this->drm->identifiant . ";" . $this->drm->declarant->no_accises . ";;;;;;;;";
+        $debutLigneAnnexe = self::TYPE_ANNEXE . ";" . $this->drm->periode . ";" . $this->getCSVDeclarantInfos() . ";;;;;;;;";
 
         foreach ($this->drm->documents_annexes as $typeDoc => $numsDoc) {
             $annexesEdi.=$debutLigneAnnexe .";;;". $typeDoc . ";debut;" . $numsDoc->debut . "\n";

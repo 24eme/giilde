@@ -1,8 +1,8 @@
 %FDF-1.2
 %âãÏÓ
-1 0 obj 
+1 0 obj
 <<
-/FDF 
+/FDF
 <<
 /Fields [
 <</T(Zone de texte 7)/V(<?php echo $etablissement->raison_sociale ?>)>>
@@ -22,7 +22,7 @@
 <</T(Zone de texte 9)/V()>>
 <</T(Zone de texte 9_2)/V()>>
 <</T(Zone de texte 9_3)/V()>>
-<</T(Zone de texte 3_6)/V()>>
+<</T(Zone de texte 3_6)/V(<?php echo $etablissement->no_accises ?>)>>
 <</T(Zone de texte 3_7)/V()>>
 <</T(Zone de texte 3_8)/V()>>
 <</T(Zone de texte 3_9)/V()>>
@@ -56,7 +56,7 @@
 ]
 >>
 >>
-endobj 
+endobj
 trailer
 
 <<
