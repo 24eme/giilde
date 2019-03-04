@@ -54,7 +54,7 @@
         <script src="<?php echo public_path("/js/ajaxHelper.js") ?>"></script>
         <script src="<?php echo public_path("/js/form.js") ?>"></script>
         <script src="<?php echo public_path("/js/colonnes.js?201801071600") ?>"></script>
-        <script src="<?php echo public_path("/js/main.js?20170223") ?>"></script>
+        <script src="<?php echo public_path("/js/main.js?201903041213") ?>"></script>
         <script src="<?php echo public_path("/js/teledeclaration.js") ?>"></script>
         <script src="<?php echo public_path("/js/conditionnement.js") ?>"></script>
         <script src="<?php echo public_path("/js/vrac.js") ?>"></script>

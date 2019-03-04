@@ -45,9 +45,14 @@ EOF;
 
         $csv = $export->export(MouvementfactureFacturationView::getInstance()->getMouvementsAll(0), $options['periode_max']);
 
+        $origineFilename = null;
         foreach($csv as $file => $lignes) {
-            file_put_contents($arguments['path']."/".$date."_".preg_replace("/.+\./", "", $file), implode("\r\n", $lignes));
+            $fileName = $arguments['path']."/".$date."_".preg_replace("/.+\./", "", $file);
+            file_put_contents($fileName, implode("\r\n", $lignes));
+            if($file == "09.ORIGINES") {
+                $origineFilename = $fileName;
+            }
         }
-        $export->setFacture($csv["09.ORIGINES"]);
+        $export->setFacture(explode("\r\n", file_get_contents($origineFilename)));
     }
 }
