@@ -87,9 +87,15 @@ use_helper('PointsAides');
           }
           ?>
             <div class="pull-right">
-              <a class="btn btn-warning " href="<?php echo url_for('vrac_nouveau', array('choix-etablissement' => $etablissementCreateur->identifiant)); ?>">
-                Saisir un nouveau contrat
-              </a>
+              <div class="btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Saisir un nouveau contrat <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="<?= url_for('vrac_nouveau', ['choix-etablissement' => $etablissementCreateur->identifiant]); ?>">Manuellement</a></li>
+                  <li><a href="<?= url_for('vrac_upload_index') ?>">Via un fichier</a></li>
+                </ul>
+              </div>
               <?php echo getPointAideHtml('vrac','menu_acces_nouveau'); ?>
             </div>
         <?php endif; ?>

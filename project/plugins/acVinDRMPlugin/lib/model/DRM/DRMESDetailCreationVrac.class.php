@@ -12,8 +12,11 @@ class DRMESDetailCreationVrac extends BaseDRMESDetailCreationVrac {
     }
 
     public function getIdentifiantLibelle() {
-
-        return EtablissementClient::getInstance()->find($this->acheteur)->__toString();
+        $e = EtablissementClient::getInstance()->find($this->acheteur);
+        if (!$e) {
+            throw new sfException("Etablissement non trouvé");
+        }
+        return $e->__toString();
     }
 
     public function getVrac(){

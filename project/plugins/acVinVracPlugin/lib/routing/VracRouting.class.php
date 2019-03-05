@@ -33,6 +33,22 @@ class VracRouting {
                                                                 array('model' => 'Etablissement',
                                                                     'type' => 'object')
                                                                     ));
+        $r->prependRoute('vrac_upload_index', new sfRoute('/vrac/upload',
+                array('module' => 'vrac', 'action' => 'indexUploadVrac')
+            )
+        );
+
+        $r->prependRoute('vrac_upload_verification', new sfRoute('/vrac/upload/verification',
+                array('module' => 'vrac', 'action' => 'verificationUploadVrac'),
+                array('sf_method' => array('post'))
+            )
+        );
+
+        $r->prependRoute('vrac_upload_import', new sfRoute('/vrac/upload/import',
+                array('module' => 'vrac', 'action' => 'importUploadVrac'),
+                array('sf_method' => array('post'))
+            )
+        );
 
         $r->prependRoute('vrac_exportCsv', new sfRoute('/vrac/exportCsv', array('module' => 'vrac',
                                                             'action' => 'exportCsv')));

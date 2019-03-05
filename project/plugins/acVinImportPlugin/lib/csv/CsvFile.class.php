@@ -4,9 +4,10 @@ class CsvFile
 {
 
   protected $current_line = 0;
+  protected $csvdata = null;
+
   private $file = null;
   private $separator = null;
-  protected $csvdata = null;
   private $ignore = null;
 
   public function getFileName() {

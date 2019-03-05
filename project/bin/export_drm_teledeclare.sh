@@ -30,7 +30,7 @@ LASTNUMEROSEQUENCE=$(grep "last_seq" $CHANGESFILE | sed 's/"last_seq"://' | sed 
 
 cat $CHANGESFILE | grep "\"DRM-" | cut -d "," -f 2 | sed 's/"id":"//' | sed 's/"//' | while read id
 do
-    curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/$id | jq -c '[._id,.teledeclare,.valide.date_signee,.declarant.no_accises]' | sed 's/\[//' | sed 's/\]//' | sed 's/"//g' | grep "true" | sed 's/null//' >> $LISTDRMFILE
+    curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/$id | jq -c '[._id,.teledeclare,.valide.date_signee,.declarant.no_accises]' | sed 's/\[//' | sed 's/\]//' | sed 's/"//g' | sed 's/null//' >> $LISTDRMFILE
 done
 
 mkdir -p $EXPORT_PATH 2> /dev/null
@@ -42,8 +42,8 @@ do
     NOACCISES=$(echo $ligne | cut -d "," -f 4)
     PERIODE=$(echo $ID | cut -d "-" -f 3)
     DRMFILE=$TMP/$id$(date +%Y%m%d%H%M%S).csv
-    php symfony drm:export-csv $ID $SYMFONYTASKOPTIONS | grep $PRODUIT > $DRMFILE
-    if test $DATE && test $(cat $DRMFILE | grep -E "^CAVE;" | grep $PRODUIT | wc -l | sed -r 's/^0$//'); then
+    php symfony drm:export-csv $ID $SYMFONYTASKOPTIONS | grep -E "$PRODUIT" > $DRMFILE
+    if test $DATE && test $(cat $DRMFILE | grep -E "^CAVE;" | grep -E "$PRODUIT" | wc -l | sed -r 's/^0$//'); then
         echo $ID
         cp $DRMFILE $EXPORT_PATH/"$DATE"_"$PERIODE"_"$NOACCISES"_"$ID".csv
     fi

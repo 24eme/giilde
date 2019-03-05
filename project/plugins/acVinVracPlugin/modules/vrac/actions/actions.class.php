@@ -19,6 +19,7 @@ class vracActions extends sfActions {
         $this->redirect403IfIsTeledeclaration();
         $this->vracs = VracClient::getInstance()->retrieveLastDocs(10);
         $this->creationForm = new VracCreationForm();
+        $this->uploadForm = new UploadCSVForm();
         //$this->etiquettesForm = new VracEtiquettesForm();
         if ($request->isMethod(sfWebRequest::POST)) {
             $this->creationForm->bind($request->getParameter($this->creationForm->getName()));
@@ -37,6 +38,59 @@ class vracActions extends sfActions {
                 $vrac->save();
                 return $this->redirect('vrac_soussigne', $vrac);
             }
+        }
+    }
+
+    public function executeIndexUploadVrac(sfWebRequest $request) {
+        $this->redirect403IfICanNotCreate();
+        $this->initSocieteAndEtablissementPrincipal();
+        $this->uploadForm = new UploadCSVForm();
+    }
+
+    public function executeVerificationUploadVrac(sfWebRequest $request) {
+        if (! $request->isMethod(sfWebRequest::POST)) {
+            return $this->redirect('vrac');
+        }
+
+        $this->redirect403IfICanNotCreate();
+
+        $this->initSocieteAndEtablissementPrincipal();
+
+        $this->form = new UploadCSVForm();
+        $this->form->bind(null, $request->getFiles('csv'));
+
+        if ($this->form->isValid()) {
+            $this->file = $this->form->getValue('file');
+            $vracs = VracCsvImport::createFromArray($this->file->getCsv());
+
+            $this->verification = [];
+            $this->verification = $vracs->import(false);
+
+            if (empty($this->verification) === false) {
+                unlink($this->file->getPath() . '/' . $this->file->getMd5());
+            }
+        }
+    }
+
+    public function executeImportUploadVrac(sfWebRequest $request) {
+        if (! $request->isMethod(sfWebRequest::POST)) {
+            return $this->redirect('vrac');
+        }
+
+        $this->redirect403IfICanNotCreate();
+
+        $file = $request->getPostParameter('md5', null);
+        $file = sfConfig::get('sf_data_dir') . '/upload/' . basename($file);
+
+        $this->imported = 0;
+
+        if (file_exists($file)) {
+            $file = new CsvFile($file);
+            $vracs = VracCsvImport::createFromArray($file->getCsv());
+
+            $this->imported = $vracs->import(true);
+
+            unlink($file->getFileName());
         }
     }
 
