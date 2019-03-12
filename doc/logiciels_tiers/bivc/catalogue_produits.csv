@@ -118,12 +118,14 @@ IGP,Tranquille,Val de Loire,,,Rouge,Cot,IGP Val de Loire Rouge Cot,3R009 CZ
 IGP,Tranquille,Val de Loire,,,Rouge,Merlot,IGP Val de Loire Rouge Merlot,3R009 DE
 IGP,Tranquille,Val de Loire,,,Rouge,Abouriou,IGP Val de Loire Rouge Abouriou,3R009 35
 IGP,Tranquille,Val de Loire,,,Rouge,Pineau d'Aunis,IGP Val de Loire Rouge Pineau d'Aunis,3R009 58
-Vin de France,Tranquille,,,,Blanc,,Vin de France Tranquille Blanc,4B999
-Vin de France,Tranquille,,,,Rouge,,Vin de France Tranquille Rouge,4R999
-Vin de France,Tranquille,,,,Rosé,,Vin de France Tranquille Rosé,4S999
-Vin de France,Mousseux,,,,Blanc,,Vin de France Mousseux Blanc,4B999M
-Vin de France,Mousseux,,,,Rosé,,Vin de France Mousseux Rosé,4S999M
-Vin de France,Mousseux,,,,Rouge,,Vin de France Mousseux Rouge,4R999M
+VSIG,Tranquille,Vin de France,,,Blanc,,Vin de France Tranquille Blanc,4B999
+VSIG,Tranquille,Vin de France,,,Rouge,,Vin de France Tranquille Rouge,4R999
+VSIG,Tranquille,Vin de France,,,Rosé,,Vin de France Tranquille Rosé,4S999
+VSIG,Tranquille,Vin étranger,,,,,Vin étranger Tranquille,VT_ETRANGERS
+VSIG,Mousseux,Vin de France,,,Blanc,,Vin de France Mousseux Blanc,4B999M
+VSIG,Mousseux,Vin de France,,,Rosé,,Vin de France Mousseux Rosé,4S999M
+VSIG,Mousseux,Vin de France,,,Rouge,,Vin de France Mousseux Rouge,4R999M
+VSIG,Mousseux,Vin étranger,,,,,Vin étranger Mousseux,VM_ETRANGERS
 Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autres,,DPLC,,,,,DPLC,4B988Y
 Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y
