@@ -212,6 +212,13 @@ class VracClient extends acCouchdbClient {
             return $doc_id;
         }
 
+        $doc_id = ArchivageAllView::getInstance()->findDocId("Bouteille", $campagne, $num_contrat);
+
+        if ($doc_id) {
+
+            return $doc_id;
+        }
+
         $recursive = $recursive - 1;
 
         if($recursive < 0) {

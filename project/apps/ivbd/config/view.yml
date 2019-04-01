@@ -15,3 +15,5 @@ default:
 
   has_layout:     true
   layout:         layout
+
+  stylesheets:    [bootstrap_ivbd.css, ../components/vins/vins.css, /js/lib/leaflet/leaflet.css]

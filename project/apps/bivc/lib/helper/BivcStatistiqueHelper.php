@@ -1,6 +1,16 @@
 <?php
+function formatNumber($number, $round = 0) {
+	return ($number && $number != 0)? number_format($number, $round, ',', '') : null;
+}
 
-function getAppellationLibelle($key) 
+function getEvol($last, $current) {
+	$last = str_replace(',', '.', $last);
+	$current = str_replace(',', '.', $current);
+	return ($last > 0)? formatNumber((($current - $last) / $last) * 100, 2) : null;
+}
+
+
+function getAppellationLibelle($key)
 {
 	$items = ConfigurationClient::getCurrent()->declaration->getKeys('appellation');
 	if (isset($items[$key])) {
@@ -10,7 +20,7 @@ function getAppellationLibelle($key)
 	return ' ';
 }
 
-function getFamilleLibelle($key) 
+function getFamilleLibelle($key)
 {
 	$familles = EtablissementFamilles::getFamilles();
 	return (isset($familles[$key]))? $familles[$key] : null;

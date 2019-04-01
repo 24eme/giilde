@@ -1,5 +1,4 @@
 <?php 
-use_helper('Statistique');
 use_helper('BivcStatistique');
 
 if ($lastPeriode) {

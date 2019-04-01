@@ -1,0 +1,15 @@
+all:
+  configuration:
+    points_aides:
+      drm:
+        mouvements_export_pays: "Indiquer le pays d’exportation en saisissant le nom du pays ou en le sélectionnant dans la liste. A minima, indiquer « Union Européenne » ou « Hors Union Européenne »."
+      vrac:
+        dernier_contrat_prix: "Indique le prix du contrat exprimé en €/hl."
+        marche_prix: "Indiquer le prix du vin, en € /hl."
+
+        condition_delais_paiement: "Sélectionner le délai de paiement dans la liste. Se référer aux accords interprofessionnels afin de connaître les éventuelles dérogations aux délais légaux."
+        condition_accompte: "Indiquer le montant de  l’acompte. Se référer aux accords interprofessionnels afin de connaitre les éventuelles dérogations au versement de l’acompte."
+        condition_moyen_paiement: "Sélectionner le moyen de paiement dans la liste."
+        condition_observation: "Indiquer toutes observations que vous pensez nécessaire"
+        condition_nom_vin: "Cocher la case si le vendeur autorise l’utilisation du nom du vin pour sa commercialisation."
+        condition_nom_producteur: "Cocher la case si le vendeur autorise l’utilisation de son nom pour la commercialisation du vin."

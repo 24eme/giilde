@@ -1,5 +1,4 @@
 <?php 
-use_helper('Statistique');
 use_helper('BivcStatistique');
 
 $csv = 'Conditionnement;Appellation;Couleur;Qté sans prix;Qté avec prix;CA;Moyenne'."\n";

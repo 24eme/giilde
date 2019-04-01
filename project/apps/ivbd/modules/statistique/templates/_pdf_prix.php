@@ -53,10 +53,10 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \pagestyle{fstyle_<?php echo $fstyle ?>}
 
 \begin{table}[ht!]
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.15\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.06\linewidth} | }
+\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | }
 \hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{Qté prix non renseigné} & \multicolumn{1}{c |}{Qté prix renseigné} & \multicolumn{1}{c |}{Chiffre d'affaire} & \multicolumn{1}{c |}{Moyenne} \tabularnewline \hline
-<?php 
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{Nb de contrats} & \multicolumn{1}{c |}{Volume} & \multicolumn{1}{c |}{Cours} & \multicolumn{1}{c |}{Volume 2018} & \multicolumn{1}{c |}{Cours 2018} & \multicolumn{1}{c |}{Volume autres millesimes} & \multicolumn{1}{c |}{Cours autres millesimes} & \multicolumn{1}{c |}{Volume tous contrats} \tabularnewline
+<?php
 	$i = 1;
 	$page = null;
 	foreach ($items as $item):
@@ -70,11 +70,9 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 			$page = $values[0];
 		}
 		unset($values[0]);
-		$values[1] = $values[1].' '.$values[2];
-		unset($values[2]);
 ?>
-<?php 
-	if ($i == $maxTableRowsPerPage || ($page != $current && !preg_match('/total/i', $current))): 
+<?php
+	if ($i == $maxTableRowsPerPage || ($page != $current && !preg_match('/total/i', $current))):
 	$newSection = false;
 	if ($page != $current) {
 		$fstyle++;
@@ -87,10 +85,10 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \clearpage
 \pagestyle{fstyle_<?php echo $fstyle ?>}
 \begin{table}[ht!]
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.15\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.06\linewidth} | }
+\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | }
 <?php if ($newSection): ?>
 \hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{Qté prix non renseigné} & \multicolumn{1}{c |}{Qté prix renseigné} & \multicolumn{1}{c |}{Chiffre d'affaire} & \multicolumn{1}{c |}{Moyenne} \tabularnewline
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{Nb de contrats} & \multicolumn{1}{c |}{Volume} & \multicolumn{1}{c |}{Courts} & \multicolumn{1}{c |}{Volume 2018} & \multicolumn{1}{c |}{Cours 2018} & \multicolumn{1}{c |}{Volume autres millesimes} & \multicolumn{1}{c |}{Cours autres millesimes} & \multicolumn{1}{c |}{Volume tous contrats} \tabularnewline
 <?php endif; ?>
 \hline
 <?php $i=($newSection)? 1 : 0; else: $i++;endif; ?>

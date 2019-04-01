@@ -241,20 +241,23 @@ private function importMouvementsFromCSV($just_check = false) {
 
     $keys_libelle_mention_fin = preg_replace("/[ ]+/", " ", sprintf("%s %s %s %s %s %s %s", $csvRow[self::CSV_CAVE_CERTIFICATION], $csvRow[self::CSV_CAVE_GENRE], $csvRow[self::CSV_CAVE_APPELLATION], $csvRow[self::CSV_CAVE_LIEU], $csvRow[self::CSV_CAVE_COULEUR], $csvRow[self::CSV_CAVE_CEPAGE],$csvRow[self::CSV_CAVE_MENTION]));
 
+    $uniquekeyproduit = $keys_libelle.$csvRow[self::CSV_CAVE_LIBELLE_PRODUIT];
+    $uniquekeyproduit_mentionfin = $keys_libelle_mention_fin.$csvRow[self::CSV_CAVE_LIBELLE_PRODUIT];
+
     /** pseudo cache : si un produit a été déjà vu, on le traite **/
-    if (isset($this->previous_produits[$keys_libelle])) {
-      $founded_produit = $this->previous_produits[$keys_libelle];
+    if (isset($this->previous_produits[$uniquekeyproduit])) {
+      $founded_produit = $this->previous_produits[$uniquekeyproduit];
     }
-    if (isset($this->previous_produits[$keys_libelle_mention_fin])) {
-      $founded_produit = $this->previous_produits[$keys_libelle_mention_fin];
+    if (!$founded_produit && isset($this->previous_produits[$uniquekeyproduit_mentionfin])) {
+      $founded_produit = $this->previous_produits[$uniquekeyproduit_mentionfin];
     }
-    if ((isset($this->produits_not_found[$keys_libelle]) && $this->produits_not_found[$keys_libelle]) || (isset($this->produits_not_found[$keys_libelle_mention_fin]) && $this->produits_not_found[$keys_libelle_mention_fin])) {
+    if ((isset($this->produits_not_found[$uniquekeyproduit]) && $this->produits_not_found[$uniquekeyproduit]) || (isset($this->produits_not_found[$uniquekeyproduit_mentionfin]) && $this->produits_not_found[$uniquekeyproduit_mentionfin])) {
       $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
       $num_ligne++;
       continue;
     }
 
-    if ($idDouane = $this->getIdDouane($csvRow)) {
+    if (!$founded_produit && $idDouane = $this->getIdDouane($csvRow)) {
     	$produits = $this->configuration->identifyProductByCodeDouane($idDouane);
     	if (count($produits) == 1) {
     		$founded_produit = $produits[0];
@@ -290,6 +293,9 @@ private function importMouvementsFromCSV($just_check = false) {
             break;
           }
         }
+      }
+      if (count($produits) > 1) {
+          $founded_produit = $produits[0];
       }
     }
 
@@ -348,8 +354,8 @@ private function importMouvementsFromCSV($just_check = false) {
     if (!$founded_produit) {
       $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
       $num_ligne++;
-      $this->produits_not_found[$keys_libelle] = 1;
-      $this->produits_not_found[$keys_libelle_mention_fin] = 1;
+      $this->produits_not_found[$uniquekeyproduit] = 1;
+      $this->produits_not_found[$uniquekeyproduit_mentionfin] = 1;
       continue;
     }
 
@@ -359,9 +365,8 @@ private function importMouvementsFromCSV($just_check = false) {
       continue;
     }
 
-
-    $this->previous_produits[$keys_libelle] = $founded_produit;
-    $this->previous_produits[$keys_libelle_mention_fin] = $founded_produit;
+    $this->previous_produits[$uniquekeyproduit] = $founded_produit;
+    $this->previous_produits[$uniquekeyproduit_mentionfin] = $founded_produit;
 
     $cat_mouvement = KeyInflector::slugify($csvRow[self::CSV_CAVE_CATEGORIE_MOUVEMENT]);
     if(strtoupper(KeyInflector::slugify($cat_mouvement)) == self::COMPLEMENT){
@@ -637,8 +642,8 @@ private function importCrdsFromCSV($just_check = false) {
       if (!preg_match('/^stock/', $fieldNameCrd) || $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} == null) {
         $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} += intval($quantite);
       }
-      $num_ligne++;
     }
+    $num_ligne++;
   }
   return $this->csvDoc->hasErreurs();
 }
@@ -756,9 +761,9 @@ private function findContratDocId($csvRow) {
     return $vrac->_id;
   }
 
-  if($vrac = VracClient::getInstance()->findDocIdByNumArchive("UNIQUE", $csvRow[self::CSV_CAVE_CONTRATID])) {
+  if($vrac_id = VracClient::getInstance()->findDocIdByNumArchive("UNIQUE", $csvRow[self::CSV_CAVE_CONTRATID])) {
 
-    return $vrac->_id;
+    return $vrac_id;
   }
 
   return VracClient::getInstance()->findDocIdByNumArchive($this->drm->campagne, $csvRow[self::CSV_CAVE_CONTRATID], 2);
@@ -812,7 +817,7 @@ private function typeMouvementNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le type de mouvement n'a pas été trouvé");
 }
 private function stockVolumeIncoherentError($num_ligne, $csvRow) {
-  return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le stock n'est pas cohérent par rapport à la DRM précédente");
+  return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le stock n'est pas cohérent par rapport à la DRM précédente", CSVDRMClient::LEVEL_WARNING);
 }
 private function centiCRDNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CRD_CENTILITRAGE], "La centilisation de CRD n'a pas été trouvée");

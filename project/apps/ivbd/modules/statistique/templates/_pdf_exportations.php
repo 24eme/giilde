@@ -1,15 +1,20 @@
 <?php
 setlocale(LC_TIME, 'fr_FR');
 $items = explode(PHP_EOL, $csv);
-array_shift($items);
+$header = array_shift($items);
+$headerArr = explode(";",$header);
 $maxTableRowsPerPage = 30;
 $nbPage = 0;
 $options = $options->getRawValue();
 $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset($options['periode'][1]))? $options['periode'] : null;
 $compare = (isset($options['compare']))? $options['compare'] : false;
 $appellations = (isset($options['appellations']))? $options['appellations'] : array();
+if($compare){
+	$maxTableRowsPerPage = 26;
+}
 ?>
 \documentclass[a4paper, landscape, 10pt]{article}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[top=2.3cm, bottom=1.8cm, left=0.5cm, right=0.5cm, headheight=2cm, headsep=0.5cm, marginparwidth=0cm]{geometry}
 \usepackage{fancyhdr}
@@ -46,10 +51,10 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 
 \begin{table}[ht!]
 <?php if ($compare): ?>
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | }
+\begin{tabularx}{\linewidth}{ | >{\raggedleft}p{0.120\linewidth} <?php foreach ($headerArr as $kHead => $vHead): ?>| >{\raggedleft}p{0.0260\linewidth} <?php endforeach; ?>| }
 \hline
-\rowcolor{gray!40} & \multicolumn{3}{c |}{Blanc} & \multicolumn{3}{c |}{Rosé} & \multicolumn{3}{c |}{Rouge} & \multicolumn{3}{c |}{Total} \tabularnewline
-\rowcolor{gray!40} Pays & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} \tabularnewline \hline
+\rowcolor{gray!40} <?php foreach ($headerArr as $kHead => $vHead): if($kHead%3 == 2):?>&  \multicolumn{3}{c |}{<?php echo '\footnotesize{'.$vHead.'}'; ?>} <?php endif; endforeach; ?> \tabularnewline
+\rowcolor{gray!40} \footnotesize{Pays} <?php array_shift($headerArr); foreach ($headerArr as $kHead => $vHead): ?>& \multicolumn{1}{c |}{<?php if($kHead%3 === 0): echo '\footnotesize{N}'; endif; if($kHead%3 == 1): echo '\footnotesize{N-1}'; endif; if($kHead%3 == 2): echo '\footnotesize{\\%}'; endif; ?>} <?php endforeach; ?> \tabularnewline \hline
 <?php else: ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 \hline
@@ -72,14 +77,24 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 \clearpage
 \pagestyle{fstyle_0}
 \begin{table}[ht!]
-<?php if ($compare): ?>
-\begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | }
+<?php if ($compare):
+$headerArr = explode(";",$header);
+?>
+\begin{tabularx}{\linewidth}{ | >{\raggedleft}p{0.120\linewidth} <?php foreach ($headerArr as $kHead => $vHead): ?>| >{\raggedleft}p{0.0260\linewidth} <?php endforeach; ?>| }
+\hline
+\rowcolor{gray!40} <?php foreach ($headerArr as $kHead => $vHead): if($kHead%3 == 2):?>&  \multicolumn{3}{c |}{<?php echo '\footnotesize{'.$vHead.'}'; ?>} <?php endif; endforeach; ?> \tabularnewline
+\rowcolor{gray!40} \footnotesize{Pays} <?php array_shift($headerArr); foreach ($headerArr as $kHead => $vHead): ?>& \multicolumn{1}{c |}{<?php if($kHead%3 === 0): echo '\footnotesize{N}'; endif; if($kHead%3 == 1): echo '\footnotesize{N-1}'; endif; if($kHead%3 == 2): echo '\footnotesize{\\%}'; endif; ?>} <?php endforeach; ?> \tabularnewline \hline
 <?php else: ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
+\hline
+\rowcolor{gray!40} Pays & \multicolumn{1}{c |}{Blanc} & \multicolumn{1}{c |}{Blanc Sec} & \multicolumn{1}{c |}{Blanc Moelleux} & \multicolumn{1}{c |}{Blanc Doux} & \multicolumn{1}{c |}{Rosé} & \multicolumn{1}{c |}{Rouge} & \multicolumn{1}{c |}{Total} \tabularnewline \hline
 <?php endif; ?>
 \hline
 <?php $i=0; else: $i++; endif; ?>
-<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if (preg_match('/total/i', $current)) {unset($values[0]); echo 'TOTAL général & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
+<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif;
+if (preg_match('/total/i', $current)) {unset($values[0]); echo 'TOTAL général & '; }
+echo ($compare)? '\tiny{'.implode('} & \tiny{', $values).'}' : implode(' & ', $values);
+?> \tabularnewline \hline
 <?php  endforeach;?>
 \end{tabularx}
 \end{table}

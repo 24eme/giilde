@@ -48,35 +48,36 @@ class vracActions extends sfActions {
     }
 
     public function executeVerificationUploadVrac(sfWebRequest $request) {
-        if (! $request->isMethod(sfWebRequest::POST)) {
-            return $this->redirect('vrac');
-        }
-
         $this->redirect403IfICanNotCreate();
 
         $this->initSocieteAndEtablissementPrincipal();
 
         $this->form = new UploadCSVForm();
-        $this->form->bind(null, $request->getFiles('csv'));
+        $this->form->bind($request->getParameter('csv'), $request->getFiles('csv'));
 
         if ($this->form->isValid()) {
             $this->file = $this->form->getValue('file');
-            $vracs = VracCsvImport::createFromArray($this->file->getCsv());
+            $headers = $this->form->getValue('checkbox');
 
-            $this->verification = [];
-            $this->verification = $vracs->import(false);
+            $vracs = VracCsvImport::createFromArray($this->file->getCsv(), $headers);
 
-            if (empty($this->verification) === false) {
+            $vracs->import(false);
+
+            $this->errors = [];
+            $this->warnings = [];
+
+            $this->errors = $vracs->getErrors();
+            $this->warnings = $vracs->getWarnings();
+
+            if (count($this->errors) > 0) {
                 unlink($this->file->getPath() . '/' . $this->file->getMd5());
             }
+        } else {
+            $this->redirect('vrac_upload_index');
         }
     }
 
     public function executeImportUploadVrac(sfWebRequest $request) {
-        if (! $request->isMethod(sfWebRequest::POST)) {
-            return $this->redirect('vrac');
-        }
-
         $this->redirect403IfICanNotCreate();
 
         $file = $request->getPostParameter('md5', null);

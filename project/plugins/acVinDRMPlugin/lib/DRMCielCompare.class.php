@@ -6,6 +6,8 @@ class DRMCielCompare
 
 	public function __construct($xmlIn, $xmlOut)
 	{
+		$xmlIn = preg_replace('/<!\[CDATA\[(.*)\]\]>/', '$1',$xmlIn);
+		$xmlOut = preg_replace('/<!\[CDATA\[(.*)\]\]>/', '$1',$xmlOut);
 		if(is_string($xmlIn)) {
 			$this->xmlIn = simplexml_load_string($xmlIn);
 		}else {
@@ -210,9 +212,8 @@ class DRMCielCompare
 	        }else{
 	          $str_arr[$key] = $values;
 	        }
-
 	      }
-		  krsort($str_arr);
+				krsort($str_arr);
 	      return $str_arr;
 	    }
 

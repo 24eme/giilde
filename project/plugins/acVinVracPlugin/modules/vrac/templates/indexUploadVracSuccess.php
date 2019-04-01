@@ -5,7 +5,7 @@
 
 <div class="col-xs-12">
     <h3>Téléversement d'un fichier CSV</h3>
-    <form action="<?= url_for('vrac_upload_verification') ?>" method="post" class="form-inline" enctype="multipart/form-data">
+    <?= $uploadForm->renderFormTag(url_for('vrac_upload_verification')) ?>
         <?= $uploadForm ?>
         <button type="submit" class="btn btn-default">Importer des contrats</button>
     </form>

@@ -68,7 +68,7 @@ class ProduitCsvFile extends CsvFile {
                 '/appellations/' . $this->getKeyProduit($line[self::CSV_PRODUIT_DENOMINATION_CODE], true, true) .
                 '/mentions/' . $this->getKeyProduit($line[self::CSV_PRODUIT_MENTION_CODE], true, true) .
                 '/lieux/' . $this->getKeyProduit($line[self::CSV_PRODUIT_LIEU_CODE], true, true) .
-                '/couleurs/' . strtolower($this->couleurKeyToCode($line[self::CSV_PRODUIT_COULEUR_CODE])) .
+                '/couleurs/' . ($this->couleurKeyToCode($line[self::CSV_PRODUIT_COULEUR_CODE])) .
                 '/cepages/' . $this->getKeyProduit($line[self::CSV_PRODUIT_CEPAGE_CODE], true, true);
     }
 
@@ -78,18 +78,18 @@ class ProduitCsvFile extends CsvFile {
                 '/appellations/' . $this->getKeyProduit($line[self::CSV_PRODUIT_DENOMINATION_CODE], false, true) .
                 '/mentions/' . $this->getKeyProduit($line[self::CSV_PRODUIT_MENTION_CODE], false, true) .
                 '/lieux/' . $this->getKeyProduit($line[self::CSV_PRODUIT_LIEU_CODE], false, true) .
-                '/couleurs/' . strtolower($this->couleurKeyToCode($line[self::CSV_PRODUIT_COULEUR_CODE])) .
+                '/couleurs/' . ($this->couleurKeyToCode($line[self::CSV_PRODUIT_COULEUR_CODE])) .
                 '/cepages/' . $this->getKeyProduit($line[self::CSV_PRODUIT_CEPAGE_CODE], false, true);
     }
 
-    private function couleurKeyToCode($key) {
+    private function couleurKeyToCode($key, $withDefault = true) {
         $correspondances = array(1 => "rouge",
             2 => "rose",
             3 => "blanc");
 
         if (!isset($correspondances[$key])) {
 
-            return $key;
+            return $this->getKey($key, $withDefault);
         }
 
         return $correspondances[$key];

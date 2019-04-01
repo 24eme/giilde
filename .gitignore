@@ -10,3 +10,5 @@ project/web/declaration_dev.php
 project/bower_components
 project/web/components/vins/.fontcustom-manifest.json
 .views/
+project/data/configuration/declarvins/
+project/data/import/configuration/declarvins/

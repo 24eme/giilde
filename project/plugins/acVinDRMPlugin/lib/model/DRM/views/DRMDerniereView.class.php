@@ -21,6 +21,14 @@ class DRMDerniereView extends acCouchdbView
         return $this->build($rows[0]);
     }
 
+    public function findByCampagneAndPeriode($campagne,$periode) {
+
+      return $this->client->reduce(false)
+                    ->startkey(array($campagne,$periode))
+                    ->endkey(array($campagne,$periode, array()))
+                    ->getView($this->design, $this->view)->rows;
+    }
+
     public function findLastPeriode() {
         $last_drm = $this->findLast();
 
@@ -50,4 +58,4 @@ class DRMDerniereView extends acCouchdbView
 
         return $drm;
     }
-}  
+}

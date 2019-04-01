@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -45,13 +46,20 @@ class statistiqueActions extends sfActions {
 			if (!isset($this->statistiquesConfig['statistiques'][$values['statistiques']]['aggregation'])) {
 				throw new sfException('No aggregation set for statistiques '.$values['statistiques']);
 			}
-			$result = $this->getAggsResult($this->statistiquesConfig['statistiques'][$values['statistiques']]['index'], $this->form->processFilters(), array($values['statistiques'] => $this->statistiquesConfig['statistiques'][$values['statistiques']]['aggregation']));
-			$csvResult = $this->getAggsResultCsv($values['statistiques'], $result);
-			if ($this->form->canPeriodeCompare()) {
-				$resultLastPeriode = $this->getAggsResult($this->statistiquesConfig['statistiques'][$values['statistiques']]['index'], $this->form->processFilters($this->form->getValuesLastPeriode()), array($values['statistiques'] => $this->statistiquesConfig['statistiques'][$values['statistiques']]['aggregation']));
-				$csvResultLastPeriode = $this->getAggsResultCsv($values['statistiques'], $resultLastPeriode);
-				$nbKeys = $this->statistiquesConfig['statistiques'][$values['statistiques']]['hashkeysize'];
-				$csvResult = $this->getAggsResultCsv($values['statistiques'], $this->getCsvToArray($csvResult, $nbKeys), $this->getCsvToArray($csvResultLastPeriode, $nbKeys));
+			if(isset($this->statistiquesConfig["statistiques"][$values['statistiques']]["customFonction"]) && $this->statistiquesConfig["statistiques"][$values['statistiques']]["customFonction"]){
+				$customFct = "render".$this->statistiquesConfig["statistiques"][$values['statistiques']]["customFonction"];
+				return $this->$customFct($values);
+
+			}else{
+				$result = $this->getAggsResult($this->statistiquesConfig['statistiques'][$values['statistiques']]['index'], $this->form->processFilters(), array($values['statistiques'] => $this->statistiquesConfig['statistiques'][$values['statistiques']]['aggregation']));
+				$csvResult = $this->getAggsResultCsv($values['statistiques'], $result);
+
+				if ($this->form->canPeriodeCompare()) {
+					$resultLastPeriode = $this->getAggsResult($this->statistiquesConfig['statistiques'][$values['statistiques']]['index'], $this->form->processFilters($this->form->getValuesLastPeriode()), array($values['statistiques'] => $this->statistiquesConfig['statistiques'][$values['statistiques']]['aggregation']));
+					$csvResultLastPeriode = $this->getAggsResultCsv($values['statistiques'], $resultLastPeriode);
+					$nbKeys = $this->statistiquesConfig['statistiques'][$values['statistiques']]['hashkeysize'];
+					$csvResult = $this->getAggsResultCsv($values['statistiques'], $this->getCsvToArray($csvResult, $nbKeys), $this->getCsvToArray($csvResultLastPeriode, $nbKeys));
+				}
 			}
 			if ($this->form->pdfFormat()) {
 				return $this->renderPdf($csvResult, $values['statistiques'], array('categories' => $this->form->getCategories(), 'appellations' => $this->form->getAppellations(), 'compare' => $this->form->canPeriodeCompare(), 'periode' => $this->form->getPeriode()));
@@ -75,13 +83,34 @@ class statistiqueActions extends sfActions {
 		$elasticaQuery = new acElasticaQuery();
 		$elasticaQuery->setSize(0);
 		$elasticaQuery->setParams($params);
-		//print_r(json_encode($elasticaQuery->toArray()));exit;
+	  //print_r(json_encode($elasticaQuery->toArray())); exit;
 		return $index->search($elasticaQuery)->getFacets();
 	}
 
 	protected function getAggsResultCsv($type, $current, $lastPeriode = null)
 	{
 		return ($lastPeriode !== null)? $this->getPartial('statistique/'.$type, array('lastPeriode' => $lastPeriode, 'result' => $current)) : $this->getPartial('statistique/'.$type, array('lastPeriode' => null, 'result' => $current[$type]));
+	}
+
+	protected function renderdisponibilitesStocks($values){
+		$resultStocks = $this->getAggsResult($this->statistiquesConfig['statistiques'][$values['statistiques']]['index'], $this->form->processFilters(), array($values['statistiques'] => $this->statistiquesConfig['statistiques'][$values['statistiques']]['aggregation']));
+
+		$values["doc.produit"] = $values["doc.mouvements.produit_hash"];
+		$cm = new CampagneManager('08-01');
+		$campagne = $cm->getCampagneByDate($values["doc.mouvements.date/from"]);
+		$values['statistiques'] = "disponibilites_vracs";
+		$values["doc.date_campagne/from"] = $cm->getDateDebutByCampagne($campagne);
+		$values["doc.date_campagne/to"] = $cm->getDateFinByCampagne($campagne);
+		$values['doc.mouvements.date/from'] = null;
+		$values['doc.mouvements.date/to'] = null;
+
+		$resultVrac = $this->getAggsResult($this->statistiquesConfig['statistiques'][$values['statistiques']]['index'], $this->form->processFilters($values), array($values['statistiques'] => $this->statistiquesConfig['statistiques'][$values['statistiques']]['aggregation']));
+		$csvResult = $this->getPartial('statistique/disponibilites', array('stocksfin' => $resultStocks,'contrats' => $resultVrac));
+		if ($this->form->pdfFormat()) {
+			return $this->renderPdf($csvResult, "disponibilites", array('categories' => $this->form->getCategories(), 'appellations' => $this->form->getAppellations(), 'periode' => $this->form->getPeriode()));
+		} else {
+			return $this->renderCsv($csvResult, 'statistiques_disponibilites');
+		}
 	}
 
 	protected function getCsvToArray($csv, $nbKeys)

@@ -45,6 +45,18 @@ EOF;
 
         $csv = $export->export(MouvementfactureFacturationView::getInstance()->getMouvementsAll(0), $options['periode_max']);
 
+        $noLignes = true;
+        foreach($csv as $file => $lignes) {
+            if(count($lignes)) {
+                $noLignes = false;
+                break;
+            }
+        }
+
+        if($noLignes) {
+            return;
+        }
+
         $origineFilename = null;
         foreach($csv as $file => $lignes) {
             $fileName = $arguments['path']."/".$date."_".preg_replace("/.+\./", "", $file);

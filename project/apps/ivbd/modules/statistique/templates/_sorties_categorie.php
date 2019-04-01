@@ -1,9 +1,8 @@
-<?php 
-use_helper('Statistique');
+<?php
 use_helper('IvbdStatistique');
 
 if ($lastPeriode) {
-	$csv = "Appellation;Couleur;France N-1;France;France %;Export N-1;Export;Export %;Négoce N-1;Négoce;Négoce %;TOTAL N-1;TOTAL;TOTAL %\n";
+	$csv = "Produit;Couleur;France;France %;France N-1;Export;Export %;Export N-1;Contrats;Contrats %;Contrats N-1;TOTAL;TOTAL %;TOTAL N-1\n";
 	$result = $result->getRawValue();
 	$lastPeriode = $lastPeriode->getRawValue();
 	$resultKeys = array_keys($result);
@@ -25,7 +24,11 @@ if ($lastPeriode) {
 			foreach ($lastPeriode as $subkey => $subvalues) {
 				$subtabKey = explode('/', $subkey);
 				if (!in_array($subtabKey[0], $resultFirstKeys)) {
-					$csv .= $subtabKey[0].';'.$subtabKey[1].';'.$subvalues[0].';'.null.';'.getEvol($subvalues[0], 0).';'.$subvalues[1].';'.null.';'.getEvol($subvalues[1], 0).';'.$subvalues[2].';'.null.';'.getEvol($subvalues[2], 0).';'.$subvalues[3].';'.null.';'.getEvol($subvalues[3], 0)."\n";
+					$csv .= $subtabKey[0].';'.$subtabKey[1].';'.
+					null.';'.getEvol($subvalues[0], 0).';'.formatNumber($subvalues[0]).';'.
+					null.';'.getEvol($subvalues[1], 0).';'.formatNumber($subvalues[1]).';'.
+					null.';'.getEvol($subvalues[2], 0).';'.formatNumber($subvalues[2]).';'.
+					null.';'.getEvol($subvalues[3], 0).';'.formatNumber($subvalues[3])."\n";
 				}
 			}
 		}
@@ -33,18 +36,30 @@ if ($lastPeriode) {
 			foreach ($lastPeriode as $subkey => $subvalues) {
 				$subtabKey = explode('/', $subkey);
 				if ($tabKey[0] == $subtabKey[0] && !in_array($subkey, $resultKeys)) {
-					$csv .= $subtabKey[0].';'.$subtabKey[1].';'.$subvalues[0].';'.null.';'.getEvol($subvalues[0], 0).';'.$subvalues[1].';'.null.';'.getEvol($subvalues[1], 0).';'.$subvalues[2].';'.null.';'.getEvol($subvalues[2], 0).';'.$subvalues[3].';'.null.';'.getEvol($subvalues[3], 0)."\n";
+					$csv .= $subtabKey[0].';'.$subtabKey[1].';'.
+					null.';'.getEvol($subvalues[0], 0).';'.formatNumber($subvalues[0]).';'.
+					null.';'.getEvol($subvalues[1], 0).';'.formatNumber($subvalues[1]).';'.
+					null.';'.getEvol($subvalues[2], 0).';'.formatNumber($subvalues[2]).';'.
+					null.';'.getEvol($subvalues[3], 0).';'.formatNumber($subvalues[3])."\n";
 				}
 			}
 		}
 		if (isset($lastPeriode[$key])) {
-			$csv .= $tabKey[0].';'.$tabKey[1].';'.$lastPeriode[$key][0].';'.$values[0].';'.getEvol($lastPeriode[$key][0], $values[0]).';'.$lastPeriode[$key][1].';'.$values[1].';'.getEvol($lastPeriode[$key][1], $values[1]).';'.$lastPeriode[$key][2].';'.$values[2].';'.getEvol($lastPeriode[$key][2], $values[2]).';'.$lastPeriode[$key][3].';'.$values[3].';'.getEvol($lastPeriode[$key][3], $values[3])."\n";
+			$csv .= $tabKey[0].';'.$tabKey[1].';'.
+			formatNumber($values[0]).';'.getEvol($lastPeriode[$key][0], $values[0]).';'.formatNumber($lastPeriode[$key][0]).';'.
+			formatNumber($values[1]).';'.getEvol($lastPeriode[$key][1], $values[1]).';'.formatNumber($lastPeriode[$key][1]).';'.
+			formatNumber($values[2]).';'.getEvol($lastPeriode[$key][2], $values[2]).';'.formatNumber($lastPeriode[$key][2]).';'.
+			formatNumber($values[3]).';'.getEvol($lastPeriode[$key][3], $values[3]).';'.formatNumber($lastPeriode[$key][3])."\n";
 		} else {
-			$csv .= $tabKey[0].';'.$tabKey[1].';'.null.';'.$values[0].';'.getEvol(0, $values[0]).';'.null.';'.$values[1].';'.getEvol(0, $values[1]).';'.null.';'.$values[2].';'.getEvol(0, $values[2]).';'.null.';'.$values[3].';'.getEvol(0, $values[3])."\n";
+			$csv .= $tabKey[0].';'.$tabKey[1].';'.
+			formatNumber($values[0]).';'.getEvol(0, $values[0]).';'.null.';'.
+			formatNumber($values[1]).';'.getEvol(0, $values[1]).';'.null.';'.
+			formatNumber($values[2]).';'.getEvol(0, $values[2]).';'.null.';'.
+			formatNumber($values[3]).';'.getEvol(0, $values[3]).';'.null."\n";
 		}
 	}
 } else {
-	$csv = "Appellation;Couleur;France;Export;Négoce;TOTAL\n";
+	$csv = "Appellation;Couleur;France;Exports;Contrats;TOTAL\n";
 	foreach ($result['agg_page']['buckets'] as $appellation) {
 		$appellationLibelle = getAppellationLibelle(strtoupper($appellation['key']));
 		$totalFrance = (formatNumber($appellation['total_france']['value']) != 0)? formatNumber($appellation['total_france']['value']) : null;

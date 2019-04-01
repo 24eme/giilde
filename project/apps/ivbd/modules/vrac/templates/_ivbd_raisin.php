@@ -59,7 +59,7 @@ if ($vrac->mandataire_exist) {
 \def\CONTRATNUMENREGISTREMENT{<?php echo substr($vrac->numero_contrat, -6)?>}
 \def\CONTRATANNEEENREGISTREMENT{<?php echo substr($vrac->numero_contrat, 2, 2)?>}
 \def\CONTRATVISA{Pas de visa}
-\def\CONTRATDATEENTETE{<?php echo date("d/m/Y", strtotime($vrac->valide->date_saisie)); ?>}
+\def\CONTRATDATEENTETE{<?php echo date("d/m/Y", strtotime($vrac->date_visa)); ?>}
 
 \def\CONTRAT_TITRE{CONTRAT D'ACHAT EN PROPRIETE}
 

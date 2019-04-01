@@ -22,7 +22,7 @@ try {
   return;
 }
 
-$t = new lime_test(30);
+$t = new lime_test(34);
 
 $t->comment("La base ElasticSearch est accessible : les tests vont être executés");
 
@@ -82,10 +82,17 @@ $typesDrmLibelles = array("Suspendu","Acquitté");
 $currentP = ((DateTime::createFromFormat("Ymd",date("Ym")."01"))->modify("-1 month"))->format("Ym");
 
 $aleaP = (DateTime::createFromFormat("Ymd",rand(2012, date("Y")-1).sprintf("%02d",rand(1,12))."01"))->format("Ym");
-
 $periodes = array($aleaP,$currentP);
 
 $t->comment("Vérification de l'indexation des documents DRM et DRMMVT");
+
+
+$produit_hash = null;
+foreach(ConfigurationClient::getInstance()->getCurrent()->getProduits() as $produit) {
+    if($produit->getTauxCVO(date("Y-m-d")) > 0 && !$produit_hash) {
+        $produit_hash = $produit->getHash();
+    }
+}
 
 
 foreach ($periodes as $p) {
@@ -112,12 +119,22 @@ foreach ($periodes as $p) {
   ksort($drmElkValidees);
 
   $drmByView = DRMDerniereView::getInstance()->findByCampagneAndPeriode($campagne,$p);
-
+  $sommeDebutMoisCouchdb = 0;
+  $sommeFinMoisCouchdb = 0;
   $drmViewValidees = array();
+  $drmMasters = array();
   foreach ($drmByView as $drmView) {
     $drmViewValidees[$drmView->id] = $drmView->id;
+    $d = DRMClient::getInstance()->find($drmView->id);
+    $d = $d->getMaster();
+    foreach ($d->getProduitsDetails(true) as $produitKey => $produit) {
+      if(strpos($produitKey,$produit_hash) !== false && !in_array($d->_id.$produitKey,$drmMasters)){
+        $drmMasters[] = $d->_id.$produitKey;
+        $sommeDebutMoisCouchdb += $produit->total_debut_mois;
+        $sommeFinMoisCouchdb += $produit->total;
+      }
+    }
   }
-  ksort($drmViewValidees);
 
   $t->is(count($drmElkValidees), count($drmViewValidees), "(".$p.") Il y a le même nombre de DRM validées dans la base elasticsearch (".count($drmElkValidees).") et dans la base couchdb (".count($drmViewValidees).")");
   $t->is(count(array_diff($drmElkValidees,$drmViewValidees)),0,"(".$p.") Il y a les mêmes DRM validées dans elasticsearch et couchdb");
@@ -132,12 +149,23 @@ foreach ($periodes as $p) {
   $resultset = $index->search($q);
   $drmMvtsElkStocks = array();
   $drmMvtsElk = array();
+
+  $sommeDebutMoisElk = 0;
+  $sommeFinMoisElk = 0;
   foreach ($resultset->getResults() as $key => $er) {
     $d = $er->getData();
     $drmMvt = $d["doc"];
     $mvtLocal = $drmMvt['mouvements'];
-    if($mvtLocal["categorie"] == "stocks"){
+    if($mvtLocal["categorie"] == "stocks" && $drmMvt["valide"]["date_saisie"]){
       $drmMvtsElkStocks[$mvtLocal["id"]] = $mvtLocal;
+      if(strpos($mvtLocal["produit_hash"],$produit_hash) !== false){
+        if($mvtLocal["type_hash"] == "total_debut_mois"){
+          $sommeDebutMoisElk += $mvtLocal["volume"];
+        }
+        if($mvtLocal["type_hash"] == "total"){
+          $sommeFinMoisElk += $mvtLocal["volume"];
+        }
+      }
     }else{
       $drmMvtsElk[$mvtLocal["id"]] = $mvtLocal;
     }
@@ -172,6 +200,9 @@ foreach ($periodes as $p) {
   $t->is($denomination_complementaire,false, "(".$p.") Dans les mouvements stocks de DRMMVT les dénominations complémentaires sont présentes");
   $t->is($type_drm,false, "(".$p.") Dans les mouvements stocks de DRMMVT les types de DRM ne sont pas valident");
   $t->is($type_drm_libelle,false, "(".$p.") Dans les mouvements stocks de DRMMVT les types libellés de DRM ne sont pas valident");
+
+  $t->is(round($sommeDebutMoisCouchdb,2),round($sommeDebutMoisElk,2),"(".$p.") les stocks début de mois couchdb et elasticsearch sont similaires.");
+  $t->is(round($sommeFinMoisCouchdb,2),round($sommeFinMoisElk,2),"(".$p.") les stocks fin de mois couchdb et elasticsearch sont similaires.");
 
   $format_produit_hash = false;
   $format_appelation = false;

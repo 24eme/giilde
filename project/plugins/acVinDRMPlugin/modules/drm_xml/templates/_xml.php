@@ -20,7 +20,7 @@
 <?php foreach (xmlGetProduitsDetails($drm, true, DRM::DETAILS_KEY_SUSPENDU) as $produit):	?>
 			<produit>
 <?php if ($produit->getCodeDouane()): ?>
-			<?php if($produit->isCodeDouaneAlcool()): ?>
+			<?php if($produit->isCodeDouaneNonINAO()): ?>
 				<libelle-fiscal><?php echo formatCodeINAO($produit->getCodeDouane()) ?></libelle-fiscal>
 			<?php else: ?>
 				<code-inao><?php echo formatCodeINAO($produit->getCodeDouane()) ?></code-inao>

@@ -28,7 +28,7 @@ echo -n > $LISTDRMFILE
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_changes?since=$NUMEROSEQUENCE > $CHANGESFILE
 LASTNUMEROSEQUENCE=$(grep "last_seq" $CHANGESFILE | sed 's/"last_seq"://' | sed 's/}//')
 
-cat $CHANGESFILE | grep "\"DRM-" | cut -d "," -f 2 | sed 's/"id":"//' | sed 's/"//' | while read id
+cat $CHANGESFILE | grep "\"DRM-" | grep -v "deleted" | cut -d "," -f 2 | sed 's/"id":"//' | sed 's/"//' | while read id
 do
     curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/$id | jq -c '[._id,.teledeclare,.valide.date_signee,.declarant.no_accises]' | sed 's/\[//' | sed 's/\]//' | sed 's/"//g' | sed 's/null//' >> $LISTDRMFILE
 done

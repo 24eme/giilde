@@ -37,13 +37,13 @@ $appellations = (isset($options['appellations']) && count($options['appellations
 \fancypagestyle{fstyle}{
 	<?php if($appellations): ?>
 
-		\fancyhead[R]{Stocks des articles pour les appellations
+		\fancyhead[R]{Stocks des produits pour les appellations
 		<?php foreach ($appellations as $key => $appellation): ?>
 			\textbf{<?php echo $appellation ?><?php echo ($key < count($appellations)-1)? ",~" :"";?>}
 		<?php endforeach; ?>}
 <?php else: ?>
 		\vspace{1cm}
-		\fancyhead[R]{Stocks des articles pour toutes les appellations}
+		\fancyhead[R]{Stocks des produits pour toutes les appellations}
 <?php endif; ?>
 }
 
@@ -55,11 +55,11 @@ $appellations = (isset($options['appellations']) && count($options['appellations
 <?php if ($compare): ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth} | >{\raggedleft}p{0.08\linewidth}| >{\raggedleft}p{0.08\linewidth} | }
 \hline
-\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Stock initial N-1}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Mouvements N-1}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} & \multicolumn{1}{c |}{\textbf{Stock Fin N-1}} \tabularnewline \hline
+\rowcolor{gray!40} \textbf{Produit} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Stock initial N-1}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Mouvements N-1}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} & \multicolumn{1}{c |}{\textbf{Stock Fin N-1}} \tabularnewline \hline
 <?php else : ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedright}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 \hline
-\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} \tabularnewline \hline
+\rowcolor{gray!40} \textbf{Produit} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} \tabularnewline \hline
 <?php endif; ?>
 <?php
 	$i = 1;
@@ -90,9 +90,9 @@ $appellations = (isset($options['appellations']) && count($options['appellations
 	<?php if ($newSection): ?>
 	\hline
 	<?php if ($compare): ?>
-		\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Stock initial N-1}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Mouvements N-1}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} & \multicolumn{1}{c |}{\textbf{Stock Fin N-1}} \tabularnewline \hline
+		\rowcolor{gray!40} \textbf{Produit} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Stock initial N-1}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Mouvements N-1}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} & \multicolumn{1}{c |}{\textbf{Stock Fin N-1}} \tabularnewline \hline
 	<?php else : ?>
-		\rowcolor{gray!40} \textbf{Article} & \multicolumn{1}{c |}{\textbf{Catégorie}} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} \tabularnewline
+		\rowcolor{gray!40} \textbf{Produit} & \multicolumn{1}{c |}{\textbf{Stock initial}} & \multicolumn{1}{c |}{\textbf{Mouvements}} & \multicolumn{1}{c |}{\textbf{Stock Fin}} \tabularnewline
 	<?php endif; ?>
 	<?php endif; ?>
 	\hline

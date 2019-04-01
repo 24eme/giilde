@@ -56,6 +56,30 @@ class ConfigurationCepage extends BaseConfigurationCepage {
         return $this->getParentNode();
     }
 
+    public static function isCodeDouaneNeedTav($code_douane) {
+        if(!$code_douane){
+
+            return false;
+        }
+
+        if(preg_match('/^[0-9]{1}/', $code_douane)){
+
+            return false;
+        }
+
+        if(preg_match('/MATIERES_PREMIERES/', $code_douane)) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public function needTav() {
+
+        return self::isCodeDouaneNeedTav($this->code_douane);
+    }
+
     public function setDonneesCsv($datas) {
         parent::setDonneesCsv($datas);
 

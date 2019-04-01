@@ -3,7 +3,7 @@
 class VracCsvImport extends CsvFile
 {
     const CSV_TYPE_TRANSACTION = 0;
-    const CSV_DATE_SIGNATURE = 1;
+    const CSV_DATE_SAISIE = 1;
     const CSV_CREATEUR_ID = 2;
     const CSV_CREATEUR_NUMERO = 3;
     const CSV_ACHETEUR_ID = 4;
@@ -40,19 +40,20 @@ class VracCsvImport extends CsvFile
     const CSV_MENTION = 33;
     const CSV_VOLUME = 34;
     const CSV_PRIX = 35;
+    const CSV_CONTENANCE = 36;
 
-    const CSV_LOGEMENT = 36;
-    const CSV_VENDEUR_TVA = 37;
-    const CSV_DELAI_PAIEMENT = 38;
-    const CSV_MOYEN_PAIEMENT = 39;
-    const CSV_ACOMPTE = 40;
-    const CSV_DATE_RETIRAISON_DEBUT = 41;
-    const CSV_DATE_RETIRAISON_LIMITE = 42;
-    const CSV_RESERVE_PROPRIETE = 43;
-    const CSV_CAHIER_CHARGES = 44;
-    const CSV_AUTH_NOM_VIN = 45;
-    const CSV_AUTH_NOM_PRODUCTEUR = 46;
-    const CSV_OBSERVATION = 47;
+    const CSV_LOGEMENT = 37;
+    const CSV_VENDEUR_TVA = 38;
+    const CSV_DELAI_PAIEMENT = 39;
+    const CSV_MOYEN_PAIEMENT = 40;
+    const CSV_ACOMPTE = 41;
+    const CSV_DATE_RETIRAISON_DEBUT = 42;
+    const CSV_DATE_RETIRAISON_LIMITE = 43;
+    const CSV_RESERVE_PROPRIETE = 44;
+    const CSV_CAHIER_CHARGES = 45;
+    const CSV_AUTH_NOM_VIN = 46;
+    const CSV_AUTH_NOM_PRODUCTEUR = 47;
+    const CSV_OBSERVATION = 48;
 
     const LABEL_BIO = 'agriculture_biologique';
 
@@ -66,6 +67,9 @@ class VracCsvImport extends CsvFile
 
     /** @var array $errors Tableau des erreurs de vérification */
     private $errors = [];
+
+    /** @var array $warnings Tableau des warnings de la vérification */
+    private $warnings = [];
 
     /**
      * Crée une instance depuis un tableau CSV
@@ -97,10 +101,28 @@ class VracCsvImport extends CsvFile
     }
 
     /**
+     * Retourne le tableau contenant les erreurs
+     *
+     * @return array Le tableau d'erreur
+     */
+    public function getErrors() {
+        return $this->errors;
+    }
+
+    /**
+     * Retourne le tableau contenant les avertissements
+     *
+     * @return array Le tableau des avertissements
+     */
+    public function getWarnings() {
+        return $this->warnings;
+    }
+
+    /**
      * Importe des vracs dans la base
      *
      * @param bool $verified Le csv a été vérifier
-     * @return int|array Nombre de vracs importés ou tableau d'erreur
+     * @return int Nombre de vracs importés
      */
     public function import($verified = false) {
         $configuration = ConfigurationClient::getInstance()->getCurrent();
@@ -108,8 +130,9 @@ class VracCsvImport extends CsvFile
         foreach ($this->getLines() as $line) {
             $v = new Vrac();
 
+            $v->teledeclare = true;
+
             $v->type_transaction = $line[self::CSV_TYPE_TRANSACTION];
-            $v->date_signature = $line[self::CSV_DATE_SIGNATURE];
 
             $v->createur_identifiant = $line[self::CSV_CREATEUR_ID];
             if (! $v->createur_identifiant) {
@@ -128,7 +151,7 @@ class VracCsvImport extends CsvFile
 
             $v->representant_identifiant = $line[self::CSV_REPRESENTANT_ID];
             if (! $v->representant_identifiant) {
-                $v->representant_identifiant = $v->acheteur_identifiant;
+                $v->representant_identifiant = $v->vendeur_identifiant;
             }
 
             $v->mandataire_identifiant = $line[self::CSV_COURTIER_MANDATAIRE_ID];
@@ -191,6 +214,13 @@ class VracCsvImport extends CsvFile
             }
             $v->prix_initial_unitaire = $line[self::CSV_PRIX];
 
+            if ($v->type_transaction === VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE) {
+                $contenances = VracConfiguration::getInstance()->getContenances();
+                if (array_key_exists($line[self::CSV_CONTENANCE], $contenances)) {
+                    $v->bouteilles_contenance_libelle = $line[self::CSV_CONTENANCE];
+                }
+            }
+
             $v->logement = $line[self::CSV_LOGEMENT];
             $v->vendeur_tva = $line[self::CSV_VENDEUR_TVA];
             $v->delai_paiement = $line[self::CSV_DELAI_PAIEMENT];
@@ -204,12 +234,16 @@ class VracCsvImport extends CsvFile
             $v->autorisation_nom_vin = $line[self::CSV_AUTH_NOM_VIN];
             $v->conditions_particulieres = $line[self::CSV_OBSERVATION];
 
+            $v->valide->date_saisie = $line[self::CSV_DATE_SAISIE];
+
             if ($verified) {
                 $v->acompte = (float) $v->acompte;
                 $v->degre = (float) $v->degre;
                 $v->millesime = (int) $v->millesime;
                 $v->jus_quantite = (float) $v->jus_quantite;
                 $v->prix_initial_unitaire = (float) $v->prix_initial_unitaire;
+
+                $v->valide->date_signature_acheteur = date('c');
 
                 $v->update();
                 $v->save();
@@ -223,12 +257,18 @@ class VracCsvImport extends CsvFile
                         $this->errors[self::$line][] = $err->getMessage() . ': ' . $err->getInfo();
                     }
                 }
+
+                if ($validator->hasVigilances()) {
+                    foreach ($validator->getVigilances() as $warn) {
+                        $this->warnings[self::$line][] = $warn->getMessage() . ': ' .  $warn->getInfo();
+                    }
+                }
             }
 
             self::$line++;
         }
 
-        return ($verified) ? self::$imported : $this->errors;
+        return self::$imported;
     }
 
     /**

@@ -47,14 +47,14 @@ $categories = (isset($options['categories']))? $options['categories'] : array();
 <?php if ($compare): ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | }
 \hline
-\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Négociant} & \multicolumn{3}{c |}{Total} \tabularnewline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} \tabularnewline \hline
+\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Exports} & \multicolumn{3}{c |}{Contrats} & \multicolumn{3}{c |}{Total} \tabularnewline
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} \tabularnewline \hline
 <?php else: ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 \hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Export} & \multicolumn{1}{c |}{Négociant} & \multicolumn{1}{c |}{Total} \tabularnewline \hline
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Exports} & \multicolumn{1}{c |}{Contrats} & \multicolumn{1}{c |}{Total} \tabularnewline \hline
 <?php endif; ?>
-<?php 
+<?php
 	$i = ($compare)? 2 : 1;
 	foreach ($items as $item):
 		$item = sfOutputEscaper::unescape($item);
@@ -67,8 +67,8 @@ $categories = (isset($options['categories']))? $options['categories'] : array();
 		$values[0] = ($values[0] != $values[1])? $values[0].' '.$values[1] : $values[0];
 		unset($values[1]);
 ?>
-<?php 
-	if ($i == $maxTableRowsPerPage): 
+<?php
+	if ($i == $maxTableRowsPerPage):
 	$newSection = true;
 ?>
 \end{tabularx}
@@ -80,14 +80,14 @@ $categories = (isset($options['categories']))? $options['categories'] : array();
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | >{\raggedleft}p{0.050\linewidth} | }
 <?php if ($newSection): ?>
 \hline
-\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Export} & \multicolumn{3}{c |}{Négociant} & \multicolumn{3}{c |}{Total} \tabularnewline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} \tabularnewline
+\rowcolor{gray!40} & \multicolumn{3}{c |}{France} & \multicolumn{3}{c |}{Exports} & \multicolumn{3}{c |}{Contrats} & \multicolumn{3}{c |}{Total} \tabularnewline
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} & \multicolumn{1}{c |}{N} & \multicolumn{1}{c |}{\%} & \multicolumn{1}{c |}{N-1} \tabularnewline
 <?php endif; ?>
 <?php else: ?>
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | >{\raggedleft}p{0.1\linewidth} | }
 <?php if ($newSection): ?>
 \hline
-\rowcolor{gray!40} Article & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Export} & \multicolumn{1}{c |}{Négociant} & \multicolumn{1}{c |}{Total} \tabularnewline
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{France} & \multicolumn{1}{c |}{Exports} & \multicolumn{1}{c |}{Contrats} & \multicolumn{1}{c |}{Total} \tabularnewline
 <?php endif; ?>
 <?php endif; ?>
 \hline

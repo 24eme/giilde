@@ -1,5 +1,4 @@
 TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT
-suspendu,stocks_debut,instance,en instance de revendication,vin en instance de revendication
 suspendu,stocks_debut,initial,initial,stock initial
 suspendu,entrees,recolte,01. récolte,récolte
 suspendu,entrees,declassement,02. issu d'un déclassement,déclassement
@@ -28,14 +27,11 @@ suspendu,sorties,consommationfamilialedegustation,11. conso. fam./dégustation,c
 suspendu,sorties,destructionperte,12. lies/destruction,lies – sorties pour destruction
 suspendu,sorties,manquant,13. manquants,manquants
 suspendu,sorties,cession,14. cession d'exploitation,cessation d'activité
-suspendu,stocks_fin,instance,en instance de revendication,en instance de revendication
 suspendu,stocks_fin,final,final,stock final
-acquitte,stocks_debut,instance,en instance,stock début en instance de revendication
 acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.
 acquitte,entrees,achat,achats,indiquer les achats du produit.
 acquitte,entrees,autre,autres,autres entrées du produit. ex : correspondant à une sortie de produits en droits suspendus pour lesquels les droits ont été payés.
 acquitte,sorties,autre,autres,indiquer les volumes commercialisés à l'export.
 acquitte,sorties,replacementsuspension,replacement en suspension,indiquer le replacement en suspension du produit.
 acquitte,sorties,vente,ventes de produits ,indiquer les ventes du produit.
-acquitte,stocks_fin,instance,en instance,stock fin en instance de revendication
 acquitte,stocks_fin,final,final,calcul automatique: cette case ne peut être modifiée.

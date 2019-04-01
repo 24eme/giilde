@@ -26,10 +26,6 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
     }
 
     public function needDouaneObservation() {
-        if($this->getParent()->getParent()->getKey() != "details") {
-
-            return false;
-        }
 
         return preg_match('/autres-entrees|autres-sorties|replacement-suspension/', $this->douane_cat);
     }

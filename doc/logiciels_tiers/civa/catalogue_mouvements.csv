@@ -1,5 +1,4 @@
 TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT
-suspendu,stocks_debut,instance,en instance,stock début en instance de revendication
 suspendu,stocks_debut,initial,initial,stock début de mois
 suspendu,entrees,achatnoncrd,achat (vrac/blles nues),achats vrac + bouteilles sans crd
 suspendu,entrees,autre,autres,autres entrées que celles-ci-dessous. nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.
@@ -31,9 +30,7 @@ suspendu,sorties,repli,repli/déclassement,autres sorties replis et délassement
 suspendu,sorties,travailafacon,travail à façon,travail à façon
 suspendu,sorties,usageindustriel,usages industriel,dra/dplc blanc ou rouge et bfav
 suspendu,sorties,vci,vci,vci
-suspendu,stocks_fin,instance,en instance,stock fin en instance de revendication
 suspendu,stocks_fin,final,final,stock fin de mois
-acquitte,stocks_debut,instance,en instance,stock début en instance de revendication
 acquitte,stocks_debut,initial,initial,stock début de mois
 acquitte,entrees,achat,achats,entrées achats
 acquitte,entrees,reintegration,réintégration,quantités réintégrées
@@ -41,5 +38,4 @@ acquitte,sorties,ventefrancecrd,blles france,sorties bouteilles france
 acquitte,sorties,export,blles hors france,sorties sous document commercial de bouteilles hors france
 acquitte,sorties,consommationfamilialedegustation,dégustation,dégustation à la propriété
 acquitte,sorties,destructionperte,pertes et manquants,pertes et manquants
-acquitte,stocks_fin,instance,en instance,stock fin en instance de revendication
 acquitte,stocks_fin,final,final,stock fin de mois

@@ -27,7 +27,7 @@ class VracValidation extends DocumentValidation
         parent::addControle('erreur', 'bouteille', 'Un problème avec les bouteilles');
 
         parent::addControle('vigilance', 'mandataire', '');
-        parent::addControle('vigilance', 'date', '');
+        parent::addControle('vigilance', 'date', 'Les dates peuvent poser problème');
         parent::addControle('vigilance', 'domaine', '');
     }
 
@@ -39,7 +39,7 @@ class VracValidation extends DocumentValidation
             parent::addPoint('erreur', 'inexistant', 'Le type de transaction n\'existe pas');
         }
 
-        if (! $this->checkDate($this->document->_get('date_signature'))) {
+        if (! $this->checkDate($this->document->valide->date_saisie)) {
             parent::addPoint('erreur', 'date', 'La date de signature doit être renseignée');
         }
 
@@ -65,6 +65,11 @@ class VracValidation extends DocumentValidation
             if (! $this->checkEtablissement($this->document->mandataire_identifiant, EtablissementFamilles::FAMILLE_COURTIER)) {
                 parent::addPoint('erreur', 'inexistant', 'Le mandataire n\'existe pas');
             }
+        }
+
+        if ($this->document->createur_identifiant !== $this->document->acheteur_identifiant
+            && $this->document->createur_identifiant !== $this->document->mandataire_identifiant) {
+                parent::addPoint('erreur', 'inexistant', 'Le créateur doit être l\'acheteur ou le mandataire');
         }
 
         if ($this->document->responsable && !in_array($this->document->responsable, ['vendeur', 'mandataire', 'acheteur'])) {
@@ -108,22 +113,41 @@ class VracValidation extends DocumentValidation
             parent::addPoint('erreur', 'inexistant', 'Le prix unitaire est requis');
         }
 
-        if (! $this->checkDate($this->document->date_limite_retiraison)) {
+        if ($this->document->prix_initial_unitaire && ! $this->checkFloat($this->document->prix_initial_unitaire)) {
+            parent::addPoint('erreur', 'float', 'Le prix n\'est pas un chiffre flottant');
+        }
+
+        if (! $this->checkDate($this->document->_get('date_limite_retiraison'))) {
             parent::addPoint('erreur', 'date', 'La date de limite de retiraison n\'est pas valide');
         }
 
-        if ($this->document->date_debut_retiraison) {
-            if (! $this->checkDate($this->document->date_debut_retiraison)) {
+        if ($this->document->_get('date_debut_retiraison')) {
+            if (! $this->checkDate($this->document->_get('date_debut_retiraison'))) {
                 parent::addPoint('erreur', 'date', 'La date de début de retiraison n\'est pas valide');
             }
 
-            if ($this->document->date_limite_retiraison < $this->document->date_debut_retiraison) {
+            if ($this->document->_get('date_limite_retiraison') < $this->document->_get('date_debut_retiraison')) {
                 parent::addPoint('vigilance', 'date', 'La date de début de retiraison est supérieure à celle du début');
             }
         }
 
         if ($this->document->acompte && ! $this->checkFloat($this->document->acompte)) {
             parent::addPoint('erreur', 'float', 'L\'acompte n\'est pas un chiffre flottant');
+        }
+
+        if ($this->document->millesime && ! $this->checkDate($this->document->millesime, 'Y')) {
+            parent::addPoint('erreur', 'date', 'Le millesime n\'est pas une année');
+        }
+
+        if (! $this->document->moyen_paiement) {
+            parent::addPoint('erreur', 'inexistant', 'Le moyen de paiement doit être renseigné');
+        }
+
+        if ($this->document->moyen_paiement) {
+            $moyens_paiement = VracConfiguration::getInstance()->getMoyensPaiement();
+            if (! array_key_exists($this->document->moyen_paiement, $moyens_paiement)) {
+                parent::addPoint('erreur', 'inexistant', 'Le moyen de paiement n\'existe pas');
+            }
         }
     }
 
