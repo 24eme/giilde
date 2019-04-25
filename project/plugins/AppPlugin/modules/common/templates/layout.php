@@ -19,7 +19,7 @@
         <link href="<?php echo public_path("/components/select2/select2-bootstrap.min.css") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css") ?>" rel="stylesheet">
         <link href="<?php echo public_path("/components/vins/vins.css") ?>" rel="stylesheet">
-        <link href="<?php echo public_path("/css/style.css?20190308") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/css/style.css?201904250946") ?>" rel="stylesheet">
         <?php if(file_exists(sfConfig::get('sf_web_dir')."/css/style_".sfConfig::get('sf_app').'.css')): ?>
             <link href="<?php echo public_path("/css/style_".sfConfig::get('sf_app').".css?201902051533") ?>" rel="stylesheet">
         <?php endif; ?>
