@@ -123,6 +123,7 @@
         initChoiceProduits();
         initCreationDrmPopup();
         initRegimeCrdsPopup();
+        initMatierePremiere();
         initCrds();
         initFavoris();
         initNonApurement();
@@ -251,6 +252,33 @@
             });
 
         });
+    }
+
+    var initMatierePremiere = function () {
+        if($('#form_matiere_premiere').length){
+            $('#form_matiere_premiere .volumehlaptohl').each(function(){
+              var row = $(this)
+              updateHlfromHlap(row);
+              $(row).find("[data-tav]").blur(function () {
+                updateHlfromHlap(row);
+              });
+              $(row).find("[data-volumehlap]").blur(function () {
+                updateHlfromHlap(row);
+              });
+            });
+          }
+    }
+
+    var updateHlfromHlap = function(elt){
+      var volumehlap = $(elt).find("[data-volumehlap]").val();
+      var tav = $(elt).find("[data-tav]").val();
+      var id = $(elt).find("[data-tav]").attr("data-tav");
+      if(tav && tav != 0.0){
+        var volume = 100.0/tav * volumehlap;
+        $(elt).find("[data-volumehl=\""+id+"\"]").text(volume.toFixed(2));
+      }else{
+        $(elt).find("[data-volumehl="+id+"]").text(0.0);
+      }
     }
 
     var updateCrdsTotaux = function (id) {

@@ -69,7 +69,9 @@
                         <?php if($detailsKey == DRM::DETAILS_KEY_ACQUITTE && $drm->isDouaneType(DRMClient::TYPE_DRM_SUSPENDU)): ?>
                             <a tabindex="-1" href="<?php echo url_for('drm_edition_details', array('sf_subject' => $drm, 'details' => DRM::DETAILS_KEY_SUSPENDU)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
                         <?php else: ?>
-                            <a tabindex="-1" href="<?php echo ($isTeledeclarationMode) ? url_for('drm_choix_produit', $drm) :   url_for('drm_etablissement', $drm); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                            <a tabindex="-1" href="<?php  if($isTeledeclarationMode){
+                                                            echo (DRMConfiguration::getInstance()->hasMatierePremiere())? url_for('drm_matiere_premiere', array('sf_subject' => $drm, 'precedent' => 1)) : url_for('drm_choix_produit', $drm);
+                                                          }else{ echo url_for('drm_etablissement', $drm); } ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
                         <?php endif; ?>
                     </div>
                     <div class="col-xs-6 text-center">

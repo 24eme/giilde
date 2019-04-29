@@ -22,3 +22,4 @@ all:
       mouvement_vide_neant: true
       negociant_facturable: true
       texte_mail_pas_transmission_douane: "Le lien entre le Portail du CIVA et Prodouane n'est actuellement pas activé. Merci de prendre rapidement contact avec le CIVA afin de transmettre votre DRM vers CIEL."
+      matiere_premiere: false

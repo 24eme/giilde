@@ -37,7 +37,6 @@ class DRMESDetails extends BaseDRMESDetails {
 
     public function createMouvements($template_mouvement) {
         $mouvements = array();
-
         // Check les éventuels suppressions
         if ($this->getDocument()->hasVersion() && $this->getDocument()->motherExist($this->getHash())) {
             $mother_this = $this->getDocument()->motherGet($this->getHash());
@@ -59,6 +58,7 @@ class DRMESDetails extends BaseDRMESDetails {
     }
 
     public function pushMouvement(&$mouvements, $template_mouvement, $detail) {
+
         $mouvement = $this->createMouvement(clone $template_mouvement, $detail);
         if (!$mouvement) {
             return;
@@ -80,7 +80,6 @@ class DRMESDetails extends BaseDRMESDetails {
 
     public function createMouvement($mouvement, $detail) {
         $volume = $detail->volume;
-
         if ($this->getDocument()->hasVersion() && $this->getDocument()->motherExist($detail->getHash())) {
             $volume = $volume - $this->getDocument()->motherGet($detail->getHash())->volume;
         }
@@ -124,8 +123,8 @@ class DRMESDetails extends BaseDRMESDetails {
             $mouvement->vrac_destinataire = null;
         }
 
-        $mouvement->date = $detail->date_enlevement;
-
+        $mouvement->date = ($detail->exist('date_enlevement'))? $detail->date_enlevement : $this->getDocument()->getDate();
+        
         return $mouvement;
     }
 

@@ -62,17 +62,7 @@ class ConfigurationCepage extends BaseConfigurationCepage {
             return false;
         }
 
-        if(preg_match('/^[0-9]{1}/', $code_douane)){
-
-            return false;
-        }
-
-        if(preg_match('/MATIERES_PREMIERES/', $code_douane)) {
-
-            return false;
-        }
-
-        return true;
+        return preg_match('/^(RHUM_|ALCOOL_|SPIRITUEUX_|AUTRES_ALCOOLS)/', $code_douane);
     }
 
     public function needTav() {

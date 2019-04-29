@@ -405,6 +405,19 @@ DRM:
                                                                                                                               date_enlevement: {  }
                                                                                                                               numero_document: {  }
                                                                                                                               type_document: {  }
+                                                                                                                  transfertsrecolte_details:
+                                                                                                                      class: DRMESDetails
+                                                                                                                      type:  collection
+                                                                                                                      required: false
+                                                                                                                      definition:
+                                                                                                                        fields:
+                                                                                                                          '*':
+                                                                                                                            type: collection
+                                                                                                                            class: DRMESDetailAlcoolPur
+                                                                                                                            definition:
+                                                                                                                              fields:
+                                                                                                                                identifiant: {  }
+                                                                                                                                volume: { type: float }
                                                                                                             stocks_fin:
                                                                                                               type: collection
                                                                                                               class: DRMDetailNoeud

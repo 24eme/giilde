@@ -29,3 +29,4 @@ all:
       warning_produit: false
       mouvement_vide_neant: false
       negociant_facturable: false
+      matiere_premiere: false

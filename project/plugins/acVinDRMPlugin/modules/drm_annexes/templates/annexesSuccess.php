@@ -123,7 +123,7 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                               </div>
                               <div class="col-xs-1 text-right">
                                 <a role="button" >
-                                  &nbsp;<span class="glyphicon  glyphicon-chevron-down" style="padding-top: 4px;" ></span>
+                                  &nbsp;<span class="glyphicon  glyphicon-chevron-<?php echo ($drm->hasStatsEuropeennes()) ? 'down' : 'right'; ?>" style="padding-top: 4px;" ></span>
                                 </a>
                               </div>
                             </div>
@@ -234,12 +234,12 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                             </div>
                             <div class="col-xs-1 text-right">
                               <a role="button" >
-                                &nbsp;<span class="glyphicon  glyphicon-chevron-down" style="padding-top: 4px;" ></span>
+                                &nbsp;<span class="glyphicon  glyphicon-chevron-<?php echo ($drm->hasWritableTAV()) ? 'down' : 'right'; ?>" style="padding-top: 4px;" ></span>
                               </a>
                             </div>
                           </div>
                       </div>
-                      <div id="collapse_tavs" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="drm_annexes_tavs">
+                      <div id="collapse_tavs" class="panel-collapse collapse <?php echo ($drm->hasWritableTAV())? ' in' : '' ?>" role="tabpanel" aria-labelledby="drm_annexes_tavs">
                       <div class="panel-body">
                         <p><?php echo getPointAideText('drm','annexe_tavs'); ?></p>
                         <table class="table table-bordered table-striped">

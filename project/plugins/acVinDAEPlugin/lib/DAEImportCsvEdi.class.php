@@ -310,7 +310,13 @@ class DAEImportCsvEdi extends DAECsvEdi
             }
             
             if (!$this->forceEtablissement && !isset($this->cache['etablissement_'.$etablissement])) {
-	            $e = EtablissementClient::getInstance()->findByIdentifiant($etablissement, acCouchdbClient::HYDRATE_JSON);
+                $e = null;
+                if ($etablissement) {
+	               $e = EtablissementClient::getInstance()->findByIdentifiant($etablissement, acCouchdbClient::HYDRATE_JSON);
+                }
+                if (!$e && $accises) {
+                    $e = ConfigurationClient::getCurrent()->identifyEtablissement($accises);
+                }
 	            if(!$e || $e->identifiant != $this->identifiant) {
 	                $this->csvDoc->addErreur($this->createDifferentEtbError($ligne_num, $csvRow));
 	            }

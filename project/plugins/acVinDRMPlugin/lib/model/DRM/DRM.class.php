@@ -1623,7 +1623,7 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
       return $this->etape == DRMClient::ETAPE_VALIDATION_EDI;
     }
 
-    
+
     /*
     * Observations
     */
@@ -1839,5 +1839,25 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
       return (($this->declaratif->statistiques->jus != null) || ($this->declaratif->statistiques->mcr != null) || ($this->declaratif->statistiques->vinaigre != null));
     }
 
+    public function hasMatierePremiere(){
+      foreach($this->getProduitsDetails() as $detail){
+          if($detail->isMatierePremiere()){ return true; }
+      }
+      return false;
+    }
+
+    public function hasWritableTAV() {
+        foreach ($this->getProduitsDetails() as $hash => $detail) {
+            if($detail->exist('tav')){
+                if ($detail->hasStockFinDeMoisDRMPrecedente()) {
+                    return false;
+                }
+                if ($detail->isAlcoolPur()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 }

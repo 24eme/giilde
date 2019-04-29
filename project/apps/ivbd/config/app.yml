@@ -127,9 +127,9 @@ all:
               agg_page:
                 terms:
                   size: 0,
-                  script: "'/declaration/certifications/'+doc['doc.mouvements.certification'].value+'/genres/'+doc['doc.mouvements.genre'].value+'/appellations/'+doc['doc.mouvements.appellation'].value+'/mentions/'+doc['doc.mouvements.mention'].value+'/lieux/'+doc['doc.mouvements.lieu'].value"
+                  field: 'doc.mouvements.couleur'
                   order:
-                    "_term": asc
+                    "_term": desc
                 aggs:
                   total_stock_initial:
                     sum_bucket:
@@ -143,8 +143,8 @@ all:
                   agg_line:
                     terms:
                       size: 0,
-                      field: 'doc.mouvements.couleur'
-                      "order" : { "_term" : "desc" }
+                      script: "'/declaration/certifications/'+doc['doc.mouvements.certification'].value+'/genres/'+doc['doc.mouvements.genre'].value+'/appellations/'+doc['doc.mouvements.appellation'].value+'/mentions/'+doc['doc.mouvements.mention'].value+'/lieux/'+doc['doc.mouvements.lieu'].value"
+                      "order" : { "_term" : "asc" }
                     aggs:
                       stock_initial:
                         filter:

@@ -15,3 +15,4 @@ all:
       reprise_stocks_changement_campagne: true
       defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 0.00375 },{ 'couleur' : 'VERT', 'contenance' : 0.0075 },{ 'couleur' : 'VERT', 'contenance' : 0.015 } ]
       default_auto_checked: false
+      matiere_premiere: false

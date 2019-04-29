@@ -256,8 +256,7 @@ class Etablissement extends BaseEtablissement implements InterfaceCompteGeneriqu
 
         $this->initFamille();
         $this->interpro = "INTERPRO-declaration";
-
-        if(VracConfiguration::getInstance()->getRegionDepartement() !== false) {
+        if(VracConfiguration::getInstance()->getRegionDepartement() !== false && $this->region != EtablissementClient::REGION_HORS_CVO) {
             $this->region = EtablissementClient::getInstance()->calculRegion($this);
         }
 

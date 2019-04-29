@@ -20,10 +20,14 @@ class DRMTavForm extends BaseForm
 
 	public function configure()
 	{
-        $w = array('tav' => new bsWidgetFormInputFloat());
+		$readonly = array();
+		$this->is_readonly = false;
+		if($this->_detail->isAlcoolPur() || $this->_detail->hasStockFinDeMoisDRMPrecedente()){
+			$readonly = array('readonly' => 'readonly');
+		}
+        $w = array('tav' => new bsWidgetFormInputFloat(array(), $readonly));
         $v = array('tav' => new sfValidatorNumber(array('required' => false, 'min' => 0), array('min' => "La saisie d'un nombre négatif est interdite")));
         $l = array('tav' => $this->_detail->getLibelle().' ('.$this->_detail->getTypeDRMLibelle().')');
-
         $this->setWidgets($w);
         $this->setValidators($v);
         $this->widgetSchema->setLabels($l);

@@ -179,6 +179,11 @@ class DRMConfiguration {
         return $this->configuration['negociant_facturable'];
     }
 
+    public function hasMatierePremiere() {
+
+        return $this->getConfig('matiere_premiere');
+    }
+
     public function getConfig($name) {
         if(!isset($this->configuration[$name])) {
 

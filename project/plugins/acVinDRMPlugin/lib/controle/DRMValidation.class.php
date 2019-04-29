@@ -69,7 +69,7 @@ class DRMValidation extends DocumentValidation {
               if(DRMConfiguration::getInstance()->hasWarningForProduit()){
                 $msgs = DRMConfiguration::getInstance()->getWarningsMessagesForProduits(array($detail->getHash() => ""));
                 if(count($msgs)){
-                  $this->addPoint('vigilance', 'alcool_hlap', $this->generateUrl('drm_edition_detail', $detail)." , les mouvements d'entrées et de sorties doivent être renseignés en HL (et non en HLAP). Un taux d'alcool volumique \"TAV\" doit être renseigné dans les ".$this->generateUrl('drm_annexes', $this->document)."");
+                  $this->addPoint('vigilance', 'alcool_hlap', '<a href="'.$this->generateUrl('drm_edition_detail', $detail)."\">".$detail->getLibelle()."</a> , les mouvements d'entrées et de sorties doivent être renseignés en HL (et non en HLAP). Un taux d'alcool volumique \"TAV\" doit être renseigné dans les <a href=\"".$this->generateUrl('drm_annexes', $this->document)."\">annexes</a>");
                 }
               }
 
@@ -123,11 +123,11 @@ class DRMValidation extends DocumentValidation {
 
             $total_sorties_destructionperte += ($detail->sorties->exist('destructionperte')) ? $detail->sorties->destructionperte : 0;
 
-            if ($detail->getConfig()->entrees->exist('transfertsrecolte') && $detail->entrees->exist('transfertsrecolte')) {
+            if ($detail->getConfig()->entrees->exist('transfertsrecolte') && $detail->entrees->exist('transfertsrecolte') && !$detail->isAlcoolPurOrMatierePremiere()) {
               $total_entrees_transfert_appellation += $detail->entrees->transfertsrecolte;
             }
 
-            if ($detail->getConfig()->sorties->exist('transfertsrecolte') && $detail->sorties->exist('transfertsrecolte')) {
+            if ($detail->getConfig()->sorties->exist('transfertsrecolte') && $detail->sorties->exist('transfertsrecolte') && !$detail->isAlcoolPurOrMatierePremiere()) {
               $total_sorties_transfert_appellation += $detail->sorties->transfertsrecolte;
             }
 

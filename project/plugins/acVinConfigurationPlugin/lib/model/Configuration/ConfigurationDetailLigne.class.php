@@ -10,6 +10,7 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
     const DETAILS_CREATIONVRAC = 'CREATIONVRAC';
     const DETAILS_EXPORT = 'EXPORT';
     const DETAILS_COOPERATIVE = 'COOPERATIVE';
+    const DETAILS_ALCOOLPUR = 'ALCOOLPUR';
 
     public function isReadable() {
 
@@ -27,7 +28,7 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
 
     public function needDouaneObservation() {
 
-        return preg_match('/autres-entrees|autres-sorties|replacement-suspension/', $this->douane_cat);
+        return preg_match('/autres-entrees|autres-sorties|replacement-suspension|manipulations/', $this->douane_cat);
     }
 
     public function needDouaneDateReplacement() {

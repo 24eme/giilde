@@ -20,27 +20,28 @@ $hasDontRevendique = $drm->getConfig()->getDocument()->hasDontRevendique();
 	<tbody>
 		<?php $details = $drm->getProduitsDetails($isTeledeclarationMode, $typeDetailKey); ?>
 		<?php foreach($details as $detail): ?>
+      <?php $unite = ($detail->isMatierePremiere())? "hlap" : "hl"; ?>
 			<tr>
 				<td><?php echo $detail->getTypeDRMLibelle() ?></td>
 				<td><a href="#tab=mouvements_<?php echo $detail->getTypeDRM() ?>&filtre=<?php echo strtolower($detail->getLibelle(ESC_RAW)); ?>"><?php echo $detail->getLibelle(ESC_RAW) ?></a></td>
 
         <td class="text-right <?php echo isVersionnerCssClass($detail, 'total_debut_mois') ?>">
-          <strong><?php echoFloat($detail->total_debut_mois) ?></strong>&nbsp;<span class="unite">hl</span>&nbsp;
+          <strong><?php echoFloat($detail->total_debut_mois) ?></strong>&nbsp;<span class="unite"><?php echo $unite; ?></span>&nbsp;
         </td>
 
-        <td class="<?php echo isVersionnerCssClass($detail, 'total_debut_mois') ?>"><?php if($detail->stocks_debut->exist('dont_revendique')): ?>(<?php echoFloat($detail->stocks_debut->dont_revendique) ?>&nbsp;<span class="unite">hl</span>)<?php endif; ?></td>
+        <td class="<?php echo isVersionnerCssClass($detail, 'total_debut_mois') ?>"><?php if($detail->stocks_debut->exist('dont_revendique')): ?>(<?php echoFloat($detail->stocks_debut->dont_revendique) ?>&nbsp;<span class="unite"><?php echo $unite; ?></span>)<?php endif; ?></td>
 
-      	<td class="text-right <?php echo isVersionnerCssClass($detail, 'total_entrees') ?>"><?php echoFloat($detail->total_entrees) ?>&nbsp;<span class="unite">hl</span></td>
+      	<td class="text-right <?php echo isVersionnerCssClass($detail, 'total_entrees') ?>"><?php echoFloat($detail->total_entrees) ?>&nbsp;<span class="unite"><?php echo $unite; ?></span></td>
         <td class="<?php echo isVersionnerCssClass($detail, 'total_entrees_revendique') ?>">
-          <?php if(!$isTeledeclarationMode && $hasDontRevendique): ?>&nbsp;(<?php echoFloat($detail->total_entrees_revendique) ?>&nbsp;<span class="unite">hl</span>)<?php endif; ?>
+          <?php if(!$isTeledeclarationMode && $hasDontRevendique): ?>&nbsp;(<?php echoFloat($detail->total_entrees_revendique) ?>&nbsp;<span class="unite"><?php echo $unite; ?></span>)<?php endif; ?>
         </td>
-				<td class="text-right <?php echo isVersionnerCssClass($detail, 'total_sorties') ?>"><?php echoFloat($detail->total_sorties) ?>&nbsp;<span class="unite">hl</span></td>
+				<td class="text-right <?php echo isVersionnerCssClass($detail, 'total_sorties') ?>"><?php echoFloat($detail->total_sorties) ?>&nbsp;<span class="unite"><?php echo $unite; ?></span></td>
         <td>
-          <?php if(!$isTeledeclarationMode && $hasDontRevendique): ?>&nbsp;(<?php echoFloat($detail->total_sorties_revendique) ?>&nbsp;<span class="unite">hl</span>)<?php endif; ?>
-          <?php if(!$isTeledeclarationMode && !$hasDontRevendique): ?>&nbsp;(<?php echoFloat($detail->total_facturable) ?>&nbsp;<span class="unite">hl</span>)<?php endif; ?>
+          <?php if(!$isTeledeclarationMode && $hasDontRevendique): ?>&nbsp;(<?php echoFloat($detail->total_sorties_revendique) ?>&nbsp;<span class="unite"><?php echo $unite; ?></span>)<?php endif; ?>
+          <?php if(!$isTeledeclarationMode && !$hasDontRevendique): ?>&nbsp;(<?php echoFloat($detail->total_facturable) ?>&nbsp;<span class="unite"><?php echo $unite; ?></span>)<?php endif; ?>
         </td>
-				<td class="text-right <?php echo isVersionnerCssClass($detail, 'total') ?>"><strong><?php echoFloat($detail->total) ?></strong>&nbsp;<span class="unite">hl</span>&nbsp;</td>
-        <td class="<?php echo isVersionnerCssClass($detail, 'total') ?>"><?php if($detail->stocks_fin->exist('dont_revendique')): ?>(<?php echoFloat($detail->stocks_fin->dont_revendique) ?>&nbsp;<span class="unite">hl</span>)<?php endif; ?></td>
+				<td class="text-right <?php echo isVersionnerCssClass($detail, 'total') ?>"><strong><?php echoFloat($detail->total) ?></strong>&nbsp;<span class="unite"><?php echo $unite; ?></span>&nbsp;</td>
+        <td class="<?php echo isVersionnerCssClass($detail, 'total') ?>"><?php if($detail->stocks_fin->exist('dont_revendique')): ?>(<?php echoFloat($detail->stocks_fin->dont_revendique) ?>&nbsp;<span class="unite"><?php echo $unite; ?></span>)<?php endif; ?></td>
 
 			</tr>
 		<?php endforeach; ?>

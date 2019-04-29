@@ -11,7 +11,23 @@ class DRMDetail extends BaseDRMDetail {
     }
 
     public function getLibelle($format = "%format_libelle%", $label_separator = ", ") {
-        return str_replace('&', ' et ', $this->getCepage()->getConfig()->getLibelleFormat($this->get('denomination_complementaire'), $format, $label_separator));
+        $s = str_replace('&', ' et ', $this->getCepage()->getConfig()->getLibelleFormat($this->get('denomination_complementaire'), $format, $label_separator));
+        if ($this->tav) {
+            $s .= " - ".$this->tav.'°';
+        }
+        return $s;
+    }
+
+    public function isAlcoolPur() {
+        return ($this->tav) &&  $this->entrees->exist('transfertsrecolte') && ($this->entrees->transfertsrecolte);
+    }
+
+    public function isMatierePremiere(){
+      return preg_match('/MATIERES_PREMIERES/', $this->code_douane);
+    }
+
+    public function isAlcoolPurOrMatierePremiere(){
+      return $this->isAlcoolPur() || $this->isMatierePremiere();
     }
 
     public function getCode($format = "%g%%a%%m%%l%%co%%ce%") {
@@ -136,7 +152,7 @@ class DRMDetail extends BaseDRMDetail {
             }
             if($this->sorties->getConfig()->get($key)->hasDetails()) {
                 $this->sorties->set($key, 0);
-                foreach ($this->sorties->get($key."_details") as $detail) {
+                foreach ($this->sorties->add($key."_details") as $detail) {
                     $this->sorties->set($key, $this->sorties->get($key) + $detail->volume);
                 }
             }
@@ -374,7 +390,7 @@ class DRMDetail extends BaseDRMDetail {
             $mouvement->type_drm_libelle = $this->getTypeDRMLibelle();
             $mouvement->facture = 0;
             $mouvement->region = $this->getDocument()->region;
-            $mouvement->cvo = $this->getCVOTaux();
+            $mouvement->cvo = ($mouvement->region == EtablissementClient::REGION_HORS_CVO && VracConfiguration::getInstance()->getRegionDepartement() == ".*")? 0.0 : $this->getCVOTaux();
             $mouvement->facturable = ($config->facturable && $mouvement->cvo > 0) ? 1 : 0;
 
             if(!$this->getDocument()->isFacturable()){
@@ -390,7 +406,7 @@ class DRMDetail extends BaseDRMDetail {
             $mouvement->date_version = ($this->getDocument()->valide->date_saisie) ? ($this->getDocument()->valide->date_saisie) : date('Y-m-d');
             $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_PROPRIETE;
 
-            if ($this->exist($hash . "/" . $key . "_details")) {
+            if ($this->exist($hash . "/" . $key . "_details") && $this->get($hash . "/" . $key . "_details")) {
                 $mouvements = array_replace_recursive($mouvements, $this->get($hash . "/" . $key . "_details")->createMouvements($mouvement));
                 continue;
             }

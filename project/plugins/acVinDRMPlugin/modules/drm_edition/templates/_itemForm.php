@@ -129,7 +129,7 @@ $drmTeledeclaree = $detail->getDocument()->teledeclare;
                                 $class .= ($detail->getConfig()->get('sorties')->get($key)->recolte) ? " recolte_sortie " : "";
                                 ?>
                                 <li class="form-group form-group-xs <?php echo isVersionnerCssClass($form->getObject()->sorties, $key) ?>">
-                                    <?php if ($form->getObject()->sorties->getConfig()->get($key)->hasDetails()): ?>
+                                    <?php if ($form->getObject()->sorties->getConfig()->get($key)->hasDetails() && $form->getObject()->sorties->getConfig()->get($key)->details != "ALCOOLPUR"): ?>
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a id="lien_sorties_<?php echo $key ?>_details_<?php echo $detail->getHashForKey() ?>" data-toggle="modal" data-remote="false" data-target="#ajax-modal" href="<?php
@@ -172,7 +172,7 @@ $drmTeledeclaree = $detail->getDocument()->teledeclare;
                                     if (!$favoris_sorties->exist($key)):
                                     ?>
                                     <li class="form-group form-group-xs <?php echo isVersionnerCssClass($form->getObject()->sorties, $key) ?>">
-                                        <?php if ($form->getObject()->sorties->getConfig()->get($key)->hasDetails()): ?>
+                                        <?php if ($form->getObject()->sorties->getConfig()->get($key)->hasDetails() && $form->getObject()->sorties->getConfig()->get($key)->details != "ALCOOLPUR"): ?>
                                           <div class="input-group">
                                               <span class="input-group-btn">
                                                   <a id="lien_sorties_<?php echo $key ?>_details_<?php echo $detail->getHashForKey() ?>" data-toggle="modal" data-remote="false" data-target="#ajax-modal" href="<?php

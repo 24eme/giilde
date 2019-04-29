@@ -45,7 +45,7 @@ Ce fichier reprend l'ensemble des spécificités décrites ci-dessus.
 |------------------|------------------|-----------------------------------|---------------------------------------|------------------------------------------------------|----------------------|
 | chambre d'agriculture | Oui |  |  |  |  |
 | bsi-info              | Oui |  |  |  |  |
-| capvision             | Oui |  |  |  |  |
+| capvision             | Oui | Oui |  |  |  |
 | cegar                 | Oui |  |  |  |  |
 | cfg67                 | Oui  | Oui  |  |  |  |
 | graineinfo            | Oui |  |  |  |  |

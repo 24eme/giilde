@@ -29,11 +29,15 @@ class drm_ajout_produitActions extends drmGeneriqueActions {
                 if($request->hasParameter('add_produit')) {
                     $this->redirect($this->redirect('drm_choix_produit', array('sf_subject' => $this->drm, 'add_produit' => $request->getParameter('add_produit'))));
                 }
-
-                return $this->redirect('drm_edition', $this->form->getObject());
+                if(!DRMConfiguration::getInstance()->hasMatierePremiere()){
+                  return $this->redirect('drm_edition', $this->drm);
+                }
+                return $this->redirect('drm_matiere_premiere', $this->form->getObject());
             }
-
-            return $this->redirect('drm_edition', $this->form->getObject());
+            if(!DRMConfiguration::getInstance()->hasMatierePremiere()){
+              return $this->redirect('drm_edition', $this->drm);
+            }
+            return $this->redirect('drm_matiere_premiere', $this->form->getObject());
         }
 
         if($request->hasParameter('add_produit')) {

@@ -12,6 +12,19 @@
             </li>
         <?php $cpt_etape++; ?>
         <?php endif; ?>
+        <?php $hasConfMatierePremiere = DRMConfiguration::getInstance()->hasMatierePremiere(); ?>
+        <?php $hasMatierePremiere = $drm->hasMatierePremiere(); ?>
+        <?php if (isset($isTeledeclarationMode) && $isTeledeclarationMode && $hasMatierePremiere && $hasConfMatierePremiere) : ?>
+            <?php $actif = ($etape_courante == DRMClient::ETAPE_MATIERE_PREMIERE); ?>
+            <?php $past = ((!$actif) && (array_search($drm->etape, DRMClient::$drm_etapes) >= array_search(DRMClient::ETAPE_MATIERE_PREMIERE, DRMClient::$drm_etapes))); ?>
+            <li class="<?php if($actif): ?>active<?php endif; ?> <?php if (!$past && !$actif): ?>disabled<?php endif; ?> <?php if ($past && !$actif): ?>visited<?php endif; ?>">
+                <a href="<?php echo url_for('drm_matiere_premiere', $drm); ?>">
+                    <span>Matière Première</span>
+                    <small class="hidden">Etape <?php echo $cpt_etape; ?></small>
+                </a>
+            </li>
+        <?php $cpt_etape++; ?>
+        <?php endif; ?>
         <?php $actif = ($etape_courante == DRMClient::ETAPE_SAISIE_SUSPENDU); ?>
         <?php $past = ((!$actif) && (array_search($drm->etape, DRMClient::$drm_etapes) >= array_search(DRMClient::ETAPE_SAISIE_SUSPENDU, DRMClient::$drm_etapes))); ?>
         <?php $isDouaneTypeSuspendu = $drm->isDouaneType(DRMClient::TYPE_DRM_SUSPENDU); ?>

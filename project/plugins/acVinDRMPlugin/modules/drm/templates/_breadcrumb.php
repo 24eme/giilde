@@ -1,4 +1,5 @@
 <?php use_helper('DRM'); ?>
+<?php use_helper('Date'); ?>
 <?php use_helper('Orthographe'); ?>
 
 <ol class="breadcrumb">
