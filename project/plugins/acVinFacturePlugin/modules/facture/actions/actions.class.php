@@ -214,7 +214,7 @@ class factureActions extends sfActions {
             }elseif($values['modele'] == FactureClient::TYPE_FACTURE_MOUVEMENT_DRM){
               $filters_parameters['modele'] = "DRM";
           }elseif($values['modele'] == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO){
-              $filters_parameters['modele'] = "SV12";
+              $filters_parameters['modele'] = "SV12NEGO";
           }elseif ($values['modele'] == FactureGenerationForm::TYPE_GENERATION_EXPORT) {
                 $filters_parameters['type_document'] = GenerationClient::TYPE_DOCUMENT_EXPORT_SHELL;
                 $filters_parameters['modele'] = null;

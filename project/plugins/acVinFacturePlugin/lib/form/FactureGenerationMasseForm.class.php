@@ -6,7 +6,7 @@ class FactureGenerationMasseForm extends FactureGenerationForm {
 
     public static $types_document = array(self::TYPE_DOCUMENT_TOUS => "Tous",
                      FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_DRM => "DRM",
-                     FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO => "SV12",
+                     FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12_NEGO => "SV12NEGO",
                      FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12 => "SV12");
 
     public function __construct($defaults = array(), $options = array(), $CSRFSecret = null) {
