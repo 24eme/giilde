@@ -102,6 +102,8 @@
                       <td class="col-xs-8">
                         <?php if ($drm->transmission_douane->success) : ?>
                           La transmission a été réalisée avec succès le <?php echo $drm->getTransmissionDate(); ?> avec l'accusé reception numéro <?php echo $drm->transmission_douane->id_declaration ?>.
+                        <?php elseif (preg_match('/HTTP Error 0/', $drm->getTransmissionErreur())) : ?>
+                          Le service de reception des DRM de la Douane n'était disponible au moment de la transmission. Lorsque la liaison sera de nouveau disponible, une retransmission sera effectuée.
                         <?php else: ?>
                           La transmission a échouée. Le(s) message(s) d'erreur envoyé(s) par le portail des douanes sont :
                           <ul>

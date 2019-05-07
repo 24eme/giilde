@@ -38,14 +38,14 @@ EOF;
       $drm = DRMClient::getInstance()->find($arguments['drmid']);
       $drm->transferToCiel();
       if ($drm->transmission_douane->success)  {
-        echo "DRM ".$drm->_id." transmise avec succès\n";
+        echo "DRM;".$drm->_id.";Transmisssion avec succès;".$drm->societe->email."\n";
       }else{
-        echo "DRM ".$drm->_id." : Erreur de transmission\n";
+        echo "DRM;".$drm->_id.";Erreur de transmission : ";
         echo $drm->transmission_douane->xml;
-        echo "\n";
+        echo ";".$drm->societe->email."\n";
       }
     }catch(sfException $e) {
-      echo "DRM ".$drm->_id." : Erreur de transmission (".$e->getMessage().")\n";
+      echo "DRM;".$drm->_id.";Exception de transmission : ".$e->getMessage().";".$drm->societe->email."\n";
     }
 
   }

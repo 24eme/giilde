@@ -33,7 +33,7 @@ include_partial('facture/pdf_generique_entete', array('facture' => $facture, 'av
 foreach ($facture->lignes as $type => $typeLignes) {
   $line_nb++;
 ?>
-    \small{\textbf{<?php echo $typeLignes->getLibellePrincipal(); ?>}<?php if($typeLignes->getLibelleSecondaire()): ?> <?php echo $typeLignes->getLibelleSecondaire(); ?><?php endif; ?>} &
+    \small{\textbf{<?php echo escape_string_for_latex($typeLignes->getLibellePrincipal()); ?>}<?php if($typeLignes->getLibelleSecondaire()): ?> <?php echo escape_string_for_latex($typeLignes->getLibelleSecondaire()); ?><?php endif; ?>} &
     \multicolumn{1}{r|}{~} &
     \multicolumn{1}{r|}{~} &
     \multicolumn{1}{r}{~}

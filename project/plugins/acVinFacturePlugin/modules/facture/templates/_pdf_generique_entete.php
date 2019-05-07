@@ -24,7 +24,7 @@ use_helper('Display');
 	\begin{tikzpicture}
 		\node[inner sep=1pt] (tab0){
 			\begin{tabular}{*{2}{c|}c}
-  				\rowcolor{lightgray} \textbf{NUMERO} & \textbf{DATE} & \textbf{<?php echo FactureConfiguration::getInstance()->getNomRefClient(); ?>} \\
+  				\rowcolor{lightgray} \textbf{NUMERO} & \textbf{DATE} & \textbf{<?php echo escape_string_for_latex(FactureConfiguration::getInstance()->getNomRefClient()); ?>} \\
   				\hline
   				\FactureNum & \FactureDate & \FactureRefClient
 			\end{tabular}
