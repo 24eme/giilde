@@ -13,7 +13,7 @@ class drm_annexesActions extends drmGeneriqueActions {
         $this->drm->update();
 
         $this->initDeleteForm();
-        $this->drm->initReleveNonApurement();
+
         $this->annexesForm = new DRMAnnexesForm($this->drm);
         if ($request->isMethod(sfRequest::POST)) {
             $this->annexesForm->bind($request->getParameter($this->annexesForm->getName()));

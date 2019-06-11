@@ -1,41 +1,41 @@
-TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT
-suspendu,stocks_debut,initial,initial,stock début de mois
-suspendu,entrees,achatnoncrd,achat (vrac/blles nues),achats vrac + bouteilles sans crd
-suspendu,entrees,autre,autres,autres entrées que celles-ci-dessous. nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.
-suspendu,entrees,excedent,excédents,quantités en excédent
-suspendu,entrees,manipulations,manipulations diverses,manipulations diverses
-suspendu,entrees,repli,repli/déclassement,repli/déclassement
-suspendu,entrees,retourmarchandisenontaxees,retour cvo non taxé,quantités réintégrées cvo seule
-suspendu,entrees,retourrelogement,retour de relogement,retour de relogement
-suspendu,entrees,retourembouteillage,retour embouteillage,retour de prestation d'embouteillage
-suspendu,entrees,retourmarchandisetaxees,retour taxé et cvo,quantités réintégrées cvo + droits circulation
-suspendu,entrees,retourtravailafacon,retour travail à façon,retour de travail à façon
-suspendu,entrees,recolte,récolte,entrées récolte
-suspendu,entrees,vci,vci,vci
-suspendu,sorties,autre,autres,autres sorties que celles-ci-dessous. nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.
-suspendu,sorties,ventefrancecrd,blles crd - dsa france,sortie taxables crd ou dsa/dsac france
-suspendu,sorties,exporttaxe,blles crd hors france,sorties taxables dsa/dsac hors france métropolitaine
-suspendu,sorties,export,blles susp. hors alsace,sorties en suspension hors france crd ou capsules neutres
-suspendu,sorties,bouteillenue,contrat bouteille,sorties contrats bouteilles nues.
-suspendu,sorties,vrac,contrat vrac,sorties contrat vrac
-suspendu,sorties,consommationfamilialedegustation,dégustation propriété,sorties en exonération dégustation à la propriété
-suspendu,sorties,embouteillage,embouteillage,sortie pour prestation d'embouteillage
-suspendu,sorties,exoversutilisateurauto,exo vers utilisat. autorisé,sorties en exonération vers un utilisateur autorisé
-suspendu,sorties,lies,lies et bourbes,autres sorties lies et bourbes
-suspendu,sorties,manipulations,manipulations,manipulations
-suspendu,sorties,destructionperte,pertes et manquants,autres sorties pertes et manquants
-suspendu,sorties,rebeches,rebêches,autres sorties rebêches
-suspendu,sorties,relogement,relogement,relogement
-suspendu,sorties,repli,repli/déclassement,autres sorties replis et délassement
-suspendu,sorties,travailafacon,travail à façon,travail à façon
-suspendu,sorties,usageindustriel,usages industriel,dra/dplc blanc ou rouge et bfav
-suspendu,sorties,vci,vci,vci
-suspendu,stocks_fin,final,final,stock fin de mois
-acquitte,stocks_debut,initial,initial,stock début de mois
-acquitte,entrees,achat,achats,entrées achats
-acquitte,entrees,reintegration,réintégration,quantités réintégrées
-acquitte,sorties,ventefrancecrd,blles france,sorties bouteilles france
-acquitte,sorties,export,blles hors france,sorties sous document commercial de bouteilles hors france
-acquitte,sorties,consommationfamilialedegustation,dégustation,dégustation à la propriété
-acquitte,sorties,destructionperte,pertes et manquants,pertes et manquants
-acquitte,stocks_fin,final,final,stock fin de mois
+TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT,CARACTERISTIQUES,DOUANE
+suspendu,stocks_debut,initial,initial,stock début de mois,,stock-debut-periode
+suspendu,entrees,achatnoncrd,achat (vrac/blles nues),achats vrac + bouteilles sans crd,,entrees-periode/achats-reintegrations
+suspendu,entrees,autre,autres,autres entrées que celles-ci-dessous. nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.,OBSERVATIONS,entrees-periode/autres-entrees
+suspendu,entrees,excedent,excédents,quantités en excédent,OBSERVATIONS,entrees-periode/autres-entrees
+suspendu,entrees,manipulations,manipulations diverses,manipulations diverses,OBSERVATIONS,entrees-periode/mouvements-internes/manipulations
+suspendu,entrees,repli,repli/déclassement,repli/déclassement,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,entrees,retourmarchandisenontaxees,retour cvo non taxé,quantités réintégrées cvo seule,,entrees-periode/achats-reintegrations
+suspendu,entrees,retourrelogement,retour de relogement,retour de relogement,,entrees-periode/mouvements-temporaires/relogement
+suspendu,entrees,retourembouteillage,retour embouteillage,retour de prestation d'embouteillage,,entrees-periode/mouvements-temporaires/embouteillage
+suspendu,entrees,retourmarchandisetaxees,retour taxé et cvo,quantités réintégrées cvo + droits circulation,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume
+suspendu,entrees,retourtravailafacon,retour travail à façon,retour de travail à façon,,entrees-periode/mouvements-temporaires/travail-a-facon
+suspendu,entrees,recolte,récolte,entrées récolte,,entrees-periode/volume-produit
+suspendu,entrees,vci,vci,vci,,entrees-periode/mouvements-internes/integration-vci-agree
+suspendu,sorties,autre,autres,autres sorties que celles-ci-dessous. nécessite la saisie obligatoire d'un commentaire dans la rubrique observations.,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,ventefrancecrd,blles crd - dsa france,sortie taxables crd ou dsa/dsac france,,sorties-periode/ventes-france-crd-suspendus/annee-courante
+suspendu,sorties,exporttaxe,blles crd hors france,sorties taxables dsa/dsac hors france métropolitaine,PAYS,sorties-periode/ventes-france-crd-suspendus/annee-courante
+suspendu,sorties,export,blles susp. hors alsace,sorties en suspension hors france crd ou capsules neutres,PAYS,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
+suspendu,sorties,bouteillenue,contrat bouteille,sorties contrats bouteilles nues.,CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
+suspendu,sorties,vrac,contrat vrac,sorties contrat vrac,CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
+suspendu,sorties,consommationfamilialedegustation,dégustation propriété,sorties en exonération dégustation à la propriété,,sorties-periode/sorties-sans-paiement-droits/consommation-familiale-degustation
+suspendu,sorties,embouteillage,embouteillage,sortie pour prestation d'embouteillage,,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/embouteillage
+suspendu,sorties,exoversutilisateurauto,exo vers utilisat. autorisé,sorties en exonération vers un utilisateur autorisé,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,lies,lies et bourbes,autres sorties lies et bourbes,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,manipulations,manipulations,manipulations,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/autres-mouvements-internes
+suspendu,sorties,destructionperte,pertes et manquants,autres sorties pertes et manquants,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,rebeches,rebêches,autres sorties rebêches,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,relogement,relogement,relogement,,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/relogement
+suspendu,sorties,repli,repli/déclassement,autres sorties replis et délassement,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,sorties,travailafacon,travail à façon,travail à façon,,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/travail-a-facon
+suspendu,sorties,usageindustriel,usages industriel,dra/dplc blanc ou rouge et bfav,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,vci,vci,vci,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci
+suspendu,stocks_fin,final,final,stock fin de mois,,stock-fin-periode
+acquitte,stocks_debut,initial,initial,stock début de mois,,stock-debut-periode
+acquitte,entrees,achat,achats,entrées achats,,entrees-periode/achats
+acquitte,entrees,reintegration,réintégration,quantités réintégrées,OBSERVATIONS,entrees-periode/autres-entrees
+acquitte,sorties,ventefrancecrd,blles france,sorties bouteilles france,,sorties-periode/ventes
+acquitte,sorties,export,blles hors france,sorties sous document commercial de bouteilles hors france,PAYS,sorties-periode/ventes
+acquitte,sorties,consommationfamilialedegustation,dégustation,dégustation à la propriété,OBSERVATIONS,sorties-periode/autres-sorties
+acquitte,sorties,destructionperte,pertes et manquants,pertes et manquants,OBSERVATIONS,sorties-periode/autres-sorties
+acquitte,stocks_fin,final,final,stock fin de mois,,stock-fin-periode

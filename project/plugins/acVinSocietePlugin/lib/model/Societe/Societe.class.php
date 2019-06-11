@@ -182,7 +182,7 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
     public function getCompte($id) {
         $this->getContactsObj();
         if (!isset($this->comptes[$id]) || !$this->comptes[$id]) {
-            throw new sfException("Pas de compte ".$id);
+            throw new sfException($this->_id." :  pas de compte ".$id);
         }
         return $this->comptes[$id];
     }

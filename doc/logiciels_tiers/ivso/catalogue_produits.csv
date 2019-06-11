@@ -91,8 +91,10 @@ IGP,Tranquille,Gers,,,Blanc sec,,IGP Gers Blanc sec,3B321
 IGP,Tranquille,Gers,,,Rosé,,IGP Gers Rosé,3S321
 IGP,Tranquille,Gers,,,Rouge,,IGP Gers Rouge,3R321
 IGP,Tranquille,Gers,Primeur,,Blanc doux,,IGP Gers Primeur Blanc doux,3B321
-IGP,Mousseux,Côte du Lot,,,Rosé,,IGP Côte du Lot Rosé,3S461M
-IGP,Mousseux,Côte du Lot,,,Blanc,,IGP Côte du Lot Blanc,3B461M
+IGP,Mousseux,Côte du Lot,,,Rosé,,IGP Côte du Lot Mousseux Rosé,3S461M
+IGP,Mousseux,Côte du Lot,,,Blanc,,IGP Côte du Lot Mousseux Blanc,3B461M
+IGP,Mousseux,Comté Tolosan,,,Rosé,,IGP Comté Tolosan Mousseux Rosé,3S003M
+IGP,Mousseux,Comté Tolosan,,,Blanc,,IGP Comté Tolosan Mousseux Blanc,3B003M
 Vin sans IG,Tranquille,,,,Rosé,,Vin sans IG Rosé,4S999
 Vin sans IG,Tranquille,,,,Rouge,,Vin sans IG Rouge,4R999
 Vin sans IG,Tranquille,,,,Blanc,,Vin sans IG Blanc,4B999
@@ -158,10 +160,18 @@ AOP,Tranquille,Jurançon,,,Blanc,,AOP Jurançon Blanc,1B13L
 AOP,Tranquille,Côtes du Marmandais,,,Rouge,,AOP Côtes du Marmandais Rouge,1R124S
 AOP,Tranquille,Côtes du Marmandais,,,Blanc sec,,AOP Côtes du Marmandais Blanc sec,1B124S
 AOP,Tranquille,Côtes du Marmandais,,,Rosé,,AOP Côtes du Marmandais Rosé,1S124S
+AOP,Tranquille,Buzet,,,Rosé,,AOP Buzet Rosé,1S109S
+AOP,Tranquille,Buzet,,,Rouge,,AOP Buzet Rouge,1R109S
+AOP,Tranquille,Buzet,,,Blanc sec,,AOP Buzet Blanc sec,1B109S
+AOP,Tranquille,Bordeaux,,,Rouge,,AOP Bordeaux Rouge,1R105S
+AOP,Tranquille,Bordeaux,,,Rosé,,AOP Bordeaux Rosé,1S105S
+AOP,Tranquille,Bordeaux,,,Blanc sec,,AOP Bordeaux Blanc sec,1B105S
+AOP,Tranquille,Bordeaux supérieur,,,Rouge,,AOP Bordeaux supérieur Rouge,1R105S2
 AOP,Mousseux,Gaillac,,,Blanc,,AOP Gaillac Mousseux,1B128M
 AOP,Mousseux,Gaillac,Méthode ancestrale,,Blanc,,AOP Gaillac Mousseux Méthode ancestrale,1B128M 1
 AOP,Mousseux,Gaillac,Méthode ancestrale,,Doux,,AOP Gaillac Mousseux Méthode ancestrale Doux,1B128M 2
 AOP,VCI,Cahors,,,Rouge,,VCI Cahors Rouge,1R111S99
+AOP,VCI,Bordeaux,,,Rouge,,VCI Bordeaux Rouge,1R105S99
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Blanc,,Vin de Liqueur AOP (Sup 18°) Blanc,VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rosé,,Vin de Liqueur AOP (Sup 18°) Rosé,VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rouge,,Vin de Liqueur AOP (Sup 18°) Rouge,VDN_VDL_AOP_SUP_18
@@ -176,8 +186,6 @@ VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Rosé,,Aut
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rouge,AUTRES_PI_INF_18
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),AUTRES_PI_INF_18
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,AUTRES_PI_INF_18_PREMIX
-VDN-VDL,,Floc de Gascogne,,,Rosé,,Floc de Gascogne Rosé,AUTRES_PI_INF_18
-VDN-VDL,,Floc de Gascogne,,,Blanc,,Floc de Gascogne Blanc,AUTRES_PI_INF_18
 Alcools,,Alcools supérieur 18° (autres que Rhum),,,,,Alcools supérieur 18° (autres que Rhum),ALCOOL_AUTRE_SUP_18
 Alcools,,Alcool inférieur 18° (autres que Rhum),,,,,Alcool inférieur 18° (autres que Rhum),ALCOOL_AUTRE_INF_18
 Alcools,,PREMIX Alcool inférieur 18°,,,,,PREMIX Alcool inférieur 18°,ALCOOL_AUTRE_INF_18_PREMIX

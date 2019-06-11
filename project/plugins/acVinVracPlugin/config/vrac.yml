@@ -118,6 +118,7 @@ all:
         "Bouteille 300 cl": 0.03
         "Bouteille 500 cl": 0.05
         "Bouteille 600 cl": 0.06
+        "Bouteille 1200 cl": 0.12
         "BIB 1,5l": 0.015
         "BIB 3l": 0.03
         "BIB 5l": 0.05

@@ -107,7 +107,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         return $this->_set('periode', $periode);
     }
 
-    public function getProduit($hash, $detailsKey, $denomination_complementaire = null) {
+    public function getProduit($hash, $detailsKey, $denomination_complementaire = null, $tav = null) {
         if (!$this->exist($hash)) {
 
             return false;
@@ -118,19 +118,19 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             return false;
         }
 
-        return $this->get($hash)->get($detailsKey)->getProduit($denomination_complementaire);
+        return $this->get($hash)->get($detailsKey)->getProduit($denomination_complementaire, $tav);
     }
 
-    public function addProduit($hash, $detailsKey, $denomination_complementaire = null) {
-        if ($p = $this->getProduit($hash, $detailsKey, $denomination_complementaire)) {
+    public function addProduit($hash, $detailsKey, $denomination_complementaire = null, $tav = null) {
+        if ($p = $this->getProduit($hash, $detailsKey, $denomination_complementaire, $tav)) {
             return $p;
         }
-        $detail = $this->getOrAdd($hash)->addDetailsNoeud($detailsKey)->addProduit($denomination_complementaire);
+        $detail = $this->getOrAdd($hash)->addDetailsNoeud($detailsKey)->addProduit($denomination_complementaire, $tav);
         $detail->produit_libelle = $detail->getLibelle($format = "%format_libelle%");
 
         $this->declaration->reorderByConf();
 
-        return $this->getProduit($hash, $detailsKey, $denomination_complementaire);
+        return $this->getProduit($hash, $detailsKey, $denomination_complementaire, $tav);
     }
 
     public function getDepartement() {

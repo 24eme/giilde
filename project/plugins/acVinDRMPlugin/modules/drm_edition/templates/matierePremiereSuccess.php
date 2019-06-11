@@ -55,6 +55,13 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+            <div class="form-group volumehlaptohl">
+                <div class="col-sm-1">
+                </div>
+                <div class="col-sm-2">
+                <button name="add_produit" value="add_produit" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter un produit</button>
+                </div>
+            </div>
           <?php endforeach; ?>
             <div class="row" style="margin-top: 40px;">
                 <div class="col-xs-4 text-left">
@@ -72,5 +79,8 @@
             </div>
         </form>
     </div>
+    <?php if(isset($formAddProduitsByCertification)): ?>
+        <?php include_partial('drm_ajout_produit/ajout_produit_popup_certification', array('drm' => $drm, 'form' => $formAddProduitsByCertification, 'matiere_premiere' => true)); ?>
+    <?php endif; ?>
 </section>
 <?php include_partial('drm/deleteDrmPopup', array('drm' => $drm, 'deleteForm' => $deleteForm)); ?>

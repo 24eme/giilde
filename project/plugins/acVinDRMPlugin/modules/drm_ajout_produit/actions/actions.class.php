@@ -57,9 +57,13 @@ class drm_ajout_produitActions extends drmGeneriqueActions {
             $this->form->bind($request->getParameter($this->form->getName()));
             if ($this->form->isValid()) {
                 $this->form->save();
+                if ($request->getParameter('matiere_premiere')) {
+                    return $this->redirect('drm_matiere_premiere', $this->form->getDrm());
+                } else {
+                    return $this->redirect('drm_choix_produit', $this->form->getDrm());
+                }
             }
         }
-        $this->redirect('drm_choix_produit', $this->form->getDrm());
     }
 
 }

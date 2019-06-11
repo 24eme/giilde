@@ -20,6 +20,7 @@ class DRMAnnexesForm extends acCouchdbObjectForm {
 
     public function __construct(acCouchdbJson $object, $options = array(), $CSRFSecret = null) {
         $this->drm = $object;
+        $this->drm->initReleveNonApurement();
         $this->getDocTypes();
         parent::__construct($this->drm, $options, $CSRFSecret);
     }

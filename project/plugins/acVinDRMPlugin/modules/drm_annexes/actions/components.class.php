@@ -3,7 +3,6 @@
 class drm_annexesComponents extends sfComponents {
 
   public function executeAnnexes() {
-      $this->drm->initReleveNonApurement();
       $this->annexesForm = new  DRMAnnexesForm($this->drm);
       if ($this->requestAnnexes->isMethod(sfRequest::POST)) {
             $this->annexesForm->bind($this->requestAnnexes->getParameter($this->annexesForm->getName()));

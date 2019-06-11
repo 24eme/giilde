@@ -23,7 +23,7 @@ if(!$produit_hash_matiere_premiere || !$produit_hash_alcoolpur || !$transfer_exi
     exit;
 }
 
-$t = new lime_test(21);
+$t = new lime_test(25);
 
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_teledeclaration')->getEtablissement();
 $periode = date('Ym');
@@ -36,17 +36,20 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode, true);
 
 $drm->addProduit($produit_hash_matiere_premiere, "details");
+$drm->addProduit($produit_hash_alcoolpur, "details", null, 42);
 $drm->addProduit($produit_hash_alcoolpur, "details");
 $drm->addProduit($produit_hash_alcoolpur, "details", "Ratafia");
 
 $produitMP = $drm->getProduit($produit_hash_matiere_premiere, "details");
 $produitA = $drm->getProduit($produit_hash_alcoolpur, "details");
+$produitATav = $drm->getProduit($produit_hash_alcoolpur, "details", null, 42);
 $produitB = $drm->getProduit($produit_hash_alcoolpur, "details", "Ratafia");
 
 $t->comment("Test du détail TAV");
 
 $produitMP->stocks_debut->initial = 1000;
 $produitA->stocks_debut->initial = 1000;
+$produitATav->stocks_debut->initial = 1000;
 $produitB->stocks_debut->initial = 1000;
 
 $detailAlcool = DRMESDetailAlcoolPur::freeInstance($drm);
@@ -60,10 +63,12 @@ $drm->save();
 
 $t->is($drm->getProduit($produit_hash_matiere_premiere, 'details')->get('stocks_debut/initial'), 1000, $drm->_id." : vérification du stock initial MP");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->get('stocks_debut/initial'), 1000, $drm->_id." : vérification du stock initial alcool");
+$t->is($drm->getProduit($produit_hash_alcoolpur, 'details', null, 42)->get('stocks_debut/initial'), 1000, $drm->_id." : vérification du stock initial alcool avec tav");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details', 'Ratafia')->get('stocks_debut/initial'), 1000, $drm->_id." : vérification du stock initial alcool 2");
 
 $t->is($drm->getProduit($produit_hash_matiere_premiere, 'details')->get('stocks_fin/final'), 900, $drm->_id." : vérification du stock final MP");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->get('stocks_fin/final'), 1250, $drm->_id." : vérification du stock final alcool");
+$t->is($drm->getProduit($produit_hash_alcoolpur, 'details', null, 42)->get('stocks_fin/final'), 1000, $drm->_id." : vérification du stock final alcool avec tav");
 
 $t->is($drm->getProduit($produit_hash_matiere_premiere, 'details')->get('sorties/transfertsrecolte'), 100, $drm->_id." : transferts enregistrés dans les MP");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->get('entrees/transfertsrecolte'), 250, $drm->_id." : transferts enregistrés dans l'alcool");
@@ -71,7 +76,7 @@ $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->get('tav'), 40, $dr
 
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->getLibelle(), 'Alcools supérieur 18° (autres que Rhum) - 40°', $drm->_id." : libellé avec TAV");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->isAlcoolPur(), true, $drm->_id." : Alcool pur ok");
-
+$t->is($drm->getProduit($produit_hash_alcoolpur, 'details', null, 42)->get('tav'), 42, $drm->_id." : vérification du tav alcool avec tav");
 
 $t->comment("Test du formulaire");
 
@@ -83,13 +88,15 @@ $hashForm = str_replace('/', '-', $produitMP->getHash());
 $t->is($form['stocks_debut_'.$hashForm]->getValue(), $produitMP->stocks_debut->initial, $drm->_id." : Le stock de début est intialisé");
 
 $hashProduitAForm = $produitMP->getHash().'-'.$produitA->getHash();
+$hashProduitATavForm = $produitMP->getHash().'-'.$produitATav->getHash();
 $hashProduitBForm = $produitMP->getHash().'-'.$produitB->getHash();
 
 $t->is($form['sorties_'.$hashForm][$hashProduitAForm]['volume']->getValue(), 100, $drm->_id." : Le volume de sortie est vide");
 $t->is($form['sorties_'.$hashForm][$hashProduitAForm]['tav']->getValue(), 40, $drm->_id." : Le tav du produit est ok");
+$t->is($form['sorties_'.$hashForm][$hashProduitATavForm]['tav']->getValue(), 42, $drm->_id." : Le tav du produit TAV est ok");
 $t->is($form['sorties_'.$hashForm][$hashProduitBForm]['volume']->getValue(), null, $drm->_id." : Le volume de sortie est vide");
 $t->is($form['sorties_'.$hashForm][$hashProduitBForm]['tav']->getValue(), 40, $drm->_id." : Le tav du produit est ok");
-$t->is(count($form['sorties_'.$hashForm]), 2, $drm->_id." : Le formulaire a 2 produits");
+$t->is(count($form['sorties_'.$hashForm]), 3, $drm->_id." : Le formulaire a 3 produits");
 
 $values = $form->getDefaults();
 $values['stocks_debut_'.$hashForm] = 120;

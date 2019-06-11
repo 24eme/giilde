@@ -1,37 +1,37 @@
-TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT
-suspendu,stocks_debut,initial,initial,stock initial
-suspendu,entrees,recolte,01. récolte,récolte
-suspendu,entrees,declassement,02. issu d'un déclassement,déclassement
-suspendu,entrees,retourembouteillage,03. retour conditionnmt,retour de conditionnement
-suspendu,entrees,vci,04-bis. intégration vci,indiquer les volumes issus de votre récolte que vous intégrez en vci
-suspendu,entrees,transfertcomptamatierecession,04. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation
-suspendu,entrees,travailafacon,05. retour travail à façon,retour de travail à façon. distillation à façon
-suspendu,entrees,retourmarchandisetaxees,06. retour vin crd acquittées,retour de vin crd acquittées
-suspendu,entrees,retourmarchandisenontaxees,07. retour vin en suspension,retour de vin en suspension
-suspendu,entrees,achatcrd,08. achat crd acquittées,achat crd acquittées
-suspendu,entrees,achatnoncrd,09. achat suspension,achat suspension
-suspendu,entrees,regularisation,10. excédent constaté,régularisation
-suspendu,entrees,cooperative,11. coopérative,coopérative
-suspendu,sorties,export,01. export,export
-suspendu,sorties,creationvrac,02. vrac négoce,vrac négoce
-suspendu,sorties,creationvractirebouche,03. bouteilles négoce,ventes en suspension de bouteilles à un négociant (bouteilles habillées ou tiré bouché)
-suspendu,sorties,apportgroupement,04. livraison coopérative,livraison coopérative
-suspendu,sorties,vracsanscontratacquitte,05. petit vrac france,bib. grandes bouteilles vendus sans crd. facture pour mise à la consommation – particuliers. chr. cavistes
-suspendu,sorties,ventefrancecrd,06. vente sous crd,vente sous crd
-suspendu,sorties,vci,07-bis. revendication vci,indiquer les volumes de vci que vous intégrez dans votre stock revendiqué
-suspendu,sorties,transfertcomptamatiere,07. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation
-suspendu,sorties,declassement,08. déclassement,déclassement
-suspendu,sorties,travailafacon,09. travail à façon,sortie d'embouteillage. relogement. travail à façon. distillation à façon
-suspendu,sorties,embouteillage,10. conditionnement,sortie de vin pour mise en bouteille
-suspendu,sorties,consommationfamilialedegustation,11. conso. fam./dégustation,consommation familiale / dégustation
-suspendu,sorties,destructionperte,12. lies/destruction,lies – sorties pour destruction
-suspendu,sorties,manquant,13. manquants,manquants
-suspendu,sorties,cession,14. cession d'exploitation,cessation d'activité
-suspendu,stocks_fin,final,final,stock final
-acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.
-acquitte,entrees,achat,achats,indiquer les achats du produit.
-acquitte,entrees,autre,autres,autres entrées du produit. ex : correspondant à une sortie de produits en droits suspendus pour lesquels les droits ont été payés.
-acquitte,sorties,autre,autres,indiquer les volumes commercialisés à l'export.
-acquitte,sorties,replacementsuspension,replacement en suspension,indiquer le replacement en suspension du produit.
-acquitte,sorties,vente,ventes de produits ,indiquer les ventes du produit.
-acquitte,stocks_fin,final,final,calcul automatique: cette case ne peut être modifiée.
+TYPE_DRM,CATEGORIE MOUVEMENT,TYPE MOUVEMENT,LIBELLE MOUVEMENT,DESCRIPTION MOUVEMENT,CARACTERISTIQUES,DOUANE
+suspendu,stocks_debut,initial,initial,stock initial,,stock-debut-periode
+suspendu,entrees,recolte,01. récolte,récolte,,entrees-periode/volume-produit
+suspendu,entrees,declassement,02. issu d'un déclassement,déclassement,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,entrees,retourembouteillage,03. retour conditionnmt,retour de conditionnement,,entrees-periode/mouvements-temporaires/relogement
+suspendu,entrees,vci,04-bis. intégration vci,indiquer les volumes issus de votre récolte que vous intégrez en vci,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci
+suspendu,entrees,transfertcomptamatierecession,04. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,entrees,travailafacon,05. retour travail à façon,retour de travail à façon. distillation à façon,,entrees-periode/mouvements-temporaires/travail-a-facon
+suspendu,entrees,retourmarchandisetaxees,06. retour vin crd acquittées,retour de vin crd acquittées,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume
+suspendu,entrees,retourmarchandisenontaxees,07. retour vin en suspension,retour de vin en suspension,,entrees-periode/achats-reintegrations
+suspendu,entrees,achatcrd,08. achat crd acquittées,achat de vins en crd acquittées remises en suspension,,entrees-periode/achats-reintegrations
+suspendu,entrees,achatnoncrd,09. achat suspension,achat suspension,,entrees-periode/volume-produit
+suspendu,entrees,regularisation,10. excédent constaté,régularisation,OBSERVATIONS,entrees-periode/autres-entrees
+suspendu,entrees,cooperative,11. coopérative,coopérative,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume
+suspendu,sorties,export,01. export,export,PAYS,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
+suspendu,sorties,creationvrac,02. vrac négoce,vrac négoce,CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
+suspendu,sorties,creationvractirebouche,03. bouteilles négoce,ventes en suspension de bouteilles à un négociant (bouteilles habillées ou tiré bouché),CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
+suspendu,sorties,apportgroupement,04. livraison coopérative,livraison coopérative,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,vracsanscontratacquitte,05. petit vrac france,bib. grandes bouteilles vendus sans crd. facture pour mise à la consommation – particuliers. chr. cavistes,,sorties-periode/ventes-france-crd-suspendus/annee-courante
+suspendu,sorties,ventefrancecrd,06. vente sous crd,vente sous crd,,sorties-periode/ventes-france-crd-suspendus/annee-courante
+suspendu,sorties,vci,07-bis. revendication vci,indiquer les volumes de vci que vous intégrez dans votre stock revendiqué,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci
+suspendu,sorties,transfertcomptamatiere,07. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,sorties,declassement,08. déclassement,déclassement,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,sorties,travailafacon,09. travail à façon,sortie d'embouteillage. relogement. travail à façon. distillation à façon,,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/travail-a-facon
+suspendu,sorties,embouteillage,10. conditionnement,sortie de vin pour mise en bouteille,,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/embouteillage
+suspendu,sorties,consommationfamilialedegustation,11. conso. fam./dégustation,consommation familiale / dégustation,,sorties-periode/sorties-sans-paiement-droits/consommation-familiale-degustation
+suspendu,sorties,destructionperte,12. lies/destruction,lies – sorties pour destruction,,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
+suspendu,sorties,manquant,13. manquants,manquants,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,cession,14. cession d'exploitation,cessation d'activité,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,stocks_fin,final,final,stock final,,stock-fin-periode
+acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.,,stock-debut-periode
+acquitte,entrees,achat,achats,indiquer les achats du produit.,,entrees-periode/achats
+acquitte,entrees,autre,autres,autres entrées du produit. ex : correspondant à une sortie de produits en droits suspendus pour lesquels les droits ont été payés.,OBSERVATIONS,entrees-periode/autres-entrees
+acquitte,sorties,autre,autres,indiquer les volumes commercialisés à l'export.,OBSERVATIONS,sorties-periode/autres-sorties
+acquitte,sorties,replacementsuspension,replacement en suspension,indiquer le replacement en suspension du produit.,OBSERVATIONS,sorties-periode/replacement-suspension
+acquitte,sorties,vente,ventes de produits ,indiquer les ventes du produit.,,sorties-periode/ventes
+acquitte,stocks_fin,final,final,calcul automatique: cette case ne peut être modifiée.,,stock-fin-periode

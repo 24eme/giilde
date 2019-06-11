@@ -640,6 +640,7 @@ DRM:
           fields:
             '*':
               type: collection
+              class: DRMNonApurementItem
               definition:
                 fields:
                   'numero_document': { }

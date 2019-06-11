@@ -677,7 +677,7 @@ private function importAnnexesFromCSV($just_check = false) {
         $num_ligne++;
         break;
       }
-      if (!preg_match('/^[A-Z]{2}[0-9A-Z]{11}$/', $numero_accise)) {
+      if (!preg_match('/^[A-Z]{2}[0-9A-Z]+$/', $numero_accise)) {
         if ($just_check) {
           $this->csvDoc->addErreur($this->annexesNonApurementWrongNumAcciseError($num_ligne, $csvRow));
         }
@@ -829,10 +829,10 @@ private function genreCRDNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CRD_GENRE], "Le genre de CRD n'a pas été trouvé");
 }
 private function categorieCRDNotFoundError($num_ligne, $csvRow) {
-  return $this->createError($num_ligne, $csvRow[self::CSV_CRD_CATEGORIE_KEY], "La categorie de CRD n'a pas été trouvée");
+  return $this->createError($num_ligne, $csvRow[self::CSV_CRD_CATEGORIE_KEY], "La categorie de mouvement de CRD (entrees, sorties, ...) n'a pas été trouvée");
 }
 private function typeCRDNotFoundError($num_ligne, $csvRow) {
-  return $this->createError($num_ligne, $csvRow[self::CSV_CRD_TYPE_KEY], "Le type de CRD n'a pas été trouvé");
+  return $this->createError($num_ligne, $csvRow[self::CSV_CRD_TYPE_KEY], "Le type de mouvement de CRD (achats, utilisations, ...) n'a pas été trouvé");
 }
 private function previousCRDProductError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CRD_REGIME], "Il n'existe pas de stock pour cette crd dans la DRM précédente");

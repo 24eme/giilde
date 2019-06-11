@@ -126,6 +126,10 @@ VSIG,Mousseux,Vin de France,,,Blanc,,Vin de France Mousseux Blanc,4B999M
 VSIG,Mousseux,Vin de France,,,Rosé,,Vin de France Mousseux Rosé,4S999M
 VSIG,Mousseux,Vin de France,,,Rouge,,Vin de France Mousseux Rouge,4R999M
 VSIG,Mousseux,Vin étranger,,,,,Vin étranger Mousseux,VM_ETRANGERS
+Autres alcools,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
+Autres alcools,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
+Autres alcools,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
+Autres alcools,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
 Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autres,,DPLC,,,,,DPLC,4B988Y
 Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y

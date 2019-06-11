@@ -42,6 +42,11 @@ class DRMAddProduitByCertificationForm extends acCouchdbObjectForm {
             'produit' => new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getProduits())), array('required' => "Aucun produit n'a été saisi !")),
             'denomination_complementaire' => new sfValidatorString(array('required' => false)),
         ));
+        if ($this->_produitFilter == 'ALCOOLS') {
+            $this->setWidget('tav', new bsWidgetFormInputFloat());
+            $this->widgetSchema->setLabel('tav', 'TAV');
+            $this->setValidator('tav', new sfValidatorString(array('required' => false)));
+        }
 
         $this->widgetSchema->setNameFormat('add_produit_' . $this->_produitFilter . '[%s]');
     }
@@ -86,7 +91,12 @@ class DRMAddProduitByCertificationForm extends acCouchdbObjectForm {
         if(isset($values["denomination_complementaire"]) && $values["denomination_complementaire"]){
           $denomination_complementaire = $values["denomination_complementaire"];
         }
-        $this->_drm->addProduit($values['produit'], DRM::DETAILS_KEY_SUSPENDU,$denomination_complementaire);
+        $tav = null;
+        if (isset($values['tav']) && $values['tav']) {
+            $tav = $values['tav'];
+        }
+
+        $this->_drm->addProduit($values['produit'], DRM::DETAILS_KEY_SUSPENDU,$denomination_complementaire, $tav * 1);
         $this->_drm->save();
     }
 

@@ -2,7 +2,7 @@
 
 class drm_editionActions extends drmGeneriqueActions {
 
-    public function executeMatierePremiere(sfWebRequest $request) {      
+    public function executeMatierePremiere(sfWebRequest $request) {
 
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         $this->drm = $this->getRoute()->getDRM();
@@ -20,6 +20,10 @@ class drm_editionActions extends drmGeneriqueActions {
 
         $this->form = new DRMMatierePremiereForm($this->drm);
 
+        if($request->hasParameter('add_produit')) {
+            $this->formAddProduitsByCertification = new DRMAddProduitByCertificationForm($this->drm, array('produitFilter' => 'ALCOOLS'));
+        }
+
         if (!$request->isMethod(sfRequest::POST)) {
 
             return sfView::SUCCESS;
@@ -31,7 +35,10 @@ class drm_editionActions extends drmGeneriqueActions {
 
           $this->form->save();
 
-          return $this->redirect('drm_edition', $this->drm);
+        if($request->getParameter('add_produit')) {
+                return $this->redirect('drm_matiere_premiere', array('sf_subject' => $this->drm, 'add_produit' => 'ALCOOLS'));
+        }
+        return $this->redirect('drm_edition', $this->drm);
 
         }
 

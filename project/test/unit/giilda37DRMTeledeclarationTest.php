@@ -8,7 +8,7 @@ sfConfig::set('app_teledeclaration_contact_contrat', array());
 sfConfig::set('app_mail_from_email', "test_from_mail@mail.org");
 sfConfig::set('app_teledeclaration_interpro', "Interpro");
 
-$t = new lime_test(13);
+$t = new lime_test(16);
 
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_teledeclaration')->getEtablissement();
 $periode = date('Ym');
@@ -38,19 +38,45 @@ $t->is($crd->centilitrage, 0.0075, "Le centilitrage est en hl");
 
 $t->comment("Annexe");
 
+$sortieObservation = null;
+foreach($drm->getConfig()->declaration->details->sorties as $sortie) {
+    if(!$sortie->needDouaneObservation()) {
+        continue;
+    }
+    $sortieObservation = $sortie->getKey();
+
+    break;
+}
+
 $t->ok(!$details->exist('observations'), "Aucune observation de base");
-$details->sorties->manquant = 100;
+$details->sorties->set($sortieObservation, 100);
 $drm->update();
 if(DRMConfiguration::getInstance()->isObservationsAuto()) {
-    $t->is($details->observations, $details->sorties->getConfig()->get('manquant')->getLibelleLong(), "Une observation a bien été ajouté automatiquement avec le libellé du mouvement");
+    $t->is($details->observations, $details->sorties->getConfig()->get($sortieObservation)->getLibelleLong(), "Une observation a bien été ajouté automatiquement avec le libellé du mouvement");
 } else {
     $t->is($details->observations, "","Le champs observation a bien été ajouté avec une chaine de caractère vide");
 }
 
-$details->sorties->manquant = null;
+$details->sorties->set($sortieObservation, null);
 $drm->update();
 
 $t->ok(!$details->exist('observations'), "Si le volume est supprimé le champ observation aussi");
+
+$annexesForm = new DRMAnnexesForm($drm);
+
+$values = array();
+
+foreach($annexesForm['releve_non_apurement'] as $formItemKey => $formItem) {
+    $values['releve_non_apurement'][$formItemKey] = array('numero_document' => '123456', 'date_emission' => date('d/m/Y'), 'numero_accise' => 'FR123456E1234');
+}
+
+$annexesForm->bind($values);
+
+$t->ok($annexesForm->isValid(), "Le formulaire est valide");
+$annexesForm->save();
+
+$t->is($drm->get('releve_non_apurement/123456')->_get('date_emission'), date('Y-m-d'), "La date est enregistré au format machine");
+$t->is($drm->get('releve_non_apurement/123456')->get('date_emission'), date('d/m/Y'), "La sortie de la date est en fr");
 
 $t->comment("Validation");
 
