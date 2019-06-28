@@ -3,6 +3,35 @@
 
 # default values
 all:
+  drm_negoce:
+    correspondances_produits:
+      "/declaration/certifications/AOC/genres/TRANQ": "/declaration/certifications/AOC/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/AOC/genres/EFF": "/declaration/certifications/AOC/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/AOC/genres/MOU": "/declaration/certifications/AOC/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/HORSBIVC_INTERLOIRE/genres/TRANQ": "/declaration/certifications/AOC/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/HORSBIVC_INTERLOIRE/genres/EFF": "/declaration/certifications/AOC/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/HORSBIVC_INTERLOIRE/genres/MOU": "/declaration/certifications/AOC/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/HORSBIVC/genres/TRANQ": "/declaration/certifications/AOC/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/HORSBIVC/genres/EFF": "/declaration/certifications/AOC/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/HORSBIVC/genres/MOU": "/declaration/certifications/AOC/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP/genres/TRANQ": "/declaration/certifications/IGP/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP/genres/EFF": "/declaration/certifications/IGP/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP/genres/MOU": "/declaration/certifications/IGP/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP_VALDELOIRE/genres/TRANQ": "/declaration/certifications/IGP/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP_VALDELOIRE/genres/EFF": "/declaration/certifications/IGP/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP_VALDELOIRE/genres/MOU": "/declaration/certifications/IGP/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VSIG/genres/TRANQ": 
+        cep: "/declaration/certifications/VSIG/genres/TRANQ/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VSIG/genres/TRANQ/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VSIG/genres/EFF":
+        cep: "/declaration/certifications/VSIG/genres/EFF/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VSIG/genres/EFF/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VSIG/genres/MOU":
+        cep: "/declaration/certifications/VSIG/genres/EFF/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VSIG/genres/EFF/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VDNVDL/genres/DEFAUT": 
+        vdlsup: "/declaration/certifications/VDNVDL/genres/DEFAUT/appellations/VDLSUP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        vdlinf: "/declaration/certifications/VDNVDL/genres/DEFAUT/appellations/VDLINF/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
   statistiques:
     stats:
       statistiques:

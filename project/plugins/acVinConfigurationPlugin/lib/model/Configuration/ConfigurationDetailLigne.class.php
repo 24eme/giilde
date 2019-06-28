@@ -26,9 +26,10 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
         return ($this->hasDetails() && (($this->getDetails() == self::DETAILS_VRAC) || ($this->getDetails() == self::DETAILS_CREATIONVRAC)));
     }
 
-    public function needDouaneObservation() {
+    public function needDouaneObservation($negoce = false) {
 
-        return preg_match('/autres-entrees|autres-sorties|replacement-suspension|manipulations/', $this->douane_cat);
+        return (!$negoce)? preg_match('/autres-entrees|autres-sorties|replacement-suspension|manipulations/', $this->douane_cat) :
+                           preg_match('/autres-entrees|autres-sorties|replacement-suspension/', $this->douane_cat_negoce);
     }
 
     public function needDouaneDateReplacement() {

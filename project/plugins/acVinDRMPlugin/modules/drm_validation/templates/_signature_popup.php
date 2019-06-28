@@ -9,13 +9,13 @@
                 <p>Vous êtes sur le point de valider votre DRM, une fois votre déclaration validée, vous ne pourrez plus la modifier.</p>
                 <p>Après validation vous recevrez votre DRM par mail.</p>
 
-                <?php if($compte->hasDroit(Roles::TELEDECLARATION_DOUANE)): ?>
+                <?php if($compte->hasDroit(Roles::TELEDECLARATION_DOUANE) && !$drm->isNegoce()): ?>
           	    <p>Si vous le souhaitez, en cliquant sur l'option ci-dessous, vous pouvez transmettre cette DRM directement sur le portail de la douane, qui apparaitra en mode brouillon sur le portail pro.douane.gouv.fr. Il vous restera alors à la valider en ligne sur le site web douanier.</p>
                 <?php else: ?>
                 <p>La transmission de votre DRM sur le portail de la douane n'est pas encore possible. Si vous avez déjà adhéré à CIEL, veuillez prendre contact avec votre interprofession.</p>
                 <?php endif; ?>
       	   <!--<p>Si vous décidez de transmettre le document par courrier postal ou par mail, n'oubliez pas que la DRM doit être signée manuellement pour être valable.</p>-->
-                <?php if($compte->hasDroit("teledeclaration_douane")): ?>
+                <?php if($compte->hasDroit(Roles::TELEDECLARATION_DOUANE) && !$drm->isNegoce()): ?>
                 <p>
                   <div class="ligne_form">
                       <div class="checkbox">

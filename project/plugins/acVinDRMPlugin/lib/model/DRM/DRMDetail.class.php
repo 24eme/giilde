@@ -185,7 +185,7 @@ class DRMDetail extends BaseDRMDetail {
 
         $hasobs = false;
         foreach($this->entrees as $entree => $v) {
-            if (!$v || !$this->getConfig()->exist('entrees/'.$entree) || !$this->getConfig()->get('entrees/'.$entree)->needDouaneObservation()) {
+            if (!$v || !$this->getConfig()->exist('entrees/'.$entree) || !$this->getConfig()->get('entrees/'.$entree)->needDouaneObservation($this->getDocument()->isNegoce())) {
                 continue;
             }
             $hasobs = true;
@@ -198,7 +198,7 @@ class DRMDetail extends BaseDRMDetail {
             if($v instanceof acCouchdbJson || !$v || !$this->getConfig()->exist('sorties/'.$sortie)) {
                 continue;
             }
-            if (!$this->getConfig()->get('sorties/'.$sortie)->needDouaneObservation()) {
+            if (!$this->getConfig()->get('sorties/'.$sortie)->needDouaneObservation($this->getDocument()->isNegoce())) {
                 continue;
             }
             $hasobs = true;
@@ -602,5 +602,34 @@ class DRMDetail extends BaseDRMDetail {
        return false;
       }
       return $this->_get('tav');
+    }
+    
+    public function getCorrespondanceNegoce()
+    {
+        if ($this->isCodeDouaneNonINAO()) {
+            return $this->getCepage()->getHash();
+        }
+        $correspondances = sfConfig::get('app_drm_negoce_correspondances_produits');
+        if (!is_array($correspondances)) {
+            throw new sfException('no correspondances_produits set in configuration app.yml');
+        }
+        $c = (isset($correspondances[$this->getGenre()->getHash()])) ? $correspondances[$this->getGenre()->getHash()] : null;
+        if (!$c) {
+            throw new sfException('correspondances_produits not found in configuration app.yml for key '.$this->getGenre()->getHash());
+        }
+        if (is_array($c)) {
+            $keys = array_keys($c);
+            $diff1 = array_diff(array('cep', 'sanscep'), $keys);
+            $diff2 = array_diff(array('vdlsup', 'vdlinf'), $keys);
+            if (!$diff1) {
+                return ($this->getCepage()->getKey() == Configuration::DEFAULT_KEY)? $c['sanscep'] : $c['cep'];
+            }
+            if (!$diff2) {
+                return ($this->getTav() > 18)? $c['vdlsup'] : $c['vdlinf'];
+            }
+            throw new sfException('errors in configuration app.yml for keys '.implode(', ', $keys));
+        } else {
+            return $c;
+        }
     }
 }

@@ -22,6 +22,9 @@ class DRMDetailSortiesForm  extends acCouchdbObjectForm {
             if(preg_match('/MATIERES_PREMIERES/', $this->getObject()->getParent()->code_douane) && $value->details == "ALCOOLPUR") {
                 $disabled = true;
             }
+            if ($key == 'vci' && $drm->isNegoce()) {
+                $disabled = true;
+            }
     		if ($value->readable) {
 	    		if (!$value->writable || $disabled) {
 	    			$this->setWidget($key, new bsWidgetFormInputFloat(array(), array('readonly' => 'readonly')));

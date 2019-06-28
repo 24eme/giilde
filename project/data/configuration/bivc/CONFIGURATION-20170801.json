@@ -1,6 +1,6 @@
 {
    "_id": "CONFIGURATION-20170801",
-    "type": "Configuration",
+   "type": "Configuration",
    "campagne": null,
    "labels": {
        "agriculture_biologique": "Agriculture Biologique"
@@ -82,7 +82,7 @@
                "achatcrd": {
                    "libelle": "08. Achat CRD acquittées",
                    "libelle_long": "Achat CRD acquittées",
-                   "description": "Achat CRD acquittées"
+                   "description": "Achat de vins en CRD acquittées remises en suspension"
                },
                "achatnoncrd": {
                    "libelle": "09. Achat suspension",
@@ -1809,7 +1809,8 @@
                                                                            ],
                                                                            "cvo": [
                                                                            ]
-                                                                       }
+                                                                       },
+                                                                       "produit_non_interpro": false
                                                                    }
                                                                }
                                                            }
@@ -2045,7 +2046,8 @@
                                                                            ],
                                                                            "cvo": [
                                                                            ]
-                                                                       }
+                                                                       },
+                                                                       "produit_non_interpro": false
                                                                    }
                                                                }
                                                            }
@@ -10660,6 +10662,7 @@
                    "facturable": 0,
                    "douane_type": "STOCK",
                    "douane_cat": "stock-debut-periode",
+                   "douane_cat_negoce": "stock-debut-periode",
                    "taxable_douane": 0
                },
                "instance": {
@@ -10688,6 +10691,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/volume-produit",
+                   "douane_cat_negoce": "entrees-periode/volume-produit",
                    "taxable_douane": 0
                },
                "declassement": {
@@ -10701,6 +10705,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation",
+                   "douane_cat_negoce": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
                },
                "retourembouteillage": {
@@ -10714,6 +10719,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/mouvements-temporaires/relogement",
+                   "douane_cat_negoce": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
                },
                "transfertcomptamatierecession": {
@@ -10727,6 +10733,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation",
+                   "douane_cat_negoce": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
                },
                "travailafacon": {
@@ -10740,6 +10747,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/mouvements-temporaires/travail-a-facon",
+                   "douane_cat_negoce": "entrees-periode/travail-a-facon",
                    "taxable_douane": 0
                },
                "retourmarchandisenontaxees": {
@@ -10753,6 +10761,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/achats-reintegrations",
+                   "douane_cat_negoce": "entrees-periode/entree-droits-suspendus",
                    "taxable_douane": 0
                },
                "retourmarchandisetaxees": {
@@ -10766,6 +10775,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/replacements/replacement-suspension/volume",
+                   "douane_cat_negoce": "entrees-periode/replacements/replacement-suspension/volume",
                    "taxable_douane": 1
                },
                "achatcrd": {
@@ -10779,6 +10789,7 @@
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "entrees-periode/achats-reintegrations",
+                   "douane_cat_negoce": "entrees-periode/entree-droits-suspendus",
                    "taxable_douane": 0
                },
                "achatnoncrd": {
@@ -10792,6 +10803,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/volume-produit",
+                   "douane_cat_negoce": "entrees-periode/volume-produit",
                    "taxable_douane": 0
                },
                "regularisation": {
@@ -10805,6 +10817,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/autres-entrees",
+                   "douane_cat_negoce": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
                },
                "cooperative": {
@@ -10818,6 +10831,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "entrees-periode/replacements/replacement-suspension/volume",
+                   "douane_cat_negoce": "entrees-periode/replacements/replacement-suspension/volume",
                    "taxable_douane": 0
                },
                "vci": {
@@ -10830,7 +10844,8 @@
                    "mouvement_coefficient": 1,
                    "facturable": 0,
                    "douane_type": "CRD_MIXTE",
-                   "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci",
+                   "douane_cat": "entrees-periode/mouvements-internes/integration-vci-agree",
+                   "douane_cat_negoce": null,
                    "taxable_douane": 0
                }
            },
@@ -10846,6 +10861,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
                    "taxable_douane": 0
                },
                "creationvractirebouche": {
@@ -10859,6 +10875,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
                    "taxable_douane": 0
                },
                "apportgroupement": {
@@ -10872,6 +10889,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
+                   "douane_cat_negoce": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                },
                "export": {
@@ -10885,6 +10903,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
                    "taxable_douane": 0
                },
                "vracsanscontratacquitte": {
@@ -10898,6 +10917,7 @@
                    "facturable": 1,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "sorties-periode/ventes-france-crd-suspendus/annee-courante",
+                   "douane_cat_negoce": "sorties-periode/sorties-avec-paiement-annee-courante",
                    "taxable_douane": 1
                },
                "ventefrancecrd": {
@@ -10911,6 +10931,7 @@
                    "facturable": 1,
                    "douane_type": "MIXTE",
                    "douane_cat": "sorties-periode/ventes-france-crd-suspendus/annee-courante",
+                   "douane_cat_negoce": "sorties-periode/sorties-avec-paiement-annee-courante",
                    "taxable_douane": 1
                },
                "declassement": {
@@ -10924,6 +10945,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation",
+                   "douane_cat_negoce": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                },
                "embouteillage": {
@@ -10937,6 +10959,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/embouteillage",
+                   "douane_cat_negoce": "sorties-periode/travail-a-facon",
                    "taxable_douane": 0
                },
                "transfertcomptamatiere": {
@@ -10950,6 +10973,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation",
+                   "douane_cat_negoce": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                },
                "travailafacon": {
@@ -10963,6 +10987,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/travail-a-facon",
+                   "douane_cat_negoce": "sorties-periode/travail-a-facon",
                    "taxable_douane": 0
                },
                "consommationfamilialedegustation": {
@@ -10976,6 +11001,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/consommation-familiale-degustation",
+                   "douane_cat_negoce": "sorties-periode/sorties-exoneration-droits",
                    "taxable_douane": 0
                },
                "destructionperte": {
@@ -10989,6 +11015,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
                    "taxable_douane": 0
                },
                "manquant": {
@@ -11002,6 +11029,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
+                   "douane_cat_negoce": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                },
                "vci": {
@@ -11015,6 +11043,7 @@
                    "facturable": 0,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci",
+                   "douane_cat_negoce": null,
                    "taxable_douane": 0
                },
                "cession": {
@@ -11028,6 +11057,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
+                   "douane_cat_negoce": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                }
            },
@@ -11043,6 +11073,7 @@
                    "facturable": 0,
                    "douane_type": "STOCK",
                    "douane_cat": null,
+                   "douane_cat_negoce": null,
                    "taxable_douane": 0
                },
                "final": {
@@ -11056,6 +11087,7 @@
                    "facturable": 0,
                    "douane_type": "STOCK",
                    "douane_cat": "stock-fin-periode",
+                   "douane_cat_negoce": "stock-fin-periode",
                    "taxable_douane": 0
                }
            }
@@ -11073,6 +11105,7 @@
                    "facturable": 0,
                    "douane_type": "STOCK",
                    "douane_cat": "stock-debut-periode",
+                   "douane_cat_negoce": "stock-debut-periode",
                    "taxable_douane": 0
                },
                "instance": {
@@ -11086,6 +11119,7 @@
                    "facturable": 0,
                    "douane_type": "STOCK",
                    "douane_cat": null,
+                   "douane_cat_negoce": null,
                    "taxable_douane": 0
                }
            },
@@ -11101,6 +11135,7 @@
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "entrees-periode/achats",
+                   "douane_cat_negoce": "entrees-periode/achats",
                    "taxable_douane": 0
                },
                "autre": {
@@ -11114,6 +11149,7 @@
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "entrees-periode/autres-entrees",
+                   "douane_cat_negoce": "entrees-periode/autres-entrees",
                    "taxable_douane": 0
                }
            },
@@ -11129,6 +11165,7 @@
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "sorties-periode/ventes",
+                   "douane_cat_negoce": "sorties-periode/ventes",
                    "taxable_douane": 0
                },
                "replacementsuspension": {
@@ -11142,6 +11179,7 @@
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "sorties-periode/replacement-suspension",
+                   "douane_cat_negoce": "sorties-periode/replacement-suspension",
                    "taxable_douane": 0
                },
                "autre": {
@@ -11155,6 +11193,7 @@
                    "facturable": 0,
                    "douane_type": "ACQUITTE",
                    "douane_cat": "sorties-periode/autres-sorties",
+                   "douane_cat_negoce": "sorties-periode/autres-sorties",
                    "taxable_douane": 0
                }
            },
@@ -11170,6 +11209,7 @@
                    "facturable": 0,
                    "douane_type": "STOCK",
                    "douane_cat": "stock-fin-periode",
+                   "douane_cat_negoce": "stock-fin-periode",
                    "taxable_douane": 0
                },
                "instance": {
@@ -11183,6 +11223,7 @@
                    "facturable": 0,
                    "douane_type": "STOCK",
                    "douane_cat": null,
+                   "douane_cat_negoce": null,
                    "taxable_douane": 0
                }
            }

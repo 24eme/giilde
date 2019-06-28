@@ -62,6 +62,14 @@
                 </div>
             <?php endif; ?>
         <?php endif; ?>
+        
+        <?php if ($drm->isNegoce()): ?>
+            <div class="alert alert-info">
+				<img src="/images/visuels/prodouane.png" />
+                <p><br />Vous pouvez à présent télécharger votre DRM au format XML afin de l'importer en DTI+ sur le site prodouanes via le lien suivant : <a href="https://pro.douane.gouv.fr/">pro.douane.gouv.fr</a><br />
+            	<a class="pull-right btn btn-default" target="_blank" href="<?php echo url_for('drm_xml', $drm); ?>">Télécharger le XML</a><br />&nbsp;</p>
+            </div>
+		<?php endif; ?>
 
         <?php include_partial('drm_visualisation/recap_stocks_mouvements', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode, 'no_link' => $no_link, 'mouvementsByProduit' => $mouvementsByProduit, 'visualisation' => true, 'typeDetailKey' => DRM::DETAILS_KEY_SUSPENDU, 'typeKey' => DRMClient::TYPE_DRM_SUSPENDU)) ?>
         <?php include_partial('drm_visualisation/recap_stocks_mouvements', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode, 'no_link' => $no_link, 'mouvementsByProduit' => $mouvementsByProduit, 'visualisation' => true, 'typeDetailKey' => DRM::DETAILS_KEY_ACQUITTE, 'typeKey' => DRMClient::TYPE_DRM_ACQUITTE)) ?>
@@ -152,7 +160,7 @@
         <a href="<?php echo url_for('drm_pdf', array('identifiant' => $drm->getIdentifiant(), 'periode_version' => $drm->getPeriodeAndVersion(), 'appellation' => 0)); ?>" class="btn btn-success">Télécharger le PDF</a>
     </div>
     <div class="col-xs-4 text-right">
-    <?php if(isset($compte) && $compte && $compte->hasDroit("teledeclaration_douane") && $isTeledeclarationMode): ?>
+    <?php if(isset($compte) && $compte && $compte->hasDroit(Roles::TELEDECLARATION_DOUANE) && $isTeledeclarationMode && !$drm->isNegoce()): ?>
       <?php if (!$drm->transmission_douane->success) : ?>
         <a style="margin-left: 5px;" href="<?php echo url_for('drm_transmission', $drm); ?>" class="btn btn-success" ><span>Transmettre la Drm sur CIEL</span></a>
       <?php else: ?>

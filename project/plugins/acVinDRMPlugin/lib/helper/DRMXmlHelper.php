@@ -53,9 +53,10 @@ function multiArray2XML($preXML) {
 	return $xml;
 }
 
-function details2XmlDouane($detail) {
+function details2XmlDouane($detail, $isNegoce = false) {
 	$detailKey = $detail->getParent()->getKey();
 	$confDetail = null;
+	$confKey = ($isNegoce)? 'douane_cat_negoce' : 'douane_cat';
 	if(!$detail->getConfig()->getDocument()->declaration->exist($detailKey)){
 		$confDetail = $detail->getConfig()->getDocument()->declaration->details;
 	}else{
@@ -65,7 +66,7 @@ function details2XmlDouane($detail) {
 	$keyForceDisplay = array();
 	foreach (array('stocks_debut', 'stocks_fin') as $type) {
 		foreach($confDetail->get($type) as $k => $v) {
-			if($confDetail->get($type)->get($k)->douane_cat) {
+			if($confDetail->get($type)->get($k)->get($confKey)) {
 				$keyForceDisplay[$type] = $k;
 				break;
 			}
@@ -73,9 +74,9 @@ function details2XmlDouane($detail) {
 	}
 	foreach (array('stocks_debut', 'entrees', 'sorties', 'stocks_fin') as $type) {
 		foreach ($detail->get($type) as $k => $v) {
-			if (($v || (($k == 'initial' || $k == 'final') && preg_match('/^stock/', $type))) && $confDetail->get($type)->exist($k) && $confDetail->get($type)->get($k)->douane_cat) {
-				$preXML = storeMultiArray($preXML, explode('/', $confDetail->get($type)->get($k)->douane_cat),  $v);
-				if (preg_match('/replacement/', $confDetail->get($type)->get($k)->douane_cat)) {
+			if (($v || (($k == 'initial' || $k == 'final') && preg_match('/^stock/', $type))) && $confDetail->get($type)->exist($k) && $confDetail->get($type)->get($k)->get($confKey)) {
+				$preXML = storeMultiArray($preXML, explode('/', $confDetail->get($type)->get($k)->get($confKey)),  $v);
+				if (preg_match('/replacement/', $confDetail->get($type)->get($k)->get($confKey))) {
 					$preXML = storeMultiArray($preXML, explode('/', 'entrees-periode/replacements/replacement-suspension/mois'),  $detail->getReplacementMonth(), true);
 					$preXML = storeMultiArray($preXML, explode('/', 'entrees-periode/replacements/replacement-suspension/annee'), $detail->getReplacementYear(),  true);
 				}
@@ -335,5 +336,63 @@ function xmlGetProduitsDetails($drm, $bool, $suspendu_acquitte) {
 			}
 		}
 	}
+	if ($drm->isNegoce()) {
+	    $drmNegoce = new DRM();
+	    $drmNegoce->periode = $drm->periode;
+	    foreach ($produits as $p) {
+	        $produit = $drmNegoce->addProduit($p->getCorrespondanceNegoce(), $suspendu_acquitte);
+	        $produit->total_debut_mois += $p->total_debut_mois;
+	        if ($p->exist('observations')) {
+	            $obs = $produit->getOrAdd('observations');
+	            $obs = ($produit->exist('observations'))? $produit->observations.' - '.$p->observations : $p->observations;
+	        }
+	        if ($p->exist('replacement_date')) {
+	            $repl = $produit->getOrAdd('replacement_date');
+	            $repl = ($produit->exist('replacement_date'))? $produit->replacement_date : $p->replacement_date;
+	        }
+	        foreach (array('stocks_debut', 'entrees', 'sorties', 'stocks_fin') as $item) {
+	            foreach ($p->{$item} as $mv => $val) {
+	                if (strpos($mv, '_details') !== false && $p->{$item}->{$mv}->exist('volume')) {
+	                    $produit->{$item}->{str_replace('_details', '', $mv)} += $p->{$item}->{$mv}->volume;
+	                } elseif (strpos($mv, '_details') === false) {
+	                   $produit->{$item}->{$mv} += $p->{$item}->{$mv};
+	                }
+	            }
+	        }
+	    }
+	    $produits = $drmNegoce->getProduitsDetails($bool, $suspendu_acquitte);
+	}
 	return $produits;
+}
+
+function getCielProduits() {
+    $e = $this->getEtablissementObject();
+    if ($e->famille == EtablissementFamilles::FAMILLE_PRODUCTEUR || $e->sous_famille == EtablissementFamilles::SOUS_FAMILLE_VINIFICATEUR) {
+        return $this->getDetails();
+    } else {
+        $drm = new DRM();
+        $drm->periode = $this->periode;
+        foreach ($this->getDetails() as $detail) {
+            $produit = $drm->addProduit($detail->getCorrespondanceNegoce());
+
+            $produit->total_debut_mois += $detail->total_debut_mois;
+            $produit->acq_total_debut_mois += $detail->acq_total_debut_mois;
+            if ($detail->observations) {
+                $produit->observations = ($produit->observations)? $produit->observations.' - '.$detail->observations : $detail->observations;
+            }
+            foreach (array('stocks_debut', 'entrees', 'sorties', 'stocks_fin') as $item) {
+                foreach ($detail->{$item} as $mv => $val) {
+                    if ($produit->{$item}->{$mv} instanceof DRMESDetails) {
+                        continue;
+                    }
+                    $produit->{$item}->{$mv} += $detail->{$item}->{$mv};
+                }
+            }
+        }
+        $drm->update();
+        foreach ($drm->getDetails() as $detail) {
+            $detail->libelle = $detail->getCertification()->getKey().' '.$detail->libelle;
+        }
+        return $drm->getDetails();
+    }
 }

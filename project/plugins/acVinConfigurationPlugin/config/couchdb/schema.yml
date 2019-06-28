@@ -144,6 +144,7 @@ Configuration:
                               facturable: { type: integer }
                               douane_type: { }
                               douane_cat: { }
+                              douane_cat_negoce: { }
                               taxable_douane: { }
                   entrees:
                     required: false
@@ -167,6 +168,7 @@ Configuration:
                               facturable_negociant: { type: integer, required: false }
                               douane_type: { }
                               douane_cat: { }
+                              douane_cat_negoce: { }
                               taxable_douane: { }
                               switch_regime: { required: false }
                   sorties:
@@ -191,6 +193,7 @@ Configuration:
                               facturable_negociant: { type: integer, required: false }
                               douane_type: { }
                               douane_cat: { }
+                              douane_cat_negoce: { }
                               taxable_douane: { }
                               switch_regime: { required: false }
                   stocks_fin:
@@ -214,6 +217,7 @@ Configuration:
                               facturable: {  }
                               douane_type: { }
                               douane_cat: { }
+                              douane_cat_negoce: { }
                               taxable_douane: { }
             attributs:
               type: collection

@@ -118,16 +118,18 @@ class ProduitCsvFile extends CsvFile {
         }
     }
 
-    public function importProduits() {
+    public function importProduits($keepExisting = false) {
         $this->errors = array();
         $csv = $this->getCsv();
 
         if(!$this->config->isNew()) {
             $this->oldconfig = clone $this->config;
         }
-
-        $this->config->declaration->remove('certifications');
-        $this->config->declaration->add('certifications');
+        
+        if (!$keepExisting) {
+            $this->config->declaration->remove('certifications');
+            $this->config->declaration->add('certifications');
+        }
 
         try {
             foreach ($csv as $line) {

@@ -1,0 +1,11 @@
+#interpro;categorie_libelle;categorie_code;genre_libelle;genre_code;denomination_libelle;denomination_code;mention_libelle;mention_code;lieu_libelle;lieu_code;couleur_libelle;couleur_code;cepage_libelle;cepage_code;departements;douane_code;douane_libelle;douane_taxe;douane_date;douane_noeud;cvo_taxe;cvo_date;cvo_noeud;repli_entree;repli_sorti;declassement_entree;declassement_sorti;densite;labels;code_produit;code_produit_noeud;code_analytique;code_comptable_noeud;code_douane;code_douane_noeud;alias_produit;format_libelle;format_libelle_noeud;cepages autorisés
+declaration;AOC;AOC;Tranquille;TRANQ;;;;;;;;;;;;L387;Vins Tranquilles;3.82;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VT_IG_AOP;cepage;;%c% %g%;cepage;
+declaration;AOC;AOC;Mousseux;EFF;;;;;;;;;;;;L385;Vins Effervescents;9.44;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VM_IG_AOP;cepage;;%c% %g%;cepage;
+declaration;IGP;IGP;Tranquille;TRANQ;;;;;;;;;;;;L387;Vins Tranquilles;3.82;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VT_IG_IGP;cepage;;%c% %g%;cepage;
+declaration;IGP;IGP;Mousseux;EFF;;;;;;;;;;;;L385;Vins Effervescents;9.44;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VM_IG_IGP;cepage;;%c% %g%;cepage;
+declaration;Vin sans IG;VSIG;Tranquille;TRANQ;Sans cépage;SANSCEP;;;;;;;;;;L387;Vins Tranquilles;3.82;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VT_SANS_IG_AUTRES;cepage;;%c% %g% %a%;cepage;
+declaration;Vin sans IG;VSIG;Mousseux;EFF;Sans cépage;SANSCEP;;;;;;;;;;L385;Vins Effervescents;9.44;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VM_SANS_IG_AUTRES;cepage;;%c% %g% %a%;cepage;
+declaration;Vin sans IG;VSIG;Tranquille;TRANQ;Avec cépage;CEP;;;;;;;;;;L387;Vins Tranquilles;3.82;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VT_SANS_IG_CEPAGE;cepage;;%c% %g% %a%;cepage;
+declaration;Vin sans IG;VSIG;Mousseux;EFF;Avec cépage;CEP;;;;;;;;;;L385;Vins Effervescents;9.44;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VM_SANS_IG_CEPAGE;cepage;;%c% %g% %a%;cepage;
+declaration;VDN-VDL;VDNVDL;;;Vin de Liqueur AOP (Sup 18°);VDLSUP;;;;;;;;;;L423;VDN-VDL;47.67;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VDN_VDL_AOP_SUP_18;cepage;;%a%;cepage;
+declaration;VDN-VDL;VDNVDL;;;Vin de Liqueur AOP (Inf 18°);VDLINF;;;;;;;;;;L423;VDN-VDL;47.67;2019-01-01;G;0;2019-01-01;CE;;;;;;;;;;;VDN_VDL_AOP_INF_18;cepage;;%a%;cepage;

@@ -56,12 +56,28 @@ class DRMValidation extends DocumentValidation {
             $entrees_retourmarchandisesanscvo = ($detail->entrees->exist('retourmarchandisesanscvo'))? $detail->entrees->retourmarchandisesanscvo : 0.0;
             $entrees_autre = ($detail->entrees->exist('autre'))? $detail->entrees->autre : 0.0;
             $entrees_cooperative = ($detail->entrees->exist('cooperative'))? $detail->entrees->cooperative : 0.0;
+            
+            // entrees drm negoce
+            $entrees_declassement = ($detail->entrees->exist('declassement'))? $detail->entrees->declassement : 0.0;
+            $entrees_retourembouteillage = ($detail->entrees->exist('retourembouteillage'))? $detail->entrees->retourembouteillage : 0.0;
+            $entrees_transfertcomptamatierecession = ($detail->entrees->exist('transfertcomptamatierecession'))? $detail->entrees->transfertcomptamatierecession : 0.0;
+            $entrees_regularisation = ($detail->entrees->exist('regularisation'))? $detail->entrees->regularisation : 0.0;
 
             $sorties_manquant = ($detail->sorties->exist('manquant'))? $detail->sorties->manquant : 0.0;
             $sorties_autre = ($detail->sorties->exist('autre'))? $detail->sorties->autre : 0.0;
+            
+            // sorties drm negoce
+            $sorties_apportgroupement = ($detail->sorties->exist('apportgroupement'))? $detail->sorties->apportgroupement : 0.0;
+            $sorties_declassement = ($detail->sorties->exist('declassement'))? $detail->sorties->declassement : 0.0;
+            $sorties_transfertcomptamatiere = ($detail->sorties->exist('transfertcomptamatiere'))? $detail->sorties->transfertcomptamatiere : 0.0;
+            $sorties_cession = ($detail->sorties->exist('cession'))? $detail->sorties->cession : 0.0;
 
             $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $entrees_cooperative + $sorties_manquant + $entrees_autre + $sorties_autre;
-
+            
+            if ($this->document->isNegoce()) {
+                $total_observations_obligatoires += $entrees_declassement + $entrees_retourembouteillage + $entrees_transfertcomptamatierecession + $entrees_regularisation + $sorties_apportgroupement + $sorties_declassement + $sorties_transfertcomptamatiere + $sorties_cession;
+            }
+            
             $produitLibelle = " pour le produit ".$detail->getLibelle();
 
             if ($this->isTeledeclarationDrm) {
@@ -98,6 +114,33 @@ class DRMValidation extends DocumentValidation {
                 }
                 if($sorties_autre){
                   $this->addPoint('erreur', 'observations', "Sortie autre (".sprintf("%.2f",$sorties_autre)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
+                
+                if ($this->document->isNegoce()) {
+                    if($entrees_declassement){
+                        $this->addPoint('erreur', 'observations', "Entrée declassement (".sprintf("%.2f",$entrees_declassement)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
+                    if($entrees_retourembouteillage){
+                        $this->addPoint('erreur', 'observations', "Entrée retour embouteillage (".sprintf("%.2f",$entrees_retourembouteillage)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
+                    if($entrees_transfertcomptamatierecession){
+                        $this->addPoint('erreur', 'observations', "Entrée transfert compta matiere cession (".sprintf("%.2f",$entrees_transfertcomptamatierecession)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
+                    if($entrees_regularisation){
+                        $this->addPoint('erreur', 'observations', "Entrée regularisation (".sprintf("%.2f",$entrees_regularisation)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
+                    if($sorties_apportgroupement){
+                        $this->addPoint('erreur', 'observations', "Sortie apport groupement (".sprintf("%.2f",$sorties_apportgroupement)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
+                    if($sorties_declassement){
+                        $this->addPoint('erreur', 'observations', "Sortie declassement (".sprintf("%.2f",$sorties_declassement)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
+                    if($sorties_transfertcomptamatiere){
+                        $this->addPoint('erreur', 'observations', "Sortie transfert compta matiere (".sprintf("%.2f",$sorties_transfertcomptamatiere)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
+                    if($sorties_cession){
+                        $this->addPoint('erreur', 'observations', "Sortie cession (".sprintf("%.2f",$sorties_cession)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                    }
                 }
               }
               if($detail->getParent()->getKey() == 'details' && ($entrees_retourmarchandisetaxees + $entrees_retourmarchandiseacquitte + $entrees_retourmarchandisesanscvo + $entrees_cooperative) && (!$detail->exist('replacement_date') || !$detail->replacement_date)) {

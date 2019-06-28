@@ -13,6 +13,9 @@ class DRMDetailEntreesForm extends acCouchdbObjectForm {
             if(!preg_match('/MATIERES_PREMIERES/', $this->getObject()->getParent()->code_douane) && $this->getObject()->getParent()->exist('tav') && $value->details == "ALCOOLPUR") {
                 $disabled = true;
             }
+            if ($key == 'vci' && $drm->isNegoce()) {
+                $disabled = true;
+            }
             if ($value->readable) {
                 if (!$value->writable || $disabled || (preg_match($declassementIgp, $certif) && ($key == 'declassement'))
                     || (($certif == 'AUTRES') && ($key != 'recolte') && ($key != 'revendication') && ($key != 'transfertsrecolte'))

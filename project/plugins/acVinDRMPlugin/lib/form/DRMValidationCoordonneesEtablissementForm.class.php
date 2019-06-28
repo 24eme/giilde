@@ -12,9 +12,13 @@ class DRMValidationCoordonneesEtablissementForm extends acCouchdbObjectForm {
 
     public function configure() {
         parent::configure();
-
+        
+        $cviRequired = true;
+        if ($this->drm->isNegoce()) {
+            $cviRequired = false;
+        }
         $this->setWidget('cvi', new bsWidgetFormInput());
-        $this->setValidator('cvi', new sfValidatorString(array('required' => true)));
+        $this->setValidator('cvi', new sfValidatorString(array('required' => $cviRequired)));
         $this->widgetSchema->setLabel('cvi', 'CVI :');
 
         $this->setWidget('adresse', new bsWidgetFormInput());

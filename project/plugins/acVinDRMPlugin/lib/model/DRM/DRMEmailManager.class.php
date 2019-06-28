@@ -132,7 +132,7 @@ L’application de télédéclaration des contrats d’InterLoire";
         }
 
         if($transmission_douane === null) {
-            $transmission_douane = $etablissement->getSociete()->getMasterCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE);
+            $transmission_douane = ($etablissement->getSociete()->getMasterCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE) && !$this->drm->isNegoce());
         }
 
         $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));

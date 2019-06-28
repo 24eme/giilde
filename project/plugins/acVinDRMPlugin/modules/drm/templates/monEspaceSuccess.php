@@ -26,7 +26,7 @@
             </div>
           </div>
             <?php
-            $transmission = $etablissement->getSociete()->getMasterCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE);
+            $transmission = ($etablissement->getSociete()->getMasterCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE) && $etablissement->famille != EtablissementFamilles::FAMILLE_NEGOCIANT);
             if ($isTeledeclarationMode && !$transmission): ?>
             <div class="row">
                 <div class="col-xs-12" style="margin-top: 10px;">
