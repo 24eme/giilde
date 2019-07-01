@@ -727,11 +727,13 @@ Vins à IGP,,France,,,Rosé,,Vins à IGP France Rosé,VT_IG_IGP
 Vins à IGP,,CEE,,,Blanc,,Vins à IGP CEE Blanc,VT_ETRANGERS
 Vins à IGP,,CEE,,,Rouge,,Vins à IGP CEE Rouge,VT_ETRANGERS
 Vins à IGP,,CEE,,,Rosé,,Vins à IGP CEE Rosé,VT_ETRANGERS
-Autre,,BFAV,,,,,BFAV,BOISSONS_FERMENTEES_AUTRES
 Autre,,DRA/DPLC,,,Blanc,,DRA/DPLC Blanc,4B988Y
 Autre,,DRA/DPLC,,,Rouge,,DRA/DPLC Rouge,4R988Y
 Autre,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autre,,Rebêches,,,,,Rebêches,5X999V
-Alcools,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
-Alcools,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
-Alcools,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
+Alcools et autres Produits,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
+Alcools et autres Produits,,Produit intermédiaire supérieur 18°,,,,,Produit intermédiaire supérieur 18°,AUTRES_PI_SUP_18
+Alcools et autres Produits,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
+Alcools et autres Produits,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
+Alcools et autres Produits,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
+Alcools et autres Produits,,BFAV,,,,,BFAV,BOISSONS_FERMENTEES_AUTRES

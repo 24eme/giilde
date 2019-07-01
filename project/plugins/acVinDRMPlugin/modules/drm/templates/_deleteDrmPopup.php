@@ -18,7 +18,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Annuler</button>
-                    <button id="drm_delete_popup_confirm" type="submit" class="btn btn-danger" style="float: right;" ><span>Suprimer la DRM</span></button>
+                    <button id="drm_delete_popup_confirm" type="submit" class="btn btn-danger" style="float: right;" ><span>Supprimer la DRM</span></button>
                 </div>
 
             </div>

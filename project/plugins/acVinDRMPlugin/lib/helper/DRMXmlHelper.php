@@ -128,7 +128,11 @@ function drm2CrdCiel($drm) {
 
 function crdGenre2CategorieFiscale($g) {
 	$crdGenre2CategorieFiscaleArray = array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'T', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'M');
-	return $crdGenre2CategorieFiscaleArray[$g];
+	if (isset($crdGenre2CategorieFiscaleArray[$g])) {
+		return $crdGenre2CategorieFiscaleArray[$g];
+	}else{
+		return $g;
+	}
 }
 function crdType2TypeCapsule($t) {
 	$crdType2TypeCapsuleArray = array(EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU=>'COLLECTIVES_DROITS_SUSPENDUS',  EtablissementClient::REGIME_CRD_COLLECTIF_ACQUITTE=> 'COLLECTIVES_DROITS_ACQUITTES', EtablissementClient::REGIME_CRD_PERSONNALISE=>'PERSONNALISEES');

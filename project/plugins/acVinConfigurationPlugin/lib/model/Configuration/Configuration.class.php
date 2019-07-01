@@ -48,13 +48,16 @@ class Configuration extends BaseConfiguration {
     }
 
     public function identifyProductByLibelle($libelle) {
+        if(!$libelle) {
+            return;
+        }
         if(array_key_exists($libelle, $this->identifyLibelleProduct)) {
 
             return $this->identifyLibelleProduct[$libelle];
         }
 
         $libelleSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($libelle)));
-
+        $possibilities = array();
         foreach($this->getProduits() as $produit) {
             $libelleProduitSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($produit->getLibelleFormat())));
             //echo $libelleSlugify."/".$libelleProduitSlugify."\n";
@@ -63,6 +66,14 @@ class Configuration extends BaseConfiguration {
 
                 return $produit;
             }
+            if($libelleSlugify && preg_match("|^".$libelleSlugify."|", $libelleProduitSlugify)) {
+                $possibilities[] = $produit;
+            }
+        }
+
+        if(count($possibilities) == 1) {
+
+            return $possibilities[0];
         }
 
         return false;

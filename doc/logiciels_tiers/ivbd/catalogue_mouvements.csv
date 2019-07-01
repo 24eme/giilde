@@ -35,6 +35,7 @@ suspendu,sorties,distillationusageindustriel,14. usages industriel,indiquer les 
 suspendu,sorties,destructionperte,15. destruction/perte,indiquer les pertes et destructions régulières (mise en bouteilles...) ou résultant d'évènements exceptionnels (vol. casse. fuite...) dûment validées par le service des douanes.,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
 suspendu,sorties,manquant,16. manquant,indiquer les volumes constatés manquants à l'occasion d'un inventaire ou d'un contrôle des douanes. (soumis à cvo).,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
 suspendu,sorties,cession,17. cession d'exploitation,indiquer les volumes vendus à votre repreneur lors de la vente de l'exploitation.,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
+suspendu,sorties,verslies,18. vers lies,indiquer les volumes qui ont été transférés vers le stock de lies,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/autres-mouvements-internes
 suspendu,stocks_fin,dont_revendique,dont revendiqué,stock revendiqué en fin de mois,,
 suspendu,stocks_fin,final,final récolté,stock final récolté,,stock-fin-periode
 acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.,,

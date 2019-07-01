@@ -25,7 +25,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
       parent::__construct($file, $drm);
       $drmInfos = $this->getDRMInfosFromFile();
       if(!$drmInfos){
-        throw new sfException("Aucune DRM ne peut être initialisé le fichier csv n'a ni identifiant, ni periode");
+          throw new sfException("La DRM n'a pu être initialisée depuis le fichier csv : l'identifiant ou/et la periode n'ont pas été trouvés");
       }
       try{
         $drm = DRMClient::getInstance()->findOrCreateFromEdiByIdentifiantAndPeriode($drmInfos['identifiant'],$drmInfos['periode'], true);

@@ -65,6 +65,15 @@ class ConfigurationCepage extends BaseConfigurationCepage {
         return preg_match('/^(RHUM_|ALCOOL_|SPIRITUEUX_|AUTRES_ALCOOLS)/', $code_douane);
     }
 
+    public static function isCodeDouanePI($code_douane) {
+        if(!$code_douane){
+
+            return false;
+        }
+
+        return preg_match('/_PI_/', $code_douane);
+    }
+
     public function needTav() {
 
         return self::isCodeDouaneNeedTav($this->code_douane);

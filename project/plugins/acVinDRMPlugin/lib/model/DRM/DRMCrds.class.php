@@ -66,6 +66,7 @@ class DRMCrds extends BaseDRMCrds {
                     $this->getOrAddCrdNode($genre, $default['couleur'], $default['contenance']);
                 }
             }else{
+                $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_DEFAUT, $contenanceDefault);
                 $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_VERT, $contenanceDefault);
                 $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_BLEU, $contenanceDefault);
                 $this->getOrAddCrdNode($genre, DRMClient::DRM_CRD_LIEDEVIN, $contenanceDefault);

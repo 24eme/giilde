@@ -95,7 +95,7 @@ fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getLibelleFormat().",suspendu,sorties,ventefrancecrd,4.62,,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getLibelleFormat().",suspendu,sorties,export,1.89,PAYS-BAS,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getLibelleFormat().",suspendu,sorties,export,0.9525,BELGIQUE,,,,,\n");
-fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getLibelleFormat().",suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".substr($produit1->getLibelleFormat(), 0, -2).",suspendu,stocks_fin,final,944,,,,,,\n"); // Teste en retirant un caractère à la fin pour voir si la reconnaissance se fait si il n'y a pas d'ambiguité sur la résolution de libellé d'un produit
 fclose($temp);
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
 $import = new DRMImportCsvEdi($tmpfname, $drm);

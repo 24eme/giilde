@@ -122,21 +122,32 @@ function getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $et
 }
 
 function getTeledeclareeLabelCalendrier($isTeledeclarationMode, $calendrier, $periode, $etablissement = false) {
-    if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode) && isTransmiseDouane($isTeledeclarationMode, $calendrier, $periode)){
-        if(isCoherenteDouane($isTeledeclarationMode, $calendrier, $periode)){
-          return '(Douane OK)';
-        }
+    if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode) && isCoherenteDouane($isTeledeclarationMode, $calendrier, $periode)) {
+
+        return '(Douane OK)';
+    }
+    
+    if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode) && isTransmiseDouane($isTeledeclarationMode, $calendrier, $periode)) {
+
         return '(Transmise)';
     }
-    else if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode))
+
+    if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode)) {
+
         return  '(Téleclarée)';
-    else if ($isTeledeclarationMode)
-        return '';
-    else {
-        $a = $calendrier->getNumeroArchive($periode, $etablissement);
-        if ($a)
-            return '('.$a.')' ;
     }
+
+    if ($isTeledeclarationMode) {
+
+        return '';
+    }
+
+    $a = $calendrier->getNumeroArchive($periode, $etablissement);
+    if (!$a) {
+        return "";
+    }
+
+    return '('.$a.')' ;
 }
 
 function isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode, $etablissement = false) {

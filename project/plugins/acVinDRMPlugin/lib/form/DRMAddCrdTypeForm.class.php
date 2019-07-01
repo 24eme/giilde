@@ -14,6 +14,7 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
     private $typesLitrages = null;
     private $defaultGenre = null;
     private $defaultRegime = null;
+    private $defaultColor = null;
 
     public function __construct(acCouchdbJson $object, $options = array(), $CSRFSecret = null) {
         $this->drm = $object;
@@ -25,6 +26,7 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
             $this->defaultRegime = $options['regime'];
             $this->regimeCrds = array($this->defaultRegime);
         }
+        $this->defaultColor = (isset($options['color'])) ? $options['color'] : DRMClient::DRM_CRD_DEFAUT;
         parent::__construct($this->drm, $options, $CSRFSecret);
     }
 
@@ -34,7 +36,6 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
             $this->setWidget('litrage_crd_' . $regime, new bsWidgetFormChoice(array('expanded' => false, 'multiple' => false, 'choices' => $this->getTypeLitrages())));
             $this->setWidget('stock_debut_' . $regime, new bsWidgetFormInputInteger());
             $this->setWidget('genre_crd_' . $regime, new bsWidgetFormChoice(array('expanded' => true, 'multiple' => false, 'choices' => $this->getGenres())));
-
 
             $this->widgetSchema->setLabel('couleur_crd_' . $regime, 'Couleur CRD ');
             $this->widgetSchema->setLabel('litrage_crd_' . $regime, 'Litrage ');
@@ -49,6 +50,8 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
             if(isset($this->defaultGenre)) {
                 $this->setDefault('genre_crd_' . $regime, $this->defaultGenre);
             }
+
+            $this->setDefault('couleur_crd_'.$regime, $this->defaultColor);
         }
         $this->widgetSchema->setNameFormat('drmAddTypeForm[%s]');
     }
@@ -82,7 +85,7 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
 
     public function getTypeCouleurs() {
         if (is_null($this->typesCouleurs)) {
-            $this->typesCouleurs = array_merge(array("" => ""), DRMClient::$drm_crds_couleurs);
+            $this->typesCouleurs = DRMClient::$drm_crds_couleurs;
         }
         return $this->typesCouleurs;
     }

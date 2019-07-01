@@ -40,6 +40,7 @@ class VracHistoryView extends acCouchdbView
 	const VALUE_CVO_NATURE = 32;
 	const VALUE_CEPAGE = 33;
 	const VALUE_CEPAGELIBELLE = 34;
+	const VALUE_LABELS = 35;
 
     public static function getInstance() 
     {

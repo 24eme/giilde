@@ -3,7 +3,7 @@ suspendu,stocks_debut,initial,initial,stock initial,,stock-debut-periode
 suspendu,entrees,recolte,01. récolte,récolte,,entrees-periode/volume-produit
 suspendu,entrees,declassement,02. issu d'un déclassement,déclassement,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
 suspendu,entrees,retourembouteillage,03. retour conditionnmt,retour de conditionnement,,entrees-periode/mouvements-temporaires/relogement
-suspendu,entrees,vci,04-bis. intégration vci,indiquer les volumes issus de votre récolte que vous intégrez en vci,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci
+suspendu,entrees,vci,04-bis. intégration vci,indiquer les volumes issus de votre récolte que vous intégrez en vci,,entrees-periode/mouvements-internes/integration-vci-agree
 suspendu,entrees,transfertcomptamatierecession,04. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
 suspendu,entrees,travailafacon,05. retour travail à façon,retour de travail à façon. distillation à façon,,entrees-periode/mouvements-temporaires/travail-a-facon
 suspendu,entrees,retourmarchandisetaxees,06. retour vin crd acquittées,retour de vin crd acquittées,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume

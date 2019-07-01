@@ -33,6 +33,7 @@ git pull -f
 BRANCH=$(cat ../.git/HEAD | sed -r 's|^ref: refs/heads/||')
 LASTCOMMIT=$(cat $WORKINGDIR/../.git/refs/heads/$BRANCH)
 DATE=$(date +%Y%m%d%H%M%S)
+BRANCH=$(echo $BRANCH | tr '/' '-')
 
 if [ "$(ls $XMLTESTDIR | grep $LASTCOMMIT | grep $APPLICATION)" != "" ] && [ "$FORCE" = "" ]
 then
