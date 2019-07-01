@@ -25,6 +25,9 @@ class DRMClient extends acCouchdbClient {
     const DRM_CRD_LIEDEVIN = 'LIEDEVIN';
     const DRM_CRD_CATEGORIE_TRANQ = 'TRANQ';
     const DRM_CRD_CATEGORIE_MOUSSEUX = 'MOUSSEUX';
+    const DRM_CRD_CATEGORIE_PI = 'PI';
+    const DRM_CRD_CATEGORIE_ALCOOLS = 'ALCOOLS';
+    const DRM_CRD_CATEGORIE_COGNAC = 'COGNAC-ARMAGNAC';
     const DRM_DOCUMENTACCOMPAGNEMENT_DAADAC = 'DAADAC';
     const DRM_DOCUMENTACCOMPAGNEMENT_DAE = 'DAE';
     const DRM_DOCUMENTACCOMPAGNEMENT_DSADSAC = 'DSADSAC';
@@ -56,7 +59,7 @@ class DRMClient extends acCouchdbClient {
         self::DRM_CRD_BLEU => 'Bleu',
         self::DRM_CRD_LIEDEVIN => 'Lie de vin'
     );
-    public static $drm_crds_genre = array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'Vins tranquilles', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'Vins mousseux');
+    public static $drm_crds_genre = array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'Vins tranquilles', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'Vins mousseux', DRMClient::DRM_CRD_CATEGORIE_PI => 'Produits intermédiaires', DRMClient::DRM_CRD_CATEGORIE_ALCOOLS => 'Alcools', DRMClient::DRM_CRD_CATEGORIE_COGNAC => 'Cognacs/Armagnac', );
     public static $drm_max_favoris_by_types_mvt = array(self::DRM_TYPE_MVT_ENTREES => 3, self::DRM_TYPE_MVT_SORTIES => 6);
     public static $drm_documents_daccompagnement = array(
         self::DRM_DOCUMENTACCOMPAGNEMENT_DAADAC => 'DAA/DAC',
