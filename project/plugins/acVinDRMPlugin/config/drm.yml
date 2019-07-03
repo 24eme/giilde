@@ -1,7 +1,7 @@
 all:
   configuration:
     drm:
-      familles: ["PRODUCTEUR", "PRODUCTEUR_VINIFICATEUR", "NEGOCIANT", "COOPERATIVE"]
+      familles: ["PRODUCTEUR", "PRODUCTEUR_VINIFICATEUR", "NEGOCIANT", "COOPERATIVE", "NEGOCIANT_PUR"]
       details:
         export_detail:
           required: ["identifiant"]
