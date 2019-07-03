@@ -711,9 +711,15 @@ Vins sans IG,,CEE,,,Rosé,,Vins sans IG CEE Rosé,VT_ETRANGERS
 Vins sans IG,,Hors UE,,,Blanc,,Vins sans IG Hors UE Blanc,VT_ETRANGERS
 Vins sans IG,,Hors UE,,,Rouge,,Vins sans IG Hors UE Rouge,VT_ETRANGERS
 Vins sans IG,,Hors UE,,,Rosé,,Vins sans IG Hors UE Rosé,VT_ETRANGERS
+Vins sans IG,,Vins tranquilles étrangers,,,Blanc,,Vins tranquilles étrangers Blanc,VT_ETRANGERS
+Vins sans IG,,Vins tranquilles étrangers,,,Rouge,,Vins tranquilles étrangers Rouge,VT_ETRANGERS
+Vins sans IG,,Vins tranquilles étrangers,,,Rosé,,Vins tranquilles étrangers Rosé,VT_ETRANGERS
 Vins sans IG,Mousseux,Vins sans IG,,,Blanc,,Vins sans IG Mousseux Blanc,VM_SANS_IG_AUTRES
 Vins sans IG,Mousseux,Vins sans IG,,,Rouge,,Vins sans IG Mousseux Rouge,VM_SANS_IG_AUTRES
 Vins sans IG,Mousseux,Vins sans IG,,,Rosé,,Vins sans IG Mousseux Rosé,VM_SANS_IG_AUTRES
+Vins sans IG,Mousseux,Vins mousseux étrangers,,,Blanc,,Vins mousseux étrangers Blanc,VM_ETRANGERS
+Vins sans IG,Mousseux,Vins mousseux étrangers,,,Rouge,,Vins mousseux étrangers Rouge,VM_ETRANGERS
+Vins sans IG,Mousseux,Vins mousseux étrangers,,,Rosé,,Vins mousseux étrangers Rosé,VM_ETRANGERS
 Vins AOP,,France,,,Blanc,,Vins AOP France Blanc,VT_IG_AOP
 Vins AOP,,France,,,Rouge,,Vins AOP France Rouge,VT_IG_AOP
 Vins AOP,,France,,,Rosé,,Vins AOP France Rosé,VT_IG_AOP
@@ -733,6 +739,7 @@ Autre,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autre,,Rebêches,,,,,Rebêches,5X999V
 Alcools et autres Produits,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
 Alcools et autres Produits,,Produit intermédiaire supérieur 18°,,,,,Produit intermédiaire supérieur 18°,AUTRES_PI_SUP_18
+Alcools et autres Produits,,Prémix inférieur à 18°,,,,,Prémix inférieur à 18°,AUTRES_PI_INF_18_PREMIX
 Alcools et autres Produits,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
 Alcools et autres Produits,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
 Alcools et autres Produits,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
