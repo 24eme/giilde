@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(41);
+$t = new lime_test(45);
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $produits = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits();
 foreach($produits as $produit) {
@@ -288,7 +288,30 @@ foreach($import->getCsvDoc()->erreurs as $k => $err) {
   break;
 }
 $t->is($err->num_ligne, 3, "L'erreur de CRD pointe la bonne ligne");
+unlink($tmpfname);
 
 $drm2->devalide();
 $drm2->delete();
+
+$t->comment("Test non appurement ".$viti->identifiant." $periode5");
+$temp = fopen($tmpfname, "w");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,01/06/2019,FR00000E0000,19FRG000000000000000\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-02,FR00000E0001,19FRG000000000000001\n");
+fclose($temp);
+$drm9 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5);
+$import = new DRMImportCsvEdi($tmpfname, $drm9);
+$t->ok($import->checkCSV(), "Permet deux types de dates de non apurement");
+foreach($import->getCsvDoc()->erreurs as $k => $err) {
+    $t->ok(false, $err->diagnostic);
+}
+
+$import->importCSV();
+$drm9->save();
+
+$t->is(count($drm9->releve_non_apurement), 2, "releve de non apurement présent");
+$t->is($drm9->releve_non_apurement["19FRG000000000000000"]->getDateEmission(true), '2019-06-01', "la 1ere date est bonne");
+$t->is($drm9->releve_non_apurement["19FRG000000000000001"]->getDateEmission(true), '2019-06-02', "la 2de date est bonne");
+
 unlink($tmpfname);
