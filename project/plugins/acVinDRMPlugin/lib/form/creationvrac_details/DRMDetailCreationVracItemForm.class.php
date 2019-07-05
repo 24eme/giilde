@@ -12,7 +12,7 @@ class DRMDetailCreationVracItemForm extends acCouchdbObjectForm {
     public function configure() {
 
         $this->setWidget('numero_archive', new sfWidgetFormInputText());
-        $this->setWidget('acheteur', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_NEGOCIANT)));
+        $this->setWidget('acheteur', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => array(EtablissementFamilles::FAMILLE_NEGOCIANT, EtablissementFamilles::FAMILLE_NEGOCIANT_PUR))));
         $this->setWidget('prixhl', new bsWidgetFormInputFloat(array(), array('autocomplete' => 'off')));
         $this->setWidget('volume', new bsWidgetFormInputFloat(array(), array('autocomplete' => 'off')));
 

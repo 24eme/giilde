@@ -284,10 +284,6 @@ class drmActions extends drmGeneriqueActions {
         $this->etablissement = $this->getRoute()->getEtablissement();
         $this->societe = $this->etablissement->getSociete();
 
-        if(!in_array($this->etablissement->famille, DRMConfiguration::getInstance()->getFamilles())) {
-            throw new sfException("L'établissement sélectionné ne déclare pas de DRM");
-        }
-
         $this->campagne = $request->getParameter('campagne');
         if (!$this->campagne) {
             $this->campagne = -1;
