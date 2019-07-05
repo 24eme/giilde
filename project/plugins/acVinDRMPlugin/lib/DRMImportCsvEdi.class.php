@@ -622,7 +622,7 @@ private function importCrdsFromCSV($just_check = false) {
     $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
     $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
 
-    if(!$regimeNode->getOrAdd($keyNode)->exist($fieldNameCrd)) {
+    if(!in_array($fieldNameCrd, array('stock_debut', 'entrees_achats', 'entrees_excedents', 'entrees_retours', 'sorties_destructions', 'sorties_manquants', 'sorties_utilisations', 'stock_fin'))) {
         $this->csvDoc->addErreur($this->typeCRDNotFoundError($num_ligne, $csvRow));
         $num_ligne++;
         continue;
