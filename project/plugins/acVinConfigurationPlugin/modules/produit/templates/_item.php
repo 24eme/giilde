@@ -1,5 +1,6 @@
 <tr>
 	<td class="center">
+		<a name="<?php echo $produit->getHashForKey(); ?>" />
 		<a href="<?php echo url_for('produit_modification', array('noeud' => $produit->getFormatLibelleDefinitionNoeud()->getTypeNoeud(), 'hash' => $produit->getHashForKey())) ?>">
 			<?php echo $produit->getLibelleFormat() ?>
 		</a>
