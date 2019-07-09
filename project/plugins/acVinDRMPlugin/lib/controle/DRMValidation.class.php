@@ -56,6 +56,7 @@ class DRMValidation extends DocumentValidation {
             $entrees_retourmarchandisesanscvo = ($detail->entrees->exist('retourmarchandisesanscvo'))? $detail->entrees->retourmarchandisesanscvo : 0.0;
             $entrees_autre = ($detail->entrees->exist('autre'))? $detail->entrees->autre : 0.0;
             $entrees_cooperative = ($detail->entrees->exist('cooperative'))? $detail->entrees->cooperative : 0.0;
+            $entrees_retourmarchandisenontaxees = ($detail->entrees->exist('retourmarchandisenontaxees'))? $detail->entrees->retourmarchandisenontaxees : 0.0;
             
             // entrees drm negoce
             $entrees_declassement = ($detail->entrees->exist('declassement'))? $detail->entrees->declassement : 0.0;
@@ -72,7 +73,7 @@ class DRMValidation extends DocumentValidation {
             $sorties_transfertcomptamatiere = ($detail->sorties->exist('transfertcomptamatiere'))? $detail->sorties->transfertcomptamatiere : 0.0;
             $sorties_cession = ($detail->sorties->exist('cession'))? $detail->sorties->cession : 0.0;
 
-            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $entrees_cooperative + $sorties_manquant + $entrees_autre + $sorties_autre;
+            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $entrees_cooperative + $sorties_manquant + $entrees_autre + $sorties_autre + $entrees_retourmarchandisenontaxees;
             
             if ($this->document->isNegoce()) {
                 $total_observations_obligatoires += $entrees_declassement + $entrees_retourembouteillage + $entrees_transfertcomptamatierecession + $entrees_regularisation + $sorties_apportgroupement + $sorties_declassement + $sorties_transfertcomptamatiere + $sorties_cession;
@@ -114,6 +115,9 @@ class DRMValidation extends DocumentValidation {
                 }
                 if($sorties_autre){
                   $this->addPoint('erreur', 'observations', "Sortie autre (".sprintf("%.2f",$sorties_autre)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
+                }
+                if($entrees_retourmarchandisenontaxees){
+                  $this->addPoint('erreur', 'observations', "Entrée retour de marchandises non taxées (".sprintf("%.2f",$entrees_retourmarchandisenontaxees)." hl)".$produitLibelle, $this->generateUrl('drm_annexes', $this->document));
                 }
                 
                 if ($this->document->isNegoce()) {
