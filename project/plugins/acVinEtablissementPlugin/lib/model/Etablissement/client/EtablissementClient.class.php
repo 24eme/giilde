@@ -28,6 +28,9 @@ class EtablissementClient extends acCouchdbClient {
     const REGIME_CRD_PERSONNALISE = 'PERSONNALISE';
     const REGIME_CRD_COLLECTIF_ACQUITTE = 'COLLECTIFACQUITTE';
     const REGIME_CRD_COLLECTIF_SUSPENDU = 'COLLECTIFSUSPENDU';
+    const REGIME_CRD_COLLECTIF_ACQUITTE_SUSPENDU = 'COLLECTIFACQUITTE,COLLECTIFSUSPENDU';
+    const REGIME_CRD_COLLECTIF_PERSONNALISE_SUSPENDU = 'PERSONNALISE,COLLECTIFSUSPENDU';
+
     const CAUTION_DISPENSE = 'DISPENSE';
     const CAUTION_CAUTION = 'CAUTION';
     const NATURE_INAO_PRODUCTEUR_INDIVIDUEL = 'Producteur individuel';
@@ -40,14 +43,25 @@ class EtablissementClient extends acCouchdbClient {
 
     public static $statuts = array(self::STATUT_ACTIF => 'ACTIF',
         self::STATUT_SUSPENDU => 'SUSPENDU');
-    public static $regimes_crds_libelles_longs = array(self::REGIME_CRD_PERSONNALISE => 'personnalisé (P)',
+    public static $regimes_crds_libelles_longs = array(
+        self::REGIME_CRD_PERSONNALISE => 'personnalisé (P)',
         self::REGIME_CRD_COLLECTIF_ACQUITTE => 'banalisées acquittées (DA)',
-        self::REGIME_CRD_COLLECTIF_SUSPENDU => 'banalisées suspendues (DS)');
-   public static $regimes_crds_libelles_longs_only_suspendu = array(self::REGIME_CRD_PERSONNALISE => 'CRD personnalisées',
-            self::REGIME_CRD_COLLECTIF_SUSPENDU => 'CRD collectives ou Pas de CRD');
-    public static $regimes_crds_libelles = array(self::REGIME_CRD_PERSONNALISE => 'Personnalisé',
+        self::REGIME_CRD_COLLECTIF_SUSPENDU => 'banalisées suspendues (DS)',
+        self::REGIME_CRD_COLLECTIF_ACQUITTE_SUSPENDU => 'banalisées acquittées + banalisées suspendues (DA+DS)',
+        self::REGIME_CRD_COLLECTIF_PERSONNALISE_SUSPENDU => 'personnalisé + banalisées suspendues (P+DS)',
+    );
+    public static $regimes_crds_libelles_longs_only_suspendu = array(
+        self::REGIME_CRD_PERSONNALISE => 'CRD personnalisées',
+        self::REGIME_CRD_COLLECTIF_SUSPENDU => 'CRD collectives ou Pas de CRD',
+        self::REGIME_CRD_COLLECTIF_PERSONNALISE_SUSPENDU => 'personnalisé + banalisées suspendues (P+DS)'
+    );
+    public static $regimes_crds_libelles = array(
+        self::REGIME_CRD_PERSONNALISE => 'Personnalisé',
         self::REGIME_CRD_COLLECTIF_ACQUITTE => 'Banalisées acquittées',
-        self::REGIME_CRD_COLLECTIF_SUSPENDU => 'Banalisées suspendues');
+        self::REGIME_CRD_COLLECTIF_SUSPENDU => 'Banalisées suspendues',
+        self::REGIME_CRD_COLLECTIF_ACQUITTE_SUSPENDU => 'Banalisées acquittées + banalisées suspendues',
+        self::REGIME_CRD_COLLECTIF_PERSONNALISE_SUSPENDU => 'Personnalisé + banalisées suspendues',
+    );
     public static $natures_inao_libelles = array(
         "01" => self::NATURE_INAO_PRODUCTEUR_INDIVIDUEL,
         "04" => self::NATURE_INAO_COOPERATIVE,

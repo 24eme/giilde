@@ -70,7 +70,11 @@ class DRMDetails extends BaseDRMDetails {
         foreach ($this->getConfigDetails() as $detailConfigCat => $detailConfig) {
             foreach ($detailConfig as $detailConfigKey => $detailConfigNode) {
                 $detail->getOrAdd($detailConfigCat)->getOrAdd($detailConfigKey, null);
-                if ($detailConfigNode->hasDetails()) {
+                if ($detailConfigNode->hasDetails() && $detailConfigNode->details != ConfigurationDetailLigne::DETAILS_ALCOOLPUR) {
+                    $detail->getOrAdd($detailConfigCat)->getOrAdd($detailConfigKey . "_details", null);
+                }
+
+                if ($detailConfigNode->hasDetails() && $detailConfigNode->details == ConfigurationDetailLigne::DETAILS_ALCOOLPUR && ($detail->isCodeDouaneAlcool() || $detail->isCodeDouaneMatierePremiere())) {
                     $detail->getOrAdd($detailConfigCat)->getOrAdd($detailConfigKey . "_details", null);
                 }
             }

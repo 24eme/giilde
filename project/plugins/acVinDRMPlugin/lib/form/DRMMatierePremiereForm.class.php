@@ -90,25 +90,27 @@ class DRMMatierePremiereForm extends acCouchdbForm {
         }
 
         foreach ($this->detailsMp as $detailsMpKey => $detailsMp) {
-        $detailsMp->stocks_debut->initial = $this->getValue('stocks_debut_'.$detailsMpKey);
-        $detailsMp->add('edited',true);
-        $sortiesValues = $this->getValue('sorties_'.$detailsMpKey);
-        foreach($sortiesValues as $hash => $sortie) {
-          $detailSplittedKey = explode("-",$hash);
-              $detailAlcool = DRMESDetailAlcoolPur::freeInstance($this->getDocument());
-              if($sortie['volume']){
+            $detailsMp->stocks_debut->initial = $this->getValue('stocks_debut_'.$detailsMpKey);
+            $detailsMp->add('edited',true);
+            $sortiesValues = $this->getValue('sorties_'.$detailsMpKey);
+            foreach($sortiesValues as $hash => $sortie) {
+                $detailSplittedKey = explode("-",$hash);
+                $detailAlcool = DRMESDetailAlcoolPur::freeInstance($this->getDocument());
+
+                /*if(!$sortie['volume']){
+                    $k = str_replace("/","-",$detailSplittedKey[1]);
+                    echo $detailSplittedKey[1]."\n";
+                    $detailsMp->sorties->transfertsrecolte_details->remove($k);
+
+                    continue;
+                }*/
+
                 $detailAlcool->setProduit($this->getDocument()->get($detailSplittedKey[1]));
                 $detailAlcool->tav = $sortie['tav'];
                 $detailAlcool->volume = $sortie['volume'];
                 $detailsMp->sorties->transfertsrecolte_details->addDetail($detailAlcool);
-            }else{
-              $k = str_replace("/","-",$detailSplittedKey[1]);
-              $exist = $detailsMp->sorties->transfertsrecolte_details->exist($k);
-              if($exist){
-                $detailsMp->sorties->transfertsrecolte_details->remove($k);
-              }
             }
-          }
+            $detailsMp->sorties->transfertsrecolte_details->cleanEmpty();
         }
 
         $this->getDocument()->update();

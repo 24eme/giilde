@@ -10,6 +10,21 @@ class DRMESDetails extends BaseDRMESDetails {
         parent::update($params);
     }
 
+    public function cleanEmpty() {
+        $itemsToDelete = array();
+        foreach($this as $item) {
+            if($item->volume) {
+                continue;
+            }
+
+            $itemsToDelete[] = $item->getKey();
+        }
+
+        foreach ($itemsToDelete as $key) {
+            $this->remove($key);
+        }
+    }
+
     public function getNoeud() {
 
         return $this->getParent();

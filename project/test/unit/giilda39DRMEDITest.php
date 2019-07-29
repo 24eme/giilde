@@ -50,6 +50,12 @@ fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tr
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",BLEU,tranquille,Bouteille150cl,,,,,,,collectif suspendu,stock_debut,debut,56,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",BLEU,tranquille,Bouteille 150 cl,,,,,,,collectif suspendu,sorties,utilisations,3,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",BLEU,tranquille,Bouteille 150cl,,,,,,,collectif suspendu,stock_fin,fin,53,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",,PI,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,100,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",,PI,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,100,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",,Alcools,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,100,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",,Alcools,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,100,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",,COGNAC-ARMAGNAC,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,100,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",,COGNAC-ARMAGNAC,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,100,,,,\n");
 fclose($temp);
 
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode);
@@ -75,7 +81,7 @@ $t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), "", "Ob
 }
 
 $t->ok($drm->crds->exist('COLLECTIFSUSPENDU'), "CRD : noeud COLLECTIFSUSPENDU reconnu");
-$t->is(count($drm->crds->COLLECTIFSUSPENDU), 2, "CRD possède deux centilisations");
+$t->is(count($drm->crds->COLLECTIFSUSPENDU), 5, "CRD possède deux centilisations");
 
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->genre, "TRANQ", "Genre 75 cl OK");
 $t->is($drm->crds->COLLECTIFSUSPENDU->get('TRANQ-VERT-750')->couleur, "VERT", "Couleur 75 cl OK");

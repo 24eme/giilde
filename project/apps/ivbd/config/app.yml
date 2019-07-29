@@ -3,6 +3,23 @@
 
 # default values
 all:
+  drm_negoce:
+    correspondances_produits:
+      "/declaration/certifications/AOC/genres/TRANQ": "/declaration/certifications/AOC/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/AOC/genres/EFF": "/declaration/certifications/AOC/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/AOC/genres/MOU": "/declaration/certifications/AOC/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP/genres/TRANQ": "/declaration/certifications/IGP/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP/genres/EFF": "/declaration/certifications/IGP/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP/genres/MOU": "/declaration/certifications/IGP/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VSIG/genres/TRANQ": 
+        cep: "/declaration/certifications/VSIG/genres/TRANQ/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VSIG/genres/TRANQ/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VSIG/genres/EFF":
+        cep: "/declaration/certifications/VSIG/genres/MOU/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VSIG/genres/MOU/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VSIG/genres/MOU":
+        cep: "/declaration/certifications/VSIG/genres/MOU/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VSIG/genres/MOU/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
   statistiques:
     stats:
       statistiques:

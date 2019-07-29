@@ -273,10 +273,11 @@
       var volumehlap = $(elt).find("[data-volumehlap]").val();
       var tav = $(elt).find("[data-tav]").val();
       var id = $(elt).find("[data-tav]").attr("data-tav");
+      var decimal = $(elt).find("[data-volumehl=\""+id+"\"]").attr('data-decimal')*1;
       if(tav && tav != 0.0){
         var volume = 100.0/tav * volumehlap;
-        $(elt).find("[data-volumehl=\""+id+"\"]").text(volume.toFixed(2));
-      }else{
+        $(elt).find("[data-volumehl=\""+id+"\"]").text(volume.toFixed(decimal).replace('/[0]*$/', ''));
+      } else {
         $(elt).find("[data-volumehl="+id+"]").text(0.0);
       }
     }

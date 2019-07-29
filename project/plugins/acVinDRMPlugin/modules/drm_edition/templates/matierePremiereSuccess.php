@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <p class="form-control-static"><span id="<?php echo $item['volume']->renderId()."_hl"; ?>" data-volumehl="<?php echo $hlaptohl_key; ?>"></span> hl</p>
+                        <p class="form-control-static"><span id="<?php echo $item['volume']->renderId()."_hl"; ?>" data-volumehl="<?php echo $hlaptohl_key; ?>" data-decimal="<?php echo FloatHelper::getInstance()->getMaxDecimalAuthorized() ?>"></span> hl</p>
                     </div>
                 </div>
             <?php endforeach; ?>

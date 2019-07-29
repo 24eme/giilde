@@ -277,6 +277,10 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         $drm_suivante->initSociete();
         $drm_suivante->clearAnnexes();
 
+        if (! $this->getEtablissement()->hasRegimeCrd()) {
+            $drm_suivante->remove('favoris');
+        }
+
         if (!$drm_suivante->exist('favoris') || ($this->periode == '201508')) {
             $drm_suivante->buildFavoris();
         }

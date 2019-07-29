@@ -1,2 +1,16 @@
 all:
+  drm_negoce:
+    correspondances_produits:
+      "/declaration/certifications/AOC_ALSACE/genres/TRANQ": "/declaration/certifications/AOP_HORSALSACE/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/AOC_ALSACE/genres/EFF": "/declaration/certifications/AOP_HORSALSACE/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/AOP_HORSALSACE/genres/TRANQ": "/declaration/certifications/AOP_HORSALSACE/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/AOP_HORSALSACE/genres/EFF": "/declaration/certifications/AOP_HORSALSACE/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP_HORSALSACE/genres/TRANQ": "/declaration/certifications/IGP_HORSALSACE/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/IGP_HORSALSACE/genres/EFF": "/declaration/certifications/IGP_HORSALSACE/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VINSSIG/genres/TRANQ": 
+        cep: "/declaration/certifications/VINSSIG/genres/TRANQ/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VINSSIG/genres/TRANQ/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+      "/declaration/certifications/VINSSIG/genres/EFF":
+        cep: "/declaration/certifications/VINSSIG/genres/EFF/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
+        sanscep: "/declaration/certifications/VINSSIG/genres/EFF/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
   compte_synchro: false

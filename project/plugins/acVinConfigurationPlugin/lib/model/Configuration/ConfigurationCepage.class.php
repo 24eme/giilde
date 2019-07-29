@@ -74,6 +74,15 @@ class ConfigurationCepage extends BaseConfigurationCepage {
         return preg_match('/_PI_/', $code_douane);
     }
 
+    public static function isCodeDouaneMatierePremiere($code_douane) {
+        if(!$code_douane){
+
+            return false;
+        }
+
+        return preg_match('/MATIERES_PREMIERES/', $code_douane);
+    }
+
     public function needTav() {
 
         return self::isCodeDouaneNeedTav($this->code_douane);

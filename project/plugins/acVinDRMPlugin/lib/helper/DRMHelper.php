@@ -230,6 +230,9 @@ function getEtatDRMLibelleCalendrier($isTeledeclarationMode, $calendrier, $perio
 }
 
 function getLibelleForGenre($genre) {
+    if(isset(DRMClient::$drm_crds_genre[$genre])) {
+        return DRMClient::$drm_crds_genre[$genre];
+    }
     if ($genre == 'TRANQ') {
         return 'TRANQUILLE';
     }

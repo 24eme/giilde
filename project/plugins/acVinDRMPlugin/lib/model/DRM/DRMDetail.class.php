@@ -19,11 +19,11 @@ class DRMDetail extends BaseDRMDetail {
     }
 
     public function isAlcoolPur() {
-        return ($this->tav) &&  $this->entrees->exist('transfertsrecolte') && ($this->entrees->transfertsrecolte);
+        return ($this->tav) && $this->entrees->exist('transfertsrecolte') && ($this->entrees->transfertsrecolte);
     }
 
     public function isMatierePremiere(){
-      return preg_match('/MATIERES_PREMIERES/', $this->code_douane);
+        return $this->isCodeDouaneMatierePremiere();
     }
 
     public function isAlcoolPurOrMatierePremiere(){
@@ -142,19 +142,33 @@ class DRMDetail extends BaseDRMDetail {
     protected function update($params = array()) {
         parent::update($params);
         $this->total_debut_mois = $this->stocks_debut->initial;
+        $keysDetailsToRemove = array();
         foreach($this->sorties as $key => $item) {
-
             if($item instanceof acCouchdbJson) {
-              continue;
+                continue;
             }
             if(!$this->sorties->getConfig()->exist($key)){
-              continue;
+                continue;
             }
-            if($this->sorties->getConfig()->get($key)->hasDetails()) {
-                $this->sorties->set($key, 0);
-                foreach ($this->sorties->add($key."_details") as $detail) {
-                    $this->sorties->set($key, $this->sorties->get($key) + $detail->volume);
-                }
+            if(!$this->sorties->getConfig()->get($key)->hasDetails()) {
+                continue;
+            }
+            if($this->sorties->getConfig()->get($key)->details == ConfigurationDetailLigne::DETAILS_ALCOOLPUR && !$this->isCodeDouaneAlcool() && !$this->isCodeDouaneMatierePremiere()) {
+                $keysDetailsToRemove[] = $key."_details";
+                continue;
+            }
+            $this->sorties->add($key."_details");
+        }
+        foreach($keysDetailsToRemove as $keyDetails) {
+            $this->sorties->remove($keyDetails);
+        }
+        foreach($this->sorties as $key => $item) {
+            if(!$this->sorties->exist($key."_details")) {
+                continue;
+            }
+            $this->sorties->set($key, 0);
+            foreach ($this->sorties->get($key."_details") as $detail) {
+                $this->sorties->set($key, $this->sorties->get($key) + $detail->volume);
             }
         }
 
@@ -560,6 +574,10 @@ class DRMDetail extends BaseDRMDetail {
 
     public function isCodeDouaneAlcool(){
         return ConfigurationCepage::isCodeDouaneNeedTav($this->getCodeDouane());
+    }
+
+    public function isCodeDouaneMatierePremiere(){
+        return ConfigurationCepage::isCodeDouaneMatierePremiere($this->getCodeDouane());
     }
 
     public function isCodeDouanePI(){

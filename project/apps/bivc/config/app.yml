@@ -29,9 +29,6 @@ all:
       "/declaration/certifications/VSIG/genres/MOU":
         cep: "/declaration/certifications/VSIG/genres/EFF/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
         sanscep: "/declaration/certifications/VSIG/genres/EFF/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
-      "/declaration/certifications/VDNVDL/genres/DEFAUT": 
-        vdlsup: "/declaration/certifications/VDNVDL/genres/DEFAUT/appellations/VDLSUP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
-        vdlinf: "/declaration/certifications/VDNVDL/genres/DEFAUT/appellations/VDLINF/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
   statistiques:
     stats:
       statistiques:

@@ -719,6 +719,15 @@ class DRMClient extends acCouchdbClient {
       if (preg_match('/^MOU/', $s)) {
         return self::DRM_CRD_CATEGORIE_MOUSSEUX;
       }
+      if (preg_match('/^COGNAC/', $s)) {
+        return self::DRM_CRD_CATEGORIE_COGNAC;
+      }
+      if (preg_match('/^ALCOOL/', $s)) {
+        return self::DRM_CRD_CATEGORIE_ALCOOLS;
+      }
+      if (preg_match('/^PI/', $s) || preg_match('/^PRODUIT/', $s)) {
+          return self::DRM_CRD_CATEGORIE_PI;
+      }
       return '';
     }
     public static function convertCRDRegime($s) {

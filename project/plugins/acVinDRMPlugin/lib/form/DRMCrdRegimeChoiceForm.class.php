@@ -40,14 +40,23 @@ class DRMCrdRegimeChoiceForm extends acCouchdbObjectForm {
     public function getCRDRegimes() {
         $regimes = DRMClient::getInstance()->getAllRegimesCrdsChoices(true);
 
+        if (! sfContext::getInstance()->getUser()->isUsurpationCompte()) {
+            unset(
+                $regimes[EtablissementClient::REGIME_CRD_COLLECTIF_ACQUITTE_SUSPENDU],
+                $regimes[EtablissementClient::REGIME_CRD_COLLECTIF_PERSONNALISE_SUSPENDU]
+            );
+        }
+
         return $regimes;
     }
 
     public function doUpdateObject($values) {
           parent::doUpdateObject($values);
           $crd_regime = $values['crd_regime'];
-          $this->drm->forceModified();
-          $this->drm->switchCrdRegime($crd_regime);
+          if (strpos($crd_regime, ',') === false) {
+              $this->drm->forceModified();
+              $this->drm->switchCrdRegime($crd_regime);
+          }
           $this->drm->save();
 
           $this->etablissement->add('crd_regime', $crd_regime);
