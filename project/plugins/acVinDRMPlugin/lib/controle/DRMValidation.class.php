@@ -73,7 +73,7 @@ class DRMValidation extends DocumentValidation {
             $sorties_transfertcomptamatiere = ($detail->sorties->exist('transfertcomptamatiere'))? $detail->sorties->transfertcomptamatiere : 0.0;
             $sorties_cession = ($detail->sorties->exist('cession'))? $detail->sorties->cession : 0.0;
 
-            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $entrees_cooperative + $sorties_manquant + $entrees_autre + $sorties_autre + $entrees_retourmarchandisenontaxees;
+            $total_observations_obligatoires = $entrees_excedents + $entrees_retourmarchandisetaxees + $entrees_retourmarchandisesanscvo + $entrees_cooperative + $sorties_manquant + $entrees_autre + $sorties_autre;
             
             if ($this->document->isNegoce()) {
                 $total_observations_obligatoires += $entrees_declassement + $entrees_retourembouteillage + $entrees_transfertcomptamatierecession + $entrees_regularisation + $sorties_apportgroupement + $sorties_declassement + $sorties_transfertcomptamatiere + $sorties_cession;
