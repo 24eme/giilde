@@ -43,12 +43,15 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode, true);
 
 $drm->addProduit($produit_hash_matiere_premiere, "details");
+$drm->addProduit($produit_hash_matiere_premiere, "detailsACQUITTE");
+$drm->addProduit($produit_hash_matiere_premiere, "details", "Meilleur");
 $drm->addProduit($produit_hash_alcoolpur, "details", null, 42);
 $drm->addProduit($produit_hash_alcoolpur, "details");
 $drm->addProduit($produit_hash_alcoolpur, "details", "Ratafia");
 $drm->addProduit($produit_hash_vin, "details");
 
 $produitMP = $drm->getProduit($produit_hash_matiere_premiere, "details");
+$produitMPMeilleur = $drm->getProduit($produit_hash_matiere_premiere, "details", "Meilleur");
 $produitA = $drm->getProduit($produit_hash_alcoolpur, "details");
 $produitATav = $drm->getProduit($produit_hash_alcoolpur, "details", null, 42);
 $produitB = $drm->getProduit($produit_hash_alcoolpur, "details", "Ratafia");
@@ -130,7 +133,7 @@ $t->is(count($form['sorties_'.$hashForm]), 3, $drm->_id." : Le formulaire a 3 pr
 
 $values = $form->getDefaults();
 $values['stocks_debut_'.$hashForm] = 120;
-$values['sorties_'.$hashForm][$hashProduitAForm]['tav'] = 25;
+$values['sorties_'.$hashForm][$hashProduitBForm]['tav'] = 25;
 $values['sorties_'.$hashForm][$hashProduitAForm]['volume'] = 0;
 $values['sorties_'.$hashForm][$hashProduitBForm]['volume'] = 100;
 
@@ -144,6 +147,6 @@ $t->is($produitMP->stocks_debut->initial, $values['stocks_debut_'.$hashForm], $d
 $t->is($produitMP->sorties->transfertsrecolte, 100, $drm->_id." : Le volume a bien été mise à jour dans la sortie de matière première");
 $t->is(count($produitMP->sorties->transfertsrecolte_details->toArray(true, false)), 1, $drm->_id." : 1 seul détail dans le détail de la sortie de matière première");
 $t->is($produitA->entrees->transfertsrecolte, 0, $drm->_id." : Le volume a bien été mise à jour dans l'alcool");
-$t->is($produitB->entrees->transfertsrecolte, 250, $drm->_id." : Le volume a bien été mise à jour dans l'alcool");
-$t->is($produitA->tav, 25, $drm->_id." : Le tav a bien été mise à jour dans l'alcool");
-$t->is($produitB->tav, 40, $drm->_id." : Le tav a bien été mise à jour dans l'alcool");
+$t->is($produitB->entrees->transfertsrecolte, 400, $drm->_id." : Le volume a bien été mise à jour dans l'alcool");
+$t->is($produitA->tav, 40, $drm->_id." : Le tav a bien été mise à jour dans l'alcool");
+$t->is($produitB->tav, 25, $drm->_id." : Le tav a bien été mise à jour dans l'alcool");

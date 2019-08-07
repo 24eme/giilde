@@ -21,7 +21,7 @@ class DRMMatierePremiereForm extends acCouchdbForm {
         $this->drm = $drm;
         $this->detailsMp = array();
         $defaults = array();
-        foreach($this->drm->getProduitsDetails() as $detailsMp) {
+        foreach($this->drm->getProduitsDetails(true, DRM::DETAILS_KEY_SUSPENDU) as $detailsMp) {
             if($detailsMp->isMatierePremiere()){
               $this->detailsMp[str_replace('/', '-', $detailsMp->getHash())] = $detailsMp;
               $defaults['stocks_debut_'.str_replace('/', '-', $detailsMp->getHash())] = $detailsMp->stocks_debut->initial;
@@ -74,7 +74,7 @@ class DRMMatierePremiereForm extends acCouchdbForm {
     public function getDetailsAlcool() {
         $produits = array();
 
-        foreach($this->getDocument()->getProduitsDetails() as $detail) {
+        foreach($this->getDocument()->getProduitsDetails(true, DRM::DETAILS_KEY_SUSPENDU) as $detail) {
             if(!$detail->exist('tav')) {
                 continue;
             }
@@ -84,35 +84,44 @@ class DRMMatierePremiereForm extends acCouchdbForm {
         return $produits;
     }
 
+    public function updateDetail($detailsMp, $key, $values) {
+        $explodedKey = explode("-",$key);
+        $detailAlcool = DRMESDetailAlcoolPur::freeInstance($this->getDocument());
+        $detailAlcool->setProduit($this->getDocument()->get($explodedKey[1]));
+        $detailAlcool->tav = $values['tav'];
+        $detailAlcool->volume = $values['volume'];
+        $detailsMp->sorties->transfertsrecolte_details->addDetail($detailAlcool);
+    }
+
     public function save() {
         if(!$this->isBound()) {
             return;
         }
-
         foreach ($this->detailsMp as $detailsMpKey => $detailsMp) {
             $detailsMp->stocks_debut->initial = $this->getValue('stocks_debut_'.$detailsMpKey);
             $detailsMp->add('edited',true);
+        }
+        foreach ($this->detailsMp as $detailsMpKey => $detailsMp) {
             $sortiesValues = $this->getValue('sorties_'.$detailsMpKey);
             foreach($sortiesValues as $hash => $sortie) {
-                $detailSplittedKey = explode("-",$hash);
-                $detailAlcool = DRMESDetailAlcoolPur::freeInstance($this->getDocument());
-
-                /*if(!$sortie['volume']){
-                    $k = str_replace("/","-",$detailSplittedKey[1]);
-                    echo $detailSplittedKey[1]."\n";
-                    $detailsMp->sorties->transfertsrecolte_details->remove($k);
-
+                if ($sortie['volume']) {
                     continue;
-                }*/
-
-                $detailAlcool->setProduit($this->getDocument()->get($detailSplittedKey[1]));
-                $detailAlcool->tav = $sortie['tav'];
-                $detailAlcool->volume = $sortie['volume'];
-                $detailsMp->sorties->transfertsrecolte_details->addDetail($detailAlcool);
+                }
+                $this->updateDetail($detailsMp, $hash, $sortie);
             }
+        }
+        foreach ($this->detailsMp as $detailsMpKey => $detailsMp) {
+            $sortiesValues = $this->getValue('sorties_'.$detailsMpKey);
+            foreach($sortiesValues as $hash => $sortie) {
+                if (!$sortie['volume']) {
+                    continue;
+                }
+                $this->updateDetail($detailsMp, $hash, $sortie);
+            }
+        }
+        foreach ($this->detailsMp as $detailsMpKey => $detailsMp) {
             $detailsMp->sorties->transfertsrecolte_details->cleanEmpty();
         }
-
         $this->getDocument()->update();
         $this->getDocument()->save();
     }

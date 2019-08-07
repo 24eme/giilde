@@ -55,7 +55,7 @@ class Configuration extends BaseConfiguration {
 
             return $this->identifyLibelleProduct[$libelle];
         }
-
+        $libelleEndWithDot = (substr($libelle, -1) === ".");
         $libelleSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($libelle)));
         $possibilities = array();
         foreach($this->getProduits() as $produit) {
@@ -68,6 +68,10 @@ class Configuration extends BaseConfiguration {
             }
             if($libelleSlugify && preg_match("|^".$libelleSlugify."|", $libelleProduitSlugify)) {
                 $possibilities[] = $produit;
+            }
+            if($libelleEndWithDot && preg_match("|^".$libelleSlugify."*|", $libelleProduitSlugify)){
+
+                return $produit;
             }
         }
 

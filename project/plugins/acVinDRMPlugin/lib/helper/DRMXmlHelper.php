@@ -43,11 +43,11 @@ function multiArray2XML($preXML) {
 		}else{
 			$xml .= "<$k>";
 			if ($k != "annee" && $k != "mois") {
-      	$xml .= sprintf('%.04f', $v);
+      			$xml .= sprintf('%.05f', $v);
 			}else{
 				$xml .= sprintf('%02d', $v);
 			}
-      $xml .= "</$k>";
+      		$xml .= "</$k>";
 		}
 	}
 	return $xml;
