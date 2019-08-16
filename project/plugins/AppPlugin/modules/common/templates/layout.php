@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+$gitcommit = file_get_contents('../../.git/ORIG_HEAD');
+ ?><!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -53,15 +55,15 @@
         <script src="<?php echo public_path("/js/lib/jquery-ui-1.8.21.min.js") ?>"></script>
         <script src="<?php echo public_path("/js/ajaxHelper.js") ?>"></script>
         <script src="<?php echo public_path("/js/form.js") ?>"></script>
-        <script src="<?php echo public_path("/js/colonnes.js?201801071600") ?>"></script>
-        <script src="<?php echo public_path("/js/main.js?201903041555") ?>"></script>
+        <script src="<?php echo public_path("/js/colonnes.js?$gitcommit") ?>"></script>
+        <script src="<?php echo public_path("/js/main.js?$gitcommit") ?>"></script>
         <script src="<?php echo public_path("/js/teledeclaration.js") ?>"></script>
         <script src="<?php echo public_path("/js/conditionnement.js") ?>"></script>
         <script src="<?php echo public_path("/js/vrac.js") ?>"></script>
-        <script src="<?php echo public_path("/js/drm.js?201907121637") ?>"></script>
+        <script src="<?php echo public_path("/js/drm.js?$gitcommit") ?>"></script>
         <script src="<?php echo public_path("/js/contacts.js") ?>"></script>
         <script src="<?php echo public_path("/js/facture.js") ?>"></script>
-        <script src="<?php echo public_path("/js/stats.js?20170222") ?>"></script>
+        <script src="<?php echo public_path("/js/stats.js?$gitcommit") ?>"></script>
         <script src="<?php echo public_path("/js/lib/jquery.sticky.js") ?>"></script>
   </body>
 </html>

@@ -702,37 +702,45 @@ AOC,,AOC Crémant d'Alsace,,,,Blanc,AOC Crémant d'Alsace Blanc,1B001M00
 AOC,,AOC Crémant d'Alsace,,,,Rosé,AOC Crémant d'Alsace Rosé,1S001M00
 AOC,VCI,Alsace blanc,,,,,VCI Alsace blanc,1B001S99
 AOC,VCI,Crémant d'Alsace,,,,,VCI Crémant d'Alsace,1B001M90
-Vins sans IG,,Vins sans IG,,,,Blanc,Vins sans IG Blanc,VT_SANS_IG_AUTRES
-Vins sans IG,,Vins sans IG,,,,Rosé,Vins sans IG Rosé,VT_SANS_IG_AUTRES
-Vins sans IG,,Vins sans IG,,,,Rouge,Vins sans IG Rouge,VT_SANS_IG_AUTRES
-Vins sans IG,,CEE,,,Blanc,,Vins sans IG CEE Blanc,VT_ETRANGERS
-Vins sans IG,,CEE,,,Rouge,,Vins sans IG CEE Rouge,VT_ETRANGERS
-Vins sans IG,,CEE,,,Rosé,,Vins sans IG CEE Rosé,VT_ETRANGERS
-Vins sans IG,,Hors UE,,,Blanc,,Vins sans IG Hors UE Blanc,VT_ETRANGERS
-Vins sans IG,,Hors UE,,,Rouge,,Vins sans IG Hors UE Rouge,VT_ETRANGERS
-Vins sans IG,,Hors UE,,,Rosé,,Vins sans IG Hors UE Rosé,VT_ETRANGERS
-Vins sans IG,,Vins tranquilles étrangers,,,Blanc,,Vins tranquilles étrangers Blanc,VT_ETRANGERS
-Vins sans IG,,Vins tranquilles étrangers,,,Rouge,,Vins tranquilles étrangers Rouge,VT_ETRANGERS
-Vins sans IG,,Vins tranquilles étrangers,,,Rosé,,Vins tranquilles étrangers Rosé,VT_ETRANGERS
+Vins sans IG,Tranquille,Vins sans IG,,,,Blanc,Vins sans IG Blanc,VT_SANS_IG_AUTRES
+Vins sans IG,Tranquille,Vins sans IG,,,,Rosé,Vins sans IG Rosé,VT_SANS_IG_AUTRES
+Vins sans IG,Tranquille,Vins sans IG,,,,Rouge,Vins sans IG Rouge,VT_SANS_IG_AUTRES
+Vins sans IG,Tranquille,CEE,,,Blanc,,Vins sans IG CEE Blanc,VT_ETRANGERS
+Vins sans IG,Tranquille,CEE,,,Rouge,,Vins sans IG CEE Rouge,VT_ETRANGERS
+Vins sans IG,Tranquille,CEE,,,Rosé,,Vins sans IG CEE Rosé,VT_ETRANGERS
+Vins sans IG,Tranquille,Hors UE,,,Blanc,,Vins sans IG Hors UE Blanc,VT_ETRANGERS
+Vins sans IG,Tranquille,Hors UE,,,Rouge,,Vins sans IG Hors UE Rouge,VT_ETRANGERS
+Vins sans IG,Tranquille,Hors UE,,,Rosé,,Vins sans IG Hors UE Rosé,VT_ETRANGERS
+Vins sans IG,Tranquille,Vins tranquilles étrangers,,,Blanc,,Vins tranquilles étrangers Tranquille Blanc,VT_ETRANGERS
+Vins sans IG,Tranquille,Vins tranquilles étrangers,,,Rouge,,Vins tranquilles étrangers Tranquille Rouge,VT_ETRANGERS
+Vins sans IG,Tranquille,Vins tranquilles étrangers,,,Rosé,,Vins tranquilles étrangers Tranquille Rosé,VT_ETRANGERS
+Vins sans IG,Tranquille,Sans cépage,,,,,Vins sans IG Tranquille Sans cépage,VT_SANS_IG_AUTRES
+Vins sans IG,Tranquille,Avec cépage,,,,,Vins sans IG Tranquille Avec cépage,VT_SANS_IG_CEPAGE
 Vins sans IG,Mousseux,Vins sans IG,,,Blanc,,Vins sans IG Mousseux Blanc,VM_SANS_IG_AUTRES
 Vins sans IG,Mousseux,Vins sans IG,,,Rouge,,Vins sans IG Mousseux Rouge,VM_SANS_IG_AUTRES
 Vins sans IG,Mousseux,Vins sans IG,,,Rosé,,Vins sans IG Mousseux Rosé,VM_SANS_IG_AUTRES
 Vins sans IG,Mousseux,Vins mousseux étrangers,,,Blanc,,Vins mousseux étrangers Blanc,VM_ETRANGERS
 Vins sans IG,Mousseux,Vins mousseux étrangers,,,Rouge,,Vins mousseux étrangers Rouge,VM_ETRANGERS
 Vins sans IG,Mousseux,Vins mousseux étrangers,,,Rosé,,Vins mousseux étrangers Rosé,VM_ETRANGERS
-Vins AOP,,France,,,Blanc,,Vins AOP France Blanc,VT_IG_AOP
-Vins AOP,,France,,,Rouge,,Vins AOP France Rouge,VT_IG_AOP
-Vins AOP,,France,,,Rosé,,Vins AOP France Rosé,VT_IG_AOP
-Vins AOP,,CEE,,,Blanc,,Vins AOP CEE Blanc,VT_ETRANGERS
-Vins AOP,,CEE,,,Rouge,,Vins AOP CEE Rouge,VT_ETRANGERS
-Vins AOP,,CEE,,,Rosé,,Vins AOP CEE Rosé,VT_ETRANGERS
-Vins AOP,,Champagne,,,Blanc,,Champagne,1B080M
-Vins à IGP,,France,,,Blanc,,Vins à IGP France Blanc,VT_IG_IGP
-Vins à IGP,,France,,,Rouge,,Vins à IGP France Rouge,VT_IG_IGP
-Vins à IGP,,France,,,Rosé,,Vins à IGP France Rosé,VT_IG_IGP
-Vins à IGP,,CEE,,,Blanc,,Vins à IGP CEE Blanc,VT_ETRANGERS
-Vins à IGP,,CEE,,,Rouge,,Vins à IGP CEE Rouge,VT_ETRANGERS
-Vins à IGP,,CEE,,,Rosé,,Vins à IGP CEE Rosé,VT_ETRANGERS
+Vins sans IG,Mousseux,Sans cépage,,,,,Vins sans IG Mousseux Sans cépage,VM_SANS_IG_AUTRES
+Vins sans IG,Mousseux,Avec cépage,,,,,Vins sans IG Mousseux Avec cépage,VM_SANS_IG_CEPAGE
+Vins AOP,Tranquille,,,,Blanc,,Vins AOP Blanc,VT_IG_AOP
+Vins AOP,Tranquille,,,,Rouge,,Vins AOP Rouge,VT_IG_AOP
+Vins AOP,Tranquille,,,,Rosé,,Vins AOP Rosé,VT_IG_AOP
+Vins AOP,Tranquille,,,,,,Vins AOP Tranquille,VT_IG_AOP
+Vins AOP,Tranquille,CEE,,,Blanc,,Vins AOP CEE Blanc,VT_ETRANGERS
+Vins AOP,Tranquille,CEE,,,Rouge,,Vins AOP CEE Rouge,VT_ETRANGERS
+Vins AOP,Tranquille,CEE,,,Rosé,,Vins AOP CEE Rosé,VT_ETRANGERS
+Vins AOP,Mousseux,Champagne,,,Blanc,,Champagne,1B080M
+Vins AOP,Mousseux,,,,,,Vins AOP Mousseux,VM_IG_AOP
+Vins à IGP,Tranquille,,,,Blanc,,Vins à IGP Blanc,VT_IG_IGP
+Vins à IGP,Tranquille,,,,Rouge,,Vins à IGP Rouge,VT_IG_IGP
+Vins à IGP,Tranquille,,,,Rosé,,Vins à IGP Rosé,VT_IG_IGP
+Vins à IGP,Tranquille,,,,,,Vins à IGP Tranquille,VT_IG_IGP
+Vins à IGP,Tranquille,CEE,,,Blanc,,Vins à IGP CEE Blanc,VT_ETRANGERS
+Vins à IGP,Tranquille,CEE,,,Rouge,,Vins à IGP CEE Rouge,VT_ETRANGERS
+Vins à IGP,Tranquille,CEE,,,Rosé,,Vins à IGP CEE Rosé,VT_ETRANGERS
+Vins à IGP,Mousseux,,,,,,Vins à IGP Mousseux,VM_IG_IGP
 Autre,,DRA/DPLC,,,Blanc,,DRA/DPLC Blanc,4B988Y
 Autre,,DRA/DPLC,,,Rouge,,DRA/DPLC Rouge,4R988Y
 Autre,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
@@ -744,3 +752,5 @@ Alcools et autres Produits,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,AL
 Alcools et autres Produits,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
 Alcools et autres Produits,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
 Alcools et autres Produits,,BFAV,,,,,BFAV,BOISSONS_FERMENTEES_AUTRES
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18

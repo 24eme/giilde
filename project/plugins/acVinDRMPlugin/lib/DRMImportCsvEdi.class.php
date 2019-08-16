@@ -137,7 +137,6 @@ class DRMImportCsvEdi extends DRMCsvEdi {
     $this->drm->type_creation = DRMClient::DRM_CREATION_EDI;
     $this->drm->buildFavoris();
     $this->drm->storeDeclarant();
-    $this->drm->initSociete();
     $this->updateAndControlCoheranceStocks();
 
     if($withSave) {
@@ -228,15 +227,19 @@ private function importMouvementsFromCSV($just_check = false) {
   $all_produits = $this->configuration->declaration->getProduitsAll();
 
   $num_ligne = 1;
+  $has_default_hash = DRMConfiguration::getInstance()->hasEdiDefaultProduitHash();
   foreach ($this->getDocRows() as $csvRow) {
     if (KeyInflector::slugify(trim($csvRow[self::CSV_TYPE])) != self::TYPE_CAVE) {
       $num_ligne++;
       continue;
     }
 
+    $founded_produit = null;
+    $is_default_produit = false;
+
     $csvLibelleProductArray = $this->buildLibellesArrayWithRow($csvRow, true);
     $csvLibelleProductComplet = $this->slugifyProduitArrayOrString($csvLibelleProductArray);
-    $founded_produit = null;
+
     $keys_libelle = preg_replace("/[ ]+/", " ", sprintf("%s %s %s %s %s %s %s", $csvRow[self::CSV_CAVE_CERTIFICATION], $csvRow[self::CSV_CAVE_GENRE], $csvRow[self::CSV_CAVE_APPELLATION], $csvRow[self::CSV_CAVE_MENTION], $csvRow[self::CSV_CAVE_LIEU], $csvRow[self::CSV_CAVE_COULEUR], $csvRow[self::CSV_CAVE_CEPAGE]));
 
     $keys_libelle_mention_fin = preg_replace("/[ ]+/", " ", sprintf("%s %s %s %s %s %s %s", $csvRow[self::CSV_CAVE_CERTIFICATION], $csvRow[self::CSV_CAVE_GENRE], $csvRow[self::CSV_CAVE_APPELLATION], $csvRow[self::CSV_CAVE_LIEU], $csvRow[self::CSV_CAVE_COULEUR], $csvRow[self::CSV_CAVE_CEPAGE],$csvRow[self::CSV_CAVE_MENTION]));
@@ -255,6 +258,12 @@ private function importMouvementsFromCSV($just_check = false) {
       $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
       $num_ligne++;
       continue;
+    }
+    if (isset($this->previous_default[$uniquekeyproduit])) {
+        $default_produit_inao = $this->previous_default[$uniquekeyproduit]['inao'];
+        $default_produit_libelle = $this->previous_default[$uniquekeyproduit]['libelle'];
+        $default_produit_hash = $this->previous_default[$uniquekeyproduit]['hash'];
+        $is_default_produit = true;
     }
 
     if (!$founded_produit && $idDouane = $this->getIdDouane($csvRow)) {
@@ -346,6 +355,14 @@ private function importMouvementsFromCSV($just_check = false) {
       }
     }
 
+    if((!$founded_produit) && $has_default_hash && preg_match('/(.*[^ ]) *\(([^\)]+)\)/', $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT], $m)) {
+        $is_default_produit = true;
+        $default_produit_libelle = $m[1];
+        $default_produit_inao = $m[2];
+        $default_produit_hash = DRMConfiguration::getInstance()->getEdiDefaultProduitHash($default_produit_inao);
+        $founded_produit = $this->configuration->get($default_produit_hash);
+    }
+
     if($founded_produit && $aggregatedEdiList && count($aggregatedEdiList) && count($aggregatedEdiList[0])
     && isset($aggregatedEdiList[0][$founded_produit->getHash()])){
       $founded_produit = $all_produits[$aggregatedEdiList[0][$founded_produit->getHash()]];
@@ -367,6 +384,9 @@ private function importMouvementsFromCSV($just_check = false) {
 
     $this->previous_produits[$uniquekeyproduit] = $founded_produit;
     $this->previous_produits[$uniquekeyproduit_mentionfin] = $founded_produit;
+    if ($is_default_produit) {
+        $this->previous_default[$uniquekeyproduit] = array('inao' => $default_produit_inao, 'libelle' => $default_produit_libelle, 'hash' => $default_produit_hash);
+    }
 
     $cat_mouvement = KeyInflector::slugify($csvRow[self::CSV_CAVE_CATEGORIE_MOUVEMENT]);
     if(strtoupper(KeyInflector::slugify($cat_mouvement)) == self::COMPLEMENT){
@@ -431,8 +451,10 @@ private function importMouvementsFromCSV($just_check = false) {
     }
 
 
-
     $denomination_complementaire = (trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]))? trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]) : false;
+    if ($is_default_produit) {
+        $denomination_complementaire = ($denomination_complementaire) ? $default_produit_libelle." ".$denomination_complementaire : $default_produit_libelle;
+    }
 
     $detailTotalVol = $this->convertNumber($csvRow[self::CSV_CAVE_VOLUME]);
     $volume = $this->convertNumber($csvRow[self::CSV_CAVE_VOLUME]);
@@ -441,7 +463,7 @@ private function importMouvementsFromCSV($just_check = false) {
     $type_key = $confDetailMvt->getKey();
 
     $drmPrecedente = DRMClient::getInstance()->find("DRM-".$this->drm->identifiant."-".DRMClient::getInstance()->getPeriodePrecedente($this->drm->periode));
-    if ($drmPrecedente) {
+    if ($drmPrecedente && $drmPrecedente->teledeclare) {
         $details_precedent = $drmPrecedente->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
         if(($cat_key == "stocks_debut") && ($volume != $details_precedent->getOrAdd('stocks_fin')->getOrAdd('final'))) {
           $this->csvDoc->addErreur($this->stockVolumeIncoherentError($num_ligne, $csvRow));
@@ -456,6 +478,11 @@ private function importMouvementsFromCSV($just_check = false) {
     }
 
     $drmDetails = $this->drm->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
+    if ($is_default_produit) {
+        $drmDetails->code_inao = $default_produit_inao;
+        $drmDetails->produit_libelle = $default_produit_libelle;
+    }
+
 
     if($cat_key == "stocks_debut" && !$drmDetails->canSetStockDebutMois()) {
       $num_ligne++;
@@ -504,7 +531,11 @@ private function importMouvementsFromCSV($just_check = false) {
     } else {
       $oldVolume = $drmDetails->getOrAdd($cat_key)->getOrAdd($type_key);
       if($cat_key == "stocks_debut" && !is_null($oldVolume) && $oldVolume != "") {
-        $this->drm->commentaire .= sprintf("IMPORT de %s le stock_debut %s de %s hl n'a pas été pris en compte\n", $drmDetails->getLibelle(), $type_key, $detailTotalVol);
+        if ($drmDetails->canSetStockDebutMois()) {
+            $drmDetails->getOrAdd($cat_key)->add($type_key, $detailTotalVol);
+        }else {
+            $this->drm->commentaire .= sprintf("IMPORT de %s le stock_debut %s de %s hl n'a pas été pris en compte\n", $drmDetails->getLibelle(), $type_key, $detailTotalVol);
+        }
       } else {
         $drmDetails->getOrAdd($cat_key)->add($type_key, $oldVolume + $detailTotalVol);
       }

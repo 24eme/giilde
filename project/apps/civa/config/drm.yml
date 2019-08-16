@@ -15,6 +15,7 @@ all:
       declassement_igp: false
       pdf_cvo: true
       campagne_liste_minimale: true
+      reprise_stocks_changement_campagne: true
       defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 0.00750 },{ 'couleur' : 'VERT', 'contenance' : 0.00500 },{ 'couleur' : 'VERT', 'contenance' : 0.00375 } ]
       aggregate_edi:
         - { "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/PB": "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/BL",         "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/CD": "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/BL",         "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/BN": "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/BL",         "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/RI": "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/BL",         "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/PG": "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/BL",         "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/PN": "/declaration/certifications/AOC_ALSACE/genres/EFF/appellations/CREMANT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/RS" }
@@ -23,3 +24,7 @@ all:
       negociant_facturable: true
       texte_mail_pas_transmission_douane: "Le lien entre le Portail du CIVA et Prodouane n'est actuellement pas activé. Merci de prendre rapidement contact avec le CIVA afin de transmettre votre DRM vers CIEL."
       matiere_premiere: false
+      edi_default_produit_hash:
+        'TRANQ':  '/declaration/certifications/AUTRE/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'MOU':    '/declaration/certifications/AUTRE/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'AUTRE':  '/declaration/certifications/ALCOOLS/genres/DEFAUT/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'

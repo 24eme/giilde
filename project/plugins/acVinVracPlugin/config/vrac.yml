@@ -143,3 +143,4 @@ all:
       repartition_cvo: "100_ACHETEUR"
       region_departement: ".*"
       teledeclaration_visa_automatique: true
+      visa_unique: false

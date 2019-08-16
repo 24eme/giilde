@@ -76,7 +76,7 @@ function details2XmlDouane($detail, $isNegoce = false) {
 		foreach ($detail->get($type) as $k => $v) {
 			if (($v || (($k == 'initial' || $k == 'final') && preg_match('/^stock/', $type))) && $confDetail->get($type)->exist($k) && $confDetail->get($type)->get($k)->get($confKey)) {
 				$preXML = storeMultiArray($preXML, explode('/', $confDetail->get($type)->get($k)->get($confKey)),  $v);
-				if (preg_match('/replacement/', $confDetail->get($type)->get($k)->get($confKey))) {
+				if (preg_match('/replacement/', $confDetail->get($type)->get($k)->get($confKey)) && $type == 'entrees') {
 					$preXML = storeMultiArray($preXML, explode('/', 'entrees-periode/replacements/replacement-suspension/mois'),  $detail->getReplacementMonth(), true);
 					$preXML = storeMultiArray($preXML, explode('/', 'entrees-periode/replacements/replacement-suspension/annee'), $detail->getReplacementYear(),  true);
 				}
@@ -339,32 +339,6 @@ function xmlGetProduitsDetails($drm, $bool, $suspendu_acquitte) {
 				$produits[] = $produit;
 			}
 		}
-	}
-	if ($drm->isNegoce()) {
-	    $drmNegoce = new DRM();
-	    $drmNegoce->periode = $drm->periode;
-	    foreach ($produits as $p) {
-	        $produit = $drmNegoce->addProduit($p->getCorrespondanceNegoce(), $suspendu_acquitte);
-	        $produit->total_debut_mois += $p->total_debut_mois;
-	        if ($p->exist('observations')) {
-	            $obs = $produit->getOrAdd('observations');
-	            $obs = ($produit->exist('observations'))? $produit->observations.' - '.$p->observations : $p->observations;
-	        }
-	        if ($p->exist('replacement_date')) {
-	            $repl = $produit->getOrAdd('replacement_date');
-	            $repl = ($produit->exist('replacement_date'))? $produit->replacement_date : $p->replacement_date;
-	        }
-	        foreach (array('stocks_debut', 'entrees', 'sorties', 'stocks_fin') as $item) {
-	            foreach ($p->{$item} as $mv => $val) {
-	                if (strpos($mv, '_details') !== false && $p->{$item}->{$mv}->exist('volume')) {
-	                    $produit->{$item}->{str_replace('_details', '', $mv)} += $p->{$item}->{$mv}->volume;
-	                } elseif (strpos($mv, '_details') === false) {
-	                   $produit->{$item}->{$mv} += $p->{$item}->{$mv};
-	                }
-	            }
-	        }
-	    }
-	    $produits = $drmNegoce->getProduitsDetails($bool, $suspendu_acquitte);
 	}
 	return $produits;
 }

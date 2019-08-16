@@ -26,10 +26,14 @@ function get_field($object, $fieldName) {
 }
 
 function escape_string_for_latex($string) {
-    $disp = str_replace("&#039;", "'", $string);
+    $disp = html_entity_decode($string);
+    $disp = str_replace("&#039;", "'", $disp);
     $disp = str_replace("&amp;", "&", $disp);
     $disp = str_replace("&", "\&", $disp);
     $disp = str_replace("%", "\%", $disp);
+    $disp = str_replace("<", "$<$", $disp);
+    $disp = str_replace(">", "$>$", $disp);
+
     return $disp;
 }
 

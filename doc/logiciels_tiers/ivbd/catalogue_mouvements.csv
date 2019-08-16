@@ -7,7 +7,7 @@ suspendu,entrees,repli,03. issu d'un repli,toute entrée dans cette rubrique pou
 suspendu,entrees,declassement,04. issu d'un déclassement,toute entrée dans cette rubrique pour une colonne doit trouver son équivalent en sortie dans une autre colonne. tout déclassement (aoc ou igp vers les vsig) doit être déclaré à l'odg.,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
 suspendu,entrees,vci,05-bis. intégration vci,indiquer les volumes issus de votre récolte que vous intégrez en vci,,entrees-periode/mouvements-internes/integration-vci-agree
 suspendu,entrees,transfertsrecolte,05. transfert de produit,(concerne que les igp. ex: volume récolté en côtes de gascogne et finalement revendiqué en comté tolosan)  indiquer les volumes transférés en provenance d'une autre igp (récoltés mais non encore revendiqués). toute entrée dans cette rubrique pour une colonne doit trouver son équivalent en revendication dans la même colonne et en sortie dans une autre colonne.,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
-suspendu,entrees,retourembouteillage,06. retour conditionnmt,retour de vins conditionnés  (mis en bouteilles. en bib...) à l'extérieur de votre chai par un prestataire.,,entrees-periode/mouvements-temporaires/relogement
+suspendu,entrees,retourembouteillage,06. retour conditionnmt,retour de vins conditionnés  (mis en bouteilles. en bib...) à l'extérieur de votre chai par un prestataire.,,entrees-periode/mouvements-temporaires/embouteillage
 suspendu,entrees,transfertcomptamatierecession,07. retour logement ext.,retour de vins logés temporairement dans un chai extérieur.,,entrees-periode/mouvements-temporaires/relogement
 suspendu,entrees,travailafacon,08. retour travail à façon,retour de vins préparés  par un prestataire extérieur (mousseux).,,entrees-periode/mouvements-temporaires/travail-a-facon
 suspendu,entrees,retourmarchandiseacquitte,09. retour de vin crd acq.,retour de vins préalablement sortis sous crd acquittées (déductible des cvo).,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume
@@ -38,10 +38,10 @@ suspendu,sorties,cession,17. cession d'exploitation,indiquer les volumes vendus 
 suspendu,sorties,verslies,18. vers lies,indiquer les volumes qui ont été transférés vers le stock de lies,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/autres-mouvements-internes
 suspendu,stocks_fin,dont_revendique,dont revendiqué,stock revendiqué en fin de mois,,
 suspendu,stocks_fin,final,final récolté,stock final récolté,,stock-fin-periode
-acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.,,
+acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.,,stock-debut-periode
 acquitte,entrees,achat,achats,indiquer les achats du produit.,,entrees-periode/achats
 acquitte,entrees,autre,autres,autres entrées du produit. ex : correspondant à une sortie de produits en droits suspendus pour lesquels les droits ont été payés.,OBSERVATIONS,entrees-periode/autres-entrees
 acquitte,sorties,autre,autres,indiquer les volumes commercialisés à l'export.,OBSERVATIONS,sorties-periode/autres-sorties
 acquitte,sorties,replacementsuspension,replacement en suspension,indiquer le replacement du produit en suspension de droits.,OBSERVATIONS,sorties-periode/replacement-suspension
 acquitte,sorties,vente,ventes de produits ,indiquer les ventes du produit.,,sorties-periode/ventes
-acquitte,stocks_fin,final,final,calcul automatique: cette case ne peut être modifiée.,,
+acquitte,stocks_fin,final,final,calcul automatique: cette case ne peut être modifiée.,,stock-fin-periode

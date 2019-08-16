@@ -7,6 +7,7 @@ Vrac:
       _rev: { }
       type: { }
       campagne: {  }
+      campagne_archive: { required: false }
       numero_contrat: {  }
       numero_archive: {  }
       etape: { type: integer }

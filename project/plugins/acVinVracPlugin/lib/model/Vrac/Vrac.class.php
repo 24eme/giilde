@@ -643,6 +643,9 @@ class Vrac extends BaseVrac {
     }
 
     public function save() {
+        if(VracConfiguration::getInstance()->isVisaUnique() && !$this->exist('campagne_archive')) {
+            $this->add('campagne_archive', 'UNIQUE');
+        }
       if (!$this->numero_contrat) {
         $this->numero_contrat = VracClient::getInstance()->buildNumeroContrat(null, null, $this->isTeledeclare());
       }

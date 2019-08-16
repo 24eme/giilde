@@ -16,9 +16,11 @@ AOC,Tranquille,Coteaux du Giennois,,,Rouge,,AOC Coteaux du Giennois Rouge,1R197S
 AOC,Tranquille,Coteaux du Giennois,,,Rosé,,AOC Coteaux du Giennois Rosé,1S197S
 AOC,Tranquille,Châteaumeillant,,,Rouge,,AOC Châteaumeillant Rouge,1R700
 AOC,Tranquille,Châteaumeillant,,,Rosé,,AOC Châteaumeillant Rosé,1S700
+AOC,Tranquille,,,,,,AOC Tranquille,VT_IG_AOP
 AOC,VCI,Menetou-Salon,,,Blanc,,AOC Menetou-Salon Blanc VCI,1B190S
 AOC,VCI,Quincy,,,Blanc,,AOC Quincy VCI,1B193S
 AOC,VCI,Reuilly,,,Blanc,,AOC Reuilly Blanc VCI,1B194S
+AOC,Mousseux,,,,,,AOC Mousseux,VM_IG_AOP
 Autre AOC,Tranquille,Anjou,,,Blanc,,Anjou Blanc,1B200
 Autre AOC,Tranquille,Anjou,,,Rouge,,Anjou Rouge,1R200S
 Autre AOC,Tranquille,Quarts de Chaume,,,Blanc,Chenin,Quarts de Chaume,1B214L
@@ -47,6 +49,8 @@ Autre AOC,Tranquille,Touraine,,,Rouge,,Touraine Rouge,1R235S
 Autre AOC,Tranquille,Touraine,,,Rosé,,Touraine Rosé,1S235S
 Autre AOC,Tranquille,Touraine,,Amboise,Blanc,Chenin,Touraine Amboise Blanc,1B236
 Autre AOC,Tranquille,Touraine,,Amboise,Rouge,,Touraine Amboise Rouge,1R236S
+Autre AOC,Tranquille,Touraine,,Chenonceaux,Blanc,,Touraine Chenonceaux Blanc,1B7055
+Autre AOC,Tranquille,Touraine,,Chenonceaux,Rouge,,Touraine Chenonceaux Rouge,1R705S
 Autre AOC,Tranquille,Coteaux du Vendomois,,,Blanc,,Coteaux du Vendomois Blanc,1B218S
 Autre AOC,Tranquille,Coteaux du Vendomois,,,Rouge,,Coteaux du Vendomois Rouge,1R218S
 Autre AOC,Tranquille,Coteaux du Vendomois,,,Rosé,,Coteaux du Vendomois Rosé,1S218S
@@ -72,6 +76,10 @@ Autre AOC,Tranquille,Côtes du Forez,,,Rosé,,Côtes du Forez Rosé,1S360
 Autre AOC,Tranquille,Premières Côtes de Bordeaux,,,Blanc,,Premières Côtes de Bordeaux Blanc,1B153D
 Autre AOC,Tranquille,Jurançon,,,Blanc,,Jurançon Blanc,1B135L
 Autre AOC,Tranquille,Jurançon,,,Blanc Sec,,Jurançon Blanc Sec,1B135S
+Autre AOC,Tranquille,Côtes de Duras,,,Blanc moelleux,,Côtes de Duras Blanc moelleux,
+Autre AOC,Tranquille,Côtes de Duras,,,Blanc sec,,Côtes de Duras Blanc sec,
+Autre AOC,Tranquille,Côtes de Duras,,,Rouge,,Côtes de Duras Rouge,
+Autre AOC,Tranquille,Côtes de Duras,,,Rosé,,Côtes de Duras Rosé,
 Autre AOC,Mousseux,Montlouis sur Loire,Pétillant,,Blanc,Chenin,Montlouis sur Loire Pétillant,1B225P 1
 Autre AOC,Mousseux,Champagne,,,Blanc,,Champagne Blanc,1B080M 1
 Autre AOC,Mousseux,Champagne,,,Rosé,,Champagne Rosé,1S080M 1
@@ -84,6 +92,8 @@ IGP,Tranquille,Coteaux de Tannay,,,Rosé,,IGP Coteaux de Tannay Rosé,3S583
 IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Blanc,,IGP Coteaux du Cher et de l'Arnon Blanc,3B182
 IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Rouge,,IGP Coteaux du Cher et de l'Arnon Rouge,3R182
 IGP,Tranquille,Coteaux du Cher et de l'Arnon,,,Rosé,,IGP Coteaux du Cher et de l'Arnon Rosé,3S182
+IGP,Tranquille,,,,,,IGP Tranquille,VT_IG_IGP
+IGP,Mousseux,,,,,,IGP Mousseux,VM_IG_IGP
 IGP,Tranquille,Val de Loire,,,Blanc,,IGP Val de Loire Blanc,3B009
 IGP,Tranquille,Val de Loire,,,Blanc,Multi cépage,IGP Val de Loire Blanc Multi cépage,3B009 00
 IGP,Tranquille,Val de Loire,,,Blanc,Pinot blanc,IGP Val de Loire Blanc Pinot blanc,3B009 59
@@ -118,14 +128,21 @@ IGP,Tranquille,Val de Loire,,,Rouge,Cot,IGP Val de Loire Rouge Cot,3R009 CZ
 IGP,Tranquille,Val de Loire,,,Rouge,Merlot,IGP Val de Loire Rouge Merlot,3R009 DE
 IGP,Tranquille,Val de Loire,,,Rouge,Abouriou,IGP Val de Loire Rouge Abouriou,3R009 35
 IGP,Tranquille,Val de Loire,,,Rouge,Pineau d'Aunis,IGP Val de Loire Rouge Pineau d'Aunis,3R009 58
-VSIG,Tranquille,Vin de France,,,Blanc,,Vin de France Tranquille Blanc,4B999
-VSIG,Tranquille,Vin de France,,,Rouge,,Vin de France Tranquille Rouge,4R999
-VSIG,Tranquille,Vin de France,,,Rosé,,Vin de France Tranquille Rosé,4S999
-VSIG,Tranquille,Vin étranger,,,,,Vin étranger Tranquille,VT_ETRANGERS
-VSIG,Mousseux,Vin de France,,,Blanc,,Vin de France Mousseux Blanc,4B999M
-VSIG,Mousseux,Vin de France,,,Rosé,,Vin de France Mousseux Rosé,4S999M
-VSIG,Mousseux,Vin de France,,,Rouge,,Vin de France Mousseux Rouge,4R999M
-VSIG,Mousseux,Vin étranger,,,,,Vin étranger Mousseux,VM_ETRANGERS
+IGP,Tranquille,Oc,,,Blanc,,IGP Oc Blanc,3B001 
+IGP,Tranquille,Oc,,,Rouge,,IGP Oc Rouge,3R001 
+IGP,Tranquille,Oc,,,Rosé,,IGP Oc Rosé,3S001 
+Vin sans IG,Tranquille,Vin de France,,,Blanc,,Vin de France Tranquille Blanc,4B999
+Vin sans IG,Tranquille,Vin de France,,,Rouge,,Vin de France Tranquille Rouge,4R999
+Vin sans IG,Tranquille,Vin de France,,,Rosé,,Vin de France Tranquille Rosé,4S999
+Vin sans IG,Tranquille,Vin étranger,,,,,Vin étranger Tranquille,VT_ETRANGERS
+Vin sans IG,Tranquille,Sans cépage,,,,,Vin sans IG Tranquille Sans cépage,VT_SANS_IG_AUTRES
+Vin sans IG,Tranquille,Avec cépage,,,,,Vin sans IG Tranquille Avec cépage,VT_SANS_IG_CEPAGE
+Vin sans IG,Mousseux,Vin de France,,,Blanc,,Vin de France Mousseux Blanc,4B999M
+Vin sans IG,Mousseux,Vin de France,,,Rosé,,Vin de France Mousseux Rosé,4S999M
+Vin sans IG,Mousseux,Vin de France,,,Rouge,,Vin de France Mousseux Rouge,4R999M
+Vin sans IG,Mousseux,Vin étranger,,,,,Vin étranger Mousseux,VM_ETRANGERS
+Vin sans IG,Mousseux,Sans cépage,,,,,Vin sans IG Mousseux Sans cépage,VM_SANS_IG_AUTRES
+Vin sans IG,Mousseux,Avec cépage,,,,,Vin sans IG Mousseux Avec cépage,VM_SANS_IG_CEPAGE
 Autres alcools,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
 Autres alcools,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
 Autres alcools,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
@@ -134,3 +151,5 @@ Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autres,,DPLC,,,,,DPLC,4B988Y
 Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y
 Autres,,DPLC,,,Rouge,,DPLC Rouge,4R988Y
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18

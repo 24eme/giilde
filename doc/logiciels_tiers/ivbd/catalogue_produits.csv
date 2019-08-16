@@ -17,9 +17,10 @@ AOC,Tranquille,Haut Montravel,,,Blanc doux,,Haut Montravel,1B133D
 AOC,Tranquille,Monbazillac,,,Blanc doux,,Monbazillac,1B144L
 AOC,Tranquille,Monbazillac,Sélection de Grains Nobles,,Blanc doux,,Monbazillac Sélection de Grains Nobles,1B144LGN
 AOC,Tranquille,Saussignac,,,Blanc doux,,Saussignac,1B163L
-AOC,Tranquille,Bordeaux,,,Rouge,,Bordeaux Rouge,1R105S
-AOC,Tranquille,Bordeaux,,,Rosé,,Bordeaux Rosé,1S105S
-AOC,Tranquille,Bordeaux,,,Blanc sec,,Bordeaux Blanc sec,1B105S
+AOC,Tranquille,,,,Rouge,,Rouge,1R105S
+AOC,Tranquille,,,,Rosé,,Rosé,1S105S
+AOC,Tranquille,,,,Blanc sec,,Blanc sec,1B105S
+AOC,Tranquille,,,,,,AOC Tranquille,VT_IG_AOP
 AOC,Tranquille,Bordeaux Supérieur,,,Rouge,,Bordeaux Supérieur Rouge,1R105S2
 AOC,Tranquille,Côtes de Bordeaux,,,Rouge,,Côtes de Bordeaux Rouge,1R120S
 AOC,Tranquille,Côtes de Bordeaux Castillon,,,Rouge,,Côtes de Bordeaux Castillon Rouge,1R116S01
@@ -29,6 +30,7 @@ AOC,Tranquille,Sainte-Foy-Bordeaux rouge,,,Rouge,,Sainte-Foy-Bordeaux rouge Roug
 AOC,Tranquille,Bordeaux bl avec sucre,,,Blanc moelleux,,Bordeaux bl avec sucre Blanc moelleux,1B105D
 AOC,Tranquille,Saint Emilion,,,Rouge,,Saint Emilion Rouge,1R156S
 AOC,Tranquille,Saint Emilion grand cru,,,Rouge,,Saint Emilion grand cru Rouge,1R157S
+AOC,Tranquille,Montagne-Saint-Emilion,,,Rouge,,Montagne-Saint-Emilion Rouge,1R145S
 AOC,VCI,Bergerac,,,Rouge,,VCI Bergerac Rouge,1R103S98
 AOC,VCI,Bergerac,,,Blanc sec,,VCI Bergerac Blanc sec,1B103S
 AOC,VCI,Côtes de Bergerac,,,Blanc,,VCI Côtes de Bergerac Blanc,1B103D99
@@ -37,20 +39,29 @@ AOC,VCI,Monbazillac,,,Blanc doux,,VCI Monbazillac,1B144L
 AOC,VCI,Côtes de Duras,,,Rouge,,VCI Côtes de Duras Rouge,1R117S
 AOC,VCI,Côtes de Duras,,,Blanc sec,,VCI Côtes de Duras Blanc sec,1B117S
 AOC,VCI,Rosette,,,Blanc moelleux,,VCI Rosette,1B155D
-IGP,Tranquille,Périgord,,,Rosé,,IGP Périgord Rosé,3S242
-IGP,Tranquille,Périgord,,,Rouge,,IGP Périgord Rouge,3R242
-IGP,Tranquille,Périgord,,,Blanc,,IGP Périgord Blanc,3B242
+AOC,Mousseux,,,,,,AOC Mousseux,VM_IG_AOP
+IGP,Tranquille,,,,Rosé,,IGP Rosé,3S242
+IGP,Tranquille,,,,Rouge,,IGP Rouge,3R242
+IGP,Tranquille,,,,Blanc,,IGP Blanc,3B242
+IGP,Tranquille,,,,,,IGP Tranquille,VT_IG_IGP
 IGP,Tranquille,Atlantique,,,Rosé,,IGP Atlantique Rosé,3S008
 IGP,Tranquille,Atlantique,,,Rouge,,IGP Atlantique Rouge,3R008
 IGP,Tranquille,Atlantique,,,Blanc,,IGP Atlantique Blanc,3B008
 IGP,Tranquille,Agenais,,,Rouge,,IGP Agenais Rouge,3R472
 IGP,Tranquille,Agenais,,,Rosé,,IGP Agenais Rosé,3S472
 IGP,Tranquille,Agenais,,,Blanc,,IGP Agenais Blanc,3B472
+IGP,Mousseux,,,,,,IGP Mousseux,VM_IG_IGP
 Vin sans IG,Tranquille,,,,Rosé,,Vin sans IG Rosé,4S999
 Vin sans IG,Tranquille,,,,Rouge,,Vin sans IG Rouge,4R999
 Vin sans IG,Tranquille,,,,Blanc,,Vin sans IG Blanc,4B999
+Vin sans IG,Tranquille,Sans cépage,,,,,Vin sans IG Tranquille Sans cépage,VT_SANS_IG_AUTRES
+Vin sans IG,Tranquille,Avec cépage,,,,,Vin sans IG Tranquille Avec cépage,VT_SANS_IG_CEPAGE
 Vin sans IG,Mousseux,,,,Rosé,,Vin sans IG Rosé Mousseux,4S999M
 Vin sans IG,Mousseux,,,,Rouge,,Vin sans IG Rouge Mousseux,4R999M
 Vin sans IG,Mousseux,,,,Blanc,,Vin sans IG Blanc Mousseux,4B999M
+Vin sans IG,Mousseux,Sans cépage,,,,,Vin sans IG Mousseux Sans cépage,VM_SANS_IG_AUTRES
+Vin sans IG,Mousseux,Avec cépage,,,,,Vin sans IG Mousseux Avec cépage,VM_SANS_IG_CEPAGE
 Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autres,,DPLC,,,,,DPLC,4B988Y
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18

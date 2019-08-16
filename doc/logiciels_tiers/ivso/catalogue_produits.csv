@@ -2,6 +2,7 @@ CERTIFICATION,GENRE,APPELLATION,MENTION,LIEU,COULEUR,CEPAGE,LIBELLE_PRODUIT,IDEN
 IGP,Tranquille,,,,Rosé,,IGP Rosé,
 IGP,Tranquille,,,,Rouge,,IGP Rouge,
 IGP,Tranquille,,,,Blanc sec,,IGP Blanc sec,
+IGP,Tranquille,,,,,,IGP Tranquille,VT_IG_IGP
 IGP,Tranquille,Comté Tolosan,,,Rosé,,IGP Comté Tolosan Rosé,3S003
 IGP,Tranquille,Comté Tolosan,,,Rouge,,IGP Comté Tolosan Rouge,3R003
 IGP,Tranquille,Comté Tolosan,,,Blanc sec,,IGP Comté Tolosan Blanc sec,3B003
@@ -101,6 +102,7 @@ IGP,Mousseux,Comté Tolosan,,,Rosé,,IGP Comté Tolosan Mousseux Rosé,3S003M
 IGP,Mousseux,Comté Tolosan,,,Blanc,,IGP Comté Tolosan Mousseux Blanc,3B003M
 IGP,Mousseux,Hors Sud-ouest,,,Blanc,,IGP Hors Sud-ouest Blanc,VM_IG_IGP
 IGP,Mousseux,Hors Sud-ouest,,,Rosé,,IGP Hors Sud-ouest Rosé,VM_IG_IGP
+IGP,Mousseux,,,,,,IGP Mousseux,VM_IG_IGP
 Vin sans IG,Tranquille,,,,Rosé,,Vin sans IG Rosé,4S999
 Vin sans IG,Tranquille,,,,Rouge,,Vin sans IG Rouge,4R999
 Vin sans IG,Tranquille,,,,Blanc,,Vin sans IG Blanc,4B999
@@ -110,11 +112,15 @@ Vin sans IG,Tranquille,VDE Armagnac,,,,,VDE Armagnac,1B611H
 Vin sans IG,Tranquille,Hors Sud-ouest,,,Rouge,,Vin sans IG Hors Sud-ouest Rouge,VT_SANS_IG_AUTRES
 Vin sans IG,Tranquille,Hors Sud-ouest,,,Rosé,,Vin sans IG Hors Sud-ouest Rosé,VT_SANS_IG_AUTRES
 Vin sans IG,Tranquille,Hors Sud-ouest,,,Blanc,,Vin sans IG Hors Sud-ouest Blanc,VT_SANS_IG_AUTRES
+Vin sans IG,Tranquille,Sans cépage,,,,,Vin sans IG Tranquille Sans cépage,VT_SANS_IG_AUTRES
+Vin sans IG,Tranquille,Avec cépage,,,,,Vin sans IG Tranquille Avec cépage,VT_SANS_IG_CEPAGE
 Vin sans IG,Mousseux,,,,Rosé,,Vin sans IG Rosé Mousseux,4S999M
 Vin sans IG,Mousseux,,,,Rouge,,Vin sans IG Rouge Mousseux,4R999M
 Vin sans IG,Mousseux,,,,Blanc,,Vin sans IG Blanc Mousseux,4B999M
 Vin sans IG,Mousseux,Hors Sud-ouest,,,Blanc,,Mousseux Hors Sud-ouest Blanc,VM_SANS_IG_AUTRES
 Vin sans IG,Mousseux,Hors Sud-ouest,,,Rosé,,Mousseux Hors Sud-ouest Rosé,VM_SANS_IG_AUTRES
+Vin sans IG,Mousseux,Sans cépage,,,,,Vin sans IG Mousseux Sans cépage,VM_SANS_IG_AUTRES
+Vin sans IG,Mousseux,Avec cépage,,,,,Vin sans IG Mousseux Avec cépage,VM_SANS_IG_CEPAGE
 Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y
 Autres,,DPLC,,,Rouge,,DPLC Rouge,4R988Y
@@ -180,19 +186,24 @@ AOP,Tranquille,Côtes de Duras,,,Rouge,,AOP Côtes de Duras Rouge,1R117S
 AOP,Tranquille,Hors Sud-ouest,,,Rouge,,AOP Hors Sud-ouest Rouge,VT_IG_AOP
 AOP,Tranquille,Hors Sud-ouest,,,Rosé,,AOP Hors Sud-ouest Rosé,VT_IG_AOP
 AOP,Tranquille,Hors Sud-ouest,,,Blanc,,AOP Hors Sud-ouest Blanc,VT_IG_AOP
+AOP,Tranquille,,,,,,AOP Tranquille,VT_IG_AOP
 AOP,Mousseux,Gaillac,,,Blanc,,AOP Gaillac Mousseux,1B128M
 AOP,Mousseux,Gaillac,Méthode ancestrale,,Blanc,,AOP Gaillac Mousseux Méthode ancestrale,1B128M 1
 AOP,Mousseux,Gaillac,Méthode ancestrale,,Doux,,AOP Gaillac Mousseux Méthode ancestrale Doux,1B128M 2
 AOP,Mousseux,Hors Sud-ouest,,,Blanc,,AOP Hors Sud-ouest Mousseux,VM_IG_AOP
 AOP,Mousseux,Hors Sud-ouest,,,Rosé,,AOP Hors Sud-ouest Mousseux,VM_IG_AOP
+AOP,Mousseux,,,,,,AOP Mousseux,VM_IG_AOP
 AOP,VCI,Cahors,,,Rouge,,VCI Cahors Rouge,1R111S99
 AOP,VCI,Bordeaux,,,Rouge,,VCI Bordeaux Rouge,1R105S99
+VDN-VDL,,Floc de Gascogne,,,Rosé,,Floc de Gascogne Rosé,AUTRES_PI_INF_18
+VDN-VDL,,Floc de Gascogne,,,Blanc,,Floc de Gascogne Blanc,AUTRES_PI_INF_18
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Blanc,,Vin de Liqueur AOP (Sup 18°) Blanc,VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rosé,,Vin de Liqueur AOP (Sup 18°) Rosé,VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,Rouge,,Vin de Liqueur AOP (Sup 18°) Rouge,VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Blanc,,Vin de Liqueur AOP (Inf 18°) Blanc,VDN_VDL_AOP_INF_18
 VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rosé,,Vin de Liqueur AOP (Inf 18°) Rosé,VDN_VDL_AOP_INF_18
 VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,Rouge,,Vin de Liqueur AOP (Inf 18°) Rouge,VDN_VDL_AOP_INF_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18
 VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Blanc,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Blanc,AUTRES_PI_SUP_18
 VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rosé,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rosé,AUTRES_PI_SUP_18
 VDN-VDL,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°),,,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Sup 18°) Rouge,AUTRES_PI_SUP_18
@@ -201,8 +212,7 @@ VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Rosé,,Aut
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Rouge,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) Rouge,AUTRES_PI_INF_18
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),AUTRES_PI_INF_18
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,AUTRES_PI_INF_18_PREMIX
-VDN-VDL,,Floc de Gascogne,,,Rosé,,Floc de Gascogne Rosé,AUTRES_PI_INF_18
-VDN-VDL,,Floc de Gascogne,,,Blanc,,Floc de Gascogne Blanc,AUTRES_PI_INF_18
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
 Alcools,,Alcools supérieur 18° (autres que Rhum),,,,,Alcools supérieur 18° (autres que Rhum),ALCOOL_AUTRE_SUP_18
 Alcools,,Alcool inférieur 18° (autres que Rhum),,,,,Alcool inférieur 18° (autres que Rhum),ALCOOL_AUTRE_INF_18
 Alcools,,PREMIX Alcool inférieur 18°,,,,,PREMIX Alcool inférieur 18°,ALCOOL_AUTRE_INF_18_PREMIX

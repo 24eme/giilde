@@ -81,7 +81,7 @@
 
         var element = $(this);
 
-        $(this).find('.input-float').inputNumberFormat({'decimal': 4, 'decimalAuto': 2});
+        $(this).find('.input-float').inputNumberFormat({'decimal': 5, 'decimalAuto': 2});
         $(this).find('.input-integer').inputNumberFormat({'decimal': 0, 'decimalAuto': 0});
 
         $(this).find('[data-toggle="tooltip"]').tooltip({'container': 'body'});

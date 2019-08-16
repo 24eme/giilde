@@ -93,7 +93,7 @@ class FactureMouvementsEditionForm extends acCouchdbObjectForm {
                         $mvtObj->facture = 0;
                     }
                     $mvtObj->facturable = 1;
-                    $mvtObj->region = ($societe->getRegionViticole())? $societe->getRegionViticole() : $societe->type_societe;
+                    $mvtObj->region = ($societe->getRegionViticole(false))? $societe->getRegionViticole() : $societe->type_societe;
                     $mvtObj->date = $this->getObject()->getDate();
                 }
             }

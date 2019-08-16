@@ -2,6 +2,7 @@
    "_id": "CURRENT",
    "type": "Current",
    "configurations": {
+     "2019-08-01": "CONFIGURATION-20190801",
       "2018-08-01": "CONFIGURATION-20180801",
        "2000-08-01": "CONFIGURATION"
    }

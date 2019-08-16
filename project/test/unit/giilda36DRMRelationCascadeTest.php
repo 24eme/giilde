@@ -2,9 +2,14 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(77);
+$t = new lime_test(86);
 
 $nego2 =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region_2')->getEtablissement();
+if (!$nego2->hasRegimeCrd()) {
+    $nego2->crd_regime = EtablissementClient::REGIME_CRD_PERSONNALISE;
+    $nego2->save();
+}
+
 $produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
 $produit_hash = array_shift($produits);
 $produit2_hash = array_shift($produits);
@@ -30,11 +35,16 @@ $details = $drm->addProduit($produit_hash, 'details');
 $t->ok($details->canSetStockDebutMois(), "Le stock début de mois est éditable");
 $details->stocks_debut->initial = 1000;
 $details->sorties->ventefrancecrd = 100;
+foreach($drm->favoris->details->sorties as $favoris_first => $v) {
+    break;
+}
+$drm->favoris->details->sorties->remove($favoris_first);
 $drm->update();
 $drm->save();
 $drm->validate();
 $drm->save();
 $t->is(count(DRMClient::getInstance()->generateVersionCascade($drm)), 0, "La génération en cascade impacte aucune DRM");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite");
 $drm01Id = $drm->_id;
 
 
@@ -46,6 +56,7 @@ $drm->type_creation = "IMPORT";
 $drm->save();
 
 $t->is($drm->_get('precedente'), $drm01Id, "La drm précédente est stocké");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 $t->ok($drm->isImport(), "La drm est une drm importé");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
@@ -67,6 +78,7 @@ $drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode);
 $drm->save();
 
 $t->is($drm->_get('precedente'), $drm02Id, "La drm précédente est stocké");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 $t->ok(!$drm->isImport() && $drm->type_creation == DRMClient::DRM_CREATION_VIERGE, "La drm est en création vierge");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
@@ -79,6 +91,7 @@ $drm->validate();
 $drm->save();
 
 $t->is($details->stocks_fin->final, 1900, "Le stock de fin de mois est cohérent");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 $t->is(count(DRMClient::getInstance()->generateVersionCascade($drm)), 0, "La génération en cascade impacte aucune DRM");
 $drm03Id = $drm->_id;
 
@@ -90,6 +103,7 @@ $drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode);
 $drm->save();
 
 $t->is($drm->_get('precedente'), null, "La drm précédente n'est stocké");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 $t->ok(!$drm->isImport() && $drm->type_creation == DRMClient::DRM_CREATION_VIERGE, "La drm est en création vierge");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
@@ -115,6 +129,7 @@ $drm->save();
 
 $t->is($drm->_get('precedente'), $drm03Id, "La drm précédente est stocké");
 $t->ok(!$drm->isImport() && $drm->type_creation == DRMClient::DRM_CREATION_VIERGE, "La drm est en création vierge");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
 $t->ok(!$details->canSetStockDebutMois(), "Le stock début n'est pas éditable");
@@ -137,6 +152,7 @@ $drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode, true);
 $drm->save();
 
 $t->is($drm->_get('precedente'), $drm05Id, "La drm précédente est stocké");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 $t->ok($drm->isTeledeclare(), "La drm est télédéclaré");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
@@ -160,6 +176,7 @@ $drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode, true);
 $drm->save();
 
 $t->is($drm->_get('precedente'), $drm06Id, "La drm précédente est stocké");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 $t->ok($drm->isTeledeclare(), "La drm est télédéclaré");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
@@ -185,6 +202,8 @@ $t->ok($drm->isTeledeclare(), "La drm est télédéclaré");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
 $t->ok($details->canSetStockDebutMois(), "Le stock début est éditable");
+$t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est conservée malgré le changement de campagne");
+
 $details->stocks_debut->initial = 1000;
 $details->sorties->ventefrancecrd = 50;
 

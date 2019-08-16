@@ -17,3 +17,7 @@ all:
       delai_ouverture_teledeclaration: "-3 month"
       xml_transfert_echec: "Le transfert de votre DRM a échoué:\n\nDESCRIPTION_ERREUR\n\nNous vous remercions de prendre contact avec l'IVBD soit par courriel à l'adresse economie@vins-bergeracduras.fr soit par téléphone au numéro +33 (0)5 53 63 57 63"
       matiere_premiere: false
+      edi_default_produit_hash:
+        'TRANQ':  '/declaration/certifications/AUTRES/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'MOU':  '/declaration/certifications/AUTRES/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'AUTRE':  '/declaration/certifications/AUTRES/genres/ALCOOLS/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'

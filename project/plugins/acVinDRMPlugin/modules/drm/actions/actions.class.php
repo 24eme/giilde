@@ -106,6 +106,17 @@ class drmActions extends drmGeneriqueActions {
                   $url_reprise_donnees_drm = str_replace(":identifiant",$identifiant,$url_reprise_donnees_drm);
                   $url_reprise_donnees_drm = str_replace(":periode",$periode,$url_reprise_donnees_drm);
 
+                  $aggregate = false;
+                  $drmLast = DRMClient::getInstance()->findLastByIdentifiant($identifiant);
+                  foreach($drmLast->getProduitsDetails() as $detail) {
+                      if(preg_match("/^Total/", $detail->getLibelle())) {
+                          $aggregate = true;
+                      }
+                  }
+
+                  if($aggregate) {
+                      $url_reprise_donnees_drm.= '?aggregate=1';
+                  }
                   $discr = date('YmdHis').'_'.uniqid();
                   $md5file = md5($discr);
                   $filename = 'import_'.$identifiant . '_' . $periode.'_'.$md5file.'.csv';

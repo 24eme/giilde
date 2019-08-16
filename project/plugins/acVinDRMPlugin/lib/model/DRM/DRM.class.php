@@ -278,15 +278,14 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         if ($drm_suivante->isPaiementAnnualise() && $isTeledeclarationMode) {
             $drm_suivante->initDroitsDouane();
         }
-        $drm_suivante->initSociete();
         $drm_suivante->clearAnnexes();
 
         if (! $this->getEtablissement()->hasRegimeCrd()) {
             $drm_suivante->remove('favoris');
         }
 
-        if (!$drm_suivante->exist('favoris') || ($this->periode == '201508')) {
-            $drm_suivante->buildFavoris();
+        if (!$drm_suivante->exist('favoris')) {
+            $drm_suivante->buildFavoris($this);
         }
         return $drm_suivante;
     }
@@ -1022,7 +1021,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         $drm_modificatrice = $this->version_document->generateModificative();
         $drm_modificatrice->etape = DRMClient::ETAPE_SAISIE;
         if (!$drm_modificatrice->exist('favoris')) {
-            $drm_modificatrice->buildFavoris();
+            $drm_modificatrice->buildFavoris($this);
         }
         return $drm_modificatrice;
     }
@@ -1136,6 +1135,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         $this->declarant->getOrAdd('adresse_compta');
         $this->declarant->getOrAdd('caution');
         $this->declarant->getOrAdd('raison_sociale_cautionneur');
+        $this->storeSociete();
     }
 
     public function getEtablissementObject() {
@@ -1494,10 +1494,21 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
     /*     * * FIN ADMINISTRATION ** */
 
     /**     * FAVORIS ** */
-    public function buildFavoris() {
-        foreach ($this->drmDefaultFavoris() as $key => $value) {
-            $keySplitted = explode('/', $key);
-            $this->getOrAdd('favoris')->getOrAdd($keySplitted[0])->getOrAdd($keySplitted[1])->add($keySplitted[2], $value);
+    public function buildFavoris($drmBase = null) {
+        if ($drmBase && $drmBase->exist('favoris')) {
+            foreach($drmBase->favoris as $d => $es) {
+                foreach($es as $entree_ou_sortie => $detail) {
+                    foreach($detail as $k => $v) {
+                        $this->getOrAdd('favoris')->getOrAdd($d)->getOrAdd($entree_ou_sortie)->add($k, $v);
+                    }
+                }
+            }
+        }
+        if (!$this->exist('favoris')) {
+            foreach ($this->drmDefaultFavoris() as $key => $value) {
+                $keySplitted = explode('/', $key);
+                $this->getOrAdd('favoris')->getOrAdd($keySplitted[0])->getOrAdd($keySplitted[1])->add($keySplitted[2], $value);
+            }
         }
     }
 
@@ -1531,10 +1542,13 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
 
     /*     * * SOCIETE ** */
 
-    public function initSociete() {
+    public function storeSociete() {
         $societe = $this->getEtablissement()->getSociete();
         $drm_societe = $this->add('societe');
         $drm_societe->add('raison_sociale', $societe->raison_sociale);
+        if(count($societe->getEtablissementsObj(false)) >= 2) {
+            $drm_societe->add('raison_sociale', $this->declarant->nom);
+        }
         $drm_societe->add('siret', $societe->siret);
         $drm_societe->add('code_postal', $societe->siege->code_postal);
         $drm_societe->add('adresse', $societe->siege->adresse);
@@ -1548,7 +1562,7 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
 
     public function getCoordonneesSociete() {
         if (!$this->exist('societe') || is_null($this->societe)) {
-            $this->initSociete();
+            $this->storeSociete();
         }
         return $this->societe;
     }
@@ -1795,10 +1809,9 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
     }
 
     public function transferToCiel() {
-        if($this->changedToTeledeclare()) {
+        if($this->getEtablissementObject()->no_accises) {
             $this->declarant->no_accises = $this->getEtablissementObject()->no_accises;
         }
-
       $xml = $this->getXML();
       $service = new CielService();
       return $service->transferAndStore($this, $xml);

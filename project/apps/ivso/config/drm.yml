@@ -18,3 +18,7 @@ all:
       xml_transfert_echec: "Le transfert de votre DRM a échoué:\n\nDESCRIPTION_ERREUR\n\nNous vous remercions de prendre contact avec l'IVSO soit par courriel à l'adresse assistance@france-sudouest.com soit par téléphone au numéro 05 61 73 87 06"
       warning_produit:
         - { regex: "/(appellations\/ARM\/mentions|appellations\/VDE\/mentions|appellations\/VDEBA\/mentions|appellations\/VDEAT\/mentions|appellations\/VDEHA\/mentions|appellations\/VDEA\/mentions)/",message: "<li style='padding-bottom:10px'>Pour rappel, seul produit \"MATIÈRES PREMIÈRES SPIRITUEUX\" doit être saisi en HLAP, sur demande des douanes, tous les autres produits sont à saisir en HL.</li>" }
+      edi_default_produit_hash:
+        'TRANQ':  '/declaration/certifications/AUTRESVINS/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'MOU':    '/declaration/certifications/AUTRESVINS/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'AUTRE':  '/declaration/certifications/ALCOOLS/genres/DEFAUT/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'

@@ -11,7 +11,7 @@ suspendu,entrees,retourmarchandisenontaxees,07. retour vin en suspension,retour 
 suspendu,entrees,achatcrd,08. achat crd acquittées,achat de vins en crd acquittées remises en suspension,,entrees-periode/achats-reintegrations
 suspendu,entrees,achatnoncrd,09. achat suspension,achat suspension,,entrees-periode/volume-produit
 suspendu,entrees,regularisation,10. excédent constaté,régularisation,OBSERVATIONS,entrees-periode/autres-entrees
-suspendu,entrees,cooperative,11. coopérative,coopérative,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume
+suspendu,entrees,cooperative,11. coopérative,coopérative,,entrees-periode/achats-reintegrations
 suspendu,sorties,export,01. export,export,PAYS,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
 suspendu,sorties,creationvrac,02. vrac négoce,vrac négoce,CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
 suspendu,sorties,creationvractirebouche,03. bouteilles négoce,ventes en suspension de bouteilles à un négociant (bouteilles habillées ou tiré bouché),CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives

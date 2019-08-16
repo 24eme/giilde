@@ -16,3 +16,7 @@ all:
       defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 0.00375 },{ 'couleur' : 'VERT', 'contenance' : 0.0075 },{ 'couleur' : 'VERT', 'contenance' : 0.015 } ]
       default_auto_checked: false
       matiere_premiere: false
+      edi_default_produit_hash:
+        'TRANQ':  '/declaration/certifications/AUTRES/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'MOU':  '/declaration/certifications/AUTRES/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'AUTRE':  '/declaration/certifications/ALCOOLS/genres/DEFAUT/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'

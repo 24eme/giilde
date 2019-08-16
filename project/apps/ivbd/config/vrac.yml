@@ -1,6 +1,7 @@
 all:
   configuration:
     vrac:
+      visa_unique: true
       solde_seuil: "9"
       repartition_cvo: "100_ACHETEUR"
       region_departement: "^(24|33|46|47)"

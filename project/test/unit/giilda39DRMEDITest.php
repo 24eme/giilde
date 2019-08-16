@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(45);
+$t = new lime_test(50);
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $produits = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits();
 foreach($produits as $produit) {
@@ -24,6 +24,7 @@ foreach($produits as $produit) {
     }
 }
 
+$produitdefault_hash = DRMConfiguration::getInstance()->getEdiDefaultProduitHash("1B455S");
 
 //Suppression des DRM précédentes
 foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k => $v) {
@@ -33,7 +34,7 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
   $csv->delete(false);
 }
 
-$t->comment("Création d'une DRM via EDI ".$viti->identifiant);
+$t->comment("Création d'une DRM via EDI avec aussi un produit non interpro ".$viti->identifiant);
 
 $periode = (date('Y'))."01";
 $tmpfname = tempnam("/tmp", "DRM_");
@@ -44,6 +45,14 @@ fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$pro
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit1->getCertification()->getLibelle().",".$produit1->getGenre()->getLibelle().",".$produit1->getAppellation()->getLibelle().",".$produit1->getMention()->getLibelle().",".$produit1->getLieu()->getLibelle().",".$produit1->getCouleur()->getLibelle().",".$produit1->getCepage()->getLibelle().",,".$produit1->getLibelleFormat().",suspendu,sorties,export,1.89,PAYS-BAS,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit1->getCertification()->getLibelle().",".$produit1->getGenre()->getLibelle().",".$produit1->getAppellation()->getLibelle().",".$produit1->getMention()->getLibelle().",".$produit1->getLieu()->getLibelle().",".$produit1->getCouleur()->getLibelle().",".$produit1->getCepage()->getLibelle().",,".$produit1->getLibelleFormat().",suspendu,sorties,export,0.9525,BELGIQUE,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit1->getCertification()->getLibelle().",".$produit1->getGenre()->getLibelle().",".$produit1->getAppellation()->getLibelle().",".$produit1->getMention()->getLibelle().",".$produit1->getLieu()->getLibelle().",".$produit1->getCouleur()->getLibelle().",".$produit1->getCepage()->getLibelle().",,".$produit1->getLibelleFormat().",suspendu,stocks_fin,final,945,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Vin de Savoie Ripaille (1B455S),suspendu,stocks_debut,initial,0,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Vin de Savoie Ripaille (1B455S),suspendu,entrees,recolte,4,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Vin de Savoie Ripaille (1B455S),suspendu,sorties,ventefrancecrd,4,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Vin de Savoie Ripaille (1B455S),suspendu,stocks_fin,final,0,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Roussette de savoie (1B436S 1),suspendu,stocks_debut,initial,0,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Roussette de savoie (1B436S 1),suspendu,entrees,recolte,4,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Roussette de savoie (1B436S 1),suspendu,sorties,ventefrancecrd,4,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,Roussette de savoie (1B436S 1),suspendu,stocks_fin,final,0,,,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,14742,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,3118,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11624,,,,\n");
@@ -79,6 +88,18 @@ $t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), Configu
 } else {
 $t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), "", "Observations OK");
 }
+#tests de produit hors interpro
+if ($produitdefault_hash) {
+$t->is(count($drm->get($produitdefault_hash)->details), 2, "les deux produits hors intepro sont bien reconnu comme deux produits défauts distincts");
+foreach($drm->get($produitdefault_hash)->details as $detail1) {
+    break;
+}
+$t->ok($detail1->isDefaultProduit(), "Produit hors-interpro est bien détecté");
+$t->is($detail1->produit_libelle, "Vin de Savoie Ripaille", "Produit hors-interpro : libellé douanier repris du CSV");
+$t->is($detail1->getLibelle(), "Vin de Savoie Ripaille (Hors Interpro)", "Produit hors-interpro : libellé douanier repris du CSV");
+$t->is($detail1->code_inao, "1B455S", "Produit hors-interpro : code inao repris du CSV");
+}
+#FIN: test de produit hors interpro
 
 $t->ok($drm->crds->exist('COLLECTIFSUSPENDU'), "CRD : noeud COLLECTIFSUSPENDU reconnu");
 $t->is(count($drm->crds->COLLECTIFSUSPENDU), 5, "CRD possède deux centilisations");

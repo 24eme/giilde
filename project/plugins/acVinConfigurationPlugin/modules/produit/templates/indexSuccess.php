@@ -29,9 +29,9 @@
             <?php foreach ($configDetails as $details): ?>
                 <?php foreach($config->declaration->details->getDetailsSorted($details) as $detail): ?>
                 <tr>
-                    <td><?php echo $configDetails->getTypeDRMLibelle() ?></td>
+                    <td><a name="mouvement_<?php echo $detail->getHashForKey(); ?>"></a><?php echo $configDetails->getTypeDRMLibelle() ?></td>
                     <td><span class="<?php if($detail->mouvement_coefficient == -1): ?>text-danger<?php endif; ?><?php if($detail->mouvement_coefficient == 1): ?>text-success<?php endif; ?>"><?php echo $detail->getParent()->getKey() ?></span></td>
-                    <td><?php echo $detail->getLibelle() ?> <small class="text-muted"><?php echo $detail->getKey() ?></small></td>
+                    <td><a href="#mouvement_<?php echo $detail->getHashForKey(); ?>"><?php echo $detail->getLibelle() ?></a> <small class="text-muted"><?php echo $detail->getKey() ?></small></td>
                     <td><small class="text-muted"><?php echo $detail->douane_cat; ?> <?php if ($detail->needDouaneObservation()): ?><span class="glyphicon glyphicon-comment" title="Nécessite une observation"></span><?php endif; ?> <?php if ($detail->needDouaneDateReplacement()): ?><span class="glyphicon glyphicon-calendar" title="Nécessite une date de replacement"></span><?php endif; ?></small></td>
                     <td><?php if($detail->isFavoris()): ?><span class="glyphicon glyphicon-star"></span><?php endif; ?></td>
                     <td>

@@ -12,6 +12,13 @@ class DRMDetail extends BaseDRMDetail {
 
     public function getLibelle($format = "%format_libelle%", $label_separator = ", ") {
         $s = str_replace('&', ' et ', $this->getCepage()->getConfig()->getLibelleFormat($this->get('denomination_complementaire'), $format, $label_separator));
+        if ($this->produit_libelle && $this->isDefaultProduit()) {
+            $s = $this->produit_libelle;
+            if ($this->denomination_complementaire != $this->produit_libelle) {
+                $s .= " ".$this->denomination_complementaire;
+            }
+            $s .= " (Hors Interpro)";
+        }
         if ($this->tav) {
             $s .= " - ".$this->tav.'°';
         }
@@ -28,6 +35,11 @@ class DRMDetail extends BaseDRMDetail {
 
     public function isAlcoolPurOrMatierePremiere(){
       return $this->isAlcoolPur() || $this->isMatierePremiere();
+    }
+
+    public function isDefaultProduit() {
+
+        return DRMConfiguration::getInstance()->hasEdiDefaultProduitHash($this->code_inao) && ($this->getCepage()->getHash() == DRMConfiguration::getInstance()->getEdiDefaultProduitHash($this->code_inao));
     }
 
     public function getCode($format = "%g%%a%%m%%l%%co%%ce%") {
@@ -361,12 +373,12 @@ class DRMDetail extends BaseDRMDetail {
 
     public function hasMouvement() {
 
-        return $this->total_entrees > 0 || $this->total_entrees_revendique > 0 || $this->total_sorties > 0 || $this->total_sorties_revendique > 0;
+        return $this->total_entrees > 0.0000001 || $this->total_entrees_revendique > 0.0000001 || $this->total_sorties > 0.0000001 || $this->total_sorties_revendique > 0.0000001;
     }
 
     public function hasStockEpuise() {
 
-        return $this->total_debut_mois == 0 && !$this->hasMouvement() && $this->total == 0 && $this->total_revendique == 0;
+        return $this->total_debut_mois <= 0.0000001 && !$this->hasMouvement() && $this->total <= 0.0000001 && $this->total_revendique <= 0.0000001;
     }
 
     public function isSupprimable() {
@@ -558,15 +570,24 @@ class DRMDetail extends BaseDRMDetail {
         if($this->exist("code_inao") && $this->code_inao) {
             return $this->code_inao;
         }
+        if ($this->getDocument()->isNegoce() && $this->getCorrespondanceNegoce()) {
+            $this->_set('code_inao', $this->getLibelleFiscalNegocePur());
+
+            return $this->_get('code_inao');
+        }
 
         return $this->getCepage()->getConfig()->code_douane;
     }
 
     public function isCodeDouaneNonINAO(){
-      if(!$this->getCodeDouane()){
+      $inao = $this->_get('code_inao');
+      if (!$inao) {
+          $inao = $this->getCepage()->getConfig()->code_douane;
+      }
+      if(!$inao){
         return false;
       }
-      if(preg_match('/^[0-9]/', $this->getCodeDouane())){
+      if(preg_match('/^[0-9]/', $inao)){
         return false;
       }
       return true;
@@ -626,7 +647,7 @@ class DRMDetail extends BaseDRMDetail {
       }
       return $this->_get('tav');
     }
-    
+
     public function getCorrespondanceNegoce()
     {
         if ($this->isCodeDouaneNonINAO()) {
@@ -655,4 +676,12 @@ class DRMDetail extends BaseDRMDetail {
             return $c;
         }
     }
+
+    public function getLibelleFiscalNegocePur() {
+        $hash = $this->getCorrespondanceNegoce();
+        $hash = preg_replace('/.details.DEFAUT$/', '', $hash);
+        $p = ConfigurationClient::getCurrent()->get($hash);
+        return $p->getCodeDouane();
+    }
+
 }

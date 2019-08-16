@@ -72,6 +72,31 @@ class DRMConfiguration {
         return $this->configuration['vrac_multi_produit'];
     }
 
+    public function hasEdiDefaultProduitHash() {
+        if (!isset($this->configuration['edi_default_produit_hash'])) {
+            return false;
+        }
+        if (!is_array($this->configuration['edi_default_produit_hash'])) {
+            return false;
+        }
+        return true;
+
+    }
+
+    public function getEdiDefaultProduitHash($inao) {
+        if (!$this->hasEdiDefaultProduitHash()) {
+            return "";
+        }
+        $hashes = $this->configuration['edi_default_produit_hash'];
+        if (preg_match('/^.....M/', $inao) && preg_match('/^VM_/', $inao)) {
+            return $hashes['MOU'];
+        }
+        if (!preg_match('/^VT_/', $inao) && preg_match('/_/', $inao)) {
+            return $hashes['AUTRE'];
+        }
+        return $hashes['TRANQ'];
+    }
+
     public function isCrdOnlySuspendus() {
 
         return $this->configuration['crd_only_suspendus'];

@@ -519,15 +519,15 @@ class DRMClient extends acCouchdbClient {
         $drm->periode = $periode;
         $drm->teledeclare = $isTeledeclarationMode;
         $drm->etape = self::ETAPE_SAISIE;
-        $drm->buildFavoris();
-        $drm->initSociete();
+        $drmLast = DRMClient::getInstance()->findLastByIdentifiant($identifiant);
+
+        $drm->buildFavoris($drmLast);
         $drm->initCrds();
         $drm->initProduitsAutres($isTeledeclarationMode);
         $drm->clearAnnexes();
         if ($isTeledeclarationMode) {
             $drm->etape = self::ETAPE_CHOIX_PRODUITS;
         }
-        $drmLast = DRMClient::getInstance()->findLastByIdentifiant($identifiant);
 
         if ($drmLast) {
             $drm->generateByDRM($drmLast);

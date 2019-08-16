@@ -8,7 +8,20 @@ if (!($conf->declaration->exist('details/sorties/vrac')) || ($conf->declaration-
     exit(0);
 }
 
-$t = new lime_test(21);
+$viti = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();
+$vitiMixte = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_mixte_viti_region')->getEtablissement();
+
+foreach (VracClient::getInstance()->retrieveBySoussigne($viti->identifiant)->rows as $k => $vrac) {
+    $vrac_obj = VracClient::getInstance()->find($vrac->id);
+    $vrac_obj->delete();
+}
+
+foreach (VracClient::getInstance()->retrieveBySoussigne($vitiMixte->identifiant)->rows as $k => $vrac) {
+    $vrac_obj = VracClient::getInstance()->find($vrac->id);
+    $vrac_obj->delete();
+}
+
+$t = new lime_test(24);
 $t->comment("création d'un contrat viti/négo/courtier");
 
 $vrac = new Vrac();
@@ -16,7 +29,7 @@ $etablissementcourtier = $societecourtier = CompteTagsView::getInstance()->findO
 $vrac->initCreateur($etablissementcourtier->getIdentifiant());
 $vrac->teledeclare = true;
 $vrac->acheteur_identifiant = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement()->getIdentifiant();
-$vrac->vendeur_identifiant =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement()->getIdentifiant();
+$vrac->vendeur_identifiant = $viti->getIdentifiant();
 $produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
 $vrac->setProduit(array_shift($produits));
 $vrac->type_transaction = VracClient::TYPE_TRANSACTION_VIN_VRAC;
@@ -49,6 +62,8 @@ $vrac->signatureByEtb(CompteTagsView::getInstance()->findOneCompteByTag('test', 
 $vrac->save();
 $t->isnt($vrac->valide->date_signature_vendeur, null, $vrac->_id." : signature du vendeur enregistrée");
 $t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_VISE, $vrac->_id." : après 3ème signature (viti), le contrat passe à validé");
+$t->is($vrac->numero_archive, 1, $vrac->_id." : Le numéro d'archive est renseigné");
+
 
 $t->comment("création d'un contrat interne viti et même négo");
 
@@ -57,7 +72,7 @@ $acheteur_identifiant = CompteTagsView::getInstance()->findOneCompteByTag('test'
 $vrac->acheteur_identifiant = $acheteur_identifiant->getIdentifiant();
 $vrac->initCreateur($acheteur_identifiant->getIdentifiant());
 $vrac->teledeclare = true;
-$vrac->vendeur_identifiant =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_mixte_viti_region')->getEtablissement()->getIdentifiant();
+$vrac->vendeur_identifiant = $vitiMixte->getIdentifiant();
 $produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
 $vrac->setProduit(array_shift($produits));
 $vrac->type_transaction = VracClient::TYPE_TRANSACTION_VIN_VRAC;
@@ -65,6 +80,7 @@ $vrac->jus_quantite = 100;
 $vrac->setPrixUnitaire(70);
 $vrac->save();
 $t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_BROUILLON, $vrac->_id." : Création d'un brouillon");
+$vrac->campagne = ConfigurationClient::getInstance()->getPreviousCampagne($vrac->getCampagne());
 
 $vrac->validate();
 $vrac->save();
@@ -72,7 +88,7 @@ $vrac->save();
 $t->isnt($vrac->valide->date_signature_acheteur, null, $vrac->_id." : signature de de l'acheteur enregistrée");
 $t->isnt($vrac->valide->date_signature_vendeur, null, $vrac->_id." : signature du vendeur enregistrée");
 $t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_NONSOLDE, $vrac->_id." : le contrat interne est en non soldé");
-
+$t->is($vrac->numero_archive, (VracConfiguration::getInstance()->isVisaUnique()) ? 2 : 1, $vrac->_id." : Le numéro d'archive est incrementé");
 
 $t->comment("cas d'un contrat sans courtier avec négo hors région");
 $vrac = new Vrac();
@@ -93,3 +109,4 @@ $t->is($vrac->cvo_repartition, "100_VENDEUR", $vrac->_id." : Répartition 100 ca
 $t->isnt($vrac->valide->date_signature_acheteur, null, $vrac->_id." : signature de de l'acheteur enregistrée");
 $t->isnt($vrac->valide->date_signature_vendeur, null, $vrac->_id." : signature du vendeur enregistrée");
 $t->is($vrac->valide->statut, VracClient::STATUS_CONTRAT_VISE, $vrac->_id." : après la signature du viti, le contrat passe à validé");
+$t->is($vrac->numero_archive, (VracConfiguration::getInstance()->isVisaUnique()) ? 3 : 2, $vrac->_id." : Le numéro d'archive est incrementé");

@@ -151,4 +151,9 @@ class VracConfiguration
 	{
 		return $this->configuration['repartition_cvo'];
 	}
+
+	public function isVisaUnique() {
+
+		return $this->configuration['visa_unique'];
+	}
 }
