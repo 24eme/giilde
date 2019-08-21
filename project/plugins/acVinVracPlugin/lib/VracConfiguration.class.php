@@ -48,7 +48,7 @@ class VracConfiguration
 	}
 
 	public static function slugifyContenances($s) {
-		return strtoupper(str_replace(" ","",str_replace(",",".", $s)));
+		return strtoupper(preg_replace("/[ _]/","",str_replace(",",".", preg_replace('/([0-9])_([0-9])/', '$1.$2', preg_replace('/^([^_]+)_(.*)/', '$2 $1', $s)))));
 	}
 
 	public function getContenanceLibelle($value) {

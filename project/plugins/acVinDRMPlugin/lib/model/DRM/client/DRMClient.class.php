@@ -713,10 +713,10 @@ class DRMClient extends acCouchdbClient {
 
     public static function convertCRDGenre($s) {
       $s = strtoupper(KeyInflector::slugify($s));
-      if (preg_match('/^TRANQ/', $s)) {
+      if (preg_match('/^T/', $s)) {
         return self::DRM_CRD_CATEGORIE_TRANQ;
       }
-      if (preg_match('/^MOU/', $s)) {
+      if (preg_match('/^M/', $s)) {
         return self::DRM_CRD_CATEGORIE_MOUSSEUX;
       }
       if (preg_match('/^COGNAC/', $s)) {

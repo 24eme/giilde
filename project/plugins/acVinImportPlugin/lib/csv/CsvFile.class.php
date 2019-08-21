@@ -25,6 +25,14 @@ class CsvFile
       return ;
     if (!file_exists($file) && !preg_match('/^http/', $file))
       throw new sfException("Cannont access $file");
+
+    $charset = $this->getCharset($file);
+    if ($charset != 'utf-8'){
+        exec('iconv -f '.$charset.' -t utf-8 '.$file.' > '.$file.'.tmp');
+        if (filesize($file.".tmp")) {
+            exec('mv '.$file.".tmp ".$file);
+        }
+    }
     $this->file = $file;
     $handle = fopen($this->file, 'r');
     if (!$handle) {
@@ -32,16 +40,6 @@ class CsvFile
     }
     $buffer = fread($handle, 500);
     fclose($handle);
-
-    $charset = $this->getCharset($file);
-    if($charset != 'utf-8'){
-        exec('recode '.$charset.'..utf-8 '.$file);
-    }
-    $charset = $this->getCharset($file);
-    if($charset != 'utf-8'){
-        exec('iconv -f '.$charset.' -t utf-8 '.$file.' > '.$file.'.tmp');
-        exec('mv '.$file.".tmp ".$file);
-    }
     $buffer = preg_replace('/$[^\n]*\n/', '', $buffer);
     if (!$buffer) {
       throw new sfException('invalid csv file; '.$this->file);

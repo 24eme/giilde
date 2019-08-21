@@ -313,7 +313,7 @@ abstract class _ConfigurationDeclaration extends acCouchdbDocumentTree {
 
     public function isActif($date) {
 
-        return $this->isDouaneActif($date);
+        return $this->isDouaneActif($date, true);
     }
 
     public function getTauxCVO($date) {
@@ -332,9 +332,9 @@ abstract class _ConfigurationDeclaration extends acCouchdbDocumentTree {
         return $cvo_produit;
     }
 
-    public function isDouaneActif($date) {
+    public function isDouaneActif($date, $actif_sans_code_douane = false) {
 
-        return ($this->getTauxDouane($date) >= 0) && ($this->getCodeDouane());
+        return ($this->getTauxDouane($date) >= 0) && ($actif_sans_code_douane || $this->getCodeDouane());
     }
 
     public function isDouaneFacturable($date) {
