@@ -24,10 +24,6 @@ class commonActions extends sfActions {
             return $this->redirect('drm');
         }
 
-        if ($this->getUser()->hasObservatoire() && !$this->getUser()->hasTeledeclarationVrac()) {
-            $this->redirect(sfConfig::get('app_observatoire_url'));
-        }
-
         if (!$this->getUser()->hasCredential('operateur')) {
 
             return $this->redirectWithCredentials($this->getUser()->getCompte()->identifiant);

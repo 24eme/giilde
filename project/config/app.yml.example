@@ -2,7 +2,6 @@ all:
   instance: dev
   auth_mode: NO_AUTH #HTTP_AD, CAS, NO_CAS, NO_AUTH
   routing_context_production_host: domaine.pro
-  observatoire_url: "https://observatoire_url"
   vinsi_url: "https://vinsi_url"
   url_reprise_donnees_drm: "http://url_reprise_donnees_drm"
   url_header: "http://url_header"

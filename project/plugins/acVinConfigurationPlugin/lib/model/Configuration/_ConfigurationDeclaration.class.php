@@ -334,7 +334,7 @@ abstract class _ConfigurationDeclaration extends acCouchdbDocumentTree {
 
     public function isDouaneActif($date) {
 
-        return $this->getTauxDouane($date) >= 0;
+        return ($this->getTauxDouane($date) >= 0) && ($this->getCodeDouane());
     }
 
     public function isDouaneFacturable($date) {
