@@ -140,7 +140,7 @@
 <?php endif; ?>
         		</sorties-capsules>
 <?php endif; ?>
-        		<stock-fin-periode><?php echo $crd->stock_fin ?></stock-fin-periode>
+        		<stock-fin-periode><?php echo ($crd->stock_fin)? $crd->stock_fin : 0 ?></stock-fin-periode>
       		</centilisation>
 <?php endforeach; ?>
     	</compte-crd>
