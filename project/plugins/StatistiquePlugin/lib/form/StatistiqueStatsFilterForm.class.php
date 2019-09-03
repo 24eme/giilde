@@ -234,9 +234,6 @@ class StatistiqueStatsFilterForm extends BaseForm
 			}else{
 				unset($values['doc.mouvements.produit_hash']);
 			}
-			if(in_array($values['statistiques'],array('stocks'))){
-				$values['doc.declarant.famille'] = array("PRODUCTEUR","PRODUCTEUR_VINIFICATEUR");
-			}
 
     	unset($values['statistiques'], $values['lastyear'], $values['pdf'], $values['doc.mouvements.date/from'], $values['doc.mouvements.date/to'], $values['doc.date_campagne/from'], $values['doc.date_campagne/to']);
     	$rangeFields = self::$rangeFields;
