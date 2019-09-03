@@ -146,15 +146,15 @@
     	</compte-crd>
 <?php endforeach; endif;
 $documents_annexes = array();
-foreach($drm->documents_annexes as $k => $v): if ($k != 'DAE' && ($v->debut * 1) > 0 && ($v->fin * 1) > 0)  :
+foreach($drm->documents_annexes as $k => $v): if ($k != 'DAE')  :
 	$documents_annexes[$k] = $v;
 endif; endforeach;
 if (count($documents_annexes)): ?>
     	<document-accompagnement>
 <?php foreach($documents_annexes as $k => $v): ?>
 	        <<?php echo documentAnnexeKey2XMLTag($k); ?>>
-        		<debut-periode><?php echo $v->debut * 1 ?></debut-periode>
-        		<fin-periode><?php echo $v->fin * 1 ?></fin-periode>
+        		<debut-periode><?php echo $v->debut ?></debut-periode>
+        		<fin-periode><?php echo $v->fin ?></fin-periode>
             <nombre-document-empreinte><?php echo $v->nb ?></nombre-document-empreinte>
           </<?php echo documentAnnexeKey2XMLTag($k); ?>>
 <?php endforeach; ?>

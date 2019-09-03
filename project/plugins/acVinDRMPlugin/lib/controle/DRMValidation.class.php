@@ -25,7 +25,8 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('erreur', 'total_negatif', "Le stock revendiqué théorique fin de mois est négatif");
         $this->addControle('vigilance', 'vrac_detail_negatif', "Le volume qui sera enlevé sur le contrat est supérieur au volume restant");
         $this->addControle('vigilance', 'crd_negatif', "Le nombre de CRD ne dois pas être négatif");
-        $this->addControle('vigilance', 'documents_annexes_erreur', "Les numéros de document d'accompagnement saisis en annexe sont mal renseignés.");
+        $this->addControle('vigilance', 'documents_annexes_vigilance', "Les numéros de document d'accompagnement saisis en annexe sont mal renseignés.");
+        $this->addControle('erreur', 'documents_annexes_erreur', "La saisie de document d'accompagnement n'est pas complètement renseignée");
         $this->addControle('vigilance', 'siret_absent', "Le numéro de siret n'a pas été renseigné");
         $this->addControle('erreur', 'no_accises_absent', "Le numéro d'accise n'a pas été renseigné");
 
@@ -287,8 +288,13 @@ class DRMValidation extends DocumentValidation {
                 if (($type_doc == $document_accompagnement_type) && ($type_doc != DRMClient::DRM_DOCUMENTACCOMPAGNEMENT_DAE) &&
                         ((!$doc_annexe->exist($document_accompagnement_type)) || (!$doc_annexe->$document_accompagnement_type->fin) || (!$doc_annexe->$document_accompagnement_type->debut)
                         )) {
-                    $this->addPoint('vigilance', 'documents_annexes_erreur', 'retour aux annexes', $this->generateUrl('drm_annexes', $this->document));
+                    $this->addPoint('vigilance', 'documents_annexes_vigilance', 'retour aux annexes', $this->generateUrl('drm_annexes', $this->document));
                 }
+            }
+        }
+        foreach ($this->document->documents_annexes as $documentAnnexe) {
+            if ((!$documentAnnexe->debut || !$documentAnnexe->fin || !$documentAnnexe->nb) && ($documentAnnexe->debut || $documentAnnexe->fin || $documentAnnexe->nb)) {
+                $this->addPoint('erreur', 'documents_annexes_erreur', 'retour aux annexes', $this->generateUrl('drm_annexes', $this->document));
             }
         }
     }
