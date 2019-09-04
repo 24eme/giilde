@@ -1344,6 +1344,9 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
     }
 
     public function initProduitsAutres($isTeledeclarationMode){
+        if ($this->isNegoce()) {
+            return;
+        }
       foreach ($this->getConfigProduits($isTeledeclarationMode) as $hash => $produit) {
         if(preg_match("|/declaration/certifications/AUTRES|",$hash)){
             if(preg_match("/(DPLC|LIES)/",$hash)){
