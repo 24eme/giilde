@@ -67,7 +67,7 @@
             <div class="alert alert-info">
 				<img src="/images/visuels/prodouane.png" />
                 <p><br />Vous pouvez à présent télécharger votre DRM au format XML afin de l'importer en DTI+ sur le site prodouanes via le lien suivant : <a href="https://pro.douane.gouv.fr/">pro.douane.gouv.fr</a><br />
-            	<a class="pull-right btn btn-default" target="_blank" href="<?php echo url_for('drm_xml', $drm); ?>">Télécharger le XML</a><br />&nbsp;</p>
+                <a class="pull-right btn btn-default" download="<?= $drm->_id ?>.xml" target="_blank" href="<?php echo url_for('drm_xml', $drm); ?>">Télécharger le XML</a><br />&nbsp;</p>
             </div>
 		<?php endif; ?>
 
