@@ -205,7 +205,7 @@ class drmActions extends drmGeneriqueActions {
      */
     public function executeCreationEdi(sfWebRequest $request) {
         set_time_limit(0);
-        ini_set('memory_limit', '512M');
+        ini_set('memory_limit', '2048M');
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');
