@@ -30,7 +30,7 @@ class drmGeneriqueActions extends sfActions {
 
     protected function redirect403IfIsNotTeledeclarationAndNotMe() {
         $this->redirect403IfIsNotTeledeclaration();
-        if ($this->getUser()->getCompte()->identifiant != $this->identifiant) {
+        if ($this->getUser()->getCompte()->id_societe != $this->societe->_id) {
             $this->redirect403();
         }
     }

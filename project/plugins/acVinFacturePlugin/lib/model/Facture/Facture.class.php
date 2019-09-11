@@ -291,12 +291,16 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
                     }
                     $detail->quantite += $ligneByType->quantite;
                 }
+                $configuration = ConfigurationClient::getConfiguration($ligneByType->date);
+                if (!$configuration) {
+                    $configuration = $this->configuration;
+                }
                 $produit_configuration = null;
-                if($this->configuration->exist($ligneByType->produit_hash)){
-                  $produit_configuration = $this->configuration->get($ligneByType->produit_hash);
+                if($configuration->exist($ligneByType->produit_hash)){
+                  $produit_configuration = $configuration->get($ligneByType->produit_hash);
                 }else{
                   $hashTransformed = preg_replace('/(.*)\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)/',"$1",$ligneByType->produit_hash);
-                  $produit_configuration = $this->configuration->get($hashTransformed);
+                  $produit_configuration = $configuration->get($hashTransformed);
                 }
                 $codeProduit = $produit_configuration->getCodeComptable();
 

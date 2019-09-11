@@ -48,7 +48,7 @@
             <h4>Documents d'aide</h4>
                     <div class="list-group">
                     <?php foreach(sfConfig::get('app_drm_documents') as $libelle => $url): ?>
-                        <a href="<?php echo $url ?>" target="_blank" class="list-group-item"><span class="glyphicon glyphicon-file"></span> <?php echo $libelle ?></a>
+                        <a href="<?php echo $url ?>?20190828" target="_blank" class="list-group-item"><span class="glyphicon glyphicon-file"></span> <?php echo $libelle ?></a>
                     <?php endforeach; ?>
                     </div>
             </div>

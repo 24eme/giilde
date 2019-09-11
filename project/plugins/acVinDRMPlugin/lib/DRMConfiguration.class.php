@@ -209,6 +209,15 @@ class DRMConfiguration {
         return $this->getConfig('matiere_premiere');
     }
 
+    public function getCRDGenres() {
+        $genres = array();
+        foreach($this->configuration['crds_genre'] as $genre) {
+            $genres[$genre] = DRMClient::$drm_crds_genre[$genre];
+        }
+
+        return $genres;
+    }
+
     public function getConfig($name) {
         if(!isset($this->configuration[$name])) {
 

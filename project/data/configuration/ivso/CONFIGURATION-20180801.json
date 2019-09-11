@@ -39830,7 +39830,7 @@
                    "facturable": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
+                   "douane_cat_negoce": "periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "vracsanscontratsuspendu": {
@@ -39844,7 +39844,7 @@
                    "facturable": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
+                   "douane_cat_negoce": "periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "apportgroupement": {
@@ -39872,7 +39872,7 @@
                    "facturable": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
+                   "douane_cat_negoce": "periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "vracsanscontratacquitte": {

@@ -16,7 +16,7 @@ class DRMDetailSortiesForm  extends acCouchdbObjectForm {
             if ($key == 'contrat' && !preg_match('/AOC/', $certif)) {
                 $disabled = true;
             }
-            if (($certif == 'AUTRES' && $this->getObject()->getParent()->code_douane != "BOISSONS_FERMENTEES_AUTRES") && ($key != 'distillationusageindustriel') && ($key != 'destructionperte') && ($key != 'manquant') && ($key != 'vracsanscontratsuspendu')) {
+            if ($certif == 'AUTRES' && !preg_match("#/(TRANQ|EFF)/#", $this->getObject()->getHash()) && $this->getObject()->getParent()->code_douane != "BOISSONS_FERMENTEES_AUTRES" && $key != 'distillationusageindustriel' && $key != 'destructionperte' && $key != 'manquant' && $key != 'vracsanscontratsuspendu') {
                 $disabled = true;
             }
             if(preg_match('/MATIERES_PREMIERES/', $this->getObject()->getParent()->code_douane) && $value->details == "ALCOOLPUR") {

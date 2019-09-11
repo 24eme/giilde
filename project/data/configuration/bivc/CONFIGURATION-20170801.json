@@ -13342,7 +13342,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "creationvractirebouche": {
@@ -13356,7 +13356,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "apportgroupement": {
@@ -13384,7 +13384,7 @@
                    "facturable": 1,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "vracsanscontratacquitte": {
@@ -13496,7 +13496,7 @@
                    "facturable": 0,
                    "douane_type": "SUSPENDU",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "sorties-periode/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "manquant": {

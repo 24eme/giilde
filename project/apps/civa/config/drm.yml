@@ -24,6 +24,7 @@ all:
       negociant_facturable: true
       texte_mail_pas_transmission_douane: "Le lien entre le Portail du CIVA et Prodouane n'est actuellement pas activé. Merci de prendre rapidement contact avec le CIVA afin de transmettre votre DRM vers CIEL."
       matiere_premiere: false
+      crds_genre: ['TRANQ', 'MOUSSEUX']
       edi_default_produit_hash:
         'TRANQ':  '/declaration/certifications/AUTRE/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
         'MOU':    '/declaration/certifications/AUTRE/genres/EFF/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'

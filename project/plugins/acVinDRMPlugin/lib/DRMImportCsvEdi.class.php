@@ -113,7 +113,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
     // Check Crds
     $this->checkImportCrdsFromCSV();
     // Check Crds
-    $this->checkHorsRegionFromCSV();
+    //$this->checkHorsRegionFromCSV();
 
     if ($this->csvDoc->hasErreurs()) {
       $this->csvDoc->setStatut(self::STATUT_WARNING);
@@ -309,7 +309,7 @@ private function importMouvementsFromCSV($just_check = false) {
     }
 
     if(!$founded_produit) {
-      $founded_produit = $this->configuration->identifyProductByLibelle(trim(preg_replace('/ *\(.*/', '', preg_replace("/[ ]+/", " ", $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT]))));
+      $founded_produit = $this->configuration->identifyProductByLibelle(trim(preg_replace('/ *\(.*/', '', preg_replace("/[ ]+/", " ", $csvRow[self::CSV_CAVE_LIBELLE_PRODUIT] . ' ' . $csvRow[self::CSV_CAVE_MENTION]))));
     }
 
     if (!$founded_produit) {
@@ -464,15 +464,15 @@ private function importMouvementsFromCSV($just_check = false) {
     $cat_key = $confDetailMvt->getParent()->getKey();
     $type_key = $confDetailMvt->getKey();
 
-    $drmPrecedente = DRMClient::getInstance()->find("DRM-".$this->drm->identifiant."-".DRMClient::getInstance()->getPeriodePrecedente($this->drm->periode));
-    if ($drmPrecedente && $drmPrecedente->teledeclare) {
-        $details_precedent = $drmPrecedente->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
-        if(($cat_key == "stocks_debut") && ($volume != $details_precedent->getOrAdd('stocks_fin')->getOrAdd('final'))) {
-          $this->csvDoc->addErreur($this->stockVolumeIncoherentError($num_ligne, $csvRow));
-          $num_ligne++;
-          continue;
-        }
-    }
+    //$drmPrecedente = DRMClient::getInstance()->find("DRM-".$this->drm->identifiant."-".DRMClient::getInstance()->getPeriodePrecedente($this->drm->periode));
+    //if ($drmPrecedente && $drmPrecedente->teledeclare) {
+    //    $details_precedent = $drmPrecedente->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
+    //    if(($cat_key == "stocks_debut") && ($volume != $details_precedent->getOrAdd('stocks_fin')->getOrAdd('final'))) {
+    //      $this->csvDoc->addErreur($this->stockVolumeIncoherentError($num_ligne, $csvRow));
+    //      $num_ligne++;
+    //      continue;
+    //    }
+    //}
 
     if($just_check) {
       $num_ligne++;
@@ -594,7 +594,7 @@ private function importComplementMvt($csvRow, $founded_produit, $just_check  = f
       break;
     }
     $denomination_complementaire = (trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]))? trim($csvRow[self::CSV_CAVE_LIBELLE_COMPLEMENTAIRE]) : false;
-    $drmDetails = $this->drm->addProduit($founded_produit->getHash(),DRMClient::$types_node_from_libelles[strtoupper($csvRow[self::CSV_CAVE_TYPE_DRM])], $denomination_complementaire);
+    $drmDetails = $this->drm->addProduit($founded_produit->getHash(),DRMClient::$types_node_from_libelles[KeyInflector::slugify($csvRow[self::CSV_CAVE_TYPE_DRM])], $denomination_complementaire);
     $field = strtolower($type_complement);
     $drmDetails->add($field, $value);
   }

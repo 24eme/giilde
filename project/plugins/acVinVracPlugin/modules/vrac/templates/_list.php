@@ -32,7 +32,7 @@ use_helper('PointsAides');
         foreach ($vracs->rows as $contrat) {
           $contrats[] = $contrat;
         }
-        foreach (array_reverse($contrats)  as $value) {
+        foreach ($contrats as $value) {
             // $elt = $value->getRawValue()->value;
                 $v = VracClient::getInstance()->find($value->id, acCouchdbClient::HYDRATE_JSON);
                 ?>

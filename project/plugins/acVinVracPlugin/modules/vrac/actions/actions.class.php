@@ -930,7 +930,7 @@ class vracActions extends sfActions {
 
     private function redirect403IfIsNotTeledeclarationAndNotMe() {
         $this->redirect403IfIsNotTeledeclaration();
-        if ($this->getUser()->getCompte()->identifiant != $this->identifiant) {
+        if (strpos($this->identifiant, str_replace('SOCIETE-', '', $this->getUser()->getCompte()->id_societe)) === false) {
             $this->redirect403();
         }
     }

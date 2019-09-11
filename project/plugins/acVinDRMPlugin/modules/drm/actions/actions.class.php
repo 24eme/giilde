@@ -116,6 +116,7 @@ class drmActions extends drmGeneriqueActions {
                       }
                   }
 
+                  $aggregate = false;
                   if($aggregate) {
                       $url_reprise_donnees_drm.= '?aggregate=1';
                   }

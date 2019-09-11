@@ -107,7 +107,7 @@ class DRMAddCrdTypeForm extends acCouchdbObjectForm {
 
     public function getGenres() {
 
-        return DRMClient::$drm_crds_genre;
+        return DRMConfiguration::getInstance()->getCRDGenres();
     }
 
     public function getRegimeCrds() {

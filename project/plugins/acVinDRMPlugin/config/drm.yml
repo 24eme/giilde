@@ -21,6 +21,7 @@ all:
       mouvement_divisable_nb_month: 12
       defaults_crds_nodes: [ { 'couleur' : 'VERT', 'contenance' : 0.00750 },{ 'couleur' : 'BLEU', 'contenance' : 0.00750 },{ 'couleur' : 'LIEDEVIN', 'contenance' : 0.00750 } ]
       default_auto_checked: true
+      crds_genre: ['TRANQ', 'MOUSSEUX', 'PI', 'ALCOOLS', 'COGNAC-ARMAGNAC']
       pdf_font_size: false
       xml_transfert_echec: "Une erreur s'est produite lors du transfert de votre DRM :\n\nDESCRIPTION_ERREUR"
       campagne_liste_minimale: false
