@@ -1,84 +1,65 @@
 <?php use_helper('DRMXml'); ?>
 <?php echo '<?xml version="1.0" encoding="utf-8" ?>' ?>
 
-<message-interprofession xmlns="http://douane.finances.gouv.fr/app/ciel/interprofession/echanges/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://douane.finances.gouv.fr/app/ciel/interprofession/echanges/1.0 echanges-interprofession-1.7.xsd">
-	<siren-interprofession><?php echo sfConfig::get('app_ciel_siren'); ?></siren-interprofession>
-	<declaration-recapitulative>
-		<identification-declarant>
-			<numero-agrement><?php echo $drm->declarant->no_accises ?></numero-agrement>
-<?php if ($drm->declarant->cvi): ?>
-			<numero-cvi><?php echo $drm->declarant->cvi ?></numero-cvi>
-<?php endif; ?>
-		</identification-declarant>
-		<periode>
-			<mois><?php echo $drm->getMois() ?></mois>
-			<annee><?php echo $drm->getAnnee() ?></annee>
-		</periode>
-		<declaration-neant><?php echo ($drm->declaration->hasStockEpuise())? "true" : "false"; ?></declaration-neant>
-<?php if (!$drm->declaration->hasStockEpuise()): ?>
-		<droits-suspendus>
-<?php foreach (xmlGetProduitsDetails($drm, true, DRM::DETAILS_KEY_SUSPENDU) as $produit):	?>
-			<produit>
-<?php if ($produit->getCodeDouane()): ?>
-			<?php if($produit->isCodeDouaneNonINAO()): ?>
-				<libelle-fiscal><?php echo formatCodeINAO($produit->getCodeDouane()) ?></libelle-fiscal>
-			<?php else: ?>
-				<code-inao><?php echo formatCodeINAO($produit->getCodeDouane()) ?></code-inao>
-			<?php endif; ?>
-<?php endif; ?>
-				<libelle-personnalise><?php echo xmlProduitLibelle($produit); ?></libelle-personnalise>
-<?php if ($produit->getTav()): ?>
-				<tav><?php echo sprintf("%01.02f", $produit->getTav()) ?></tav>
-<?php endif; ?>
-<?php if (false && $produit->getPremix()): ?>
-				<premix>true</premix>
-<?php endif; ?>
-<?php if ($produit->exist('observations')): ?>
-				<observations><?php echo $produit->get('observations'); ?></observations>
-<?php endif; ?>
-				<balance-stocks>
-
-<?php
-	$xml = details2XmlDouane($produit, $drm->isNegoce());
-	echo formatXml($xml, 5);
-?>
-				</balance-stocks>
-			</produit>
-<?php endforeach; ?>
-			<stockEpuise>false</stockEpuise>
-		</droits-suspendus>
+<mouvements-balances xsi:schemaLocation="http://douane.finances.gouv.fr/app/ciel/dtiplus/v1 ciel-dti-plus_v1.0.12.xsd" xmlns="http://douane.finances.gouv.fr/app/ciel/dtiplus/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <periode-taxation>
+    <mois><?php echo $drm->getMois() ?></mois>
+    <annee><?php echo $drm->getAnnee() ?></annee>
+  </periode-taxation>
+  <identification-redevable><?php echo $drm->declarant->no_accises ?></identification-redevable>
 <?php if ($drm->hasExportableProduitsAcquittes()): ?>
 		<droits-acquittes>
 <?php foreach (xmlGetProduitsDetails($drm, true, DRM::DETAILS_KEY_ACQUITTE) as $produit): ?>
 			<produit>
+				<libelle-personnalise><?php echo xmlProduitLibelle($produit); ?></libelle-personnalise>
 <?php if ($produit->getCodeDouane()): ?>
 			<?php if($produit->isCodeDouaneNonINAO()): ?>
 				<libelle-fiscal><?php echo formatCodeINAO($produit->getCodeDouane()) ?></libelle-fiscal>
-			<?php else: ?>
-				<code-inao><?php echo formatCodeINAO($produit->getCodeDouane()) ?></code-inao>
 			<?php endif; ?>
 <?php endif; ?>
-				<libelle-personnalise><?php echo xmlProduitLibelle($produit); ?></libelle-personnalise>
 <?php if ($produit->getTav()): ?>
 				<tav><?php echo sprintf("%01.02f", $produit->getTav()) ?></tav>
-<?php endif; ?>
-<?php if (false && $produit->getPremix()): ?>
-				<premix>true</premix>
 <?php endif; ?>
 <?php if ($produit->exist('observations')): ?>
 				<observations><?php echo $produit->get('observations'); ?></observations>
 <?php endif; ?>
-				<balance-stocks>
-
+				<balance-stock>
 <?php
 	$xml = details2XmlDouane($produit, $drm->isNegoce());
 	echo formatXml($xml, 5);?>
-				</balance-stocks>
+				</balance-stock>
 			</produit>
 <?php endforeach; ?>
+			<?php if (!$drm->isNegoce()): ?>
 			<stockEpuise>false</stockEpuise>
+			<?php endif; ?>
     	</droits-acquittes>
 <?php endif; ?>
+<?php if (!$drm->declaration->hasStockEpuise()): ?>
+		<droits-suspendus>
+<?php foreach (xmlGetProduitsDetails($drm, true, DRM::DETAILS_KEY_SUSPENDU) as $produit):	?>
+			<produit>
+				<libelle-personnalise><?php echo xmlProduitLibelle($produit); ?></libelle-personnalise>
+<?php if ($produit->getCodeDouane()): ?>
+			<?php if($produit->isCodeDouaneNonINAO()): ?>
+				<libelle-fiscal><?php echo formatCodeINAO($produit->getCodeDouane()) ?></libelle-fiscal>
+			<?php endif; ?>
+<?php endif; ?>
+<?php if ($produit->getTav()): ?>
+				<tav><?php echo sprintf("%01.02f", $produit->getTav()) ?></tav>
+<?php endif; ?>
+<?php if ($produit->exist('observations')): ?>
+				<observations><?php echo $produit->get('observations'); ?></observations>
+<?php endif; ?>
+				<balance-stock>
+<?php
+	$xml = details2XmlDouane($produit, $drm->isNegoce());
+	echo formatXml($xml, 5);
+?>
+				</balance-stock>
+			</produit>
+<?php endforeach; ?>
+		</droits-suspendus>
 <?php endif; ?>
 <?php if ($drm->exist('crds') && $drm->crds): foreach(drm2CrdCiel($drm) as $gcrds): $fkey = key($gcrds);?>
     	<compte-crd>
@@ -94,11 +75,11 @@
 <?php if ($crd->entrees_achats): ?>
 				<achats><?php echo $crd->entrees_achats ?></achats>
 <?php endif; ?>
-<?php if ($crd->entrees_retours): ?>
-				<retours><?php echo $crd->entrees_retours ?></retours>
-<?php endif; ?>
 <?php if ($crd->entrees_excedents): ?>
 				<excedents><?php echo $crd->entrees_excedents ?></excedents>
+<?php endif; ?>
+<?php if ($crd->entrees_retours): ?>
+				<retours><?php echo $crd->entrees_retours ?></retours>
 <?php endif; ?>
         		</entrees-capsules>
 <?php endif; ?>
@@ -157,5 +138,4 @@ if (count($documents_annexes)): ?>
 <?php endif; ?>
     	</statistiques>
 <?php endif; ?>
-  	</declaration-recapitulative>
-</message-interprofession>
+</mouvements-balances>

@@ -1775,7 +1775,8 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
       if (!function_exists('get_partial')) {
         sfContext::getInstance()->getConfiguration()->loadHelpers(array('Partial'));
       }
-      return get_partial('drm_xml/xml', array('drm' => $this));
+      $partial = ($this->isNegoce())? 'drm_xml/xmlnegoce' : 'drm_xml/xml';
+      return get_partial($partial, array('drm' => $this));
     }
 
     public function getXMLRetour() {

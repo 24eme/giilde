@@ -1,3 +1,3 @@
 <?php
-
-include_partial('xml', array('drm' => $drm));
+$partial = ($drm->isNegoce())? 'xmlnegoce' : 'xml';
+include_partial($partial, array('drm' => $drm));
