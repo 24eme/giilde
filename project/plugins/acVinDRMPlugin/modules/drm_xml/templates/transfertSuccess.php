@@ -2,7 +2,9 @@
     <div id="application_drm">
         <div id="contenu_etape">
 		<h2>Transmission de votre DRM à la Douane</h2>
-<?php if (!$drm->transmission_douane->success) :
+<?php if (!$drm->transmission_douane->success) : ?>
+    <center><img src="/images/2douane_failed.png" width=200 height=150/></center>
+<?php
     echo DRMConfiguration::getInstance()->getXmlTransfertEchec($cielResponse);
 else: ?>
 	<p>Votre DRM a été transmise avec succès sur le portail <a href="https://pro.douane.gouv.fr/">pro.douane.gouv.fr</a>.<br/><br/></p>

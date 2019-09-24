@@ -36,7 +36,7 @@ class ExportMouvementsDRMDB2
         $this->structure = $this->buildStructure();
     }
 
-    public function export($mouvements, $periode_max = null) {
+    public function export($mouvements, $periode_max = null, $periode_min = null) {
         $drms = array();
 
         foreach($mouvements as $key => $mouvement) {
@@ -55,6 +55,12 @@ class ExportMouvementsDRMDB2
             if ($periode_max) {
               $myperiode = preg_replace('/[^-]*-/', '', $identifiantPeriode);
               if ($myperiode > $periode_max) {
+                continue;
+              }
+            }
+            if ($periode_min) {
+              $myperiode = preg_replace('/[^-]*-/', '', $identifiantPeriode);
+              if ($myperiode < $periode_min) {
                 continue;
               }
             }

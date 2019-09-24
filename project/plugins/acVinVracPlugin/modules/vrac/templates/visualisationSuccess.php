@@ -42,7 +42,7 @@ use_helper('Date');
 
     <div class="col-xs-4 text-left">
         <p>
-            <span class="<?php echo typeToPictoCssClass($vrac->type_transaction) ?>" style="font-size: 24px;"><?php echo "&nbsp;Contrat de " . showType($vrac); ?></span>
+            <span class="<?php echo typeToPictoCssClass($vrac->type_transaction) ?>" style="font-size: 24px;"><?php echo "&nbsp;Contrat de " . showType($vrac); ?><?php if ($vrac->valide->statut == VracClient::STATUS_CONTRAT_ANNULE) : ?> (Contrat annulé)<?php endif; ?></span>
         </p>
     </div>
 

@@ -2,15 +2,24 @@
 
 Projet de dématérialisation informatique des activités des interprofessions des Vins du Sud Ouest (IVSO) et de Bergerac (IVBD)
 
-# Aperçu de l'application
+## Projets déployés
+
+Le projet est actuellement en cours d'utilisation par  : 
+
+* IVSO : https://declaration.ivsopro.com/ [![Intégration continue](https://declaration.ivsopro.com/statuts/tests.svg.php)](https://declaration.ivsopro.com/statuts/tests.php)
+* IVBD : https://declaration.ivbdpro.fr/ [![Intégration continue](https://declaration.ivbdpro.fr/statuts/tests.svg.php)](https://declaration.ivbdpro.fr/statuts/tests.php)
+* BIVC : https://declaration.vins-centre-loire.com/ [![Intégration continue](https://declaration.vins-centre-loire.com/statuts/tests.svg.php)](https://declaration.vins-centre-loire.com/statuts/tests.php)
+* CIVA : https://declaration.vinsalsace.pro/ [![Intégration continue](https://declaration.vinsalsace.pro/drm/statuts/tests.svg.php)](https://declaration.vinsalsace.pro/drm/statuts/tests.php)
+
+## Aperçu de l'application
 
 ![Écran de saisie de la DRM](doc/captures/drm.jpg)
 
-# License utilisée
+## License utilisée
 
 Ce logiciel est mis à disposition en licence AGPL
 
-# Installation
+## Installation
 
 ## Via ansible
 

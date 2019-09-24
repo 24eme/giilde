@@ -1,5 +1,7 @@
 <?php
 
+ini_set('memory_limit', '-1');
+
 class DRMExportDB2Task extends sfBaseTask
 {
 
@@ -14,6 +16,7 @@ class DRMExportDB2Task extends sfBaseTask
         new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
         new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'default'),
         new sfCommandOption('periode_max', null, sfCommandOption::PARAMETER_REQUIRED, 'limit on a max periode', null),
+        new sfCommandOption('periode_min', null, sfCommandOption::PARAMETER_REQUIRED, 'limit on a min periode', null),
         new sfCommandOption('file_origine', null, sfCommandOption::PARAMETER_REQUIRED, "fichier origine tel que généré précédemment", null),
         // add your own options here
     ));
@@ -43,7 +46,7 @@ EOF;
           return $export->setFacture($csv);
         }
 
-        $csv = $export->export(MouvementfactureFacturationView::getInstance()->getMouvementsAll(0), $options['periode_max']);
+        $csv = $export->export(MouvementfactureFacturationView::getInstance()->getMouvementsAll(0), $options['periode_max'], $options['periode_min']);
 
         $noLignes = true;
         foreach($csv as $file => $lignes) {

@@ -128,10 +128,12 @@ all:
         "BIB 5l": 0.05
         "BIB 6l": 0.06
         "BIB 10l": 0.1
+        "BIB 11l": 0.11
         "BIB 15l": 0.15
         "BIB 20l": 0.2
         "BIB 22l": 0.22
         "BIB 30l": 0.3
+        "BIB 33l": 0.33
       acteurs_preparation_vin:
         "VENDEUR": "Vendeur"
         "ACHETEUR": "Acheteur"

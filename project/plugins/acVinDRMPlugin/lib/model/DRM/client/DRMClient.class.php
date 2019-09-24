@@ -703,10 +703,11 @@ class DRMClient extends acCouchdbClient {
         case self::DRM_CRD_BLEU:
           return self::DRM_CRD_BLEU;
         case self::DRM_CRD_VERT:
-        case '':
           return self::DRM_CRD_VERT;
         case self::DRM_CRD_LIEDEVIN:
           return self::DRM_CRD_LIEDEVIN;
+        case '':
+          return self::DRM_CRD_DEFAUT;
       }
       return '';
     }

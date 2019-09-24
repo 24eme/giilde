@@ -464,15 +464,16 @@ private function importMouvementsFromCSV($just_check = false) {
     $cat_key = $confDetailMvt->getParent()->getKey();
     $type_key = $confDetailMvt->getKey();
 
-    //$drmPrecedente = DRMClient::getInstance()->find("DRM-".$this->drm->identifiant."-".DRMClient::getInstance()->getPeriodePrecedente($this->drm->periode));
-    //if ($drmPrecedente && $drmPrecedente->teledeclare) {
-    //    $details_precedent = $drmPrecedente->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
-    //    if(($cat_key == "stocks_debut") && ($volume != $details_precedent->getOrAdd('stocks_fin')->getOrAdd('final'))) {
-    //      $this->csvDoc->addErreur($this->stockVolumeIncoherentError($num_ligne, $csvRow));
-    //      $num_ligne++;
-    //      continue;
-    //    }
-    //}
+    $drmPrecedente = DRMClient::getInstance()->find("DRM-".$this->drm->identifiant."-".DRMClient::getInstance()->getPeriodePrecedente($this->drm->periode));
+    if ($drmPrecedente && $drmPrecedente->teledeclare && !preg_match('/08$/', $drmPrecedente->periode)) {
+        $details_precedent = $drmPrecedente->addProduit($founded_produit->getHash(), $type_douane_drm_key, $denomination_complementaire);
+        if(($cat_key == "stocks_debut") && ($volume != $details_precedent->getOrAdd('stocks_fin')->getOrAdd('final'))) {
+          $this->csvDoc->addErreur($this->stockVolumeIncoherentError($num_ligne, $csvRow));
+          $num_ligne++;
+          continue;
+        }
+    }
+
 
     if($just_check) {
       $num_ligne++;
