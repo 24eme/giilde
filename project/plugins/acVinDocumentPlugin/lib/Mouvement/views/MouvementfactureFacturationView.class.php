@@ -33,7 +33,11 @@ class MouvementfactureFacturationView extends acCouchdbView {
     protected function getMouvementsBySociete($societe, $facturee, $facturable, $facturationBySoc = false) {
         $identifiantFirstEntity = ($facturationBySoc) ? $societe->identifiant : $societe->identifiant . '00';
         $identifiantLastEntity = ($facturationBySoc) ? $societe->identifiant : $societe->identifiant . '99';
-        $paramRegion = ($societe->type_societe != SocieteClient::TYPE_OPERATEUR) ? SocieteClient::TYPE_AUTRE : $societe->getRegionViticole();
+        try {
+            $paramRegion = ($societe->type_societe != SocieteClient::TYPE_OPERATEUR) ? SocieteClient::TYPE_AUTRE : $societe->getRegionViticole();
+        } catch (Exception $e) {
+            $paramRegion = array();
+        }
 
         return $this->client
                         ->startkey(array($facturee, $facturable, $paramRegion, $identifiantFirstEntity))

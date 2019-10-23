@@ -93,7 +93,7 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
         return array_shift($regions);
     }
 
-    private function getRegionsViticoles($excludeSuspendus = true) {
+    public function getRegionsViticoles($excludeSuspendus = true) {
         $regions = array();
         foreach ($this->getEtablissementsObj() as $id => $e) {
             if (!$e->etablissement->isActif() || $e->etablissement->region == EtablissementClient::REGION_HORS_CVO) {

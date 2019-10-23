@@ -4,11 +4,11 @@ suspendu,entrees,recolte,01. récolte,récolte,,entrees-periode/volume-produit
 suspendu,entrees,declassement,02. issu d'un déclassement,déclassement,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
 suspendu,entrees,retourembouteillage,03. retour conditionnmt,retour de conditionnement,,entrees-periode/mouvements-temporaires/relogement
 suspendu,entrees,vci,04-bis. intégration vci,indiquer les volumes issus de votre récolte que vous intégrez en vci,,entrees-periode/mouvements-internes/integration-vci-agree
-suspendu,entrees,transfertcomptamatierecession,04. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,entrees,transfertcomptamatierecession,04. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation. intégration d’une cuvée dans un produit plus générique ,,entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation
 suspendu,entrees,travailafacon,05. retour travail à façon,retour de travail à façon. distillation à façon,,entrees-periode/mouvements-temporaires/travail-a-facon
 suspendu,entrees,retourmarchandisetaxees,06. retour vin crd acquittées,retour de vin crd acquittées,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume
 suspendu,entrees,retourmarchandisenontaxees,07. retour vin en suspension,retour de vin en suspension,,entrees-periode/achats-reintegrations
-suspendu,entrees,achatcrd,08. achat crd acquittées,achat de vins en crd acquittées remises en suspension,,entrees-periode/achats-reintegrations
+suspendu,entrees,achatcrd,08. achat crd acquittées,achat de vins en crd acquittées remises en suspension,DATE_REPLACEMENT;OBSERVATIONS,entrees-periode/replacements/replacement-suspension/volume
 suspendu,entrees,achatnoncrd,09. achat suspension,achat suspension,,entrees-periode/volume-produit
 suspendu,entrees,regularisation,10. excédent constaté,régularisation,OBSERVATIONS,entrees-periode/autres-entrees
 suspendu,entrees,cooperative,11. coopérative,coopérative,,entrees-periode/achats-reintegrations
@@ -16,10 +16,10 @@ suspendu,sorties,export,01. export,export,PAYS,sorties-periode/sorties-sans-paie
 suspendu,sorties,creationvrac,02. vrac négoce,vrac négoce,CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
 suspendu,sorties,creationvractirebouche,03. bouteilles négoce,ventes en suspension de bouteilles à un négociant (bouteilles habillées ou tiré bouché),CONTRAT,sorties-periode/sorties-sans-paiement-droits/sorties-definitives
 suspendu,sorties,apportgroupement,04. livraison coopérative,livraison coopérative,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
-suspendu,sorties,vracsanscontratacquitte,05. petit vrac france,bib. grandes bouteilles vendus sans crd. facture pour mise à la consommation – particuliers. chr. cavistes,,sorties-periode/ventes-france-crd-suspendus/annee-courante
+suspendu,sorties,vracsanscontratacquitte,05. petit vrac france,bib. bouteilles vendus sans crd. facture pour mise à la consommation – particuliers. chr. cavistes,,sorties-periode/ventes-france-crd-suspendus/annee-courante
 suspendu,sorties,ventefrancecrd,06. vente sous crd,vente sous crd,,sorties-periode/ventes-france-crd-suspendus/annee-courante
 suspendu,sorties,vci,07-bis. revendication vci,indiquer les volumes de vci que vous intégrez dans votre stock revendiqué,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci
-suspendu,sorties,transfertcomptamatiere,07. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
+suspendu,sorties,transfertcomptamatiere,07. transfert de produits,transfert de récoltes ou de vins entre les chais d'une même exploitation. tranfert vers un produit plus générique,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
 suspendu,sorties,declassement,08. déclassement,déclassement,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation
 suspendu,sorties,travailafacon,09. travail à façon,sortie d'embouteillage. relogement. travail à façon. distillation à façon,,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/travail-a-facon
 suspendu,sorties,embouteillage,10. conditionnement,sortie de vin pour mise en bouteille,,sorties-periode/sorties-sans-paiement-droits/mouvements-temporaires/embouteillage

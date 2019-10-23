@@ -185,12 +185,19 @@ abstract class _ConfigurationDeclaration extends acCouchdbDocumentTree {
     }
 
     public function getCodeDouane() {
-        if (!$this->_get('code_douane')) {
+        $a = $this->getCodesDouanes();
+        if (!$a) {
+            return null;
+        }
+        return array_shift($a);
+    }
 
-            return $this->getParentNode()->getCodeDouane();
+    public function getCodesDouanes() {
+        if (!$this->_get('code_douane')) {
+            return $this->getParentNode()->getCodesDouanes();
         }
 
-        return $this->_get('code_douane');
+        return explode(',', $this->_get('code_douane'));
     }
 
     public function getCodeProduit() {

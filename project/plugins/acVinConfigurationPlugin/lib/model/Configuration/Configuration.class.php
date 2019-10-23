@@ -91,12 +91,14 @@ class Configuration extends BaseConfiguration {
         $codeSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($code)));
 
         foreach($this->getProduits() as $produit) {
-            $codeProduitSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($produit->getCodeDouane())));
-            if($codeSlugify == $codeProduitSlugify) {
-                $this->identifyCodeDouaneProduct[$code][] = $produit;
+            foreach($produit->getCodesDouanes() as $codeDouane) {
+                $codeProduitSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($codeDouane)));
+                if($codeSlugify == $codeProduitSlugify) {
+                    $this->identifyCodeDouaneProduct[$code][] = $produit;
+                }
             }
         }
-        if (isset($this->identifyCodeDouaneProduct[$code])) {
+        if (array_key_exists($code, $this->identifyCodeDouaneProduct)) {
           return $this->identifyCodeDouaneProduct[$code];
         }
         return array();

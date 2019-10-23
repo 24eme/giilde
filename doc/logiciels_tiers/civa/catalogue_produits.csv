@@ -745,6 +745,8 @@ Autre,,DRA/DPLC,,,Blanc,,DRA/DPLC Blanc,4B988Y
 Autre,,DRA/DPLC,,,Rouge,,DRA/DPLC Rouge,4R988Y
 Autre,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autre,,Rebêches,,,,,Rebêches,5X999V
+Autre,Autres Vins Tranquilles,,,,,,Autres Vins Tranquilles,
+Autre,Autres Vins Mousseux,,,,,,Autres Vins Mousseux,
 Alcools et autres Produits,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
 Alcools et autres Produits,,Produit intermédiaire supérieur 18°,,,,,Produit intermédiaire supérieur 18°,AUTRES_PI_SUP_18
 Alcools et autres Produits,,Prémix inférieur à 18°,,,,,Prémix inférieur à 18°,AUTRES_PI_INF_18_PREMIX
@@ -752,5 +754,6 @@ Alcools et autres Produits,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,AL
 Alcools et autres Produits,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
 Alcools et autres Produits,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
 Alcools et autres Produits,,BFAV,,,,,BFAV,BOISSONS_FERMENTEES_AUTRES
+Alcools et autres Produits,,Autres alcools,,,,,Autres alcools,
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18

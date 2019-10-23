@@ -213,12 +213,13 @@ VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,Rouge,,Aut
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°),AUTRES_PI_INF_18
 VDN-VDL,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,,,,Autres produits intermédiaires que VDL-VDN AOP (Inf 18°) - PREMIX,AUTRES_PI_INF_18_PREMIX
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
-Alcools,,Alcools supérieur 18° (autres que Rhum),,,,,Alcools supérieur 18° (autres que Rhum),ALCOOL_AUTRE_SUP_18
-Alcools,,Alcool inférieur 18° (autres que Rhum),,,,,Alcool inférieur 18° (autres que Rhum),ALCOOL_AUTRE_INF_18
-Alcools,,PREMIX Alcool inférieur 18°,,,,,PREMIX Alcool inférieur 18°,ALCOOL_AUTRE_INF_18_PREMIX
-Alcools,,RHUM (hors DOM),,,,,RHUM (hors DOM),RHUM_TIERS_ET_AUTRES
-Alcools,,ARMAGNAC,,,,,ARMAGNAC,ALCOOL_AUTRE_SUP_18
-Alcools,,ARMAGNAC,BLANCHE,,,,ARMAGNAC BLANCHE,ALCOOL_AUTRE_SUP_18
+Alcools,Autres alcools,Alcools supérieur 18° (autres que Rhum),,,,,Alcools supérieur 18° (autres que Rhum) Autres alcools,ALCOOL_AUTRE_SUP_18
+Alcools,Autres alcools,Alcool inférieur 18° (autres que Rhum),,,,,Alcool inférieur 18° (autres que Rhum) Autres alcools,ALCOOL_AUTRE_INF_18
+Alcools,Autres alcools,PREMIX Alcool inférieur 18°,,,,,PREMIX Alcool inférieur 18° Autres alcools,ALCOOL_AUTRE_INF_18_PREMIX
+Alcools,Autres alcools,RHUM (hors DOM),,,,,RHUM (hors DOM) Autres alcools,RHUM_TIERS_ET_AUTRES
+Alcools,Autres alcools,ARMAGNAC,,,,,ARMAGNAC Autres alcools,ALCOOL_AUTRE_SUP_18
+Alcools,Autres alcools,ARMAGNAC,BLANCHE,,,,ARMAGNAC Autres alcools BLANCHE,ALCOOL_AUTRE_SUP_18
+Alcools,Autres alcools,,,,,,Autres alcools,
 Alcools,,Matières premières spiritueux,,,,,Matières premières spiritueux,MATIERES_PREMIERES_SPIRITUEUX
 Alcools,,Matières premières alcools,,,,,Matières premières alcools,MATIERES_PREMIERES_ALCOOLS
 Autres Vins,,Pétillants,,,Rosé,,Pétillants Rosé,PETILLANTS
@@ -230,3 +231,5 @@ Autres Vins,,Vins tranquilles étrangers,,,Rosé,,Vins tranquilles étrangers Ro
 Autres Vins,,Vins tranquilles étrangers,,,Blanc sec,,Vins tranquilles étrangers Blanc sec,VT_ETRANGERS
 Autres Vins,,Vins tranquilles étrangers,,,Blanc doux,,Vins tranquilles étrangers Blanc doux,VT_ETRANGERS
 Autres Vins,,Vins mousseux étrangers,,,,,Vins mousseux étrangers,VM_ETRANGERS
+Autres Vins,Tranquille,,,,,,Tranquille,
+Autres Vins,Mousseux,,,,,,Mousseux,

@@ -5,6 +5,13 @@ class ediActions extends sfActions {
     protected $save = true;
 
     public function executeDrmCreationEdi(sfWebRequest $request) {
+
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            $this->response->setStatusCode('401');
+
+            return sfView::NONE;
+        }
+
       $only_edi = true;
       if($request->getContentType()){
         $only_edi = $request->getContentType();

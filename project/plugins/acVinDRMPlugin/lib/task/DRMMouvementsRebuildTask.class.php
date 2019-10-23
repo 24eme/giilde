@@ -55,22 +55,21 @@ EOF;
             return;
         }
         foreach ($drm->mouvements as $id => $list) {
-           foreach ($list as $mid => $mvt) {
-		if ($mvt->facture) {
-			throw new sfException("$drmId : Impossible de rebuild des mouvements facturés");
+            foreach ($list as $mid => $mvt) {
+                if ($mvt->facture) {
+                    throw new sfException("$drmId : Impossible de rebuild des mouvements facturés");
                 }
-           }
+            }
         }
         $drm->clearMouvements();
+        $drm->region = $drm->getEtablissement()->region;
         $isTeleclare = $drm->isTeledeclare();
 
         foreach ($drm->getProduits() as $hash => $produit){
             foreach ($produit->getProduitsDetails($isTeleclare) as $detail){
-             $detail->storeDroits();
-
+                $detail->storeDroits();
             }
-
-            }
+        }
 
         $drm->generateMouvements();
         if ($drm->teledeclare) {

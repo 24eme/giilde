@@ -444,7 +444,7 @@ private function importMouvementsFromCSV($just_check = false) {
 
         $vrac_id = $this->findContratDocId($csvRow);
 
-        if(!$vrac_id) {
+        if(!$vrac_id && $founded_produit->isCVOActif($date)) {
           $this->csvDoc->addErreur($this->contratIDNotFoundError($num_ligne, $csvRow));
           $num_ligne++;
           continue;
@@ -508,7 +508,11 @@ private function importMouvementsFromCSV($just_check = false) {
       }
 
       if ($confDetailMvt->getDetails() == ConfigurationDetailLigne::DETAILS_VRAC) {
-        $vrac_id = $this->findContratDocId($csvRow);
+        if ($founded_produit->isCVOActif($date)) {
+            $vrac_id = $this->findContratDocId($csvRow);
+        }else{
+            $vrac_id = $csvRow[self::CSV_CAVE_CONTRATID];
+        }
 
         $detailNode = $drmDetails->getOrAdd($cat_key)->getOrAdd($type_key . '_details')->add($vrac_id);
         if ($detailNode->volume) {

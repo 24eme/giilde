@@ -47,7 +47,7 @@ class FloatHelper
         $float = null;
 
         if(count(explode(".", $number."")) >= 2) {
-            list($int, $float) = explode(".", $number);
+            list($int, $float) = explode(".", sprintf("%f", $number));
         }
 
         $defaultDecimalFormat = (is_null($defaultDecimalFormat)) ? $this->getDefaultDecimalFormat() : $defaultDecimalFormat;

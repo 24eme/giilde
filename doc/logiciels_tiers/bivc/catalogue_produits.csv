@@ -17,10 +17,12 @@ AOC,Tranquille,Coteaux du Giennois,,,Rosé,,AOC Coteaux du Giennois Rosé,1S197S
 AOC,Tranquille,Châteaumeillant,,,Rouge,,AOC Châteaumeillant Rouge,1R700
 AOC,Tranquille,Châteaumeillant,,,Rosé,,AOC Châteaumeillant Rosé,1S700
 AOC,Tranquille,,,,,,AOC Tranquille,VT_IG_AOP
-AOC,VCI,Menetou-Salon,,,Blanc,,AOC Menetou-Salon Blanc VCI,1B190S
-AOC,VCI,Quincy,,,Blanc,,AOC Quincy VCI,1B193S
-AOC,VCI,Reuilly,,,Blanc,,AOC Reuilly Blanc VCI,1B194S
+AOC,Tranquille,Vouvray,,,Blanc moelleux,Chenin,AOC Vouvray Blanc moelleux,
+AOC,VCI,Menetou-Salon,,,Blanc,,VCI AOC Menetou-Salon Blanc,1B190S99
+AOC,VCI,Quincy,,,Blanc,,VCI AOC Quincy Blanc,1B193S99
+AOC,VCI,Reuilly,,,Blanc,,VCI AOC Reuilly Blanc,1B194S99
 AOC,Mousseux,,,,,,AOC Mousseux,VM_IG_AOP
+Autre AOC,Tranquille,Muscadet Côtes de Grandlieu,Sur lie,,Blanc,,Muscadet Côtes de Grandlieu Sur lie,1B227 01
 Autre AOC,Tranquille,Anjou,,,Blanc,,Anjou Blanc,1B200
 Autre AOC,Tranquille,Anjou,,,Rouge,,Anjou Rouge,1R200S
 Autre AOC,Tranquille,Quarts de Chaume,,,Blanc,Chenin,Quarts de Chaume,1B214L
@@ -76,10 +78,15 @@ Autre AOC,Tranquille,Côtes du Forez,,,Rosé,,Côtes du Forez Rosé,1S360
 Autre AOC,Tranquille,Premières Côtes de Bordeaux,,,Blanc,,Premières Côtes de Bordeaux Blanc,1B153D
 Autre AOC,Tranquille,Jurançon,,,Blanc,,Jurançon Blanc,1B135L
 Autre AOC,Tranquille,Jurançon,,,Blanc Sec,,Jurançon Blanc Sec,1B135S
-Autre AOC,Tranquille,Côtes de Duras,,,Blanc moelleux,,Côtes de Duras Blanc moelleux,
-Autre AOC,Tranquille,Côtes de Duras,,,Blanc sec,,Côtes de Duras Blanc sec,
-Autre AOC,Tranquille,Côtes de Duras,,,Rouge,,Côtes de Duras Rouge,
-Autre AOC,Tranquille,Côtes de Duras,,,Rosé,,Côtes de Duras Rosé,
+Autre AOC,Tranquille,Côtes de Duras,,,Blanc moelleux,,Côtes de Duras Blanc moelleux,1B117D
+Autre AOC,Tranquille,Côtes de Duras,,,Blanc sec,,Côtes de Duras Blanc sec,1B117S
+Autre AOC,Tranquille,Côtes de Duras,,,Rouge,,Côtes de Duras Rouge,1R117S
+Autre AOC,Tranquille,Côtes de Duras,,,Rosé,,Côtes de Duras Rosé,1S117S
+Autre AOC,Tranquille,Bordeaux supérieur,,,Rouge,,Bordeaux supérieur Rouge,1R105S2
+Autre AOC,Tranquille,Lussac Saint Emilion,,,Rouge,,Lussac Saint Emilion Rouge,1R139S
+Autre AOC,Tranquille,Montagne Saint Emilion,,,Rouge,,Montagne Saint Emilion Rouge,1R145S
+Autre AOC,Tranquille,Saint Emilion Grand Cru,,,Rouge,,Saint Emilion Grand Cru Rouge,1R157S
+Autre AOC,Tranquille,Saint Emilion,,,Rouge,,Saint Emilion Rouge,1R156S
 Autre AOC,Mousseux,Montlouis sur Loire,Pétillant,,Blanc,Chenin,Montlouis sur Loire Pétillant,1B225P 1
 Autre AOC,Mousseux,Champagne,,,Blanc,,Champagne Blanc,1B080M 1
 Autre AOC,Mousseux,Champagne,,,Rosé,,Champagne Rosé,1S080M 1
@@ -147,9 +154,12 @@ Autres alcools,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES
 Autres alcools,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
 Autres alcools,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
 Autres alcools,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
+Autres alcools,,Autres,,,,,Autres,
 Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autres,,DPLC,,,,,DPLC,4B988Y
 Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y
 Autres,,DPLC,,,Rouge,,DPLC Rouge,4R988Y
+Autres,Tranquille,Autres vins,,,,,Autres vins Tranquille,
+Autres,Mousseux,Autres vins,,,,,Autres vins Mousseux,
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18
