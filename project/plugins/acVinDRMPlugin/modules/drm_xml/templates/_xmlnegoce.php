@@ -30,9 +30,6 @@
 				</balance-stock>
 			</produit>
 <?php endforeach; ?>
-			<?php if (!$drm->isNegoce()): ?>
-			<stockEpuise>false</stockEpuise>
-			<?php endif; ?>
     	</droits-acquittes>
 <?php endif; ?>
 <?php if (!$drm->declaration->hasStockEpuise()): ?>
