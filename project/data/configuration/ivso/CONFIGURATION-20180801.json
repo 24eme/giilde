@@ -39269,10 +39269,17 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2000-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       }
                                    ],
                                    "cvo": [
                                    ]
-                               }
+                               },
+                               "produit_non_interpro": false
                            }
                        },
                        "departements": [
@@ -39412,10 +39419,17 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2000-01-01T00:00:00+01:00",
+                                           "taux": "9.35",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       }
                                    ],
                                    "cvo": [
                                    ]
-                               }
+                               },
+                               "produit_non_interpro": false
                            }
                        },
                        "departements": [
@@ -39650,7 +39664,7 @@
                "transfertsrecolte": {
                    "readable": 1,
                    "writable": 1,
-                   "details": "ALCOOLPUR",
+                   "details": null,
                    "revendique": 0,
                    "restriction_lies": 0,
                    "recolte": 1,
@@ -39734,7 +39748,7 @@
                "retourmarchandisetaxees": {
                    "readable": 1,
                    "writable": 1,
-                   "details": null,
+                   "details": "REINTEGRATION",
                    "revendique": 1,
                    "restriction_lies": 0,
                    "recolte": 1,
@@ -39749,7 +39763,7 @@
                "retourmarchandiseacquitte": {
                    "readable": 1,
                    "writable": 1,
-                   "details": null,
+                   "details": "REINTEGRATION",
                    "revendique": 1,
                    "restriction_lies": 0,
                    "recolte": 1,
@@ -39830,7 +39844,7 @@
                    "facturable": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "vracsanscontratsuspendu": {
@@ -39844,7 +39858,7 @@
                    "facturable": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "apportgroupement": {
@@ -39872,7 +39886,7 @@
                    "facturable": 1,
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
-                   "douane_cat_negoce": "periode/sorties-sans-paiement-droits/sorties-definitives",
+                   "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/sorties-definitives",
                    "taxable_douane": 0
                },
                "vracsanscontratacquitte": {

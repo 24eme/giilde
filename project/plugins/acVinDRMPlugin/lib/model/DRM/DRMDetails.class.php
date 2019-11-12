@@ -58,15 +58,7 @@ class DRMDetails extends BaseDRMDetails {
         return null;
     }
 
-    public function addProduit($denomination_complementaire = null, $tav = null) {
-        $detailDefaultKey = DRM::DEFAULT_KEY;
-        $detail = null;
-        if($denomination_complementaire || $tav){
-          $detail = $this->add($this->createSHA1Denom($denomination_complementaire, $tav));
-          $detail->denomination_complementaire = $denomination_complementaire;
-        }else{
-          $detail = $this->add($detailDefaultKey);
-        }
+    public function createESDetails($detail) {
         foreach ($this->getConfigDetails() as $detailConfigCat => $detailConfig) {
             foreach ($detailConfig as $detailConfigKey => $detailConfigNode) {
                 $detail->getOrAdd($detailConfigCat)->getOrAdd($detailConfigKey, null);
@@ -79,6 +71,18 @@ class DRMDetails extends BaseDRMDetails {
                 }
             }
         }
+    }
+
+    public function addProduit($denomination_complementaire = null, $tav = null) {
+        $detailDefaultKey = DRM::DEFAULT_KEY;
+        $detail = null;
+        if($denomination_complementaire || $tav){
+          $detail = $this->add($this->createSHA1Denom($denomination_complementaire, $tav));
+          $detail->denomination_complementaire = $denomination_complementaire;
+        }else{
+          $detail = $this->add($detailDefaultKey);
+        }
+        $this->createESDetails($detail);
         if($detail->isCodeDouaneAlcool()){
           $detail->add('tav',$tav);
         }

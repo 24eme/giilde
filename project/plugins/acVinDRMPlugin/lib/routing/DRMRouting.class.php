@@ -172,6 +172,11 @@ class DRMRouting {
             'type' => 'object',
             'control' => array('edition'))));
 
+            $r->prependRoute('drm_reintegration_details', new DRMDetailRoute('/drm/:identifiant/edition/:periode_version/details-reintegration/:certification/:genre/:appellation/:mention/:lieu/:couleur/:cepage/:details/:detail/:cat_key/:key', array('module' => 'drm_reintegration_details',
+                'action' => 'produit'), array('sf_method' => array('get', 'post')), array('model' => 'DRM',
+                'type' => 'object',
+                'control' => array('edition'))));
+
 
         $r->prependRoute('drm_edition_produit_addlabel', new DRMDetailRoute('/drm/:identifiant/edition/:periode_version/addlabel/:certification/:genre/:appellation/:mention/:lieu/:couleur/:cepage/:detail', array('module' => 'drm_edition',
             'action' => 'addLabel'), array('sf_method' => array('get', 'post')), array('model' => 'DRM',

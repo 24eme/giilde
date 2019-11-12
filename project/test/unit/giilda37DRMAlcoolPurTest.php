@@ -96,7 +96,7 @@ $t->is($drm->getProduit($produit_hash_matiere_premiere, 'details')->get('sorties
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->get('entrees/transfertsrecolte'), 250, $drm->_id." : transferts enregistrés dans l'alcool");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->get('tav'), 40, $drm->_id." : tav enregistré dans l'alcool");
 
-$t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->getLibelle(), 'Alcools supérieur 18° (autres que Rhum) - 40°', $drm->_id." : libellé avec TAV");
+$t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->getLibelle(), $configuration->get($produit_hash_alcoolpur)->getLibelleFormat().' - 40°', $drm->_id." : libellé avec TAV");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details')->isAlcoolPur(), true, $drm->_id." : Alcool pur ok");
 $t->is($drm->getProduit($produit_hash_alcoolpur, 'details', null, 42)->get('tav'), 42, $drm->_id." : vérification du tav alcool avec tav");
 $t->is($drm->getProduit($produit_hash_vin, 'details')->get('sorties/transfertsrecolte'), 100, $drm->_id." : transfert enregistré dans le produit vin");

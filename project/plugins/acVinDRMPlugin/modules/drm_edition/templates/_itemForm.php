@@ -55,6 +55,17 @@ $drmTeledeclaree = $detail->getDocument()->teledeclare;
                             $class .= ($detail->getConfig()->get('entrees')->get($key)->recolte) ? " recolte_entree " : "";
                             ?>
                             <li class="form-group form-group-xs <?php echo isVersionnerCssClass($form->getObject()->entrees, $key) ?>">
+                                <?php if ($form->getObject()->entrees->getConfig()->exist($key.'_details')): ?>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a id="lien_entrees_<?php echo $key ?>_details_<?php echo $detail->getHashForKey() ?>" data-toggle="modal" data-remote="false" data-target="#ajax-modal" href="<?php
+                                            echo url_for("drm_".strtolower($form->getObject()->entrees->getConfig()->get($key)->getDetails())."_details",
+                                            array('sf_subject' => $form->getObject(), 'cat_key' => 'entrees', 'key' => $key, 'details' => $detailsKey)) ?>" class="btn btn-default btn-xs click-on-space-key" type="button" tabindex="<?php echo $tabindex; ?>"><span class="glyphicon glyphicon-list-alt"></span></a>
+                                        </span>
+                                        <input type="text" id="input_entrees_<?php echo $key ?>_<?php echo $detail->getHashForKey() ?>" data-hash="<?php echo $detail->getHash() ?>" data-pointer="#lien_entrees_<?php echo $key ?>_details_<?php echo $detail->getHashForKey() ?>" class="btn_detail pointer input-float somme_detail bold_on_blur drm_input_details form-control no-state text-right <?php echo $class; ?>"
+                                        readonly="readonly" value="<?php echoFloat($detail->entrees->get($key)); ?>" tabindex="-1" />
+                                    </div>
+                                <?php else: ?>
                                 <?php
                                 $isWritable = ($detail->getConfig()->get('entrees')->get($key)->writable && !$subform->getWidget()->getAttribute('readonly'));
                                 $allAttributes = array('data-val-defaut' => $subform->getValue(), 'class' => $subform->getWidget()->getAttribute('class') . $class . ' somme_detail bold_on_blur');
@@ -64,6 +75,7 @@ $drmTeledeclaree = $detail->getDocument()->teledeclare;
                                 }
                                 echo $subform->render($allAttributes);
                                 ?>
+                                <?php endif; ?>
                             </li>
                             <?php
                         endforeach;
@@ -81,10 +93,21 @@ $drmTeledeclaree = $detail->getDocument()->teledeclare;
                             <?php
                             $isfirst = true;
                             foreach ($form['entrees'] as $key => $subform):
-                                ?>
-                                <?php
                                 if (!$detail->getConfig()->isWritableForEtablissement('entrees', $key, $etablissement, $drmTeledeclaree)){ continue; }
                                 if ($favoris_entrees->exist($key)): continue; endif;
+                                ?>
+                                <li class="form-group form-group-xs <?php echo isVersionnerCssClass($form->getObject()->entrees, $key) ?>">
+                                <?php if ($form->getObject()->entrees->exist($key.'_details')): ?>
+                                  <div class="input-group">
+                                      <span class="input-group-btn">
+                                          <a id="lien_entrees_<?php echo $key ?>_details_<?php echo $detail->getHashForKey() ?>" data-toggle="modal" data-remote="false" data-target="#ajax-modal" href="<?php
+                                          echo url_for("drm_".strtolower($form->getObject()->entrees->getConfig()->get($key)->getDetails())."_details",
+                                          array('sf_subject' => $form->getObject(), 'cat_key' => 'entrees', 'key' => $key, 'details' => $detailsKey)) ?>" class="btn btn-default btn-xs click-on-space-key" type="button" tabindex="<?php echo $tabindex; ?>"><span class="glyphicon glyphicon-list-alt"></span></a>
+                                      </span>
+                                      <input type="text" id="input_entrees_<?php echo $key ?>_<?php echo $detail->getHashForKey() ?>" data-hash="<?php echo $detail->getHash() ?>" data-pointer="#lien_entrees_<?php echo $key ?>_details_<?php echo $detail->getHashForKey() ?>" class="btn_detail pointer not_a_favoris_entrees input-float somme_detail bold_on_blur drm_input_details form-control no-state text-right <?php echo $class; ?>" readonly="readonly" value="<?php echoFloat($detail->entrees->get($key)); ?>" tabindex="-1" />
+                                  </div>
+                                <?php else: ?>
+                                <?php
                                 $class = $subform->getWidget()->getAttribute('class') . ' not_a_favoris_entrees somme_detail bold_on_blur ';
                                 $class.= ($detail->getConfig()->get('entrees')->get($key)->revendique) ? " revendique_entree " : "";
                                 $class.= ($detail->getConfig()->get('entrees')->get($key)->recolte) ? " recolte_entree " : "";
@@ -100,8 +123,8 @@ $drmTeledeclaree = $detail->getDocument()->teledeclare;
                                 }
                                 $allAttributes = array_merge($allAttributes, array('class' => $class));
                                 ?>
-                                <li class="form-group form-group-xs <?php echo isVersionnerCssClass($form->getObject()->entrees, $key) ?>">
                                     <?php echo $subform->render($allAttributes); ?>
+                                <?php endif; ?>
                                 </li>
                                 <?php
                             endforeach;

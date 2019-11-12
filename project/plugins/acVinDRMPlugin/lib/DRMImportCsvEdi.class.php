@@ -220,6 +220,7 @@ private function checkImportAnnexesFromCSV() {
 }
 
 private function importMouvementsFromCSV($just_check = false) {
+    $date = new DateTime($this->drm->getDate());
   $aggregatedEdiList = null;
   if(DRMConfiguration::getInstance()->hasAggregatedEdi()){
     $aggregatedEdiList = DRMConfiguration::getInstance()->getAggregatedEdi();
@@ -342,7 +343,7 @@ private function importMouvementsFromCSV($just_check = false) {
           continue;
         }
         $founded_produit = $produit;
-        $date = new DateTime($this->drm->getDate());
+
         if($founded_produit->getTauxCVO($date) == "-1" && $founded_produit->getTauxDouane($date) == "-1"){
 
           if($aggregatedEdiList && count($aggregatedEdiList) && count($aggregatedEdiList[0])
@@ -499,6 +500,13 @@ private function importMouvementsFromCSV($just_check = false) {
     if ($confDetailMvt->hasDetails()) {
       $detailTotalVol += $this->convertNumber($drmDetails->getOrAdd($cat_key)->getOrAdd($type_key));
 
+      if ($confDetailMvt->getDetails() == ConfigurationDetailLigne::DETAILS_REINTEGRATION) {
+        $dateReplacement = $this->getDateReplacementObject($csvRow[self::CSV_CAVE_EXPORTPAYS]);
+        $reintegration = DRMESDetailReintegration::freeInstance($this->drm);
+        $reintegration->volume = $volume;
+        $reintegration->date = ($dateReplacement)? $dateReplacement->format('Y-m-d') : null;
+        $drmDetails->getOrAdd($cat_key)->getOrAdd($type_key . '_details')->addDetail($reintegration);
+      }
       if ($confDetailMvt->getDetails() == ConfigurationDetailLigne::DETAILS_EXPORT) {
         $pays = ConfigurationClient::getInstance()->findCountry($csvRow[self::CSV_CAVE_EXPORTPAYS]);
         $export = DRMESDetailExport::freeInstance($this->drm);
@@ -518,7 +526,6 @@ private function importMouvementsFromCSV($just_check = false) {
         if ($detailNode->volume) {
           $volume+=$detailNode->volume;
         }
-        $date = new DateTime($this->drm->getDate());
         $detailNode->volume = $volume;
         $detailNode->identifiant = $vrac_id;
         $detailNode->date_enlevement = $date->format('Y-m-d');
@@ -555,21 +562,27 @@ private function importMouvementsFromCSV($just_check = false) {
       }
     }
 
-    $dateReplacement = null;
-    if (preg_match('/^2\d\d\d-\d\d-\d\d$/', $csvRow[self::CSV_CAVE_EXPORTPAYS])) {
-      $dateReplacement = new DateTime($csvRow[self::CSV_CAVE_EXPORTPAYS]);
-    }
-
-    if (preg_match('/^(2\d\d\d)(\d\d)$/', $csvRow[self::CSV_CAVE_EXPORTPAYS], $matches)) {
-      $dateReplacement = new DateTime($matches[1]."-".$matches[2]."-01");
-      $dateReplacement->modify("last day of this month");
-    }
+    $dateReplacement = $this->getDateReplacementObject($csvRow[self::CSV_CAVE_EXPORTPAYS]);
     if($dateReplacement) {
       $drmDetails->add("replacement_date", $dateReplacement->format("Y-m-d"));
     }
 
     $num_ligne++;
   }
+}
+
+private function getDateReplacementObject($csvDate) {
+    $dateReplacement = null;
+    if (preg_match('/^2\d\d\d-\d\d-\d\d$/', $csvDate)) {
+      $dateReplacement = new DateTime($csvDate);
+    }
+
+    if (preg_match('/^(2\d\d\d)(\d\d)$/', $csvDate, $matches)) {
+      $dateReplacement = new DateTime($matches[1]."-".$matches[2]."-01");
+      $dateReplacement->modify("last day of this month");
+    }
+
+    return $dateReplacement;
 }
 private function importComplementMvt($csvRow, $founded_produit, $just_check  = false){
   $type_complement = strtoupper(KeyInflector::slugify($csvRow[self::CSV_CAVE_TYPE_COMPLEMENT_PRODUIT]));
@@ -976,6 +989,15 @@ private function getIdDouane($datas)
     	!trim($datas[self::CSV_CAVE_COULEUR]) &&
     	!trim($datas[self::CSV_CAVE_CEPAGE])
 	) {
+        if(preg_match("/VT/", $datas[self::CSV_CAVE_LIBELLE_PRODUIT])) {
+
+            $certification = preg_replace('/D2([0-9]{1})$/', 'D1\1', $certification);
+        }
+        if(preg_match("/SGN/", $datas[self::CSV_CAVE_LIBELLE_PRODUIT])) {
+
+            $certification = preg_replace('/D1([0-9]{1})$/', 'D6\1', $certification);
+        }
+
 		return $certification;
 	}
 

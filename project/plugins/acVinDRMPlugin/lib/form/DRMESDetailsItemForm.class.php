@@ -37,8 +37,10 @@ abstract class DRMESDetailsItemForm extends acCouchdbObjectForm {
 
     public function doUpdateObject($values) {
         parent::doUpdateObject($values);
-        $date = new DateTime($this->getObject()->getDocument()->getDate());
-        $this->getObject()->date_enlevement = $date->format('Y-m-d');
+        if($this->getObject()->exist('date_enlevement')) {
+            $date = new DateTime($this->getObject()->getDocument()->getDate());
+            $this->getObject()->date_enlevement = $date->format('Y-m-d');
+        }
     }
 
     public function getProduitDetail() {
@@ -52,7 +54,10 @@ abstract class DRMESDetailsItemForm extends acCouchdbObjectForm {
 
     public abstract function getFormName();
 
-    public abstract function getIdentifiantChoices();
+    public function getIdentifiantChoices() {
+
+        return array();
+    }
 
     public function getPostValidatorClass() {
 

@@ -148,7 +148,8 @@ class DRMValidation extends DocumentValidation {
                     }
                 }
               }
-              if($detail->getParent()->getKey() == 'details' && ($entrees_retourmarchandisetaxees + $entrees_retourmarchandiseacquitte + $entrees_retourmarchandisesanscvo + $entrees_cooperative) && (!$detail->exist('replacement_date') || !$detail->replacement_date)) {
+
+              if($detail->getParent()->getKey() == 'details' && $detail->exist('replacement_date') && ($entrees_retourmarchandisetaxees + $entrees_retourmarchandiseacquitte + $entrees_retourmarchandisesanscvo + $entrees_cooperative) && !$detail->replacement_date) {
                 $this->addPoint('erreur', 'replacement_date', $produitLibelle, $this->generateUrl('drm_annexes', $this->document));
               }
             }

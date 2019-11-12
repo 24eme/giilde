@@ -112,6 +112,7 @@ all:
         "Bouteille 37,5 cl": 0.00375
         "Bouteille 38 cl": 0.0038
         "Bouteille 50 cl": 0.005
+        "Bouteille 62 cl": 0.0062
         "Bouteille 70 cl": 0.0070
         "Bouteille 75 cl": 0.0075
         "Bouteille 100 cl": 0.01

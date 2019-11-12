@@ -155,6 +155,15 @@ class DRMDetail extends BaseDRMDetail {
         parent::update($params);
         $this->total_debut_mois = $this->stocks_debut->initial;
         $keysDetailsToRemove = array();
+        foreach($this->entrees as $key => $item) {
+            if(!$this->entrees->exist($key."_details")) {
+                continue;
+            }
+            $this->entrees->set($key, 0);
+            foreach ($this->entrees->get($key."_details") as $detail) {
+                $this->entrees->set($key, $this->entrees->get($key) + $detail->volume);
+            }
+        }
         foreach($this->sorties as $key => $item) {
             if($item instanceof acCouchdbJson) {
                 continue;
@@ -239,7 +248,7 @@ class DRMDetail extends BaseDRMDetail {
 
         $needDateReplacement = false;
         foreach($this->entrees as $entree => $v) {
-            if($v && $this->getConfig()->get('entrees')->exist($entree) && $this->getConfig()->get('entrees')->get($entree)->needDouaneDateReplacement()) {
+            if($v && $this->getConfig()->get('entrees')->exist($entree) && $this->getConfig()->get('entrees')->get($entree)->needDouaneDateReplacement() && !$this->entrees->exist($entree.'_details')) {
                 $needDateReplacement = true;
             }
         }
@@ -440,7 +449,7 @@ class DRMDetail extends BaseDRMDetail {
             if(!$this->getDocument()->isFacturable() && $mouvement->facturable && DRMConfiguration::getInstance()->isMouvementDivisable() &&  $volume * $config->mouvement_coefficient > DRMConfiguration::getInstance()->getMouvementDivisableSeuil() ) {
                 $nbDivision = DRMConfiguration::getInstance()->getMouvementDivisableNbMonth();
                 $date = new DateTime($this->getDocument()->getDate());
-                $volumePart = round($volume / $nbDivision, 4);
+                $volumePart = round($volume / $nbDivision, FloatHelper::getInstance()->getMaxDecimalAuthorized());
                 $volumeTotal = $volume;
                 for($i=1; $i <= $nbDivision; $i++) {
                     $mouvementPart = $this->createMouvement(clone $mouvement, $hash . '/' . $key, $volumePart, $date->format('Y-m-d'));

@@ -44,11 +44,15 @@ if ($lastPeriode) {
 				$totalTotal = 0;
 
 				foreach ($produitsCouleur['agg_line']['buckets'] as $produit) {
-					$produitHash = str_replace("/declaration/certifications/AOC/genres/TRANQ/appellations/CDB/mentions/DEFAUT/lieux/DEFAUT/couleurs/blanc_moelleux",
-					"/declaration/certifications/AOC/genres/TRANQ/appellations/CDB/mentions/DEFAUT/lieux/DEFAUT/couleurs/blanc",$produit['key']."/couleurs/".$produitsCouleur['key']);
+					$produitHash=$produit['key'];
+
+					if(!ConfigurationClient::getCurrent()->exist("/declaration/certifications/AOC/genres/TRANQ/appellations/CDB/mentions/DEFAUT/lieux/DEFAUT/couleurs/blanc_moelleux")){
+						$produitHash = str_replace("/declaration/certifications/AOC/genres/TRANQ/appellations/CDB/mentions/DEFAUT/lieux/DEFAUT/couleurs/blanc_moelleux",
+						"/declaration/certifications/AOC/genres/TRANQ/appellations/CDB/mentions/DEFAUT/lieux/DEFAUT/couleurs/blanc",$produit['key']."/couleurs/".$produitsCouleur['key']);
+					}
 
 					$produitCouleurLibelle = preg_replace('/AOC /', '',ConfigurationClient::getCurrent()->get($produitHash)->getLibelleFormat());
-					
+
 					$stockInitial = (formatNumber($produit['stock_initial']['agg_column']['value']) != 0)? formatNumber($produit['stock_initial']['agg_column']['value']) : null;
 					$stockFinal = (formatNumber($produit['stock_final']['agg_column']['value']) != 0)? formatNumber($produit['stock_final']['agg_column']['value']) : null;
 					$totalMvt = (formatNumber($produit['total']['value']) != 0)? formatNumber($produit['total']['value']) : null;

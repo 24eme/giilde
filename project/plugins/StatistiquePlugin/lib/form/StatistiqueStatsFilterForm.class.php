@@ -118,9 +118,14 @@ class StatistiqueStatsFilterForm extends BaseForm
         $items = ConfigurationClient::getCurrent()->declaration->getProduits();
 
         foreach($items as $key => $item) {
-					  if(floatval($item->getDroitCVO(date('Y-m-d'))->taux)){
-							$libelles[$key] = $item->getLibelleFormat();
+						try {
+							if(floatval($item->getDroitCVO(date('Y-m-d'))->taux)){
+								$libelles[$key] = $item->getLibelleFormat();
+							}
+						} catch (sfException $e) {
+							continue;
 						}
+
         }
 
         return $libelles;

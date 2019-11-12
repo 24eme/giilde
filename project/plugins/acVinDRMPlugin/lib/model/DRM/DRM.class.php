@@ -260,6 +260,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
         $tobedeleted = array();
         foreach ($drm_suivante->declaration->getProduitsDetails() as $details) {
+            $details->getParent()->createESDetails($details);
             $details->getCepage()->remove('no_movements');
             $details->getCepage()->remove('edited');
             $details->add('no_movements', false);
@@ -805,8 +806,11 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 $listSorties[$detail->getConfig()->getHash()] = array_keys($detail->getConfig()->getSortiesSorted());
             }
             foreach ($detail->entrees as $keyEntree => $valueEntree) {
+                if ($valueEntree instanceof DRMESDetails) {
+                    continue;
+                }
                 if ($valueEntree && !in_array($keyEntree, $listEntrees[$detail->getConfig()->getHash()])) {
-                    $key_to_remove[] = $produit_hash.'/entrees/'.$keyEntree;
+                    $key_to_remove[] = $detail->getHash().'/entrees/'.$keyEntree;
 
                 }
             }
@@ -1895,7 +1899,7 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
         }
         return true;
     }
-    
+
     public function isNegoce() {
         return $this->declarant->famille == EtablissementFamilles::FAMILLE_NEGOCIANT_PUR;
     }

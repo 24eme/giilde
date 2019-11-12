@@ -82,7 +82,11 @@ $t->is($drm->getProduit($produit1_hash, 'details')->get('stocks_debut/initial'),
 $t->is($drm->getProduit($produit1_hash, 'details')->get('sorties/ventefrancecrd'),4.62,"vente frande crd OK");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('sorties/export'),2.8425,"sortie export OK");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('stocks_fin/final'),945,"stock final OK");
-$t->is($drm->getProduit($produit1_hash, 'details')->get('replacement_date'), "31/12/2017","Date de replacement OK");
+if($drm->getProduit($produit1_hash, 'details')->exist('entrees/retourmarchandisetaxees_details')) {
+    $t->is($drm->getProduit($produit1_hash, 'details')->get('entrees/retourmarchandisetaxees_details')->getFirst()->getDateFr(), "31/12/2017","Date de replacement OK");
+} else {
+    $t->is($drm->getProduit($produit1_hash, 'details')->get('replacement_date'), "31/12/2017","Date de replacement OK");
+}
 if(DRMConfiguration::getInstance()->isObservationsAuto()) {
 $t->is($drm->getProduit($produit1_hash, 'details')->get('observations'), ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->libelle_detail_ligne->details->entrees->retourmarchandisetaxees->libelle_long, "Observations OK");
 } else {
@@ -176,7 +180,13 @@ $import->importCSV();
 
 $t->is($drm2->getProduit($produit1_hash, 'details')->get('stocks_fin/final'), 944, "le stock find est celui attendu");
 $t->is($drm2->getProduit($produit1_hash, 'details')->get('entrees/retourmarchandisetaxees'), 1, "retour a le bon volume");
-$t->is($drm2->getProduit($produit1_hash, 'details')->replacement_date, '20/12/2017', "Date de replacement conservée");
+
+if($drm->getProduit($produit1_hash, 'details')->exist('entrees/retourmarchandisetaxees_details')) {
+    $t->is($drm2->getProduit($produit1_hash, 'details')->get('entrees/retourmarchandisetaxees_details')->getFirst()->getDateFr(), "20/12/2017","Date de replacement conservée");
+} else {
+    $t->is($drm2->getProduit($produit1_hash, 'details')->replacement_date, '20/12/2017', "Date de replacement conservée");
+}
+
 
 $t->is($drm2->getProduit($produit2_hash, 'details')->get('stocks_debut/initial'), 951.4625, "le stock initial est celui attendu");
 $t->is($drm2->getProduit($produit2_hash, 'details')->get('stocks_fin/final'), 944, "le stock find est celui attendu");

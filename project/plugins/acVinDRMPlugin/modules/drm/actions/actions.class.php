@@ -171,7 +171,8 @@ class drmActions extends drmGeneriqueActions {
      * @param sfWebRequest $request
      */
     public function executeVerificationEdi(sfWebRequest $request) {
-        ini_set('memory_limit', '512M');
+        ini_set('memory_limit', '256M');
+        set_time_limit(0);
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');
@@ -207,7 +208,7 @@ class drmActions extends drmGeneriqueActions {
      */
     public function executeCreationEdi(sfWebRequest $request) {
         set_time_limit(0);
-        ini_set('memory_limit', '512M');
+        ini_set('memory_limit', '256M');
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');

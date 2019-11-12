@@ -11,6 +11,7 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
     const DETAILS_EXPORT = 'EXPORT';
     const DETAILS_COOPERATIVE = 'COOPERATIVE';
     const DETAILS_ALCOOLPUR = 'ALCOOLPUR';
+    const DETAILS_REINTEGRATION = 'REINTEGRATION';
 
     public function isReadable() {
 

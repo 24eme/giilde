@@ -51,13 +51,14 @@ Autre AOC,Tranquille,Touraine,,,Rouge,,Touraine Rouge,1R235S
 Autre AOC,Tranquille,Touraine,,,Rosé,,Touraine Rosé,1S235S
 Autre AOC,Tranquille,Touraine,,Amboise,Blanc,Chenin,Touraine Amboise Blanc,1B236
 Autre AOC,Tranquille,Touraine,,Amboise,Rouge,,Touraine Amboise Rouge,1R236S
-Autre AOC,Tranquille,Touraine,,Chenonceaux,Blanc,,Touraine Chenonceaux Blanc,1B7055
+Autre AOC,Tranquille,Touraine,,Chenonceaux,Blanc,,Touraine Chenonceaux Blanc,1B705S
 Autre AOC,Tranquille,Touraine,,Chenonceaux,Rouge,,Touraine Chenonceaux Rouge,1R705S
 Autre AOC,Tranquille,Coteaux du Vendomois,,,Blanc,,Coteaux du Vendomois Blanc,1B218S
 Autre AOC,Tranquille,Coteaux du Vendomois,,,Rouge,,Coteaux du Vendomois Rouge,1R218S
 Autre AOC,Tranquille,Coteaux du Vendomois,,,Rosé,,Coteaux du Vendomois Rosé,1S218S
 Autre AOC,Tranquille,Coteaux de l'Aubance,,,Blanc,Chenin,Coteaux de l'Aubance,1B211L
 Autre AOC,Tranquille,Anjou-Villages Brissac,,,Rouge,,Anjou-Villages Brissac,1R217S
+Autre AOC,Tranquille,Jasnières,,,Blanc,,Jasnières,1B224 
 Autre AOC,Mousseux,Crémant de Loire,,,Blanc,,Crémant de Loire Blanc,1B215M
 Autre AOC,Mousseux,Crémant de Loire,,,Rosé,,Crémant de Loire Rosé,1S215M
 Autre AOC,Mousseux,Touraine,,,Blanc,,Touraine Mousseux Blanc,1B235M 1
@@ -68,6 +69,7 @@ Autre AOC,Tranquille,Bourgueil,,,Rosé,Cabernet Franc,Bourgueil Rosé,1R220S
 Autre AOC,Tranquille,Cheverny,,,Blanc,,Cheverny Blanc,1B231S
 Autre AOC,Tranquille,Cheverny,,,Rouge,,Cheverny Rouge,1R231S
 Autre AOC,Tranquille,Montlouis sur Loire,,,Blanc,Chenin,Montlouis sur Loire,1B225
+Autre AOC,Tranquille,Saint Pourçain,,,Rosé,,Saint Pourçain Rosé,1S430S
 Autre AOC,Tranquille,Saint Pourçain,,,Blanc,,Saint Pourçain Blanc,1B430S 
 Autre AOC,Tranquille,Saint Pourçain,,,Rouge,,Saint Pourçain Rouge,1R430S
 Autre AOC,Tranquille,Valençay,,,Blanc,,Valençay Blanc,1B233S
