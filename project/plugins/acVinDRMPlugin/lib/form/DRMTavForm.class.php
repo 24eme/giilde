@@ -22,7 +22,7 @@ class DRMTavForm extends BaseForm
 	{
 		$readonly = array();
 		$this->is_readonly = false;
-		if($this->_detail->isAlcoolPur() || $this->_detail->hasStockFinDeMoisDRMPrecedente()){
+		if($this->_detail->exist('tav') && $this->_detail->tav && ($this->_detail->isAlcoolPur() || $this->_detail->hasStockFinDeMoisDRMPrecedente())) {
 			$readonly = array('readonly' => 'readonly');
 		}
         $w = array('tav' => new bsWidgetFormInputFloat(array(), $readonly));
