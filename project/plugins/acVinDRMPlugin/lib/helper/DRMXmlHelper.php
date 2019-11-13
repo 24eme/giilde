@@ -379,7 +379,7 @@ function xmlGetProduitsDetails($drm, $bool, $suspendu_acquitte) {
 			continue;
 		}
 		$produits_faits[$produit_libelle] = $produit_libelle;
-		if ($drmPrecedente->exist($produit->getHash()) && $drmPrecedente->get($produit->getHash())->getCodeDouane() != $produit->getCodeDouane()) {
+		if (false && $drmPrecedente->exist('transmission_douane/success') && $drmPrecedente->transmission_douane->success && $drmPrecedente->exist($produit->getHash()) && $drmPrecedente->get($produit->getHash())->getCodeDouane() != $produit->getCodeDouane()) {
 			$produit2 = $drmPrecedente->get($produit->getHash());
 
 			$produit->stocks_debut->add('initial',  0);
