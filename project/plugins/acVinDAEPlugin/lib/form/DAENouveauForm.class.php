@@ -118,10 +118,8 @@ class DAENouveauForm extends acCouchdbObjectForm
 
     public function getDestinations() {
         if (is_null($this->_choices_destinations)) {
-        	$destinationChoicesWidget = new bsWidgetFormI18nChoiceCountry(array('culture' => 'fr', 'add_empty' => true));
-        	$destinationChoices = $destinationChoicesWidget->getChoices();
-        	unset($destinationChoices['FR']);
-        	unset($destinationChoices['']);
+            $destinationChoices = ConfigurationClient::getInstance()->getCountryList();
+            unset($destinationChoices['FR']);
             $this->_choices_destinations = array_merge(array(null => null, 'FR' => 'France'), $destinationChoices);
         }
         return $this->_choices_destinations;

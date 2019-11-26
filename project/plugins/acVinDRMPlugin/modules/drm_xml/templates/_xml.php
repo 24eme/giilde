@@ -30,7 +30,7 @@
 <?php if ($produit->getTav()): ?>
 				<tav><?php echo sprintf("%01.02f", $produit->getTav()) ?></tav>
 <?php endif; ?>
-<?php if (false && $produit->getPremix()): ?>
+<?php if ($produit->isPremix()): ?>
 				<premix>true</premix>
 <?php endif; ?>
 <?php if ($produit->exist('observations')): ?>

@@ -6,6 +6,7 @@ IP_AUTHORIZED=$3
 NUMEROSEQUENCE=0
 COUCHDBSEQFILE=$EXPORT_PATH/.couchdbseq
 CHANGESFILE=$TMP/$(date +%Y%m%d%H%M%S)_export_changes
+OPERATEURSFILE=$TMP/$(date +%Y%m%d%H%M%S)_export_operateurs
 LISTDRMFILE=$TMP/$(date +%Y%m%d%H%M%S)_export_drms
 
 if test -f $COUCHDBSEQFILE
@@ -23,14 +24,17 @@ if ! test "$EXPORT_PATH"; then
     exit;
 fi
 
-echo -n > $LISTDRMFILE
+curl http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/mouvement/_view/consultation | grep -iE "$PRODUIT" | cut -d "," -f 1 | cut -d "-" -f 2 | sort | uniq > $OPERATEURSFILE
 
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_changes?since=$NUMEROSEQUENCE > $CHANGESFILE
 LASTNUMEROSEQUENCE=$(grep "last_seq" $CHANGESFILE | sed 's/"last_seq"://' | sed 's/}//')
 
+echo -n > $LISTDRMFILE
 cat $CHANGESFILE | grep "\"DRM-" | grep -v "deleted" | cut -d "," -f 2 | sed 's/"id":"//' | sed 's/"//' | while read id
 do
-    curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/$id | jq -c '[._id,.teledeclare,.valide.date_signee,.declarant.no_accises]' | sed 's/\[//' | sed 's/\]//' | sed 's/"//g' | sed 's/null//' >> $LISTDRMFILE
+    if test $(grep $(echo -n $id | cut -d "-" -f 2) $OPERATEURSFILE | wc -l | sed -r 's/^0$//'); then
+	curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/$id | jq -c '[._id,.teledeclare,.valide.date_signee,.declarant.no_accises]' | sed 's/\[//' | sed 's/\]//' | sed 's/"//g' | sed 's/null//' >> $LISTDRMFILE
+    fi
 done
 
 mkdir -p $EXPORT_PATH 2> /dev/null
@@ -41,9 +45,9 @@ do
     DATE=$(echo $ligne | cut -d "," -f 3 | sed 's/-//g')
     NOACCISES=$(echo $ligne | cut -d "," -f 4)
     PERIODE=$(echo $ID | cut -d "-" -f 3)
-    DRMFILE=$TMP/$id$(date +%Y%m%d%H%M%S).csv
-    php symfony drm:export-csv $ID $SYMFONYTASKOPTIONS | grep -E "$PRODUIT" > $DRMFILE
-    if test $DATE && test $(cat $DRMFILE | grep -E "^CAVE;" | grep -E "$PRODUIT" | wc -l | sed -r 's/^0$//'); then
+    DRMFILE=$TMP/$ID$(date +%Y%m%d%H%M%S).csv
+    php symfony drm:export-csv $ID $SYMFONYTASKOPTIONS | grep -iE "$PRODUIT" > $DRMFILE
+    if test $DATE && test $(cat $DRMFILE | grep -E "^CAVE;" | grep -iE "$PRODUIT" | wc -l | sed -r 's/^0$//'); then
         echo $ID
         cp $DRMFILE $EXPORT_PATH/"$DATE"_"$PERIODE"_"$NOACCISES"_"$ID".csv
     fi
@@ -53,6 +57,7 @@ done
 echo $LASTNUMEROSEQUENCE > $COUCHDBSEQFILE
 rm $CHANGESFILE
 rm $LISTDRMFILE
+rm $OPERATEURSFILE
 
 if test "$IP_AUTHORIZED"; then
     echo "<RequireAny>" > $EXPORT_PATH/.htaccess.tmp

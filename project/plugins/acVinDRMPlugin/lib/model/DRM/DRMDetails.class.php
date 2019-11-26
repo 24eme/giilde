@@ -83,7 +83,7 @@ class DRMDetails extends BaseDRMDetails {
           $detail = $this->add($detailDefaultKey);
         }
         $this->createESDetails($detail);
-        if($detail->isCodeDouaneAlcool()){
+        if($detail->isCodeDouaneAlcool() || $detail->isPremix()){
           $detail->add('tav',$tav);
         }
         return $detail;

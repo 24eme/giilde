@@ -588,6 +588,13 @@ class DRMDetail extends BaseDRMDetail {
         return $this->getCepage()->getConfig()->code_douane;
     }
 
+    public function isPremix() {
+        if (preg_match('/(premix|premix)/i', $this->produit_libelle) || preg_match('/(premix|premix)/i', $this->denomination_complementaire)) {
+            return true;
+        }
+        return false;
+    }
+
     public function isCodeDouaneNonINAO(){
       $inao = $this->_get('code_inao');
       if (!$inao) {

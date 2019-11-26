@@ -7,7 +7,7 @@
 <table id="drm_reintegration_details_table" class="table table-striped">
     <thead>
         <tr>
-            <th class="col-xs-5">Date de replacement</th>
+            <th class="col-xs-5">Date de mise à la consommation</th>
             <th class="col-xs-5">Volumes</th>
             <th class="col-xs-2"></th>
         </tr>

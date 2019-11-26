@@ -133,6 +133,15 @@ class DRMExportCsvEdi extends DRMCsvEdi {
                 if (!$entreeValue) {
                     continue;
                 }
+                if ($entreeValue instanceof DRMESDetails) {
+                    foreach ($entreeValue as $entreeDetailKey => $entreeDetailValue) {
+                        if (!$entreeDetailValue->getVolume()) {
+                            continue;
+                        }
+                        $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "entrees;" . $this->getLibelleDetail($entreekey). ";" . $entreeDetailValue->getVolume() . ";".$entreeDetailValue->identifiant.";;\n";
+                    }
+                    continue;
+                }
                 $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "entrees;" . $entreekey . ";" . $entreeValue . ";;;\n";
             }
 
@@ -144,7 +153,7 @@ class DRMExportCsvEdi extends DRMCsvEdi {
                             if ($sortieDetailValue->getVolume()) {
                                 $complement = $sortieDetailValue->getIdentifiant();
 
-                                $numero_doc = ($sortieDetailValue->numero_document) ? $sortieDetailValue->numero_document : '';
+                                $numero_doc = ($sortieDetailValue->exist('numero_document') && $sortieDetailValue->numero_document) ? $sortieDetailValue->numero_document : '';
                                 if (preg_match('/export.*_details/', $sortiekey)) {
                                     $pays = $this->countryList[$sortieDetailValue->getIdentifiant()];
                                     $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "sorties;" . $this->getLibelleDetail($sortiekey) . ";" . $sortieDetailValue->getVolume() . ";" . $pays . ";;" . $numero_doc . "\n";

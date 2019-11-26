@@ -20,7 +20,7 @@
                             <ul class="list-unstyled">
                                 <?php if(DRMConfiguration::getInstance()->getRepriseDonneesUrl()): ?>
                                     <li class="col-xs-10 col-xs-offset-1">
-                                        <input type="radio" checked="checked" id="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_DOCUMENTS.'_'.$periode . '_' . $identifiant; ?>" value="<?php echo DRMClient::DRM_CREATION_DOCUMENTS; ?>" name="drmChoixCreation[type_creation]">&nbsp;<label for="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_DOCUMENTS.'_'.$periode . '_' . $identifiant; ?>">Création d'une drm pré-remplie <small>(avec détail par cépage)</small></label>
+                                        <input type="radio" checked="checked" id="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_DOCUMENTS.'_'.$periode . '_' . $identifiant; ?>" value="<?php echo DRMClient::DRM_CREATION_DOCUMENTS; ?>" name="drmChoixCreation[type_creation]">&nbsp;<label for="drmChoixCreation_type_creation_<?php echo DRMClient::DRM_CREATION_DOCUMENTS.'_'.$periode . '_' . $identifiant; ?>">Création d'une drm pré-remplie</label>
                                             <div class="pull-right"><?php echo getPointAideHtml('drm','creation_nouvelle') ?></div>
                                     </li>
                                 <?php endif; ?>
