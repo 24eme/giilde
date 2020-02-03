@@ -54,7 +54,7 @@
                         }, 0);
                     }
                     if (nextfocus == 'prevCol') {
-                        var prev = colonne.gePrevious();
+                        var prev = colonne.getPrevious();
                         if (prev) {
                             prev.focus();
                             prev.focusChamp(fieldfocus);

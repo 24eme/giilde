@@ -3,7 +3,7 @@
 . bin/config.inc
 . bin/import_functions.inc
 
-curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/drm/_view/all?reduce=false | sed -f bin/unicode2alpha | sed 's/{"id"://g' | sed 's/"key":\[//g' | sed 's/"value":1},//g' | sed 's/],//g' | grep -E '"DRM-([0-9]{8}-[0-9]{6})"' > $TMP/all_drm.csv
+curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/drm/_view/all?reduce=false | sed -f bin/unicode2alpha | sed 's/{"id"://g' | sed 's/"key":\[//g' | sed 's/"value":1},//g' | sed 's/],//g' | grep -E '"DRM-([0-9a-zA-Z]+-[0-9]{6})"' > $TMP/all_drm.csv
 
 rm $TMP/export_bi_drm.csv.temp > /dev/null 2>&1
 touch $TMP/export_bi_drm.csv.temp

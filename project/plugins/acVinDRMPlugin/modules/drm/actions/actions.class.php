@@ -106,18 +106,22 @@ class drmActions extends drmGeneriqueActions {
                   $url_reprise_donnees_drm = str_replace(":identifiant",$identifiant,$url_reprise_donnees_drm);
                   $url_reprise_donnees_drm = str_replace(":periode",$periode,$url_reprise_donnees_drm);
 
-                  $aggregate = false;
                   $drmLast = DRMClient::getInstance()->findLastByIdentifiant($identifiant);
                   if ($drmLast !== null) {
+                      $produitsTotaux = null;
                       foreach($drmLast->getProduitsDetails() as $detail) {
                           if(preg_match("/^Total/", $detail->getLibelle())) {
-                              $aggregate = true;
+                              if($produitsTotaux) {
+                                  $produitsTotaux .= '|';
+                              }
+                              $produitsTotaux .= $detail->getCouleur()->getLieu()->getConfig()->getHash();
                           }
+
                       }
                   }
 
-                  if($aggregate) {
-                      $url_reprise_donnees_drm.= '?aggregate=1';
+                  if($produitsTotaux) {
+                      $url_reprise_donnees_drm.= '?aggregate='.$produitsTotaux;
                   }
                   $discr = date('YmdHis').'_'.uniqid();
                   $md5file = md5($discr);
@@ -134,7 +138,7 @@ class drmActions extends drmGeneriqueActions {
                   if(!$resultFile && file_exists($path)){
                     return $this->redirect('drm_nouvelle', array('identifiant' => $identifiant, 'periode' => $periode));
                   }
-                  return $this->redirect('drm_creation_fichier_edi',array('identifiant' => $identifiant,'periode' => $periode,'md5' => $md5file));
+                  return $this->redirect('drm_creation_fichier_edi',array('identifiant' => $identifiant,'periode' => $periode,'md5' => $md5file,'etape' => DRMClient::ETAPE_CHOIX_PRODUITS));
                 break;
                 case DRMClient::DRM_CREATION_EDI :
                     if ($this->creationDrmForm->isValid()) {
@@ -170,7 +174,7 @@ class drmActions extends drmGeneriqueActions {
      * @param sfWebRequest $request
      */
     public function executeVerificationEdi(sfWebRequest $request) {
-        ini_set('memory_limit', '256M');
+        ini_set('memory_limit', '300M');
         set_time_limit(0);
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
@@ -207,7 +211,7 @@ class drmActions extends drmGeneriqueActions {
      */
     public function executeCreationEdi(sfWebRequest $request) {
         set_time_limit(0);
-        ini_set('memory_limit', '256M');
+        ini_set('memory_limit', '300M');
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');
@@ -219,10 +223,10 @@ class drmActions extends drmGeneriqueActions {
         $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
         $this->drmCsvEdi->importCSV();
 
-        $this->drm->etape = DRMClient::ETAPE_CHOIX_PRODUITS;
+        $this->drm->etape = $request->getParameter('etape', DRMClient::ETAPE_VALIDATION);
         $this->drm->save();
 
-        $this->redirect('drm_choix_produit', $this->drm);
+        $this->redirect('drm_redirect_etape', $this->drm);
 
     }
 

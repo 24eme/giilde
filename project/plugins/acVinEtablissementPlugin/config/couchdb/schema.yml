@@ -15,6 +15,7 @@ Etablissement:
        relance_ds: {  }
        teledeclaration_email: {  }
        nature_inao: {  }
+       mois_stock_debut: { required: false }
        recette_locale:
          type: collection
          definition:

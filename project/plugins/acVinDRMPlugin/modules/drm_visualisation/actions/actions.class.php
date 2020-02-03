@@ -12,7 +12,7 @@
  * @author mathurin
  */
 class drm_visualisationActions extends drmGeneriqueActions {
-    
+
     public function executeVisualisation(sfWebRequest $request) {
         $this->drm = $this->getRoute()->getDRM();
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
@@ -23,7 +23,19 @@ class drm_visualisationActions extends drmGeneriqueActions {
         }
         $this->hide_rectificative = $request->getParameter('hide_rectificative');
         $this->drm_suivante = $this->drm->getSuivante();
-        $this->mouvements = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndPeriode($this->drm->identifiant, $this->drm->periode);
+        if ($this->drm->isMaster()) {
+            $this->mouvements = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissementAndPeriode($this->drm->identifiant, $this->drm->periode);
+        }else{
+            $this->mouvements = array();
+            foreach($this->drm->mouvements as $operateur => $mouvements) {
+                foreach($mouvements as $key => $mouvement) {
+                    if(!$mouvement->produit_hash) {
+                        continue;
+                    }
+                    $this->mouvements[] = $mouvement;
+                }
+            }
+        }
         $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);
         $this->recapCvos = DRMClient::getInstance()->getRecapCvosByMouvements($this->mouvements);
     }

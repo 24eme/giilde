@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(51);
+$t = new lime_test(63);
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $produits = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits();
 foreach($produits as $produit) {
@@ -20,7 +20,12 @@ foreach($produits as $produit) {
     if(!isset($produit2)) {
         $produit2_hash = $produit->getHash();
         $produit2 = $produit;
-        break;
+        continue;
+    }
+    if(!isset($produitAlcool) && $produit->needTav()) {
+        $produitAlcool_hash = $produit->getHash();
+        $produitAlcool = $produit;
+        continue;
     }
 }
 
@@ -367,5 +372,64 @@ foreach ($drm9->crds as $k1 => $coul) {
         $t->is($crd->couleur, 'DEFAUT', "sans couleur, la CRD couleur par défaut est DEFAUT");
     }
 }
+
+unlink($tmpfname);
+
+$drm9->devalide();
+$drm9->delete();
+
+$periode5 = date('Y')."04";
+$t->comment("Reconnaissance de produit Alcool avec le degré");
+$temp = fopen($tmpfname, "w");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,45,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,100,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 20° (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,20,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 20° (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,50,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 60° (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,70,,,,,,\n");
+fclose($temp);
+
+$drm10 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5, true);
+$import = new DRMImportCsvEdi($tmpfname, $drm10);
+$import->importCSV();
+$drm10->save();
+$drm10->get($produitAlcool_hash.'/details/DEFAUT')->tav = 60;
+$drm10->validate();
+$drm10->save();
+
+$keyProductTav45 = $drm10->get($produitAlcool_hash.'/details')->createSHA1Denom(null, 45);
+$keyProductTav20 = $drm10->get($produitAlcool_hash.'/details')->createSHA1Denom(null, 20);
+$keyProductTav60 = 'DEFAUT';
+
+$t->is(count($drm10->get($produitAlcool_hash.'/details')->toArray(true, false)), 3, "3 produits ont été créés");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav45)->tav, 45, "Tav du 1er produit");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav45)->stocks_debut->initial, 100, "Le stock initial du 1er produit");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav45)->getLibelle(), $produitAlcool->getAppellation()->getLibelle().' - 45°', "Libellé du 1er produit");
+
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav20)->tav, 20, "Tav du 2ème produit");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav20)->stocks_debut->initial, 50, "Stock initial du 2ème produit");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav20)->getLibelle(), $produitAlcool->getAppellation()->getLibelle().' - 20°', "Le libelle du 2ème produit contient le tav");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav60)->tav, 60, "Tav du 3ème produit");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav60)->stocks_debut->initial, 70, "Stock initial du 3ème produit");
+$t->is($drm10->get($produitAlcool_hash.'/details/'.$keyProductTav60)->getLibelle(), $produitAlcool->getAppellation()->getLibelle().' - 60°', "Libellé du 3ème produit avec le tav");
+unlink($tmpfname);
+
+$periode6 = date('Y')."05";
+$temp = fopen($tmpfname, "w");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 20 (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,50,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 20° (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,20,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 45° (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,100,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 45° (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,45,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 60° (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,70,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 60° (".$produitAlcool->getCodeDouane()."),suspendu,sorties,ventefrancecrd,10,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 60° (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,60,,,,,,\n");
+
+fclose($temp);
+
+$drm11 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode6, true);
+$import = new DRMImportCsvEdi($tmpfname, $drm11);
+$import->importCSV();
+$t->is(count($drm11->get($produitAlcool_hash.'/details')->toArray(true, false)), 3, "3 produits ont été créés");
+$t->is($drm11->get($produitAlcool_hash.'/details/'.$keyProductTav60)->stocks_fin->final, 60, "Stock final du 3 ème produit");
+
 
 unlink($tmpfname);

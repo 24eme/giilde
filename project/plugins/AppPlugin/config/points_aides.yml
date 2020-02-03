@@ -137,7 +137,7 @@ all:
         crd_sortie_detruite : "Indiquer  les capsules détruites."
         crd_sortie_manquant : "Indiquer les capsules constatées manquantes lors d’un inventaire ou d’un contrôle douanier."
         crd_stock_fin : "Le stock de fin de mois est calculé automatiquement."
-        annexe_document_accompagnement: "Indiquer les documents utilisés dans le mois."
+        annexe_document_accompagnement: "Indiquer les documents papiers utilisés dans le mois."
         annexe_daadac : "DAA/DAC (=DCA)"
         annexe_dsadsac : "DSA/DSAC. Documents servant pour la vente à un débitant, un particulier ou un entrepositaire agréé ne travaillant qu’en droits acquittés (n° d’identification sous la forme FR 000 000 A 0000)."
         annexe_empreinte : "Empreinte. Uniquement en cas de détention d’une machine à timbrer."

@@ -24,7 +24,7 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
                         <div class="panel-heading " style="cursor:pointer;" id="drm_annexes_documents" >
                           <div class="row" data-toggle="collapse" data-parent="#accordion" href="#collapse_documents" aria-expanded="true" aria-controls="collapse_documents">
                             <div class="col-xs-11">
-                              <h3 class="panel-title text-center"><strong>Déclaration des documents d'accompagnement</strong></h3>
+                              <h3 class="panel-title text-center"><strong>Déclaration des documents d'accompagnement papier</strong></h3>
                             </div>
                             <div class="col-xs-1 text-right">
                               <a role="button" >

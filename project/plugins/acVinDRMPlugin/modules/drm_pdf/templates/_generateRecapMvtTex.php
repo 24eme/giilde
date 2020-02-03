@@ -41,7 +41,7 @@ if(!isset($tabTitle)) {
             $entete .='C{' . $size_col . 'mm}|';
         }
         $entete .='}';
-        if ($index_page > 0) {
+        if ($index_page == 1) {
             $libelleCertif .= ' (Suite)';
         }
         $maxCol = 2 + $nb_produits_per_page;

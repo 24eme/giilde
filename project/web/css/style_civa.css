@@ -200,3 +200,28 @@ ul.navbar-nav  > .active > a:focus {
     color: #555 !important;
 
 }
+
+/***
+ * ERROR 404
+ ****************/
+
+#error_page {
+    margin-left: 40px;
+}
+
+#error_page img{
+    float: left;
+    margin-right:36px;
+}
+
+#error_page h1{
+    font-size:20px;
+    font-weight:normal;
+    line-height:26px;
+    margin:0 0 0 20px;
+    padding:0 10px;
+}
+
+#error_page li{
+    list-style: square;
+}

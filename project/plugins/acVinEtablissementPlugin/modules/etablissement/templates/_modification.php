@@ -14,7 +14,7 @@
         <?php echo $etablissementForm['nom']->renderLabel(null, array("class" => "col-xs-4 control-label")); ?>
         <div class="col-xs-8"><?php echo $etablissementForm['nom']->render(); ?></div>
     </div>
-    
+
     <div class="form-group<?php if($etablissementForm['nature_inao']->hasError()): ?> has-error<?php endif; ?>">
         <?php echo $etablissementForm['nature_inao']->renderError(); ?>
         <?php echo $etablissementForm['nature_inao']->renderLabel(null, array("class" => "col-xs-4 control-label")); ?>
@@ -45,6 +45,13 @@
         <?php echo $etablissementForm['no_accises']->renderLabel(null, array("class" => "col-xs-4 control-label")); ?>
         <div class="col-xs-8"><?php echo $etablissementForm['no_accises']->render(); ?></div>
     </div>
+
+    <div class="form-group<?php if($etablissementForm['mois_stock_debut']->hasError()): ?> has-error<?php endif; ?>">
+      <?php echo $etablissementForm['mois_stock_debut']->renderError(); ?>
+      <?php echo $etablissementForm['mois_stock_debut']->renderLabel(null, array("class" => "col-xs-4 control-label")); ?>
+      <div class="col-xs-8"><?php echo $etablissementForm['mois_stock_debut']->render(); ?></div>
+    </div>
+
     <div class="form-group<?php if($etablissementForm['commentaire']->hasError()): ?> has-error<?php endif; ?>">
         <?php echo $etablissementForm['commentaire']->renderError(); ?>
         <?php echo $etablissementForm['commentaire']->renderLabel(null, array("class" => "col-xs-4 control-label")); ?>

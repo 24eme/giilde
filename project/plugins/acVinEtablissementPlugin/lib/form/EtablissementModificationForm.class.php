@@ -24,10 +24,13 @@ class EtablissementModificationForm extends CompteGeneriqueForm {
 
         $this->setWidget('famille', new bsWidgetFormChoice(array('choices' => $this->getFamilles())));
         $this->setWidget('nom', new bsWidgetFormInput());
-        $this->setWidget('region', new bsWidgetFormChoice(array('choices' => self::getRegions())));        
+        $this->setWidget('region', new bsWidgetFormChoice(array('choices' => self::getRegions())));
         $this->setWidget('nature_inao', new bsWidgetFormChoice(array('choices' => self::getNaturesInao())));
         $this->setWidget('no_accises', new bsWidgetFormInput());
-        $this->setWidget('commentaire', new bsWidgetFormTextarea(array(), array('style' => 'width: 100%;resize:none;')));        $this->setWidget('site_fiche', new bsWidgetFormInput());
+        $this->setWidget('commentaire', new bsWidgetFormTextarea(array(), array('style' => 'width: 100%;resize:none;')));
+        $this->setWidget('site_fiche', new bsWidgetFormInput());
+        $this->setWidget('mois_stock_debut', new bsWidgetFormChoice(array('choices' => $this->getMonths())));
+
 
         $this->widgetSchema->setLabel('famille', 'Famille *');
         $this->widgetSchema->setLabel('nom', 'Nom du chai *');
@@ -36,6 +39,8 @@ class EtablissementModificationForm extends CompteGeneriqueForm {
         $this->widgetSchema->setLabel('no_accises', "N° d'Accise");
         $this->widgetSchema->setLabel('commentaire', 'Commentaire');
         $this->widgetSchema->setLabel('site_fiche', 'Site Fiche Publique');
+        $this->widgetSchema->setLabel('mois_stock_debut', 'Mois de début de declaration DRM');
+
 
         $this->setValidator('famille', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getFamilles()))));
         $this->setValidator('nom', new sfValidatorString(array('required' => true)));
@@ -44,6 +49,7 @@ class EtablissementModificationForm extends CompteGeneriqueForm {
         $this->setValidator('site_fiche', new sfValidatorString(array('required' => false)));
         $this->setValidator('no_accises', new sfValidatorString(array('required' => false)));
         $this->setValidator('commentaire', new sfValidatorString(array('required' => false)));
+        $this->setValidator('mois_stock_debut', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getMonths()))));
 
         if (!$this->etablissement->isCourtier()) {
             $this->setWidget('cvi', new bsWidgetFormInput());
@@ -75,7 +81,7 @@ class EtablissementModificationForm extends CompteGeneriqueForm {
     public static function getNaturesInao() {
         return EtablissementClient::getNaturesInao();
     }
-    
+
     public function getTypeDR() {
         return EtablissementClient::getTypeDR();
     }
@@ -88,6 +94,22 @@ class EtablissementModificationForm extends CompteGeneriqueForm {
         } else {
             $this->etablissement->setCartePro($values['carte_pro']);
         }
+        if (!$this->etablissement->exist('mois_stock_debut')) {
+            $this->etablissement->add('mois_stock_debut', $values['mois_stock_debut']);
+        } else {
+            $this->etablissement->mois_stock_debut = $values['mois_stock_debut'];
+        }
+    }
+
+    public function getMonths()
+    {
+      $dateFormat = new sfDateFormat('fr_FR');
+      $results = array('' => '');
+      for ($i = 1; $i <= 12; $i++) {
+            $month = $dateFormat->format(date('Y').'-'.$i.'-01', 'MMMM');
+            $results[$i] = $month;
+      }
+      return $results;
     }
 
     public function updateEmbedForm($name, $form) {

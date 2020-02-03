@@ -122,9 +122,17 @@ class couchClient extends couch {
 	protected function _queryAndTest ( $method, $url,$allowed_status_codes, $parameters = array(),$data = NULL ) {
 // 		print_r($method.' '.$url."\n");
 // 		print_r($parameters);
+		if (sfConfig::get('sf_debug')) {
+			$memory = memory_get_usage();
+			$timer = sfTimerManager::getTimer("CouchDB", true);
+		}
 		$raw = $this->query($method,$url,$parameters,$data);
 // 		echo $raw."\n";
 		$response = $this->parseRawResponse($raw, $this->results_as_array);
+		if (sfConfig::get('sf_debug')) {
+			$memoryUse = memory_get_usage() - $memory;
+			CouchdbDebugManager::addQuery($url, $method, $parameters, $timer->addTime(), $memoryUse);
+		}
 		$this->results_as_array = false;
 // 		print_r($response);
 		if ( in_array($response['status_code'], $allowed_status_codes) ) {

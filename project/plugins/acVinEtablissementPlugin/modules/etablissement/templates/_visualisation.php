@@ -57,6 +57,24 @@
             </div>
         </div>
     <?php endif; ?>
+
+    <?php if($etablissement->exist('mois_stock_debut')): ?>
+      <div class="list-group-item text-center">
+        <div class="row">
+          <div class="col-xs-12  text-left">
+              <div class="row">
+                  <div class="col-xs-3">
+                      <strong>Mois de saisie du stock :</strong>
+                  </div>
+                  <div class="col-xs-9">
+                      <strong><?php echo ucfirst(format_date(date("Y")."-".$etablissement->mois_stock_debut."-01", 'MMMM', 'fr_FR')); ?></strong>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+
     <div class="list-group-item text-muted<?php echo ($etablissement->isSuspendu()) ? ' disabled': '' ?>">
         <?php if ($etablissement->isSameCompteThanSociete()): ?>
             <div class="row">

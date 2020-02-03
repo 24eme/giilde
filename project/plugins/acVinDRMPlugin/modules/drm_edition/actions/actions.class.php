@@ -3,7 +3,7 @@
 class drm_editionActions extends drmGeneriqueActions {
 
     public function executeMatierePremiere(sfWebRequest $request) {
-
+        ini_set('memory_limit', '1024M');
         $this->isTeledeclarationMode = $this->isTeledeclarationDrm();
         $this->drm = $this->getRoute()->getDRM();
         $this->initDeleteForm();

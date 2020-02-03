@@ -122,12 +122,20 @@
 
         this.updateScroll = function ()
         {
-            if (this.hasActive())
-            {
-                this.element_saisies.scrollTo(this.getActive().element, 200);
-            } else if (this.hasFocus())
-            {
-                this.element_saisies.scrollTo(this.getFocus().element, 200);
+            var colToScroll = null;
+
+            if (this.hasActive()) {
+                colToScroll = this.getActive();
+            } else if (this.hasFocus()) {
+                colToScroll = this.getFocus();
+            }
+
+            if(colToScroll && colToScroll.getPrevious()) {
+                colToScroll = colToScroll.getPrevious();
+            }
+
+            if(colToScroll) {
+                this.element_saisies.scrollTo(colToScroll.element, 200);
             } else
             {
                 this.element_saisies.scrollTo({top: 0, left: 0}, 200);
@@ -510,7 +518,7 @@
             return null;
         }
 
-        this.gePrevious = function () {
+        this.getPrevious = function () {
             var last = false;
 
             for (key in this.colonnes.colonnes) {

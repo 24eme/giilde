@@ -55,7 +55,7 @@ $drmTeledeclaree = $detail->getDocument()->teledeclare;
                             $class .= ($detail->getConfig()->get('entrees')->get($key)->recolte) ? " recolte_entree " : "";
                             ?>
                             <li class="form-group form-group-xs <?php echo isVersionnerCssClass($form->getObject()->entrees, $key) ?>">
-                                <?php if ($form->getObject()->entrees->getConfig()->exist($key.'_details')): ?>
+                                <?php if ($form->getObject()->entrees->exist($key.'_details')): ?>
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <a id="lien_entrees_<?php echo $key ?>_details_<?php echo $detail->getHashForKey() ?>" data-toggle="modal" data-remote="false" data-target="#ajax-modal" href="<?php

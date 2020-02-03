@@ -31,16 +31,8 @@ class FloatHelper
     }
 
     public function format($number, $defaultDecimalFormat = null, $maxDecimalAuthorized = null, $format = null, $milliSeparate = false) {
-        if($number === "") {
-            $number = null;
-        }
-
-        if (is_null($number)) {
+        if ($number === "" || is_null($number)) {
             return null;
-        }
-
-        if(is_null($format)) {
-            $format = "%01.0%df";
         }
 
         $int = $number;

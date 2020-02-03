@@ -36,12 +36,20 @@ function sprintFloat($float, $format = "%01.02f") {
 
 function echoFloatWithHl($float) {
     if(!$float){
-        echo '';
-
-        return;
+        return '';
     }
 
-    echo FloatHelper::getInstance()->format($float).' hl';
+    $float = FloatHelper::getInstance()->format($float);
+
+    // credits: https://stackoverflow.com/a/2966878
+    $rounded = intval($float * 100) / 100.0;
+    if ($rounded == $float) {
+        $format = "%.02f";
+    } else {
+        $format = "%g";
+    }
+
+    echo sprintf($format, $float) . ' hl';
 }
 
 

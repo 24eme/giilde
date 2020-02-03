@@ -3,7 +3,7 @@
         <div id="contenu_etape">
 		<h2>Transmission de votre DRM à la Douane</h2>
 <?php if (!$drm->transmission_douane->success) : ?>
-    <center><img src="/images/2douane_failed.png" width=200 height=150/></center>
+    <center><img src="../../../../images/2douane_failed.png" width=200 height=150/></center>
 <?php
     echo DRMConfiguration::getInstance()->getXmlTransfertEchec($cielResponse);
 else: ?>

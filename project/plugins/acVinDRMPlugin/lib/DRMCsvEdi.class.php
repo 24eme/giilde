@@ -69,7 +69,7 @@ class DRMCsvEdi extends CsvFile {
     protected static $permitted_types = array(self::TYPE_CAVE,
         self::TYPE_CRD,
         self::TYPE_ANNEXE);
-    protected static $permitted_annexes_type_mouvements = array('DEBUT', 'FIN');
+    protected static $permitted_annexes_type_mouvements = array('DEBUT', 'FIN', 'NB');
     protected $drm = null;
     protected $csv = null;
     protected static $genres = array('MOU' => 'Mousseux', 'EFF' => 'Effervescent', 'TRANQ' => 'Tranquille');

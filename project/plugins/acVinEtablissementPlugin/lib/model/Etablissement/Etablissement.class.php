@@ -426,4 +426,12 @@ class Etablissement extends BaseEtablissement implements InterfaceCompteGeneriqu
       return $this->getSociete()->hasLegalSignature();
     }
 
+    public function getMoisToSetStock()
+    {
+        if ($this->exist('mois_stock_debut') && $this->mois_stock_debut) {
+            return $this->mois_stock_debut;
+        }
+        return DRMPaiement::NUM_MOIS_DEBUT_CAMPAGNE;
+    }
+
 }
