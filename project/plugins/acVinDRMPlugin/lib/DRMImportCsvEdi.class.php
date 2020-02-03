@@ -841,6 +841,7 @@ private function importComplementMvt($csvRow, $founded_produit, $num_ligne, $jus
 
 private function importCrdsFromCSV($just_check = false) {
   $num_ligne = 0;
+  $edited = false;
   $etablissementObj = $this->drm->getEtablissementObject();
 
   $crd_regime = ($etablissementObj->exist('crd_regime'))? $etablissementObj->get('crd_regime') : EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU;
@@ -917,8 +918,12 @@ private function importCrdsFromCSV($just_check = false) {
       }
       if (!preg_match('/^stock/', $fieldNameCrd) || $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} == null) {
         $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} += intval($quantite);
+        $edited = true;
       }
     }
+  }
+  if ($edited) {
+      $this->drm->updateStockFinDeMoisAllCrds();
   }
   return $this->csvDoc->hasErreurs();
 }

@@ -6,7 +6,7 @@
                     <?php foreach ($lastDrmToCompleteAndToStart as $etb => $drmsByEtb) : ?>
 
                                     <?php if ($drmsByEtb->statut == DRMCalendrier::STATUT_EN_COURS): ?>
-                                        <li class="list-group-item text-warning">
+                                        <li class="list-group-item">
                                           <div class="row">
                                               <div class="col-xs-12">
                                               <h4><?php echo $drmsByEtb->nom . ' (' . $etb . ')'; ?></h4>
@@ -42,10 +42,10 @@
                                             }
                                         }
                                         ?>
-                                        <li class="list-group-item text-warning">
+                                        <li class="list-group-item">
                                           <div class="row">
                                               <div class="col-xs-12">
-                                              <h4><?php echo $drmsByEtb->nom . ' (' . $etb . ')'; ?></h4>
+                                              <h4><?php echo $drmsByEtb->nom . ' - ' . $drmsByEtb->no_accises . ' (' . $etb . ')'; ?></h4>
                                             </div>
                                             </div>
                                             <div class="row">
