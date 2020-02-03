@@ -13,17 +13,17 @@ $gitcommit = file_get_contents('../../.git/ORIG_HEAD');
         <?php include_stylesheets() ?>
         <!-- Bootstrap core CSS -->
         <?php if(file_exists(sfConfig::get('sf_web_dir')."/css/bootstrap_".sfConfig::get('sf_app').'.css')): ?>
-            <link href="<?php echo public_path("/css/bootstrap_".sfConfig::get('sf_app').".css") ?>" rel="stylesheet">
+            <link href="<?php echo public_path("/css/bootstrap_".sfConfig::get('sf_app').".css").'?'.$gitcommit; ?>" rel="stylesheet">
         <?php else: ?>
             <link href="<?php echo public_path("/css/bootstrap.css") ?>" rel="stylesheet">
         <?php endif; ?>
-        <link href="<?php echo public_path("/components/select2/select2.css?201806260925") ?>" rel="stylesheet">
-        <link href="<?php echo public_path("/components/select2/select2-bootstrap.min.css") ?>" rel="stylesheet">
-        <link href="<?php echo public_path("/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css") ?>" rel="stylesheet">
-        <link href="<?php echo public_path("/components/vins/vins.css") ?>" rel="stylesheet">
-        <link href="<?php echo public_path("/css/style.css?201904250946") ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/select2/select2.css").'?'.$gitcommit; ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/select2/select2-bootstrap.min.css").'?'.$gitcommit; ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css").'?'.$gitcommit; ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/components/vins/vins.css").'?'.$gitcommit; ?>" rel="stylesheet">
+        <link href="<?php echo public_path("/css/style.css").'?'.$gitcommit; ?>" rel="stylesheet">
         <?php if(file_exists(sfConfig::get('sf_web_dir')."/css/style_".sfConfig::get('sf_app').'.css')): ?>
-            <link href="<?php echo public_path("/css/style_".sfConfig::get('sf_app').".css?201902051533") ?>" rel="stylesheet">
+            <link href="<?php echo public_path("/css/style_".sfConfig::get('sf_app').".css").'?'.$gitcommit; ?>" rel="stylesheet">
         <?php endif; ?>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -57,12 +57,12 @@ $gitcommit = file_get_contents('../../.git/ORIG_HEAD');
         <script src="<?php echo public_path("/js/form.js") ?>"></script>
         <script src="<?php echo public_path("/js/colonnes.js?$gitcommit") ?>"></script>
         <script src="<?php echo public_path("/js/main.js?$gitcommit") ?>"></script>
-        <script src="<?php echo public_path("/js/teledeclaration.js") ?>"></script>
-        <script src="<?php echo public_path("/js/conditionnement.js") ?>"></script>
-        <script src="<?php echo public_path("/js/vrac.js") ?>"></script>
+        <script src="<?php echo public_path("/js/teledeclaration.js?$gitcommit") ?>"></script>
+        <script src="<?php echo public_path("/js/conditionnement.js?$gitcommit") ?>"></script>
+        <script src="<?php echo public_path("/js/vrac.js?$gitcommit") ?>"></script>
         <script src="<?php echo public_path("/js/drm.js?$gitcommit") ?>"></script>
-        <script src="<?php echo public_path("/js/contacts.js") ?>"></script>
-        <script src="<?php echo public_path("/js/facture.js") ?>"></script>
+        <script src="<?php echo public_path("/js/contacts.js?$gitcommit") ?>"></script>
+        <script src="<?php echo public_path("/js/facture.js?$gitcommit") ?>"></script>
         <script src="<?php echo public_path("/js/stats.js?$gitcommit") ?>"></script>
         <script src="<?php echo public_path("/js/lib/jquery.sticky.js") ?>"></script>
   </body>
