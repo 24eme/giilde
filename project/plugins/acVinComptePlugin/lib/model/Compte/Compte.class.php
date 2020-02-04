@@ -325,7 +325,7 @@ class Compte extends BaseCompte implements InterfaceCompteGenerique {
         $ldap = new CompteLdap();
         $groupldap = new CompteGroupLdap();
 
-        $compteid = ($this->isSocieteContact()) ? $this->getSociete()->identifiant : $this->identifiant;
+        $compteid = $this->getSociete()->identifiant;
 
         // récupération des groupes LDAP du compte
         $groupes = $groupldap->getMembership($compteid);
@@ -335,15 +335,15 @@ class Compte extends BaseCompte implements InterfaceCompteGenerique {
 
             if (sfConfig::get('app_ldap_autogroup', false)) {
                 $groupes_a_garder = [];
+                $groupes_a_garder = $groupldap->saveLdapGroup($this->tags->toArray(), $compteid);
 
-                foreach ($this->tags as $type => $tags) {
-                    foreach ($tags as $group) {
-                        $groupldap->saveGroup($type."_".$group, $compteid);
-
-                        // On récupère les groupes
-                        $groupes_a_garder[] = $group;
-                    }
-                }
+                $groupes_a_garder = array_merge(
+                    $groupes_a_garder,
+                    $groupldap->saveLdapGroup(
+                        $this->getSociete()->getMasterCompte()->tags->toArray(),
+                        $compteid
+                    )
+                );
 
                 // ex_groupes contient les groupes qui ne sont plus liés au compte
                 $ex_groupes = array_diff($groupes, $groupes_a_garder);

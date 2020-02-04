@@ -21,6 +21,13 @@ class DRMCepage extends BaseDRMCepage {
         return array($this->getHash() => $this);
     }
 
+    public function getDetailsNoeud($detailsKey) {
+        if($detailsKey != DRM::DETAILS_KEY_ACQUITTE && $detailsKey != DRM::DETAILS_KEY_SUSPENDU) {
+            throw new sfException(sprintf("La clé détail %s n'est pas autorisé", $detailsKey));
+        }
+        return $this->get($detailsKey);
+    }
+
     public function addDetailsNoeud($detailsKey) {
         if($detailsKey != DRM::DETAILS_KEY_ACQUITTE && $detailsKey != DRM::DETAILS_KEY_SUSPENDU) {
 

@@ -12,6 +12,10 @@ class CompteGroupLdap extends acVinLdap
         ]
     ];
 
+    public static $blacklist = [
+        '_rouge', '_rose', '_blanc_sec', '_blanc_moelleux', '_blanc_doux', '_blanc'
+    ];
+
     /**
      * Vérifie la présence d'un groupe dans le LDAP, et ajoute
      * un membre s'il n'est pas déjà présent
@@ -31,6 +35,32 @@ class CompteGroupLdap extends acVinLdap
         if (! $this->memberExists($cn, $fdn)) {
             return $this->addMember($cn, $fdn);
         }
+    }
+
+    /**
+     * Sauve les groupes du tableau $t pour le compte $compteid
+     *
+     * @param array $t Tableau de tags
+     * @param string $compteid Identifiant du compte
+     *
+     * @return array $groupes_a_garder La liste des groupes sauvés
+     */
+    public function saveLdapGroup(array $t, $compteid)
+    {
+        $groupes_a_garder = [];
+
+        foreach ($t as $type => $tags) {
+            foreach ($tags as $group) {
+                $group = str_replace(self::$blacklist, '', $group);
+                $group = $type.'_'.$group;
+                $this->saveGroup($group, $compteid);
+
+                // On récupère les groupes
+                $groupes_a_garder[] = $group;
+            }
+        }
+
+        return $groupes_a_garder;
     }
 
     /**

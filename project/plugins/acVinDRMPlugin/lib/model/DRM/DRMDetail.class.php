@@ -675,7 +675,8 @@ class DRMDetail extends BaseDRMDetail {
         }
         $c = (isset($correspondances[$this->getGenre()->getHash()])) ? $correspondances[$this->getGenre()->getHash()] : null;
         if (!$c) {
-            throw new sfException('correspondances_produits not found in configuration app.yml for key '.$this->getGenre()->getHash());
+            //throw new sfException('correspondances_produits not found in configuration app.yml for key '.$this->getGenre()->getHash());
+            return null;
         }
         if (is_array($c)) {
             $keys = array_keys($c);
