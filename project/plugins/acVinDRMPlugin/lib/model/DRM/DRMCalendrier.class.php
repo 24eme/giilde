@@ -302,6 +302,7 @@ class DRMCalendrier {
             if (!array_key_exists($etb->identifiant, $drmLastWithStatut)) {
                 $drmLastWithStatut[$etb->identifiant] = new stdClass();
                 $drmLastWithStatut[$etb->identifiant]->nom = $etb->nom;
+                $drmLastWithStatut[$etb->identifiant]->no_accises = $etb->no_accises;
                 $drmLastWithStatut[$etb->identifiant]->statut = self::STATUT_VALIDEE;
                 $drmLastWithStatut[$etb->identifiant]->periode = null;
             }

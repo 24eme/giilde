@@ -10,7 +10,7 @@
             <div id="calendrier_item_<?php echo $periode ?>_<?php echo $etb->identifiant ?>" style="<?php if($multiEtablissement): ?>display: none;<?php endif; ?>">
                 <div class="text-center">
                     <p class="etablissement_nom"><?php echo $etb->nom; ?></p>
-                    <p class="etablissement_identifiant"><?php echo $etb->identifiant; ?></p>
+                    <p class="etablissement_identifiant"><?php echo $etb->no_accises; ?> - <?php echo $etb->identifiant; ?></p>
                     <p class="lignestatut">Etat : <span class="statut"><?php echo getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?></span>&nbsp;<?php echo getPointAideHtml('drm','etats') ?><br/>&nbsp;<?php echo getTeledeclareeLabelCalendrier($isTeledeclarationMode && !(sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte()), $calendrier, $periode) ?></p>
                     <?php $lien = getEtatDRMHrefCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?>
                     <?php if ($lien) : ?>
