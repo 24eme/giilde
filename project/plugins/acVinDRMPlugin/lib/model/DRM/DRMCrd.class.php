@@ -11,8 +11,8 @@ class DRMCrd extends BaseDRMCrd {
     }
 
     public function getLibelle(){
-        return ($this->couleur === DRMClient::DRM_CRD_DEFAUT)
-            ? str_replace('Bouteille', '', $this->detail_libelle)
+        return ($this->couleur === DRMClient::DRM_CRD_DEFAUT || !$this->couleur)
+            ? preg_replace('/Bouteilles? */i', '', $this->detail_libelle)
             : DRMClient::$drm_crds_couleurs[$this->couleur].' - '.str_replace('Bouteille', '', $this->detail_libelle);
     }
 

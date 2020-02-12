@@ -1904,6 +1904,10 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
         return $this->declarant->famille == EtablissementFamilles::FAMILLE_NEGOCIANT_PUR;
     }
 
+    public function canSetStockDebutMois() {
+       return (!$this->hasPrecedente() || $this->changedToTeledeclare() || $this->changedImportToCreation() || $this->isMoisOuvert());
+    }
+
     public function isMoisOuvert() {
       $mois = ($this->getEtablissementObject())? $this->getEtablissementObject()->getMoisToSetStock() : DRMPaiement::NUM_MOIS_DEBUT_CAMPAGNE;
       return (DRMClient::getInstance()->getMois($this->periode) == $mois)? true : false;

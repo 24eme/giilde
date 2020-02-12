@@ -44,9 +44,9 @@ function echoFloatWithHl($float) {
     // credits: https://stackoverflow.com/a/2966878
     $rounded = intval($float * 100) / 100.0;
     if ($rounded == $float) {
-        $format = "%.02f";
+        $format = "%.0".FloatHelper::getInstance()->getDefaultDecimalFormat()."f";
     } else {
-        $format = "%g";
+        $format = "%.0".FloatHelper::getInstance()->getMaxDecimalAuthorized()."f";
     }
 
     echo sprintf($format, $float) . ' hl';

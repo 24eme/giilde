@@ -149,6 +149,12 @@ class DRMImportCsvEdi extends DRMCsvEdi {
       }
       $has_default_hash = DRMConfiguration::getInstance()->hasEdiDefaultProduitHash();
 
+      if ($this->drm->canSetStockDebutMois()) {
+          $this->drm->remove('declaration');
+          $this->drm->add('declaration');
+      }
+
+
       foreach ($this->getDocRows() as $datas) {
         if (KeyInflector::slugify(trim($datas[self::CSV_TYPE])) != self::TYPE_CAVE) {
             continue;
@@ -160,7 +166,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
         if (isset($this->cache2datas[$cacheid])) {
             continue;
         }
-        if($csvRow[self::CSV_CAVE_VOLUME] === "") {
+        if(!isset($csvRow[self::CSV_CAVE_VOLUME]) || $csvRow[self::CSV_CAVE_VOLUME] === "") {
             continue;
         }
 
@@ -196,14 +202,11 @@ class DRMImportCsvEdi extends DRMCsvEdi {
           if (preg_match('/^(...)?#/', $datas[self::CSV_TYPE])) {
               continue;
           }
-          if (strtoupper(KeyInflector::slugify($datas[self::CSV_TYPE])) != self::TYPE_CAVE) {
+          if (strtoupper(KeyInflector::slugify(trim($datas[self::CSV_TYPE]))) != self::TYPE_CAVE) {
               continue;
           }
           if (isset($this->cache[$this->getCacheKeyFromData($datas)])) {
               continue;
-          }
-          if (KeyInflector::slugify(trim($datas[self::CSV_TYPE])) != self::TYPE_CAVE) {
-            continue;
           }
 
           $founded_produit = null;
@@ -575,7 +578,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
           $denomination_complementaire = $this->cache2datas[$this->getCacheKeyFromData($datas)]['denomination_complementaire'];
           $founded_produit = $this->cache2datas[$this->getCacheKeyFromData($datas)]['founded_produit'];
 
-          if ($this->drmPrecedente && $this->drmPrecedente->teledeclare && !preg_match('/08$/', $this->drmPrecedente->periode)
+          if ($this->drmPrecedente && $this->drmPrecedente->teledeclare && !$this->drm->canSetStockDebutMois()
            && $this->drmPrecedente->exist($produit->getHash()) && isset($this->cache2datas[$this->getCacheKeyFromData($datas)][self::CSV_CAVE_VOLUME])) {
 
               $details_precedent = $this->drmPrecedente->get($produit->getHash());
@@ -900,13 +903,36 @@ private function importComplementMvt($csvRow, $founded_produit, $num_ligne, $jus
   }
 }
 
+private static function cdrreversekeyid($regime, $genre, $couleur, $libelle) {
+    if (!$couleur) {
+        $couleur = 'DEFAUT';
+    }
+    return $regime.'-'.$genre.'-'.$couleur.'-'.DRMClient::convertCRDLitrage($libelle);
+}
+
 private function importCrdsFromCSV($just_check = false) {
+   if ($this->drm->canSetStockDebutMois()) {
+       $this->drm->remove('crds');
+       $this->drm->add('crds');
+   }
   $num_ligne = 0;
   $edited = false;
   $etablissementObj = $this->drm->getEtablissementObject();
 
   $crd_regime = ($etablissementObj->exist('crd_regime'))? $etablissementObj->get('crd_regime') : EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU;
   $all_contenances = VracConfiguration::getInstance()->getContenancesSlugified();
+
+  $crd_precedente = array();
+  foreach($this->drmPrecedente->crds as $regime => $crds) {
+      foreach($crds as $key => $crd) {
+          $kid = self::cdrreversekeyid($regime, $crd->genre, $crd->couleur, $crd->detail_libelle);
+          if (!isset($crd_precedente[$kid])) {
+              $crd_precedente[$kid] = array();
+          }
+          $crd_precedente[$kid][] = $crd->getKey();
+      }
+  }
+
   foreach ($this->getDocRows() as $csvRow) {
     $num_ligne++;
     if (KeyInflector::slugify($csvRow[self::CSV_TYPE] != self::TYPE_CRD)) {
@@ -949,7 +975,14 @@ private function importCrdsFromCSV($just_check = false) {
     $centilitrage = $all_contenances[$litrageKey];
     $litrageLibelle = DRMClient::getInstance()->getLibelleCRD($litrageKey);
     $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
-    $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
+    $keyNode = null;
+    $reverseKey = self::cdrreversekeyid($regime, $genre, $couleur, $litrageLibelle);
+    if (isset($crd_precedente[$reverseKey])) {
+        $keyNode = array_pop($crd_precedente[$reverseKey]);
+    }
+    if (!$keyNode) {
+        $keyNode = $regimeNode->constructKey($genre, $couleur, $centilitrage, $litrageLibelle);
+    }
 
     if(!in_array($fieldNameCrd, array('stock_debut', 'entrees_achats', 'entrees_excedents', 'entrees_retours', 'sorties_destructions', 'sorties_manquants', 'sorties_utilisations', 'stock_fin'))) {
         $this->csvDoc->addErreur($this->typeCRDNotFoundError($num_ligne, $csvRow));
@@ -964,7 +997,7 @@ private function importCrdsFromCSV($just_check = false) {
             continue;
           }
 
-          if ($drmPrecedente->crds->exist($crd_regime)  && $drmPrecedente->crds->get($crd_regime)->exist($keyNode)) {
+          if ($drmPrecedente->crds->exist($crd_regime)  && $drmPrecedente->crds->get($crd_regime)->exist($keyNode) && !$this->drm->canSetStockDebutMois()) {
             if ($drmPrecedente->crds->get($crd_regime)->get($keyNode)->stock_fin != $quantite) {
               $this->csvDoc->addErreur($this->previousCRDStockError($num_ligne, $csvRow));
               continue;
@@ -977,7 +1010,7 @@ private function importCrdsFromCSV($just_check = false) {
       if (!$regimeNode->exist($keyNode)) {
         $regimeNode->getOrAddCrdNode($genre, $couleur, $centilitrage, $litrageLibelle);
       }
-      if (!preg_match('/^stock/', $fieldNameCrd) || $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} == null) {
+      if (!preg_match('/^stock/', $fieldNameCrd) || $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} == null || ($this->drm->canSetStockDebutMois() && preg_match('/debut/', $fieldNameCrd))) {
         $regimeNode->getOrAdd($keyNode)->{$fieldNameCrd} += intval($quantite);
         $edited = true;
       }
@@ -1019,7 +1052,7 @@ private function importAnnexesFromCSV($just_check = false) {
         }
         break;
       }
-      if (!preg_match('/^[A-Z]{2}[0-9A-Z]+$/', $numero_accise)) {
+      if ($numero_accise && !preg_match('/^[A-Z]{2}[0-9A-Z]{11}$/', $numero_accise)) {
         if ($just_check) {
           $this->csvDoc->addErreur($this->annexesNonApurementWrongNumAcciseError($num_ligne, $csvRow));
         }
@@ -1069,7 +1102,7 @@ private function importAnnexesFromCSV($just_check = false) {
 
 private function convertNumber($number){
   $numberPointed = trim(str_replace(",",".",$number));
-  return round(floatval($numberPointed), 5);
+  return round(floatval($numberPointed), FloatHelper::getInstance()->getMaxDecimalAuthorized());
 }
 
 private function getDetailsKeyFromDRMType($drmType ) {
@@ -1219,7 +1252,7 @@ private function annexesNonApurementWrongDateError($num_ligne, $csvRow) {
 }
 
 private function annexesNonApurementWrongNumAcciseError($num_ligne, $csvRow) {
-  return $this->createError($num_ligne, $csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST], "La numéro d'accise du destinataire est vide ou mal formatté (".$csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST].").");
+  return $this->createError($num_ligne, $csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST], "La numéro d'accise du destinataire est mal formatté (".$csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST].").");
 }
 
 private function typeComplementNotFoundError($num_ligne, $csvRow) {

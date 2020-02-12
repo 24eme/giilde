@@ -23,8 +23,8 @@ if(!isset($tabTitle)) {
     if ($nb_produits == 0) {
         continue;
     }
-    $nb_pages = (int) ($nb_produits / DRMLatex::NB_PRODUITS_PER_PAGE) + 1;
-    $nb_produits_per_page = (int) ($nb_produits / $nb_pages) + 1;
+    $nb_pages = ceil($nb_produits / DRMLatex::NB_PRODUITS_PER_PAGE);
+    $nb_produits_per_page = DRMLatex::NB_PRODUITS_PER_PAGE;
     $nb_produits_displayed = 0;
     $produits_for_certifs = array_values($produitsDetailsByCertifications->produits->getRawValue());
     ?>

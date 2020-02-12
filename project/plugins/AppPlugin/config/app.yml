@@ -1,4 +1,4 @@
 all:
   float:
     default_decimal_format: 2
-    max_decimal_authorized: 4
+    max_decimal_authorized: 5

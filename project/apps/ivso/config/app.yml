@@ -23,9 +23,6 @@ all:
       "/declaration/certifications/VSIG/genres/MOU":
         cep: "/declaration/certifications/VSIG/genres/MOU/appellations/CEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
         sanscep: "/declaration/certifications/VSIG/genres/MOU/appellations/SANSCEP/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT"
-  float:
-    default_decimal_format: 2
-    max_decimal_authorized: 5
   statistiques:
     stats:
       statistiques:
