@@ -834,19 +834,14 @@ class Vrac extends BaseVrac {
     }
 
     public function signatureByEtb($etb) {
-        switch ($etb->getFamilleType()) {
-            case 'vendeur' :
-                if ($etb->identifiant == $this->vendeur_identifiant) {
-                    $this->valide->_add('date_signature_vendeur', date('c'));
-                }
-                break;
-            case 'acheteur' :
-                if ($etb->identifiant == $this->acheteur_identifiant) {
-                    $this->valide->_add('date_signature_acheteur', date('c'));
-                }
-                break;
-        }
-        return $this->updateStatutForSignatures();
+      if ($etb->identifiant == $this->vendeur_identifiant) {
+            $this->valide->_add('date_signature_vendeur', date('c'));
+      }
+
+      if ($etb->identifiant == $this->acheteur_identifiant) {
+            $this->valide->_add('date_signature_acheteur', date('c'));
+      }
+      return $this->updateStatutForSignatures();
     }
 
     private function updateStatutForSignatures() {

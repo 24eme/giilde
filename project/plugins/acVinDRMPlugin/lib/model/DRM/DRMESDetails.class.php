@@ -162,8 +162,14 @@ class DRMESDetails extends BaseDRMESDetails {
         if ($mouvement->cvo > 0 && $mouvement->volume) {
             $mouvement->facturable = 1;
         }
+
         if(!$this->getDocument()->isFacturable()){
             $mouvement->facturable = 0;
+        }
+
+        if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant() && $mouvement->cvo > 0) {
+            $mouvement->facturable = 1;
+            $mouvement->remove('coefficient_facturation', 1);
         }
         return $mouvement;
     }
@@ -193,6 +199,11 @@ class DRMESDetails extends BaseDRMESDetails {
         if(!$this->getDocument()->isFacturable()){
             $mouvement->facturable = 0;
         }
+        if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant() && $mouvement->cvo > 0) {
+            $mouvement->facturable = 1;
+            $mouvement->remove('coefficient_facturation', 1);
+        }
+
         return $mouvement;
     }
 

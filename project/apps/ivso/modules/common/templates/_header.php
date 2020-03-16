@@ -2,7 +2,7 @@
 	<div class="header-top">
 		<div class="container">
 			<h1 class="logo-site">
-				<img src="/images/logo_site_ivso.png" alt="France sud ouest. Les vins à découvrir." />
+				<a href="/"><img src="/images/logo_site_ivso.png" alt="France sud ouest. Les vins à découvrir." /></a>
 				Espace des professionnels des vins et spiritueux du Sud-ouest
 			</h1>
 			<div class="logos">

@@ -45,13 +45,12 @@ class CompteGroupLdap extends acVinLdap
      *
      * @return array $groupes_a_garder La liste des groupes sauvés
      */
-    public function saveLdapGroup(array $t, $compteid)
+    public function saveMultipleGroup(array $t, $compteid)
     {
         $groupes_a_garder = [];
 
         foreach ($t as $type => $tags) {
             foreach ($tags as $group) {
-                $group = str_replace(self::$blacklist, '', $group);
                 $group = $type.'_'.$group;
                 $this->saveGroup($group, $compteid);
 
@@ -141,7 +140,7 @@ class CompteGroupLdap extends acVinLdap
         );
 
         if (! $result) {
-            return false;
+            return [];
         }
 
         if (ldap_count_entries(parent::getConnection(), $result) === 0) {

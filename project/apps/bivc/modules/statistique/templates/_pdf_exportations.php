@@ -8,6 +8,7 @@ $options = $options->getRawValue();
 $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset($options['periode'][1]))? $options['periode'] : null;
 $compare = (isset($options['compare']))? $options['compare'] : false;
 $appellations = (isset($options['appellations']))? $options['appellations'] : array();
+$categories = (isset($options['categories']))? $options['categories'] : array();
 ?>
 \documentclass[a4paper, landscape, 10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +37,7 @@ $appellations = (isset($options['appellations']))? $options['appellations'] : ar
 \fancyfoot[L]{<?php echo strftime("%e %B %Y", time()) ?>}
 \fancyhead[L]{\includegraphics[scale=0.6]{\LOGO}}
 \fancypagestyle{fstyle_0}{
-\fancyhead[C]{Volume exporté par pays et par couleur pour <?php if (count($appellations) > 1): ?>les appellations : \\ \textbf{<?php echo implode(', ', $appellations); ?>}<?php elseif (count($appellations) > 0): ?>l'appellation \textbf{<?php echo $appellations[0]; ?>}<?php else: ?>les vins du \textbf{Centre-Loire}<?php endif; ?><?php if ($periode): ?>\\Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
+\fancyhead[C]{Volume exporté par pays et par couleur pour <?php if (count($appellations) > 1): ?>les appellations : \\ \textbf{<?php echo implode(', ', $appellations); ?>}<?php elseif (count($appellations) > 0): ?>l'appellation \textbf{<?php echo $appellations[0]; ?>}<?php else: ?>les vins du \textbf{Centre-Loire}<?php endif; ?> <?php if (count($categories) > 0): ?>(<?php echo implode(', ', $categories); ?>)<?php endif; ?><?php if ($periode): ?>\\Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
 }
 
 \begin{document}

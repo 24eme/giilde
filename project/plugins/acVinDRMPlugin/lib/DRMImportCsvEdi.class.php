@@ -166,7 +166,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
         if (isset($this->cache2datas[$cacheid])) {
             continue;
         }
-        if(!isset($csvRow[self::CSV_CAVE_VOLUME]) || $csvRow[self::CSV_CAVE_VOLUME] === "") {
+        if(!isset($datas[self::CSV_CAVE_VOLUME]) || $datas[self::CSV_CAVE_VOLUME] === "") {
             continue;
         }
 
@@ -231,7 +231,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
           			if (!$founded_produit) {
           				$founded_produit = $p;
           			}
-          			if ($p->getLibelleFormat() == $libelle) {
+          			if (KeyInflector::slugify(str_replace(" ", "", $p->getLibelleFormat())) == KeyInflector::slugify(str_replace(" ", "", $libelle))) {
           				$founded_produit = $p;
           				break;
           			}
@@ -493,10 +493,11 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                   $new_hash = array_shift($new_hashes);
                   unset($volume2hash["$total_debut_mois"][$new_hash]);
               }
+
               if (isset($this->cache2datas[$cacheid]['tav'])  && (
                        ! $this->drmPrecedente->exist($new_hash)
                     || ! $this->drmPrecedente->get($new_hash)->exist('tav')
-                    || !($this->cache2datas[$cacheid]['tav'] != $this->drmPrecedente->get($new_hash)->tav)
+                    || ($this->cache2datas[$cacheid]['tav'] != $this->drmPrecedente->get($new_hash)->tav)
                 ) ) {
                         continue;
                     }
@@ -774,6 +775,11 @@ private function importMouvementsFromCSV($just_check = false) {
 
     $cat_key = $confDetailMvt->getParent()->getKey();
     $type_key = $confDetailMvt->getKey();
+
+    if(!preg_match("/stocks/", $cat_key) && $volume < 0) {
+        $this->csvDoc->addErreur($this->mouvementVolumeNegatifError($num_ligne, $csvRow));
+        continue;
+    }
 
     if($just_check) {
       continue;
@@ -1190,6 +1196,11 @@ private function categorieMouvementNotFoundError($num_ligne, $csvRow) {
 private function typeMouvementNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le type de mouvement n'a pas été trouvé");
 }
+
+private function mouvementVolumeNegatifError($num_ligne, $csvRow) {
+  return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le volume est négatif");
+}
+
 private function stockVolumeIncoherentError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le stock n'est pas cohérent par rapport à la DRM précédente", CSVDRMClient::LEVEL_WARNING);
 }

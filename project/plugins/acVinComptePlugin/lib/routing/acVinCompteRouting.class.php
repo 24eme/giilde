@@ -77,6 +77,12 @@ class acVinCompteRouting {
             array('sf_method' => array('get', 'post')),
             array('model' => 'Compte',
                 'type' => 'object')));
+        $r->prependRoute('compte_generate_codecreation',
+            new CompteRoute('/compte/:identifiant/generate-code-creation',
+                ['module' => 'compte', 'action' => 'generateCodeCreation'],
+                ['sf_method' => ['get']],
+                ['model' => 'Compte', 'type' => 'object']
+            ));
         $r->prependRoute('compte_coordonnee_modification', new CompteRoute('/compte-coordonnee/:identifiant/modification',
             array('module' => 'compte',
                 'action' => 'modificationCoordonnee'),

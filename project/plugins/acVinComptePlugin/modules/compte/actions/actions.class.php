@@ -84,6 +84,14 @@ class compteActions extends sfCredentialActions {
         return $this->redirect('compte_visualisation', array('identifiant' => $this->compte->identifiant));
     }
 
+    public function executeGenerateCodeCreation(sfWebRequest $request)
+    {
+        $this->compte = $this->getRoute()->getCompte();
+        $this->compte->generateCodeCreation();
+        $this->compte->save();
+        return $this->redirect('compte_visualisation', ['identifiant' => $this->compte->identifiant]);
+    }
+
     private function initSearch(sfWebRequest $request, $extratag = null, $excludeextratag = false) {
         $query = $request->getParameter('q', '*');
         if($query == ""){

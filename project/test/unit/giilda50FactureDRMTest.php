@@ -16,7 +16,7 @@ foreach ($conf->declaration->filter('details') as $configDetails) {
     }
 }
 
-$t = new lime_test(31);
+$t = new lime_test(34);
 
 $t->comment("Création d'une facture à partir des DRM pour une société");
 
@@ -193,23 +193,46 @@ $t->comment("Facturation d'une DRM négo");
 
 $societeNego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getSociete();
 $nego = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
+$societeNego2 = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region_2')->getSociete();
+$nego2 = CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region_2')->getEtablissement();
 
 foreach(DRMClient::getInstance()->viewByIdentifiant($nego->identifiant) as $k => $v) {
   $drm = DRMClient::getInstance()->find($k);
   $drm->delete(false);
 }
 
+$vrac = new Vrac();
+$vrac->initCreateur($nego2->getIdentifiant());
+$vrac->teledeclare = true;
+$vrac->acheteur_identifiant = $nego2->getIdentifiant();
+$vrac->vendeur_identifiant = $nego->getIdentifiant();
+$produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
+$produit = array_shift($produits);
+$vrac->setProduit($produit);
+$vrac->type_transaction = VracClient::TYPE_TRANSACTION_VIN_VRAC;
+$vrac->jus_quantite = 100;
+$vrac->setPrixUnitaire(70);
+$vrac->save();
 
 $drm = DRMClient::getInstance()->createDoc($nego->identifiant, $periode, true);
 $drm->save();
 
-$details = $drm->addProduit($produit_hash, 'details');
+$details = $drm->addProduit($produit, 'details');
 $details->entrees->recolte = 100;
+$details->sorties->manquant = 1;
+
+$vrac_detail = DRMESDetailVrac::freeInstance($drm);
+$vrac_detail->identifiant = $vrac->_id;
+$vrac_detail->volume = 1;
+$vrac_detail = $details->sorties->vrac_details->addDetail($vrac_detail);
+
 $drm->update();
 $drm->validate();
 $drm->save();
 
-$prixHt = round($details->entrees->recolte / 12, 4) * $details->getCVOTaux();
+$t->is($drm->mouvements->get($nego2->getIdentifiant())->getFirst()->facturable, 1, 'Mouvement du negociant est facturable');
+
+$prixHt = round($details->entrees->recolte / 12, 4) * $details->getCVOTaux() - round($details->sorties->manquant * $details->getCVOTaux(), 2) - round($vrac_detail->volume * ($details->getCVOTaux() / 2), 2);
 
 $paramFacturation["date_mouvement"] = preg_replace("/([0-9]{4})([0-9]{2})/", '\1-\2-31', $periode);
 $facture = FactureClient::getInstance()->createAndSaveFacturesBySociete($societeNego, $paramFacturation);
@@ -219,5 +242,14 @@ if($hasCVONegociant) {
     $t->is($facture->total_ht, round($prixHt, 4), "Le total HT est de ".$prixHt." €");
 } else {
     $t->ok(!$facture, "La facture n'est pas créée");
+    $t->pass("Rien à facturer");
+}
+
+$facture_negoce2 = FactureClient::getInstance()->createAndSaveFacturesBySociete($societeNego2, $paramFacturation);
+if($hasCVONegociant) {
+    $t->ok($facture_negoce2, "La facture de l'acheteur est créée");
+    $t->is($facture_negoce2->total_ht, round($vrac_detail->volume * ($details->getCVOTaux() / 2), 2), "Le total HT est correct");
+} else {
+    $t->ok(!$facture_negoce2, "La facture n'est pas créée");
     $t->pass("Rien à facturer");
 }

@@ -27,7 +27,7 @@ class CompteLdap extends acVinLdap
         return $this->delete(self::getIdentifiant($compte));
     }
 
-    protected static function getIdentifiant($compte)
+    public static function getIdentifiant($compte)
     {
         if ($compte->isSocieteContact()) {
             return $compte->getSociete()->identifiant;

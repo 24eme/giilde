@@ -67,7 +67,7 @@
                       <strong>Mois de saisie du stock :</strong>
                   </div>
                   <div class="col-xs-9">
-                      <strong><?php echo ucfirst(format_date(date("Y")."-".$etablissement->mois_stock_debut."-01", 'MMMM', 'fr_FR')); ?></strong>
+                      <strong><?php echo ($etablissement->mois_stock_debut)? ucfirst(format_date(date("Y")."-".$etablissement->mois_stock_debut."-01", 'MMMM', 'fr_FR')) : ''; ?></strong>
                   </div>
               </div>
           </div>

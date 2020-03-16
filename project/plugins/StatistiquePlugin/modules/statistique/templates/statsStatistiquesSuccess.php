@@ -38,7 +38,7 @@
         <?php endif; ?>
       </div>
       <?php if(StatistiqueConfiguration::getInstance()->isAggregatAppellation()): ?>
-			<div id="bloc_famille" class="form-group bloc_conditionner" data-condition-value="sorties_categorie">
+			<div id="bloc_famille" class="form-group bloc_conditionner" data-condition-value="exportations|sorties_categorie">
 				<span class="error has-error"><?php echo $form['doc.declarant.famille']->renderError() ?></span>
 		        <?php echo $form['doc.declarant.famille']->renderLabel(null, array("class" => "col-xs-6 control-label")); ?>
 		        <div class="col-xs-6"><?php echo $form['doc.declarant.famille']->render(); ?></div>

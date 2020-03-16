@@ -187,6 +187,9 @@ class DRMCielCompare
 		if (is_numeric($value)) {
 			return $value * 1;
 		}
+		if (preg_match("/^(\")?[0-9]+(\.[0-9]+)?(\")?$/",$value)) {
+			return floatval($value) * 1;
+		}
 		return $value;
 	}
 
