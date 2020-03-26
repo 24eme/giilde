@@ -84,6 +84,9 @@ class DRMDeclaration extends BaseDRMDeclaration {
         foreach ($this->certifications as $certification) {
             foreach ($certification->genres as $genre) {
                 foreach ($genre->appellations as $appellation) {
+                    if(!preg_match("|".$produitsFilter."|", $appellation->getHash())) {
+                        continue;
+                    }
                     $produits[$appellation->getHash()] = $appellation->getLibelle();
                 }
             }

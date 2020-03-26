@@ -566,6 +566,21 @@ DRM:
             service: {  }
             envoi: {  }
             accuse: {  }
+      controles:
+        type: collection
+        required: false
+        definition:
+          fields:
+            '*':
+              type: collection
+              definition:
+                fields:
+                  nb: { type: integer }
+                  messages:
+                    type: array_collection
+                    definition:
+                      fields:
+                        '*': { }
       mouvements:
         type: collection
         definition:

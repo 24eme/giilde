@@ -51,9 +51,9 @@ keepaspectratio]{<?php echo realpath(dirname(__FILE__) . "/../../../../../web/da
 \setlength{\topmargin}{-3.5cm}
 \setlength{\footskip}{0cm}
 
+\begin{document}
 
 <?php include_partial('drm_pdf/generateEnteteTex', array('drm' => $drm, 'nbPages' => $nbPages)); ?>
-\begin{document}{~}
 
 <?php if (!$drm->isValidee()): ?>
 \AddToShipoutPicture{\BackgroundPic}

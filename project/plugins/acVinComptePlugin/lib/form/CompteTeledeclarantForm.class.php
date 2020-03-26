@@ -11,6 +11,11 @@ class CompteTeledeclarantForm extends acCouchdbForm {
         }else{
             $defaultEmail = $societe->getEmailTeledeclaration();
         }
+
+        if($doc->compte_type == CompteClient::TYPE_COMPTE_INTERLOCUTEUR && $doc->email) {
+            $defaultEmail = $doc->email;
+        }
+
         if(!$defaultEmail){
             $defaultEmail = $societe->email;
         }
@@ -64,6 +69,11 @@ class CompteTeledeclarantForm extends acCouchdbForm {
         $email = $this->getValue('email');
 
         if(!$email) {
+            return;
+        }
+
+        if($doc->compte_type == CompteClient::TYPE_COMPTE_INTERLOCUTEUR) {
+            $doc->email = $email;
             return;
         }
 

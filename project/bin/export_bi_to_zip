@@ -1,15 +1,15 @@
 #!/bin/bash
 
-. bin/config.inc 
+. bin/config.inc
 
 rm -rf $TMP/export_bi 2> /dev/null
 rm $TMP/export_bi.zip
 mkdir -p $TMP/export_bi
 
-bash bin/export_bi 
+bash bin/export_bi
 
 cd $TMP
-zip export_bi.zip export_bi_contrats.csv  export_bi_drm.csv  export_bi_etablissements.csv  export_bi_mouvements.csv export_bi_societes.csv export_bi_drm_stock.csv
+zip export_bi.zip export_bi_contrats.csv  export_bi_drm.csv  export_bi_etablissements.csv  export_bi_mouvements.csv export_bi_societes.csv export_bi_drm_stock.csv export_bi_factures.csv
 cd -
 
 mv $TMP/export_bi.zip $EXPORTDIR"/export_bi.zip.new"

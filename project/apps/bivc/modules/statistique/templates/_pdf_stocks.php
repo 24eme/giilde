@@ -58,7 +58,7 @@ $headers[$appellation] = $appellation;
 <?php
 	$i = 1;
 	$page = null;
-	foreach ($items as $item):
+	foreach ($items as $i => $item):
 		$values = explode(';', $item);
 		if (!$values[1]) {
 			continue;

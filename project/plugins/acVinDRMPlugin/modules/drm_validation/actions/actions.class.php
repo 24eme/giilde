@@ -50,6 +50,11 @@ class drm_validationActions extends drmGeneriqueActions {
         }
 
         $this->validation = new DRMValidation($this->drm, $this->isTeledeclarationMode);
+        if($this->validation->hasPoints()){
+            $this->drm->addPoints($this->validation);
+        }else if($this->drm->exist("controles")){
+            $this->drm->cleanControles();
+        }
         $this->produits = array();
         foreach ($this->drm->getProduits() as $produit) {
             $d = new stdClass();

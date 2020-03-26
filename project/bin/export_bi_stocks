@@ -14,7 +14,7 @@ cat $TMP/export_bi_drm_stock.csv | awk -F ";" ' substr($5,2,4) >= 2014  { print 
 
 # Récupération des plus hautes modificatrices
 
-cat $TMP/export_bi_drm_stock_campagne_filtered.csv | awk  -F ";" '{ gsub("\"","",$3); gsub("\"","",$5); gsub("\"","",$6); print $3"-"$5"-"$6";"$1";"$2";"$3";"$4";"$5";"$6";"$7";"$8";"$9";"$10";"$11";"$12";"$13 }' | sed -r 's/^([0-9]*-[0-9]{6}-);/\1M00;/g' > $TMP/export_bi_drm_stock_campagne_filtered_with_modificatrices.csv
+cat $TMP/export_bi_drm_stock_campagne_filtered.csv | awk  -F ";" '{ gsub("\"","",$3); gsub("\"","",$5); gsub("\"","",$6); print $3"-"$5"-"$6";"$1";"$2";"$3";"$4";"$5";"$6";"$7";"$8";"$9";"$10";"$11";"$12";"$13 }' | sed -r 's/^([0-9a-zA-Z]*-[0-9]{6}-);/\1M00;/g' > $TMP/export_bi_drm_stock_campagne_filtered_with_modificatrices.csv
 cat $TMP/export_bi_drm_stock_campagne_filtered_with_modificatrices.csv | cut -d ";" -f 1 | sort -r | uniq -w 16 > $TMP/export_bi_drm_ids.csv
 
 # On garde uniquement les lignes de plus hautes modificatrices

@@ -4,8 +4,8 @@ function formatNumber($number, $round = 0) {
 }
 
 function getEvol($last, $current) {
-	$last = str_replace(',', '.', $last);
-	$current = str_replace(',', '.', $current);
+	$last = intval(str_replace(',', '.', $last));
+	$current = intval(str_replace(',', '.', $current));
 	return ($last > 0)? formatNumber((($current - $last) / $last) * 100, 2) : null;
 }
 

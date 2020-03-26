@@ -11,6 +11,10 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
     const DETAILS_KEY_SUSPENDU = 'details';
     const DETAILS_KEY_ACQUITTE = 'detailsACQUITTE';
 
+    const ENGAGEMENT = 'engagement';
+    const VIGILANCE = 'vigilance';
+    const EURREUR = 'erreur';
+
 
     protected $mouvement_document = null;
     protected $version_document = null;
@@ -321,7 +325,42 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
         $this->devalide();
     }
+    public function addPoints($points){
+        $this->remove('controles');
+        $this->add('controles');
+        if($points->hasErreurs()){
+            $this->controles->add('erreur');
+            $this->controles->erreur->nb = count($points->getErreurs());
+            $this->addMessages($this::EURREUR, $points->getErreurs());
+        }
+    
+        if($points->hasVigilances()){
+            $this->controles->add('vigilance');
+            $this->controles->vigilance->nb = count($points->getVigilances());
+            $this->addMessages($this::VIGILANCE, $points->getVigilances());
+        }
+            
+        if($points->hasEngagements()){
+            $this->controles->add('engagement');
+            $this->controles->engagement->nb = count($points->getEngagements());
+            $this->addMessages($this::ENGAGEMENT, $points->getEngagements());
+        }
+        $this->save();
+    }
 
+    protected function addMessages($typePoint, $point){
+        foreach ($point as $identifiant => $message) {
+            $lien = $message->getLien();
+            if($typePoint == $this::EURREUR) $this->controles->erreur->messages->add(1,$message->getMessage()." ( $lien )");
+            if($typePoint == $this::ENGAGEMENT) $this->controles->engagement->messages->add(1,$message->getMessage()." ( $lien )");
+            if($typePoint == $this::VIGILANCE) $this->controles->vigilance->messages->add(1,$message->getMessage()." ( $lien )");
+        }
+    }
+
+    public function cleanControles(){
+        $this->remove("controles");
+        $this->save();
+    }
     public function setDroits() {
         $this->remove('droits');
         $this->add('droits');

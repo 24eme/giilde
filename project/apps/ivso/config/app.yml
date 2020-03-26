@@ -360,7 +360,7 @@ all:
           aggregation:
             filter:
               term:
-                type: 'vrac'
+                doc.type: 'vrac'
             aggs:
               agg_page:
                 terms:

@@ -157,7 +157,7 @@ class DRMConfiguration {
 
     public function getXmlTransfertEchec($cielResponse){
         $erreur = preg_replace('/<\/erreur-fonctionnelle>/' ,'<br/></erreur-fonctionnelle>', html_entity_decode($cielResponse));
-        if (preg_match('/HTTP Error 0/', $erreur) || preg_match('/permission to access .authtoken.oauth2/', $erreur)) {
+        if (preg_match('/HTTP Error \d/', $erreur) || preg_match('/permission to access .authtoken.oauth2/', $erreur)) {
             $erreur = "<strong>Le service de reception des DRM de la Douane est indisponible pour le moment</strong>";
         }
         return "<p>".str_replace("DESCRIPTION_ERREUR",$erreur,nl2br($this->configuration['xml_transfert_echec']))."</p>";

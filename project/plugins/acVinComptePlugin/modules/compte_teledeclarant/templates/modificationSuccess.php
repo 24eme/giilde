@@ -6,6 +6,10 @@ if($compte->getSociete()->isTransaction()){
     $email_teledecl = $compte->getSociete()->getEmailTeledeclaration();
 }
 
+if($compte->compte_type == CompteClient::TYPE_COMPTE_INTERLOCUTEUR) {
+    $email_teledecl = $compte->email;
+}
+
 ?>
 <div id="principal" >
   <div class="row">

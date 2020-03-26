@@ -35,11 +35,12 @@ if(!isset($tabTitle)) {
         if ($index_page == $nb_pages - 1) {
             $nb_produits_per_page = $nb_produits - $nb_produits_displayed;
         }
-        $size_col = 20;
-        $entete = '\begin{tabular}{C{48mm} |';
+        $size_col = 40;
+        $entete = '\begin{tabular}{c|';
         for ($cpt_col = 0; $cpt_col < $nb_produits_per_page; $cpt_col++) {
-            $entete .='C{' . $size_col . 'mm}|';
+            $entete .='c|';
         }
+        $entete .='c|';
         $entete .='}';
         if ($index_page == 1) {
             $libelleCertif .= ' (Suite)';
@@ -78,9 +79,12 @@ if(!isset($tabTitle)) {
         \end{large} &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
             <?php $libelleProduit = str_replace("AOC Alsace Grand Cru", "Gd Cru", $produit->libelle); ?>
-            \multicolumn{1}{>{\columncolor[rgb]{0,0,0}}C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{<?php echo escape_string_for_latex($libelleProduit); ?>}}}}
+
+
+            \multicolumn{1}{>{\columncolor[rgb]{0,0,0}}c|}{ \small{\color{white}{\textbf{<?php echo escape_string_for_latex($libelleProduit); ?>}}}}
             <?php echo ($counter < count($produits_for_page) -1 ) ? "&" : ''; ?>
         <?php endforeach; ?>
+        &\multicolumn{1}{>{\columncolor[rgb]{0,0,0}}c|}{ \small{\color{white}{\textbf{TOTAL}}}}
         \\
         \hline
         <?php
@@ -89,11 +93,14 @@ if(!isset($tabTitle)) {
          */
         ?>
         \rowcolor{gray}
+        <?php $totaldebuth = 0; ?>
         \multicolumn{1}{|c|}{ \small{\color{white}{\textbf{STOCK DÉBUT DE MOIS}} }} &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
+            <?php $totaldebuth += $produit->total_debut_mois; ?>
             \multicolumn{1}{r|}{  \small{\color{white}{\textbf{<?php echoFloatWithHl($produit->total_debut_mois); ?>}}}}
             <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
+        &\multicolumn{1}{r|}{ \small{\color{white}{\textbf{ <?php echoFloatWithHl( $totaldebuth ); ?> }}}}
         \\
         \hline
         <?php
@@ -101,31 +108,43 @@ if(!isset($tabTitle)) {
          * LES ENTREES
          */
         ?>
+        
         <?php foreach ($mvtsEnteesForPdf as $cpt_entree => $entree): ?>
             <?php $entreeKey = $entree->key; ?>
             <?php if (!$cpt_entree): ?>
                 \multicolumn{1}{|c}{\multirow{<?php echo count($mvtsEnteesForPdf); ?>}{48mm}{\small{\textbf{ENTREES DU MOIS}}}} &
             <?php endif; ?>
-
+            <?php $totalentreeh = 0; ?>
             \multicolumn{1}{|l|}{  \small{<?php echo $entree->libelle; ?>} } &
             <?php foreach ($produits_for_page as $counter => $produit): ?>
-                \multicolumn{1}{r|}{ \small{<?php echoFloatWithHl((($produit->entrees instanceof acCouchdbJson && $produit->entrees->exist($entreeKey)) || isset($produit->entrees->$entreeKey)) ? $produit->entrees->$entreeKey : null) ; ?>}}
-                <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
-            <?php endforeach; ?>
+                <?php $entreeVal = (($produit->entrees instanceof acCouchdbJson && $produit->entrees->exist($entreeKey)) || isset($produit->entrees->$entreeKey)) ? $produit->entrees->$entreeKey : null; ?>
+                
+                \multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl( $entreeVal ); ?> }}
+                <?php $totalentreeh += $entreeVal; ?>
+                
+                <?php if($counter < count($produits_for_page) - 1): ?>
+                    <?php echo "&"; ?>
+                <?php else: ?>
+                    &\multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl( $totalentreeh ); ?> }}
+                <?php endif?>
+            <?php endforeach; ?>           
             \\
-              \hline
+            \hline
         <?php endforeach; ?>
+        \hline
         <?php
         /*
          * TOTAL ENTREES
          */
         ?>
         \rowcolor{lightgray}
+        <?php $tTotalentrees = 0; ?>
         \multicolumn{1}{|r|}{ \small{\textbf{TOTAL ENTREES}} } &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
             \multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($produit->total_entrees); ?>}} }
-            <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
+            <?php $tTotalentrees += $produit->total_entrees; echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
+        &\multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($tTotalentrees); ?>}} }
         \\
         \hline
 
@@ -139,12 +158,16 @@ if(!isset($tabTitle)) {
             <?php if (!$cpt_sortie): ?>
                 \multicolumn{1}{|c}{\multirow{<?php echo count($mvtsSortiesForPdf); ?>}{48mm}{\small{\textbf{SORTIES DU MOIS}}}} &
             <?php endif; ?>
-
+            <?php $totalsortieh = 0; ?>
             \multicolumn{1}{|l|}{  \small{<?php echo $sortie->libelle; ?>} } &
             <?php foreach ($produits_for_page as $counter => $produit): ?>
-                \multicolumn{1}{r|}{  \small{\color{black}{<?php echoFloatWithHl((($produit->sorties instanceof acCouchdbJson && $produit->sorties->exist($sortieKey)) || isset($produit->sorties->$sortieKey)) ? $produit->sorties->$sortieKey : null); ?>}}}
+                <?php $sortieVal = (($produit->sorties instanceof acCouchdbJson && $produit->sorties->exist($sortieKey)) || isset($produit->sorties->$sortieKey)) ? $produit->sorties->$sortieKey : null; ?>
+                
+                \multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl( $sortieVal ); ?> }}
+                <?php $totalsortieh += $sortieVal; ?>
                 <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
             <?php endforeach; ?>
+            &\multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl($totalsortieh); ?> }}  
             \\
             <?php if ((count($mvtsSortiesForPdf)) != $cpt_sortie): ?>
                 \hline
@@ -158,13 +181,16 @@ if(!isset($tabTitle)) {
          */
         ?>
         \rowcolor{lightgray}
+        <?php $tTotalsorties = 0; ?>
         \multicolumn{1}{|r|}{ \small{\textbf{TOTAL SORTIES}} } &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
             \multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($produit->total_sorties); ?>}} }
+            <?php $tTotalsorties += $produit->total_sorties; ?>
             <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
+        &\multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($tTotalsorties); ?>}} }
         \\
-        \hline
+        \hline \hline
 
         <?php
         /*
@@ -172,11 +198,13 @@ if(!isset($tabTitle)) {
          */
         ?>
         \rowcolor{gray}
+        <?php $totalstockh = 0; ?>
         \multicolumn{1}{|c|}{ \small{\color{white}{\textbf{STOCK FIN DE MOIS}} }} &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
-            \multicolumn{1}{r|}{  \small{\color{white}{\textbf{<?php echoFloatWithHl($produit->stocks_fin->final); ?>}}}}
+            \multicolumn{1}{r|}{  \small{\color{white}{\textbf{<?php $totalstockh += $produit->stocks_fin->final; echoFloatWithHl($produit->stocks_fin->final); ?>}}}}
             <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
+        &\multicolumn{1}{r|}{  \small{\color{white}{\textbf{<?php echoFloatWithHl($totalstockh); ?>}}}}
         \\
         \hline
         \end{tabular}

@@ -31,6 +31,7 @@
  * @property acCouchdbJson $interpros
  * @property acCouchdbJson $valide
  * @property acCouchdbJson $douane
+ * @property acCouchdbJson $controles
  * @property acCouchdbJson $mouvements
  * @property DRMCrdsRegime $crds
  * @property DRMFavoris $favoris
@@ -94,6 +95,8 @@
  * @method acCouchdbJson setValide()
  * @method acCouchdbJson getDouane()
  * @method acCouchdbJson setDouane()
+ * @method acCouchdbJson getControles()
+ * @method acCouchdbJson setControles()
  * @method acCouchdbJson getMouvements()
  * @method acCouchdbJson setMouvements()
  * @method DRMCrdsRegime getCrds()

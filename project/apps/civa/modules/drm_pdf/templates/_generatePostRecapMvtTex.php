@@ -22,45 +22,61 @@ foreach ($dataExport as $pays => $appellations) {
 
 <?php if(count($produits)): ?>
 
-\newpage
+    \newpage
 
-<?php
-$size_col = 20;
-$entete = '\begin{tabular}{C{48mm} |';
-foreach($produits as $libelle) {
+    <?php
+    $size_col = 20;
+    $entete = '\begin{tabular}{C{48mm} |';
+    foreach($produits as $libelle) {
+        $entete .='C{' . $size_col . 'mm}|';
+    }
     $entete .='C{' . $size_col . 'mm}|';
-}
-$entete .='}';
-?>
+    $entete .='}';
+    ?>
 
-<?php echo $entete; ?>
+    <?php echo $entete; ?>
 
-\begin{large}
-\textbf{Expédition AOC par pays }
-\end{large} &
-<?php $i = 1; ?>
-<?php foreach ($produits as $libelle): ?>
-    \multicolumn{1}{>{\columncolor[rgb]{0,0,0}}C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{<?php echo escape_string_for_latex($libelle); ?>}}}}
-    <?php echo ($i < count($produits)) ? "&" : '';  ?>
-    <?php $i++; ?>
-<?php endforeach; ?>
-\\
-\hline
+    \begin{large}
+    \textbf{Expédition AOC par pays }
+    \end{large} &
+    <?php $i = 1; $nbcol = 0; $tabTotal = ["Total" => array()];?>
+    <?php foreach ($produits as $libelle): ?>
+        \multicolumn{1}{>{\columncolor[rgb]{0,0,0}}C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{<?php echo escape_string_for_latex($libelle); ?>}}}}
+        <?php echo ($i < count($produits)) ? "&" : '';  ?>
+        <?php $i++; $tabTotal["Total"][$i] = 0;?>
+    <?php $nbcol = $i; endforeach; ?>
+    &\multicolumn{1}{>{\columncolor[rgb]{0,0,0}}C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{TOTAL}}}}
+    \\
+    \hline
 
-<?php foreach($dataExport as $pays => $appellations): ?>
-    \multicolumn{1}{|l|}{  \small{<?php echo ConfigurationClient::getInstance()->getCountry($pays) ?>} } &
-    <?php $i = 1; ?>
-    <?php foreach($appellations as $volume):?>
-        \multicolumn{1}{r|}{ \small{<?php echoFloatWithHl($volume) ; ?>}}
-        <?php echo ($i < count($appellations)) ? "&" : '';  ?>
-        <?php $i++; ?>
-     <?php endforeach; ?>
-     \\
-       \hline
-<?php endforeach; ?>
+    <?php  foreach($dataExport as $pays => $appellations): ?>
+        \multicolumn{1}{|l|}{  \small{<?php echo ConfigurationClient::getInstance()->getCountry($pays) ?>} } &
+        <?php $i = 1; ?>
+        <?php $totalh = 0; ?>
+        <?php foreach($appellations as $volume):?>
+            \multicolumn{1}{r|}{ \small{<?php $totalh += $volume; echoFloatWithHl($volume) ; ?>}}
 
-\end{tabular}
+            <?php echo ($i < count($appellations)) ? "&" : '';  ?>
+            <?php $i++; $tabTotal["Total"][$i] += $volume; ?>
+         <?php endforeach; ?>
+         &\multicolumn{1}{r|}{ \small{<?php echoFloatWithHl($totalh) ; ?>}}
+         \\
+           \hline
+    <?php endforeach; ?>
+    \rowcolor{lightgray}
+    <?php $totalh = 0; ?>
+    \multicolumn{1}{|r|}{ \small{\textbf{TOTAL}} } &
+    <?php foreach ($tabTotal["Total"] as $key => $totalv): ?>
+        \multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($totalv); ?>}} }
+        <?php $totalh += $totalv; ?>
+        <?php echo ($key < $nbcol) ? "&" : '';  ?>
+    <?php endforeach; ?>
+    &\multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($totalh); ?>}} }
+    \\
+    \hline
 
-\newpage
+    \end{tabular}
+
+    \newpage
 
 <?php endif; ?>

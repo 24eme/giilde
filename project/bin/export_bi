@@ -32,6 +32,11 @@ echo "#SOCIETE;statut (ACTIF, SUSPENDU);type societe;identifiant interne;identif
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/societe/_view/export | sed -f bin/unicode2alpha | sed 's/.*"key":\["INTERPRO-[^"]*",/SOCIETE;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | grep '^SOCIETE;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed -r 's/"([^"]+); ([^"]+)"/"\1 \2"/g'  >> $TMP/export_bi_societes.csv
 
 
+php symfony export:facture $SYMFONYTASKOPTIONS --factureid=FACTURE-XXXXX-YYYY > $TMP/export_bi_factures.csv
+curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/facture/_view/etablissement?reduce=false | awk -F '"' '{print $4}' | while read facture ; do
+	php symfony export:facture $SYMFONYTASKOPTIONS --factureid="$facture" --entete=0 >> $TMP/export_bi_factures.csv
+done
+
 . bin/export_bi_drm
 
 ENTETE_MDVPLV="SOCIETE;\"statut (ACTIF, SUSPENDU)\";\"type societe (OPERATEUR, VITICULTEUR, NEGOCIANT, COURTIER, PRESSE, PARTENAIRE, DOUANE, INSTITUTION, HOTEL-RESTAURANT, AUTRE)\";\"identifiant interne\";\"identifiant\";\"code_comptable_client\";\"code_comptable_fournisseur\";\"type fournisseur\";\"nom\";\"nom abrege\";\"cave cooperative (OUI, NON)\";\"siret\";\"code naf\";\"tva intracommunautaire\";\"enseignes (enseigne1|enseigne2)\";\"adresse\";\"adresse complementaire\";\"code postal\";\"ville\";\"pays\";\"telephone\";\"fax\";\"email\"";
@@ -63,8 +68,10 @@ cat data/import/configuration/produits.csv | sed -r 's/^/#PRODUIT;/' | sed -r 's
 
 cat data/export/constantes.csv > $TMP/export_bi_constantes.csv
 
+
+
 cd $TMP
-recode UTF8..ISO88591-1 export_bi_mouvements.csv export_bi_contrats.csv export_bi_dss.csv export_bi_revendiques.csv export_bi_etablissements.csv export_bi_societes.csv MDV_Fournisseurs.csv PLV_Fournisseurs.csv PLV_Clients.csv export_bi_drm.csv export_bi_drm_stock.csv
+recode UTF8..ISO88591-1 export_bi_mouvements.csv export_bi_contrats.csv export_bi_dss.csv export_bi_revendiques.csv export_bi_etablissements.csv export_bi_societes.csv MDV_Fournisseurs.csv PLV_Fournisseurs.csv PLV_Clients.csv export_bi_drm.csv export_bi_drm_stock.csv export_bi_factures.csv
 
 sed -i 's/T[0-9]+[0-9:+GMT]+;/;/g' export_bi_contrats.csv
 
@@ -72,7 +79,7 @@ sed -i 's/T[0-9]+[0-9:+GMT]+;/;/g' export_bi_contrats.csv
 #export_bi_mouvements.csv export_bi_contrats.csv export_bi_etablissements.csv export_bi_drm.csv
 
 if test "$SAMBA_XLSOFT_IP" && test "$SAMBA_XLSOFT_SHARE" && test "$SAMBA_AUTH" && test "$SAMBA_XLSOFT_DIR" ; then
-    smbclient //$SAMBA_XLSOFT_IP/$SAMBA_XLSOFT_SHARE -A $SAMBA_AUTH -c "cd $SAMBA_XLSOFT_DIR ; put export_bi_mouvements.csv ; put export_bi_contrats.csv; put export_bi_dss.csv ; put export_bi_revendiques.csv ; put export_bi_etablissements.csv ; put export_bi_societes.csv ; put MDV_Fournisseurs.csv ; put PLV_Fournisseurs.csv ; put PLV_Clients.csv ; put export_bi_drm.csv"
+    smbclient //$SAMBA_XLSOFT_IP/$SAMBA_XLSOFT_SHARE -A $SAMBA_AUTH -c "cd $SAMBA_XLSOFT_DIR ; put export_bi_mouvements.csv ; put export_bi_contrats.csv; put export_bi_dss.csv ; put export_bi_revendiques.csv ; put export_bi_etablissements.csv ; put export_bi_societes.csv ; put MDV_Fournisseurs.csv ; put PLV_Fournisseurs.csv ; put PLV_Clients.csv ; put export_bi_drm.csv; put export_bi_factures.csv"
 fi
 
 if test "$METABASE_SQLITE"; then

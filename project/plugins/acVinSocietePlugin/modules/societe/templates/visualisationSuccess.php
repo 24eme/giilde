@@ -55,7 +55,7 @@
                 <div class="list-group-item<?php echo ($societe->isSuspendu()) ? ' disabled': '' ?>">
     <?php if ($societe->getMasterCompte()->exist('droits') && $societe->getMasterCompte()->hasDroit(Roles::TELEDECLARATION)): ?>
                         <p>
-                            <strong>Login de télédéclaration :</strong> <?php echo $societe->identifiant; ?>
+                            <strong>Login de télédéclaration :</strong> <?php echo $societe->getMasterCompte()->getLogin(); ?>
                             <?php if ($societe->getMasterCompte()->getStatutTeledeclarant() == CompteClient::STATUT_TELEDECLARANT_NOUVEAU) : ?>
                                 <span class="text-muted">(code de création : <?php echo str_replace('{TEXT}', '', $societe->getMasterCompte()->mot_de_passe); ?>)</span>
                             <?php else: ?>

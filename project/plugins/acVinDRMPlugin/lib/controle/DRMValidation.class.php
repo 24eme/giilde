@@ -24,7 +24,7 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('erreur', 'vrac_achateur_exists', "Le contrat n'a pas d'acheteur connu");
         $this->addControle('erreur', 'total_negatif', "Le stock revendiqué théorique fin de mois est négatif");
         $this->addControle('vigilance', 'vrac_detail_negatif', "Le volume qui sera enlevé sur le contrat est supérieur au volume restant");
-        $this->addControle('vigilance', 'crd_negatif', "Le nombre de CRD ne dois pas être négatif");
+        $this->addControle('erreur', 'crd_negatif', "Le nombre de CRD ne dois pas être négatif");
         $this->addControle('vigilance', 'documents_annexes_vigilance', "Les numéros de document d'accompagnement saisis en annexe sont mal renseignés.");
         $this->addControle('erreur', 'documents_annexes_erreur', "La saisie de document d'accompagnement n'est pas complètement renseignée");
         $this->addControle('vigilance', 'siret_absent', "Le numéro de siret n'a pas été renseigné");
@@ -252,7 +252,7 @@ class DRMValidation extends DocumentValidation {
                     foreach ($crds as $type_crd => $crd) {
                         if (!is_null($crd->stock_fin) && $crd->stock_fin < 0) {
                             $genreLibelle = ($genre == 'TRANQ') ? 'TRANQUILLE' : $genre;
-                            $this->addPoint('vigilance', 'crd_negatif', $crd->getLibelle() . ' (' . $genreLibelle . ')', $this->generateUrl('drm_crd', $this->document));
+                            $this->addPoint('erreur', 'crd_negatif', $crd->getLibelle() . ' (' . $genreLibelle . ')', $this->generateUrl('drm_crd', $this->document));
                         }
                     }
                 }

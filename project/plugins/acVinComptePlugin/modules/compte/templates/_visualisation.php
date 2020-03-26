@@ -60,7 +60,7 @@
         <div class="list-group-item list-group-item-xs">
             <div class="row">
                 <div class="col-xs-12">
-                    <span class=text-muted">Login de télédeclaration : <?php echo $compte->identifiant ?></span><br />
+                    <span class=text-muted">Login de télédeclaration : <?php echo $compte->getLogin() ?></span><br />
                     <span class=text-muted">Code de création : <?= str_replace('{TEXT}', '', $compte->mot_de_passe) ?></span>
                 </div>
             </div>
@@ -69,7 +69,7 @@
         <div class="list-group-item list-group-item-xs">
             <div class="row">
                 <div class="col-xs-12">
-                    <span class=text-muted">Login de télédeclaration : <?php echo $compte->identifiant ?></span><br />
+                    <span class=text-muted">Login de télédeclaration : <?php echo $compte->getLogin() ?></span><br />
                     <span class=text-muted">Code de création : Compte déjà créé</span>
                 </div>
             </div>

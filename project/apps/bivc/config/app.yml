@@ -329,7 +329,7 @@ all:
           aggregation:
             filter:
               term:
-                type: 'vrac'
+                doc.type: 'Vrac'
             aggs:
               agg_page:
                 terms:

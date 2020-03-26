@@ -229,7 +229,7 @@ all:
           aggregation:
             filter:
               term:
-                type: 'vrac'
+                doc.type: 'Vrac'
             aggs:
               totaux_stock_final:
                 sum_bucket:
@@ -328,7 +328,7 @@ all:
           aggregation:
             filter:
               term:
-                type: 'vrac'
+                doc.type: 'vrac'
             aggs:
                   agg_page:
                     terms:
@@ -383,7 +383,7 @@ all:
           aggregation:
             filter:
               term:
-                type: 'vrac'
+                doc.type: 'vrac'
             aggs:
                   agg_page:
                     terms:

@@ -31,22 +31,30 @@ class DRMLatex extends GenericLatex {
         if ($this->drm->isNeant()) {
             return 2;
         }
-        foreach ($this->drm->declaration->getProduitsDetailsByCertifications(true) as $produitByCertif) {
-            $nb_produits = count($produitByCertif->produits);
-            if ($nb_produits == 0) {
-                continue;
+        foreach (DRMClient::$types_libelles as $typeDetailsNodes => $libelle){
+            
+            foreach ($this->drm->declaration->getProduitsDetailsByCertifications(true, $typeDetailsNodes) as $key => $produitByCertif) {
+                $nb_produits = count($produitByCertif->produits);
+                if ($nb_produits == 0) {
+                   continue;
+                }
+                $nbPages+= (int) ($nb_produits / DRMLatex::NB_PRODUITS_PER_PAGE) + 1;
             }
-            $nbPages+= (int) ($nb_produits / DRMLatex::NB_PRODUITS_PER_PAGE) + 1;
         }
+        $nbPages += DRMConfiguration::getInstance()->getNbExtraPDFPages();//pour recap
+
         $cpt_crds_annexes = $this->drm->nbTotalCrdsTypes();
-        if ($cpt_crds_annexes) {
+
+        if($cpt_crds_annexes || count($this->drm->documents_annexes)){
             $nbPages++;
         }
+        
+        
         if ($this->drm->exist('releve_non_apurement') && count($this->drm->releve_non_apurement) && (count($this->drm->releve_non_apurement) >= 4)) {
             $nbPages++;
         }
-        $nbPages++;
-        $nbPages += DRMConfiguration::getInstance()->getNbExtraPDFPages();
+        $nbPages += (int) (count($this->drm->droits->douane)/DRMLatex::NB_PRODUITS_PER_PAGE)+1;
+        
         return $nbPages;
     }
 

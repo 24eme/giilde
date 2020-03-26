@@ -24,10 +24,11 @@ class drm_pdfActions extends drmGeneriqueActions {
         $this->forward404Unless($this->drm);
 
         if ($this->drm->teledeclare && !$this->drm->isValidee()) {
+            $this->drm->cleanDeclaration();
             $this->drm->generateDroitsDouanes();
             $this->drm->generateMouvements();
-        }
 
+        }
         $latex = new DRMLatex($this->drm);
        // $latex->getLatexFileContents();
        $latex->echoWithHTTPHeader($request->getParameter('type'));
