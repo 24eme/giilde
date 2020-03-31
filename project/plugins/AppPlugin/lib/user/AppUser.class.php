@@ -35,8 +35,10 @@ class AppUser extends sfBasicSecurityUser {
             $login = $compte->getLogin();
         } else {
 
-            $compte = CompteClient::getInstance()->findByLogin($login_or_compte);
-            $login = $login_or_compte;
+            if ($compte = CompteClient::getInstance()->findByLogin($login_or_compte)) {
+                $login = $compte->getLogin();
+            }
+            
         }
 
         if(!$compte) {
