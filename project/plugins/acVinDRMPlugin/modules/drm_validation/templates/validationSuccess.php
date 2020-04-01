@@ -24,6 +24,7 @@
                 <?php include_partial('drm_visualisation/recap_crds', array('drm' => $drm)); ?>
                 <?php include_partial('drm_visualisation/recapAnnexes', array('drm' => $drm)) ?>
             <?php endif; ?>
+            <?php include_partial('drm_visualisation/recapCsv', array('drm' => $drm)) ?>
         </div>
     </div>
 

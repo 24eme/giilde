@@ -94,6 +94,7 @@
     <?php include_partial('drm_visualisation/recap_crds', array('drm' => $drm)) ?>
     <?php include_partial('drm_visualisation/recapAnnexes', array('drm' => $drm)) ?>
 <?php endif; ?>
+<?php include_partial('drm_visualisation/recapCsv', array('drm' => $drm)) ?>
 <?php include_partial('drm_visualisation/recapDroits', array('drm' => $drm, 'recapCvos' => $recapCvos, 'isTeledeclarationMode' => $isTeledeclarationMode)) ?>
 <?php if ($drm->exist('transmission_douane') && $drm->transmission_douane): ?>
 <div class="row">

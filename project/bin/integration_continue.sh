@@ -26,9 +26,10 @@ fi
 
 echo $$ > $PID_PATH
 
-mkdir $XMLTESTDIR 2> /dev/null
+mkdir -p $XMLTESTDIR 2> /dev/null
 
-git pull -f
+git fetch
+git reset --hard origin/master
 
 BRANCH=$(cat ../.git/HEAD | sed -r 's|^ref: refs/heads/||')
 LASTCOMMIT=$(cat $WORKINGDIR/../.git/refs/heads/$BRANCH)
@@ -42,8 +43,8 @@ then
     exit;
 fi
 
-curl -X DELETE $COUCHTEST
-curl -X PUT $COUCHTEST
+curl -s -X DELETE $COUCHTEST
+curl -s -X PUT $COUCHTEST
 
 cd ..
 make clean
@@ -52,7 +53,7 @@ cd -
 
 ls $WORKINGDIR/data/configuration/$APPLICATION | while read jsonFile
 do
-    curl -X POST -d @data/configuration/$APPLICATION/$jsonFile -H "content-type: application/json" $COUCHTEST
+    curl -s -X POST -d @data/configuration/$APPLICATION/$jsonFile -H "content-type: application/json" $COUCHTEST
 done
 
 php symfony cc

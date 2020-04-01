@@ -1,5 +1,4 @@
 <?php use_helper('DRM'); ?>
-
 <div class="panel panel-default <?php echo getClassGlobalEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $etablissement); ?>">
     <div class="panel-heading text-center"><?php echo $calendrier->getPeriodeLibelle($periode) ?></div>
     <div class="panel-body text-center">
@@ -11,7 +10,7 @@
                 <div class="text-center">
                     <p class="etablissement_nom"><?php echo $etb->nom; ?></p>
                     <p class="etablissement_identifiant"><?php echo $etb->no_accises; ?> - <?php echo $etb->identifiant; ?></p>
-                    <p class="lignestatut">Etat : <span class="statut"><?php echo getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?></span>&nbsp;<?php echo getPointAideHtml('drm','etats') ?><br/>&nbsp;<?php echo getTeledeclareeLabelCalendrier($isTeledeclarationMode && !(sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte()), $calendrier, $periode) ?></p>
+                    <p class="lignestatut">Etat : <span class="statut"><?php echo getEtatDRMCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?></span>&nbsp;<?php echo getPointAideHtml('drm','etats') ?><br/>&nbsp;<?php echo getTeledeclareeLabelCalendrier($isTeledeclarationMode && !(sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte()), $calendrier, $periode) ?> <?php if($md5 = getDRMCSVCalendrier($isTeledeclarationMode, $calendrier, $periode, $etablissement)): ?><small>(<a href="<?php echo url_for('drm_verification_fichier_edi', array('identifiant' => $etablissement->identifiant, 'periode' => $periode, 'md5' => $md5, 'nocreate' => 1)) ?>">csv</a>)</small><?php endif; ?></p>
                     <?php $lien = getEtatDRMHrefCalendrier($isTeledeclarationMode, $calendrier, $periode, $etb); ?>
                     <?php if ($lien) : ?>
                     <a <?php if(preg_match("/^#/", $lien)): ?>data-toggle="modal"<?php endif; ?>

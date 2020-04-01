@@ -169,6 +169,21 @@ class drmActions extends drmGeneriqueActions {
         return $this->redirect('drm_societe', array('identifiant' => $identifiant));
     }
 
+    public function executeCsv(sfWebRequest $request) {
+        $identifiant = $request->getParameter('identifiant');
+        $periode = $request->getParameter('periode');
+
+        $csv = CSVDRMClient::getInstance()->findFromIdentifiantPeriode($identifiant, $periode);
+
+        $filename = 'import_edi_'.$identifiant.'_'.$periode.'.csv';
+
+        $this->response->setContent(file_get_contents($csv->getAttachmentUri($filename)));
+        $this->response->setContentType('text/csv');
+        $this->response->setHttpHeader('Content-Disposition', "attachment; filename=" . $filename);
+
+        return sfView::NONE;
+    }
+
     /**
      *
      * @param sfWebRequest $request
@@ -182,27 +197,47 @@ class drmActions extends drmGeneriqueActions {
 
         if ($this->md5 == 'error') {
             $this->erreurs = array( (object) array("diagnostic" => "Mauvais format de fichier EDI", "num_ligne" => "", "csv_erreur" => ""));
-        }else{
+
+            return sfView::SUCCESS;
+        }
+
+        $this->drm = DRMClient::getInstance()->findMasterByIdentifiantAndPeriode($this->identifiant, $this->periode);
+
+        if(!$this->drm) {
           $this->drm = new DRM();
           $this->drm->identifiant = $this->identifiant;
           $this->drm->periode = $this->periode;
           $this->drm->teledeclare = true;
           $this->drm->constructId();
+        }
+
           $fileName = 'import_'.$this->drm->identifiant . '_' . $this->drm->periode.'_'.$this->md5.'.csv';
 
           try {
-              $this->drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
-              $this->drmCsvEdi->checkCSV();
+              if (!$request->getParameter('nocheck')) {
+                $drmCsvEdi = new DRMImportCsvEdi(sfConfig::get('sf_data_dir') . '/upload/' . $fileName, $this->drm);
+                $drmCsvEdi->checkCSV();
+                $this->csvDoc = $drmCsvEdi->getCsvDoc();
+              }else{
+                $this->csvDoc = CSVDRMClient::getInstance()->findFromIdentifiantPeriode($this->identifiant, $this->periode);
+              }
 
-              $this->erreurs = $this->drmCsvEdi->getCsvDoc()->erreurs;
+              $this->erreurs = $this->csvDoc->erreurs;
           }catch(sfException $e) {
               $this->erreurs = array( (object) array("diagnostic" => preg_replace('/;.*/', '', $e->getMessage()), "num_ligne" => "", "csv_erreur" => ""));
           }
-        }
+
+          if(!$this->drm->isNew()) {
+            return sfView::SUCCESS;
+          }
+
+          if ($request->getParameter('nocreate')) {
+               return sfView::SUCCESS;
+          }
+
         if (!count($this->erreurs)) {
           return $this->redirect('drm_creation_fichier_edi', array('periode' => $this->periode, 'md5' => $this->md5,'identifiant' => $this->identifiant));
         }
-
     }
 
         /**

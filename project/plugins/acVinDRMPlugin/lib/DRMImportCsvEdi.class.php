@@ -105,7 +105,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
     if ($this->csvDoc->hasErreurs()) {
       $this->csvDoc->setStatut(self::STATUT_ERREUR);
       $this->csvDoc->save();
-      return;
+      return false;
     }
     // Check mouvements
     $this->createCacheProduits();

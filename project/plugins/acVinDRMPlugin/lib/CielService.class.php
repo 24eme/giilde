@@ -90,6 +90,13 @@ class CielService
 		$this->storeXmlAsAttachement($drm, $xml);
 		$drm->add('transmission_douane')->add('xml', $cielResponse);
 		$drm->add('transmission_douane')->add('success', false);
+		if(!$drm->exist('controles')){
+			$drm->add("controles");
+			$drm->save();
+		}
+		$drm->controles->remove(DRM::TRANSMISSION);
+		$drm->controles->getOrAdd(DRM::TRANSMISSION)->messages->add(null, $cielResponse);
+		$drm->controles->getOrAdd(DRM::TRANSMISSION)->nb = 1;
 		if (preg_match('/identifiant-declaration>([^<]*)<.*horodatage-depot>([^<]+)</', $cielResponse, $m)) {
 			$drm->add('transmission_douane')->add('success', true);
 			$drm->add('transmission_douane')->add('horodatage', $m[2]);

@@ -376,9 +376,20 @@ class Elastica_Client
      */
     public function request($path, $method, $data = array(), array $query = array())
     {
+        if (class_exists('sfConfig') && class_exists("CouchdbDebugManager") && sfConfig::get('sf_debug')) {
+            $memory = memory_get_usage();
+            $timer = sfTimerManager::getTimer("Elastica", true);
+        }
+
         $request = new Elastica_Request($this, $path, $method, $data, $query);
 
-        return $request->send();
+        $res = $request->send();
+
+        if (class_exists('sfConfig') && class_exists("CouchdbDebugManager") && sfConfig::get('sf_debug')) {
+			$memoryUse = memory_get_usage() - $memory;
+			CouchdbDebugManager::addQuery(strtolower($this->_config['transport'])."://".$this->_config['host'].":".$this->_config['port']."/".$path, $method, $data, $timer->addTime(), $memoryUse);
+		}
+        return $res;
     }
 
     /**

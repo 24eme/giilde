@@ -38,6 +38,8 @@ class drm_xmlActions extends drmGeneriqueActions {
           "Erreur transmision XML pour ".$this->drm->_id,
           "Une transmission vient d'échouer pour la DRM ".$this->drm->_id." : \n".$this->drm->transmission_douane->xml);
           $this->getMailer()->send($msg);
+      }else{
+        $this->drm->cleanTransmission();
       }
 
       return $this->redirect('drm_ciel', $this->drm);
@@ -78,6 +80,7 @@ class drm_xmlActions extends drmGeneriqueActions {
     if ($this->drm->exist('transmission_douane/coherente') && $this->drm->exist('transmission_douane/success
 ') && $this->drm->transmission_douane->success && !$this->drm->transmission_douane->coherente && $this->drm->areXMLIdentical()) {
         $this->drm->getOrAdd('transmission_douane')->add("coherente", true);
+        $this->drm->getOrAdd('controles')->getOrAdd(DRM::TRANSMISSION)->messages->add(null, "XML non identique.");
         $this->drm->save();
     }
 

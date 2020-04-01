@@ -2,6 +2,8 @@
 <?php use_helper('PointsAides'); ?>
 <?php if ($isTeledeclarationMode) : ?>
   <h3>Droits et cotisations</h3>
+<?php else: ?>
+<h3>Cotisations</h3>
 <?php endif; ?>
 <div class="row">
   <div class="col-xs-12">
