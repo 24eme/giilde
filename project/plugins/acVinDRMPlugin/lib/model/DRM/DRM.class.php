@@ -334,19 +334,19 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             $this->controles->erreur->nb = count($points->getErreurs());
             $this->addMessages($this::EURREUR, $points->getErreurs());
         }
-    
+
         if($points->hasVigilances()){
             $this->controles->add($this::VIGILANCE);
             $this->controles->vigilance->nb = count($points->getVigilances());
             $this->addMessages($this::VIGILANCE, $points->getVigilances());
         }
-            
+
         if($points->hasEngagements()){
             $this->controles->add($this::ENGAGEMENT);
             $this->controles->engagement->nb = count($points->getEngagements());
             $this->addMessages($this::ENGAGEMENT, $points->getEngagements());
         }
-        $this->save();
+        //$this->save();
     }
 
     protected function addMessages($typePoint, $point){

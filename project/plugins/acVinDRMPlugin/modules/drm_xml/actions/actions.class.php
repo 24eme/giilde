@@ -39,7 +39,7 @@ class drm_xmlActions extends drmGeneriqueActions {
           "Une transmission vient d'échouer pour la DRM ".$this->drm->_id." : \n".$this->drm->transmission_douane->xml);
           $this->getMailer()->send($msg);
       }else{
-        $this->drm->cleanTransmission();
+        //$this->drm->cleanTransmission();
       }
 
       return $this->redirect('drm_ciel', $this->drm);
