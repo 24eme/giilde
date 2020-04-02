@@ -11,9 +11,7 @@ if ! test -s $SEQ; then
     echo 0 > $SEQ
 fi
 
-curl -s "http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_changes?since="$(cat $SEQ | sed 's/[^0-9]//g') | grep "COMPTE" > $TMP/comptes_ldap_ids
-
-cat $TMP/comptes_ldap_ids | while read ligne
+curl -s "http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_changes?continuous=1&timeout=590000&since="$(cat $SEQ | sed 's/[^0-9]//g') | grep "COMPTE" | while read ligne
 do
     echo $ligne | awk -F '"' '{print $3}' | sed 's/[^0-9]//g' > $SEQ
     php symfony compte:ldap-update $SYMFONYTASKOPTIONS $(echo $ligne | awk -F '"' '{print $6}')
