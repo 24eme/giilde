@@ -7,6 +7,9 @@ if test -f $LOCK ; then
     exit 1
 fi
 touch $LOCK
+if ! test -s $SEQ; then
+    echo 0 > $SEQ
+fi
 
 curl -s "http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_changes?since="$(cat $SEQ | sed 's/[^0-9]//g') | grep "COMPTE" > $TMP/comptes_ldap_ids
 

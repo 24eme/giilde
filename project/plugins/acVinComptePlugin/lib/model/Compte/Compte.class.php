@@ -387,15 +387,7 @@ class Compte extends BaseCompte implements InterfaceCompteGenerique {
                 }
             }
         } else {
-            if (sfConfig::get('app_ldap_autogroup', false)) {
-                $ldapUid = CompteLdap::getIdentifiant($this);
-
-                foreach ($groupldap->getMembership($ldapUid) as $group) {
-                    $groupldap->removeMember($group, $ldapUid);
-                }
-            }
-
-            $ldap->deleteCompte($this, $verbose);
+            CompteClient::getInstance()->deleteLdapCompte(CompteLdap::getIdentifiant($this));
         }
     }
 

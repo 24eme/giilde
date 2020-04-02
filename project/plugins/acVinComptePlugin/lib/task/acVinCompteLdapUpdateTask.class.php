@@ -51,16 +51,19 @@ EOF;
 
   protected function execute($arguments = array(), $options = array())
   {
-    ini_set('memory_limit', '512M');
-    $databaseManager = new sfDatabaseManager($this->configuration);
-    $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
+      ini_set('memory_limit', '512M');
+      $databaseManager = new sfDatabaseManager($this->configuration);
+      $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
 
-    $compte = CompteClient::getInstance()->find($arguments['doc_id']);
-    if(!$compte) {
-
-      throw new sfCommandException(sprintf("The Document \"%s\" does not exist", $arguments['doc_id']));
-    }
-
-    $compte->updateLdap($options['verbose']);
+      $compte = CompteClient::getInstance()->find($arguments['doc_id']);
+      if($compte) {
+          $compte->updateLdap($options['verbose']);
+      }else{
+          if (preg_match('/COMPTE-([0-9]*)(01)?/', $arguments['doc_id'], $match)) {
+              CompteClient::getInstance()->deleteLdapCompte($match[1]);
+          }else{
+              throw new sfCommandException(sprintf("The Document \"%s\" does not exist", $arguments['doc_id']));
+          }
+      }
   }
 }
