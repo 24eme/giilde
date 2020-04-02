@@ -17,4 +17,4 @@ do
     php symfony compte:ldap-update $SYMFONYTASKOPTIONS $(echo $ligne | awk -F '"' '{print $6}')
 done
 
-rm $TMP/comptes_ldap_ids $LOCK
+rm $LOCK
