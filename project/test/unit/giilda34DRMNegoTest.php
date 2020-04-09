@@ -59,7 +59,7 @@ if(!$hasCVONegociant) {
     exit;
 }
 
-$t = new lime_test(10 + 2*12);
+$t = new lime_test(11 + 4*12);
 
 $t->comment("DRM Négociant avec récolte");
 
@@ -86,8 +86,11 @@ $facturable = true;
 $coefficientFacturation = 1;
 
 $dateMouvement = new DateTime($drm->getDate());
+
+$i = 0;
 foreach($drm->mouvements->get($nego->identifiant) as $mouvement) {
     if($mouvement->type_hash == "entrees/recolte") {
+        $i++;
         $nbMouvementEntreeRecolte += 1;
         $volumeTotal += $mouvement->getQuantite();
         $prixTotal += $mouvement->getPrixHt();
@@ -99,11 +102,14 @@ foreach($drm->mouvements->get($nego->identifiant) as $mouvement) {
         }
         $t->ok($mouvement->volume > 0, "Le volume est supérieur à 0");
         $t->is($mouvement->date, $dateMouvement->format('Y-m-d'), "La date du mouvement est ".$dateMouvement->format('Y-m-d'));
+        $t->is($mouvement->categorie, "negociant_recolte", "negociant_recolte pour la catégorie des mouvemements");
+        $t->is($mouvement->detail_libelle, "".sprintf("%02d", $i)."/12", "Numérotation dans les mouvements de récoltes");
         $dateMouvement = $dateMouvement->modify("last day of next month");
     }
 
     if($mouvement->type_hash == "sorties/destructionperte") {
         $nbMouvementSortieDestructionPerte += 1;
+        $t->is($mouvement->categorie, "negociant_recolte_regulation", "negociant_recolte_regulation pour la catégorie des mouvemements");
     }
 }
 
@@ -111,7 +117,7 @@ foreach($drm->mouvements->get($nego->identifiant) as $mouvement) {
 
 $t->is($nbMouvementEntreeRecolte, DRMConfiguration::getInstance()->getMouvementDivisableNbMonth(), "Les mouvements de recolté on été scindé en ".DRMConfiguration::getInstance()->getMouvementDivisableNbMonth());
 $t->is($nbMouvementSortieDestructionPerte, 1, "1 seul mouvement de destruction perte");
-$t->ok($facturable, "Tous les mouvements sont factruables");
+$t->ok($facturable, "Tous les mouvements sont facturables");
 $t->is($coefficientFacturation, 1, "Le coefficient de facturation de tous les mouvements est 1");
 $t->is($volumeTotal, $details->entrees->recolte, "L'ensemble des mouvements couvrent le volume total d'entrée récolte");
 $t->is($prixTotal, $details->entrees->recolte * $details->getCVOTaux(), "Le prix Ht est la quantité * La CVO du produit");

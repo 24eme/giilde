@@ -73,24 +73,36 @@ class DRMESDetails extends BaseDRMESDetails {
     }
 
     public function pushMouvement(&$mouvements, $template_mouvement, $detail) {
+        $config = $this->getConfig();
 
         $mouvement = $this->createMouvement(clone $template_mouvement, $detail);
         if (!$mouvement) {
             return;
         }
         $md5 = $mouvement->getMD5Key();
+
+        $mouvement_vrac_destinataire = $this->createMouvementVracDestinataire(clone $mouvement, $detail);
+        $mouvement_vrac_intermediaire = $this->createMouvementVracIntermediaire(clone $mouvement, $detail);
+
+        if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant() && $mouvement->cvo > 0) {
+            $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE_REGULATION;
+        }
+
         $mouvements[$this->getDocument()->getIdentifiant()][$md5] = $mouvement;
 
-        if ($mouvement_vrac_destinataire = $this->createMouvementVracDestinataire(clone $mouvement, $detail)) {
-            $mouvements[$detail->getVrac()->acheteur_identifiant][$mouvement->getMD5Key()] = $mouvement_vrac_destinataire;
+        if ($mouvement_vrac_destinataire) {
+            $mouvements[$detail->getVrac()->acheteur_identifiant][$mouvement_vrac_destinataire->getMD5Key()] = $mouvement_vrac_destinataire;
             $mouvements[$this->getDocument()->getIdentifiant()][$md5]['region_destinataire'] = $mouvement_vrac_destinataire->region;
         }
 
-        if ($mouvement_vrac_intermediaire = $this->createMouvementVracIntermediaire(clone $mouvement, $detail)) {
-            $mouvements[$detail->getVrac()->representant_identifiant][$mouvement->getMD5Key()] = $mouvement_vrac_intermediaire;
+        if ($mouvement_vrac_intermediaire) {
+            $mouvements[$detail->getVrac()->representant_identifiant][$mouvement_vrac_intermediaire->getMD5Key()] = $mouvement_vrac_intermediaire;
         }
+    }
 
+    public function getConfig() {
 
+        return $this->getProduitDetail()->getConfig()->get($this->getNoeud()->getKey() . '/' . $this->getTotalHash());
     }
 
     public function createMouvement($mouvement, $detail) {
@@ -99,7 +111,7 @@ class DRMESDetails extends BaseDRMESDetails {
             $volume = $volume - $this->getDocument()->motherGet($detail->getHash())->volume;
         }
 
-        $config = $this->getProduitDetail()->getConfig()->get($this->getNoeud()->getKey() . '/' . $this->getTotalHash());
+        $config = $this->getConfig();
         $volume = $config->mouvement_coefficient * $volume;
 
         if ($volume == 0) {
@@ -139,12 +151,12 @@ class DRMESDetails extends BaseDRMESDetails {
         }
 
         $mouvement->date = ($detail->exist('date_enlevement'))? $detail->date_enlevement : $this->getDocument()->getDate();
-        
+
         return $mouvement;
     }
 
     public function createMouvementVracDestinataire($mouvement, $detail) {
-        $config = $this->getProduitDetail()->getConfig()->get($this->getNoeud()->getKey() . '/' . $this->getTotalHash());
+        $config = $this->getConfig();
 
         if (!$config->isVrac() || $detail->isSansContrat() || !$detail->getVrac() instanceof Vrac) {
 
@@ -175,7 +187,7 @@ class DRMESDetails extends BaseDRMESDetails {
     }
 
     public function createMouvementVracIntermediaire($mouvement, $detail) {
-        $config = $this->getProduitDetail()->getConfig()->get($this->getNoeud()->getKey() . '/' . $this->getTotalHash());
+        $config = $this->getConfig();
 
         if (!$config->isVrac() || $detail->isSansContrat() || !$detail->getVrac() instanceof Vrac) {
             return null;

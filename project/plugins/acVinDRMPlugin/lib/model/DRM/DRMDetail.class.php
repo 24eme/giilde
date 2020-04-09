@@ -433,14 +433,15 @@ class DRMDetail extends BaseDRMDetail {
                 $mouvement->facturable = 0;
             }
 
-            if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant() && $mouvement->cvo > 0) {
-                $mouvement->facturable = 1;
-                $mouvement->add('coefficient_facturation', 1);
-            }
-
             $mouvement->version = $this->getDocument()->getVersion();
             $mouvement->date_version = ($this->getDocument()->valide->date_saisie) ? ($this->getDocument()->valide->date_saisie) : date('Y-m-d');
             $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_PROPRIETE;
+
+            if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant() && $mouvement->cvo > 0) {
+                $mouvement->facturable = 1;
+                $mouvement->add('coefficient_facturation', 1);
+                $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE_REGULATION ;
+            }
 
             if ($this->exist($hash . "/" . $key . "_details") && $this->get($hash . "/" . $key . "_details")) {
                 $mouvements = array_replace_recursive($mouvements, $this->get($hash . "/" . $key . "_details")->createMouvements($mouvement));
@@ -454,6 +455,7 @@ class DRMDetail extends BaseDRMDetail {
                 $volumeTotal = $volume;
                 for($i=1; $i <= $nbDivision; $i++) {
                     $mouvementPart = $this->createMouvement(clone $mouvement, $hash . '/' . $key, $volumePart, $date->format('Y-m-d'));
+                    $mouvementPart->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE;
                     $date->modify("last day of next month");
                     if (!$mouvementPart) {
                         continue;
@@ -462,6 +464,7 @@ class DRMDetail extends BaseDRMDetail {
                     if($i == $nbDivision && $volumeTotal) {
                         $mouvementPart->volume += $volumeTotal;
                     }
+                    $mouvementPart->detail_libelle = sprintf("%0".strlen($nbDivision)."d", $i)."/".$nbDivision;
 
                     $mouvements[$this->getDocument()->getIdentifiant()][$mouvementPart->getMD5Key()] = $mouvementPart;
                 }

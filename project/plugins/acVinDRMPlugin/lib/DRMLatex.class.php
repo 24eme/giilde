@@ -18,7 +18,7 @@ class DRMLatex extends GenericLatex {
 
     const VRAC_OUTPUT_TYPE_PDF = 'pdf';
     const VRAC_OUTPUT_TYPE_LATEX = 'latex';
-    const NB_PRODUITS_PER_PAGE = 9;
+    const NB_PRODUITS_PER_PAGE = 4;
 
     function __construct(DRM $drm, $config = null) {
         sfProjectConfiguration::getActive()->loadHelpers("Partial", "Url", "MyHelper");
@@ -41,7 +41,21 @@ class DRMLatex extends GenericLatex {
                 $nbPages+= (int) ($nb_produits / DRMLatex::NB_PRODUITS_PER_PAGE) + 1;
             }
         }
-        $nbPages += DRMConfiguration::getInstance()->getNbExtraPDFPages();//pour recap
+        $recap = $this->drm->declaration->getProduitsDetailsAggregateByAppellation(true, 'details', '/genres/VCI/');
+        if(isset($recap['/declaration/certifications/AOC_ALSACE'])) {
+            $nbPages += (int)(count(array_keys($recap['/declaration/certifications/AOC_ALSACE']->produits))/DRMLatex::NB_PRODUITS_PER_PAGE)+1;
+        }
+
+        $dataExport = $this->drm->declaration->getMouvementsAggregateByAppellation('export.*_details', '/declaration/certifications/AOC_ALSACE');
+        $nb = 0;
+        foreach ($dataExport as $pays => $produits) {
+            if($nb < count($produits)){
+                $nb = count($produits);
+            }
+        }
+        if ($nb) {
+            $nbPages += (int) ($nb/DRMLatex::NB_PRODUITS_PER_PAGE) +1;
+        }
 
         $cpt_crds_annexes = $this->drm->nbTotalCrdsTypes();
 

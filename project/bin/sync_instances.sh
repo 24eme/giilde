@@ -4,4 +4,4 @@
 
 rsync -aO $WORKINGDIR"/web/generation/" $COUCHDISTANTHOST":"$WORKINGDIR"/web/generation"
 rsync -aO $WORKINGDIR"/data/upload/" $COUCHDISTANTHOST":"$WORKINGDIR"/data/upload"
-rsync -aO $WORKINGDIR"/data/dateDrmDouane" $COUCHDISTANTHOST":"$WORKINGDIR"/data/
+rsync -aO $WORKINGDIR"/data/dateDrmDouane" $COUCHDISTANTHOST":"$WORKINGDIR"/data/"

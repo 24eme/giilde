@@ -216,12 +216,13 @@
 
     var initSignatureDrmPopup = function () {
 
-
-
         $('#signature_drm_popup button#signature_drm_popup_confirm').click(function () {
             $("form#drm_validation input#drm_email_transmission").val($('#drm_email_transmission_visible').val());
-          $("form#drm_validation input#drm_transmission_ciel").val($('#drm_transmission_ciel_visible').is(':checked'));
-          //  $("form#drm_validation").submit();
+            if($('#drm_transmission_ciel_visible').is(':checked') || $('#drm_transmission_ciel_visible').prop('checked')) {
+                $("form#drm_validation input#drm_transmission_ciel").val("1");
+            } else {
+                $("form#drm_validation input#drm_transmission_ciel").val("0");
+            }
         });
 
     };

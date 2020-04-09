@@ -10,19 +10,12 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
     protected $declarant_document = null;
     protected $archivage_document = null;
     protected $etablissements = array();
-    protected $config_sortie_array = array();
-    private $configuration = null;
 
     const MESSAGE_DEFAULT = "";
 
     public function __construct() {
         parent::__construct();
         $this->initDocuments();
-        $this->configuration = ConfigurationClient::getCurrent();
-        $config_detail_list = $this->configuration->declaration->getDetailConfiguration();
-        foreach ($config_detail_list->sorties as $keyDetail => $detail) {
-            $this->config_sortie_array[$keyDetail] = $detail->getLibelle();
-        }
     }
 
     public function __clone() {
@@ -201,20 +194,21 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
     }
 
     public function storeLignesFromMouvements($mvts, $famille, $modele) {
-        foreach ($mvts as $ligneByType) {
-            if (isset($this->config_sortie_array['vrac']) && $ligneByType->type_libelle == $this->config_sortie_array['vrac']) {
+        foreach ($mvts as $key => $ligneByType) {
+            if (!isset($ligneByType->matiere) || $ligneByType->matiere != FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE) {
                 continue;
             }
             $this->storeLigneFromMouvements($ligneByType, $famille, $modele);
+            unset($mvts[$key]);
+        }
+        foreach ($mvts as $key => $ligneByType) {
+            if ($ligneByType->vrac_destinataire) {
+                continue;
+            }
+            $this->storeLigneFromMouvements($ligneByType, $famille, $modele);
+            unset($mvts[$key]);
         }
         foreach ($mvts as $ligneByType) {
-            if (!isset($this->config_sortie_array['vrac'])) {
-                continue;
-            }
-            if ($ligneByType->type_libelle != $this->config_sortie_array['vrac']) {
-                continue;
-            }
-
             $this->storeLigneFromMouvements($ligneByType, $famille, $modele);
         }
     }
@@ -249,6 +243,9 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
             $origin_mouvement = $ligneByType->origine;
             if ($origin_mouvement == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_DRM){
                 $ligne->libelle = DRMClient::getInstance()->getLibelleFromId($docId);
+                if(preg_match('/^'.FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE.'/', $ligneByType->matiere)) {
+                    $ligne->libelle .= " (sur la base des volumes produits)";
+                }
                 if (count($etablissements) > 1) {
                     $idEtb = $ligneByType->etablissement_identifiant;
                     $etb = $etablissements["ETABLISSEMENT-" . $idEtb];
@@ -269,7 +266,7 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
             if (($origin_mouvement == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_DRM) || ($origin_mouvement == FactureClient::FACTURE_LIGNE_ORIGINE_TYPE_SV12)) {
                 $produit_libelle = $ligneByType->produit_libelle;
                 $detail = null;
-                if ($ligneByType->vrac_destinataire) {
+                if ($ligneByType->vrac_destinataire || $ligneByType->matiere != FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_PROPRIETE) {
                     $detail = $ligne->getOrAdd('details')->add();
                     $detail->libelle = $produit_libelle;
                     $detail->prix_unitaire = $ligneByType->prix_unitaire;
@@ -293,7 +290,7 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
                 }
                 $configuration = ConfigurationClient::getConfiguration($ligneByType->date);
                 if (!$configuration) {
-                    $configuration = $this->configuration;
+                    $configuration = ConfigurationClient::getCurrent();
                 }
                 $produit_configuration = null;
                 if($configuration->exist($ligneByType->produit_hash)){

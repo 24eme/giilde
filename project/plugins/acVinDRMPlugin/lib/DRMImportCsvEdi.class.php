@@ -813,7 +813,9 @@ private function importMouvementsFromCSV($just_check = false) {
       if ($confDetailMvt->getDetails() == ConfigurationDetailLigne::DETAILS_VRAC) {
         if ($founded_produit->isCVOActif($date)) {
             $vrac_id = $this->findContratDocId($csvRow);
-        }else{
+        } elseif(!$csvRow[self::CSV_CAVE_CONTRATID] && DRMConfiguration::getInstance()->hasSansContratOption()){
+            $vrac_id = DRMESDetailVrac::CONTRAT_SANS_NUMERO;
+        } else {
             $vrac_id = $csvRow[self::CSV_CAVE_CONTRATID];
         }
 

@@ -55,7 +55,9 @@
             <?php endif ?>
         </div>
         <?php endif; ?>
-
+        <?php if ($sf_user->hasFlash('drm_warning')) : ?>
+        <p class="alert alert-warning" role="alert"><?php echo $sf_user->getFlash('drm_warning'); ?></p>
+        <?php endif; ?>
         <?php if (!$isTeledeclarationMode): ?>
             <ul class="nav nav-tabs">
                 <li class="active"><a href="">Vue calendaire</a></li>

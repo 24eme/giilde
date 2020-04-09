@@ -7,6 +7,7 @@
 class CSVDRM extends BaseCSVDRM {
 
     public function __construct() {
+        $this->type = "CSVDRM";
         parent::__construct();
     }
 
