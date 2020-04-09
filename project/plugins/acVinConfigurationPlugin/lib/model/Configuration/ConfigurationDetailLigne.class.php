@@ -83,6 +83,11 @@ class ConfigurationDetailLigne extends BaseConfigurationDetailLigne {
         return $this->exist('facturable_negociant') && $this->get('facturable_negociant');
     }
 
+    public function isDivisable() {
+
+        return $this->exist('divisable') && $this->get('divisable');
+    }
+
     public function isWritableForEtablissement($etb, $isTeledeclaree = false) {
         if($this->douane_type == DRMClient::CRD_TYPE_ACQUITTE){
             if(!$isTeledeclaree){

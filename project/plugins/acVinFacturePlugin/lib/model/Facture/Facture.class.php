@@ -195,7 +195,7 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
 
     public function storeLignesFromMouvements($mvts, $famille, $modele) {
         foreach ($mvts as $key => $ligneByType) {
-            if (!isset($ligneByType->matiere) || $ligneByType->matiere != FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE) {
+            if (!preg_match('/_divise$/', $ligneByType->matiere)) {
                 continue;
             }
             $this->storeLigneFromMouvements($ligneByType, $famille, $modele);

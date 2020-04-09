@@ -102,14 +102,14 @@ foreach($drm->mouvements->get($nego->identifiant) as $mouvement) {
         }
         $t->ok($mouvement->volume > 0, "Le volume est supérieur à 0");
         $t->is($mouvement->date, $dateMouvement->format('Y-m-d'), "La date du mouvement est ".$dateMouvement->format('Y-m-d'));
-        $t->is($mouvement->categorie, "negociant_recolte", "negociant_recolte pour la catégorie des mouvemements");
+        $t->is($mouvement->categorie, "negociant_recolte_divise", "negociant_recolte pour la catégorie des mouvemements");
         $t->is($mouvement->detail_libelle, "".sprintf("%02d", $i)."/12", "Numérotation dans les mouvements de récoltes");
         $dateMouvement = $dateMouvement->modify("last day of next month");
     }
 
     if($mouvement->type_hash == "sorties/destructionperte") {
         $nbMouvementSortieDestructionPerte += 1;
-        $t->is($mouvement->categorie, "negociant_recolte_regulation", "negociant_recolte_regulation pour la catégorie des mouvemements");
+        $t->is($mouvement->categorie, "negociant_recolte", "negociant_recolte_regulation pour la catégorie des mouvemements");
     }
 }
 

@@ -12,12 +12,9 @@ include_partial('drm_pdf/generateRecapMvtTex', array('drm' => $drm,'drmLatex' =>
 
 <?php $dataExport = $drm->declaration->getMouvementsAggregateByAppellation('export.*_details', '/declaration/certifications/AOC_ALSACE')->getRawValue(); ?>
 
-
-<?php $list_pays = array_keys($dataExport);
-// foreach ($dataExport as $certification => $produits_for_certifs) : ?>
 <?php
+$list_pays = array_keys($dataExport);
 $produits = array();
-// $produits_for_certifs = array_values($produitsDetailsByCertifications);
 $libelleCertif = "Expédition AOC par pays";
 $nb_produits_per_page = DRMLatex::NB_PRODUITS_PER_PAGE;
 foreach ($dataExport as $pays => $appellations) {
@@ -112,7 +109,6 @@ if($nb_produits): ?>
     \multicolumn{1}{r|}{\small{\textbf{<?php echoFloatWithHl($totalh); ?>}} }
     \\
     \hline
-
 
     \end{tabular}
 

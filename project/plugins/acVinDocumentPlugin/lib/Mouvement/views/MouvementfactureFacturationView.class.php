@@ -153,18 +153,17 @@ class MouvementfactureFacturationView extends acCouchdbView {
         return $mouvement;
     }
 
-
     public function createOrigine($famille, $mouvement) {
         $origine_libelle = null;
-
-        if(isset($mouvement->matiere) && $mouvement->matiere == FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE_REGULATION) {
-
+        if(preg_match('/^'.FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE.'/', $mouvement->matiere) && $mouvement->quantite < 0) {
             $origine_libelle = "Régularisation";
         }
 
-        if(isset($mouvement->matiere) && $mouvement->matiere == FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE) {
-
-            $origine_libelle = "Récolte (".$mouvement->detail_libelle.")";
+        if(preg_match('/^'.FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE.'/', $mouvement->matiere) && $mouvement->quantite > 0) {
+            $origine_libelle = "Récolte";
+            if($mouvement->detail_libelle) {
+                $origine_libelle .= " (".$mouvement->detail_libelle.")";
+            }
         }
 
         if(!$mouvement->vrac_destinataire) {

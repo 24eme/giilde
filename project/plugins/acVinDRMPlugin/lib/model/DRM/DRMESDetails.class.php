@@ -85,7 +85,7 @@ class DRMESDetails extends BaseDRMESDetails {
         $mouvement_vrac_intermediaire = $this->createMouvementVracIntermediaire(clone $mouvement, $detail);
 
         if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant() && $mouvement->cvo > 0) {
-            $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE_REGULATION;
+            $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE;
         }
 
         $mouvements[$this->getDocument()->getIdentifiant()][$md5] = $mouvement;

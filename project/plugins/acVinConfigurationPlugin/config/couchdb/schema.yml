@@ -171,6 +171,7 @@ Configuration:
                               douane_cat_negoce: { }
                               taxable_douane: { }
                               switch_regime: { required: false }
+                              divisable: { type: integer, required: false }
                   sorties:
                     required: false
                     type: collection

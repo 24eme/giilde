@@ -440,7 +440,7 @@ class DRMDetail extends BaseDRMDetail {
             if(!$this->getDocument()->isFacturable() && $config->isFacturableInverseNegociant() && $mouvement->cvo > 0) {
                 $mouvement->facturable = 1;
                 $mouvement->add('coefficient_facturation', 1);
-                $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE_REGULATION ;
+                $mouvement->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE;
             }
 
             if ($this->exist($hash . "/" . $key . "_details") && $this->get($hash . "/" . $key . "_details")) {
@@ -448,14 +448,14 @@ class DRMDetail extends BaseDRMDetail {
                 continue;
             }
 
-            if(!$this->getDocument()->isFacturable() && $mouvement->facturable && DRMConfiguration::getInstance()->isMouvementDivisable() &&  $volume * $config->mouvement_coefficient > DRMConfiguration::getInstance()->getMouvementDivisableSeuil() ) {
+            if(!$this->getDocument()->isFacturable() && $mouvement->facturable && DRMConfiguration::getInstance()->isMouvementDivisable() && $volume * $config->mouvement_coefficient > DRMConfiguration::getInstance()->getMouvementDivisableSeuil() && $config->isDivisable()) {
                 $nbDivision = DRMConfiguration::getInstance()->getMouvementDivisableNbMonth();
                 $date = new DateTime($this->getDocument()->getDate());
                 $volumePart = round($volume / $nbDivision, FloatHelper::getInstance()->getMaxDecimalAuthorized());
                 $volumeTotal = $volume;
                 for($i=1; $i <= $nbDivision; $i++) {
                     $mouvementPart = $this->createMouvement(clone $mouvement, $hash . '/' . $key, $volumePart, $date->format('Y-m-d'));
-                    $mouvementPart->categorie = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_NEGOCIANT_RECOLTE;
+                    $mouvementPart->categorie .= '_divise';
                     $date->modify("last day of next month");
                     if (!$mouvementPart) {
                         continue;

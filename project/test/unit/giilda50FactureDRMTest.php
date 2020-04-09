@@ -180,6 +180,8 @@ $mouvement->vrac_destinataire = "Test destinaire";
 $mouvement->detail_libelle = "000001";
 $mouvement->vrac_destinataire = date('Ymd')."000001";
 $mouvement->vrac_numero = "VRAC-2018000099999";
+$mouvement->matiere = FactureClient::FACTURE_LIGNE_MOUVEMENT_TYPE_PROPRIETE;
+$mouvement->quantite = 100;
 
 if($application == "ivso") {
     $origine = (FactureConfiguration::getInstance()->isPdfProduitFirst()) ? "Contrat ".$mouvement->vrac_destinataire : "Contrat n° 99999 (".$mouvement->vrac_destinataire.") ";
@@ -221,11 +223,15 @@ $details = $drm->addProduit($produit, 'details');
 $details->entrees->recolte = 100;
 $details->sorties->manquant = 1;
 $details->sorties->destructionperte = 2;
+$details->sorties->transfertsrecolte = 10;
 
 $vrac_detail = DRMESDetailVrac::freeInstance($drm);
 $vrac_detail->identifiant = $vrac->_id;
 $vrac_detail->volume = 1;
 $vrac_detail = $details->sorties->vrac_details->addDetail($vrac_detail);
+
+$details_2 = $drm->addProduit($produit, 'details', 'BIO');
+$details_2->entrees->transfertsrecolte = 10;
 
 $drm->update();
 $drm->validate();
@@ -244,7 +250,7 @@ if($hasCVONegociant) {
     $t->ok($facture, "La facture est créée");
     $t->is($facture->total_ht, round($prixHt, 2), "Le total HT est de ".$prixHt." €");
     $t->is($facture->lignes->get($drm->_id)->libelle,DRMClient::getInstance()->getLibelleFromId($drm->_id)." (sur la base des volumes produits)", 'Libellé de la catégorie');
-    $t->is(count($facture->lignes->get($drm->_id)->details->toArray(true, false)), 4, "La facture à 4 lignes");
+    $t->is(count($facture->lignes->get($drm->_id)->details->toArray(true, false)), 5, "La facture à 5 lignes");
 } else {
     $t->ok(!$facture, "La facture n'est pas créée");
     $t->pass("Rien à facturer");

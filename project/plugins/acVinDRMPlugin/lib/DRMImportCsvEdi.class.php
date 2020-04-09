@@ -16,6 +16,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
   protected $configuration = null;
   protected $mouvements = array();
   protected $csvDoc = null;
+  protected $etablissement = null;
   protected $fromEdi = false;
   protected $noSave = false;
 
@@ -35,6 +36,9 @@ class DRMImportCsvEdi extends DRMCsvEdi {
         return;
       }
     }
+
+    $this->etablissement = $drm->getEtablissementObject();
+    $this->societe = $this->etablissement->getSociete();
 
     $this->initConf($drm);
     $this->drmPrecedente = DRMClient::getInstance()->findMasterByIdentifiantAndPeriode($drm->identifiant, DRMClient::getInstance()->getPeriodePrecedente($drm->periode));
@@ -665,7 +669,7 @@ private function checkCSVIntegrity() {
     if (!preg_match('/^FR0[0-9A-Z]{10}$/', KeyInflector::slugify($csvRow[self::CSV_NUMACCISE]))) {
       //$this->csvDoc->addErreur($this->createWrongFormatNumAcciseError($ligne_num, $csvRow));
     }
-    if($this->drm->getIdentifiant() != KeyInflector::slugify($csvRow[self::CSV_IDENTIFIANT]) && ($this->drm->getEtablissementObject()->getSociete()->identifiant != KeyInflector::slugify($csvRow[self::CSV_IDENTIFIANT]) && (!$csvRow[self::CSV_NUMACCISE] || $this->drm->getEtablissementObject()->no_accises != $csvRow[self::CSV_NUMACCISE]))) {
+    if($this->drm->getIdentifiant() != KeyInflector::slugify($csvRow[self::CSV_IDENTIFIANT]) && ($this->societe->identifiant != KeyInflector::slugify($csvRow[self::CSV_IDENTIFIANT]) && (!$csvRow[self::CSV_NUMACCISE] || $this->etablissement->no_accises != $csvRow[self::CSV_NUMACCISE]))) {
       $this->csvDoc->addErreur($this->otherNumeroCompteError($ligne_num, $csvRow));
     }
     if($this->drm->getPeriode() != KeyInflector::slugify($csvRow[self::CSV_PERIODE])){
@@ -684,8 +688,7 @@ private function checkImportCrdsFromCSV() {
 }
 
 private function checkHorsRegionFromCSV() {
-  $etablissementObj = $this->drm->getEtablissementObject();
-  if ($etablissementObj->region == EtablissementClient::REGION_HORS_CVO) {
+  if ($this->etablissement->region == EtablissementClient::REGION_HORS_CVO) {
     $this->csvDoc->addErreur($this->importHorsRegionError());
   }
 }
@@ -739,6 +742,12 @@ private function importMouvementsFromCSV($just_check = false) {
       continue;
     }
     $confDetailMvt = $this->mouvements[$type_douane_drm_key][$cat_mouvement][$type_mouvement];
+
+    if(!$confDetailMvt->isWritableForEtablissement($this->etablissement, true)) {
+        $this->csvDoc->addErreur($this->typeMouvementCompatibiliteError($num_ligne, $csvRow));
+        $num_ligne++;
+        continue;
+    }
 
     if ($confDetailMvt->hasDetails() && $confDetailMvt->getDetails() == ConfigurationDetailLigne::DETAILS_EXPORT) {
         $pays = ConfigurationClient::getInstance()->findCountry($csvRow[self::CSV_CAVE_EXPORTPAYS]);
@@ -925,21 +934,22 @@ private function importCrdsFromCSV($just_check = false) {
    }
   $num_ligne = 0;
   $edited = false;
-  $etablissementObj = $this->drm->getEtablissementObject();
 
-  $crd_regime = ($etablissementObj->exist('crd_regime'))? $etablissementObj->get('crd_regime') : EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU;
+  $crd_regime = ($this->etablissement->exist('crd_regime'))? $this->etablissement->get('crd_regime') : EtablissementClient::REGIME_CRD_COLLECTIF_SUSPENDU;
   $all_contenances = VracConfiguration::getInstance()->getContenancesSlugified();
 
   $crd_precedente = array();
-  foreach($this->drmPrecedente->crds as $regime => $crds) {
-      foreach($crds as $key => $crd) {
-          $kid = self::cdrreversekeyid($regime, $crd->genre, $crd->couleur, $crd->detail_libelle);
-          if (!isset($crd_precedente[$kid])) {
-              $crd_precedente[$kid] = array();
+  if($this->drmPrecedente) {
+      foreach($this->drmPrecedente->crds as $regime => $crds) {
+          foreach($crds as $key => $crd) {
+              $kid = self::cdrreversekeyid($regime, $crd->genre, $crd->couleur, $crd->detail_libelle);
+              if (!isset($crd_precedente[$kid])) {
+                  $crd_precedente[$kid] = array();
+              }
+              $crd_precedente[$kid][] = $crd->getKey();
           }
-          $crd_precedente[$kid][] = $crd->getKey();
       }
-  }
+    }
 
   foreach ($this->getDocRows() as $csvRow) {
     $num_ligne++;
@@ -984,7 +994,7 @@ private function importCrdsFromCSV($just_check = false) {
     $litrageLibelle = DRMClient::getInstance()->getLibelleCRD($litrageKey);
     $regimeNode = $this->drm->getOrAdd('crds')->getOrAdd($crd_regime);
     $keyNode = null;
-    $reverseKey = self::cdrreversekeyid($regime, $genre, $couleur, $litrageLibelle);
+    $reverseKey = self::cdrreversekeyid($crd_regime, $genre, $couleur, $litrageLibelle);
     if (isset($crd_precedente[$reverseKey])) {
         $keyNode = array_pop($crd_precedente[$reverseKey]);
     }
@@ -1197,6 +1207,12 @@ private function categorieMouvementNotFoundError($num_ligne, $csvRow) {
 
 private function typeMouvementNotFoundError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le type de mouvement n'a pas été trouvé");
+}
+
+private function typeMouvementCompatibiliteError($num_ligne, $csvRow) {
+    return $this->createError($num_ligne,
+                              $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT],
+                              "Le type de mouvement n'est pas compatible avec le régime crd de l'établissement, le volume ne sera pas importé");
 }
 
 private function mouvementVolumeNegatifError($num_ligne, $csvRow) {

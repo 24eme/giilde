@@ -245,6 +245,11 @@
                    "libelle": "19. Revendication de VCI",
                    "libelle_long": "Revendication de VCI",
                    "description": "Volume de VCI de l'année N-1 du produit ayant reçu l'agrément à la récolte de l'année N"
+               },
+               "regularisationrevendiquation": {
+                   "libelle": "20. Régularisation Revendiqué",
+                   "libelle_long": "Régularisation Revendiqué",
+                   "description": "Permet de régulariser le stock de volume revendiqué"
                }
            },
            "stocks_fin": {
@@ -40054,7 +40059,8 @@
                    "douane_cat": "entrees-periode/volume-produit",
                    "douane_cat_negoce": "entrees-periode/volume-produit",
                    "taxable_douane": 0,
-                   "facturable_negociant": 1
+                   "facturable_negociant": 1,
+                   "divisable": 1
                },
                "revendication": {
                    "readable": 1,
@@ -40082,7 +40088,8 @@
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "entrees-periode/mouvements-internes/replis-declassement-transfert-changement-appellation",
                    "douane_cat_negoce": "entrees-periode/autres-entrees",
-                   "taxable_douane": 0
+                   "taxable_douane": 0,
+                   "facturable_negociant": 1
                },
                "changementdenomination": {
                    "readable": 1,
@@ -40384,7 +40391,8 @@
                    "douane_type": "CRD_MIXTE",
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/replis-declassement-transfert-changement-appellation",
                    "douane_cat_negoce": "sorties-periode/sorties-sans-paiement-droits/autres-sorties",
-                   "taxable_douane": 0
+                   "taxable_douane": 0,
+                   "facturable_negociant": 1
                },
                "changementdenomination": {
                    "readable": 1,
@@ -40513,7 +40521,21 @@
                    "douane_cat": "sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci",
                    "douane_cat_negoce": null,
                    "taxable_douane": 0
-               }
+               },
+               "regularisationrevendiquation": {
+                    "readable": 1,
+                    "writable": 1,
+                    "details": null,
+                    "revendique": 1,
+                    "restriction_lies": 0,
+                    "recolte": 0,
+                    "mouvement_coefficient": -1,
+                    "facturable": 0,
+                    "douane_type": "CRD_MIXTE",
+                    "douane_cat": null,
+                    "douane_cat_negoce": null,
+                    "taxable_douane": 0
+                }
            },
            "stocks_fin": {
                "instance": {
