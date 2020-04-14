@@ -844,6 +844,10 @@ private function importMouvementsFromCSV($just_check = false) {
         if (!$nego) {
           $nego = EtablissementClient::getInstance()->retrieveByName(str_replace(".", "", $csvRow[self::CSV_CAVE_CONTRAT_ACHETEUR_NOM]));
         }
+        if($nego && !in_array($nego->famille, array(EtablissementFamilles::FAMILLE_NEGOCIANT, EtablissementFamilles::FAMILLE_NEGOCIANT_PUR))) {
+            $this->csvDoc->addErreur($this->creationvracdetailsAcheteurNonNegoError($num_ligne, $csvRow));
+            continue;
+        }
         $creationvrac->acheteur = $nego->identifiant;
         $creationvrac->type_contrat = ($type_key == 'creationvrac')? VracClient::TYPE_TRANSACTION_VIN_VRAC : VracClient::TYPE_TRANSACTION_VIN_BOUTEILLE;
         $drmDetails->getOrAdd($cat_key)->getOrAdd($type_key . '_details')->addDetail($creationvrac);
@@ -1218,7 +1222,9 @@ private function typeMouvementCompatibiliteError($num_ligne, $csvRow) {
 private function mouvementVolumeNegatifError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le volume est négatif");
 }
-
+private function creationvracdetailsAcheteurNonNegoError($num_ligne, $csvRow) {
+    return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_CONTRAT_ACHETEUR_ACCISES]."/".$csvRow[self::CSV_CAVE_CONTRAT_ACHETEUR_NOM], "L'acheteur doit être un négociant");
+}
 private function stockVolumeIncoherentError($num_ligne, $csvRow) {
   return $this->createError($num_ligne, $csvRow[self::CSV_CAVE_TYPE_MOUVEMENT], "Le stock n'est pas cohérent par rapport à la DRM précédente", CSVDRMClient::LEVEL_WARNING);
 }
