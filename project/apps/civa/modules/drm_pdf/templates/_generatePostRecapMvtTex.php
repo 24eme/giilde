@@ -10,7 +10,9 @@ if(isset($dataGlobal['/declaration/certifications/AOC_ALSACE'])) {
 
 include_partial('drm_pdf/generateRecapMvtTex', array('drm' => $drm,'drmLatex' => $drmLatex, 'detailsNodes' => 'details', "libelleDetail" => null, 'data' => $data, 'tabTitle' => 'Récapitulatif')); ?>
 
-<?php $dataExport = $drm->declaration->getMouvementsAggregateByAppellation('export.*_details', '/declaration/certifications/AOC_ALSACE')->getRawValue(); ?>
+<?php $dataExport = $drm->declaration->getMouvementsAggregateByAppellation('export.*_details', '/declaration/certifications/AOC_ALSACE')->getRawValue();
+    $dataExport = DRMLatex::sortDataExport($dataExport);
+?>
 
 <?php
 $list_pays = array_keys($dataExport);
@@ -32,14 +34,15 @@ if($nb_produits): ?>
     <?php
     $nb_pages = ceil($nb_produits / $nb_produits_per_page);
     $nb_produits_displayed = 0;
-    $size_col = 40;
+    $size_col = 25;
+    $size_col_sp = 40;
     for ($index_page = 0; $index_page < $nb_pages; $index_page++): ?>
         <?php
         $index_first_produit = $index_page * $nb_produits_per_page;
         if ($index_page == $nb_pages - 1) {
             $nb_produits_per_page = $nb_produits - $nb_produits_displayed;
         }
-        $entete = '\begin{tabular}{C{'. $size_col .'mm} |';
+        $entete = '\begin{tabular}{C{'.$size_col_sp.'mm} |';
         for ($cpt_col = 0; $cpt_col < $nb_produits_per_page; $cpt_col++) {
             $entete .='C{'.$size_col.'mm}|';
         }
@@ -56,14 +59,19 @@ if($nb_produits): ?>
             $val = array();
             foreach (range($index_first_produit, $index_last_produit) as $indexProduit) {
                 if($indexProduit < count(array_values($dataExport[$p]))){
-                    $val[] = array_values($dataExport[$p])[$indexProduit];
+                    if(!preg_match("|VCI|", array_keys($dataExport[$p])[$indexProduit])){
+                        $val[] = array_values($dataExport[$p])[$indexProduit];
+                    }
                 }
             }
             $produits_for_page[$p][] = $val;
         }
         foreach (range($index_first_produit, $index_last_produit) as $indexProduit) {
             if($indexProduit < count($produits)){
-                $produits_labelles[] = $produits[$indexProduit];
+                $libelle = $produits[$indexProduit];
+                if(!preg_match("|VCI|", $libelle)){
+                    $produits_labelles[] = $libelle;
+                }                
             }
         }
         ?>

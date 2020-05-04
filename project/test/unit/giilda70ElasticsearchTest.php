@@ -2,6 +2,13 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 sfContext::createInstance($configuration);
 
+try {
+    acElasticaManager::getIndex();
+} catch(sfException $e) {
+    $t = new lime_test(0);
+    return;
+}
+
 
 $index = acElasticaManager::getType('ETABLISSEMENT');
 $elasticaQueryString = new acElasticaQueryQueryString();
@@ -79,9 +86,9 @@ $t->is($nbSocieteElasticsearch, count($societeByView), "Il y a le même nombre d
 $typesDrm = array("SUSPENDU","ACQUITTE");
 $typesDrmLibelles = array("Suspendu","Acquitté");
 
-$currentP = ((DateTime::createFromFormat("Ymd",date("Ym")."01"))->modify("-1 month"))->format("Ym");
+$currentP = DateTime::createFromFormat("Ymd",date("Ym")."01")->modify("-1 month")->format("Ym");
 
-$aleaP = (DateTime::createFromFormat("Ymd",rand(2012, date("Y")-1).sprintf("%02d",rand(1,12))."01"))->format("Ym");
+$aleaP = DateTime::createFromFormat("Ymd",rand(2012, date("Y")-1).sprintf("%02d",rand(1,12))."01")->format("Ym");
 $periodes = array($aleaP,$currentP);
 
 $t->comment("Vérification de l'indexation des documents DRM et DRMMVT");
@@ -107,7 +114,7 @@ foreach ($periodes as $p) {
   $resultset = $index->search($q);
 
 
-  $campagne = ConfigurationClient::getInstance()->buildCampagne((DateTime::createFromFormat("Ymd",$p."01"))->format('Y-m'));
+  $campagne = ConfigurationClient::getInstance()->buildCampagne(DateTime::createFromFormat("Ymd",$p."01")->format('Y-m'));
   $drmElkValidees = array();
   foreach ($resultset->getResults() as $key => $er) {
     $d = $er->getData();

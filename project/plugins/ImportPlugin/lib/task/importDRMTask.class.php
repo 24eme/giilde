@@ -300,7 +300,7 @@ class importDRMTask extends importAbstractTask
     $this->name             = 'drm';
     $this->briefDescription = '';
     $this->detailedDescription = <<<EOF
-The [importVrac|INFO] task does things.
+The [importDRM|INFO] task does things.
 Call it with:
 
   [php symfony import:drm|INFO]

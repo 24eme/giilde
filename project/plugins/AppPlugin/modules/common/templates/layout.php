@@ -39,6 +39,7 @@ $gitcommit = file_get_contents('../../.git/ORIG_HEAD');
             <?php if(sfConfig::get('app_instance') == 'preprod' ): ?>
               <div><p style="color:red; text-align:center; font-weight: bold;">Preproduction (la base est succeptible d'être supprimée à tout moment)</p></div>
             <?php endif; ?>
+            <?php if(isset($global_message)) { echo $global_message ; } ?>
     		<div class="container">
             <?php echo $sf_content ?>
             </div>

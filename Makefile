@@ -62,4 +62,4 @@ project/web/components/vins/vins-preview.html: project/web/components/vins/fontc
 	perl bin/generate_views.pl project/config/databases.yml project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.history.map.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.history.reduce.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.recherche.map.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.recherche.reduce.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.relance.map.view.js project/plugins/acVinAlertePlugin/lib/model/Alerte/views/alerte.relance.reduce.view.js > $@ || rm >@
 
 clean:
-	rm -f .views/*;mkdir .views
+	rm -f .views/*; mkdir -p .views

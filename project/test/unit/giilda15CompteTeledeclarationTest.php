@@ -11,6 +11,12 @@ foreach (CompteTagsView::getInstance()->listByTags('test', 'test_teledeclaration
       $soc = SocieteClient::getInstance()->findByIdentifiantSociete($m[1]);
       $soc->delete();
     }
+    if (preg_match('/ETABLISSEMENT-([^ ]*)/', implode(' ', array_values($v->value)), $m)) {
+      $etb = EtablissementClient::getInstance()->findByIdentifiant($m[1]);
+      if ($etb) {
+          $etb->delete();
+      }
+    }
 }
 
 SocieteClient::getInstance()->clearSingleton();
@@ -55,6 +61,28 @@ $etablissement3->save();
 $etablissement4 = $societe->createEtablissement(EtablissementFamilles::FAMILLE_PRODUCTEUR_VINIFICATEUR);
 $etablissement4->nom = "établissement viti test télédéclaration 4";
 $etablissement4->save();
+
+$compte = $etablissement->getMasterCompte();
+$compte->add('droits', array('teledeclaration', 'teledeclaration_drm'));
+$compte->addTag('test', 'test');
+$compte->addTag('test', 'test_teledeclaration');
+$compte->save();
+$compte = $etablissement2->getMasterCompte();
+$compte->add('droits', array('teledeclaration', 'teledeclaration_drm'));
+$compte->addTag('test', 'test');
+$compte->addTag('test', 'test_teledeclaration');
+$compte->save();
+$compte = $etablissement3->getMasterCompte();
+$compte->add('droits', array('teledeclaration', 'teledeclaration_drm'));
+$compte->addTag('test', 'test');
+$compte->addTag('test', 'test_teledeclaration');
+$compte->save();
+$compte = $etablissement4->getMasterCompte();
+$compte->add('droits', array('teledeclaration', 'teledeclaration_drm'));
+$compte->addTag('test', 'test');
+$compte->addTag('test', 'test_teledeclaration');
+$compte->save();
+
 
 $t->comment("Formulaire de création du compte avec une société qui n'a pas d'email");
 

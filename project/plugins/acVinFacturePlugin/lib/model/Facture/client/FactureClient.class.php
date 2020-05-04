@@ -368,55 +368,6 @@ class FactureClient extends acCouchdbClient {
         return '';
     }
 
-    //INUTILE
-    public function createAvoir(Facture $f) {
-        if (!$f->isRedressable()) {
-            return;
-        }
-        $avoir = clone $f;
-
-        $avoir->constructIds($f->getCompte()->getSociete(), $f->region);
-
-        foreach ($avoir->lignes as $ligne) {
-            foreach ($ligne->details as $detail) {
-                $detail->quantite *= -1;
-                $detail->montant_ht *= -1;
-                $detail->montant_tva *= -1;
-            }
-
-            $ligne->montant_ht *= -1;
-            $ligne->montant_tva *= -1;
-
-            $ligne->remove('origine_mouvements');
-            $ligne->add('origine_mouvements');
-        }
-
-        $avoir->total_ht *= -1;
-        $avoir->total_taxe *= -1;
-        $avoir->total_ttc *= -1;
-
-        $avoir->remove('origines');
-        $avoir->add('origines');
-
-        $avoir->remove('templates');
-        $avoir->add('templates');
-
-        $avoir->numero_archive = null;
-        $avoir->numero_piece_comptable = null;
-        $avoir->versement_comptable = 0;
-        $avoir->versement_comptable_paiement = 1;
-        $avoir->storeDatesCampagne($f->date_facturation);
-        $avoir->date_paiement = null;
-        $avoir->date_emission = date('Y-m-d');
-        $avoir->date_facturation = date('Y-m-d');
-        $avoir->date_echeance = date('Y-m-d');
-        $avoir->reglement_paiement = null;
-        $avoir->remove('arguments');
-        $avoir->add('arguments');
-
-        return $avoir;
-    }
-
     public function defactureCreateAvoirAndSaveThem(Facture $f) {
         if (!$f->isRedressable()) {
             return;
@@ -438,7 +389,7 @@ class FactureClient extends acCouchdbClient {
         $avoir->remove('echeances');
         $avoir->add('echeances');
         $avoir->statut = self::STATUT_NONREDRESSABLE;
-        $avoir->storeDatesCampagne($f->date_facturation);
+        $avoir->storeDatesCampagne(date('Y-m-d'));
         $avoir->numero_archive = null;
         $avoir->numero_piece_comptable_origine = $avoir->numero_piece_comptable;
         $avoir->numero_piece_comptable = null;

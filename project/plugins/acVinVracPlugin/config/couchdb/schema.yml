@@ -24,8 +24,8 @@ Vrac:
       delai_paiement_libelle: { }
       moyen_paiement: { }
       moyen_paiement_libelle: { }
-      date_limite_retiraison: { }
-      date_debut_retiraison: { }
+      date_limite_retiraison: { type: date }
+      date_debut_retiraison: { type: date }
       conditions_particulieres: { }
       tva: { }
       pluriannuel: { }
@@ -86,14 +86,14 @@ Vrac:
         type: collection
         definition:
           fields:
-            nom: {  }
-            raison_sociale: {  }
+            nom: { searchable: true }
+            raison_sociale: { searchable: true }
             cvi: {  }
             siret: {  }
             no_accises: {   }
             no_tva_intracomm: {    }
-            adresse: {  }
-            commune: {  }
+            adresse: { searchable: true }
+            commune: { searchable: true }
             code_postal: {   }
             region: {   }
             famille: { }
@@ -102,14 +102,14 @@ Vrac:
         type: collection
         definition:
           fields:
-            nom: {  }
-            raison_sociale: {  }
+            nom: { searchable: true }
+            raison_sociale: { searchable: true }
             cvi: {  }
             siret: {  }
             no_accises: {   }
             no_tva_intracomm: {    }
-            adresse: {  }
-            commune: {  }
+            adresse: { searchable: true }
+            commune: { searchable: true }
             code_postal: {   }
             region: {   }
             famille: { }
@@ -118,14 +118,14 @@ Vrac:
         type: collection
         definition:
           fields:
-            nom: {  }
-            raison_sociale: {  }
+            nom: { searchable: true }
+            raison_sociale: { searchable: true }
             cvi: {  }
             siret: {  }
             no_accises: {   }
             no_tva_intracomm: {    }
-            adresse: {  }
-            commune: {  }
+            adresse: { searchable: true }
+            commune: { searchable: true }
             code_postal: {   }
             region: {   }
             famille: { }
@@ -141,11 +141,11 @@ Vrac:
         type: collection
         definition:
           fields:
-            nom: {  }
-            raison_sociale: {  }
+            nom: { searchable: true }
+            raison_sociale: { searchable: true }
             carte_pro: {  }
-            adresse: {  }
-            commune: {  }
+            adresse: { searchable: true }
+            commune: { searchable: true }
             code_postal: {   }
             siret: {   }
 
@@ -207,14 +207,14 @@ Vrac:
 
 #Validations
       versement_fa: { }
-      date_campagne: { }
-      date_signature: { }
-      date_visa: { }
+      date_campagne: { type: date }
+      date_signature: { type: date }
+      date_visa: { type: date }
 
       volume_propose: { type: float }
       volume_enleve: { type: float }
 
-      enlevement_date: {  }
+      enlevement_date: { type: date }
       enlevement_frais_garde: { type: float }
 
       valide:
@@ -222,9 +222,9 @@ Vrac:
         definition:
           fields:
             # les vues de date_campagne/date_signature dans part3
-            date_saisie: {  }
+            date_saisie: { type: date }
             identifiant: {  }
             statut: { }
-            date_signature_vendeur: { require:false }
-            date_signature_acheteur: { require:false }
-            date_signature_courtier: { require:false }
+            date_signature_vendeur: { type: date, require:false }
+            date_signature_acheteur: { type: date, require:false }
+            date_signature_courtier: { type: date, require:false }

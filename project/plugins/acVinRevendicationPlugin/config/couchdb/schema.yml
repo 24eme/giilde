@@ -6,8 +6,9 @@ Revendication:
       _rev: {}
       _attachments:
         type: collection
+        indexable: false
         definition:
-          fields: 
+          fields:
             '*':
               type: collection
               definition:
@@ -20,10 +21,11 @@ Revendication:
       type: { }
       odg: { }
       campagne: {}
-      date_creation: {}
+      date_creation: { type: date }
       etape: {}
       datas:
         type: collection
+        indexable: false
         definition:
           fields:
             '*':

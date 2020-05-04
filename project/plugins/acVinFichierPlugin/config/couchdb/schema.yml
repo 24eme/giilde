@@ -6,6 +6,7 @@ Fichier:
       _rev: {  }
       _attachments:
         type: collection
+        indexable: false
         definition:
           fields:
             '*':
@@ -16,8 +17,8 @@ Fichier:
       type: {  }
       fichier_id: { }
       identifiant: { }
-      date_depot: { }
-      date_import: { }
+      date_depot: { type: date }
+      date_import: { type: date }
       libelle: { }
       mime: { required: false }
       visibilite: { type: integer }
@@ -33,7 +34,7 @@ Fichier:
               definition:
                 fields:
                   identifiant: { }
-                  date_depot: { }
+                  date_depot: { type: date }
                   libelle: { }
                   mime: { }
                   visibilite: { type: integer }

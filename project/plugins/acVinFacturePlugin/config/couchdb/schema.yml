@@ -11,10 +11,10 @@ Facture:
       numero_piece_comptable: {}
       numero_piece_comptable_origine: {}
       numero_adherent: {}
-      date_emission: {}
-      date_facturation: {}
-      date_paiement: {}
-      date_echeance: {}
+      date_emission: { type: string }
+      date_facturation: { type: date }
+      date_paiement: { type: date }
+      date_echeance: { type: date }
       reglement_paiement: {}
       montant_paiement: {}
       campagne: {}
@@ -35,9 +35,9 @@ Facture:
         type: collection
         definition:
           fields:
-            adresse: {}
+            adresse: { searchable: true }
             code_postal: {}
-            ville: {}
+            ville: { searchable: true }
             service_facturation: {}
             telephone: {}
             email: {}
@@ -45,19 +45,20 @@ Facture:
         type: collection
         definition:
           fields:
-            nom: {  }
+            nom: { searchable: true }
             num_tva_intracomm: {    }
-            adresse: {  }
-            adresse_complementaire: {  }
-            commune: {  }
+            adresse: { searchable: true }
+            adresse_complementaire: { searchable: true }
+            commune: { searchable: true }
             code_postal: {   }
-            raison_sociale: {  }
+            raison_sociale: { searchable: true }
       total_ht: {type: float}
       total_ttc: {type: float}
       total_taxe: {type: float}
       lignes:
         type: collection
         class: FactureLignes
+        indexable: false
         definition:
           fields:
             '*':
@@ -114,11 +115,12 @@ Facture:
               type: collection
               definition:
                 fields:
-                  echeance_code: {}
-                  echeance_date: {}
+                  echeance_code: { }
+                  echeance_date: { type: date }
                   montant_ttc: {type: float}
       origines:
         type: collection
+        indexable: false
         definition:
           fields:
             '*': {}
@@ -171,6 +173,7 @@ MouvementsFacture:
                         vrac_numero : { } #Utilisé pour l'ordre
 
 Comptabilite:
+  indexable: false
   definition:
     fields:
       _id: {  }

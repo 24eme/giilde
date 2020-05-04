@@ -33,10 +33,12 @@ foreach (CompteTagsView::getInstance()->listByTags('test', 'test') as $k => $v) 
               }
           }
         }
-        foreach (FactureSocieteView::getInstance()->findBySociete($soc) as $id => $facture) {
-            $facture = FactureClient::getInstance()->find($id);
-            $facture->delete();
-            $t->is(FactureClient::getInstance()->find($id), null, "Suppression de la Facture ".$id);
+        if($application != "civa") {
+            foreach (FactureSocieteView::getInstance()->findBySociete($soc) as $id => $facture) {
+                $facture = FactureClient::getInstance()->find($id);
+                $facture->delete();
+                $t->is(FactureClient::getInstance()->find($id), null, "Suppression de la Facture ".$id);
+            }
         }
         $soc->delete();
         $t->is(CompteClient::getInstance()->findByIdentifiant($m[1].'01'), null, "Suppression de la sociétés ".$m[1]." provoque la suppression de son compte");

@@ -7,12 +7,12 @@ Compte:
       identifiant: { }
       mot_de_passe: { }
       civilite: { }
-      prenom: { }
-      nom: { }
+      prenom: { searchable: true }
+      nom: { searchable: true }
       mot_de_passe: { }
-      date_creation: { required: false }
-      nom_a_afficher: {}
-      fonction: { }
+      date_creation: { type: date, required: false }
+      nom_a_afficher: { searchable: true }
+      fonction: { searchable: true }
       commentaire: { }
       origines:
         type: array_collection
@@ -20,23 +20,23 @@ Compte:
           fields:
              '*': { }
       id_societe: { }
-      adresse_societe: {  }
-      adresse: { }
-      adresse_complementaire: { }
+      adresse_societe: {  searchable: true }
+      adresse: { searchable: true }
+      adresse_complementaire: { searchable: true }
       code_postal: { }
-      commune: { }
+      commune: { searchable: true }
       insee: { }
       compte_type: { }
       cedex: { require: false } #A supprimer
-      pays: {  }
+      pays: { searchable: true }
       email: {  }
       telephone_perso: {  }
       telephone_bureau: {  }
       telephone_mobile: {  }
       fax: {  }
       site_internet: { }
-      nom_a_afficher: {  }
-      raison_sociale_societe: { required: false }
+      nom_a_afficher: { searchable: true }
+      raison_sociale_societe: { required: false, searchable: true }
       type_societe: { required: false }
       teledeclaration_active: { required: false }
       gecos: { required: false }
@@ -45,11 +45,11 @@ Compte:
         definition:
           fields:
             type: { }
-            raison_sociale: { }
-            adresse: {  }
-            adresse_complementaire: {  }
+            raison_sociale: { searchable: true }
+            adresse: { searchable: true }
+            adresse_complementaire: { searchable: true }
             code_postal: {  }
-            commune: {  }
+            commune: { searchable: true }
             email: {  }
             telephone: {  }
             fax: {  }
@@ -67,6 +67,7 @@ Compte:
       droits:
         type: array_collection
         required: false
+        indexable: false
         definition:
           fields:
             '*': { }

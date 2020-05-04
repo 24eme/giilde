@@ -6,18 +6,18 @@ DAE:
       _rev: {}
       type: {}
       identifiant: {  }
-      date: {  }
-      date_saisie: {  }
+      date: { type: date }
+      date_saisie: { type: date }
       declarant:
         type: collection
         definition:
           fields:
-            nom: {  }
-            raison_sociale: {  }
+            nom: { searchable: true }
+            raison_sociale: { searchable: true }
             cvi: {  }
             no_accises: {   }
-            adresse: {  }
-            commune: {  }
+            adresse: { searchable: true }
+            commune: { searchable: true }
             code_postal: {   }
             region: {  }
             famille: {  }
@@ -54,6 +54,7 @@ CSVDAE:
       type: {  }
       _attachments:
         type: collection
+        indexable: false
         definition:
           fields:
             '*':

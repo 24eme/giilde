@@ -123,8 +123,10 @@ $t->is(count($csv["06.DRMAX"]), 3, "3 lignes pour les exports");
 
 $t->is(count($csv["07.DRMCRD"]), 2, "2 lignes pour les CRDS");
 
+$cvo = $drm->declaration->certifications->AOC_ALSACE->genres->TRANQ->appellations->ALSACEBLANC->mentions->DEFAUT->lieux->DEFAUT->couleurs->DEFAUT->cepages->CH->details->DEFAUT->getCVOTaux();
+
 $t->is(count($csv["08.DRMENT"]), 1, "Une seul ligne pour le récap");
-$t->is($csv["08.DRMENT"][0], substr($periode,0,4).";".(substr($periode,4,2)*1).";".$viti->num_interne.";;0;\"\";0;0;0;221.39;44.28;265.67;30;265.67;40;30;20;10;0;0;0;0;10;0;20;0;0;0;0;0;0;0;0;0;".$dateFinMois.";".$date.";\"TELEDECLARATION\";\"\";\"\";;0.75;0.38;0;0", "Le recap est bien reporté");
+$t->is($csv["08.DRMENT"][0], substr($periode,0,4).";".(substr($periode,4,2)*1).";".$viti->num_interne.";;0;\"\";0;0;0;".($cvo*30).";".($cvo*30 * ExportMouvementsDRMDB2::TVA ).";".($cvo*30 * (1 + ExportMouvementsDRMDB2::TVA) ).";30;".($cvo*30 * (1 + ExportMouvementsDRMDB2::TVA) ).";40;30;20;10;0;0;0;0;10;0;20;0;0;0;0;0;0;0;0;0;".$dateFinMois.";".$date.";\"TELEDECLARATION\";\"\";\"\";;0.75;0.38;0;0", "Le recap est bien reporté");
 
 $t->is(count($csv["09.ORIGINES"]), 13, "13 lignes de mouvements");
 
@@ -155,7 +157,7 @@ foreach($mouvements as $key => $mouvement) {
 $export = new ExportMouvementsDRMDB2();
 $csv = $export->export($mouvements);
 
-$t->is(count($csv), 7, "L'export genère 7 csv");
+$t->is(count($csv), 9, "L'export genère 9 csv");
 
 $t->is(count($csv["01.DRMDEM"]), 1, "Une seul ligne pour les entrées");
 $t->is($csv["01.DRMDEM"][0], substr($periode,0,4).";".(substr($periode,4,2)*1).";".$viti->num_interne.";;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;".$date.";\"TELEDECLARATION\"", "Les entrées sont vides");

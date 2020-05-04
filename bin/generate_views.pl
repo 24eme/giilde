@@ -8,11 +8,11 @@ use JSON -support_by_pp;
 open(CONF, $dbconfig);
 while (<CONF>) {
 	chomp;
-	if (/dsn:\s*([^ ]*)/) {
+	if (/dsn:\s*([^ ]*)/ && ! /#/) {
 		$db = $1;
 		print "db: $db\n" if ($verbose);
 	}
-	if (/dbname:\s*([^ ]*)/) {
+	if (/dbname:\s*([^ ]*)/ && !/#/) {
 		$dbname = $1;
 		print "dbname: $dbname\n" if ($verbose);
 	}

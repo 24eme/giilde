@@ -6,6 +6,7 @@ DRM:
       _rev: {  }
       _attachments:
         type: collection
+        indexable: false
         definition:
           fields:
             '*':
@@ -26,7 +27,8 @@ DRM:
                   compte: {  }
                   nom: {  }
                   prenom: {  }
-                  date_modification: {  }
+                  date_modification: { type: date }
+      date_modification: { type: date, required: false}
       apurement_possible: {  }
       raison_rectificative: {  }
       etape: {  }
@@ -40,6 +42,7 @@ DRM:
       numero_archive: {  }
       droits:
         type: collection
+        indexable: false
         definition:
           fields:
             douane:
@@ -95,6 +98,7 @@ DRM:
             total: { type: float }
             certifications:
               type: collection
+              indexable: false
               definition:
                 fields:
                   '*':
@@ -453,14 +457,14 @@ DRM:
         type: collection
         definition:
           fields:
-            nom: {  }
-            raison_sociale: {  }
+            nom: { searchable: true }
+            raison_sociale: { searchable: true  }
             cvi: {  }
             num_accise: {  required: false } # A SUPPRIMER
             no_accises: {   }
             num_tva_intracomm: {  required: false } # A SUPPRIMER
-            adresse: {  }
-            commune: {  }
+            adresse: {  searchable: true }
+            commune: {  searchable: true }
             code_postal: {   }
             region: {  }
             adresse_compta: {  }
@@ -554,8 +558,8 @@ DRM:
         type: collection
         definition:
           fields:
-            date_saisie: {  }
-            date_signee: {  }
+            date_saisie: { type: date }
+            date_signee: { type: date }
             identifiant: {  }
             status: { required: false }
             statut: { }
@@ -695,7 +699,7 @@ DRM:
           fields:
             'xml': string
             'success': boolean
-            'horodatage': string
+            'horodatage': date
             'id_declaration': string
             'coherente': boolean
             diff: { required: false }
@@ -708,6 +712,7 @@ CSVDRM:
       type: {  }
       _attachments:
         type: collection
+        indexable: false
         definition:
           fields:
             '*':

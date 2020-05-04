@@ -88,7 +88,7 @@ class DRMConfiguration {
             return "";
         }
         $hashes = $this->configuration['edi_default_produit_hash'];
-        if (preg_match('/^.....M/', $inao) && preg_match('/^VM_/', $inao)) {
+        if (preg_match('/^.....M/', $inao) || preg_match('/^VM_/', $inao)) {
             return $hashes['MOU'];
         }
         if (!preg_match('/^VT_/', $inao) && preg_match('/_/', $inao)) {

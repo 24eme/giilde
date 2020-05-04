@@ -22,19 +22,19 @@ class DRMRoute extends sfObjectRoute implements InterfaceEtablissementRoute {
 
         if (in_array('valid', $control) && !$this->drm->isValidee()) {
             $myUser->setFlash('drm_warning', 'La DRM de '.$this->drm->getMois().'/'.$this->drm->getAnnee().' doit être validée');
-            return $this->redirectHome($this->drm->identifiant);
+            return $this->redirectHome($this->drm);
         }
 
         if (in_array('edition', $control) && $this->drm->isValidee()) {
             $myUser->setFlash('drm_warning', 'La DRM de '.$this->drm->getMois().'/'.$this->drm->getAnnee().' ne peut pas être éditée car elle est validé');
-            return $this->redirectHome($this->drm->identifiant);
+            return $this->redirectHome($this->drm);
         }
         sfContext::getInstance()->getResponse()->setTitle('DRM - '.$this->drm->getEtablissement()->getNom().' ('.$this->drm->getPeriode().')');
 
         return $this->drm;
     }
-    protected function redirectHome($identifiant) {
-        sfContext::getInstance()->getController()->redirect('@drm_etablissement?identifiant='.$identifiant);
+    protected function redirectHome($drm) {
+        sfContext::getInstance()->getController()->redirect('@drm_etablissement?identifiant='.$drm->identifiant."&campagne=".$drm->campagne);
         exit;
     }
 

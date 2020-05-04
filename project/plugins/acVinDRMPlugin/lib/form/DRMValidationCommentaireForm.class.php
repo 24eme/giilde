@@ -23,4 +23,7 @@ class DRMValidationCommentaireForm extends acCouchdbObjectForm {
       $this->widgetSchema->setNameFormat('drm[%s]');
     }
 
+    protected function doUpdateObject($values) {
+        $this->getObject()->updateControles();
+    }
 }

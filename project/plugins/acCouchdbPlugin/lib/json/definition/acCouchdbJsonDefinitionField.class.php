@@ -16,6 +16,7 @@ class acCouchdbJsonDefinitionField {
     const TYPE_STRING = 'string';
     const TYPE_INTEGER = 'integer';
     const TYPE_FLOAT = 'float';
+    const TYPE_DATE = 'date';
     const TYPE_COLLECTION = 'collection';
     const TYPE_ARRAY_COLLECTION = 'array_collection';
 

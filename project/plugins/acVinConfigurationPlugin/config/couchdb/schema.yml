@@ -1,5 +1,6 @@
 
 Current:
+  indexable: false
   definition:
     fields:
       _id: {  }
@@ -13,6 +14,7 @@ Current:
             '*': {  }
 
 Configuration:
+  indexable: false
   definition:
     fields:
       _id: {  }

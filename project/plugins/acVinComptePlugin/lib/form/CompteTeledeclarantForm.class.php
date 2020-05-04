@@ -72,8 +72,8 @@ class CompteTeledeclarantForm extends acCouchdbForm {
             return;
         }
 
-        if($doc->compte_type == CompteClient::TYPE_COMPTE_INTERLOCUTEUR) {
-            $doc->email = $email;
+        if($this->getDocument()->compte_type == CompteClient::TYPE_COMPTE_INTERLOCUTEUR) {
+            $this->getDocument()->email = $email;
             return;
         }
 

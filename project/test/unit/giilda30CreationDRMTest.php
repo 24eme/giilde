@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(42);
+$t = new lime_test(44);
 $t->comment("création d'une DRM avec des sorties facturables et non");
 
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();
@@ -50,8 +50,11 @@ $details->sorties->export_details->addDetail($export);
 $export_key2 = $export->getKey();
 $t->is($drm->getProduit($produit_hash, 'details')->get("sorties/export_details")->get($export_key2)->getKey(), $export_key2, $drm->_id." : les clés d'export sont conservées");
 
+
 $drm->update();
 $drm->save();
+
+$t->is($drm->date_modification, date('Y-m-d'), "La date de modification est celle d'aujourd'hui (".date('Y-m-d').")");
 
 $drm = DRMClient::getInstance()->findMasterByIdentifiantAndPeriode($viti->identifiant, $periode);
 $t->is($drm->getProduit($produit_hash, 'details')->get('stocks_fin/final'), 600, $drm->_id." : le stock final est impacté par les sorties de 450hl");
@@ -59,7 +62,12 @@ $t->is(count($drm->getProduit($produit_hash, 'details')->get('sorties/export_det
 
 $t->comment("validation de la DRM et génération des mouvements");
 $drm->validate();
+
+
+$drm->valide->date_saisie = date('Y-m-01');
+$drm->valide->date_signee = date('Y-m-01');
 $drm->save();
+$t->is($drm->date_modification, date('Y-m-01'), "La date de modification est celle de la validation (".date('Y-m-01').")");
 
 $mvts_viti = $drm->mouvements->{$drm->identifiant};
 $t->is(count($mvts_viti) * count($drm->mouvements), 4, $drm->_id." : la validation a généré trois mouvements chez le viti");

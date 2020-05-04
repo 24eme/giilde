@@ -28,6 +28,11 @@ curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/revendication/_view/stoc
 echo "#ETABLISSEMENT;statut (ACTIF, SUSPENDU);famille;identifiant societe;identifiant interne;nom;identifiant;cvi;region viticole;raison sociale;siege.adresse;siege.commune;siege.code postal;no accises;carte pro;email;telephone;fax;recette_locale_id_douane;recette_locale_nom;" > $TMP/export_bi_etablissements.csv
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/etablissement/_view/all?reduce=false | sed -f bin/unicode2alpha | sed -r 's/.*"key":\[("INTERPRO-[^"]*"|null),/ETABLISSEMENT;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | sed 's/,"key":./,/' | sed 's/{"id"://' | grep '^ETABLISSEMENT;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed -r 's/"([^"]+);([^"]+)"/"\1 \2"/g' | tr -d '"'  >> $TMP/export_bi_etablissements.csv
 
+touch $TMP/etablissementsDocs.tmp
+cat $TMP/export_bi_etablissements.csv | grep ';ACTIF;' | cut -d ';' -f 5 | sed -r "s|(.+)|curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/\1 >> $TMP/etablissementsDocs.tmp|" | bash
+cat $TMP/etablissementsDocs.tmp  | grep -v '"num_interne":null' | sed -r 's/(.+)"identifiant":"(C?[0-9]+)","(.+)num_interne":("[0-9]+")(.*)/"\2";\4/' | sort | uniq | grep -E "[0-9]+" > $TMP/export_bi_etablissements_numerointerne.csv
+rm $TMP/etablissementsDocs.tmp
+
 echo "#SOCIETE;statut (ACTIF, SUSPENDU);type societe;identifiant interne;identifiant;code_comptable_client;code_comptable_fournisseur;type fournisseur;nom;nom abrege;cave cooperative (OUI, NON);siret;code naf;tva intracommunautaire;domaines;adresse;adresse complementaire;code postal;ville;pays;telephone;fax;email" > $TMP/export_bi_societes.csv
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/societe/_view/export | sed -f bin/unicode2alpha | sed 's/.*"key":\["INTERPRO-[^"]*",/SOCIETE;/' | sed 's/\],"value":\[*/,/' | sed 's/\]*\},*//' | grep '^SOCIETE;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed -r 's/"([^"]+); ([^"]+)"/"\1 \2"/g'  >> $TMP/export_bi_societes.csv
 

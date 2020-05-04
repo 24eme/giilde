@@ -6,7 +6,7 @@ Projet de dématérialisation informatique des activités des interprofessions d
 
 Le projet est actuellement en cours d'utilisation par  : 
 
-* IVSO : https://declaration.ivsopro.com/ [![Intégration continue](https://declaration.ivsopro.com/statuts/tests.svg.php)](https://declaration.ivsopro.com/statuts/tests.php)
+* IVSO (Vins du Sud Ouest) : https://declaration.ivsopro.com/ [![Intégration continue](https://declaration.ivsopro.com/statuts/tests.svg.php)](https://declaration.ivsopro.com/statuts/tests.php)
 * IVBD : https://declaration.ivbdpro.fr/ [![Intégration continue](https://declaration.ivbdpro.fr/statuts/tests.svg.php)](https://declaration.ivbdpro.fr/statuts/tests.php)
 * BIVC : https://declaration.vins-centre-loire.com/ [![Intégration continue](https://declaration.vins-centre-loire.com/statuts/tests.svg.php)](https://declaration.vins-centre-loire.com/statuts/tests.php)
 * CIVA : https://declaration.vinsalsace.pro/ [![Intégration continue](https://declaration.vinsalsace.pro/drm/statuts/tests.svg.php)](https://declaration.vinsalsace.pro/drm/statuts/tests.php)

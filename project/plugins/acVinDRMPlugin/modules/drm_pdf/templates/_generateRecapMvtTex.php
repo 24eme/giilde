@@ -7,8 +7,10 @@ use_helper('Display');
 $mvtsEnteesForPdf = $drmLatex->getMvtsEnteesForPdf($detailsNodes);
 $mvtsSortiesForPdf = $drmLatex->getMvtsSortiesForPdf($detailsNodes);
 $newPage = false;
+$is_recap = true;
 if(!isset($data)) {
     $data = $drm->declaration->getProduitsDetailsByCertifications(true,$detailsNodes);
+    $is_recap = false;
 }
 if(!isset($tabTitle)) {
     $tabTitle = "Produits ".$libelleDetail."s";
@@ -35,12 +37,17 @@ if(!isset($tabTitle)) {
         if ($index_page == $nb_pages - 1) {
             $nb_produits_per_page = $nb_produits - $nb_produits_displayed;
         }
-        $size_col = 40;
-        $entete = '\begin{tabular}{C{'.$size_col.'mm}|';
+        $size_col = 25;
+        $size_col_sp = 40;
+        $entete = '\begin{tabular}{C{'.$size_col_sp.'mm}|';
         for ($cpt_col = 0; $cpt_col < $nb_produits_per_page; $cpt_col++) {
             $entete .='C{'.$size_col.'mm}|';
         }
-        $entete .='C{'.$size_col.'mm}|}';
+        if($is_recap){
+            $entete .='C{'.$size_col.'mm}|}';
+        }else{
+            $entete .='}';
+        }
 
         if ($index_page == 1) {
             $libelleCertif .= ' (Suite)';
@@ -78,13 +85,16 @@ if(!isset($tabTitle)) {
         \textbf{<?php echo $tabTitle ?> <?php echo $libelleCertif; ?>}
         \end{large} &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
-            <?php $libelleProduit = str_replace("AOC Alsace Grand Cru", "Gd Cru", $produit->libelle); ?>
+            <?php $libelleProduit = str_replace(array("AOC Alsace Grand Cru", "AOC Alsace Communale"), array("Gd Cru", "Communale"), $produit->libelle); ?>
 
 
             \multicolumn{1}{>{\columncolor[rgb]{0,0,0}}C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{<?php echo escape_string_for_latex($libelleProduit); ?>}}}}
             <?php echo ($counter < count($produits_for_page) -1 ) ? "&" : ''; ?>
         <?php endforeach; ?>
-        &\multicolumn{1}{>{\columncolor[rgb]{0,0,0}}C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{TOTAL}}}}
+        <?php if($is_recap):?>
+            &\multicolumn{1}{>{\columncolor[rgb]{0,0,0}}C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{TOTAL}}}}            
+        <?php endif; ?>
+        
         \\
         \hline
         <?php
@@ -94,7 +104,7 @@ if(!isset($tabTitle)) {
         ?>
         \rowcolor{gray}
         <?php $totaldebuth = 0; ?>
-        \multicolumn{1}{C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{STOCK DÉBUT DE MOIS}} }} &
+        \multicolumn{1}{C{<?php echo $size_col_sp; ?>mm}|}{ \small{\color{white}{\textbf{STOCK DÉBUT DE MOIS}} }} &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
             <?php if(count((array)$produit) > 1):?>
                 <?php $totaldebuth += $produit->total_debut_mois; ?>
@@ -104,7 +114,9 @@ if(!isset($tabTitle)) {
             <?php endif; ?>
             <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
-        &\multicolumn{1}{r|}{ \small{\color{white}{\textbf{ <?php echoFloatWithHl( $totaldebuth ); ?> }}}}
+        <?php if($is_recap):?>
+            &\multicolumn{1}{r|}{ \small{\color{white}{\textbf{ <?php echoFloatWithHl( $totaldebuth ); ?> }}}}
+        <?php endif; ?>        
         \\
         \hline
         <?php
@@ -133,7 +145,9 @@ if(!isset($tabTitle)) {
                 <?php if($counter < count($produits_for_page) - 1): ?>
                     <?php echo "&"; ?>
                 <?php else: ?>
-                    &\multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl( $totalentreeh ); ?> }}
+                    <?php if($is_recap):?>
+                        &\multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl( $totalentreeh ); ?> }}
+                    <?php endif; ?>                    
                 <?php endif?>
             <?php endforeach; ?>           
             \\
@@ -157,7 +171,9 @@ if(!isset($tabTitle)) {
             <?php endif; ?>
             <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
-        &\multicolumn{1}{r|}{\small{\textbf{<?php echoFloatWithHl($tTotalentrees); ?>}} }
+        <?php if($is_recap):?>
+            &\multicolumn{1}{r|}{\small{\textbf{<?php echoFloatWithHl($tTotalentrees); ?>}} }
+        <?php endif; ?>
         \\
         \hline
 
@@ -169,7 +185,7 @@ if(!isset($tabTitle)) {
         <?php foreach ($mvtsSortiesForPdf as $cpt_sortie => $sortie): ?>
             <?php $sortieKey = $sortie->key; ?>
             <?php if (!$cpt_sortie): ?>
-                \multicolumn{1}{C{<?php echo $size_col; ?>mm}|}{\multirow{<?php echo count($mvtsSortiesForPdf); ?>}{48mm}{\small{\textbf{SORTIES DU MOIS}}}} &
+                \multicolumn{1}{C{<?php echo $size_col_sp; ?>mm}|}{\multirow{<?php echo count($mvtsSortiesForPdf); ?>}{48mm}{\small{\textbf{SORTIES DU MOIS}}}} &
             <?php endif; ?>
             <?php $totalsortieh = 0; ?>
             \multicolumn{1}{|l|}{  \small{<?php echo $sortie->libelle; ?>} } &
@@ -184,7 +200,9 @@ if(!isset($tabTitle)) {
                 <?php endif; ?>
                 <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
             <?php endforeach; ?>
-            &\multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl($totalsortieh); ?> }}  
+            <?php if($is_recap):?>
+                &\multicolumn{1}{r|}{ \small{ <?php echoFloatWithHl($totalsortieh); ?> }}
+            <?php endif; ?>  
             \\
             <?php if ((count($mvtsSortiesForPdf)) != $cpt_sortie): ?>
                 \hline
@@ -209,7 +227,10 @@ if(!isset($tabTitle)) {
             <?php endif; ?>
             <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
-        &\multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($tTotalsorties); ?>}} }
+        <?php if($is_recap):?>
+            &\multicolumn{1}{r|}{   \small{\textbf{<?php echoFloatWithHl($tTotalsorties); ?>}} }
+        <?php endif; ?>
+        
         \\
         \hline \hline
 
@@ -220,7 +241,7 @@ if(!isset($tabTitle)) {
         ?>
         \rowcolor{gray}
         <?php $totalstockh = 0; ?>
-        \multicolumn{1}{C{<?php echo $size_col; ?>mm}|}{ \small{\color{white}{\textbf{STOCK FIN DE MOIS}} }} &
+        \multicolumn{1}{C{<?php echo $size_col_sp; ?>mm}|}{ \small{\color{white}{\textbf{STOCK FIN DE MOIS}} }} &
         <?php foreach ($produits_for_page as $counter => $produit): ?>
             <?php if(count((array)$produit) > 1):?>
                 \multicolumn{1}{r|}{  \small{\color{white}{\textbf{<?php $totalstockh += $produit->stocks_fin->final; echoFloatWithHl($produit->stocks_fin->final); ?>}}}}
@@ -229,7 +250,9 @@ if(!isset($tabTitle)) {
             <?php endif; ?>
             <?php echo ($counter < count($produits_for_page) - 1) ? "&" : ''; ?>
         <?php endforeach; ?>
-        &\multicolumn{1}{r|}{  \small{\color{white}{\textbf{<?php echoFloatWithHl($totalstockh); ?>}}}}
+        <?php if($is_recap):?>
+            &\multicolumn{1}{r|}{  \small{\color{white}{\textbf{<?php echoFloatWithHl($totalstockh); ?>}}}}
+        <?php endif; ?>        
         \\
         \hline
         \end{tabular}

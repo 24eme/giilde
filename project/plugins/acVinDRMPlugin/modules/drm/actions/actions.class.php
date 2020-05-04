@@ -26,7 +26,35 @@ class drmActions extends drmGeneriqueActions {
     }
 
     public function executeIndex(sfWebRequest $request) {
-        $this->redirect403IfIsTeledeclaration();
+      $this->redirect403IfIsTeledeclaration();
+      
+      $res_by_page = 10;        
+      $this->page_num = $request->getParameter('page', 1);
+
+      $this->current_page = $this->page_num;
+      $from = $res_by_page * ($this->page_num  - 1);
+      $this->drm_controles = [];
+      $this->nb_results = 0;
+      if(!acElasticaManager::getIndex()->exists()){
+        return;
+      }
+
+      $index = acElasticaManager::getType('DRM');
+      $query = new acElasticaQuery();
+      $elasticaQueryString = new acElasticaQueryQueryString();
+      $elasticaQueryString->setQuery("_exists_:doc.controles");
+      $query->setQuery($elasticaQueryString);
+      $query->setSort([["doc.periode" => ["order"=>"asc"]]]);
+      $query->setFrom($from);
+      $query->setLimit($res_by_page);
+      $this->drm_controles = $index->search($query);
+      
+      $this->nb_results = $this->drm_controles->getTotalHits();       
+      $this->last_page = ceil($this->nb_results / $res_by_page);        
+      
+      if($this->page_num > $this->last_page){
+        return $this->forward404Unless(true);
+      }
     }
 
     public function executeEtablissementSelection(sfWebRequest $request) {
@@ -189,7 +217,7 @@ class drmActions extends drmGeneriqueActions {
      * @param sfWebRequest $request
      */
     public function executeVerificationEdi(sfWebRequest $request) {
-        ini_set('memory_limit', '300M');
+        ini_set('memory_limit', '400M');
         set_time_limit(0);
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
@@ -246,7 +274,7 @@ class drmActions extends drmGeneriqueActions {
      */
     public function executeCreationEdi(sfWebRequest $request) {
         set_time_limit(0);
-        ini_set('memory_limit', '300M');
+        ini_set('memory_limit', '400M');
         $this->md5 = $request->getParameter('md5');
         $this->identifiant = $request->getParameter('identifiant');
         $this->periode = $request->getParameter('periode');
@@ -461,7 +489,8 @@ class drmActions extends drmGeneriqueActions {
             $this->redirect403IfIsTeledeclaration();
         }
         $drm = $this->getRoute()->getDRM();
-        $this->redirect403Unless($drm->isTeledeclareNonFacturee());
+        $this->redirect403Unless($drm->isReouvrable());
+        $drm->cleanControles();
 
         $drm = $this->getRoute()->getDRM();
         $drm->devalidate();

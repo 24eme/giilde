@@ -7,8 +7,8 @@ Societe:
       type: { }
       identifiant: { }
       type_societe: { }
-      raison_sociale: { }
-      raison_sociale_abregee: { }
+      raison_sociale: { searchable: true }
+      raison_sociale_abregee: { searchable: true }
       statut: { }
       code_comptable_client: { }
       code_comptable_fournisseur: { }
@@ -24,8 +24,8 @@ Societe:
       code_naf: { }
       siret: { }
       interpro: { }
-      date_modification: { required: false }
-      date_creation: { required: false}
+      date_modification: { type: date, required: false }
+      date_creation: { type: date, required: false}
       no_tva_intracommunautaire: { }
       email: {  }
       telephone: {  }
@@ -35,11 +35,11 @@ Societe:
         type: collection
         definition:
           fields:
-            adresse: {  }
-            adresse_complementaire: { }
+            adresse: { searchable: true }
+            adresse_complementaire: { searchable: true }
             code_postal: {  }
-            commune: {  }
-            pays: {  }
+            commune: { searchable: true }
+            pays: { searchable: true }
       cooperative: { }
       enseignes:
         type: array_collection

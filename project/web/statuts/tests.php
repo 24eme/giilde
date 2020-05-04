@@ -3,8 +3,16 @@
 $directory = dirname(__FILE__);
 $files = scandir($directory."/xml");
 
-$tests = array();
+sort($files);
 
+$output = 'html';
+
+if(isset($_GET['format']) && $_GET['format']) {
+    $output = $_GET['format'];
+}
+
+$tests = array();
+$precs = array();
 foreach($files as $file) {
     if(!preg_match('/^(.+)_(.+)_(.+)_(.+)\.xml/', $file, $matches)) {
         continue;
@@ -29,16 +37,48 @@ foreach($files as $file) {
             continue;
         }
         $test->nb_errors += $item['failures']*1 + $item['assertions']*1 - count($item);
-        //echo ($xml['failures']*1)."\n";
     }
     $test->success = !$test->nb_errors;
+    $test->nb_success = $test->nb - $test->nb_errors;
+    $test->diff_nb_success = 0;
+    $test->diff_nb_errors = 0;
 
+    $precTest = null;
+    if(isset($prec[$test->application.'_'.$test->branch]) && $prec[$test->application.'_'.$test->branch] && $prec[$test->application.'_'.$test->branch]->commit != $test->commit) {
+        $precTest = $prec[$test->application.'_'.$test->branch];
+    }
+
+    if($precTest) {
+        $test->diff_nb_errors = $test->nb_errors - $precTest->nb_errors;
+        $test->diff_nb_success = $test->nb_success - $precTest->nb_success;
+    }
+
+    $prec[$test->application.'_'.$test->branch] = $test;
     $tests[$test->date->format('YmdHis')] = $test;
 }
 
 krsort($tests);
 
 ?>
+<?php if($output == "xml"): ?>
+<?php header('Content-Type: text/xml'); ?>
+<?xml version="1.0" encoding="utf-8"?>
+    <feed xmlns="http://www.w3.org/2005/Atom">
+    	<title>Tests <?php echo $application ?></title>
+    	<updated><?php echo current($tests)->date->format('Y-m-d H:i:s') ?></updated>
+
+        <?php foreach($tests as $test): ?>
+        <?php if(!$test->diff_nb_success && !$test->diff_nb_errors): continue; endif;?>
+        <entry>
+    		<title>Le bilan des tests a évolué : <?php echo $test->nb_success ?> (<?php if($test->diff_nb_success > 0): ?>+<?php endif; ?><?php echo $test->diff_nb_success ?>) SUCCESS / <?php echo $test->nb_errors ?> (<?php if($test->diff_nb_errors > 0): ?>+<?php endif; ?><?php echo $test->diff_nb_errors ?>) FAILED </title>
+    	    <id><?php echo $test->commit ?></id>
+    	    <link><?php echo (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].preg_replace("/\?.+$/", "", $_SERVER['REQUEST_URI']) ?></link>
+    		<updated><?php echo $test->date->format('Y-m-d H:i:s') ?></updated>
+    	</entry>
+        <?php endforeach; ?>
+    </feed>
+<?php exit; ?>
+<?php endif; ?>
 <!doctype html>
 <html lang="fr_FR">
 <head>
@@ -47,13 +87,14 @@ krsort($tests);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <title>Tests</title>
 </head>
 <body>
     <div class="container" style="margin-top: 20px;">
-        <h2>Tests <img src="/statuts/tests.svg.php" /></h2>
+        <a class="float-right btn btn-sm btn-link" href="tests.php?format=xml">Feed </a>
+        <h2>Tests <img src="./tests.svg.php" /></h2>
         <table style="margin-top: 20px;" class="table table-bordered table-striped table-sm">
             <thead>
                 <tr>
@@ -76,17 +117,12 @@ krsort($tests);
                     <td class="text-center"><?php echo $test->nb; ?></td>
                     <td class="text-center <?php if($test->success): ?>text-success<?php else: ?>text-danger<?php endif; ?>"><?php echo $test->nb_errors ?></td>
                     <td class="<?php if($test->success): ?>text-success<?php else: ?>text-danger<?php endif; ?>"><?php if($test->success): ?>Succès<?php else: ?>Échec<?php endif ?></td>
-                    <td><a href="/statuts/xml/<?php echo $test->file ?>">Voir</a></td>
+                    <td><a href="./xml/<?php echo $test->file ?>">Voir</a></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

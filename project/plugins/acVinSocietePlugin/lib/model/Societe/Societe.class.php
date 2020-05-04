@@ -440,14 +440,14 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
     }
 
     public function getEmailTeledeclaration() {
+        if ($this->exist('teledeclaration_email') && $this->teledeclaration_email) {
+            return $this->teledeclaration_email;
+        }
         if ($compteSociete = $this->getMasterCompte()) {
             if ($compteSociete->exist('societe_information') && $compteSociete->societe_information->exist('email') && $compteSociete->societe_information->email) {
                 return $compteSociete->societe_information->email;
             }
             return $compteSociete->email;
-        }
-        if ($this->exist('teledeclaration_email') && $this->teledeclaration_email) {
-            return $this->teledeclaration_email;
         }
         if ($this->exist('email') && $this->email) {
             return $this->email;

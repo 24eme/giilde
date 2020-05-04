@@ -34,6 +34,9 @@ class acCouchdbJsonDefinitionParser {
         $type = self::getValue($data_field, 'type', 'string');
         $required = self::getValue($data_field, 'required', true);
         $multiple = ($key == '*');
+        if ($type === acCouchdbJsonDefinitionField::TYPE_DATE) {
+            $type = acCouchdbJsonDefinitionField::TYPE_STRING;
+        }
         if (in_array($type, array(acCouchdbJsonDefinitionField::TYPE_STRING,
                                   acCouchdbJsonDefinitionField::TYPE_ANYONE,
                                   acCouchdbJsonDefinitionField::TYPE_INTEGER,

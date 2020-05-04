@@ -45,8 +45,8 @@ Etablissement:
        site_fiche: {  }
        compte: {  }
        num_interne: {  }
-       raison_sociale: {  }
-       nom: {  }
+       raison_sociale: { searchable: true }
+       nom: { searchable: true }
        cvi: {  }
        no_accises: {  }
        carte_pro: {  }
@@ -57,7 +57,7 @@ Etablissement:
        fax: {  }
        commentaire: {  }
        crd_regime: { }
-       adresse_compta: { }
+       adresse_compta: { searchable: true }
        caution: { }
        siret: { required: false }
        intitule: { required: false }
@@ -65,7 +65,7 @@ Etablissement:
        declaration_commune: { required: false }
        declaration_insee: { required: false }
        raison_sociale_cautionneur: { required: false }
-       date_modification: { required: false }
+       date_modification: { type: date, required: false }
        acheteur_raisin: { required: false }
        ds_decembre: { required: false }
        no_ds_negociant: { required: false }
@@ -75,29 +75,29 @@ Etablissement:
           definition:
             fields:
               civilite: {  }
-              nom: {  }
-              adresse: {  }
+              nom: { searchable: true }
+              adresse: { searchable: true }
               code_postal: {  }
-              commune: {  }
+              commune: { searchable: true }
               telephone: {  }
-              date_naissance: {  }
+              date_naissance: { type: date }
        siege:
            type: collection
            definition:
              fields:
-               adresse: {  }
-               adresse_complementaire: {  }
+               adresse: { searchable: true }
+               adresse_complementaire: { searchable: true }
                code_postal: {  }
-               commune: {  }
-               pays: {}
+               commune: { searchable: true }
+               pays: { searchable: true }
        comptabilite:
            type: collection
            definition:
              fields:
-               adresse: {  }
-               code_postal: {  }
-               commune: {  }
-               pays: {}
+               adresse: { searchable: true }
+               code_postal: { searchable: true }
+               commune: { searchable: true }
+               pays: { searchable: true }
        lieux_stockage:
          type: collection
          required: false
@@ -109,7 +109,7 @@ Etablissement:
                definition:
                  fields:
                    numero: {  }
-                   nom: {  }
-                   adresse: {  }
-                   commune: {  }
+                   nom: { searchable: true }
+                   adresse: { searchable: true }
+                   commune: { searchable: true }
                    code_postal: {  }

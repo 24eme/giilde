@@ -20,4 +20,4 @@ all:
       edi_default_produit_hash:
         'TRANQ':  '/declaration/certifications/AUTRES/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
         'MOU':  '/declaration/certifications/AUTRES/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
-        'AUTRE':  '/declaration/certifications/AUTRES/genres/ALCOOLS/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'AUTRE':  '/declaration/certifications/ALCOOLS/genres/DEFAUT/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'

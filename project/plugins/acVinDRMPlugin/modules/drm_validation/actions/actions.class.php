@@ -38,6 +38,7 @@ class drm_validationActions extends drmGeneriqueActions {
         $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);
 
         $this->drm->cleanDeclaration();
+
         if ($this->isTeledeclarationMode) {
             $this->validationCoordonneesSocieteForm = new DRMValidationCoordonneesSocieteForm($this->drm);
             $this->validationCoordonneesEtablissementForm = new DRMValidationCoordonneesEtablissementForm($this->drm);
@@ -50,10 +51,6 @@ class drm_validationActions extends drmGeneriqueActions {
         }
 
         $this->validation = new DRMValidation($this->drm, $this->isTeledeclarationMode);
-        if($this->validation->hasPoints()){
-            $this->drm->addPoints($this->validation);
-        }
-
         $this->produits = array();
         foreach ($this->drm->getProduits() as $produit) {
             $d = new stdClass();
@@ -71,12 +68,15 @@ class drm_validationActions extends drmGeneriqueActions {
 
         $this->isUsurpationMode = $this->isUsurpationMode();
 
-        $this->form = new DRMValidationCommentaireForm($this->drm);
-
         if (!$request->isMethod(sfWebRequest::POST)) {
+            $this->drm->updateControles();
+            $this->drm->save();
 
+            $this->form = new DRMValidationCommentaireForm($this->drm);
             return sfView::SUCCESS;
         }
+
+        $this->form = new DRMValidationCommentaireForm($this->drm);
 
         $this->mouvements = $this->drm->getMouvementsCalculeByIdentifiant($this->drm->identifiant);
         $this->form->bind($request->getParameter($this->form->getName()));
@@ -88,13 +88,8 @@ class drm_validationActions extends drmGeneriqueActions {
         if (!$this->validation->isValide()) {
             return sfView::SUCCESS;
         }
-        $this->form->save();
         $this->drm->validate(array('isTeledeclarationMode' => $this->isTeledeclarationMode));
-        
-        if($this->drm->exist("controles")){
-            $this->drm->cleanControles();
-        }
-        $this->drm->save();
+        $this->form->save();
 
         $this->drm->updateVracs();
 

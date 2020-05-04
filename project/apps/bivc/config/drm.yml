@@ -17,6 +17,6 @@ all:
       default_auto_checked: false
       matiere_premiere: false
       edi_default_produit_hash:
-        'TRANQ':  '/declaration/certifications/AUTRES/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
-        'MOU':  '/declaration/certifications/AUTRES/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'
+        'TRANQ':  '/declaration/certifications/AUTRES/genres/TRANQ/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/defaut/cepages/DEFAUT'
+        'MOU':  '/declaration/certifications/AUTRES/genres/MOU/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/defaut/cepages/DEFAUT'
         'AUTRE':  '/declaration/certifications/ALCOOLS/genres/DEFAUT/appellations/DEFAUT/mentions/DEFAUT/lieux/DEFAUT/couleurs/DEFAUT/cepages/DEFAUT'

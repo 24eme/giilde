@@ -337,7 +337,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
             continue;
           }
 
-          if ($founded_produit && !$founded_produit->isActif($datas[self::CSV_PERIODE].'-01')) {
+          if ($founded_produit && !$founded_produit->isActif(substr($datas[self::CSV_PERIODE], 0, 4).'-'.substr($datas[self::CSV_PERIODE], -2).'-01')) {
             $this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $datas));
             continue;
           }
@@ -1287,7 +1287,7 @@ private function annexesNonApurementWrongDateError($num_ligne, $csvRow) {
 }
 
 private function annexesNonApurementWrongNumAcciseError($num_ligne, $csvRow) {
-  return $this->createError($num_ligne, $csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST], "La numéro d'accise du destinataire est mal formatté (".$csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST].").");
+  return $this->createError($num_ligne, $csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST], "Le numéro d'accise du destinataire est mal formatté (".$csvRow[self::CSV_ANNEXE_NONAPUREMENTACCISEDEST].").");
 }
 
 private function typeComplementNotFoundError($num_ligne, $csvRow) {

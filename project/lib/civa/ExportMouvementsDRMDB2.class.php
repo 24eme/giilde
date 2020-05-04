@@ -3,6 +3,8 @@
 class ExportMouvementsDRMDB2
 {
 
+    const TVA = 0.20;
+
     public $produits = array("01.BLANC", "02.ROUGE", "03.GRDCRU", "04.CREMANT");
     public $produitsExport = array("01.BLANC", "02.ROUGE", "04.CREMANT", "03.GRDCRU");
 
@@ -178,8 +180,8 @@ class ExportMouvementsDRMDB2
             if(!isset($total["crd_tranq_utilisation"])) { $total["crd_tranq_utilisation"] = 0; }
             if(!isset($total["crd_mousseux_utilisation"])) { $total["crd_mousseux_utilisation"] = 0; }
 
-            $total["prix_ht"] = floor(($total["prix_ht"] * 100)) / 100;
-            $total["tva"] = round($total["prix_ht"] * 0.20, 2);
+            $total["prix_ht"] = floor(($total["prix_ht"] + 0.00001) * 100) / 100;
+            $total["tva"] = round($total["prix_ht"] * self::TVA, 2);
             $total["prix_ttc"] = $total["prix_ht"] + $total["tva"];
 
             $ligne = substr($periode, 0, 4).";".(substr($periode, 4, 2)*1).";". $identifiant.";;0;\"\";0;0;0;".$total["prix_ht"].";".$total["tva"].";".$total["prix_ttc"].";".$total["quantite"].";".$total["prix_ttc"];
