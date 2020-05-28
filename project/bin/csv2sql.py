@@ -31,3 +31,6 @@ sys.stderr.write("export_bi_dss.csv\n")
 csv = pd.read_csv("export_bi_dss.csv", encoding='iso-8859-1', delimiter=";", index_col=False).rename(columns={ 'statut (ACTIF, SUSPENDU)': 'statut', "#DS": "type de document"})
 csv.to_sql('ds', con=engine, if_exists='replace')
 
+sys.stderr.write("export_bi_drm_stock.csv\n")
+csv = pd.read_csv("export_bi_drm_stock.csv", encoding='iso-8859-1', delimiter=";", index_col=False).rename(columns={"#ID": "id stock"})
+csv.to_sql('DRM_Stock', con=engine, if_exists='replace')

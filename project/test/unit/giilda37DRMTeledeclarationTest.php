@@ -141,7 +141,7 @@ $t->is(count($messages), 2, "L'envoi compte 2 messages");
 
 @mkdir(sfConfig::get('sf_test_dir')."/output");
 file_put_contents(sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration_douane_transmission_douane.eml", $messages[0]);
-$t->ok(strpos($messages[0], " test_from_mail@ma") !== false, "Les infos de contact dans le mail sont bonnes");
+$t->ok(strpos(str_replace(array("\n", "\r", "="), "", $messages[0]), " test_from_mail@ma") !== false, "Les infos de contact dans le mail sont bonnes");
 
 $t->ok($messages[0] instanceof Swift_Mime_SimpleMessage, "Mail généré : ".sfConfig::get('sf_test_dir')."/output/email_drm_validation_teldeclaration_douane_transmission_douane.eml");
 

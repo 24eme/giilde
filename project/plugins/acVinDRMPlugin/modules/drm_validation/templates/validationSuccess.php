@@ -59,8 +59,9 @@
         </div>
     </div>
 
+    <?php include_partial('drm_visualisation/douane_table', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode)); ?>
     <?php include_partial('drm_xml/rapport_retour', array('drm' => $drm, 'isTeledeclarationMode' => $isTeledeclarationMode)); ?>
-
+    <br/><br/>
     <div class="row">
         <div class="col-xs-4 text-left">
             <a tabindex="-1" href="<?php echo ($isTeledeclarationMode) ? url_for('drm_annexes', $drm) : url_for('drm_edition_details', array('sf_subject' => $drm, 'details' => DRM::DETAILS_KEY_SUSPENDU)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>

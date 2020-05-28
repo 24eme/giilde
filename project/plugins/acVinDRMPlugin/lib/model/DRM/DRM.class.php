@@ -358,10 +358,15 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
     public function updateControles(){
         $points = new DRMValidation($this, true);
-	$this->cleanControles();
-	if(!$points->hasPoints() && !$this->exist("transmission_douane")){
+    	$this->cleanControles();
+        $this->doSave();
+        if($this->isValidee()){
             return;
         }
+        if(!$points->hasPoints() && !$this->exist("transmission_douane")){
+            return;
+        }
+    	
         if($points->hasPoints()){
             $this->add('controles');
             if($points->hasErreurs()){
@@ -381,10 +386,10 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             }
         }
 
-        if($this->exist("transmission_douane") && $this->transmission_douane->success == false){
+        if($this->exist("transmission_douane") && !is_null($this->transmission_douane->success) && $this->transmission_douane->success == false){
             $this->addControleMessage(DRM::CONTROLE_TRANSMISSION, $this->getTransmissionErreur());
         }
-        if($this->exist("transmission_douane") && $this->get("transmission_douane")->exist('coherence') && !$this->get("transmission_douane")->coherence){
+        if($this->exist("transmission_douane") && !is_null($this->get("transmission_douane")->coherente) && $this->get("transmission_douane")->coherente == false){
             $this->addControleMessage(DRM::CONTROLE_COHERENCE, "Non conforme douane");
         }
     }

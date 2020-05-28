@@ -125,7 +125,12 @@ abstract class DocumentValidation
 
     protected function generateUrl($route, $params = array(), $absolute = false)
     {       
-        return sfContext::getInstance()->getRouting()->generate($route, $params, $absolute);
+        try{
+            return sfContext::getInstance()->getRouting()->generate($route, $params, $absolute);
+        }catch(sfException $e){
+            return;
+        }
+
     }
 
     protected function isTypeExist($type) {

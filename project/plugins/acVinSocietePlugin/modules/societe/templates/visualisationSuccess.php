@@ -61,21 +61,19 @@
                             <?php else: ?>
                                 <span class="text-muted">(code de création : Compte déjà créé)</span>
                             <?php endif; ?>
+                        </p>
                             <?php
                             if ($societe->isTransaction()):
                                 if ($societe->getEtablissementPrincipal() && $societe->getEtablissementPrincipal()->getEmailTeledeclaration() && $societe->getMasterCompte()->isTeledeclarationActive()) :
                                     ?>
-                                <li>Email de télédéclaration : <?php echo $societe->getEtablissementPrincipal()->getEmailTeledeclaration(); ?></li>
+                                <p>Email de télédéclaration : <?php echo $societe->getEtablissementPrincipal()->getEmailTeledeclaration(); ?></p>
                             <?php endif; ?>
                         <?php else: ?>
                             <?php if ($societe->getEmailTeledeclaration() && $societe->getMasterCompte()->isTeledeclarationActive()) :
                                 ?>
-                                <li>Email de télédéclaration : <?php echo $societe->getEmailTeledeclaration(); ?></li>
+                                <p>Email de télédéclaration : <?php echo $societe->getEmailTeledeclaration(); ?></p>
                             <?php endif; ?>
         <?php endif; ?>
-
-                        </ul>
-                        </p>
     <?php endif; ?>
                     <p><?php if ($societe->getMasterCompte()->exist('droits')): ?>
                             <strong>Droits :</strong>

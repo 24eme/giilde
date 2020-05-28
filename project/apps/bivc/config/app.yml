@@ -161,6 +161,10 @@ all:
           libelle: "Sorties par catégorie"
           index: "DRMMVT"
           hashkeysize: 2
+          query_filters:
+            range:
+              'doc.mouvements.cvo':
+                gt: 0
           aggregation:
             filter:
               terms:

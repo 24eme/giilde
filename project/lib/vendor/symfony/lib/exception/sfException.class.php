@@ -196,7 +196,7 @@ class sfException extends Exception
     }
 
     // when using CLI, we force the format to be TXT
-    if (0 == strncasecmp(PHP_SAPI, 'cli', 3))
+    if (0 == strncasecmp(PHP_SAPI, 'cli', 3) && !isset($_SERVER['SERVER_PORT']))
     {
       $format = 'txt';
     }

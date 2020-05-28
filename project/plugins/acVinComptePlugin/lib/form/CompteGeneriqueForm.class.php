@@ -27,6 +27,7 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->setWidget('droits', new bsWidgetFormChoice(array('choices' => self::getDroits(), 'multiple' => true, 'expanded' => true)));
 
         $this->setWidget('email', new bsWidgetFormInput());
+        $this->setWidget('teledeclaration_email', new bsWidgetFormInput());
         $this->setWidget('telephone_perso', new bsWidgetFormInput());
         $this->setWidget('telephone_bureau', new bsWidgetFormInput());
         $this->setWidget('telephone_mobile', new bsWidgetFormInput());
@@ -42,6 +43,7 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->widgetSchema->setLabel('droits', 'Droits *');
 
         $this->widgetSchema->setLabel('email', 'E-mail');
+        $this->widgetSchema->setLabel('teledeclaration_email', 'E-mail de télédéclaration');
         $this->widgetSchema->setLabel('telephone_perso', 'Telephone Perso.');
         $this->widgetSchema->setLabel('telephone_bureau', 'Telephone Bureau');
         $this->widgetSchema->setLabel('telephone_mobile', 'Mobile');
@@ -56,6 +58,7 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->setValidator('pays', new sfValidatorChoice(array('required' => false, 'choices' => array_keys(self::getCountryList()))));
         $this->setValidator('droits', new sfValidatorChoice(array('required' => false, 'multiple' => true, 'choices' => array_keys(self::getDroits()))));
         $this->setValidator('email', new sfValidatorString(array('required' => false)));
+        $this->setValidator('teledeclaration_email', new sfValidatorString(array('required' => false)));
         $this->setValidator('telephone_perso', new sfValidatorString(array('required' => false)));
         $this->setValidator('telephone_bureau', new sfValidatorString(array('required' => false)));
         $this->setValidator('telephone_mobile', new sfValidatorString(array('required' => false)));
@@ -72,8 +75,8 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->setDefault('insee', $this->getObject()->getInsee());
         $this->setDefault('pays', $this->getObject()->getPays());
         $this->setDefault('adresse_complementaire', $this->getObject()->getAdresseComplementaire());
-
         $this->setDefault('email', $this->getObject()->getEmail());
+        $this->setDefault('teledeclaration_email', $this->getObject()->getEmailTeledeclaration());
         $this->setDefault('telephone_perso', $this->getObject()->getTelephonePerso());
         $this->setDefault('telephone_bureau', $this->getObject()->getTelephoneBureau());
         $this->setDefault('telephone_mobile', $this->getObject()->getTelephoneMobile());
@@ -100,7 +103,7 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->getObject()->setPays($values['pays']);
         $this->getObject()->setAdresseComplementaire($values['adresse_complementaire']);
         $this->getObject()->setCodePostal($values['code_postal']);
-
+        $this->getObject()->setEmailTeledeclaration($values['teledeclaration_email']);
         $this->getObject()->setEmail($values['email']);
         $this->getObject()->setTelephonePerso($values['telephone_perso']);
         $this->getObject()->setTelephoneBureau($values['telephone_bureau']);

@@ -70,11 +70,13 @@ use_helper('Date');
                         <?php endif; ?>
                     <?php endif; ?>
                     <?php
-                    if (!is_null($vrac->valide->statut) && $vrac->valide->statut != VracClient::STATUS_CONTRAT_ANNULE && (is_null($vrac->volume_enleve) || ($vrac->volume_enleve == 0))):
+                    if (!is_null($vrac->valide->statut) && ($vrac->valide->statut != VracClient::STATUS_CONTRAT_ANNULE) && ($vrac->valide->statut != VracClient::STATUS_CONTRAT_SOLDE)):
                         if (!$isTeledeclarationMode):
                             ?>
                             <a id="btn_editer_contrat" href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-warning">Modifier</a>
                         <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if (!is_null($vrac->valide->statut) && $vrac->valide->statut != VracClient::STATUS_CONTRAT_ANNULE && (is_null($vrac->volume_enleve) || ($vrac->volume_enleve == 0))): ?>
                         <?php if ($isTeledeclarationMode && $isTeledeclare && $isProprietaire && !$vrac->isVise() && $vrac->valide->statut != VracClient::STATUS_CONTRAT_VALIDE): ?>
                             <button onclick='return confirm("Étes-vous sur de vouloir supprimer ce contrat ?")' id="btn_annuler_contrat" type="submit" class="btn btn-danger">Annuler</button>
                         <?php endif; ?>

@@ -44,11 +44,11 @@ class drmActions extends drmGeneriqueActions {
       $elasticaQueryString = new acElasticaQueryQueryString();
       $elasticaQueryString->setQuery("_exists_:doc.controles");
       $query->setQuery($elasticaQueryString);
-      $query->setSort([["doc.periode" => ["order"=>"asc"]]]);
+      $query->setSort([["doc.date_modification" => ["order"=>"desc"]]]);
       $query->setFrom($from);
       $query->setLimit($res_by_page);
       $this->drm_controles = $index->search($query);
-      
+
       $this->nb_results = $this->drm_controles->getTotalHits();       
       $this->last_page = ceil($this->nb_results / $res_by_page);        
       
@@ -166,7 +166,7 @@ class drmActions extends drmGeneriqueActions {
                   if(!$resultFile && file_exists($path)){
                     return $this->redirect('drm_nouvelle', array('identifiant' => $identifiant, 'periode' => $periode));
                   }
-                  return $this->redirect('drm_creation_fichier_edi',array('identifiant' => $identifiant,'periode' => $periode,'md5' => $md5file,'etape' => DRMClient::ETAPE_CHOIX_PRODUITS));
+                  return $this->redirect('drm_creation_fichier_edi',array('identifiant' => $identifiant,'periode' => $periode,'md5' => $md5file,'etape' => DRMClient::ETAPE_CHOIX_PRODUITS, 'type_creation' => DRMClient::DRM_CREATION_AUTO));
                 break;
                 case DRMClient::DRM_CREATION_EDI :
                     if ($this->creationDrmForm->isValid()) {
@@ -287,6 +287,7 @@ class drmActions extends drmGeneriqueActions {
         $this->drmCsvEdi->importCSV();
 
         $this->drm->etape = $request->getParameter('etape', DRMClient::ETAPE_VALIDATION);
+        $this->drm->type_creation = $request->getParameter('type_creation', DRMClient::DRM_CREATION_EDI);
         $this->drm->save();
 
         $this->redirect('drm_redirect_etape', $this->drm);

@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$nb_tests = 59;
+$nb_tests = 63;
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $produits = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits();
 
@@ -43,6 +43,10 @@ if ($produitdefault_mou_hash) {
 $produitdefault_autre_hash = DRMConfiguration::getInstance()->getEdiDefaultProduitHash("SPIRITUEUX_GUADELOUPE_SUP_18");
 if ($produitdefault_autre_hash) {
     $nb_tests += 5;
+}
+
+if($application == "ivso") {
+    $nb_tests += 1;
 }
 
 //Suppression des DRM précédentes
@@ -382,23 +386,32 @@ fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
 fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,01/06/2019,FR00000E00000,19FRG000000000000000\n");
 fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-02,FR00000E00001,19FRG000000000000001\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-03,FR123456,19FRG000000000000002\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-04,FR1234,19FRG000000000000003\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-04,FR12345678,19FRG000000000000004\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,100,,,,\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_fin,fin,100,,,,\n");
 fclose($temp);
 $drm9 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5);
 $drm9->teledeclare = true;
 $import = new DRMImportCsvEdi($tmpfname, $drm9);
-$t->ok($import->checkCSV(), "Permet deux types de dates de non apurement");
+-$t->ok(!$import->checkCSV(), "Repère bien l'erreur sur le non appurement");
+$t->is(count($import->getCsvDoc()->erreurs), 2, "a bien que les erreurs de accises/bureau de douane");
 foreach($import->getCsvDoc()->erreurs as $k => $err) {
-    $t->ok(false, $err->diagnostic);
+    if (!preg_match("/Le numéro d'accise du destinataire est mal formatté/", $err->diagnostic)) {
+        $t->ok(false, $err->diagnostic);
+    }
 }
 
 $import->importCSV();
 $drm9->save();
 
-$t->is(count($drm9->releve_non_apurement), 2, "releve de non apurement présent");
+$t->is(count($drm9->releve_non_apurement), 3, "releve de non apurement présent");
 $t->is($drm9->releve_non_apurement["19FRG000000000000000"]->getDateEmission(true), '2019-06-01', "la 1ere date est bonne");
 $t->is($drm9->releve_non_apurement["19FRG000000000000001"]->getDateEmission(true), '2019-06-02', "la 2de date est bonne");
+$t->is($drm9->releve_non_apurement["19FRG000000000000002"]->getDateEmission(true), '2019-06-03', "la 3ème date est bonne");
+$t->ok(!isset($drm9->releve_non_apurement["19FRG000000000000003"]), "le 4ème relevé de non appurement a bien été exclu (moins de 8 caractères)");
+$t->ok(!isset($drm9->releve_non_apurement["19FRG000000000000004"]), "le 5ème relevé de non appurement a bien été exclu (de 9 à 10 caractères)");
 foreach ($drm9->crds as $k1 => $coul) {
     foreach($coul as $k2 => $crd) {
         $t->is($crd->couleur, 'DEFAUT', "sans couleur, la CRD couleur par défaut est DEFAUT");
@@ -463,5 +476,31 @@ $import->importCSV();
 $t->is(count($drm11->get($produitAlcool_hash.'/details')->toArray(true, false)), 3, "3 produits ont été créés");
 $t->is($drm11->get($produitAlcool_hash.'/details/'.$keyProductTav60)->stocks_fin->final, 60, "Stock final du 3 ème produit");
 
-
 unlink($tmpfname);
+
+$drm10->devalidate();
+$drm10->delete();
+$drm11->delete();
+
+
+if($application == "ivso") {
+    $periode5 = date('Y')."04";
+    $t->comment("Reconnaissance du Floc Gascogne pour IVSO");
+
+    $temp = fopen($tmpfname, "w");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,stocks_debut,initial,0,,,,,,\n");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,entrees,achatcrd,100,,,,,,\n");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,sorties,ventefrancecrd,100,,,,,,\n");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,complement,TAV,20,,,,,,\n");
+    fclose($temp);
+
+    $drm10 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5, true);
+    $import = new DRMImportCsvEdi($tmpfname, $drm10);
+    $import->importCSV();
+    $drm10->save();
+    $details = $drm10->getProduitsDetails();
+    foreach($details as $detail) {
+    }
+
+    $t->is($detail->getLibelle(), "Floc de Gascogne Blanc - 20°", "Reconnaissance du produit");
+}

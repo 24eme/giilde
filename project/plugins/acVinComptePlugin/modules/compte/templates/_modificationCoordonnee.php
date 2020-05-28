@@ -76,6 +76,14 @@ $isSameContactThanSociete = !$isCompteSociete && $compteForm->getObject()->isSam
             </div>
             <div class="form-group">
 
+                <?php echo $compteForm['teledeclaration_email']->renderLabel(null, array('class' => 'col-xs-4 control-label')); ?>
+
+                <div class="col-xs-8"><?php echo $compteForm['teledeclaration_email']->render(); ?></div>
+
+                <?php echo $compteForm['teledeclaration_email']->renderError(); ?>
+            </div>
+            <div class="form-group">
+
                 <?php echo $compteForm['telephone_perso']->renderLabel(null, array('class' => 'col-xs-4 control-label')); ?>
 
                 <div class="col-xs-8"><?php echo $compteForm['telephone_perso']->render(); ?></div>

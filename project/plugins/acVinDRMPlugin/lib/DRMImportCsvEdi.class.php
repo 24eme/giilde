@@ -1074,7 +1074,7 @@ private function importAnnexesFromCSV($just_check = false) {
         }
         break;
       }
-      if ($numero_accise && !preg_match('/^[A-Z]{2}[0-9A-Z]{11}$/', $numero_accise)) {
+      if ($numero_accise && !preg_match('/^[A-Z]{2}[0-9A-Z]{6}(|[0-9A-Z]{5})$/', $numero_accise)) {
         if ($just_check) {
           $this->csvDoc->addErreur($this->annexesNonApurementWrongNumAcciseError($num_ligne, $csvRow));
         }
