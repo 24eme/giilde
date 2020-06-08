@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
 
-$t = new lime_test(19);
+$t = new lime_test(20);
 
 
 $t->comment("création d'une DRM avec des contrôles");
@@ -22,6 +22,9 @@ foreach(DRMClient::getInstance()->viewByIdentifiant($viti->identifiant) as $k =>
 }
 
 $drm = DRMClient::getInstance()->createDoc($viti->identifiant, $periode, true);
+$drm->save();
+$t->is($drm->exist("controles"), true, "Noeud controles existant");
+
 
 //Création de transmission
 $drm->add("transmission_douane")->add("success", false);
@@ -40,11 +43,10 @@ $t->is($drm->controles->exist("engagement"), false, "Pas d'engagement");
 
 
 $drm->remove("transmission_douane");
-$drm->updateControles();
 $drm->save();
 
 $t->is($drm->exist("transmission_douane"), false, "Suppression de la transmission douane");
-$t->is($drm->exist("controles"), false, "----->> Plus de controle dans la DRM");
+$t->is($drm->exist("controles"), false, "----->> Il n'existe de plus de controle dans la DRM");
 
 //Création de l'erreur
 $produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
@@ -55,32 +57,28 @@ $details->entrees->recolte = 100;
 $details->sorties->destructionperte = 106;
 
 $drm->update();
-$drm->updateControles();
 $drm->save();
 
 $t->is($drm->controles->exist("erreur"), true, "Erreur dans la DRM crée un controle");
 
 $details->sorties->destructionperte = 50;
 $drm->update();
-$drm->updateControles();
 $drm->save();
 
-$t->is($drm->exist("controles"), false, "----->> Plus de controle dans la DRM");
+$t->is($drm->exist("controles"), false, "----->> Il n'existe de plus de controle dans la DRM");
 
 //Création de vigilance
 $t->is(is_null($drm->declarant->no_accises), false, "Numéro d'accise: ". $drm->declarant->no_accises);
 $drm->declarant->no_accises = null;
 $t->is(is_null($drm->declarant->no_accises), true, "Numéro d'accise vide");
 
-$drm->updateControles();
 $drm->save();
 $t->is($drm->controles->exist("vigilance"), false, "Point de vigilance dans la DRM");
 
 $drm->declarant->no_accises = 12345;
-$drm->updateControles();
 $drm->save();
 
-$t->is($drm->exist("controles"), false, "----->> Plus de controle dans la DRM");
+$t->is($drm->exist("controles"), false, "----->> Il n'existe de plus de controle dans la DRM");
 
 
 
@@ -97,8 +95,6 @@ $details->sorties->destructionperte = 200;
 $drm->add("transmission_douane")->add("success", false);
 $drm->add("transmission_douane")->add("coherente", false);
 
-$drm->updateControles();
-$drm->update();
 $drm->save();
 
 $t->is(count($drm->controles), 4, "La DRM possède 4 controles: 1 transmissions, 1 cohérence, 1 vigilance et 1 erreur");
@@ -106,17 +102,14 @@ $t->is(count($drm->controles), 4, "La DRM possède 4 controles: 1 transmissions,
 $drm->validate();
 $t->is($drm->isValidee(), date("Y-m-d"), "DRM validée");
 
-$drm->updateControles();
-$drm->update();
 $drm->save();
+
 $t->is(count($drm->controles), 2, "La DRM ne possède que 2 contrôles:  1 transmissions et 1 cohérence");
 
 $drm->transmission_douane->success = true;
 $drm->transmission_douane->coherente = true;
 
-$drm->updateControles();
-$drm->update();
 $drm->save();
 
 $t->is($drm->exist("transmission_douane"), true, "La DRM a été transmise et coherente");
-$t->is($drm->exist("controles"), false, "----->> Plus de controle dans la DRM");
+$t->is($drm->exist("controles"), false, "----->>Il n'existe de plus de controle dans la DRM");

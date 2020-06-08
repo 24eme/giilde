@@ -353,44 +353,50 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
     }
 
     protected function cleanControle($controle){
-        $this->controles->remove($controle);
+        if($this->exist("controles")){
+            $this->controles->remove($controle);
+        }
+        
     }
 
     public function updateControles(){
+
+        $this->cleanControles();
+
+        if($this->exist("transmission_douane")) {
+            //cas d'erreur de transmission
+            if ($this->transmission_douane->success == false ) {
+                $this->addControleMessage(DRM::CONTROLE_TRANSMISSION, $this->getTransmissionErreur());
+            }
+            //cas d'incoherence
+            if ($this->get("transmission_douane")->coherente == false) {
+                $this->addControleMessage(DRM::CONTROLE_COHERENCE, "Non conforme douane");
+            }
+        }
+
+        //Points de controles liés à la validation
+        if ($this->isValidee()) {
+            return ;
+        }
         $points = new DRMValidation($this, true);
-    	$this->cleanControles();
-        $this->doSave();
-        if($this->isValidee()){
-            return;
+        if(!$points->hasPoints()){
+            return ;
         }
-        if(!$points->hasPoints() && !$this->exist("transmission_douane")){
-            return;
+        $this->add('controles');
+        if($points->hasErreurs()){
+            $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_BLOCANT, $points->getErreurs());   
+        }   
+
+        if($points->hasVigilances()){
+            $this->controles->add(DRM::CONTROLE_POINT_VIGILANCE);
+            $this->controles->vigilance->nb = count($points->getVigilances());
+            $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_VIGILANCE, $points->getVigilances());  
         }
-    	
-        if($points->hasPoints()){
-            $this->add('controles');
-            if($points->hasErreurs()){
-                $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_BLOCANT, $points->getErreurs());
-            }
 
-            if($points->hasVigilances()){
-                $this->controles->add(DRM::CONTROLE_POINT_VIGILANCE);
-                $this->controles->vigilance->nb = count($points->getVigilances());
-                $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_VIGILANCE, $points->getVigilances());
-            }
-
-            if($points->hasEngagements()){
+        if($points->hasEngagements()){
                 $this->controles->add(DRM::CONTROLE_POINT_ENGAGEMENT);
                 $this->controles->engagement->nb = count($points->getEngagements());
                 $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_ENGAGEMENT, $points->getEngagements());
-            }
-        }
-
-        if($this->exist("transmission_douane") && !is_null($this->transmission_douane->success) && $this->transmission_douane->success == false){
-            $this->addControleMessage(DRM::CONTROLE_TRANSMISSION, $this->getTransmissionErreur());
-        }
-        if($this->exist("transmission_douane") && !is_null($this->get("transmission_douane")->coherente) && $this->get("transmission_douane")->coherente == false){
-            $this->addControleMessage(DRM::CONTROLE_COHERENCE, "Non conforme douane");
         }
     }
 
@@ -914,6 +920,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 $this->add('date_modification', $this->valide->date_saisie);
             }
         }
+        $this->updateControles();
     }
 
     protected function preSaveEditeur() {

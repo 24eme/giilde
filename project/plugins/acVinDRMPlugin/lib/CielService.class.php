@@ -96,7 +96,6 @@ class CielService
 			$drm->add('transmission_douane')->add('horodatage', $m[2]);
 			$drm->add('transmission_douane')->add('id_declaration', $m[1]);
 		}
-		$drm->updateControles();
 		
 		$drm->save();
 	}

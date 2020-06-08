@@ -69,7 +69,6 @@ class drm_validationActions extends drmGeneriqueActions {
         $this->isUsurpationMode = $this->isUsurpationMode();
 
         if (!$request->isMethod(sfWebRequest::POST)) {
-            $this->drm->updateControles();
             $this->drm->save();
 
             $this->form = new DRMValidationCommentaireForm($this->drm);

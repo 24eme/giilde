@@ -77,7 +77,6 @@ class drm_xmlActions extends drmGeneriqueActions {
 
     if ($this->drm->exist('transmission_douane/coherente') && $this->drm->exist('transmission_douane/success') && $this->drm->transmission_douane->success && !$this->drm->transmission_douane->coherente && $this->drm->areXMLIdentical()) {
         $this->drm->getOrAdd('transmission_douane')->add("coherente", true);
-        $this->drm->updateControles();
         $this->drm->save();
     }
 
@@ -106,7 +105,6 @@ class drm_xmlActions extends drmGeneriqueActions {
       $drm = $this->getRoute()->getDRM();
       if ($drm->exist('transmission_douane')) {
           $drm->transmission_douane->success = true;
-          $drm->updateControles();
           $drm->save();
       }
       return $this->redirect('drm_redirect_etape', $drm);
@@ -116,8 +114,6 @@ class drm_xmlActions extends drmGeneriqueActions {
       $drm = $this->getRoute()->getDRM();
       if ($drm->exist('transmission_douane')) {
           $drm->transmission_douane->coherente = true;
-          $drm->transmission_douane->diff = "ignore";
-          $drm->updateControles();
           $drm->save();
       }
       return $this->redirect('drm_redirect_etape', $drm);

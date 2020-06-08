@@ -7,8 +7,8 @@
 class CSVDRM extends BaseCSVDRM {
 
     public function __construct() {
-        parent::__construct();
         $this->type = "CSVDRM";
+        parent::__construct();
     }
 
     public function getFileContent() {
