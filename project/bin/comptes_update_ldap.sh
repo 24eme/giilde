@@ -8,12 +8,12 @@ if test -f $LOCK ; then
 fi
 touch $LOCK
 if test -s $SEQ; then
-    echo -n "&since="$(cat $SEQ | sed 's/[^0-9a-z_-]//gi') > $SINCESEQ
+    SINCESEQ=$(echo -n "&since="$(cat $SEQ))
 fi
 
 curl -s "http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_changes?feed=continuous&timeout=59000"$SINCESEQ | grep "COMPTE" | grep -v "_design" | while read ligne
 do
-    echo $ligne | sed 's/.*"seq"://' | sed 's/,.*//' | sed 's/"/g/' > $SEQ
+    echo $ligne | sed 's/.*"seq"://' | sed 's/,.*//' | sed 's/"//g' > $SEQ
     php symfony compte:ldap-update $SYMFONYTASKOPTIONS $(echo $ligne | sed 's/.*"id":"//' | sed 's/",.*//' )
 done
 

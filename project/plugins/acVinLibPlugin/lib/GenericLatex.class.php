@@ -17,7 +17,7 @@ class GenericLatex {
     return $fn;
   }
 
-  private function getLatexDestinationDir() {
+  public function getLatexDestinationDir() {
     return sfConfig::get('sf_root_dir')."/data/latex/";
   }
 

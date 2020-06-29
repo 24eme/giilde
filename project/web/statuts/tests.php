@@ -93,6 +93,11 @@ krsort($tests);
 </head>
 <body>
     <div class="container" style="margin-top: 20px;">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/statuts/tests.php">Tests</a></li>
+          </ol>
+        </nav>
         <a class="float-right btn btn-sm btn-link" href="tests.php?format=xml">Feed </a>
         <h2>Tests <img src="./tests.svg.php" /></h2>
         <table style="margin-top: 20px;" class="table table-bordered table-striped table-sm">
@@ -117,7 +122,7 @@ krsort($tests);
                     <td class="text-center"><?php echo $test->nb; ?></td>
                     <td class="text-center <?php if($test->success): ?>text-success<?php else: ?>text-danger<?php endif; ?>"><?php echo $test->nb_errors ?></td>
                     <td class="<?php if($test->success): ?>text-success<?php else: ?>text-danger<?php endif; ?>"><?php if($test->success): ?>Succès<?php else: ?>Échec<?php endif ?></td>
-                    <td><a href="./xml/<?php echo $test->file ?>">Voir</a></td>
+                    <td><a href="tests_view.php?file=<?php echo str_replace('.xml', '', $test->file) ?>">Voir</a></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

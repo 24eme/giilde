@@ -76,7 +76,9 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->setDefault('pays', $this->getObject()->getPays());
         $this->setDefault('adresse_complementaire', $this->getObject()->getAdresseComplementaire());
         $this->setDefault('email', $this->getObject()->getEmail());
-        $this->setDefault('teledeclaration_email', $this->getObject()->getEmailTeledeclaration());
+        if (method_exists($this->getObject(), 'getEmailTeledeclaration')) {
+            $this->setDefault('teledeclaration_email', $this->getObject()->getEmailTeledeclaration());
+        }
         $this->setDefault('telephone_perso', $this->getObject()->getTelephonePerso());
         $this->setDefault('telephone_bureau', $this->getObject()->getTelephoneBureau());
         $this->setDefault('telephone_mobile', $this->getObject()->getTelephoneMobile());
@@ -103,7 +105,9 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->getObject()->setPays($values['pays']);
         $this->getObject()->setAdresseComplementaire($values['adresse_complementaire']);
         $this->getObject()->setCodePostal($values['code_postal']);
-        $this->getObject()->setEmailTeledeclaration($values['teledeclaration_email']);
+        if (method_exists($this->getObject(), 'getEmailTeledeclaration')) {
+            $this->getObject()->setEmailTeledeclaration($values['teledeclaration_email']);
+        }
         $this->getObject()->setEmail($values['email']);
         $this->getObject()->setTelephonePerso($values['telephone_perso']);
         $this->getObject()->setTelephoneBureau($values['telephone_bureau']);

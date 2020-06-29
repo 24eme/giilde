@@ -41,7 +41,11 @@ EOF;
 
     $doc = acCouchdbManager::getClient()->find($arguments['doc_id']);
 
-    $nodeCollection = $doc->getOrAdd($hash);
+    if($hash == "/") {
+        $nodeCollection = $doc;
+    } else {
+        $nodeCollection = $doc->getOrAdd($hash);
+    }
 
     $key = $options['key'];
     $value = $options['value'];

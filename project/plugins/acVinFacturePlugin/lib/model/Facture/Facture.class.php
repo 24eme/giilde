@@ -576,15 +576,8 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
         if ($this->exist('taux_tva') && $this->_get('taux_tva')) {
             return round($this->_get('taux_tva'), 2);
         }
-        $config_tva = FactureConfiguration::getInstance()->getTauxTva();
-        $date_facturation = str_replace('-', '', $this->date_facturation);
-        $taux_f = 0.0;
-        foreach ($config_tva as $date => $taux) {
-            if ($date_facturation >= $date) {
-                $taux_f = round($taux, 2);
-            }
-        }
-        return $taux_f;
+
+        return FactureClient::getInstance()->getTauxTva($this->date_facturation);
     }
 
     public function save() {

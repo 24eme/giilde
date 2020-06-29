@@ -49,7 +49,7 @@
 		        <?php echo $form['doc.type_transaction']->renderLabel(null, array("class" => "col-xs-6 control-label")); ?>
 		        <div class="col-xs-6"><?php echo $form['doc.type_transaction']->render(); ?></div>
 			</div>
-			<div id="bloc_periode" class="form-group bloc_conditionner" data-condition-value="exportations|disponibilites_stocks|sorties_categorie|sorties_appellation|stocks">
+			<div id="bloc_periode" class="form-group bloc_conditionner" data-condition-value="exportations|disponibilites_stocks|sorties_categorie|sorties_appellation|stocks|mouvements_facturation">
 				<span class="error has-error"><?php echo $form['doc.mouvements.date/from']->renderError() ?></span>
 				<span class="error has-error"><?php echo $form['doc.mouvements.date/to']->renderError() ?></span>
 				<label class="col-xs-6 control-label">Période</label>

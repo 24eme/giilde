@@ -13,6 +13,15 @@ Current:
           fields:
             '*': {  }
 
+Messages:
+  indexable: false
+  definition:
+    fields:
+      _id: {  }
+      _rev: {  }
+      type: {}
+      '*': { }
+
 Configuration:
   indexable: false
   definition:

@@ -105,6 +105,7 @@ class factureActions extends sfActions {
     }
 
     public function executeCreation(sfWebRequest $request) {
+        ini_set('memory_limit', '256M');
 
         $this->societe = $this->getRoute()->getSociete();
         $this->values = array();

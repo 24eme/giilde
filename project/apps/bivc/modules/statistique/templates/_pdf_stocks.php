@@ -91,9 +91,9 @@ $headers[$appellation] = $appellation;
 <?php endif; ?>
 \hline
 <?php $i=($newSection)? 1 : 0; else: $i++;endif; ?>
-<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if (preg_match('/total/i', $current)) {unset($values[1]); echo 'TOTAL général & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
+<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if (preg_match('/total/i', $current)) {unset($values[0]); unset($values[1]); echo 'TOTAL général & & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
 <?php  endforeach;?>
 \end{tabularx}
 \end{table}
 
-\end{document} 
+\end{document}

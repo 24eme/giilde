@@ -40,6 +40,7 @@ DRM:
       precedente: {  }
       version: {  }
       numero_archive: {  }
+      taux_tva: { type: float, required: false }
       droits:
         type: collection
         indexable: false

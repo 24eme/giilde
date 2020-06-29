@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
 
-$t = new lime_test(20);
+$t = new lime_test(24);
 
 
 $t->comment("création d'une DRM avec des contrôles");
@@ -28,18 +28,28 @@ $t->is($drm->exist("controles"), true, "Noeud controles existant");
 
 //Création de transmission
 $drm->add("transmission_douane")->add("success", false);
-$drm->add("transmission_douane")->add("coherente", false);
 $drm->declarant->no_accises = 12345;
 $drm->societe->siret = 123456789;
-$drm->updateControles();
 $drm->save();
 
-$t->is($drm->controles->coherence->nb, 1, "Absence de cohérence crée un controle");
+
+$t->is($drm->transmission_douane->coherente, NULL, "Transmission douane cohérente à NULL");
+$t->is($drm->controles->exist('coherence'), false, "Transmission douane cohérente donc ne crée pas de controle");
 $t->is($drm->controles->transmission->nb, 1, "Erreur de transmission crée un controle");
 $t->is($drm->controles->exist("vigilance"), false, "Pas de vigilance");
 $t->is($drm->controles->exist("erreur"), false, "Pas d'erreur dans la DRM");
 $t->is($drm->controles->exist("engagement"), false, "Pas d'engagement");
 
+$drm->remove("transmission_douane");
+$drm->save();
+
+$t->is($drm->exist("transmission_douane"), false, "Suppression de la transmission douane");
+$t->is($drm->exist("controles"), false, "----->> Il n'existe de plus de controle dans la DRM");
+
+
+$drm->add("transmission_douane")->add("coherente", false);
+$drm->save();
+$t->is($drm->controles->coherence->nb, 1, "Absence de cohérence crée un controle");
 
 
 $drm->remove("transmission_douane");

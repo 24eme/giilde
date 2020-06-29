@@ -1,3 +1,7 @@
+<?php use_helper('Date'); ?>
+<?php use_helper('Orthographe'); ?>
+<?php use_helper('DRM'); ?>
+
 <ol class="breadcrumb">
     <?php if (!isset($isTeledeclarationMode) || !$isTeledeclarationMode): ?>
     <li><a href="<?php echo url_for('drm') ?>">DRM</a></li>
@@ -55,6 +59,20 @@
             <?php endif ?>
         </div>
         <?php endif; ?>
+        <?php if ($isTeledeclarationMode): ?>
+            <?php $messages = $calendrier->getMessages() ?>
+            <?php if(count($messages)): ?>
+            <div class="alert alert-info">
+                <dl class="dl-horizontal" style="margin-bottom: 0;">
+                <?php foreach($messages as $periode => $message): ?>
+                    <dt style="text-align: left;"><span class="glyphicon glyphicon-info-sign"></span> DRM <?php echo getFrPeriodeElision($periode) ?></dt>
+                    <dd><?php echo $message ?></dd>
+                <?php endforeach; ?>
+                </dl>
+            </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
         <?php if ($sf_user->hasFlash('drm_warning')) : ?>
         <p class="alert alert-warning" role="alert"><?php echo $sf_user->getFlash('drm_warning'); ?></p>
         <?php endif; ?>

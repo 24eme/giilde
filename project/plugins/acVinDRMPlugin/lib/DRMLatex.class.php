@@ -70,17 +70,17 @@ class DRMLatex extends GenericLatex {
 
         if($cpt_crds_annexes || count($this->drm->documents_annexes)){
             $nbPages++;
-        }        
-        
+        }
+
         if ($this->drm->exist('releve_non_apurement') && count($this->drm->releve_non_apurement) && (count($this->drm->releve_non_apurement) >= 4)) {
             $nbPages++;
         }
         $nbPages += $this->makeDivision(count($this->drm->droits->douane));
-        
+
         return $nbPages;
     }
 
-    public function deleteAccents ($string) {
+    public static function deleteAccents ($string) {
         $table = array(
             'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj', 'd'=>'dj', 'Ž'=>'Z', 'ž'=>'z', 'C'=>'C', 'c'=>'c', 'C'=>'C', 'c'=>'c',
             'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
@@ -91,11 +91,11 @@ class DRMLatex extends GenericLatex {
             'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
             'ÿ'=>'y', 'R'=>'R', 'r'=>'r',
         );
-       
+
         return strtr($string, $table);
     }
 
-    public function sortDataExport($dataExport){
+    public static function sortDataExport($dataExport){
         $all_keys = array_keys($dataExport);
         $data_new = array();
         $countries = array();

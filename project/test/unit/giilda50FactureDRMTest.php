@@ -21,7 +21,12 @@ foreach ($conf->declaration->filter('details') as $configDetails) {
     }
 }
 
-$t = new lime_test(37);
+$t = new lime_test(40);
+
+$t->comment("Configuration");
+
+$t->is(FactureClient::getInstance()->getTauxTva('2013-12-31'), 19.6, "Taux de tva avant 2014");
+$t->is(FactureClient::getInstance()->getTauxTva('2014-01-01'), 20, "Taux de tva à partir de 2014");
 
 $t->comment("Création d'une facture à partir des DRM pour une société");
 
@@ -54,6 +59,8 @@ $drm->update();
 $drm->save();
 $drm->validate();
 $drm->save();
+
+$t->is($drm->_get('taux_tva'), FactureClient::getInstance()->getTauxTva($drm->getDate()) / 100, "La taux de tva ".(FactureClient::getInstance()->getTauxTva($drm->getDate()) / 100)." est stocké dans la DRM");
 
 $t->comment("Recherche des mouvements (non facturable)");
 $mouvementsFactureMasse = FactureClient::getInstance()->getMouvementsNonFacturesBySoc(FactureClient::getInstance()->getMouvementsForMasse(null));

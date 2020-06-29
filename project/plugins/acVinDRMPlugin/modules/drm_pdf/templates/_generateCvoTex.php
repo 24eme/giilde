@@ -22,13 +22,15 @@ if ($drm->mouvements->exist($drm->identifiant)) {
 	    }
 	}
 }
+
+$totalPrixDroitCvoTTC = $totalPrixDroitCvo * (1 + $drm->getTauxTva());
 ?>
 
 ~ \\
 \hspace{-0.5cm}
 \vspace{0.5cm}
-\begin{tabular}{C{43mm}|C{43mm}|C{43mm}|C{43mm}|<?php if ($totalVolumeReintegration): ?>C{43mm}|<?php endif; ?>}
-\multicolumn{<?php if ($totalVolumeReintegration): ?>5<?php else: ?>4<?php endif; ?>}{|c}{\cellcolor[gray]{0.3}\small{\color{white}{\textbf{CVO}}}}
+\begin{tabular}{C{43mm}|C{43mm}|C{43mm}|C{43mm}|C{43mm}|<?php if ($totalVolumeReintegration): ?>C{43mm}|<?php endif; ?>}
+\multicolumn{<?php if ($totalVolumeReintegration): ?>6<?php else: ?>5<?php endif; ?>}{|c}{\cellcolor[gray]{0.3}\small{\color{white}{\textbf{CVO}}}}
 \\
 \hline
 \rowcolor{lightgray}
@@ -38,7 +40,8 @@ if ($drm->mouvements->exist($drm->identifiant)) {
 \multicolumn{1}{|C{43mm}|}{\small{\textbf{Réintégré}}} &
 <?php endif; ?>
 \multicolumn{1}{|C{43mm}|}{\small{\textbf{Taux}}} &
-\multicolumn{1}{|C{43mm}|}{\small{\textbf{Total~HT}}}
+\multicolumn{1}{|C{43mm}|}{\small{\textbf{Total~HT}}} &
+\multicolumn{1}{|C{43mm}|}{\small{\textbf{Total~TTC}}}
 \\
 \hline
 \multicolumn{1}{|l}{\small{\textbf{CVO Totale}}} &
@@ -47,7 +50,8 @@ if ($drm->mouvements->exist($drm->identifiant)) {
 \multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($totalVolumeReintegration).' hl';  ?>}}} &
 <?php endif; ?>
 \multicolumn{1}{|r|}{\small{\textbf{<?php echo ($cvoTotal)? round($cvoTotal/$nbMvtsFacturable,2).' €/hl' : ''; ?>}}} &
-\multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($totalPrixDroitCvo).' €'; ?>}}}
+\multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($totalPrixDroitCvo).' €'; ?>}}} &
+\multicolumn{1}{|r|}{\small{\textbf{<?php echo sprintFloat($totalPrixDroitCvoTTC).' €'; ?>}}}
 \\
 \hline
 \end{tabular}

@@ -8,18 +8,42 @@ BASEDIR=$(pwd)
 
 #curl -sX GET "http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/configuration/_view/produits?reduce=false" | sed -f bin/unicode2alpha | grep "produits" | sed 's/"declaration\//"\/declaration\//g' | sed 's/\//\\\//g'| sed 's/null/""/' | awk -F ',' '{ print "s/;;\\(" $7 "\\)/;\\1;" $9 "/" }' > $TMP/sed_produit_code
 
+rm -rf $TMP/export_bi_annualise 2> /dev/null
+
 echo "s/;;\(\"\/declaration\/[^\"]*\"\);/;\1;;/" > $TMP/sed_produit_code
 
-echo "#MOUVEMENT;type document;identifiant declarant;campagne;periode;document id;certification;genre;appellation;mention;lieu;couleur;cepage;code produit;type de mouvement;numero vrac du mouvement;detail identifiant;nom declarant;libelle produit;libelle type;volume mouvement;vrac destinataire;detail libelle;date;version document;cvo;facturable;identifiant mouvement;pays export (si export);is_facture;is_vendeur;type de drm;libelle type de drm;date mouvement;famille DRM;extra" > $TMP/export_bi_mouvements.csv
+CSVHEADER="#MOUVEMENT;type document;identifiant declarant;campagne;periode;document id;certification;genre;appellation;mention;lieu;couleur;cepage;code produit;type de mouvement;numero vrac du mouvement;detail identifiant;nom declarant;libelle produit;libelle type;volume mouvement;vrac destinataire;detail libelle;date;version document;cvo;facturable;identifiant mouvement;pays export (si export);is_facture;is_vendeur;type de drm;libelle type de drm;date mouvement;famille DRM;extra"
+echo $CSVHEADER > $TMP/export_bi_mouvements.csv
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/mouvement/_view/consultation  | sed -f bin/unicode2alpha | sed 's/.*"key":\[/MOUVEMENT;/' | sed 's/\],"value":\[/,/' | sed 's/\]\},*//' | grep '^MOUVEMENT;"' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed 's/;"\/declaration/;\0/g' | sed -f $TMP/sed_produit_code | sed 's/"//g' | sed -r 's|[\-]?[0-9]+;$||' | awk -F ';' 'BEGIN{OFS=";"}{EXTRA = "1" ; if ( $6 ~ $3 ) EXTRA = "0" ; print $0 EXTRA}' | sed 's|/declaration/certifications/||' | sed 's|/genres/|;|' | sed 's|/appellations/|;|' | sed 's|/mentions/|;|' | sed 's|/lieux/|;|' | sed 's|/couleurs/|;|' | sed 's|/cepages/|;|' | sed 's/%/%%/g' | awk -F ";" 'BEGIN { OFS=";"} { for(i=1;i<=14;i++) { printf($(i) ";") } for(i=16;i<=20;i++) { printf($(i) ";") } for(i=22;i <= NF - 4;i++) { printf($(i) ";") } printf("0;"$15 ";" $21";"$(NF-2)";"$(NF - 1)";"$(NF)); printf("\n")  }' >> $TMP/export_bi_mouvements.csv
 
-echo "#CONTRAT;campagne;statut;identifiant document;numero contrat;numero archive;identifiant acheteur;nom acheteur;identifiant vendeur; nom vendeur;identifiant courtier;nom courtier;identifiant intermediaire ou vendeur;nom intermediaire ou vendeur;type de vente (VIN_VRAC, VIN_BOUTEILLE, RAISIN, MOUT);certification;genre;appellation;mention;lieu;couleur;cepage;code produit;libelle produit;volume propose (en hl);volume enleve (en hl);prix unitaire (en hl);prix unitaire definitif (en hl);prix variable (OUI, NON);contrat interne (OUI, NON);original (OUI, NON);type de contrat(SPOT, PLURIANNUEL);date de signature;date de statistiques;date de validation;millesime;type de produit (GENERIQUE, DOMAINE);domaine;part variable;repartition cvo;nature de la cvo (MARCHE_DEFINITIF, COMPENSATION, NON_FINANCIERE, VINAIGRERIE);code cepage;libelle cepage;labels" > $TMP/export_bi_contrats.csv
+cat $TMP/export_bi_mouvements.csv | cut -d ";" -f 5 | sed -r 's/([0-9]{4}).+$/\1/' | grep -E "[0-9]+" | sort | uniq | while read annee; do
+    mkdir -p $TMP/export_bi_annualise/$annee 2> /dev/null;
+    echo $CSVHEADER > $TMP/export_bi_annualise/$annee/"$annee"_export_bi_mouvements.csv;
+    cat $TMP/export_bi_mouvements.csv | sort -t ";" -k 5,5 | grep -E ";$annee[0-9]{2};" >> $TMP/export_bi_annualise/$annee/"$annee"_export_bi_mouvements.csv;
+done;
+
+CSVHEADER="#CONTRAT;campagne;statut;identifiant document;numero contrat;numero archive;identifiant acheteur;nom acheteur;identifiant vendeur; nom vendeur;identifiant courtier;nom courtier;identifiant intermediaire ou vendeur;nom intermediaire ou vendeur;type de vente (VIN_VRAC, VIN_BOUTEILLE, RAISIN, MOUT);certification;genre;appellation;mention;lieu;couleur;cepage;code produit;libelle produit;volume propose (en hl);volume enleve (en hl);prix unitaire (en hl);prix unitaire definitif (en hl);prix variable (OUI, NON);contrat interne (OUI, NON);original (OUI, NON);type de contrat(SPOT, PLURIANNUEL);date de signature;date de statistiques;date de validation;millesime;type de produit (GENERIQUE, DOMAINE);domaine;part variable;repartition cvo;nature de la cvo (MARCHE_DEFINITIF, COMPENSATION, NON_FINANCIERE, VINAIGRERIE);code cepage;libelle cepage;labels"
+echo $CSVHEADER > $TMP/export_bi_contrats.csv
 curl -s http://$COUCHHOST:$COUCHPORT/$COUCHBASE/_design/vrac/_view/history  |  awk -F ',' 'BEGIN { OFS="," }{if ($19 == "null" ) $19 = "\"/declaration/certifications//genres//appellations//mentions//lieux//couleurs//cepages/\"" ; print $0}' | sed -f bin/unicode2alpha | sed -r 's|.+"key"\:\[(.{1}),(.+)|\1;\2|' | sed -r 's/^(.{1});.*"value":\[(.+)/\1;CONTRAT;\2/' | sed 's/\],"value":\[/,/' | sed 's/\]\},*//' | grep -E '^.{1};CONTRAT;' | grep -E ',"(NONSOLDE|SOLDE|ANNULE)",' | sed 's/,/;/g' | sed 's/\r*$/;/' | sed 's/null//g' | sed -r 's/(;[0-9]+\.[0-9]{2})[0-9]+;/\1;/g' | sed 's/;"\/declaration/;\0/g' | sed -f $TMP/sed_produit_code | sed 's/"//g' | sed 's|/declaration/certifications/||' | sed 's|/genres/|;|' | sed 's|/appellations/|;|' | sed 's|/mentions/|;|' | sed 's|/lieux/|;|' | sed 's|/couleurs/|;|' | sed 's|/cepages/|;|' | awk '{ gsub(/T[0-9]{2}:[0-9]{2}:[0-9]{2}\+[0-9]{2}:[0-9]{2}/,""); print }' | awk -F ';' 'BEGIN { OFS=";" } { teledeclare=$1; if(teledeclare==1){ date_signature=$34; $35=date_signature; $36=date_signature; }  print $0 }' | sed -r 's/^.{1};//g'  >> $TMP/export_bi_contrats.csv
+
+sed -i 's/T[0-9]+[0-9:+GMT]+;/;/g' $TMP/export_bi_contrats.csv
+
+cat $TMP/export_bi_contrats.csv | cut -d ";" -f 33 | sed -r 's/([0-9]{4}).+$/\1/' | grep -E "[0-9]+" | sort | uniq | while read annee; do
+    mkdir -p $TMP/export_bi_annualise/$annee 2> /dev/null;
+    echo $CSVHEADER > $TMP/export_bi_annualise/$annee/"$annee"_export_bi_contrats.csv;
+    cat $TMP/export_bi_contrats.csv | sort -t ";" -k 33,33 | grep -E ";[A-Z0-9]*;$annee-[0-9]{2}-[0-9]{2};" >> $TMP/export_bi_annualise/$annee/"$annee"_export_bi_contrats.csv;
+done;
 
 . bin/export_bi_stocks
 
 echo "#ID;Type document;campagne;identifiant;certifications;genres;appellations;mentions;lieux;couleurs;cepages;date;modificatrice;stock debut;entree;entree revendiquee;sortie;sortie revendiquee;stock fin;nom;libelle produit" > $TMP/export_bi_drm_stock.csv
 cat $TMP/export_bi_drm_stock_last_modificatrices.csv | sed 's/"//g' | sed 's|/declaration/certifications/||' | sed 's|/genres/|;|' | sed 's|/appellations/|;|' | sed 's|/mentions/|;|' | sed 's|/lieux/|;|' | sed 's|/couleurs/|;|' | sed 's|/cepages/|;|' >> $TMP/export_bi_drm_stock.csv
+
+cat $TMP/export_bi_drm_stock.csv | cut -d ";" -f 12 | sed -r 's/([0-9]{4}).+$/\1/' | grep -E "[0-9]+" | sort | uniq | while read annee; do
+    mkdir -p $TMP/export_bi_annualise/$annee 2> /dev/null;
+    echo $CSVHEADER > $TMP/export_bi_annualise/$annee/"$annee"_export_bi_drm_stock.csv;
+    cat $TMP/export_bi_drm_stock.csv | sort -t ";" -k 12,12 | grep -E ";$annee[0-9]{2};" >> $TMP/export_bi_annualise/$annee/"$annee"_export_bi_drm_stock.csv;
+done;
 
 
 echo "#REVENDIQUE;campagne;identifiant declarant;certification;genre;appellation;mention;lieu;couleur;cepage;code produit;region;document id;volume;nom declarant;libelle produit" > $TMP/export_bi_revendiques.csv
@@ -74,14 +98,9 @@ cat data/import/configuration/produits.csv | sed -r 's/^/#PRODUIT;/' | sed -r 's
 cat data/export/constantes.csv > $TMP/export_bi_constantes.csv
 
 
-
 cd $TMP
-recode UTF8..ISO88591-1 export_bi_mouvements.csv export_bi_contrats.csv export_bi_dss.csv export_bi_revendiques.csv export_bi_etablissements.csv export_bi_societes.csv MDV_Fournisseurs.csv PLV_Fournisseurs.csv PLV_Clients.csv export_bi_drm.csv export_bi_drm_stock.csv export_bi_factures.csv
 
-sed -i 's/T[0-9]+[0-9:+GMT]+;/;/g' export_bi_contrats.csv
-
-#Fichier GIILDA
-#export_bi_mouvements.csv export_bi_contrats.csv export_bi_etablissements.csv export_bi_drm.csv
+recode UTF8..ISO88591-1 export_bi_mouvements.csv export_bi_contrats.csv export_bi_dss.csv export_bi_revendiques.csv export_bi_etablissements.csv export_bi_societes.csv MDV_Fournisseurs.csv PLV_Fournisseurs.csv PLV_Clients.csv export_bi_drm.csv export_bi_drm_stock.csv export_bi_factures.csv export_bi_annualise/*/*.csv
 
 if test "$SAMBA_XLSOFT_IP" && test "$SAMBA_XLSOFT_SHARE" && test "$SAMBA_AUTH" && test "$SAMBA_XLSOFT_DIR" ; then
     smbclient //$SAMBA_XLSOFT_IP/$SAMBA_XLSOFT_SHARE -A $SAMBA_AUTH -c "cd $SAMBA_XLSOFT_DIR ; put export_bi_mouvements.csv ; put export_bi_contrats.csv; put export_bi_dss.csv ; put export_bi_revendiques.csv ; put export_bi_etablissements.csv ; put export_bi_societes.csv ; put MDV_Fournisseurs.csv ; put PLV_Fournisseurs.csv ; put PLV_Clients.csv ; put export_bi_drm.csv; put export_bi_factures.csv"

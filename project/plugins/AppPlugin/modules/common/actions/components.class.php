@@ -60,6 +60,7 @@ class commonComponents extends sfComponents {
       if($this->getUser()->hasCredential('teledeclaration_drm')){
         $this->teledeclaration_drm = true;
         $this->campagne = -1;
+        $this->calendrier = new DRMCalendrier($this->etablissement, $this->campagne, true);
       }
         $this->etablissementPrincipal = $this->getUser()->getCompte()->getSociete()->getEtablissementPrincipal();
 

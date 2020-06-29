@@ -443,4 +443,15 @@ class FactureClient extends acCouchdbClient {
         return $type_mouvement;
     }
 
+    public function getTauxTva($date) {
+        $date = str_replace('-', '', $date);
+        $taux = 0.0;
+        foreach (FactureConfiguration::getInstance()->getTauxTva() as $d => $t) {
+            if ($date >= $d) {
+                $taux = round($t, 2);
+            }
+        }
+        return $taux;
+    }
+
 }

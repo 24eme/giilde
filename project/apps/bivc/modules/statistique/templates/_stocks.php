@@ -14,9 +14,9 @@ foreach ($result['agg_page']['buckets'] as $appellation) {
 		$stockInitial = (formatNumber($categorie['stock_initial']['agg_column']['value']) != 0)? formatNumber($categorie['stock_initial']['agg_column']['value']) : null;
 		$stockFinal = (formatNumber($categorie['stock_final']['agg_column']['value']) != 0)? formatNumber($categorie['stock_final']['agg_column']['value']) : null;
 		$totalMvt = (formatNumber($categorie['total']['value']) != 0)? formatNumber($categorie['total']['value']) : null;
-		$csv .= $globalLibelle.';'.$appellationLibelle.';'.$categorieLibelle.';'.$stockInitial.';'.$stockFinal.';'.$totalMvt."\n";
+		$csv .= $appellationLibelle.';'.$categorieLibelle.';'.$stockInitial.';'.$stockFinal.';'.$totalMvt."\n";
 	}
-	$csv .= $appellationLibelle.';TOTAL;'.$totalStockInitial.';'.$totalStockFinal.';'.$totalTotal."\n";
+	$csv .= 'TOTAL;;'.$totalStockInitial.';'.$totalStockFinal.';'.$totalTotal."\n";
 }
 #$csv .= 'TOTAL;TOTAL;TOTAL;'.formatNumber($result['totaux_stock_initial']['value']).';'.formatNumber($result['totaux_stock_final']['value']).';'.formatNumber($result['totaux_total']['value'])."\n";
 echo $csv;
