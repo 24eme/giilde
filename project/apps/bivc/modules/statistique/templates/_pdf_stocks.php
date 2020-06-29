@@ -1,7 +1,7 @@
 <?php
 setlocale(LC_TIME, 'fr_FR');
 $items = explode(PHP_EOL, html_entity_decode($csv, ENT_QUOTES));
-array_shift($items);
+//array_shift($items);
 $headers = array();
 $maxTableRowsPerPage = 30;
 $nbPage = 0;
@@ -91,7 +91,7 @@ $headers[$appellation] = $appellation;
 <?php endif; ?>
 \hline
 <?php $i=($newSection)? 1 : 0; else: $i++;endif; ?>
-<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if (preg_match('/total/i', $current)) {unset($values[0]); unset($values[1]); echo 'TOTAL général & & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
+<?php if (preg_match('/total/i', $current)): ?>\hline<?php endif; ?><?php if ($isTotal): ?>\rowcolor{gray!40} <?php endif; if ($isTotal) {unset($values[0]); echo 'TOTAL général & & '; } echo implode(' & ', $values); ?> \tabularnewline \hline
 <?php  endforeach;?>
 \end{tabularx}
 \end{table}
