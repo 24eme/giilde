@@ -15,7 +15,7 @@ DATEFORMAT=`date '+%Y-%m-%d %H:%M:%S'`
 mkdir -p $TMP"/retoursDouanes" > /dev/null
 LOGFILE=$TMP"/retoursDouanes/retrieveXMLAndCompare_"$DATE".log"
 
-bash $(dirname $0)/retrieveXMLAndCompare.sh $DATEREQUETE > $LOGFILE
+bash $(dirname $0)/retrieveXMLAndCompare.sh $DATEREQUETE $FILEDATE".new" > $LOGFILE
 
 
 RAPPORTBODY=$TMP"/retoursDouanes/retrieveXMLAndCompare_rapport_"$DATE".txt"
@@ -54,4 +54,4 @@ cat $LOGFILE | grep "Le numéro d'accise" | cut -d ":" -f 3 | sed "s/ Le numéro
 
 cat $RAPPORTBODY  | iconv -t ISO-8859-1 | mail -s "[RAPPORT RETOUR DOUANE de $APPLICATION du $DATEFORMAT]" $MAILFROMDOUANE $MAILRETOURDOUANE;
 
-echo $(date +%Y-%m-%d) > $FILEDATE
+mv $FILEDATE".new" $FILEDATE
