@@ -21,5 +21,6 @@ cat /tmp/retrieveXML.$$.url | sort -r | while read url ; do
 done
 
 if test "$2" && test -d $(dirname $2) ; then
-    cat /tmp/retrieveXML.$$.url | awk -F '_' '{print $4}' | sort  | tail -n 1 | sed 's/\(....\)\(..\)\(..\).xml/\1-\2-\3/' > $2
+    cat /tmp/retrieveXML.$$.url | awk -F '_' '{print $4 * 1 + 1}' | sort  | tail -n 1 | sed 's/\(....\)\(..\)\(..\)/\1-\2-\3/' > $2
 fi
+rm /tmp/retrieveXML.$$.url
