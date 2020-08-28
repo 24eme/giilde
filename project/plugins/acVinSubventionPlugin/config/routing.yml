@@ -1,0 +1,157 @@
+subvention:
+  url: /subvention
+  param: { module: subvention, action: index }
+
+subvention_etablissement:
+  url: /subvention/etablissement/:identifiant
+  param: { module: subvention, action: etablissement }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_societe:
+  url: /subvention/societe/:identifiant
+  param: { module: subvention, action: societe }
+  class: EtablissementRoute
+  options:
+    model:    Societe
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_debrayage:
+  url: /subvention/connexion/:identifiant
+  param: { module: subvention, action: connexion }
+  class: EtablissementRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_etablissement_selection:
+  url: /subvention/etablissement-selection
+  param: { module: subvention, action: etablissementSelection }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [post]
+
+subvention_creation:
+  url: /subvention/:identifiant/creation/:operation
+  param: { module: subvention, action: creation }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_infos:
+  url: /subvention/:identifiant/infos/:operation
+  param: { module: subvention, action: infos }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_dossier:
+  url: /subvention/:identifiant/dossier/:operation
+  param: { module: subvention, action: dossier }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_engagements:
+  url: /subvention/:identifiant/engagements/:operation
+  param: { module: subvention, action: engagements }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_validation:
+  url: /subvention/:identifiant/validation/:operation
+  param: { module: subvention, action: validation }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_devalidation:
+  url: /subvention/:identifiant/devalidation/:operation
+  param: { module: subvention, action: devalidation }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_confirmation:
+  url: /subvention/:identifiant/confirmation/:operation
+  param: { module: subvention, action: confirmation }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get]
+
+subvention_visualisation:
+  url: /subvention/:identifiant/visualisation/:operation
+  param: { module: subvention, action: visualisation }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_reouvrir:
+  url: /subvention/:identifiant/re-ouvrir/:operation
+  param: { module: subvention, action: reouvrir }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+subvention_xls:
+  url: /subvention/:identifiant/xls/:operation
+  param: { module: subvention, action: xls }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+
+subvention_pdf:
+  url: /subvention/:identifiant/pdf/:operation
+  param: { module: subvention, action: latex }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object
+
+subvention_zip:
+  url: /subvention/:identifiant/zip/:operation
+  param: { module: subvention, action: zip }
+  class: SubventionRoute
+  options:
+    model:    Subvention
+    type:     object

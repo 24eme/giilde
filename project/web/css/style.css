@@ -116,3 +116,11 @@ span.disabled, a.disabled {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.row-condensed .form-control-static {
+    padding: 5px 0 !important;
+    min-height: 1px !important;
+}
+.row-condensed .control-label {
+    padding: 5px 10px 0 10px !important;
+}

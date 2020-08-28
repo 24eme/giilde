@@ -1,9 +1,10 @@
 {
-   "_id": "CURRENT",
-   "type": "Current",
-   "configurations": {
-       "2018-08-01": "CONFIGURATION-20180801",
-       "2016-10-01": "CONFIGURATION-20161001",
-       "1990-08-01": "CONFIGURATION"
-   }
+   "_id" : "CURRENT",
+   "configurations" : {
+      "1990-08-01" : "CONFIGURATION",
+      "2016-10-01" : "CONFIGURATION-20161001",
+      "2018-08-01" : "CONFIGURATION-20180801",
+      "2020-08-01" : "CONFIGURATION-20200801"
+   },
+   "type" : "Current"
 }

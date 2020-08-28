@@ -40,6 +40,7 @@ class ProjectConfiguration extends sfProjectConfiguration
         $this->enablePlugins('acElasticaPlugin');
         $this->enablePlugins('StatistiquePlugin');
         $this->enablePlugins('acVinFichierPlugin');
+        $this->enablePlugins('acVinSubventionPlugin');
         $this->enablePlugins('acVinCouchdbToElasticsearchPlugin');
 
         $this->dispatcher->connect('application.throw_exception', array('acError500', 'handleException'));

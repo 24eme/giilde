@@ -207,7 +207,7 @@ if ($vrac->mandataire_exist) {
 	 ~ & ~ \\
 	 \multicolumn{2}{|r|}{Ci après dénommé le vendeur,} \\
 	 <?php if ($vrac->representant_identifiant): ?>
-	 \multicolumn{2}{|r|}{Représenté par <?php echo $vrac->representant->raison_sociale ?>} \\
+	 \multicolumn{2}{|r|}{Représenté par <?php echo display_latex_string($vrac->representant->raison_sociale) ?>} \\
 	 <?php endif; ?>
 
 	\hline

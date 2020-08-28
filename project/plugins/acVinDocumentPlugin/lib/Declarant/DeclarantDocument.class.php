@@ -60,9 +60,8 @@ class DeclarantDocument
         if ($declarant->exist('famille')) {
           $declarant->famille = $etablissement->famille;
         }
-        if ($etablissement->exist("siret")) {
-            if($declarant->getDefinition()->exist('siret'))
-                 $declarant->add('siret', $etablissement->siret);
+        if($declarant->getDefinition()->exist('siret')) {
+             $declarant->add('siret', $etablissement->siret);
         }
         if ($etablissement->exist("telephone")) {
             if($declarant->getDefinition()->exist('telephone'))

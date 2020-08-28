@@ -60,7 +60,10 @@ class DRMClient extends acCouchdbClient {
         self::DRM_CRD_LIEDEVIN => 'Lie de vin'
     );
     public static $drm_crds_genre = array(DRMClient::DRM_CRD_CATEGORIE_TRANQ => 'Vins tranquilles', DRMClient::DRM_CRD_CATEGORIE_MOUSSEUX => 'Vins mousseux', DRMClient::DRM_CRD_CATEGORIE_PI => 'Produits intermédiaires', DRMClient::DRM_CRD_CATEGORIE_ALCOOLS => 'Alcools', DRMClient::DRM_CRD_CATEGORIE_COGNAC => 'Cognacs/Armagnac', );
-    public static $drm_max_favoris_by_types_mvt = array(self::DRM_TYPE_MVT_ENTREES => 3, self::DRM_TYPE_MVT_SORTIES => 6);
+    public static $drm_max_favoris_by_types_mvt = array(
+        self::DRM_TYPE_MVT_ENTREES => 6,
+        self::DRM_TYPE_MVT_SORTIES => 6
+    );
     public static $drm_documents_daccompagnement = array(
         self::DRM_DOCUMENTACCOMPAGNEMENT_DAADAC => 'DAA/DAC',
         self::DRM_DOCUMENTACCOMPAGNEMENT_DSADSAC => 'DSA/DSAC',
@@ -402,9 +405,9 @@ class DRMClient extends acCouchdbClient {
         $statutsContrats = VracClient::STATUS_CONTRAT_NONSOLDE;
         $results = array();
         if($withAgregat){
-          $results = $this->getContratsFromMultiProduitsAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction);
+          $results = $this->getContratsFromMultiProduitsAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction, $date);
         }else{
-          $results = $this->getContratsFromProduitAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction);
+          $results = $this->getContratsFromProduitAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction, $date);
         }
         return $this->postTraitementVracResult($results);
     }
@@ -442,7 +445,7 @@ class DRMClient extends acCouchdbClient {
       $produits = ConfigurationClient::getInstance()->convertHashProduitForDRM($produit, true, $date);
       $vendeur_identifiant = "ETABLISSEMENT-".$vendeur_identifiant;
       foreach ($produits as $produit) {
-        $results = array_merge($results,$this->getContratsFromProduitAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction));
+        $results = array_merge($results,$this->getContratsFromProduitAndATransactionRow($statutsContrats,$vendeur_identifiant, $produit,$type_transaction, $date));
       }
       return $results;
     }

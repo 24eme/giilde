@@ -8,7 +8,6 @@
 			<th>Condi.</th>
 			<th>Qté</th>
 			<th>Prix HT</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,10 +17,9 @@
 			<td><?php echo $dae->millesime ?></td>
 			<td><?php echo $dae->destination_libelle ?></td>
 			<td><?php echo $dae->type_acheteur_libelle ?></td>
-			<td><?php echo $dae->contenance_libelle ?></td>
+			<td><?php echo $dae->conditionnement_libelle ?></td>
 			<td class="text-right"><?php echo $dae->quantite ?>&nbsp;<span class="text-muted"><?php if ($dae->conditionnement_key == 'BOUTEILLE'): ?>btl<?php elseif ($dae->conditionnement_key == 'BIB'): ?>bib<?php else: ?>hl<?php endif; ?></span></td>
 			<td class="text-right"><?php echo $dae->prix_unitaire ?>&nbsp;<span class="text-muted">€&nbsp;<?php if ($dae->conditionnement_key == 'BOUTEILLE'): ?>btl<?php elseif ($dae->conditionnement_key == 'BIB'): ?>bib<?php else: ?>hl<?php endif; ?></span></td>
-			<td><a href="<?php echo url_for('dae_nouveau', array('identifiant' => $dae->identifiant, 'id' => $dae->_id, 'periode' => $dae->date)) ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>

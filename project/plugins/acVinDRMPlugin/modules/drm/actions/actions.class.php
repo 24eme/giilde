@@ -134,7 +134,9 @@ class drmActions extends drmGeneriqueActions {
                   $url_reprise_donnees_drm = str_replace(":identifiant",$identifiant,$url_reprise_donnees_drm);
                   $url_reprise_donnees_drm = str_replace(":periode",$periode,$url_reprise_donnees_drm);
 
-                  $drmLast = DRMClient::getInstance()->findLastByIdentifiant($identifiant);
+
+                  // Récupère la dernière DRM de la campagne pour regarder si elle a des colonnes Total Alsace banc et Alsace Lieu, si c'est le cas on demande les données des contrats, ds, récolte aggrégées
+                  $drmLast = DRMClient::getInstance()->findLastByIdentifiantAndCampagne($identifiant, DRMClient::getInstance()->buildCampagne($periode));
                   if ($drmLast !== null) {
                       $produitsTotaux = null;
                       foreach($drmLast->getProduitsDetails() as $detail) {

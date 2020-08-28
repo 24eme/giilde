@@ -15,7 +15,7 @@ function sprintFloat($number, $format = "%01.02f", $milliSeparate = false)
     return formatFloat($number, null, null, $format, $milliSeparate);
 }
 
-function sprintFloatFr($float, $format = "%01.02f", $milliSeparate = false)
+function sprintFloatFr($number, $format = "%01.02f", $milliSeparate = false)
 {
     return formatFloatFr($number, null, null, $format, $milliSeparate);
 }

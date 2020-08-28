@@ -126,7 +126,7 @@ function getTeledeclareeLabelCalendrier($isTeledeclarationMode, $calendrier, $pe
 
         return '(Douane OK)';
     }
-    
+
     if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode) && isTransmiseDouane($isTeledeclarationMode, $calendrier, $periode)) {
 
         return '(Transmise)';
@@ -134,7 +134,7 @@ function getTeledeclareeLabelCalendrier($isTeledeclarationMode, $calendrier, $pe
 
     if (isTeledeclareeCalendrier($isTeledeclarationMode, $calendrier, $periode)) {
 
-        return  '(Téleclarée)';
+        return  '(Télédéclarée)';
     }
 
     if ($isTeledeclarationMode) {

@@ -72,7 +72,7 @@ krsort($tests);
         <entry>
     		<title>Le bilan des tests a évolué : <?php echo $test->nb_success ?> (<?php if($test->diff_nb_success > 0): ?>+<?php endif; ?><?php echo $test->diff_nb_success ?>) SUCCESS / <?php echo $test->nb_errors ?> (<?php if($test->diff_nb_errors > 0): ?>+<?php endif; ?><?php echo $test->diff_nb_errors ?>) FAILED </title>
     	    <id><?php echo $test->commit ?></id>
-    	    <link><?php echo (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].preg_replace("/\?.+$/", "", $_SERVER['REQUEST_URI']) ?></link>
+    	    <link><?php echo (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].preg_replace("/\?.+$/", "", $_SERVER['REQUEST_URI']) ?>?file=<?php echo str_replace('.xml', '', $test->file) ?></link>
     		<updated><?php echo $test->date->format('Y-m-d H:i:s') ?></updated>
     	</entry>
         <?php endforeach; ?>

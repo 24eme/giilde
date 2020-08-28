@@ -23,6 +23,7 @@
         $(document).initAdvancedElements();
         $.initQueryHash();
         $.initTableSelection();
+        $.initModal();
 
         $(options.selectors.ajaxModal).on("show.bs.modal", function (e) {
             var link = $(e.relatedTarget);
@@ -76,6 +77,13 @@
   			});
   		});
   	};
+
+    $.initModal = function () {
+        $('.modal.modal-page').modal({keyboard: false, backdrop: 'static'});
+        if($('.modal').find('.has-error').length !== 0) {
+        	$('.modal').modal('show');
+        }
+    }
 
     $.fn.initAdvancedElements = function () {
 
@@ -334,7 +342,7 @@
 
             return true;
         });
-        
+
         /**
       	 * Sélection de lignes de tableau
       	 ******************************************/

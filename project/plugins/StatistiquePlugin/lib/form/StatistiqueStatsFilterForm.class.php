@@ -119,7 +119,7 @@ class StatistiqueStatsFilterForm extends BaseForm
 
         foreach($items as $key => $item) {
 						try {
-							if(floatval($item->getDroitCVO(date('Y-m-d'))->taux)){
+								if(floatval($item->getDroitCVO(date('Y-m-d'))->taux) && (floatval($item->getDroitCVO(date('Y-m-d'))->taux) > 0.0) ){
 								$libelles[$key] = $item->getLibelleFormat();
 							}
 						} catch (sfException $e) {

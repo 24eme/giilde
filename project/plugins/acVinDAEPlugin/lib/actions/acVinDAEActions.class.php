@@ -18,33 +18,6 @@ class acVinDAEActions extends sfActions
 		$this->daes = DAEClient::getInstance()->findByIdentifiantPeriode($this->etablissement->identifiant, $this->periode->format('Ym'), acCouchdbClient::HYDRATE_JSON)->getDatas();
 	}
 	
-	public function executeNouveau(sfWebRequest $request) {
-		$this->etablissement = $this->getRoute()->getEtablissement();
-		$this->periode = new DateTime($request->getParameter('periode', date('Y-m-d')));
-	
-		$this->withlast = $request->getParameter('withlast', null);
-		$this->last = null;
-	
-		if ($this->withlast) {
-			$this->last = DAEClient::getInstance()->findLastByIdentifiantDate($this->etablissement->getIdentifiant(), $this->periode->format('Ymd'));
-		}
-	
-		$this->dae = ($id = $request->getParameter('id'))? DAEClient::getInstance()->find($id) : DAEClient::getInstance()->createSimpleDAE($this->etablissement->getIdentifiant(), $this->periode->format('Y-m-d'));
-		if ($this->last && !$request->getParameter('id')) {
-			$this->dae->initByDae($this->last);
-		}
-	
-		$this->form = new DAENouveauForm($this->dae);
-	
-		if ($request->isMethod(sfWebRequest::POST)) {
-			$this->form->bind($request->getParameter($this->form->getName()));
-			if ($this->form->isValid()) {
-				$this->dae = $this->form->save();
-				return ($this->withlast)?  $this->redirect('dae_nouveau', array('sf_subject' => $this->etablissement, 'periode' => $this->dae->date, 'withlast' => 1)) : $this->redirect('dae_etablissement', array('identifiant' => $this->dae->identifiant, 'periode' => $this->dae->date));
-			}
-		}
-	}
-	
 	public function executeExportEdi(sfWebRequest $request) {
 		$this->etablissement = $this->getRoute()->getEtablissement();
 		$this->campagne = $request->getParameter('campagne');
@@ -89,7 +62,10 @@ class acVinDAEActions extends sfActions
 						$this->erreurs = $this->daeCsvEdi->getCsvDoc()->erreurs;
 					} else {
 						$this->getUser()->setFlash('notice', 'Vos ventes ont bien été importées');
-						return $this->redirect('dae_etablissement', array('identifiant' => $this->identifiant));
+						$periodes = $this->daeCsvEdi->periodes;
+						krsort($periodes);
+						$periode = (count($periodes) > 0)? current($periodes) : null;
+						return $this->redirect('dae_etablissement', array('identifiant' => $this->identifiant, 'periode' => $periode));
 					}
 				}
 			} else {

@@ -40,7 +40,7 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 
 <?php $i=0; foreach ($headers as $header): ?>
 \fancypagestyle{fstyle_<?php echo $i ?>}{
-\fancyhead[C]{Mouvements drm pour la facturation \\\textbf{<?php echo $header ?>}<?php if ($periode): ?> - Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
+\fancyhead[C]{Contrôle de facturation des sorties \\\textbf{<?php echo $header ?>}<?php if ($periode): ?> - Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
 }
 <?php $i++; endforeach; ?>
 
@@ -59,7 +59,7 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \cline{4-6}
   & \multicolumn{1}{c|}{sous contrat} & \multicolumn{1}{c|}{hors contrat} & \multicolumn{1}{c|}{06. Retour} & \multicolumn{1}{c|}{08. Retour} & \multicolumn{1}{c|}{09. Retour} & \multicolumn{1}{c|}{cvo hors} & ~ & ~ & ~ \tabularnewline
   &  &  & \multicolumn{1}{c|}{logement} & \multicolumn{1}{c|}{de vin CRD} & \multicolumn{1}{c|}{de vin hors} & \multicolumn{1}{c|}{contrat} & ~ & ~ & ~ \tabularnewline
-  &  &  & \multicolumn{1}{c|}{ext} &  & \multicolumn{1}{c|}{CRD} &  &  &  &  \tabularnewline \hline
+  &  &  & \multicolumn{1}{c|}{ext} &  & \multicolumn{1}{c|}{CRD} &  &  &  &  \hline
 <?php
 	$i = 1;
 	foreach ($items as $item):

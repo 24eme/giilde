@@ -360,8 +360,8 @@
                 if (value === "1") {
                     $('#colonne_intitules input#' + id_fav_input).val("");
                 } else {
-                  if ($(".glyphicon-star").length > 7) {
-                    alert("On ne peut sélectionner en favoris qu'au maximum 8 mouvements d'entrée ou de sortie");
+                  if ($(".glyphicon-star").length >= 12) {
+                    alert("On ne peut sélectionner en favoris qu'au maximum 12 mouvements d'entrée ou de sortie");
                     return false;
                   }else {
                     $('#colonne_intitules input#' + id_fav_input).val("1");

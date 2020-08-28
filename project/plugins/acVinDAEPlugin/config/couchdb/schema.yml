@@ -6,8 +6,8 @@ DAE:
       _rev: {}
       type: {}
       identifiant: {  }
-      date: { type: date }
-      date_saisie: { type: date }
+      date: { }
+      date_saisie: { }
       declarant:
         type: collection
         definition:

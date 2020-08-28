@@ -4,7 +4,7 @@ class bsWidgetFormSchemaFormatterBootstrap extends sfWidgetFormSchemaFormatter
   protected
     $rowFormat       = "<div class='form-group'>\n%error%%label%\n %field%%help%\n%hidden_fields%</div>\n",
     $errorRowFormat  = "<li>\n%errors%</li>\n",
-    $helpFormat      = '<br />%help%',
+    $helpFormat      = '<span class="help-block">%help%</span>',
     $decoratorFormat = "<ul>\n  %content%</ul>";
 
     public function getErrorListFormatInARow()

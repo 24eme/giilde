@@ -10,12 +10,12 @@ cat /tmp/retrieveXML.$$.url | sort -r | while read url ; do
     echo "L'xml d'url "$url" n'est pas la version la plus récente";
     continue;
   fi
-	OUT=$(php5 symfony $SYMFONYTASKOPTIONS drm:storeXMLRetour --force-update="1" $url)
+	OUT=$(php symfony $SYMFONYTASKOPTIONS drm:storeXMLRetour --force-update="1" $url)
 	RET=$?
 	DRM=$(echo $OUT | sed 's/ .*//')
 	echo $OUT
 	if test $RET -eq 0 ; then
-		php5 symfony $SYMFONYTASKOPTIONS drm:compareXMLs $DRM
+		php symfony $SYMFONYTASKOPTIONS drm:compareXMLs $DRM
 	fi
   LAST=$(echo $url | sed -r 's/(.+)\/([0-9]{4}\/[0-9]{2}\/[0-9A-Z]+).*/\2/g')
 done

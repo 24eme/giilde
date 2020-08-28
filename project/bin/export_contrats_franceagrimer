@@ -5,16 +5,21 @@
 
 mkdir -p $TMP/exports_franceagrimer > /dev/null
 DATE=$(date +%Y%m%d);
-FILENAME="CA_IVSO_"$DATE".txt";
+FILENAME="CA_IVSO_"$DATE;
 
-PATHFILEFA=$(echo $TMP/exports_franceagrimer/$FILENAME);
+PATHFILEFA=$TMP"/exports_franceagrimer/"$FILENAME;
 
-echo 'CONSTRUCTION DU FICHIER '$PATHFILEFA;
+echo 'CONSTRUCTION DU FICHIER '$PATHFILEFA'.txt';
 
-php symfony export:contrats-france-agrimer $SYMFONYTASKOPTIONS > $PATHFILEFA".tmp"
+php symfony export:contrats-france-agrimer $SYMFONYTASKOPTIONS > $PATHFILEFA".tmp" 2> $PATHFILEFA"_enrichi.csv"
 
+touch $TMP/exports_franceagrimer/sedCepages
+if test -f data/export/match_cepages.csv; then
 cat data/export/match_cepages.csv | cut -d ';' -f 1,2 | sed -r 's|"([0-9]+)";"(.*)"|s\/;"\2";\/;"\1";\/g|g' | grep -v '"COD_CEP";"LIB_CEP"' > $TMP/exports_franceagrimer/sedCepages
+fi
 
-cat $PATHFILEFA".tmp" | sed -f $TMP/exports_franceagrimer/sedCepages > $PATHFILEFA
+cat $PATHFILEFA".tmp" | sed -f $TMP/exports_franceagrimer/sedCepages > $PATHFILEFA".txt"
 
-cp $PATHFILEFA /home/franceagrimer/$FILENAME
+$FRANCEAGRIMER_MOUNT
+cp $PATHFILEFA".txt" $FRANCEAGRIMER_PATH"/"
+$FRANCEAGRIMER_UMOUNT

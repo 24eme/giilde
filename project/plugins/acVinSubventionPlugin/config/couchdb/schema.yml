@@ -1,0 +1,73 @@
+#schema des Subvention
+Subvention:
+  definition:
+    fields:
+      _id: {}
+      _rev: {}
+      _attachments:
+        type: collection
+        indexable: false
+        definition:
+          fields:
+            '*':
+              type: collection
+              definition:
+                fields:
+                  '*': { }
+      type: {}
+      identifiant: {}
+      operation: {}
+      declarant:
+        type: collection
+        definition:
+          fields:
+            nom: { searchable: true }
+            raison_sociale: { searchable: true  }
+            siret:  { searchable: true  }
+            cvi: {  }
+            no_accises: {   }
+            adresse: {  searchable: true }
+            commune: {  searchable: true }
+            code_postal: {   }
+            region: {  }
+            famille: {  }
+      infos:
+        type: collection
+        inheritance: SubventionNoeud
+        class: SubventionInfos
+        definition:
+          fields:
+            '*':
+              type: collection
+              inheritance: SubventionNoeudCategorie
+              class: SubventionInfosCategorie
+              definition:
+                fields:
+                  '*': {  }
+      engagements:
+        type: collection
+        definition:
+          fields:
+            '*': {  }
+      approbations:
+        type: collection
+        inheritance: SubventionNoeud
+        class: SubventionApprobations
+        definition:
+          fields:
+            '*':
+              type: collection
+              inheritance: SubventionNoeudCategorie
+              class: SubventionApprobationsCategorie
+              definition:
+                fields:
+                  '*': {  }
+      commentaire: { }
+      date_modification: { }
+      validation_date: { }
+      signature_date: { }
+      dossier_date: { }
+      statut: { required: false }
+      numero_archive: { }
+      campagne_archive: { }
+      version: { }

@@ -64,7 +64,8 @@ class statistiqueActions extends sfActions {
 			if ($this->form->pdfFormat()) {
 				return $this->renderPdf($csvResult, $values['statistiques'], array('categories' => $this->form->getCategories(), 'appellations' => $this->form->getAppellations(), 'compare' => $this->form->canPeriodeCompare(), 'periode' => $this->form->getPeriode()));
 			} else {
-				return $this->renderCsv($csvResult, 'statistiques_'.$values['statistiques']);
+				$options = array('periode' => $this->form->getPeriode());
+				return $this->renderCsv($csvResult, 'statistiques_'.$values['statistiques'],$options);
 			}
 		}
 	}
@@ -89,7 +90,11 @@ class statistiqueActions extends sfActions {
 
 	protected function getAggsResultCsv($type, $current, $lastPeriode = null)
 	{
-		return ($lastPeriode !== null)? $this->getPartial('statistique/'.$type, array('lastPeriode' => $lastPeriode, 'result' => $current)) : $this->getPartial('statistique/'.$type, array('lastPeriode' => null, 'result' => $current[$type]));
+		$values = $this->form->getValues();
+		$fromDate = $values["doc.mouvements.date/from"];
+		$options = array("fromDate" => $fromDate);
+
+		return ($lastPeriode !== null)? $this->getPartial('statistique/'.$type, array('lastPeriode' => $lastPeriode, 'result' => $current, 'options' => $options)) : $this->getPartial('statistique/'.$type, array('lastPeriode' => null, 'result' => $current[$type], 'options' => $options ));
 	}
 
 	protected function renderdisponibilitesStocks($values){
@@ -405,7 +410,7 @@ class statistiqueActions extends sfActions {
     }
 
 
-    protected function renderCsv($csv_file, $type)
+    protected function renderCsv($csv_file, $type, $options = array())
     {
     	$this->setLayout(false);
     	$dateTime = new DateTime();

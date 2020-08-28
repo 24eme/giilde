@@ -131,7 +131,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             return $p;
         }
         $detail = $this->getOrAdd($hash)->addDetailsNoeud($detailsKey)->addProduit($denomination_complementaire, $tav);
-        $detail->produit_libelle = $detail->getLibelle($format = "%format_libelle%");
+        $detail->produit_libelle = $detail->getLibelle();
 
         $this->declaration->reorderByConf();
 
@@ -237,7 +237,10 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 if (DRMConfiguration::getInstance()->isRepriseStocksChangementCampagne() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
                     $stock = $crd->stock_fin;
                 }
-                $this->getOrAdd('crds')->getOrAdd($regime)->getOrAddCrdNode($crd->genre, $crd->couleur, $crd->centilitrage, $crd->detail_libelle, $stock, true);
+                $crdNode = $this->getOrAdd('crds')->getOrAdd($regime)->getOrAddCrdNode($crd->genre, $crd->couleur, $crd->centilitrage, $crd->detail_libelle, $stock, true);
+                if($crd->stock_debut && !$crd->stock_fin){
+                    $crd->stock_fin = $crd->stock_debut;
+                }
             }
         }
     }
@@ -397,13 +400,13 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         }
         $this->add('controles');
         if($points->hasErreurs()){
-            $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_BLOCANT, $points->getErreurs());   
-        }   
+            $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_BLOCANT, $points->getErreurs());
+        }
 
         if($points->hasVigilances()){
             $this->controles->add(DRM::CONTROLE_POINT_VIGILANCE);
             $this->controles->vigilance->nb = count($points->getVigilances());
-            $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_VIGILANCE, $points->getVigilances());  
+            $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_VIGILANCE, $points->getVigilances());
         }
 
         if($points->hasEngagements()){

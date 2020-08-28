@@ -51,3 +51,26 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<?php if(count(MessagesClient::getInstance()->retrieveMessages())): ?>
+<a name="messages"></a>
+<h2>Configuration des messages de DRM <small><a href="#messages"><span class="glyphicon glyphicon-link"></span></a></small></h2>
+<table class="table table-condensed table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="col-xs-2">ID</th>
+            <th>Message</th>
+            <th style="width: 0;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach(MessagesClient::getInstance()->retrieveMessages()->getMessages() as $key => $message): ?>
+        <tr>
+            <td><?php echo $key ?></td>
+            <td><?php if($message): ?><?php echo nl2br($message) ?><?php else: ?><span class="text-muted">Aucun message</span><?php endif; ?></td>
+            <td><a href="<?php echo url_for("messages_modification", array('id' => $key)) ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php endif; ?>

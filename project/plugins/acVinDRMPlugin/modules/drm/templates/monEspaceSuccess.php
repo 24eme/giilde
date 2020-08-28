@@ -63,12 +63,9 @@
             <?php $messages = $calendrier->getMessages() ?>
             <?php if(count($messages)): ?>
             <div class="alert alert-info">
-                <dl class="dl-horizontal" style="margin-bottom: 0;">
-                <?php foreach($messages as $periode => $message): ?>
-                    <dt style="text-align: left;"><span class="glyphicon glyphicon-info-sign"></span> DRM <?php echo getFrPeriodeElision($periode) ?></dt>
-                    <dd><?php echo $message ?></dd>
+                <?php foreach($messages->getRawValue() as $message): ?>
+                    <p><span class="glyphicon glyphicon-info-sign"></span> <?php echo nl2br($message) ?></p>
                 <?php endforeach; ?>
-                </dl>
             </div>
             <?php endif; ?>
         <?php endif; ?>

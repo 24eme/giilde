@@ -17,5 +17,9 @@ class ConfigurationRouting {
         $r->prependRoute('produit_nouveau', new sfRoute('/produits/nouveau', 
             array('module' => 'produit', 'action' => 'nouveau', 'hash' => null, 'noeud' => null)));
 
+
+        $r->prependRoute('messages_modification', new sfRoute('/messages/modification/:id',
+            array('module' => 'messages', 'action' => 'modification')));
+
     }
  }

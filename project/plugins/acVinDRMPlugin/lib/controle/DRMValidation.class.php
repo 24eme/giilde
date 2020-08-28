@@ -162,8 +162,12 @@ class DRMValidation extends DocumentValidation {
                   $total_entrees_replis += $detail->entrees->repli;
                   $total_sorties_replis += $detail->sorties->repli;
             }
-            if($detail->getConfig()->entrees->exist('declassement')){
+
+            if($detail->getConfig()->entrees->exist('declassement') && $detail->entrees->exist('declassement')){
                 $total_entrees_declassement += $detail->entrees->declassement;
+            }
+
+            if($detail->getConfig()->sorties->exist('declassement') && $detail->sorties->exist('declassement')){
                 $total_sorties_declassement += $detail->sorties->declassement;
             }
 
@@ -268,7 +272,7 @@ class DRMValidation extends DocumentValidation {
 
         $sortiesDocAnnexes = array();
         foreach ($this->document->getProduitsDetails($this->document->teledeclare,'details') as $detail) {
-            if (count($detail->sorties->export_details)) {
+            if ($detail->sorties->exist('export_details') && count($detail->sorties->export_details)) {
                 foreach ($detail->sorties->export_details as $paysCode => $export) {
                     if ($export->numero_document) {
                         $sortiesDocAnnexes[$export->type_document] = $export->numero_document;

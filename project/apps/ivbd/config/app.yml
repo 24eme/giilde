@@ -479,8 +479,8 @@ all:
                                   agg_column:
                                     sum:
                                       field: 'doc.prix_total'
-        mouvements_facturation:
-          libelle: "Mouvement facturation"
+        mouvements_drm:
+          libelle: "Mouvement DRM"
           index: "DRMMVT"
           hashkeysize: 2
           aggregation:
@@ -658,6 +658,126 @@ all:
                         total_entrees_sum: "total_entrees>agg_column"
                         total_sorties_sum: "total_sorties>agg_column"
                       script: "total_sorties_sum - total_entrees_sum"
+        controle_facturation:
+          libelle: "Controle Facturation"
+          index: "DRMMVT"
+          hashkeysize: 2
+          aggregation:
+            filter:
+              terms:
+                doc.declarant.famille: ['PRODUCTEUR']
+            aggs:
+              totaux_vrac_cvo:
+                sum_bucket:
+                  buckets_path: "agg_page>total_vrac>total_vrac_cvo>agg_column"
+              totaux_entrees:
+                sum_bucket:
+                  buckets_path: "agg_page>total_entrees>agg_column"
+              totaux_entrees_cvo:
+                sum_bucket:
+                  buckets_path: "agg_page>total_entrees>total_entrees_cvo>agg_column"
+              totaux_entrees_sans_cvo:
+                sum_bucket:
+                  buckets_path: "agg_page>total_entrees>total_entrees_sans_cvo>agg_column"
+              totaux_sorties:
+                sum_bucket:
+                  buckets_path: "agg_page>total_sorties>agg_column"
+              totaux_sorties_cvo:
+                sum_bucket:
+                  buckets_path: "agg_page>total_sorties>total_sorties_cvo>agg_column"
+              totaux_facturation_hors_contrat:
+                sum_bucket:
+                  buckets_path: "agg_page>total_facturation_hors_contrat"
+              totaux_facturation:
+                sum_bucket:
+                  buckets_path: "agg_page>total_facturation"
+              agg_page:
+                terms:
+                  size: 0,
+                  script: "'/declaration/certifications/'+doc['doc.mouvements.certification'].value+'/genres/'+doc['doc.mouvements.genre'].value+'/appellations/'+doc['doc.mouvements.appellation'].value+'/mentions/'+doc['doc.mouvements.mention'].value+'/lieux/'+doc['doc.mouvements.lieu'].value+'/couleurs/'+doc['doc.mouvements.couleur'].value"
+                  "order" : { "_term" : "asc" }
+                aggs:
+                  total_vrac:
+                    filter:
+                      term:
+                        doc.mouvements.type_hash: 'vrac_details'
+                    aggs:
+                      total_vrac_cvo:
+                        filter:
+                          term:
+                            doc.mouvements.facturable: "1"
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                  total_entrees:
+                    filter:
+                      term:
+                        doc.mouvements.type_es: "entree"
+                    aggs:
+                      total_entrees_cvo:
+                        filter:
+                          term:
+                            doc.mouvements.facturable: "1"
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * 1'
+                      total_entrees_sans_cvo:
+                        filter:
+                          term:
+                            doc.mouvements.facturable: "0"
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * 1'
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * 1'
+                  total_sorties:
+                    filter:
+                      term:
+                        doc.mouvements.type_es: "sortie"
+                    aggs:
+                      total_sorties_cvo:
+                        filter:
+                          term:
+                            doc.mouvements.facturable: "1"
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                      total_sorties_sans_cvo:
+                        filter:
+                          term:
+                            doc.mouvements.facturable: "0"
+                        aggs:
+                          agg_column:
+                            sum:
+                              field: 'doc.mouvements.volume'
+                              script: '_value * -1'
+                      agg_column:
+                        sum:
+                          field: 'doc.mouvements.volume'
+                          script: '_value * -1'
+                  total_facturation_hors_contrat:
+                    bucket_script:
+                      buckets_path:
+                        total_sorties_cvo_sum: "total_sorties>total_sorties_cvo>agg_column"
+                        total_vrac_cvo_sum: "total_vrac>total_vrac_cvo>agg_column"
+                        total_entrees_cvo_sum: "total_entrees>total_entrees_cvo>agg_column"
+                      script: "total_sorties_cvo_sum - total_vrac_cvo_sum - total_entrees_cvo_sum"
+                  total_facturation:
+                    bucket_script:
+                      buckets_path:
+                        total_facturation_hors_contrat_sum: "total_facturation_hors_contrat"
+                        total_vrac_cvo_sum: "total_vrac>total_vrac_cvo>agg_column"
+                      script: "total_facturation_hors_contrat_sum + total_vrac_cvo_sum"
     drm:
       title: "Etat des lieux de saisie des DRMs"
       nb_resultat: 20

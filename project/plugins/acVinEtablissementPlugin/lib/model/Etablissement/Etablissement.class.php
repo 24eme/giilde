@@ -147,11 +147,15 @@ class Etablissement extends BaseEtablissement implements InterfaceCompteGeneriqu
     }
 
     public function isNegociant() {
-        return ($this->famille == EtablissementFamilles::FAMILLE_NEGOCIANT);
+        return ($this->famille == EtablissementFamilles::FAMILLE_NEGOCIANT || $this->famille == EtablissementFamilles::FAMILLE_NEGOCIANT_PUR);
     }
 
     public function isViticulteur() {
-        return ($this->famille == EtablissementFamilles::FAMILLE_PRODUCTEUR);
+        return ($this->famille == EtablissementFamilles::FAMILLE_PRODUCTEUR || $this->famille == EtablissementFamilles::FAMILLE_PRODUCTEUR_VINIFICATEUR);
+    }
+
+    public function isCaveCooperative() {
+        return ($this->famille == EtablissementFamilles::FAMILLE_COOPERATIVE);
     }
 
     public function isCourtier() {
@@ -344,6 +348,15 @@ class Etablissement extends BaseEtablissement implements InterfaceCompteGeneriqu
             $a .= ' ; ' . $this->siege->adresse_complementaire;
         }
         return $a;
+    }
+
+    public function getSiret() {
+        if($this->exist('siret')) {
+
+            return $this->_get('siret');
+        }
+
+        return $this->getSociete()->siret;
     }
 
     public function findEmail() {

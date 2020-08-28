@@ -93,6 +93,7 @@ class Configuration extends BaseConfiguration {
         foreach($this->getProduits() as $produit) {
             foreach($produit->getCodesDouanes() as $codeDouane) {
                 $codeProduitSlugify = KeyInflector::slugify(preg_replace("/[ ]+/", " ", trim($codeDouane)));
+                //echo "identifyProductByCodeDouane : $codeSlugify == $codeProduitSlugify\n";
                 if($codeSlugify == $codeProduitSlugify) {
                     $this->identifyCodeDouaneProduct[$code][] = $produit;
                 }

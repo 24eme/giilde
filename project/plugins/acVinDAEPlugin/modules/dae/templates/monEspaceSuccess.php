@@ -10,9 +10,16 @@
 
 <h1>Expérimentation des données de commercialisation</h1>
 
-
+	<div class="col-xs-6">
+		<div class="row"><a class="btn btn-sm btn-default" href="<?php echo url_for('dae_export_edi', array('sf_subject' => $etablissement, 'campagne' => $campagne)) ?>"><span class=" glyphicon glyphicon-cloud-download"></span> Voir le fichier de mes commercialisations <?php echo $campagne ?></a></div>
+	</div>
+	<div class="col-xs-6">
+        <div class="row text-right">
+        	<a class="btn btn-default" href="<?php echo url_for('dae_upload_fichier_edi', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d'), 'md5' => "0")); ?>"><span class="glyphicon glyphicon-cloud-upload"></span> Déposer le fichier de mes commercialisations</a>
+        </div>
+    </div>
+    
     <div class="col-xs-12">
-    	<div class="row"><a class="btn btn-sm btn-default pull-right" href="<?php echo url_for('dae_export_edi', array('sf_subject' => $etablissement, 'campagne' => $campagne)) ?>"><span class=" glyphicon glyphicon-cloud-download"></span> Voir le fichier de mes commercialisations <?php echo $campagne ?></a></div>
         <div class="row">
         	<h4>
         		Liste des ventes de <strong><?php echo ucfirst(format_date($periode->format('Y-m-d'), 'MMMM yyyy', 'fr_FR')) ?></strong>
@@ -43,17 +50,6 @@
         	<?php include_partial('dae/recap', array('etablissement' => $etablissement, 'periode' => $periode, 'daes' => $daes)); ?>
         </div>
     </div>
-
-	<div class="col-xs-6">
-        <div class="row text-right">
-        	<a class="btn btn-default" href="<?php echo url_for('dae_upload_fichier_edi', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d'), 'md5' => "0")); ?>"><span class="glyphicon glyphicon-cloud-upload"></span> Déposer le fichier de mes commercialisations</a>
-        </div>
-    </div>
-	<div class="col-xs-6">
-        <div class="row text-right">
-			<a class="btn btn-default" href="<?php echo url_for('dae_nouveau', array('identifiant' => $etablissement->identifiant, 'periode' => $periode->format('Y-m-d')))?>"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter</a>
-		</div>
-	</div>
 
 
 	<script type="text/javascript">

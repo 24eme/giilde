@@ -36,7 +36,8 @@ done;
 
 . bin/export_bi_stocks
 
-echo "#ID;Type document;campagne;identifiant;certifications;genres;appellations;mentions;lieux;couleurs;cepages;date;modificatrice;stock debut;entree;entree revendiquee;sortie;sortie revendiquee;stock fin;nom;libelle produit" > $TMP/export_bi_drm_stock.csv
+CSVHEADER="#ID;Type document;campagne;identifiant;certifications;genres;appellations;mentions;lieux;couleurs;cepages;date;modificatrice;stock debut;entree;entree revendiquee;sortie;sortie revendiquee;stock fin;nom;libelle produit"
+echo $CSVHEADER > $TMP/export_bi_drm_stock.csv
 cat $TMP/export_bi_drm_stock_last_modificatrices.csv | sed 's/"//g' | sed 's|/declaration/certifications/||' | sed 's|/genres/|;|' | sed 's|/appellations/|;|' | sed 's|/mentions/|;|' | sed 's|/lieux/|;|' | sed 's|/couleurs/|;|' | sed 's|/cepages/|;|' >> $TMP/export_bi_drm_stock.csv
 
 cat $TMP/export_bi_drm_stock.csv | cut -d ";" -f 12 | sed -r 's/([0-9]{4}).+$/\1/' | grep -E "[0-9]+" | sort | uniq | while read annee; do

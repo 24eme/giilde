@@ -22,27 +22,28 @@ class DAEImportCsvEdi extends DAECsvEdi
     protected $labels = null;
     protected $mentions = null;
     protected $types = null;
-    protected $contenances = null;
+    protected $conditionnements = null;
     protected $forceEtablissement = false;
     protected $dates = array();
     protected $cache = array();
     protected $etablissement = null;
     protected $client = null;
+    public $periodes = array();
 
-    public function __construct($file = null, $identifiant ,$periode) {
+    public function __construct($file = null, $identifiant, $periode) {
             $this->identifiant = $identifiant;
             $this->etablissement = EtablissementClient::getInstance()->find($identifiant);
             $this->file = $file;
-            $this->csvDoc = CSVDAEClient::getInstance()->find(CSVDAEClient::getInstance()->buildId($identifiant ,$periode));
+            $this->csvDoc = CSVDAEClient::getInstance()->find(CSVDAEClient::getInstance()->buildId($identifiant, $periode));
             if(is_null($this->csvDoc)) {
-            	$this->csvDoc = CSVDAEClient::getInstance()->createOrFindDocFromDAES($file, $identifiant ,$periode);
+            	$this->csvDoc = CSVDAEClient::getInstance()->createOrFindDocFromDAES($file, $identifiant, $periode);
             }
             $this->dae = new DAE();
             $this->configuration = $this->dae->getConfig();
             $this->labels = $this->dae->getLabels();
             $this->mentions = $this->dae->getMentions();
             $this->types = $this->dae->getTypes();
-            $this->contenances = $this->dae->getContenances();
+            $this->conditionnements = $this->dae->getConditionnements();
             $this->client = acCouchdbManager::getClient();
             parent::__construct($file, array());
     }
@@ -111,19 +112,21 @@ class DAEImportCsvEdi extends DAECsvEdi
     }
 	
     private function identifyProduct($csvRow) {
-    	$hash = $this->getHashProduit($csvRow);
+        $inao = trim($csvRow[self::CSV_PRODUIT_INAO]);
     	$libelle = trim($csvRow[self::CSV_PRODUIT_LIBELLE_PERSONNALISE]);
-		if ($hash && isset($this->cache['produit_'.$hash])) {
-			return $this->cache['produit_'.$hash];
+    	$searchable = "$libelle ($inao)";
+    	
+		if ($inao && isset($this->cache['produit_'.$inao])) {
+			return $this->cache['produit_'.$inao];
 		}
 		if ($libelle && isset($this->cache['produit_'.$libelle])) {
 			return $this->cache['produit_'.$libelle];
 		}
-		$produit = $this->configuration->identifyProduct($hash, $libelle);
-		if ($hash) {
-			$this->cache['produit_'.$hash] = $produit;
+		$produit = $this->configuration->getConfigurationProduitByLibelle($searchable);
+		if ($inao && $produit) {
+			$this->cache['produit_'.$inao] = $produit;
 		}
-		if ($libelle) {
+		if ($libelle && $produit) {
 			$this->cache['produit_'.$libelle] = $produit;
 		}
 		return $produit;
@@ -149,20 +152,11 @@ class DAEImportCsvEdi extends DAECsvEdi
     		}
     	}
 
-    	if ($type == self::CSV_ACHETEUR_TYPE) {
-    		if (isset($this->cache['type_'.$value])) {
-    			return $this->cache['type_'.$value];
-    		} else {
-    			$this->cache['type_'.$value] = $this->getItemKey($this->types, $csvRows[self::CSV_ACHETEUR_TYPE]);
-    			return $this->cache['type_'.$value];
-    		}
-    	}
-
-    	if ($type == self::CSV_LIBELLE_CONDITIONNEMENT) {
+    	if ($type == self::CSV_CONDITIONNEMENT_TYPE) {
     		if (isset($this->cache['cond_'.$value])) {
     			return $this->cache['cond_'.$value];
     		} else {
-    			$this->cache['cond_'.$value] = $this->getItemKey($this->contenances, $csvRows[self::CSV_LIBELLE_CONDITIONNEMENT]);
+    			$this->cache['cond_'.$value] = $this->getItemKey($this->conditionnements, $csvRows[self::CSV_CONDITIONNEMENT_TYPE]);
     			return $this->cache['cond_'.$value];
     		}
     	}
@@ -175,7 +169,25 @@ class DAEImportCsvEdi extends DAECsvEdi
     			return $this->cache['pays_'.$value];
     		}
     	}
+
+    	if ($type == self::CSV_DEVISE) {
+    		if (isset($this->cache['devise_'.$value])) {
+    			return $this->cache['devise_'.$value];
+    		} else {
+    			$this->cache['devise_'.$value] = $this->getItemKey($this->deviseList, $csvRows[self::CSV_DEVISE]);
+    			return $this->cache['devise_'.$value];
+    		}
+    	}
     	
+    	if ($type == self::CSV_ACHETEUR_TYPE) {
+    	   if (isset($this->cache['type_'.$value])) {
+    	        return $this->cache['type_'.$value];
+    	   } else {
+    	       $this->cache['type_'.$value] = $this->getItemKey($this->types, $csvRows[self::CSV_ACHETEUR_TYPE]);
+    	       return $this->cache['type_'.$value];
+    	   }
+    	}
+    	             
     	return null;
     }
     
@@ -193,8 +205,9 @@ class DAEImportCsvEdi extends DAECsvEdi
             $label = $this->identifyItemKey($csvRow, self::CSV_PRODUIT_LABEL);
             $mention = $this->identifyItemKey($csvRow, self::CSV_PRODUIT_DOMAINE);
             $type = $this->identifyItemKey($csvRow, self::CSV_ACHETEUR_TYPE);
-            $contenance = $this->identifyItemKey($csvRow, self::CSV_LIBELLE_CONDITIONNEMENT);
+            $conditionnement = $this->identifyItemKey($csvRow, self::CSV_CONDITIONNEMENT_TYPE);
             $destination = $this->identifyItemKey($csvRow, self::CSV_PAYS_NOM);
+            $devise = $this->identifyItemKey($csvRow, self::CSV_DEVISE);
             
             $csvRow[self::CSV_PRODUIT_LABEL] = $label;
 			$csvRow[self::CSV_PRODUIT_DOMAINE] = $mention;
@@ -205,17 +218,23 @@ class DAEImportCsvEdi extends DAECsvEdi
             } else {
             	$csvRow[self::CSV_ACHETEUR_TYPE] = $type;
             }
-            if (!$contenance) {
-            	$this->csvDoc->addErreur($this->contenanceNotFoundError($num_ligne, $csvRow));
+            if (!$conditionnement) {
+            	$this->csvDoc->addErreur($this->conditionnementNotFoundError($num_ligne, $csvRow));
             	$hasErrors = true;
             } else {
-            	$csvRow[self::CSV_LIBELLE_CONDITIONNEMENT] = $contenance;
+            	$csvRow[self::CSV_CONDITIONNEMENT_TYPE] = $conditionnement;
             }
             if (!$destination) {
             	$this->csvDoc->addErreur($this->destinationNotFoundError($num_ligne, $csvRow));
             	$hasErrors = true;
             } else {
             	$csvRow[self::CSV_PAYS_NOM] = $destination;
+            }
+            if (!$devise) {
+            	$this->csvDoc->addErreur($this->deviseNotFoundError($num_ligne, $csvRow));
+            	$hasErrors = true;
+            } else {
+            	$csvRow[self::CSV_DEVISE] = $devise;
             }
             if (!$just_check && !$hasErrors) {
                 $daes[] = $this->createDae($csvRow, $founded_produit);
@@ -269,22 +288,26 @@ class DAEImportCsvEdi extends DAECsvEdi
     private function checkCSVIntegrity() {
         $ligne_num = 1;
         foreach ($this->getDocRows() as $csvRow) {
-            if(count($csvRow) != 31){
+            if(count($csvRow) != 19){
               $this->csvDoc->addErreur($this->createWrongFormatFieldCountError($ligne_num, $csvRow));
               $ligne_num++;
               continue;
             }
+            
             $date = trim($csvRow[self::CSV_DATE_COMMERCIALISATION]);
             $millesime = trim($csvRow[self::CSV_PRODUIT_MILLESIME]);
-            $accises = trim($csvRow[self::CSV_NUMACCISE]);
-            $acheteur = trim($csvRow[self::CSV_ACHETEUR_NUMACCISE]);
-            $etablissement = trim($csvRow[self::CSV_IDENTIFIANT]);
+            $accises = trim($csvRow[self::CSV_VENDEUR_ACCISES]);
+            $acheteur = trim($csvRow[self::CSV_ACHETEUR_ACCISES]);
             
             if (!isset($this->cache['date_'.$date])) {
-	            if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
+                $nDate = $date;
+                if (preg_match('/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})$/', $date, $m)) {
+                	$nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[2], $m[1]);
+                }
+	            if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $nDate)) {
 	                $this->csvDoc->addErreur($this->createWrongFormatDateCommercialisationError($ligne_num, $csvRow));
 	            } else {
-	            	$this->cache['date_'.$date] = $date;
+	            	$this->cache['date_'.$date] = $nDate;
 	            }
             }
             if (!isset($this->cache['millesime_'.$millesime])) {
@@ -302,23 +325,8 @@ class DAEImportCsvEdi extends DAECsvEdi
 	            }
             }
             if (!isset($this->cache['acheteur_'.$acheteur])) {
-	            if ($acheteur && !preg_match('/^FR[a-zA-Z0-9]{11}$/', $acheteur)) {
-	            	$this->csvDoc->addErreur($this->createWrongFormatNumAcciseClientError($ligne_num, $csvRow));
-	            } else {
+	            if ($acheteur && preg_match('/^FR[a-zA-Z0-9]{11}$/', $acheteur)) {
 	            	$this->cache['acheteur_'.$acheteur] = $acheteur;
-	            }
-            }
-            
-            if (!$this->forceEtablissement && !isset($this->cache['etablissement_'.$etablissement])) {
-                $e = null;
-                if ($etablissement) {
-	               $e = EtablissementClient::getInstance()->findByIdentifiant($etablissement, acCouchdbClient::HYDRATE_JSON);
-                }
-                if (!$e && $accises) {
-                    $e = ConfigurationClient::getCurrent()->identifyEtablissement($accises);
-                }
-	            if(!$e || $e->identifiant != $this->identifiant) {
-	                $this->csvDoc->addErreur($this->createDifferentEtbError($ligne_num, $csvRow));
 	            }
             }
             
@@ -328,15 +336,26 @@ class DAEImportCsvEdi extends DAECsvEdi
 
     public function createDae($csvRow, $produit) {
 		$date = trim($csvRow[self::CSV_DATE_COMMERCIALISATION]);
+		if (!isset($this->cache['date_'.$date])) {
+		    $nDate = $date;
+		    if (preg_match('/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})$/', $date, $m)) {
+		        $nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[2], $m[1]);
+		    }
+		    if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $nDate)) {
+		        $this->csvDoc->addErreur($this->createWrongFormatDateCommercialisationError($ligne_num, $csvRow));
+		    } else {
+		        $this->cache['date_'.$date] = $nDate;
+		    }
+		}
 		
         $dae = new stdClass();
         $dae->identifiant = $this->identifiant;
-        $dae->date = $date;
+        $dae->date = $this->cache['date_'.$date];
+        $this->periodes[substr($this->cache['date_'.$date], 0, -3)] = substr($this->cache['date_'.$date], 0, -3);
         $dae->date_saisie = date('Y-m-d');
         $dae->type = 'DAE';
         
         if ($this->etablissement) {
-	        $dae->declarant->nom = null;
 	        if ($this->etablissement->exist("intitule") && $this->etablissement->get("intitule")) {
 	        	$dae->declarant->nom = $this->etablissement->intitule . " ";
 	        }
@@ -360,7 +379,7 @@ class DAEImportCsvEdi extends DAECsvEdi
 		$dae->produit_key = $produit->getHash();
         $dae->produit_libelle = $produit->getLibelleFormat();
         
-        $dae->no_accises_acheteur = trim($csvRow[self::CSV_ACHETEUR_NUMACCISE]);
+        $dae->no_accises_acheteur = trim($csvRow[self::CSV_ACHETEUR_ACCISES]);
         $dae->nom_acheteur = trim($csvRow[self::CSV_ACHETEUR_NOM]);
         
         $dae->type_acheteur_key = $csvRow[self::CSV_ACHETEUR_TYPE];
@@ -371,8 +390,9 @@ class DAEImportCsvEdi extends DAECsvEdi
         
         $dae->millesime = trim($csvRow[self::CSV_PRODUIT_MILLESIME]);
         
-        $dae->contenance_key = $csvRow[self::CSV_LIBELLE_CONDITIONNEMENT];
-        $dae->contenance_libelle = $this->contenances[$dae->contenance_key];
+        $dae->conditionnement_key = $csvRow[self::CSV_CONDITIONNEMENT_TYPE];
+        $dae->contenance_key = $csvRow[self::CSV_CONDITIONNEMENT_VOLUME];
+        $dae->conditionnement_libelle = $this->conditionnements[$dae->conditionnement_key];
         
         $dae->label_key = trim($csvRow[self::CSV_PRODUIT_LABEL]);
         $dae->label_libelle = $this->labels[$dae->label_key];
@@ -383,26 +403,15 @@ class DAEImportCsvEdi extends DAECsvEdi
         $primeur = trim($csvRow[self::CSV_PRODUIT_PRIMEUR]);
         $dae->primeur = (!$primeur)? 0 : 1;
         
-        $dae->quantite = $this->convertNumber($csvRow[self::CSV_QUANTITE_CONDITIONNEMENT]);
+        $dae->quantite = $this->convertNumber($csvRow[self::CSV_CONDITIONNEMENT_QUANTITE]);
         $dae->prix_unitaire = $this->convertNumber($csvRow[self::CSV_PRIX_UNITAIRE]);
         
-		$isHl = false;
-        if (preg_match('/CL_/', $dae->contenance_key)) {
-        	$dae->conditionnement_key = 'BOUTEILLE';
-        	$dae->conditionnement_libelle = 'Bouteille';
-        } elseif (preg_match('/BIB_/', $dae->contenance_key)) {
-        	$dae->conditionnement_key = 'BIB';
-        	$dae->conditionnement_libelle = 'Bib';
-        } else {
-        	$isHl = true;
-        	$dae->conditionnement_key = 'HL';
-        	$dae->conditionnement_libelle = 'Hectolitre';
-        }
+		$volume = (int)trim(str_replace('ml', '', $csvRow[self::CSV_CONDITIONNEMENT_VOLUME]));
 
-        if (!$dae->contenance_key || $isHl) {
+        if (!$volume) {
         	$dae->contenance_hl = 1;
         } else {
-        	$dae->contenance_hl = (str_replace('_', '.', str_replace(array('CL_','BIB_'), '', $dae->contenance_key)) * 1) / 10000;
+        	$dae->contenance_hl = round($volume / 100000,5);
         }
         
         $dae->volume_hl = round($dae->contenance_hl * $dae->quantite, 2);
@@ -424,83 +433,6 @@ class DAEImportCsvEdi extends DAECsvEdi
         $error->level = $level;
         return $error;
  	}
- 	
- 	private function getHashProduit($datas)
- 	{
-    	if (
-    			!$this->getKey($datas[self::CSV_PRODUIT_CERTIFICATION]) &&
-    			!$this->getKey($datas[self::CSV_PRODUIT_GENRE]) &&
-    			!$this->getKey($datas[self::CSV_PRODUIT_APPELLATION]) &&
-    			!$this->getKey($datas[self::CSV_PRODUIT_MENTION]) &&
-    			!$this->getKey($datas[self::CSV_PRODUIT_LIEU]) &&
-    			!$this->couleurKeyToCode($datas[self::CSV_PRODUIT_COULEUR], false) && 
-    			!$this->getKey($datas[self::CSV_PRODUIT_CEPAGE])
-    		) {
-    		return null;
-    	}
- 		$hash = 'declaration/certifications/'.$this->getKey($datas[self::CSV_PRODUIT_CERTIFICATION]).
- 		'/genres/'.$this->getKey($datas[self::CSV_PRODUIT_GENRE], true).
- 		'/appellations/'.$this->getKey($datas[self::CSV_PRODUIT_APPELLATION], true).
- 		'/mentions/'.$this->getKey($datas[self::CSV_PRODUIT_MENTION], true).
- 		'/lieux/'.$this->getKey($datas[self::CSV_PRODUIT_LIEU], true).
- 		'/couleurs/'.strtolower($this->couleurKeyToCode($datas[self::CSV_PRODUIT_COULEUR])).
- 		'/cepages/'.$this->getKey($datas[self::CSV_PRODUIT_CEPAGE], true);
- 		return $hash;
- 	}
- 	 
- 	private function getKey($key, $withDefault = false)
- 	{
- 		$$key = trim($key);
- 		if ($key == " " || !$key) {
- 			$key = null;
- 		}
- 		if ($withDefault) {
- 			return ($key)? $key : ConfigurationProduit::DEFAULT_KEY;
- 		} else {
- 			return $key;
- 		}
- 	}
-    
-    private function couleurKeyToCode($key, $withDefault = true)
-    {
-    	$key = strtolower($key);
-    	if (preg_match('/^ros.+$/', $key)) {
-    		$key = 'rose';
-    	}
-    	if (!$withDefault && ($key == " " || !$key)) {
-    		return null;
-    	}
-    	$correspondances = array(1 => "rouge",
-    			2 => "rose",
-    			3 => "blanc");
-    	if (!in_array($key, array_keys($correspondances))) {
-    		return $this->getKey($key, true);
-    	}
-    	return $correspondances[$key];
-    }	
-
-	private function buildLibellesArrayWithRow($csvRow, $with_slugify = false) {
-	    $certification = ($with_slugify) ? KeyInflector::slugify($csvRow[self::CSV_PRODUIT_CERTIFICATION]) : $csvRow[self::CSV_PRODUIT_CERTIFICATION];
-	    $genre = ($with_slugify) ? KeyInflector::slugify($csvRow[self::CSV_PRODUIT_GENRE]) : $csvRow[self::CSV_PRODUIT_GENRE];
-	    $appellation = ($with_slugify) ? KeyInflector::slugify($csvRow[self::CSV_PRODUIT_APPELLATION]) : $csvRow[self::CSV_PRODUIT_APPELLATION];
-	    $mention = ($with_slugify) ? KeyInflector::slugify($csvRow[self::CSV_PRODUIT_MENTION]) : $csvRow[self::CSV_PRODUIT_MENTION];
-	    $lieu = ($with_slugify) ? KeyInflector::slugify($csvRow[self::CSV_PRODUIT_LIEU]) : $csvRow[self::CSV_PRODUIT_LIEU];
-	    $couleur = ($with_slugify) ? KeyInflector::slugify($csvRow[self::CSV_PRODUIT_COULEUR]) : $csvRow[self::CSV_PRODUIT_COULEUR];
-	    $cepage = ($with_slugify) ? KeyInflector::slugify($csvRow[self::CSV_PRODUIT_CEPAGE]) : $csvRow[self::CSV_PRODUIT_CEPAGE];
-	    $libelles = array(strtoupper($certification),
-		strtoupper($genre),
-		strtoupper($appellation),
-		strtoupper($mention),
-		strtoupper($lieu),
-		strtoupper($couleur),
-		strtoupper($cepage));
-	    foreach ($libelles as $key => $libelle) {
-			if (!$libelle) {
-			    $libelles[$key] = null;
-			}
-	    }
-	    return $libelles;
-	}
     
     private function createWrongCsvFileError($num_ligne, $csvRow) {
     	return $this->createError($num_ligne,"", "Ce fichier n'est pas un fichier CSV valide.", CSVDAEClient::LEVEL_ERROR);
@@ -515,12 +447,11 @@ class DAEImportCsvEdi extends DAECsvEdi
     }
     
     private function createDifferentEtbError($num_ligne, $csvRow) {
-    	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_IDENTIFIANT]), "L'établissement n'existe pas ou n'est pas le bon.");
+    	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_VENDEUR_ACCISES]), "L'établissement n'existe pas ou n'est pas le bon.");
     }
     
     private function productNotFoundError($num_ligne, $csvRow) {
-    	$libellesArray = $this->buildLibellesArrayWithRow($csvRow);
-    	return $this->createError($num_ligne, implode(' ', $libellesArray), "Le produit n'a pas été trouvé");
+    	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_PRODUIT_INAO]).' '.KeyInflector::slugify($csvRow[self::CSV_PRODUIT_LIBELLE_PERSONNALISE]), "Le produit n'a pas été trouvé");
     }
     
     private function labelNotFoundError($num_ligne, $csvRow) {
@@ -535,20 +466,24 @@ class DAEImportCsvEdi extends DAECsvEdi
     	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_ACHETEUR_TYPE]), "Le type de client n'a pas été trouvé");
     }
     
-    private function contenanceNotFoundError($num_ligne, $csvRow) {
-    	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_LIBELLE_CONDITIONNEMENT]), "Le conditionnement n'a pas été trouvé");
+    private function condtionnementNotFoundError($num_ligne, $csvRow) {
+    	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_CONDITIONNEMENT_TYPE]), "Le conditionnement n'a pas été trouvé");
     }
     
     private function destinationNotFoundError($num_ligne, $csvRow) {
     	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_PAYS_NOM]), "Le pays n'a pas été trouvé");
     }
+    
+    private function deviseNotFoundError($num_ligne, $csvRow) {
+    	return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_DEVISE]), "La devise n'a pas été trouvée");
+    }
 
     private function createWrongFormatNumAcciseError($num_ligne, $csvRow) {
-        return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_NUMACCISE]), "Format numéro d'accises non valide");
+        return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_VENDEUR_ACCISES]), "Format numéro d'accises non valide");
     }
 
     private function createWrongFormatNumAcciseClientError($num_ligne, $csvRow) {
-        return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_ACHETEUR_NUMACCISE]), "Format numéro d'accises non valide");
+        return $this->createError($num_ligne, KeyInflector::slugify($csvRow[self::CSV_ACHETEUR_ACCISES]), "Format numéro d'accises non valide");
     }
 
     private function createWrongFormatMillesimeError($num_ligne, $csvRow) {

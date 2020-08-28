@@ -2,8 +2,9 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$nb_tests = 63;
+$nb_tests = 67;
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
+$nego =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
 $produits = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits();
 
 $produit_disabled = null;
@@ -47,6 +48,9 @@ if ($produitdefault_autre_hash) {
 
 if($application == "ivso") {
     $nb_tests += 1;
+}
+if($application == "bivc") {
+    $nb_tests += 8;
 }
 
 //Suppression des DRM précédentes
@@ -109,6 +113,7 @@ $t->is(count($drm->getProduitsDetails()), 4, "La DRM a bien 4 produits");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('stocks_debut/initial'), 951.4625, "le stock initial est celui attendu");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('sorties/ventefrancecrd'),4.62,"vente frande crd OK");
 $t->is($drm->getProduit($produit1_hash, 'details')->get('sorties/export'),2.8425,"sortie export OK");
+
 $t->is($drm->getProduit($produit1_hash, 'details')->get('stocks_fin/final'),945,"stock final OK");
 if($drm->getProduit($produit1_hash, 'details')->exist('entrees/retourmarchandisetaxees_details')) {
     $t->is($drm->getProduit($produit1_hash, 'details')->get('entrees/retourmarchandisetaxees_details')->getFirst()->getDateFr(), "31/12/2017","Date de replacement OK");
@@ -389,23 +394,26 @@ fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,
 fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-03,FR123456,19FRG000000000000002\n");
 fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-04,FR1234,19FRG000000000000003\n");
 fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,NONAPUREMENT,,,2019-06-04,FR12345678,19FRG000000000000004\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,DAADAC,debut,,,,20FRG9999900000000001\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,DAADAC,fin,,,,20FRG9999900000000002\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,DSADSAC,debut,,,,123450\n");
+fwrite($temp, "ANNEXE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,,,DSADSAC,fin,,,,123460\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,100,,,,\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_fin,fin,100,,,,\n");
 fclose($temp);
 $drm9 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5);
 $drm9->teledeclare = true;
 $import = new DRMImportCsvEdi($tmpfname, $drm9);
--$t->ok(!$import->checkCSV(), "Repère bien l'erreur sur le non appurement");
-$t->is(count($import->getCsvDoc()->erreurs), 2, "a bien que les erreurs de accises/bureau de douane");
+$t->ok(!$import->checkCSV(), "Repère bien l'erreur sur le non appurement");
+$t->is(count($import->getCsvDoc()->erreurs), 4, "a bien que les erreurs de accises/bureau de douane et le warning relatif au DAE");
 foreach($import->getCsvDoc()->erreurs as $k => $err) {
-    if (!preg_match("/Le numéro d'accise du destinataire est mal formatté/", $err->diagnostic)) {
-        $t->ok(false, $err->diagnostic);
+    if (!preg_match("/Le numéro d'accise du destinataire est mal formatté/", $err->diagnostic) && !preg_match("/DAE/", $err->diagnostic)) {
+        $t->ok(false, "Erreur non voulue lors de l'import : ".$err->diagnostic);
     }
 }
 
 $import->importCSV();
 $drm9->save();
-
 $t->is(count($drm9->releve_non_apurement), 3, "releve de non apurement présent");
 $t->is($drm9->releve_non_apurement["19FRG000000000000000"]->getDateEmission(true), '2019-06-01', "la 1ere date est bonne");
 $t->is($drm9->releve_non_apurement["19FRG000000000000001"]->getDateEmission(true), '2019-06-02', "la 2de date est bonne");
@@ -417,6 +425,10 @@ foreach ($drm9->crds as $k1 => $coul) {
         $t->is($crd->couleur, 'DEFAUT', "sans couleur, la CRD couleur par défaut est DEFAUT");
     }
 }
+$t->ok(!$drm9->documents_annexes->exist('DAADAC'), "Les numéros de DAE ne sont bien pas enregistrés en annexes");
+$t->ok($drm9->documents_annexes->exist('DSADSAC'), "Enregistrement des documents d'accompagnement papier");
+$t->is($drm9->documents_annexes->DSADSAC->debut, 123450, 'DSA debut est bon');
+$t->is($drm9->documents_annexes->DSADSAC->fin, 123460, 'DSA fin est bon');
 
 unlink($tmpfname);
 
@@ -485,13 +497,13 @@ $drm11->delete();
 
 if($application == "ivso") {
     $periode5 = date('Y')."04";
-    $t->comment("Reconnaissance du Floc Gascogne pour IVSO");
+    $t->comment("Reconnaissance du Floc de Gascogne pour IVSO");
 
     $temp = fopen($tmpfname, "w");
     fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,stocks_debut,initial,0,,,,,,\n");
     fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,entrees,achatcrd,100,,,,,,\n");
     fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,sorties,ventefrancecrd,100,,,,,,\n");
-    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,complement,TAV,20,,,,,,\n");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",AUTRES_PI_INF_18,,,,,,,,Floc de Gascogne Blanc - 17°,suspendu,complement,TAV,17,,,,,,\n");
     fclose($temp);
 
     $drm10 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5, true);
@@ -502,5 +514,50 @@ if($application == "ivso") {
     foreach($details as $detail) {
     }
 
-    $t->is($detail->getLibelle(), "Floc de Gascogne Blanc - 20°", "Reconnaissance du produit");
+    $t->is($detail->getLibelle(), "Floc de Gascogne Blanc - 17°", "Reconnaissance du produit");
+} elseif($application == "bivc") {
+    $periode5 = date('Y')."04";
+    $t->comment("création vrac");
+
+    $temp = fopen($tmpfname, "w");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,sorties,creationvractirebouche,50,,,,450,".$nego->no_accises.",".$nego->raison_sociale."\n");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,sorties,creationvractirebouche,50,,-,\n");
+    fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,844,,,,,,\n");
+    fclose($temp);
+
+    $drm10 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5, true);
+    $drm10->teledeclare = true;
+    $drm10->save();
+    $t->comment("DRM id : ".$drm10->_id);
+    $import = new DRMImportCsvEdi($tmpfname, $drm10);
+    $import->checkCSV();
+    $t->is(count($import->getCsvDoc()->erreurs), 1, "a bien que une erreur d'absence d'acheteur");
+    if ($import->getCsvDoc()->hasErreurs()) {
+        foreach ($import->getCsvDoc()->erreurs as $k => $err) {
+            if (!preg_match('/acheteur doit être renseigné/', $err->diagnostic)) {
+                $t->ok(false, $err->diagnostic);
+            }
+        }
+    }
+    $import->importCSV();
+    $drm10->save();
+    $details = $drm10->getProduitsDetails();
+    foreach($details as $detail) {
+    }
+    $t->is($drm10->getProduit($produit1_hash, 'details')->get('stocks_debut/initial'), 944, "le stock initial est celui attendu");
+    $t->is($drm10->getProduit($produit1_hash, 'details')->get('sorties/creationvractirebouche'),50,"Vrac tiré bouché");
+    $t->is($drm10->getProduit($produit1_hash, 'details')->get('stocks_fin/final'), 894, "le stock final est celui attendu");
+    $t->ok($drm10->getProduit($produit1_hash, 'details')->exist('sorties/creationvractirebouche_details'), "details créé");
+    $i = 0;
+    foreach($drm10->getProduit($produit1_hash, 'details')->get('sorties/creationvractirebouche_details') as $drmid => $v) {
+        $i++;
+        if ($i == 1) {
+            $t->is($v->volume, 50, "volume du contrat ".$i." est ok");
+            $t->is($v->acheteur, $nego->identifiant, "l'acheteur 1 a bien été reconnu (".$nego->no_accises.")");
+            $t->is($v->prixhl, 450, "le prix du contrat de l'acheteur 1 a bien été reconnu");
+        }else{
+            $t->ok(false, "l'absence de l'acheteur 2 ne doit pas être enregistré");
+        }
+    }
 }
