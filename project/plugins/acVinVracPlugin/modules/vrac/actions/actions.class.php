@@ -567,6 +567,7 @@ class vracActions extends sfActions {
     }
 
     public function executeVisualisation(sfWebRequest $request) {
+        ini_set('memory_limit', '2048M');
         $this->getUser()->setAttribute('vrac_object', null);
         $this->getUser()->setAttribute('vrac_acteur', null);
         $this->vrac = $this->getRoute()->getVrac();
