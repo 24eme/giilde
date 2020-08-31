@@ -12,15 +12,6 @@ class DRMCalendrier {
     protected $transmises = null;
     protected $coherentes = null;
 
-    const VIEW_INDEX_ETABLISSEMENT = 0;
-    const VIEW_CAMPAGNE = 1;
-    const VIEW_PERIODE = 2;
-    const VIEW_VERSION = 3;
-    const VIEW_MODE_SAISIE = 4;
-    const VIEW_STATUT = 5;
-    const VIEW_STATUT_DOUANE_ENVOI = 6;
-    const VIEW_STATUT_DOUANE_ACCUSE = 7;
-    const VIEW_NUMERO_ARCHIVAGE = 8;
     const STATUT_EN_COURS_NON_TELEDECLARE = 'STATUT_EN_COURS_NON_TELEDECLARE';
     const STATUT_NOUVELLE = 'NOUVELLE';
     const STATUT_NOUVELLE_BLOQUEE = 'NOUVELLE BLOQUÉE';
@@ -82,8 +73,8 @@ class DRMCalendrier {
             foreach ($this->periodes as $periode) {
                 $drm = DRMClient::getInstance()->viewMasterByIdentifiantPeriode($etbIdentifiant, $periode);
                 $this->drms[$etbIdentifiant][$periode] = $drm;
-                $this->transmises[$etbIdentifiant][$periode] = ($drm[10] == 'SUCCESS');
-                $this->coherentes[$etbIdentifiant][$periode] = $drm[12];
+                $this->transmises[$etbIdentifiant][$periode] = (isset($drm[DRMAllView::KEY_TRANSMISSION]) && ($drm[DRMAllView::KEY_TRANSMISSION] == 'SUCCESS'));
+                $this->coherentes[$etbIdentifiant][$periode] = (isset($drm[DRMAllView::KEY_COHERENTE]) && $drm[DRMAllView::KEY_COHERENTE]);
             }
         }
     }
@@ -109,7 +100,7 @@ class DRMCalendrier {
 
         $drm = $this->drms[$etablissement->identifiant][$periode];
 
-        return DRMClient::getInstance()->buildPeriodeAndVersion($drm[self::VIEW_PERIODE], $drm[self::VIEW_VERSION]);
+        return DRMClient::getInstance()->buildPeriodeAndVersion($drm[DRMAllView::KEY_PERIODE], $drm[DRMAllView::KEY_VERSION]);
     }
 
     public function getPeriodes() {
@@ -140,7 +131,7 @@ class DRMCalendrier {
 
         $drm = $this->drms[$this->etablissement->identifiant][$periode];
 
-        return DRMClient::getInstance()->buildId($drm[self::VIEW_INDEX_ETABLISSEMENT], $drm[self::VIEW_PERIODE], $drm[self::VIEW_VERSION]);
+        return DRMClient::getInstance()->buildId($drm[DRMAllView::KEY_INDEX_ETABLISSEMENT], $drm[DRMAllView::KEY_PERIODE], $drm[DRMAllView::KEY_VERSION]);
     }
 
     public function getPeriodeLibelle($periode) {
@@ -197,7 +188,6 @@ class DRMCalendrier {
             foreach ($periodes as $periode) {
                 $statut = $this->computeStatut($periode, $etablissement);
                 if ($this->isTeledeclarationMode) {
-                    $drm = $this->drms[$etbIdentifiant][$periode];
                     if (($statut === self::STATUT_VALIDEE) || ($statut === self::STATUT_EN_COURS)) {
                         $hasteledeclaree = true;
                     } else if (!$hasteledeclaree) {
@@ -229,7 +219,7 @@ class DRMCalendrier {
 
         $drm = $this->drms[$etablissement->identifiant][$periode];
 
-        if ($drm[self::VIEW_STATUT]) {
+        if ($drm[DRMAllView::KEY_DATE_SAISIE]) {
             $drm = DRMClient::getInstance()->findMasterByIdentifiantAndPeriode($etablissement->identifiant, $periode);
             if (!$drm->isTeledeclare()) {
                 return self::STATUT_VALIDEE_NON_TELEDECLARE;
@@ -276,6 +266,17 @@ class DRMCalendrier {
         return DRMClient::getInstance()->findMasterByIdentifiantAndPeriode($etablissement->identifiant, $periode)->isTeledeclare();
     }
 
+    public function isImportee($periode, $etablissement = false) {
+        if (!$etablissement) {
+            $etablissement = $this->etablissement;
+        }
+        if (!$this->hasDRM($periode, $etablissement)) {
+            return;
+        }
+        $drm = $this->drms[$etablissement->identifiant][$periode];
+        return $drm[DRMAllView::KEY_TYPE_CREATION];
+    }
+
     public function getNumeroArchive($periode, $etablissement =  false) {
         if (!$etablissement) {
             $etablissement = $this->etablissement;
@@ -284,7 +285,7 @@ class DRMCalendrier {
             return;
         }
         $drm = $this->drms[$etablissement->identifiant][$periode];
-        return $drm[self::VIEW_NUMERO_ARCHIVAGE];
+        return $drm[DRMAllView::KEY_NUMERO_ARCHIVAGE];
     }
 
     public function getDRM($periode, $etablissement = null) {

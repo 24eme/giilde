@@ -239,11 +239,13 @@ class StatistiqueStatsFilterForm extends BaseForm
 			}else{
 				unset($values['doc.mouvements.produit_hash']);
 			}
-
+			$statName = $values['statistiques'];
     	unset($values['statistiques'], $values['lastyear'], $values['pdf'], $values['doc.mouvements.date/from'], $values['doc.mouvements.date/to'], $values['doc.date_campagne/from'], $values['doc.date_campagne/to']);
     	$rangeFields = self::$rangeFields;
+
     	$filters = $this->getQueryFilters($statistique);
     	$nbFilters = count($filters);
+
     	foreach ($values as $field => $value) {
     		if (in_array($field, $rangeFields)) {
     			$range = array('format' => 'yyyy-MM-dd');
@@ -268,6 +270,25 @@ class StatistiqueStatsFilterForm extends BaseForm
     			$nbFilters++;
     		}
     	}
+
+			if(in_array($statName,array('prix'))){
+				if(!isset($filters)){
+					$filters = array();
+				}
+
+				 $should_prix = array();
+				 $should_prix[] = array('term' => array("doc.vendeur.famille" => "PRODUCTEUR"));
+				 $should_prix[] = array('term' => array("doc.vendeur.famille" => "COOPERATIVE"));
+				 $must_not_prix = array('term' => array("doc.interne"=> "1"));
+
+
+
+				$prix_bool = array("bool" => array('should' => $should_prix, 'must_not' => $must_not_prix));
+				$filters[] = $prix_bool;
+				$nbFilters++;
+			}
+
+
     	return ($nbFilters > 0)? ($nbFilters > 1)? array('filtered' => array('filter' => array('and' => $filters))) : array('filtered' => array('filter' => current($filters))) : null;
     }
 
@@ -275,7 +296,7 @@ class StatistiqueStatsFilterForm extends BaseForm
     {
     	return (isset($this->config['statistiques'][$statistique]) && isset($this->config['statistiques'][$statistique]['query_filters']))? array($this->config['statistiques'][$statistique]['query_filters']) : array();
     }
-    
+
     public function getStatistiquesConf()
     {
     	$values = $this->getValues();

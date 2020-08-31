@@ -11,7 +11,7 @@ class DRMHistorique {
     const VIEW_CAMPAGNE = 1;
     const VIEW_PERIODE = 2;
     const VIEW_VERSION = 3;
-    const VIEW_MODE_DE_DAISIE = 4;
+    const VIEW_TYPE_CREATION = 4;
     const VIEW_STATUT = 5;
     const VIEW_STATUT_DOUANE_ENVOI = 6;
     const VIEW_STATUT_DOUANE_ACCUSE = 7;
@@ -99,7 +99,7 @@ class DRMHistorique {
         $drm->campagne = $ligne[self::VIEW_CAMPAGNE];
         $drm->periode = $ligne[self::VIEW_PERIODE];
         $drm->version = $ligne[self::VIEW_VERSION];
-        $drm->mode_de_saisie = $ligne[self::VIEW_MODE_DE_DAISIE];
+        $drm->type_creation = $ligne[self::VIEW_TYPE_CREATION];
         $drm->valide = new stdClass();
         $drm->valide->date_saisie = $ligne[self::VIEW_STATUT];
         $drm->douane = new stdClass();

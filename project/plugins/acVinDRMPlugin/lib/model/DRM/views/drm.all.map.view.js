@@ -17,5 +17,5 @@ function(doc) {
     	coherente = doc.transmission_douane.coherente;
     	diff = doc.transmission_douane.diff;
     }
-    emit([doc.identifiant, doc.campagne, doc.periode, doc.version, doc.mode_de_saisie, doc.valide.date_saisie, doc.douane.envoi, doc.douane.accuse, doc.numero_archive, doc.teledeclare, transmission, horodatage, coherente, diff], 1);
+    emit([doc.identifiant, doc.campagne, doc.periode, doc.version, doc.type_creation, doc.valide.date_saisie, doc.douane.envoi, doc.douane.accuse, doc.numero_archive, doc.teledeclare, transmission, horodatage, coherente, diff], 1);
 }

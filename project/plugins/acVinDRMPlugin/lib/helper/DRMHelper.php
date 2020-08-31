@@ -137,6 +137,11 @@ function getTeledeclareeLabelCalendrier($isTeledeclarationMode, $calendrier, $pe
         return  '(Télédéclarée)';
     }
 
+    if ($calendrier->isImportee($periode)) {
+
+        return  '(Importée)';
+    }
+
     if ($isTeledeclarationMode) {
 
         return '';

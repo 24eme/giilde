@@ -15,7 +15,16 @@
     <div class="col-xs-12">
 
 
-        <h3 style="margin-bottom: 30px">DRM <?php echo getFrPeriodeElision($drm->periode); ?> <?php if ($drm->isTeledeclare()): ?><small>(Validée le <?php echo format_date($drm->valide->date_signee, "dd/MM/yyyy", "fr_FR"); ?>)</small><?php endif; ?>
+        <h3 style="margin-bottom: 30px">DRM <?php echo getFrPeriodeElision($drm->periode); ?>
+            <small>
+                <?php if ($drm->isTeledeclare()): ?>
+                    (Validée le <?php echo format_date($drm->valide->date_signee, "dd/MM/yyyy", "fr_FR"); ?>)
+                <?php elseif ($drm->isImport()): ?>
+                    (Importée le <?php echo format_date($drm->valide->date_signee, "dd/MM/yyyy", "fr_FR"); ?>)
+                <?php else: ?>
+                    (Saisie interne le <?php echo format_date($drm->valide->date_saisie, "dd/MM/yyyy", "fr_FR"); ?>)
+                <?php endif; ?>
+            </small>
         <?php if (!$isTeledeclarationMode || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())): ?>
             <div class="pull-right">
                 <?php if ($drm->isReouvrable()): ?>

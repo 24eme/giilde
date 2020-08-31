@@ -66,7 +66,7 @@ class DRMCsvFile extends CsvFile
   const CSV_COL_DETAIL_STOCKFIN_COMMERCIALISABLE = 56;
   const CSV_COL_DETAIL_DATEDESIGNATURE = 57;
   const CSV_COL_DETAIL_DATEDESAISIE = 58;
-  const CSV_COL_DETAIL_MODEDESAISIE = 59;
+  const CSV_COL_DETAIL_TYPECREATION = 59;
   const CSV_COL_DETAIL_CVO_TAUX = 60;
   const CSV_COL_DETAIL_CVO_VOLUME = 61;
   const CSV_COL_DETAIL_CVO_PRIX = 62;
@@ -158,7 +158,7 @@ class DRMCsvFile extends CsvFile
       $line[self::CSV_COL_DETAIL_CVO_PRIX] = $line[self::CSV_COL_DETAIL_CVO_TAUX] * $line[self::CSV_COL_DETAIL_CVO_VOLUME];
       $line[self::CSV_COL_DETAIL_DATEDESAISIE] = $d->getDocument()->valide->date_saisie;
       $line[self::CSV_COL_DETAIL_DATEDESIGNATURE] = $d->getDocument()->valide->date_signee;
-      $line[self::CSV_COL_DETAIL_MODEDESAISIE] = $d->getDocument()->mode_de_saisie;
+      $line[self::CSV_COL_DETAIL_TYPECREATION] = $d->getDocument()->type_creation;
       $line[self::CSV_COL_DETAIL_IDDRMDECLARVIN] = $d->getDocument()->_id;
       $line[self::CSV_COL_DETAIL_ID_ETABLISSEMENT_INTERNE] = $d->getDocument()->getEtablissement()->num_interne;
       $csv->csvdata[] = $line;
