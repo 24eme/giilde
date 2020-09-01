@@ -37,6 +37,11 @@ class drm_validationActions extends drmGeneriqueActions {
         }
         $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);
 
+        if (! $request->isMethod(sfWebRequest::POST)) {
+            $this->drm->updateControles();
+            $this->drm->save();
+        }
+
         $this->drm->cleanDeclaration();
 
         if ($this->isTeledeclarationMode) {
@@ -69,8 +74,6 @@ class drm_validationActions extends drmGeneriqueActions {
         $this->isUsurpationMode = $this->isUsurpationMode();
 
         if (!$request->isMethod(sfWebRequest::POST)) {
-            $this->drm->save();
-
             $this->form = new DRMValidationCommentaireForm($this->drm);
             return sfView::SUCCESS;
         }
