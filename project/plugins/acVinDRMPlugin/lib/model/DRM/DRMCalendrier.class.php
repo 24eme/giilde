@@ -285,7 +285,7 @@ class DRMCalendrier {
             return;
         }
         $drm = $this->drms[$etablissement->identifiant][$periode];
-        return $drm[DRMAllView::KEY_NUMERO_ARCHIVAGE];
+        return $drm[DRMAllView::KEY_NUMERO_ARCHIVE];
     }
 
     public function getDRM($periode, $etablissement = null) {
