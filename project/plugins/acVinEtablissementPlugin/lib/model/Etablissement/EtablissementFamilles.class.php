@@ -23,6 +23,7 @@ class EtablissementFamilles
 
     protected static $familles = array(
     	self::FAMILLE_PRODUCTEUR => "Producteur",
+        self::FAMILLE_PRODUCTEUR_VINIFICATEUR => "Producteur Vinificateur",
     	self::FAMILLE_NEGOCIANT => "Négociant",
     	self::FAMILLE_COOPERATIVE => "Coopérative",
     	self::FAMILLE_COURTIER => "Courtier",

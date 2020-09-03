@@ -15,7 +15,7 @@
 			<annee><?php echo $drm->getAnnee() ?></annee>
 		</periode>
 		<declaration-neant><?php echo ($drm->declaration->hasStockEpuise())? "true" : "false"; ?></declaration-neant>
-<?php if (!$drm->declaration->hasStockEpuise()): ?>
+<?php if (!$drm->declaration->hasStockEpuise() || $drm->isMoisOuvert()): ?>
 		<droits-suspendus>
 <?php foreach (xmlGetProduitsDetails($drm, true, DRM::DETAILS_KEY_SUSPENDU) as $produit):	?>
 			<produit>

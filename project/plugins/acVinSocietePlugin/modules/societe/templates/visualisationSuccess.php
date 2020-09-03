@@ -78,7 +78,7 @@
                     <p><?php if ($societe->getMasterCompte()->exist('droits')): ?>
                             <strong>Droits :</strong>
                             <?php foreach ($societe->getMasterCompte()->getDroits() as $droit) : ?>
-                                <label class="label label-default"><?php echo Roles::$teledeclarationLibelles[$droit]; ?></label>
+                                <label class="label label-default"><?php echo isset(Roles::$teledeclarationLibelles[$droit]) ? Roles::$teledeclarationLibelles[$droit] : $droit; ?></label>
                             <?php endforeach; ?>
                 <?php endif; ?></p>
                 </div>

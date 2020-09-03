@@ -18,6 +18,9 @@ class CompteClient extends acCouchdbClient {
     }
 
     public function getId($identifiant) {
+        if (! ($identifiant * 1)) {
+            return 'COMPTE-' . $identifiant;
+        }
         return 'COMPTE-' . sprintf('%08d', $identifiant);
     }
 

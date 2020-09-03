@@ -131,7 +131,7 @@ class DRMCalendrier {
 
         $drm = $this->drms[$this->etablissement->identifiant][$periode];
 
-        return DRMClient::getInstance()->buildId($drm[DRMAllView::KEY_INDEX_ETABLISSEMENT], $drm[DRMAllView::KEY_PERIODE], $drm[DRMAllView::KEY_VERSION]);
+        return DRMClient::getInstance()->buildId($drm[DRMAllView::KEY_ETABLISSEMENT_IDENTIFIANT], $drm[DRMAllView::KEY_PERIODE], $drm[DRMAllView::KEY_VERSION]);
     }
 
     public function getPeriodeLibelle($periode) {
