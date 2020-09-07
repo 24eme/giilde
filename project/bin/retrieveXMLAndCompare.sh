@@ -21,7 +21,9 @@ cat /tmp/retrieveXML.$$.url | sort -r | while read url ; do
 done
 
 if test "$2" && test -d $(dirname $2) ; then
-    cat /tmp/retrieveXML.$$.url | awk -F '_' '{print $4 * 1 + 1}' | sort  | tail -n 1 | sed 's/\(....\)\(..\)\(..\)/\1-\2-\3/' > $2".tmp"
+    cat /tmp/retrieveXML.$$.url | awk -F '_' '{print $4 * 1 }' | sort  | tail -n 1 > $2".lastdate.tmp";
+    LASTDATE=$(cat $2".lastdate.tmp");
+    echo $(date -d "$LASTDATE +1 days" +'%Y%m%d') > $2".tmp"
     if test -s $2".tmp"; then
 	    mv $2".tmp" $2
     fi

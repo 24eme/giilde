@@ -230,6 +230,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             }
 
             if (! $this->isMoisOuvert() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
+                $p->stocks_debut->revendique = $produit->total_revendique;
                 $p->stocks_debut->initial = $produit->total;
                 $p->produit_libelle = $produit->produit_libelle;
                 $p->code_inao = $produit->code_inao;
@@ -242,6 +243,11 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
                 if (DRMConfiguration::getInstance()->isRepriseStocksChangementCampagne() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
                     $stock = $crd->stock_fin;
                 }
+
+                if (! $this->isMoisOuvert() && $drm->periode == DRMClient::getPeriodePrecedente($this->periode)) {
+                    $stock = $crd->stock_fin;
+                }
+
                 $crdNode = $this->getOrAdd('crds')->getOrAdd($regime)->getOrAddCrdNode($crd->genre, $crd->couleur, $crd->centilitrage, $crd->detail_libelle, $stock, true);
                 if($crdNode->stock_debut && !$crdNode->stock_fin){
                     $crdNode->stock_fin = $crdNode->stock_debut;
@@ -253,6 +259,8 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             $this->precedente = $drm->_id;
             $this->document_precedent = null;
         }
+
+        $this->update();
     }
 
     public function generateSuivanteByPeriode($periode, $isTeledeclarationMode = false) {
@@ -1969,7 +1977,7 @@ private function switchDetailsCrdRegime($produit,$newCrdRegime, $typeDrm = DRM::
           return $node_details_or_cepage;
         }
       }
-      throw new sfException("La Hash du mvt $hash_detail_or_cepage n'a pas été trouvée dans la DRM");
+      throw new sfException("La Hash du mvt $hash_details_or_cepage n'a pas été trouvée dans la DRM");
     }
 
     public function hasExportableProduitsAcquittes(){
