@@ -511,6 +511,7 @@ class DRMImportCsvEdi extends DRMCsvEdi {
                         continue;
                     }
               if (!$this->drmPrecedente->exist($this->cache[$cacheid]->getCepage()->getHash())
+                 || !$this->drmPrecedente->get($this->cache[$cacheid]->getCepage()->getHash())->exist($this->cache2datas[$cacheid]['details_type'])
                  || !$this->drmPrecedente->get($this->cache[$cacheid]->getCepage()->getHash())->getDetailsNoeud($this->cache2datas[$cacheid]['details_type'])
                  || !$this->drmPrecedente->get($this->cache[$cacheid]->getCepage()->getHash())->getDetailsNoeud($this->cache2datas[$cacheid]['details_type'])->exist($this->cache[$cacheid]->getKey())
                  ) {
