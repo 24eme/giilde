@@ -41,18 +41,50 @@ class DRMReecritureJuilletAoutTask extends sfBaseTask
 
             try {
                 $detail_aout = $drm_aout->getDetailsByHash($hash_prec);
+                echo 'HASH TROUVÉE: '.$hash_prec.PHP_EOL;
             } catch (sfException $e) {
                 echo $e->getMessage().PHP_EOL;
                 continue;
             }
 
-            if ($detail->getProduitLibelle() !== $detail_aout->getProduitLibelle()) {
+            if ($detail->getProduitLibelle() !== $detail_aout->getProduitLibelle()
+                || $detail->getCodeInao() !== $detail_aout->getCodeInao()) {
+                echo 'UPDATE : '. $hash_prec . ' :'.PHP_EOL;
                 echo 'update : '. $detail_aout->getProduitLibelle() . ' -> '.$detail->getProduitLibelle().PHP_EOL;
                 $detail_aout->produit_libelle = $detail->getProduitLibelle();
                 $detail_aout->code_inao = $detail->getCodeInao();
             }
 
             $drm_aout->update();
+            echo 'Fin UPDATE : '. $hash_prec . ' :'.PHP_EOL.PHP_EOL;
+        }
+
+        echo PHP_EOL.'Parcours des non trouvés :'.PHP_EOL;
+
+        foreach ($unknowns as $detail) {
+            echo 'On cherche : '.$detail->getProduitLibelle().PHP_EOL;
+            foreach ($drm_aout->getProduitsDetails() as &$aout_detail) {
+                if ($aout_detail->denomination_complementaire == $detail->denomination_complementaire
+                    && $aout_detail->getCepage()->getHash() == $detail->getCepage()->getHash()
+                    && $aout_detail->tav == $detail->tav) {
+
+                    echo 'CANDIDAT: '.PHP_EOL;
+                    echo $aout_detail->denomination_complementaire." == \n".$detail->denomination_complementaire."\n";
+                    echo $aout_detail->getCepage()->getHash().' == '."\n".$detail->getCepage()->getHash().PHP_EOL;
+                    echo $aout_detail->tav.' == '.$detail->tav.PHP_EOL;
+
+                    echo 'update : '. $aout_detail->getProduitLibelle() . ' -> ' . $detail->getProduitLibelle().PHP_EOL;
+                    echo 'hash : '. $aout_detail->getHash() . ' -> ' . $detail->getHash().PHP_EOL;
+                    echo PHP_EOL;
+
+                    $aout_detail->produit_libelle = $detail->getProduitLibelle();
+                    $aout_detail->code_inao = $detail->getCodeInao();
+                    $drm_aout->update();
+
+                    continue;
+                }
+            }
+            echo PHP_EOL.'On passe au suivant'.PHP_EOL;
         }
 
         $drm_aout->save();

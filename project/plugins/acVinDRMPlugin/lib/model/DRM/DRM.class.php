@@ -862,7 +862,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             return false;
         } elseif ($this->getPrecedente() && $this->getPrecedente()->isNew()) {
             return false;
-        } elseif ($this->isDebutCampagne()) {
+        } elseif ($this->isMoisOuvert()) {
             return false;
         }
 
