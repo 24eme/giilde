@@ -245,7 +245,7 @@ class VracMarcheForm extends VracForm {
         if ($date->format('m') < 8) {
             $annee--;
         }
-        $stop = $annee - 15;
+        $stop = $annee - 20;
         while ($annee >= $stop) {
             $this->millesimes[$annee] = '' . $annee;
             $annee--;
