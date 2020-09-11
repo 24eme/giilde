@@ -403,6 +403,10 @@ class DRMImportCsvEdi extends DRMCsvEdi {
           unset($this->cache[$cacheid]);
 
       }
+
+        if($this->drm->isMoisOuvert()) {
+          return;
+        }
       //on prépare les vérifications
       $check = array();
       foreach ($this->cache as $cacheid => $produit) {
@@ -522,8 +526,6 @@ class DRMImportCsvEdi extends DRMCsvEdi {
 
 	      if($new_hash) {
               $detail = $this->drm->getOrAdd($new_hash);
-              $detail->getParent()->createESDetails($detail);
-              $detail->denomination_complementaire = $this->cache2datas[$cacheid]['denomination_complementaire'];
               $this->cache[$cacheid] = $detail;
               $this->cache2datas[$cacheid][self::CSV_CAVE_VOLUME] = $this->convertNumber($this->cache2datas[$cacheid][self::CSV_CAVE_VOLUME]);
               $this->cache2datas[$cacheid]['founded_produit'] = $this->cache[$cacheid]->getConfig();
@@ -558,8 +560,6 @@ class DRMImportCsvEdi extends DRMCsvEdi {
               }
           }
 	      $detail = $this->drm->getOrAdd($cepagedenomtav[$id_cepagedenomtav]);
-          $detail->denomination_complementaire = $this->cache2datas[$cacheid]['denomination_complementaire'];
-          $detail->getParent()->createESDetails($detail);
           $this->cache[$cacheid] = $detail;
           $this->cache2datas[$cacheid]['founded_produit'] = $this->cache[$cacheid]->getConfig();
           $this->cache2datas[$cacheid]['hash'] = $this->cache2datas[$cacheid]['founded_produit']->getHash();
