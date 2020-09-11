@@ -4,7 +4,7 @@
     <?php else: ?>
     <h2>Rapport d'erreurs de l'import de la DRM</h2>
     <?php endif; ?>
-    <?php if (count($csvDoc->erreurs)): ?>
+    <?php if (count($erreurs)): ?>
     <table class="table table-bordered table-condensed table-striped">
         <thead>
             <tr>
