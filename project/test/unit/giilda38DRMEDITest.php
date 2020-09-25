@@ -104,7 +104,7 @@ $import = new DRMImportCsvEdi($tmpfname, $drm);
 $t->ok($import->checkCSV(), "Vérification de l'import");
 if ($import->getCsvDoc()->hasErreurs()) {
     foreach ($import->getCsvDoc()->erreurs as $k => $err) {
-        $t->ok(false, $err->diagnostic);
+        $t->ok(false, $err->diagnostic.":".$err->num_ligne);
     }
 }
 

@@ -74,7 +74,9 @@ class drm_xmlActions extends drmGeneriqueActions {
     if(!$this->drm->isValidee()){
         return $this->redirect('drm_validation', $this->drm);
     }
-
+    //Si l'algo du diff a changé, le coherente n'a pas changé alors qu'il devrait.
+    //Si on ne recharge pas la DRM, il y a un update conflict
+    $this->drm = DRMClient::getInstance()->find($this->drm->_id);
     if ($this->drm->exist('transmission_douane/coherente') && $this->drm->exist('transmission_douane/success') && $this->drm->transmission_douane->success && !$this->drm->transmission_douane->coherente && $this->drm->areXMLIdentical()) {
         $this->drm->getOrAdd('transmission_douane')->add("coherente", true);
         $this->drm->save();
@@ -103,11 +105,11 @@ class drm_xmlActions extends drmGeneriqueActions {
 
   public function executeSuccessTrue(sfWebRequest $request) {
       $drm = $this->getRoute()->getDRM();
-      if ($drm->exist('transmission_douane')) {
-          $drm->transmission_douane->success = true;
-          $drm->save();
-      }
-      return $this->redirect('drm_redirect_etape', $drm);
+      $drm->initTransmission();
+      $drm->transmission_douane->success = true;
+      $drm->save();
+
+      return $this->redirect('drm_visualisation', $drm);
   }
 
   public function executeRetourIgnore(sfWebRequest $request) {

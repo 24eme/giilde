@@ -68,7 +68,7 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 		$lastItem = (count($items) <= $i );
 		?>
 		<?php if ($isTotal): ?> \hline
-			<?php echo implode(' & ', $values); ?> <?php if (!$lastItem): ?> \tabularnewline <?php endif; ?>\hline  <?php else: ?><?php  echo implode(' & ', $values); ?>  \tabularnewline <?php endif; ?>
+			\rowcolor{gray!40} <?php echo implode(' & ', $values); ?> <?php if (!$lastItem): ?> \tabularnewline <?php endif; ?>\hline  <?php else: ?><?php  echo implode(' & ', $values); ?>  \tabularnewline <?php endif; ?>
 <?php  endforeach;?>
 \end{tabularx}
 \end{table}

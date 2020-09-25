@@ -242,7 +242,7 @@ $details->sorties->manquant = 1;
 $details->sorties->destructionperte = 2;
 $details->sorties->transfertsrecolte = 10;
 
-$prixHt = round($details->entrees->recolte / 12 * 2, 2) * $details->getCVOTaux() - round($details->sorties->manquant * $details->getCVOTaux(), 2) - round($details->sorties->destructionperte * $details->getCVOTaux(), 2);
+$prixHt = round(round($details->entrees->recolte / 12, 2) * 2, 2) * $details->getCVOTaux() - round($details->sorties->manquant * $details->getCVOTaux(), 2) - round($details->sorties->destructionperte * $details->getCVOTaux(), 2);
 if ($details->sorties->exist('vrac_details')) {
     $vrac_detail = DRMESDetailVrac::freeInstance($drm);
     $vrac_detail->identifiant = $vrac->_id;

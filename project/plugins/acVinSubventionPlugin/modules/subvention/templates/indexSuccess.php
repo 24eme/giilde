@@ -18,15 +18,14 @@
             <tr>
               <th>Société</th>
               <th>Subvention</th>
-              <th style="width: 110px;">Date création</th>
+              <th style="width: 110px;">Date modif</th>
               <th class="text-center">Statut</th>
               <th class="text-center">Documents</th>
               <th class="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($subventions as $subventionNom => $subventionsDate): ?>
-              <?php foreach ($subventionsDate as $date => $subvention): ?>
+            <?php foreach ($subventions as $date => $subvention): ?>
                 <tr>
                   <td class="">
                     <span><?php echo $subvention->declarant->raison_sociale; ?></span>
@@ -58,7 +57,6 @@
                     <a href="<?php echo url_for('subvention_etablissement',array('identifiant' => $subvention->identifiant)); ?>" class="btn btn-xs btn-default btn-block">Voir le dossier</a>
                   </td>
                 </tr>
-              <?php endforeach ?>
             <?php endforeach ?>
           </tbody>
         </table>

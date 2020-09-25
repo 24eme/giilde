@@ -2,6 +2,11 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
+if(!SV12Configuration::getInstance()->isActif()) {
+    $t = new lime_test(0);
+    exit;
+}
+
 $t = new lime_test(3);
 $nego =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region_2')->getEtablissement();
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti')->getEtablissement();

@@ -134,7 +134,7 @@ class DRMCielCompare
 					continue;
 				}
 				if (preg_match($patternProduit, $key) && preg_match('/libelle-personnalise/i', $key)) {
-					$newKeyProduit .= '_'.KeyInflector::slugifyCaseSensitive($value);
+					$newKeyProduit .= '_'.$value;
 					continue;
 				}
 				if (preg_match($patternCrd, $key) && preg_match('/categorie-fiscale-capsules/i', $key)) {

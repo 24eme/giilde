@@ -2,13 +2,15 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(86);
+$t = new lime_test(107);
 
 $nego2 =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region_2')->getEtablissement();
 if (!$nego2->hasRegimeCrd()) {
     $nego2->crd_regime = EtablissementClient::REGIME_CRD_PERSONNALISE;
     $nego2->save();
 }
+$nego2->remove('mois_stock_debut');
+$nego2->save();
 
 $produits = array_keys(ConfigurationClient::getInstance()->getCurrent()->getProduits());
 $produit_hash = array_shift($produits);
@@ -159,6 +161,8 @@ $details = $drm->get($produit_hash.'/details/DEFAUT');
 $t->ok($details->canSetStockDebutMois(), "Le stock début est éditable");
 $details->stocks_debut->initial = 3000;
 $details->sorties->ventefrancecrd = 100;
+$details->code_inao = "TEST";
+$details->produit_libelle = "Test Libelle";
 $drm->update();
 $drm->save();
 $drm->validate();
@@ -166,6 +170,7 @@ $drm->save();
 
 $t->is($details->stocks_fin->final, 2900, "Le stock de fin de mois est cohérent");
 $t->is(count(DRMClient::getInstance()->generateVersionCascade($drm)), 0, "La génération en cascade impacte aucune DRM");
+
 $drm06Id = $drm->_id;
 
 
@@ -178,6 +183,8 @@ $drm->save();
 $t->is($drm->_get('precedente'), $drm06Id, "La drm précédente est stocké");
 $t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est bien conservé");
 $t->ok($drm->isTeledeclare(), "La drm est télédéclaré");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->code_inao, "TEST", "Le code INAO est conservé");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->produit_libelle, "Test Libelle", "Le libellé est conservé");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
 $t->ok(!$details->canSetStockDebutMois(), "Le stock début n'est pas éditable");
@@ -200,12 +207,17 @@ $drm->save();
 $t->is($drm->_get('precedente'), null, "La drm précédente n'est pas stocké");
 $t->ok($drm->isTeledeclare(), "La drm est télédéclaré");
 
+
 $details = $drm->get($produit_hash.'/details/DEFAUT');
 $t->ok($details->canSetStockDebutMois(), "Le stock début est éditable");
 $t->ok(!$drm->favoris->details->sorties->exist($favoris_first), "le retrait de la première sortie favorite est conservée malgré le changement de campagne");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->code_inao, null, "Le code INAO n'est pas repris");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->produit_libelle, $drm->get($produit_hash.'/details/DEFAUT')->getCepage()->getConfig()->getLibelleFormat(), "Le libellé n'est pas repris");
 
 $details->stocks_debut->initial = 1000;
 $details->sorties->ventefrancecrd = 50;
+$details->code_inao = "TEST";
+$details->produit_libelle = "Test Libelle";
 
 $drm->addProduit($produit2_hash, 'details');
 $details2 = $drm->get($produit2_hash.'/details/DEFAUT');
@@ -230,6 +242,8 @@ $drm->save();
 
 $t->is($drm->_get('precedente'), $drm08Id, "La drm précédente est stocké");
 $t->ok($drm->isTeledeclare(), "La drm est télédéclaré");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->code_inao, "TEST", "Le code INAO est conservé");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->produit_libelle, "Test Libelle", "Le libellé est conservé");
 
 $details = $drm->get($produit_hash.'/details/DEFAUT');
 $details->sorties->ventefrancecrd = 150;
@@ -356,3 +370,62 @@ $drm->save();
 
 $cascades = DRMClient::getInstance()->generateVersionCascade($drm);
 $t->ok(count($cascades) == 1 && $cascades[0] == $drm09Id."-M01", "La génération en cascade génère une modificatrice pour la DRM de septembre");
+
+$t->comment("Changement du mois de fin de stock à octobre");
+
+$nego2->add('mois_stock_debut', '10');
+$nego2->save();
+
+$t->comment("DRM d'octobre");
+
+$periode = (date('Y'))."10";
+$drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode, true);
+$drm->save();
+
+$t->ok($drm->canSetStockDebutMois(), "Le stock début est éditable");
+if(!DRMConfiguration::getInstance()->isRepriseStocksChangementCampagne()) {
+    $t->is($drm->get($produit_hash.'/details/DEFAUT')->stocks_debut->initial, null, "Le stock est vide");
+} else {
+    $t->is($drm->get($produit_hash.'/details/DEFAUT')->stocks_debut->initial, 750, "Le stock est repris");
+}
+$t->is($drm->_get('precedente'), null, "La DRM précédente doit être vide");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->code_inao, "TEST", "Le code INAO n'est pas repris");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->produit_libelle, "Test Libelle", "Le libellé n'est pas repris");
+
+$drm->get($produit_hash.'/details/DEFAUT')->stocks_debut->initial = 750;
+$drm->validate();
+$drm->save();
+
+$t->comment("DRM de juin");
+
+$periode = (date('Y') + 1)."06";
+$drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode, true);
+$drm->save();
+$drm->get($produit_hash.'/details/DEFAUT')->code_inao = "TEST";
+$drm->get($produit_hash.'/details/DEFAUT')->produit_libelle = "Test Libelle";
+$drm->validate();
+$drm->save();
+$t->ok($drm->canSetStockDebutMois(), "Le stock début est éditable");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->stocks_debut->initial, 750, "Le stock est repris");
+
+$t->comment("DRM de juillet");
+
+$periode = (date('Y') + 1)."07";
+$drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode, true);
+$drm->save();
+$drm->validate();
+$drm->save();
+$t->ok(!$drm->canSetStockDebutMois(), "Le stock début n'est pas éditable");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->stocks_debut->initial, 750, "Le stock est repris");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->code_inao, "TEST", "Le code INAO est conservé");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->produit_libelle, "Test Libelle", "Le libellé est conservé");
+
+$t->comment("DRM d'août");
+
+$periode = (date('Y') + 1)."08";
+$drm = DRMClient::getInstance()->createDoc($nego2->identifiant, $periode, true);
+$drm->save();
+$t->ok(!$drm->canSetStockDebutMois(), "Le stock début n'est pas éditable");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->stocks_debut->initial, 750, "Le stock est repris");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->code_inao, "TEST", "Le code INAO est repris");
+$t->is($drm->get($produit_hash.'/details/DEFAUT')->produit_libelle, "Test Libelle", "Le libellé est conservé");

@@ -129,6 +129,9 @@ class DAEImportCsvEdi extends DAECsvEdi
 		if ($libelle && $produit) {
 			$this->cache['produit_'.$libelle] = $produit;
 		}
+		if (!$produit && $inao && $libelle && preg_match('/^[1-5]{1}(B|R|S|X)[0-9]+/', $inao)) {
+		    $produit = $this->configuration->getConfigurationProduit($this->configuration->getDefaultProduitHash($inao));
+		}
 		return $produit;
     }
     
@@ -197,6 +200,22 @@ class DAEImportCsvEdi extends DAECsvEdi
         $hasErrors = false;
         $nbDaes = 0;
         foreach ($this->getDocRows() as $csvRow) {
+            if ($this->isEmptyLine($csvRow)) {
+                continue;
+            }
+            $nDate = trim($csvRow[self::CSV_DATE_COMMERCIALISATION]);
+		    if (preg_match('/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})$/', $nDate, $m)) {
+		        $nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[2], $m[1]);
+		    }
+		    if (preg_match('/^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$/', $nDate, $m)) {
+		        $nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[1], $m[2]);
+		    }
+		    if (preg_match('/^([0-9]{2})-([0-9]{1,2})-([0-9]{1,2})$/', $nDate, $m)) {
+		        $nDate = sprintf("%04d-%02d-%02d", '20'.$m[1], $m[2], $m[3]);
+		    }
+            if ($num_ligne == 1 && !preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $nDate)) {
+                continue;
+            }
         	$founded_produit = $this->identifyProduct($csvRow);
         	if (!$founded_produit) {
         		$this->csvDoc->addErreur($this->productNotFoundError($num_ligne, $csvRow));
@@ -293,7 +312,9 @@ class DAEImportCsvEdi extends DAECsvEdi
               $ligne_num++;
               continue;
             }
-            
+            if ($this->isEmptyLine($csvRow)) {
+                continue;
+            }
             $date = trim($csvRow[self::CSV_DATE_COMMERCIALISATION]);
             $millesime = trim($csvRow[self::CSV_PRODUIT_MILLESIME]);
             $accises = trim($csvRow[self::CSV_VENDEUR_ACCISES]);
@@ -301,18 +322,28 @@ class DAEImportCsvEdi extends DAECsvEdi
             
             if (!isset($this->cache['date_'.$date])) {
                 $nDate = $date;
-                if (preg_match('/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})$/', $date, $m)) {
-                	$nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[2], $m[1]);
-                }
+    		    if (preg_match('/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})$/', $nDate, $m)) {
+    		        $nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[2], $m[1]);
+    		    }
+    		    if (preg_match('/^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$/', $nDate, $m)) {
+    		        $nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[1], $m[2]);
+    		    }
+    		    if (preg_match('/^([0-9]{2})-([0-9]{1,2})-([0-9]{1,2})$/', $nDate, $m)) {
+    		        $nDate = sprintf("%04d-%02d-%02d", '20'.$m[1], $m[2], $m[3]);
+    		    }
 	            if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $nDate)) {
-	                $this->csvDoc->addErreur($this->createWrongFormatDateCommercialisationError($ligne_num, $csvRow));
+	                if ($ligne_num == 1) {
+	                    continue;
+	                } else {
+	                   $this->csvDoc->addErreur($this->createWrongFormatDateCommercialisationError($ligne_num, $csvRow));
+	                }
 	            } else {
 	            	$this->cache['date_'.$date] = $nDate;
 	            }
             }
             if (!isset($this->cache['millesime_'.$millesime])) {
-            	if ($millesime && !preg_match('/^[0-9]{4}$/', $millesime)) {
-                	$this->csvDoc->addErreur($this->createWrongFormatMillesimeError($ligne_num, $csvRow));
+            	if ($millesime && preg_match('/^[0-9]{2,4}$/', $millesime)) {
+                	$this->cache['millesime_'.$millesime] = (strlen($millesime) == 2)? '20'.$millesime : $millesime;
             	}else {
 	            	$this->cache['millesime_'.$millesime] = $millesime;
 	            }
@@ -338,8 +369,14 @@ class DAEImportCsvEdi extends DAECsvEdi
 		$date = trim($csvRow[self::CSV_DATE_COMMERCIALISATION]);
 		if (!isset($this->cache['date_'.$date])) {
 		    $nDate = $date;
-		    if (preg_match('/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})$/', $date, $m)) {
+		    if (preg_match('/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})$/', $nDate, $m)) {
 		        $nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[2], $m[1]);
+		    }
+		    if (preg_match('/^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$/', $nDate, $m)) {
+		        $nDate = sprintf("%04d-%02d-%02d", (strlen($m[3]) == 2)? '20'.$m[3] : $m[3], $m[1], $m[2]);
+		    }
+		    if (preg_match('/^([0-9]{2})-([0-9]{1,2})-([0-9]{1,2})$/', $nDate, $m)) {
+		        $nDate = sprintf("%04d-%02d-%02d", '20'.$m[1], $m[2], $m[3]);
 		    }
 		    if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $nDate)) {
 		        $this->csvDoc->addErreur($this->createWrongFormatDateCommercialisationError($ligne_num, $csvRow));
@@ -356,31 +393,34 @@ class DAEImportCsvEdi extends DAECsvEdi
         $dae->type = 'DAE';
         
         if ($this->etablissement) {
+            $declarant = new stdClass();
+            $declarant->nom = '';
 	        if ($this->etablissement->exist("intitule") && $this->etablissement->get("intitule")) {
-	        	$dae->declarant->nom = $this->etablissement->intitule . " ";
+	        	$declarant->nom = $this->etablissement->intitule . " ";
 	        }
-	        $dae->declarant->nom .= $this->etablissement->nom;
-	        $dae->declarant->raison_sociale = $this->etablissement->getRaisonSociale();
-	        $dae->declarant->cvi = $this->etablissement->cvi;
-	        $dae->declarant->no_accises = $this->etablissement->getNoAccises();
-	        $dae->declarant->adresse = $this->etablissement->siege->adresse;
+	        $declarant->nom .= $this->etablissement->nom;
+	        $declarant->raison_sociale = $this->etablissement->getRaisonSociale();
+	        $declarant->cvi = $this->etablissement->cvi;
+	        $declarant->no_accises = $this->etablissement->getNoAccises();
+	        $declarant->adresse = $this->etablissement->siege->adresse;
 	        if ($this->etablissement->siege->exist("adresse_complementaire")) {
-	        	$dae->declarant->adresse .= ' ; '.$this->etablissement->siege->adresse_complementaire;
+	        	$declarant->adresse .= ' ; '.$this->etablissement->siege->adresse_complementaire;
 	        }
-	        $dae->declarant->commune = $this->etablissement->siege->commune;
-	        $dae->declarant->code_postal = $this->etablissement->siege->code_postal;
-	        $dae->declarant->region = $this->etablissement->getRegion();
-	        $dae->declarant->famille = $this->etablissement->famille;
-	        $dae->declarant->sous_famille = $this->etablissement->sous_famille;
+	        $declarant->commune = $this->etablissement->siege->commune;
+	        $declarant->code_postal = $this->etablissement->siege->code_postal;
+	        $declarant->region = $this->etablissement->getRegion();
+	        $declarant->famille = $this->etablissement->famille;
+	        $declarant->sous_famille = $this->etablissement->sous_famille;
+	        $dae->declarant = $declarant;
         }
         
         $this->dates[$date] = $date;
         
 		$dae->produit_key = $produit->getHash();
-        $dae->produit_libelle = $produit->getLibelleFormat();
+        $dae->produit_libelle = (isset(trim($csvRow[self::CSV_PRODUIT_LIBELLE_PERSONNALISE])))? trim($csvRow[self::CSV_PRODUIT_LIBELLE_PERSONNALISE]) : $produit->getLibelleFormat();
         
-        $dae->no_accises_acheteur = trim($csvRow[self::CSV_ACHETEUR_ACCISES]);
-        $dae->nom_acheteur = trim($csvRow[self::CSV_ACHETEUR_NOM]);
+        $dae->no_accises_acheteur = (preg_match('/^FR[a-zA-Z0-9]{11}$/', trim($csvRow[self::CSV_ACHETEUR_ACCISES])))? trim($csvRow[self::CSV_ACHETEUR_ACCISES]) : null;
+        $dae->nom_acheteur = ($dae->no_accises_acheteur)? trim($csvRow[self::CSV_ACHETEUR_NOM]) : null;
         
         $dae->type_acheteur_key = $csvRow[self::CSV_ACHETEUR_TYPE];
         $dae->type_acheteur_libelle = $this->types[$dae->type_acheteur_key];
@@ -388,17 +428,18 @@ class DAEImportCsvEdi extends DAECsvEdi
         $dae->destination_key = $csvRow[self::CSV_PAYS_NOM];
         $dae->destination_libelle = $this->countryList[$dae->destination_key];
         
-        $dae->millesime = trim($csvRow[self::CSV_PRODUIT_MILLESIME]);
+        $millesime = trim($csvRow[self::CSV_PRODUIT_MILLESIME]);
+        $dae->millesime = (preg_match('/^[0-9]{2,4}$/', $millesime))? (strlen($millesime) == 2)? '20'.$millesime : $millesime : null;
         
         $dae->conditionnement_key = $csvRow[self::CSV_CONDITIONNEMENT_TYPE];
         $dae->contenance_key = $csvRow[self::CSV_CONDITIONNEMENT_VOLUME];
         $dae->conditionnement_libelle = $this->conditionnements[$dae->conditionnement_key];
         
         $dae->label_key = trim($csvRow[self::CSV_PRODUIT_LABEL]);
-        $dae->label_libelle = $this->labels[$dae->label_key];
+        $dae->label_libelle = ($dae->label_key && isset($this->labels[$dae->label_key]))? $this->labels[$dae->label_key] : null;
         
         $dae->mention_key = trim($csvRow[self::CSV_PRODUIT_DOMAINE]);
-        $dae->mention_libelle = $this->mentions[$dae->mention_key];
+        $dae->mention_libelle = ($dae->mention_key && isset($this->mentions[$dae->mention_key]))? $this->mentions[$dae->mention_key] : null;
         
         $primeur = trim($csvRow[self::CSV_PRODUIT_PRIMEUR]);
         $dae->primeur = (!$primeur)? 0 : 1;
@@ -418,6 +459,19 @@ class DAEImportCsvEdi extends DAECsvEdi
         $dae->prix_hl = round($dae->prix_unitaire / $dae->contenance_hl, 2);
         
         return $dae;
+    }
+    
+    private function isEmptyLine($csvRow)
+    {
+        $empty = true;
+        $length = count($csvRow);
+        for($i=0; $i<$length; $i++) {
+            if (!empty($csvRow[$i])) {
+                $empty = false;
+                break;
+            }
+        }
+        return $empty;
     }
 
     private function convertNumber($number){

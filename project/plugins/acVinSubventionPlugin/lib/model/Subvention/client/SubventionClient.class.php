@@ -52,15 +52,10 @@ class SubventionClient extends acCouchdbClient {
       $subventionsDocs = array();
 
       foreach ($subventions as $key => $subvention) {
-            if(!array_key_exists($subvention->operation,$subventionsDocs)){
-              $subventionsDocs[$subvention->operation] = array();
-            }
-            $subventionsDocs[$subvention->operation][$subvention->date_modification] = $subvention;
+            $subventionsDocs[$subvention->date_modification] = $subvention;
 
       }
-      foreach ($subventionsDocs as $sub => $subventions) {
-        ksort($subventions);
-      }
+      krsort($subventionsDocs);
       return $subventionsDocs;
     }
 

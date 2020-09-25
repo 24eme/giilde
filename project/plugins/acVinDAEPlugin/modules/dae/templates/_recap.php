@@ -18,8 +18,8 @@
 			<td><?php echo $dae->destination_libelle ?></td>
 			<td><?php echo $dae->type_acheteur_libelle ?></td>
 			<td><?php echo $dae->conditionnement_libelle ?></td>
-			<td class="text-right"><?php echo $dae->quantite ?>&nbsp;<span class="text-muted"><?php if ($dae->conditionnement_key == 'BOUTEILLE'): ?>btl<?php elseif ($dae->conditionnement_key == 'BIB'): ?>bib<?php else: ?>hl<?php endif; ?></span></td>
-			<td class="text-right"><?php echo $dae->prix_unitaire ?>&nbsp;<span class="text-muted">€&nbsp;<?php if ($dae->conditionnement_key == 'BOUTEILLE'): ?>btl<?php elseif ($dae->conditionnement_key == 'BIB'): ?>bib<?php else: ?>hl<?php endif; ?></span></td>
+			<td class="text-right"><?php echo $dae->quantite ?>&nbsp;<span class="text-muted"><?php if ($dae->conditionnement_key == 'VRAC'): ?>hl<?php endif; ?></span></td>
+			<td class="text-right"><?php echo sprintf("%.2f", $dae->prix_unitaire) ?>&nbsp;<span class="text-muted">€&nbsp;<?php if ($dae->conditionnement_key == 'VRAC'): ?>hl<?php endif; ?></span></td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>

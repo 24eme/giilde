@@ -36,6 +36,9 @@ class drm_visualisationActions extends drmGeneriqueActions {
                 }
             }
         }
+        if ($this->drm->isTeledeclare() && !$this->drm->exist('transmission_douane')) {
+            $this->drm->initTransmission();
+        }
         $this->mouvementsByProduit = DRMClient::getInstance()->sortMouvementsForDRM($this->mouvements);
         $this->recapCvos = DRMClient::getInstance()->getRecapCvosByMouvements($this->mouvements);
     }

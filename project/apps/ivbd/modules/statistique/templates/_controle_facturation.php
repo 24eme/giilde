@@ -10,6 +10,7 @@ use_helper('IvbdStatistique');
 		$produitKey = $produitLine['key'];
 		$produit = ConfigurationClient::getCurrent()->get($produitKey);
 		$couleur = $produit->getLibelle();
+
 		$produitLibelle = $produit->getLibelleFormat();
 
 		$cvoTaux = $produit->getDroitCVO($fromDate)->taux;
@@ -23,9 +24,9 @@ use_helper('IvbdStatistique');
 		$facturant = $produitLine['total_facturation']['value'];
 		$facturant_prix = $facturant*$cvoTaux;
 
-		if(preg_match("/CMR|CDB/",$produitKey)){
-			$couleur = "Blanc moelleux";
-		}
+		 if(preg_match("/CMR|CDB\/mentions\/DEFAUT\/lieux\/DEFAUT\/couleurs\/blanc_moelleux/",$produitKey)){
+		 	$couleur = "Blanc moelleux";
+		  }
 
 		if(!array_key_exists($couleur,$appellationByCouleurCsv)){
 			$appellationByCouleurCsv[$couleur] = array();
@@ -58,7 +59,7 @@ use_helper('IvbdStatistique');
 		$appellationByCouleurCsv[$couleur]['ztotal'][9] += $facturant_prix;
 
 		// remplissage totaux
-		$appellationByCouleurCsv['ztotal']['ztotal'][0] = "TOTAL tous vins";
+		$appellationByCouleurCsv['ztotal']['ztotal'][0] = "Total Général";
 		$appellationByCouleurCsv['ztotal']['ztotal'][1] += $vrac_contrat;
 		$appellationByCouleurCsv['ztotal']['ztotal'][2] = null;
 		$appellationByCouleurCsv['ztotal']['ztotal'][3] += $vrac_prix;
@@ -71,9 +72,8 @@ use_helper('IvbdStatistique');
 	}
 
 	ksort($appellationByCouleurCsv);
-
 	$appellationByCouleurCsv["Total Rouge et Rosés"]['ztotal'] = array("TOTAL Rouge et Rosés", 0.0,null,0.0,0.0,null,0.0,0.0,null,0.0);
-	$appellationByCouleurCsv["Total tous Blancs"]['ztotal'] = array("TOTAL tous Blancs", 0.0,null,0.0,0.0,null,0.0,0.0,null,0.0);
+	$appellationByCouleurCsv["BlancsZ"]['ztotal'] = array("TOTAL tous Blancs", 0.0,null,0.0,0.0,null,0.0,0.0,null,0.0);
 
 	foreach ($appellationByCouleurCsv as $couleur => $couleurCsv) {
 		foreach ($couleurCsv as $appellation => $appellationCsv) {
@@ -86,12 +86,12 @@ use_helper('IvbdStatistique');
 				$appellationByCouleurCsv["Total Rouge et Rosés"]['ztotal'][9] += $appellationCsv[9];
 			}
 			if($appellation == "ztotal" && preg_match("/Blanc/",$couleur)){
-				$appellationByCouleurCsv["Total tous Blancs"]['ztotal'][1] += $appellationCsv[1];
-				$appellationByCouleurCsv["Total tous Blancs"]['ztotal'][3] += $appellationCsv[3];
-				$appellationByCouleurCsv["Total tous Blancs"]['ztotal'][4] += $appellationCsv[4];
-				$appellationByCouleurCsv["Total tous Blancs"]['ztotal'][6] += $appellationCsv[6];
-				$appellationByCouleurCsv["Total tous Blancs"]['ztotal'][7] += $appellationCsv[7];
-				$appellationByCouleurCsv["Total tous Blancs"]['ztotal'][9] += $appellationCsv[9];
+				$appellationByCouleurCsv["BlancsZ"]['ztotal'][1] += $appellationCsv[1];
+				$appellationByCouleurCsv["BlancsZ"]['ztotal'][3] += $appellationCsv[3];
+				$appellationByCouleurCsv["BlancsZ"]['ztotal'][4] += $appellationCsv[4];
+				$appellationByCouleurCsv["BlancsZ"]['ztotal'][6] += $appellationCsv[6];
+				$appellationByCouleurCsv["BlancsZ"]['ztotal'][7] += $appellationCsv[7];
+				$appellationByCouleurCsv["BlancsZ"]['ztotal'][9] += $appellationCsv[9];
 			}
 		}
 	}

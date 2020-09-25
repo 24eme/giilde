@@ -1,10 +1,10 @@
 {
    "_id" : "CURRENT",
    "configurations" : {
-      "2000-08-01" : "CONFIGURATION",
-      "2018-08-01" : "CONFIGURATION-20180801",
-      "2019-08-01" : "CONFIGURATION-20190801",
-      "2020-08-01" : "CONFIGURATION-20200801"
+       "2020-08-01" : "CONFIGURATION-20200801",
+       "2019-08-01" : "CONFIGURATION-20190801",
+       "2018-08-01" : "CONFIGURATION-20180801",
+       "2000-08-01" : "CONFIGURATION"
    },
    "type" : "Current"
 }
