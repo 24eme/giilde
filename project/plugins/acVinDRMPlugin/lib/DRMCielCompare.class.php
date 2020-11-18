@@ -137,6 +137,9 @@ class DRMCielCompare
 					$newKeyProduit .= '_'.$value;
 					continue;
 				}
+				if (!preg_match($patternCrd, $key) && preg_match('/\/compte-crd\/\{array\}\//i', $key)) {
+					$key = str_replace('compte-crd/{array}', 'compte-crd/{array}/0/{array}', $key);
+				}
 				if (preg_match($patternCrd, $key) && preg_match('/categorie-fiscale-capsules/i', $key)) {
 					$newKeyCrd = $value;
 					continue;
@@ -158,18 +161,14 @@ class DRMCielCompare
 				if (preg_match($patternProduit, $key)) {
 					$tmp = preg_replace($patternProduit, '/produit/{array}/'.$newKeyProduit.'/{array}/', $key);
 					$result[$tmp] = $value;
-				}elseif (preg_match($patternCentilisation, $key)){
-				  if($value !== 0){
-						 $tmp = preg_replace($patternCrd, '/compte-crd/{array}/'.$newKeyCrd.'/{array}/', $key);
-						 $tmp = preg_replace($patternCentilisation, '/centilisation/{array}/'.$newKeyCentilisation.'/{array}/', $tmp);
-
-						 $result[$tmp] = $value;
-					 }
-				} elseif (preg_match($patternCrd, $key)){
+				}elseif (preg_match($patternCrd, $key) || preg_match($patternCentilisation, $key)) {
+					if ($value !== 0) {
 						$tmp = preg_replace($patternCrd, '/compte-crd/{array}/'.$newKeyCrd.'/{array}/', $key);
+						$tmp = preg_replace($patternCentilisation, '/centilisation/{array}/'.$newKeyCentilisation.'/{array}/', $tmp);
 						$result[$tmp] = $value;
+					}
 				} else {
-						$result[$key] = $value;
+					$result[$key] = $value;
 				}
 			}
 		}
