@@ -7,12 +7,12 @@ class DRMCielCompare
 	public function __construct($xmlIn, $xmlOut)
 	{
 		if(is_string($xmlIn)) {
-			$this->xmlIn = simplexml_load_string($xmlIn, 'SimpleXMLElement', LIBXML_NOCDATA);
+			$this->xmlIn = simplexml_load_string(str_replace("&", "", $xmlIn), 'SimpleXMLElement', LIBXML_NOCDATA);
 		}else {
 			$this->xmlIn = $xmlIn;
 		}
 		if(is_string($xmlOut)) {
-			$this->xmlOut = simplexml_load_string($xmlOut, 'SimpleXMLElement', LIBXML_NOCDATA);
+			$this->xmlOut = simplexml_load_string(str_replace("&", "", $xmlOut), 'SimpleXMLElement', LIBXML_NOCDATA);
 		}else {
 			$this->xmlOut = $xmlOut;
 		}

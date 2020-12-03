@@ -50,7 +50,7 @@ class DAE extends BaseDAE implements InterfaceDeclarantDocument {
     }
     
     public function getTypes() {
-        return array('CHR' => 'Café / Hôtel / Restaurant', 'CAVISTE' => 'Caviste', 'GD' => 'Grande Distribution (Leclerc, Carrefour...)', 'GROSSIST' => 'Grossiste-CHR', 'HARD' => 'Hard Discount  (LIDL, ALDI, Leader Price...)', 'IMPORTAT' => 'Importateur', 'N_HORS_R' => 'Négociant hors région', 'N_VDR' => 'Négociant/Union Vallée du Rhône', 'ON_TRADE' => 'Export on trade', 'OFF_TRAD' => 'Export off trade', 'VPC' => 'Vente par correspondance / internet', 'V_CAVEAU' => 'Vente sur place', 'V_SALON' => 'Vente sur salon', 'AUTRE' => 'Autre');
+        return array('CHR' => 'Café / Hôtel / Restaurant', 'CAVISTE' => 'Caviste', 'GD' => 'Grande Distribution (Leclerc / Carrefour...)', 'GROSSIST' => 'Grossiste-CHR', 'HARD' => 'Hard Discount  (LIDL / ALDI / Leader Price...)', 'IMPORTAT' => 'Importateur', 'N_HORS_R' => 'Négociant hors région', 'N_VDR' => 'Négociant/Union Vallée du Rhône', 'ON_TRADE' => 'Export on trade', 'OFF_TRAD' => 'Export off trade', 'VPC' => 'Vente par correspondance / internet', 'V_CAVEAU' => 'Vente sur place', 'V_SALON' => 'Vente sur salon', 'AUTRE' => 'Autre');
     }
     
     public function getConditionnements() {

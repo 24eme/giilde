@@ -46,7 +46,7 @@
         <nav>
     		<ul class="pagination">
                 <?php $args_copy = $args; ?>
-                <?php $args = array('q' => $q, 'tags' => $args['tags']); ?>
+                <?php $args = array('q' => $q, 'tags' => $args['tags'],'contacts_all' => $args['contacts_all']); ?>
                 <?php if ($current_page > 1) : ?>
     				<li><a href="<?php echo url_for('compte_search', $args); ?>"><span aria-hidden="true"><<</span></a></li>
     				<?php if ($current_page > 1) $args['page'] = $current_page - 1; ?>

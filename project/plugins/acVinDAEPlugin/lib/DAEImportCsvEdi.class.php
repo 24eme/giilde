@@ -420,7 +420,7 @@ class DAEImportCsvEdi extends DAECsvEdi
         $dae->produit_libelle = (isset(trim($csvRow[self::CSV_PRODUIT_LIBELLE_PERSONNALISE])))? trim($csvRow[self::CSV_PRODUIT_LIBELLE_PERSONNALISE]) : $produit->getLibelleFormat();
         
         $dae->no_accises_acheteur = (preg_match('/^FR[a-zA-Z0-9]{11}$/', trim($csvRow[self::CSV_ACHETEUR_ACCISES])))? trim($csvRow[self::CSV_ACHETEUR_ACCISES]) : null;
-        $dae->nom_acheteur = ($dae->no_accises_acheteur)? trim($csvRow[self::CSV_ACHETEUR_NOM]) : null;
+        $dae->nom_acheteur = str_replace(',', '/', trim($csvRow[self::CSV_ACHETEUR_NOM]));
         
         $dae->type_acheteur_key = $csvRow[self::CSV_ACHETEUR_TYPE];
         $dae->type_acheteur_libelle = $this->types[$dae->type_acheteur_key];

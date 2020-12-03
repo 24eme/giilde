@@ -153,14 +153,17 @@ class SocieteClient extends acCouchdbClient {
         $result = array();
         foreach ($contactsArr as $id => $value) {
             $compte = CompteClient::getInstance()->find($id);
-            if ($withSuspendus) {
+            if ($compte->statut != SocieteClient::STATUT_SUSPENDU) {
                 $result[] = $compte;
-            } else {
-
-                if ($compte->statut != SocieteClient::STATUT_SUSPENDU) {
-                    $result[] = $compte;
-                }
             }
+        }
+        if ($withSuspendus) {
+          foreach ($contactsArr as $id => $value) {
+              $compte = CompteClient::getInstance()->find($id);
+              if ($compte->statut == SocieteClient::STATUT_SUSPENDU) {
+                  $result[] = $compte;
+              }
+          }
         }
         return $result;
     }

@@ -72,7 +72,7 @@ class commonActions extends sfActions {
             if($this->getUser()->hasCredential(Roles::TELEDECLARATION_DRM)){
                    return $this->redirect('drm_societe', array('identifiant' => $idCompte));
             }
-            if(sfConfig::get('app_extra_service_url')) {
+            if(sfConfig::get('app_extra_service_url') && !$this->getUser()->getCompte()->getEtablissement()) {
                 return $this->redirect(sfConfig::get('app_extra_service_url'));
             }
            return $this->redirect("common_accueil_etablissement" ,array('identifiant' => $idCompte));

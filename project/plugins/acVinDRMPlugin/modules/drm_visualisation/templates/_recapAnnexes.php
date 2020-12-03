@@ -52,6 +52,17 @@
                     <?php if ($drm->observations): ?>
                     <li class="list-group-item"><strong>Observations sur les mouvements :</strong> <?php echo $drm->observations; ?></li>
                 <?php endif; ?>
+              <?php if ($drm->declaratif->exist('statistiques') && ($drm->declaratif->statistiques->jus || $drm->declaratif->statistiques->mcr || $drm->declaratif->statistiques->vinaigre)): ?>
+                <?php if ($drm->declaratif->statistiques->jus): ?>
+                    <li class="list-group-item"><strong>Quantités de moûts de raisin transformées en jus de raisin :</strong> <?php echo sprintf("%.2f", $drm->declaratif->statistiques->jus)." hl" ?></li>
+                <?php endif; ?>
+                <?php if ($drm->declaratif->statistiques->mcr): ?>
+                    <li class="list-group-item"><strong>Quantités de moûts de raisin transformées en MCR :</strong> <?php echo sprintf("%.2f", $drm->declaratif->statistiques->mcr)." hl" ?></li>
+                <?php endif; ?>
+                <?php if ($drm->declaratif->statistiques->vinaigre): ?>
+                    <li class="list-group-item"><strong>Quantités de moûts de raisin transformées en vinaigre :</strong> <?php echo sprintf("%.2f", $drm->declaratif->statistiques->vinaigre)." hl" ?></li>
+                <?php endif; ?>
+              <?php endif; ?>
             </ul>
         </div>
     </div>

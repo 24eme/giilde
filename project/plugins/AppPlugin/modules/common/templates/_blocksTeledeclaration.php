@@ -70,7 +70,7 @@
     </div>
 </div>
 <?php endif; ?>
-<?php if($teledeclaration && SubventionConfiguration::getInstance()->isActif()): ?>
+<?php if($teledeclaration && SubventionConfiguration::getInstance()->isActif($etablissement, $sf_user->hasCredential('admin'))): ?>
 <div class="col-xs-12">
     <div class="panel panel-default">
         <div class="panel-heading clearfix">

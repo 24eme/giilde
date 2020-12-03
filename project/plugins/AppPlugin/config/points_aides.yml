@@ -66,7 +66,7 @@ all:
         marche_cepage_8515: "Cocher la case si la règle  dite du « 85/15 » a été appliquée sur le cépage (cépage entre 85 et 100%)."
         marche_agriculture_bio: "Cocher la case si le vin est issu de l’agriculture biologique."
         marche_numero_lot: "Facultatif. Indiquer le n° du lot."
-        marche_degre: "Facultatif. Indiquer le degré du vin."
+        marche_degre: "Indiquer le degré du vin."
         marche_mention: "Le cas échéant, cocher la case « avec mention »  puis sélectionner le nom de Château, de Domaine ou de marque dans la liste qui apparaît, ou le saisir (en précisant Château ou Domaine)."
         marche_volume: "Indiquer le volume de vin objet du contrat, en hl."
         marche_prix: "Indiquer le prix du vin, en € /T (1Tonneau = 9 hl)"

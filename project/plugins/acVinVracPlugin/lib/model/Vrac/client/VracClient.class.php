@@ -815,7 +815,10 @@ class VracClient extends acCouchdbClient {
         $enlevements = array();
         $mvts = $vrac->getMouvementsFromDrmOrSV12ImpactVolumeEnleve();
         foreach ($mvts as $key => $mvt) {
-                $enlevements[$mvt->doc_id] = new stdClass();
+                if (! array_key_exists($mvt->doc_id, $enlevements)) {
+                    $enlevements[$mvt->doc_id] = new stdClass();
+                    $enlevements[$mvt->doc_id]->volume = 0;
+                }
                 $enlevements[$mvt->doc_id]->doc_id = $mvt->doc_id;
                 $enlevements[$mvt->doc_id]->type = $mvt->type;
                 if($mvt->type == "DRM"){
@@ -823,7 +826,7 @@ class VracClient extends acCouchdbClient {
                 }else{
                     $enlevements[$mvt->doc_id]->periode = preg_replace('/(-M[0-9]+)/','',preg_replace('/SV12-([0-9]+)-/','',$mvt->doc_id));
                 }
-                $enlevements[$mvt->doc_id]->volume = $mvt->volume * -1;
+                $enlevements[$mvt->doc_id]->volume += $mvt->volume * -1;
         }
 
         return $enlevements;

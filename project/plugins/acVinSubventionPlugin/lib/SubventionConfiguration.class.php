@@ -103,8 +103,18 @@ class SubventionConfiguration {
 
 
 
-    public function isActif() {
-        return $this->configuration['actif'];
+    public function isActif($etablissement = null, $isAdmin = false) {
+        if (!$this->configuration['actif']) {
+          return false;
+        }
+        if ($isAdmin) {
+          return true;
+        }
+        if ($etablissement) {
+          $sub = SubventionClient::getInstance()->findByEtablissementAndOperation($etablissement->identifiant, 'COVID1');
+          return ($sub && $sub->isValide())? true : false;
+        }
+        return false;
     }
 
     public function getOperationEnCours() {

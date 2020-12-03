@@ -7,10 +7,10 @@
  */
 
 /**
- * Description of class VracUpdateRepartitionCVOTask
+ * Description of class VracUpdateEnlevementsTask
  * @author mathurin
  */
-class VracUpdateRepartitionCVOTask extends sfBaseTask
+class VracUpdateEnlevementsTask extends sfBaseTask
 {
   protected function configure()
   {
@@ -26,13 +26,13 @@ class VracUpdateRepartitionCVOTask extends sfBaseTask
     ));
 
     $this->namespace        = 'vrac';
-    $this->name             = 'update-repartition-cvo';
+    $this->name             = 'update-enlevements';
     $this->briefDescription = '';
     $this->detailedDescription = <<<EOF
-The [maintenanceVracRepartitionCVO|INFO] task does things.
+The [VracUpdateEnlevements|INFO] task does things.
 Call it with:
 
-  [php symfony maintenanceVracRepartitionCVO|INFO]
+  [php symfony update-enlevements|INFO]
 EOF;
   }
 
@@ -49,13 +49,17 @@ EOF;
         throw new sfException(sprintf("ERREUR;Contrat introuvable %s", $arguments['doc_id']));
     }
 
-    $cvo_repartition_origin = $vrac->cvo_repartition;
-    $vrac->setInformations();
-    $vrac->cvo_repartition = $vrac->calculCvoRepartition();
+    $oldVolEnleve = $vrac->volume_enleve;
 
-    if($cvo_repartition_origin != $vrac->cvo_repartition) {
-        echo sprintf("Contrat %s CVO passé de %s à %s (code postal de l'acheteur (%s) %s)\n", $vrac->_id, $cvo_repartition_origin, $vrac->cvo_repartition, $vrac->acheteur_identifiant, $vrac->acheteur->code_postal);
-        $vrac->save();
+    $vrac->updateVolumesEnleves();
+
+    $newVolEnleve = $vrac->volume_enleve;
+
+    $vrac->save();
+    if($oldVolEnleve != $newVolEnleve) {
+        echo sprintf("Contrat %s : Volume enlevé %s => %s \n", $vrac->_id, $oldVolEnleve, $newVolEnleve);
+    }else{
+      echo sprintf("Contrat %s : Pas de changements\n", $vrac->_id);
     }
   }
 }

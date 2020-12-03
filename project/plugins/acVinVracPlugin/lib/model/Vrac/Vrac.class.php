@@ -86,6 +86,8 @@ class Vrac extends BaseVrac {
             if ($value) {
                 $cepages = $this->getCepagesConfig();
                 $this->cepage_libelle = $cepages[$value];
+            }else{
+              $this->cepage_libelle = null;
             }
         }
     }
@@ -571,15 +573,14 @@ class Vrac extends BaseVrac {
         $mvts = array();
         $mvts_drm = DRMMouvementsConsultationView::getInstance()->getMouvementsByEtablissement($this->vendeur_identifiant);
         $mvts_sv12 = SV12MouvementsConsultationView::getInstance()->getMouvementsByEtablissement($this->acheteur_identifiant);
+
         foreach ($mvts_drm as $key => $mvt) {
-            $pos = strpos($mvt->produit_hash, $this->produit);
-            if(($mvt->type_hash == "vrac_details" && ($pos !== false) && $mvt->detail_identifiant == $this->_id) || (preg_match("/^creationvrac/",$mvt->type_hash) && ($pos !== false) && ("VRAC-".$mvt->vrac_numero == $this->_id))){
+            if(($mvt->type_hash == "vrac_details" && $mvt->detail_identifiant == $this->_id) || (preg_match("/^creationvrac/",$mvt->type_hash) && ("VRAC-".$mvt->vrac_numero == $this->_id))){
                 $mvts[] = $mvt;
             }
         }
         foreach ($mvts_sv12 as $key => $mvt) {
-            $pos = strpos($mvt->produit_hash, $this->produit);
-            if($pos !== false && $mvt->detail_identifiant == $this->_id){
+            if($mvt->detail_identifiant == $this->_id){
                 $mvts[] = $mvt;
             }
         }

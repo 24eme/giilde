@@ -55,7 +55,18 @@ class annuaireActions extends sfActions {
             $this->annuaire = AnnuaireClient::getInstance()->findOrCreateAnnuaire($request->getParameter('identifiant'));
 
             $this->societeObject = AnnuaireClient::getInstance()->findSocieteByTypeAndTiers($this->type, $this->societeId);
-            $this->etablissements = $this->societeObject->getEtablissementsObj(false);
+            $etablissements = $this->societeObject->getEtablissementsObj(false);
+            $this->etablissements = array();
+            foreach($etablissements as $item) {
+              $e = $item->etablissement;
+              if ($this->type == AnnuaireClient::ANNUAIRE_RECOLTANTS_KEY && $e->famille != EtablissementFamilles::FAMILLE_PRODUCTEUR) {
+                  continue;
+              }
+              if ($this->type == AnnuaireClient::ANNUAIRE_NEGOCIANTS_KEY && $e->famille != EtablissementFamilles::FAMILLE_NEGOCIANT) {
+                  continue;
+              }
+              $this->etablissements[] = $item;
+            }
 
             $this->form = new AnnuaireAjoutForm($this->annuaire, $this->isCourtierResponsable,$this->isRepresentantResponsable, $this->type, $this->etablissements);
             $this->form->setDefault('type', $this->type);

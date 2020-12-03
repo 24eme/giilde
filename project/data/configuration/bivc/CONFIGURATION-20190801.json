@@ -1,16 +1,779 @@
 {
-   "_id": "CONFIGURATION-20200801",
+   "_id": "CONFIGURATION-20190801",
    "type": "Configuration",
    "campagne": null,
    "droits": {
        "CVO": "Cvo",
        "DOUANE": "Douane"
    },
-   "correspondances": {
-       "-declaration-certifications-HORSBIVC-genres-TRANQ-appellations-CHY-mentions-DEFAUT-lieux-DEFAUT-couleurs-blanc-cepages-DEFAUT": "/declaration/certifications/HORSBIVC/genres/TRANQ/appellations/CHY/mentions/DEFAUT/lieux/CHY/couleurs/blanc/cepages/DEFAUT"
-   },
    "declaration": {
        "certifications": {
+           "ALCOOLS": {
+               "genres": {
+                   "DEFAUT": {
+                       "appellations": {
+                           "AS18": {
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "ALCOOL_AUTRE_SUP_18",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
+                                                       },
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ]
+                                                   }
+                                               },
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ]
+                                           }
+                                       },
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ]
+                                   }
+                               },
+                               "libelle": "Alcool supérieur 18°",
+                               "format_libelle": null,
+                               "code": "AS18",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       }
+                                   }
+                               },
+                               "departements": [
+                               ]
+                           },
+                           "MP": {
+                               "libelle": "Matières Premières",
+                               "format_libelle": null,
+                               "code": "MP",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       }
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "MATIERES_PREMIERES_ALCOOLS",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           },
+                           "PII18": {
+                               "libelle": "Produit intermédiaire inférieur 18°",
+                               "format_libelle": null,
+                               "code": "PI",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       }
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "AUTRES_PI_INF_18",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           },
+                           "AI18": {
+                               "libelle": "Alcool inférieur 18°",
+                               "format_libelle": null,
+                               "code": "AI18",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       }
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "ALCOOL_AUTRE_INF_18",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           },
+                           "DEFAUT": {
+                               "libelle": "Autres",
+                               "format_libelle": null,
+                               "code": null,
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       },
+                                       "produit_non_interpro": false
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": null,
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": true
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           },
+                           "BFA": {
+                               "libelle": "Autres Boissons fermentées",
+                               "format_libelle": null,
+                               "code": null,
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       },
+                                       "produit_non_interpro": false
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "defaut": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": "defaut",
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": null,
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "BOISSONS_FERMENTEES_AUTRES",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                           ]
+                                                                       },
+                                                                       "produit_non_interpro": false
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       },
+                       "libelle": null,
+                       "format_libelle": null,
+                       "code": "DEFAUT",
+                       "code_produit": null,
+                       "code_comptable": null,
+                       "code_douane": null,
+                       "interpro": {
+                           "INTERPRO-declaration": {
+                               "labels": [
+                               ],
+                               "droits": {
+                                   "douane": [
+                                   ],
+                                   "cvo": [
+                                   ]
+                               }
+                           }
+                       },
+                       "departements": [
+                       ]
+                   }
+               },
+               "libelle": "Autres alcools",
+               "format_libelle": "%a% %g% %l% %m% %co%",
+               "code": "ALCOOLS",
+               "code_produit": null,
+               "code_comptable": null,
+               "code_douane": null,
+               "departements": [
+               ],
+               "interpro": {
+                   "INTERPRO-declaration": {
+                       "labels": [
+                       ],
+                       "droits": {
+                           "douane": [
+                               {
+                                   "date": "1900-01-01",
+                                   "taux": "0",
+                                   "code": null,
+                                   "libelle": null
+                               }
+                           ],
+                           "cvo": [
+                               {
+                                   "date": "1900-01-01",
+                                   "taux": "-1",
+                                   "code": "CVO",
+                                   "libelle": "Cvo"
+                               }
+                           ]
+                       }
+                   }
+               }
+           },
            "AOC": {
                "libelle": "AOC",
                "format_libelle": null,
@@ -28,6 +791,18 @@
                            "douane": [
                            ],
                            "cvo": [
+                               {
+                                   "date": "1900-01-01",
+                                   "taux": "0.0",
+                                   "code": "CVO",
+                                   "libelle": "Cvo"
+                               },
+                               {
+                                   "date": "2012-01-01",
+                                   "taux": "3",
+                                   "code": "CVO",
+                                   "libelle": "Cvo"
+                               },
                                {
                                    "date": "2018-08-01",
                                    "taux": "3.5",
@@ -52,6 +827,24 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "3.77",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "3.78",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "3.88",
@@ -1426,12 +2219,6 @@
                                            "douane": [
                                            ],
                                            "cvo": [
-                                               {
-                                                   "date": "2019-01-01",
-                                                   "taux": "0.0",
-                                                   "code": "CVO",
-                                                   "libelle": "Cvo"
-                                               }
                                            ]
                                        }
                                    }
@@ -1520,6 +2307,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -2053,6 +2846,18 @@
                                "droits": {
                                    "douane": [
                                        {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "9.35",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
                                            "code": "DOUANE",
@@ -2084,12 +2889,6 @@
                                            "douane": [
                                            ],
                                            "cvo": [
-                                               {
-                                                   "date": "2019-01-01",
-                                                   "taux": "0.0",
-                                                   "code": "CVO",
-                                                   "libelle": "Cvo"
-                                               }
                                            ]
                                        }
                                    }
@@ -2178,6 +2977,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -2237,6 +3042,24 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "3.77",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "3.78",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "3.88",
@@ -5841,6 +6664,30 @@
                                "droits": {
                                    "douane": [
                                        {
+                                           "date": "2015-01-08T00:00:00+01:00",
+                                           "taux": "9.29",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "9.33",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "9.35",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
                                            "code": "DOUANE",
@@ -6316,8 +7163,20 @@
                        "droits": {
                            "douane": [
                                {
-                                   "date": "2020-01-01T00:00:00+01:00",
-                                   "taux": "3.88",
+                                   "date": "2015-01-08T00:00:00+01:00",
+                                   "taux": "3.75",
+                                   "code": "L387",
+                                   "libelle": "Vins Tranquilles"
+                               },
+                               {
+                                   "date": "2016-01-01T00:00:00+01:00",
+                                   "taux": "3.77",
+                                   "code": "L387",
+                                   "libelle": "Vins Tranquilles"
+                               },
+                               {
+                                   "date": "2018-01-01T00:00:00+01:00",
+                                   "taux": "3.78",
                                    "code": "L387",
                                    "libelle": "Vins Tranquilles"
                                }
@@ -6348,6 +7207,30 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2015-08-01T00:00:00+02:00",
+                                           "taux": "3.75",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "3.77",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "3.78",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "3.88",
@@ -6570,10 +7453,10 @@
                                        "departements": [
                                        ],
                                        "lieux": {
-                                           "DEFAUT": {
+                                           "CHY": {
                                                "libelle": null,
                                                "format_libelle": null,
-                                               "code": "DEFAUT",
+                                               "code": "CHY",
                                                "code_produit": null,
                                                "code_comptable": null,
                                                "code_douane": null,
@@ -8531,6 +9414,30 @@
                                "droits": {
                                    "douane": [
                                        {
+                                           "date": "2015-08-01T00:00:00+02:00",
+                                           "taux": "9.29",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "9.33",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "9.35",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
                                            "code": "DOUANE",
@@ -8678,6 +9585,12 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
@@ -8904,6 +9817,24 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "3.77",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "3.78",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "3.88",
@@ -9668,6 +10599,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -9696,6 +10633,18 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "9.35",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
@@ -9816,6 +10765,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -9851,8 +10806,8 @@
                            ],
                            "cvo": [
                                {
-                                   "date": "2020-01-01",
-                                   "taux": -1,
+                                   "date": "2016-01-01T00:00:00+01:00",
+                                   "taux": "0",
                                    "code": "CVO",
                                    "libelle": "Cvo"
                                }
@@ -9875,6 +10830,24 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "3.77",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "3.78",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "3.88",
@@ -10763,6 +11736,24 @@
                                "droits": {
                                    "douane": [
                                        {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "3.77",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "3.78",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "3.88",
                                            "code": "DOUANE",
@@ -11009,8 +12000,8 @@
                            ],
                            "cvo": [
                                {
-                                   "date": "2020-01-01",
-                                   "taux": -1,
+                                   "date": "2016-01-01T00:00:00+01:00",
+                                   "taux": "0",
                                    "code": "CVO",
                                    "libelle": "Cvo"
                                }
@@ -11033,6 +12024,30 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "3.77",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "3.78",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "3.82",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "3.88",
@@ -11481,6 +12496,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -11598,6 +12619,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -11626,6 +12653,18 @@
                                ],
                                "droits": {
                                    "douane": [
+                                       {
+                                           "date": "2016-01-01T00:00:00+01:00",
+                                           "taux": "9.35",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
                                        {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
@@ -11985,6 +13024,18 @@
                                "droits": {
                                    "douane": [
                                        {
+                                           "date": "2018-01-01T00:00:00+01:00",
+                                           "taux": "9.35",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
                                            "code": "DOUANE",
@@ -12104,6 +13155,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -12221,1067 +13278,12 @@
                                                                            "douane": [
                                                                            ],
                                                                            "cvo": [
-                                                                           ]
-                                                                       }
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                       }
-                   }
-               }
-           },
-           "ALCOOLS": {
-               "genres": {
-                   "DEFAUT": {
-                       "appellations": {
-                           "AS18": {
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "couleurs": {
-                                                   "DEFAUT": {
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": "ALCOOL_AUTRE_SUP_18",
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       }
-                                                                   }
-                                                               }
-                                                           }
-                                                       },
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": null,
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ]
-                                                   }
-                                               },
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ]
-                                           }
-                                       },
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ]
-                                   }
-                               },
-                               "libelle": "Alcool supérieur 18°",
-                               "format_libelle": null,
-                               "code": "AS18",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       }
-                                   }
-                               },
-                               "departements": [
-                               ]
-                           },
-                           "MP": {
-                               "libelle": "Matières Premières",
-                               "format_libelle": null,
-                               "code": "MP",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       }
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "DEFAUT": {
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": null,
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": "MATIERES_PREMIERES_ALCOOLS",
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       }
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           },
-                           "PII18": {
-                               "libelle": "Produit intermédiaire inférieur 18°",
-                               "format_libelle": null,
-                               "code": "PI",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       }
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "DEFAUT": {
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": null,
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": "AUTRES_PI_INF_18",
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       }
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           },
-                           "AI18": {
-                               "libelle": "Alcool inférieur 18°",
-                               "format_libelle": null,
-                               "code": "AI18",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       }
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "DEFAUT": {
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": null,
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": "ALCOOL_AUTRE_INF_18",
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       }
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           },
-                           "DEFAUT": {
-                               "libelle": "Autres",
-                               "format_libelle": null,
-                               "code": null,
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       },
-                                       "produit_non_interpro": false
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "DEFAUT": {
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": null,
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": null,
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       },
-                                                                       "produit_non_interpro": true
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           },
-                           "BFA": {
-                               "libelle": "Autres Boissons fermentées",
-                               "format_libelle": null,
-                               "code": null,
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       },
-                                       "produit_non_interpro": false
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "defaut": {
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": "defaut",
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": null,
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": "BOISSONS_FERMENTEES_AUTRES",
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       },
-                                                                       "produit_non_interpro": false
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                       },
-                       "libelle": null,
-                       "format_libelle": null,
-                       "code": "DEFAUT",
-                       "code_produit": null,
-                       "code_comptable": null,
-                       "code_douane": null,
-                       "interpro": {
-                           "INTERPRO-declaration": {
-                               "labels": [
-                               ],
-                               "droits": {
-                                   "douane": [
-                                   ],
-                                   "cvo": [
-                                   ]
-                               }
-                           }
-                       },
-                       "departements": [
-                       ]
-                   }
-               },
-               "libelle": "Autres alcools",
-               "format_libelle": "%a% %g% %l% %m% %co%",
-               "code": "ALCOOLS",
-               "code_produit": null,
-               "code_comptable": null,
-               "code_douane": null,
-               "departements": [
-               ],
-               "interpro": {
-                   "INTERPRO-declaration": {
-                       "labels": [
-                       ],
-                       "droits": {
-                           "douane": [
-                               {
-                                   "date": "1900-01-01",
-                                   "taux": "0",
-                                   "code": null,
-                                   "libelle": null
-                               }
-                           ],
-                           "cvo": [
-                               {
-                                   "date": "1900-01-01",
-                                   "taux": "-1",
-                                   "code": "CVO",
-                                   "libelle": "Cvo"
-                               }
-                           ]
-                       }
-                   }
-               }
-           },
-           "VDNVDL": {
-               "libelle": "VDN-VDL",
-               "format_libelle": null,
-               "code": "VDNVDL",
-               "code_produit": null,
-               "code_comptable": null,
-               "code_douane": null,
-               "departements": [
-               ],
-               "interpro": {
-                   "INTERPRO-declaration": {
-                       "labels": [
-                       ],
-                       "droits": {
-                           "douane": [
-                               {
-                                   "date": "2020-01-01T00:00:00+01:00",
-                                   "taux": "48.43",
-                                   "code": "DOUANE",
-                                   "libelle": "Douane"
-                               }
-                           ],
-                           "cvo": [
-                               {
-                                   "date": "2020-01-01",
-                                   "taux": -1,
-                                   "code": "CVO",
-                                   "libelle": "Cvo"
-                               }
-                           ]
-                       }
-                   }
-               },
-               "genres": {
-                   "DEFAUT": {
-                       "libelle": null,
-                       "format_libelle": null,
-                       "code": null,
-                       "code_produit": null,
-                       "code_comptable": null,
-                       "code_douane": null,
-                       "interpro": {
-                           "INTERPRO-declaration": {
-                               "labels": [
-                               ],
-                               "droits": {
-                                   "douane": [
-                                   ],
-                                   "cvo": [
-                                   ]
-                               },
-                               "produit_non_interpro": false
-                           }
-                       },
-                       "departements": [
-                       ],
-                       "appellations": {
-                           "VDLSUP": {
-                               "libelle": "Vin de Liqueur AOP (Sup 18°)",
-                               "format_libelle": null,
-                               "code": "VDLSUP",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       }
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "DEFAUT": {
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": null,
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": "%a%",
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": "VDN_VDL_AOP_SUP_18",
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
-                                                                           ]
-                                                                       }
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                                   }
-                               }
-                           },
-                           "VDLINF": {
-                               "libelle": "Vin de Liqueur AOP (Inf 18°)",
-                               "format_libelle": null,
-                               "code": "VDLINF",
-                               "code_produit": null,
-                               "code_comptable": null,
-                               "code_douane": null,
-                               "densite": "1.3",
-                               "interpro": {
-                                   "INTERPRO-declaration": {
-                                       "labels": [
-                                       ],
-                                       "droits": {
-                                           "douane": [
-                                           ],
-                                           "cvo": [
-                                           ]
-                                       }
-                                   }
-                               },
-                               "departements": [
-                               ],
-                               "mentions": {
-                                   "DEFAUT": {
-                                       "libelle": null,
-                                       "format_libelle": null,
-                                       "code": null,
-                                       "code_produit": null,
-                                       "code_comptable": null,
-                                       "code_douane": null,
-                                       "interpro": {
-                                           "INTERPRO-declaration": {
-                                               "labels": [
-                                               ],
-                                               "droits": {
-                                                   "douane": [
-                                                   ],
-                                                   "cvo": [
-                                                   ]
-                                               }
-                                           }
-                                       },
-                                       "departements": [
-                                       ],
-                                       "lieux": {
-                                           "DEFAUT": {
-                                               "libelle": null,
-                                               "format_libelle": null,
-                                               "code": null,
-                                               "code_produit": null,
-                                               "code_comptable": null,
-                                               "code_douane": null,
-                                               "interpro": {
-                                                   "INTERPRO-declaration": {
-                                                       "labels": [
-                                                       ],
-                                                       "droits": {
-                                                           "douane": [
-                                                           ],
-                                                           "cvo": [
-                                                           ]
-                                                       }
-                                                   }
-                                               },
-                                               "departements": [
-                                               ],
-                                               "couleurs": {
-                                                   "DEFAUT": {
-                                                       "libelle": null,
-                                                       "format_libelle": null,
-                                                       "code": null,
-                                                       "code_produit": null,
-                                                       "code_comptable": null,
-                                                       "code_douane": null,
-                                                       "interpro": {
-                                                           "INTERPRO-declaration": {
-                                                               "labels": [
-                                                               ],
-                                                               "droits": {
-                                                                   "douane": [
-                                                                   ],
-                                                                   "cvo": [
-                                                                   ]
-                                                               }
-                                                           }
-                                                       },
-                                                       "departements": [
-                                                       ],
-                                                       "cepages": {
-                                                           "DEFAUT": {
-                                                               "libelle": null,
-                                                               "format_libelle": "%a%",
-                                                               "code": null,
-                                                               "code_produit": null,
-                                                               "code_comptable": null,
-                                                               "code_douane": "VDN_VDL_AOP_INF_18",
-                                                               "cepages_autorises": [
-                                                               ],
-                                                               "interpro": {
-                                                                   "INTERPRO-declaration": {
-                                                                       "droits": {
-                                                                           "douane": [
-                                                                           ],
-                                                                           "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
                                                                            ]
                                                                        }
                                                                    }
@@ -13696,7 +13698,7 @@
                                "droits": {
                                    "douane": [
                                        {
-                                           "date": "2020-01-01T00:00:00+01:00",
+                                           "date": "2000-01-01T00:00:00+01:00",
                                            "taux": "3.88",
                                            "code": "DOUANE",
                                            "libelle": "Douane"
@@ -13846,6 +13848,12 @@
                                "droits": {
                                    "douane": [
                                        {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "9.44",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
                                            "date": "2020-01-01T00:00:00+01:00",
                                            "taux": "9.59",
                                            "code": "DOUANE",
@@ -13968,6 +13976,313 @@
                                                                            ]
                                                                        },
                                                                        "produit_non_interpro": true
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           },
+           "VDNVDL": {
+               "libelle": "VDN-VDL",
+               "format_libelle": null,
+               "code": "VDNVDL",
+               "code_produit": null,
+               "code_comptable": null,
+               "code_douane": null,
+               "departements": [
+               ],
+               "interpro": {
+                   "INTERPRO-declaration": {
+                       "labels": [
+                       ],
+                       "droits": {
+                           "douane": [
+                           ],
+                           "cvo": [
+                           ]
+                       }
+                   }
+               },
+               "genres": {
+                   "DEFAUT": {
+                       "libelle": null,
+                       "format_libelle": null,
+                       "code": null,
+                       "code_produit": null,
+                       "code_comptable": null,
+                       "code_douane": null,
+                       "interpro": {
+                           "INTERPRO-declaration": {
+                               "labels": [
+                               ],
+                               "droits": {
+                                   "douane": [
+                                       {
+                                           "date": "2019-01-01T00:00:00+01:00",
+                                           "taux": "47.67",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       },
+                                       {
+                                           "date": "2020-01-01T00:00:00+01:00",
+                                           "taux": "48.43",
+                                           "code": "DOUANE",
+                                           "libelle": "Douane"
+                                       }
+                                   ],
+                                   "cvo": [
+                                   ]
+                               },
+                               "produit_non_interpro": false
+                           }
+                       },
+                       "departements": [
+                       ],
+                       "appellations": {
+                           "VDLSUP": {
+                               "libelle": "Vin de Liqueur AOP (Sup 18°)",
+                               "format_libelle": null,
+                               "code": "VDLSUP",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       }
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": "%a%",
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "VDN_VDL_AOP_SUP_18",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
+                                                                           ]
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           },
+                           "VDLINF": {
+                               "libelle": "Vin de Liqueur AOP (Inf 18°)",
+                               "format_libelle": null,
+                               "code": "VDLINF",
+                               "code_produit": null,
+                               "code_comptable": null,
+                               "code_douane": null,
+                               "densite": "1.3",
+                               "interpro": {
+                                   "INTERPRO-declaration": {
+                                       "labels": [
+                                       ],
+                                       "droits": {
+                                           "douane": [
+                                           ],
+                                           "cvo": [
+                                           ]
+                                       }
+                                   }
+                               },
+                               "departements": [
+                               ],
+                               "mentions": {
+                                   "DEFAUT": {
+                                       "libelle": null,
+                                       "format_libelle": null,
+                                       "code": null,
+                                       "code_produit": null,
+                                       "code_comptable": null,
+                                       "code_douane": null,
+                                       "interpro": {
+                                           "INTERPRO-declaration": {
+                                               "labels": [
+                                               ],
+                                               "droits": {
+                                                   "douane": [
+                                                   ],
+                                                   "cvo": [
+                                                   ]
+                                               }
+                                           }
+                                       },
+                                       "departements": [
+                                       ],
+                                       "lieux": {
+                                           "DEFAUT": {
+                                               "libelle": null,
+                                               "format_libelle": null,
+                                               "code": null,
+                                               "code_produit": null,
+                                               "code_comptable": null,
+                                               "code_douane": null,
+                                               "interpro": {
+                                                   "INTERPRO-declaration": {
+                                                       "labels": [
+                                                       ],
+                                                       "droits": {
+                                                           "douane": [
+                                                           ],
+                                                           "cvo": [
+                                                           ]
+                                                       }
+                                                   }
+                                               },
+                                               "departements": [
+                                               ],
+                                               "couleurs": {
+                                                   "DEFAUT": {
+                                                       "libelle": null,
+                                                       "format_libelle": null,
+                                                       "code": null,
+                                                       "code_produit": null,
+                                                       "code_comptable": null,
+                                                       "code_douane": null,
+                                                       "interpro": {
+                                                           "INTERPRO-declaration": {
+                                                               "labels": [
+                                                               ],
+                                                               "droits": {
+                                                                   "douane": [
+                                                                   ],
+                                                                   "cvo": [
+                                                                   ]
+                                                               }
+                                                           }
+                                                       },
+                                                       "departements": [
+                                                       ],
+                                                       "cepages": {
+                                                           "DEFAUT": {
+                                                               "libelle": null,
+                                                               "format_libelle": "%a%",
+                                                               "code": null,
+                                                               "code_produit": null,
+                                                               "code_comptable": null,
+                                                               "code_douane": "VDN_VDL_AOP_INF_18",
+                                                               "cepages_autorises": [
+                                                               ],
+                                                               "interpro": {
+                                                                   "INTERPRO-declaration": {
+                                                                       "droits": {
+                                                                           "douane": [
+                                                                           ],
+                                                                           "cvo": [
+                                                                               {
+                                                                                   "date": "2019-01-01",
+                                                                                   "taux": "0.0",
+                                                                                   "code": "CVO",
+                                                                                   "libelle": "Cvo"
+                                                                               }
+                                                                           ]
+                                                                       }
                                                                    }
                                                                }
                                                            }
@@ -14594,6 +14909,8 @@
        "detailsACQUITTE_sorties_vente": "detailsACQUITTE_sorties_vente",
        "detailsACQUITTE_sorties_replacementsuspension": "detailsACQUITTE_sorties_replacementsuspension",
        "detailsACQUITTE_sorties_autre": "detailsACQUITTE_sorties_autre"
+   },
+   "correspondances": {
    },
    "libelle_detail_ligne": {
        "details": {

@@ -611,10 +611,8 @@ class DRMDetail extends BaseDRMDetail {
       if(!$inao){
         return false;
       }
-      if(preg_match('/^[0-9]/', $inao)){
-        return false;
-      }
-      return true;
+
+      return !ConfigurationCepage::isCodeDouaneINAO($inao);
     }
 
     public function isCodeDouaneAlcool(){

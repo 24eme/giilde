@@ -149,3 +149,4 @@ all:
       region_departement: ".*"
       teledeclaration_visa_automatique: true
       visa_unique: false
+      required_degre: false

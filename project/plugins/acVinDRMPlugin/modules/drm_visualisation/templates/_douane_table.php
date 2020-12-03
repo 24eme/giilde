@@ -1,4 +1,4 @@
-<?php if ($drm->exist('transmission_douane') && $drm->transmission_douane && (!$isTeledeclarationMode  || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte()))): ?>
+<?php if ($drm->exist('transmission_douane') && $drm->transmission_douane && (!$isTeledeclarationMode  || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())) && !$drm->isNegoce()): ?>
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">

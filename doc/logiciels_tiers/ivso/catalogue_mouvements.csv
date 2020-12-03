@@ -40,6 +40,7 @@ suspendu,sorties,cession,16. cession d'exploitation,cession d'activité,OBSERVAT
 suspendu,sorties,apportgroupement,17. apport à groupement,apport à un groupement,OBSERVATIONS,sorties-periode/sorties-sans-paiement-droits/autres-sorties
 suspendu,sorties,manipulationssoutirages,18. manipulations soutirages,sorties internes manipulations soutirages (notamment vers lies),,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/autres-mouvements-internes
 suspendu,sorties,revendicationvci,19. revendication de vci,volume de vci de l'année n-1 du produit ayant reçu l'agrément à la récolte de l'année n,,sorties-periode/sorties-sans-paiement-droits/mouvements-internes/revendication-vci
+suspendu,sorties,regularisationrevendiquation,20. régularisation revendiqué,permet de régulariser le stock de volume revendiqué,,
 suspendu,stocks_fin,dont_revendique,dont revendiqué,stock revendiqué en fin de mois,,
 suspendu,stocks_fin,final,final récolté,stock final récolté,,stock-fin-periode
 acquitte,stocks_debut,initial,initial,a remplir uniquement sur la 1ère drm de campagne. en août. indiquer le stock réel constaté par inventaire et identique à la déclaration de stocks. pour tous les mois suivants de la campagne. le stock est automatiquement repris du mois précédent.,,stock-debut-periode

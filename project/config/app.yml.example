@@ -35,6 +35,10 @@ all:
       from_name: "acExceptionNotifierPlugin"
       to: ["email@email.email"]
       subject: "[GIILDA] Erreur 500 : %title%"
+  drm:
+    documents:
+     "Notice d'aide 1": "https://url_de_la_notice_d_aide_1.pdf"
+     "Notice d'aide 2": "https://url_de_la_notice_d_aide_2.pdf"
   pdf:
     reader_link: "https://pdfreaders.org/pdfreaders.fr.html"
   configuration:

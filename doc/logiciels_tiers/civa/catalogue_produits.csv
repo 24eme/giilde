@@ -1,5 +1,4 @@
 CERTIFICATION,GENRE,APPELLATION,MENTION,LIEU,COULEUR,CEPAGE,LIBELLE_PRODUIT,IDENTIFIANT INAO
-AOC,,AOC Alsace blanc,,,,Total Alsace Blanc hors mention,Total Alsace Blanc hors mention,1B001S
 AOC,,AOC Alsace blanc,,,,Chasselas,AOC Alsace blanc Chasselas,1B001S 5
 AOC,,AOC Alsace blanc,,,,Sylvaner,AOC Alsace blanc Sylvaner,1B001S 8
 AOC,,AOC Alsace blanc,,,,Auxerrois,AOC Alsace blanc Auxerrois,1B001S0A
@@ -21,7 +20,6 @@ AOC,,AOC Alsace blanc,SGN,,,Pinot Gris,AOC Alsace blanc Pinot Gris SGN,1B001D13
 AOC,,AOC Alsace blanc,SGN,,,Muscat,AOC Alsace blanc Muscat SGN,1B001D12
 AOC,,AOC Alsace blanc,SGN,,,Muscat Ottonel,AOC Alsace blanc Muscat Ottonel SGN,1B001D10
 AOC,,AOC Alsace blanc,SGN,,,Gewurztraminer,AOC Alsace blanc Gewurztraminer SGN,1B001D11
-AOC,,AOC Alsace Lieu-dit,,,Blanc,Total Lieu dit Blanc hors mention,Total Lieu dit Blanc hors mention,1B070S
 AOC,,AOC Alsace Lieu-dit,,,Blanc,Chasselas,AOC Alsace Lieu-dit Chasselas,1B070S05
 AOC,,AOC Alsace Lieu-dit,,,Blanc,Sylvaner,AOC Alsace Lieu-dit Sylvaner,1B070S08
 AOC,,AOC Alsace Lieu-dit,,,Blanc,Auxerrois,AOC Alsace Lieu-dit Auxerrois,1B070S0A
@@ -33,7 +31,6 @@ AOC,,AOC Alsace Lieu-dit,,,Blanc,Pinot Gris,AOC Alsace Lieu-dit Pinot Gris,1B070
 AOC,,AOC Alsace Lieu-dit,,,Blanc,Muscat,AOC Alsace Lieu-dit Muscat,1B070S02
 AOC,,AOC Alsace Lieu-dit,,,Blanc,Muscat Ottonel,AOC Alsace Lieu-dit Muscat Ottonel,1B070S00
 AOC,,AOC Alsace Lieu-dit,,,Blanc,Gewurztraminer,AOC Alsace Lieu-dit Gewurztraminer,1B070S01
-AOC,,AOC Alsace Lieu-dit,,,Rouge,Total Lieu dit Rouge,Total Lieu dit Rouge,1R070S
 AOC,,AOC Alsace Lieu-dit,,,Rouge,Pinot Noir Rouge,AOC Alsace Lieu-dit Pinot Noir Rouge,1R070S
 AOC,,AOC Alsace Lieu-dit,VT,,Blanc,Riesling,AOC Alsace Lieu-dit Riesling VT,1B070D24
 AOC,,AOC Alsace Lieu-dit,VT,,Blanc,Pinot Gris,AOC Alsace Lieu-dit Pinot Gris VT,1B070D23
@@ -724,10 +721,10 @@ Vins sans IG,Mousseux,Vins mousseux étrangers,,,Rouge,,Vins mousseux étrangers
 Vins sans IG,Mousseux,Vins mousseux étrangers,,,Rosé,,Vins mousseux étrangers Rosé,VM_ETRANGERS
 Vins sans IG,Mousseux,Sans cépage,,,,,Vins sans IG Mousseux Sans cépage,VM_SANS_IG_AUTRES
 Vins sans IG,Mousseux,Avec cépage,,,,,Vins sans IG Mousseux Avec cépage,VM_SANS_IG_CEPAGE
+Vins AOP,Tranquille,,,,,,Vins AOP Tranquille,VT_IG_AOP
 Vins AOP,Tranquille,,,,Blanc,,Vins AOP Blanc,VT_IG_AOP
 Vins AOP,Tranquille,,,,Rouge,,Vins AOP Rouge,VT_IG_AOP
 Vins AOP,Tranquille,,,,Rosé,,Vins AOP Rosé,VT_IG_AOP
-Vins AOP,Tranquille,,,,,,Vins AOP Tranquille,VT_IG_AOP
 Vins AOP,Tranquille,CEE,,,Blanc,,Vins AOP CEE Blanc,VT_ETRANGERS
 Vins AOP,Tranquille,CEE,,,Rouge,,Vins AOP CEE Rouge,VT_ETRANGERS
 Vins AOP,Tranquille,CEE,,,Rosé,,Vins AOP CEE Rosé,VT_ETRANGERS
@@ -747,13 +744,15 @@ Autre,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autre,,Rebêches,,,,,Rebêches,5X999V
 Autre,Autres Vins Tranquilles,,,,,,Autres Vins Tranquilles,
 Autre,Autres Vins Mousseux,,,,,,Autres Vins Mousseux,
+Alcools et autres Produits,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
+Alcools et autres Produits,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
 Alcools et autres Produits,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
 Alcools et autres Produits,,Produit intermédiaire supérieur 18°,,,,,Produit intermédiaire supérieur 18°,AUTRES_PI_SUP_18
 Alcools et autres Produits,,Prémix inférieur à 18°,,,,,Prémix inférieur à 18°,AUTRES_PI_INF_18_PREMIX
-Alcools et autres Produits,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
-Alcools et autres Produits,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
 Alcools et autres Produits,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
 Alcools et autres Produits,,BFAV,,,,,BFAV,BOISSONS_FERMENTEES_AUTRES
 Alcools et autres Produits,,Autres alcools,,,,,Autres alcools,
+Alcools et autres Produits,,Hydromels,,,,,Hydromels,HYDROMELS
+Alcools et autres Produits,,Cidre,,,,,Cidre,CIDRES
 VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
 VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18

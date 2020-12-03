@@ -100,12 +100,12 @@
                         <?php endif; ?>
                         <?php if ($societe->exist('type_fournisseur') && count($societe->type_fournisseur)) : ?>
                         <li>Type de Fournisseur : <?php foreach ($societe->type_fournisseur as $type_fournisseur) : ?> <?php echo $type_fournisseur; ?>&nbsp;<?php endforeach; ?>
-<?php endif; ?>
+                        <?php endif; ?>
                 </ul>
 
                 <?php if ($societe->commentaire) : ?>
                     <strong>Commentaires :</strong> <?php echo $societe->commentaire; ?>
-<?php endif; ?>
+                <?php endif; ?>
             </div>
 
         </div>

@@ -156,4 +156,8 @@ class VracConfiguration
 
 		return $this->configuration['visa_unique'];
 	}
+
+	public function isRequiredDegre(){
+		return (isset($this->configuration['required_degre'])) && $this->configuration['required_degre'];
+	}
 }

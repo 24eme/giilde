@@ -113,6 +113,22 @@ $interpro = strtoupper(sfConfig::get('app_teledeclaration_interpro'));
 }
 ~ \\
 <?php endif; ?>
+<?php if($drm->declaratif->exist('statistiques') && ($drm->declaratif->statistiques->jus || $drm->declaratif->statistiques->mcr || $drm->declaratif->statistiques->vinaigre)): ?>
+\fcolorbox{white}{white}{
+\begin{tabular}{L{280mm}}
+<?php if ($drm->declaratif->statistiques->jus): ?>
+    \textbf{Quantités de moûts de raisin transformées en jus de raisin : }<?php echo sprintf("%.2f", $drm->declaratif->statistiques->jus)." hl" ?>
+<?php endif; ?>
+<?php if ($drm->declaratif->statistiques->mcr): ?>
+    \textbf{Quantités de moûts de raisin transformées en MCR : }<?php echo sprintf("%.2f", $drm->declaratif->statistiques->mcr)." hl" ?>
+<?php endif; ?>
+<?php if ($drm->declaratif->statistiques->vinaigre): ?>
+      \textbf{Quantités de moûts de raisin transformées en vinaigre : }<?php echo sprintf("%.2f", $drm->declaratif->statistiques->vinaigre)." hl" ?>
+<?php endif; ?>
+\end{tabular}
+}
+~ \\
+<?php endif; ?>
 <?php if(DRMConfiguration::getInstance()->isPdfCvo()): ?>
 <?php include_partial('drm_pdf/generateCvoTex', array('drm' => $drm)); ?>
 <?php endif; ?>

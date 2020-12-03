@@ -54,7 +54,7 @@ class AnnuaireAjoutForm extends acCouchdbObjectForm {
             $tiers = EtablissementClient::getInstance()->retrieveById($values['etablissementChoice']);
         } else {
             $societe = $values['societe'];
-            $tiers = $societe->getEtablissementPrincipal();
+            $tiers = array_pop($this->etablissements)->etablissement;
         }
         $libelle = ($tiers->nom) ? $tiers->nom : $tiers->raison_sociale;
 

@@ -66,7 +66,7 @@ use_helper('PointsAides');
                           <li class="list-group-item <?php if ($item->isActif): ?> actif <?php else: ?> list-group-item-danger <?php endif; ?>">
                                 <div class="row">
                                     <div class="col-xs-10"><?php echo $item->name ?><span>&nbsp;(<?php echo str_replace("ETABLISSEMENT-","",$key); ?>)</span></div>
-                                    <div class="col-xs-2 text-right"><a href="<?php echo url_for('annuaire_supprimer', array('type' => 'recoltants', 'id' => $key, 'identifiant' => $etablissement->identifiant)) ?>" onclick="return confirm('Confirmez-vous la suppression du négociant ?')" class="btn btn-xs btn-danger">X</a>&nbsp;<?php echo getPointAideHtml('vrac','annuaire_suppression'); ?></div>
+                                    <div class="col-xs-2 text-right"><a href="<?php echo url_for('annuaire_supprimer', array('type' => 'negociants', 'id' => $key, 'identifiant' => $etablissement->identifiant)) ?>" onclick="return confirm('Confirmez-vous la suppression du négociant ?')" class="btn btn-xs btn-danger">X</a>&nbsp;<?php echo getPointAideHtml('vrac','annuaire_suppression'); ?></div>
 
                                 </div>
                             </li>

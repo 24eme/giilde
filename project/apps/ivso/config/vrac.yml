@@ -24,3 +24,4 @@ all:
         "ESPECES": "Espèces"
       transactions:
         "MOUTS": null
+      required_degre: true

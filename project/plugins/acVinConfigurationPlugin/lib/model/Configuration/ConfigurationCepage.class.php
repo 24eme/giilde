@@ -56,6 +56,11 @@ class ConfigurationCepage extends BaseConfigurationCepage {
         return $this->getParentNode();
     }
 
+    public static function isCodeDouaneINAO($code_douane){
+
+      return preg_match('/^[0-9]/', $code_douane);
+    }
+
     public static function isCodeDouaneNeedTav($code_douane) {
         if(!$code_douane){
 

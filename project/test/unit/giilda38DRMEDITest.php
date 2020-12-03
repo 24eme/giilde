@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$nb_tests = 67;
+$nb_tests = 69;
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $nego =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
 $produits = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits();
@@ -208,12 +208,12 @@ fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,sorties,export,1.89,PAYS-BAS,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,sorties,export,1.9525,BELGIQUE,,,,,\n");
 fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_debut,initial,951.4625,,,,,,\n");
-fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,sorties,ventefrancecrd,4.62,,,,,,\n");
-fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,sorties,export,1.89,PAYS-BAS,,,,,\n");
-fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,sorties,export,0.9525,BELGIQUE,,,,,\n");
-fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_fin,final,944,,,,,,\n");
-fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,14742,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_debut,initial,951.4625,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,sorties,ventefrancecrd,4.62,,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,sorties,export,1.89,PAYS-BAS,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,sorties,export,0.9525,BELGIQUE,,,,,\n");
+fwrite($temp, "CAVE,$periode,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,14742,,,Bon Vin,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,3118,,,,\n");
 fwrite($temp, "CRD,$periode,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11624,,,,\n");
 fclose($temp);
@@ -314,8 +314,8 @@ $temp = fopen($tmpfname, "w");
 $periode5 = date('Y')."02";
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_debut,initial,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_fin,final,944,,,,,,\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif acquitte,stock_debut,debut,11624,,,,\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif acquitte,stock_fin,fin,11624,,,,\n");
 fclose($temp);
@@ -334,8 +334,8 @@ $temp = fopen($tmpfname, "w");
 $periode5 = date('Y')."02";
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_debut,initial,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_fin,final,944,,,,,,\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,0,,,,\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,entrees,achats,11624,,,,\n");
 fwrite($temp, "CRD,$periode5,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11624,,,,\n");
@@ -353,8 +353,8 @@ unlink($tmpfname);
 $temp = fopen($tmpfname, "w");
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_debut,initial,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_debut,initial,944,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_fin,final,944,,,,,,\n");
 fclose($temp);
 $drm7 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5);
 $drm7->teledeclare = true;
@@ -368,8 +368,8 @@ unlink($tmpfname);
 $temp = fopen($tmpfname, "w");
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_debut,initial,944,,,,,,\n");
 fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produit1->getAppellation()->getLibelle()." (".$produit1->getCodeDouane()."),suspendu,stocks_fin,final,944,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_debut,initial,940,,,,,,\n");
-fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,,suspendu,stocks_fin,final,940,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_debut,initial,940,,,,,,\n");
+fwrite($temp, "CAVE,$periode5,".$viti->identifiant.",".$viti->no_accises.",".$produit2->getCodeDouane().",,,,,,,,Bon Vin,suspendu,stocks_fin,final,940,,,,,,\n");
 fclose($temp);
 $drm8 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode5);
 $drm8->teledeclare = true;
@@ -474,8 +474,8 @@ $periode6 = date('Y')."05";
 $temp = fopen($tmpfname, "w");
 fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 20 (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,50,,,,,,\n");
 fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 20° (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,20,,,,,,\n");
-fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 45° (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,100,,,,,,\n");
-fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 45° (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,45,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,45°,".$produitAlcool->getAppellation()->getLibelle()." (".$produitAlcool->getCodeDouane()."),suspendu,sorties,ventefrancecrd,10,,,,,,\n");
+fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,45°,".$produitAlcool->getAppellation()->getLibelle()." (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,45,,,,,,\n");
 fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 60° (".$produitAlcool->getCodeDouane()."),suspendu,stocks_debut,initial,70,,,,,,\n");
 fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 60° (".$produitAlcool->getCodeDouane()."),suspendu,sorties,ventefrancecrd,10,,,,,,\n");
 fwrite($temp, "CAVE,$periode6,".$viti->identifiant.",".$viti->no_accises.",,,,,,,,,".$produitAlcool->getAppellation()->getLibelle()." - 60° (".$produitAlcool->getCodeDouane()."),suspendu,complement,TAV,60,,,,,,\n");
@@ -485,7 +485,8 @@ fclose($temp);
 $drm11 = DRMClient::getInstance()->createDoc($viti->identifiant, $periode6, true);
 $import = new DRMImportCsvEdi($tmpfname, $drm11);
 $import->importCSV();
-$t->is(count($drm11->get($produitAlcool_hash.'/details')->toArray(true, false)), 3, "3 produits ont été créés");
+$t->is(count($drm11->get($produitAlcool_hash.'/details')->toArray(true, false)), 3, "3 produits");
+$t->is($drm11->get($produitAlcool_hash.'/details/'.$keyProductTav45)->stocks_fin->final, 90, "Stock final du 2ème produit");
 $t->is($drm11->get($produitAlcool_hash.'/details/'.$keyProductTav60)->stocks_fin->final, 60, "Stock final du 3 ème produit");
 
 unlink($tmpfname);
@@ -514,7 +515,8 @@ if($application == "ivso") {
     foreach($details as $detail) {
     }
 
-    $t->is($detail->getLibelle(), "Floc de Gascogne Blanc - 17°", "Reconnaissance du produit");
+    $t->is($detail->getCepage()->getHash(), "/declaration/certifications/VDNVDL/genres/DEFAUT/appellations/FDG/mentions/DEFAUT/lieux/DEFAUT/couleurs/blanc/cepages/DEFAUT", "Hash du produit reconnu");
+    $t->is($detail->getLibelle(), "Floc de Gascogne Blanc - 17°", "Libellé du produit reconnu");
 } elseif($application == "bivc") {
     $periode5 = date('Y')."04";
     $t->comment("création vrac");

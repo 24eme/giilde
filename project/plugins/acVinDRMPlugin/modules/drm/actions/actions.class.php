@@ -153,6 +153,11 @@ class drmActions extends drmGeneriqueActions {
                   if($produitsTotaux) {
                       $url_reprise_donnees_drm.= '?aggregate='.$produitsTotaux;
                   }
+
+                  if(!DRMClient::getInstance()->findLastByIdentifiant($identifiant, acCouchdbClient::HYDRATE_JSON)) {
+                      $url_reprise_donnees_drm.= "?firstdrm=1";
+                  }
+
                   $discr = date('YmdHis').'_'.uniqid();
                   $md5file = md5($discr);
                   $filename = 'import_'.$identifiant . '_' . $periode.'_'.$md5file.'.csv';

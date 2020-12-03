@@ -59,18 +59,21 @@ Autre AOC,Tranquille,Coteaux du Vendomois,,,Rosé,,Coteaux du Vendomois Rosé,1S
 Autre AOC,Tranquille,Coteaux de l'Aubance,,,Blanc,Chenin,Coteaux de l'Aubance,1B211L
 Autre AOC,Tranquille,Anjou-Villages Brissac,,,Rouge,,Anjou-Villages Brissac,1R217S
 Autre AOC,Tranquille,Jasnières,,,Blanc,,Jasnières,1B224 
+Autre AOC,Tranquille,Coteaux du Loir,,,Blanc,Chenin,Coteaux du Loir Blanc,1B223
+Autre AOC,Tranquille,Coteaux du Loir,,,Rouge,,Coteaux du Loir Rouge,1R223S
+Autre AOC,Tranquille,Coteaux du Loir,,,Rosé,,Coteaux du Loir Rosé,1S223S
 Autre AOC,Mousseux,Crémant de Loire,,,Blanc,,Crémant de Loire Blanc,1B215M
 Autre AOC,Mousseux,Crémant de Loire,,,Rosé,,Crémant de Loire Rosé,1S215M
 Autre AOC,Mousseux,Touraine,,,Blanc,,Touraine Mousseux Blanc,1B235M 1
 Autre AOC,Mousseux,Touraine,,,Rosé,,Touraine Mousseux Rosé,1S235M 1
 Autre AOC,Mousseux,Vouvray,Pétillant,,Blanc,,Vouvray Pétillant,1B226P 1
-Autre AOC,Tranquille,Bourgueil,,,Rouge,Cabernet Franc,Bourgueil Rouge,1S220S
-Autre AOC,Tranquille,Bourgueil,,,Rosé,Cabernet Franc,Bourgueil Rosé,1R220S
+Autre AOC,Tranquille,Bourgueil,,,Rouge,Cabernet Franc,Bourgueil Rouge,1R220S
+Autre AOC,Tranquille,Bourgueil,,,Rosé,Cabernet Franc,Bourgueil Rosé,1S220S
 Autre AOC,Tranquille,Cheverny,,,Blanc,,Cheverny Blanc,1B231S
 Autre AOC,Tranquille,Cheverny,,,Rouge,,Cheverny Rouge,1R231S
 Autre AOC,Tranquille,Montlouis sur Loire,,,Blanc,Chenin,Montlouis sur Loire,1B225
 Autre AOC,Tranquille,Saint Pourçain,,,Rosé,,Saint Pourçain Rosé,1S430S
-Autre AOC,Tranquille,Saint Pourçain,,,Blanc,,Saint Pourçain Blanc,1B430S 
+Autre AOC,Tranquille,Saint Pourçain,,,Blanc,,Saint Pourçain Blanc,1B430S
 Autre AOC,Tranquille,Saint Pourçain,,,Rouge,,Saint Pourçain Rouge,1R430S
 Autre AOC,Tranquille,Valençay,,,Blanc,,Valençay Blanc,1B233S
 Autre AOC,Tranquille,Valençay,,,Rouge,,Valençay Rouge,1R233S
@@ -152,16 +155,17 @@ Vin sans IG,Mousseux,Vin de France,,,Rouge,,Vin de France Mousseux Rouge,4R999M
 Vin sans IG,Mousseux,Vin étranger,,,,,Vin étranger Mousseux,VM_ETRANGERS
 Vin sans IG,Mousseux,Sans cépage,,,,,Vin sans IG Mousseux Sans cépage,VM_SANS_IG_AUTRES
 Vin sans IG,Mousseux,Avec cépage,,,,,Vin sans IG Mousseux Avec cépage,VM_SANS_IG_CEPAGE
+Autres alcools,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
 Autres alcools,,Matières Premières,,,,,Matières Premières,MATIERES_PREMIERES_ALCOOLS
 Autres alcools,,Produit intermédiaire inférieur 18°,,,,,Produit intermédiaire inférieur 18°,AUTRES_PI_INF_18
 Autres alcools,,Alcool inférieur 18°,,,,,Alcool inférieur 18°,ALCOOL_AUTRE_INF_18
-Autres alcools,,Alcool supérieur 18°,,,,,Alcool supérieur 18°,ALCOOL_AUTRE_SUP_18
 Autres alcools,,Autres,,,,,Autres,
+Autres alcools,,Autres Boissons fermentées,,,,,Autres Boissons fermentées,BOISSONS_FERMENTEES_AUTRES
+VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
+VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18
 Autres,,Lies et Bourbes,,,,,Lies et Bourbes,4X999V
 Autres,,DPLC,,,,,DPLC,4B988Y
 Autres,,DPLC,,,Blanc,,DPLC Blanc,4B988Y
 Autres,,DPLC,,,Rouge,,DPLC Rouge,4R988Y
 Autres,Tranquille,Autres vins,,,,,Autres vins Tranquille,
 Autres,Mousseux,Autres vins,,,,,Autres vins Mousseux,
-VDN-VDL,,Vin de Liqueur AOP (Sup 18°),,,,,Vin de Liqueur AOP (Sup 18°),VDN_VDL_AOP_SUP_18
-VDN-VDL,,Vin de Liqueur AOP (Inf 18°),,,,,Vin de Liqueur AOP (Inf 18°),VDN_VDL_AOP_INF_18
