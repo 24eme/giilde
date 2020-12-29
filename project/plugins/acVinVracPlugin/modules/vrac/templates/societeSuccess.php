@@ -92,7 +92,12 @@ use_helper('PointsAides');
                     Saisir un nouveau contrat <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
+                  <?php if ($societe->isNegociant()): ?>
+                  <li><a href="<?= url_for('vrac_nouveau', ['choix-etablissement' => $etablissementCreateur->identifiant]); ?>"><b>Manuellement en tant qu'acheteur</b></a></li>
+                  <li><a href="<?= url_for('vrac_nouveau', ['choix-etablissement' => $etablissementCreateur->identifiant, 'vrac[isVendeur]' => true]); ?>">Manuellement en tant que vendeur</a></li>
+                  <?php else: ?>
                   <li><a href="<?= url_for('vrac_nouveau', ['choix-etablissement' => $etablissementCreateur->identifiant]); ?>">Manuellement</a></li>
+                  <?php endif; ?>
                   <li><a href="<?= url_for('vrac_upload_index') ?>">Via un fichier</a></li>
                 </ul>
               </div>

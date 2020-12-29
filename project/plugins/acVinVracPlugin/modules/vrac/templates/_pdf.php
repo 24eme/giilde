@@ -84,20 +84,20 @@ if ($vrac->mandataire_exist) {
 
 
 
-\def\CONTRATVENDEURNOM{<?php echo $vendeur_raison_sociale ?><?php if ($vrac->responsable == 'vendeur'): ?> (responsable)<?php endif; ?>}
+\def\CONTRATVENDEURNOM{<?php echo $vendeur_raison_sociale ?><?php if ($vrac->isVendeurResponsable()): ?> (responsable)<?php endif; ?>}
 \def\CONTRATVENDEURCVI{<?php echo $vrac->vendeur->cvi ?>}
 \def\CONTRATVENDEURACCISES{<?php echo $vrac->vendeur->no_accises ?>}
 \def\CONTRATVENDEURADRESSE{<?php echo $vrac->vendeur->adresse ?>}
 \def\CONTRATVENDEURCOMMUNE{<?php echo $vrac->vendeur->code_postal.' '.$vrac->vendeur->commune ?>}
 
 
-\def\CONTRATACHETEUREURNOM{<?php echo $acheteur_raison_sociale ?><?php if ($vrac->responsable == 'acheteur'): ?> (responsable)<?php endif; ?>}
+\def\CONTRATACHETEUREURNOM{<?php echo $acheteur_raison_sociale ?><?php if ($vrac->isAcheteurResponsable()): ?> (responsable)<?php endif; ?>}
 \def\CONTRATACHETEURCVI{<?php echo $vrac->acheteur->cvi ?>}
 \def\CONTRATACHETEURACCISES{<?php echo $vrac->acheteur->no_accises ?>}
 \def\CONTRATACHETEURADRESSE{<?php echo $vrac->acheteur->adresse ?>}
 \def\CONTRATACHETEURCOMMUNE{<?php echo $vrac->acheteur->code_postal.' '.$vrac->acheteur->commune ?>}
 
-\def\CONTRATCOURTIERNOM{<?php echo $mandataire_raison_sociale ?><?php if ($vrac->responsable == 'mandataire'): ?> (responsable)<?php endif; ?>}
+\def\CONTRATCOURTIERNOM{<?php echo $mandataire_raison_sociale ?><?php if ($vrac->isMandataireResponsable())): ?> (responsable)<?php endif; ?>}
 \def\CONTRATCOURTIERCARTEPRO{, n° carte professionnelle:~<?php echo $vrac->mandataire->carte_pro ?>}
 
 \def\CONTRATTYPE{Moûts}

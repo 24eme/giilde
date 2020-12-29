@@ -78,17 +78,17 @@ var initSoussignes = function()
     	var active = $(this);
     	if (active.hasClass('text-success')) {
     		console.log('declick');
-    		active.removeClass('text-success');
-    		active.addClass('text-info');
-    		active.find('input').removeAttr('checked');
+            active.removeClass('text-success');
+            active.addClass('text-muted');
+            active.find('input').removeAttr('checked');
     	} else {
         	$('.responsable').each(function() {
         		$(this).removeClass('text-success');
         		$(this).addClass('text-info');
         	});
-        	active.removeClass('text-info');
-        	active.addClass('text-success');
-    		active.find('input').attr('checked', 'checked');
+            active.removeClass('text-muted');
+            active.addClass('text-success');
+            active.find('input').attr('checked', 'checked');
     	}
     });
 };

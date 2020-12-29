@@ -87,7 +87,6 @@ all:
         #18
         validation_pt_vigilance: "Points non bloquants. Vous pouvez résoudre le point en cliquant sur l’hyperlien."
         validation_pt_bloquant: "Les points bloquants doivent être résolus avant de valider le contrat. Pour cela, cliquer sur l’hyperlien."
-        validation_valider: "Cliquer pour valider et signer le contrat."
 
         #19
         validation_popup_annuler: "Permet de revenir à la saisie pour modification ou suppression  intégrale du contrat."

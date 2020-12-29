@@ -1,9 +1,12 @@
 <?php
 use_helper('PointsAides');
 ?>
-<?php if (isset($id) && !isset($soussigne)): ?>
-<?php $soussigne = EtablissementClient::getInstance()->find($id) ?>
-<?php endif; ?>
+<?php if (!isset($soussigne)) {
+    $soussigne = null;
+    if (isset($id)) {
+        $soussigne = EtablissementClient::getInstance()->find($id);
+    }
+} ?>
 <?php if (!$soussigne) return ; ?>
 <strong><?php echo $soussigne->nom ?></strong>
 <small class="text-muted">(<?php echo EtablissementFamilles::getFamilleLibelle($soussigne->famille) ?>)</small><br />
@@ -24,9 +27,9 @@ use_helper('PointsAides');
   <br />
   <br />
   <div class="alert alert-warning" role="warning">
-  <?php echo getPointAideHtml('vrac','soussigne_nonactif_compte'); ?>
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>
   Ce ressortissant n'a pas encore activé son compte de télédeclarant.
+  <?php echo getPointAideHtml('vrac','soussigne_nonactif_compte'); ?>
 </div>
 <?php endif; ?>

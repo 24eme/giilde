@@ -17,16 +17,20 @@ class VracSoussigneForm extends VracForm {
     private $representant = null;
     protected $fromAnnuaire;
     protected $isAcheteurResponsable;
-    protected $isCourtierResponsable;
+    protected $isVendeurResponsable;
+    protected $isMandataireResponsable;
     protected $isRepresentantResponsable;
+    protected $isTeledeclarationMode;
     private $types_contrat = array('1' => 'Oui', '0' => 'Non');
-    private $types_responsable = array('vendeur' => 'Vendeur', 'acheteur' => 'Acheteur', 'mandataire' => 'Mandataire / Courtier');
+    private $types_responsable = array('vendeur' => 'Vendeur', 'acheteur' => 'Acheteur', 'mandataire' => 'Mandataire / Courtier', 'representant' => "Représentant");
 
-    public function __construct(Vrac $object, $fromAnnuaire = false, $isAcheteurResponsable = false, $isCourtierResponsable = false,$isRepresentantResponsable = false, $ajaxSearch = false, $options = array(), $CSRFSecret = null) {
+    public function __construct(Vrac $object, $fromAnnuaire = false, $ajaxSearch = false, $options = array(), $CSRFSecret = null) {
         $this->fromAnnuaire = $fromAnnuaire;
-        $this->isAcheteurResponsable = $isAcheteurResponsable;
-        $this->isCourtierResponsable = $isCourtierResponsable;
-        $this->isRepresentantResponsable = $isRepresentantResponsable;
+        $this->isAcheteurResponsable = $object->isAcheteurResponsable();
+        $this->isVendeurResponsable = $object->isVendeurResponsable();
+        $this->isMandataireResponsable = $object->isMandataireResponsable();
+        $this->isRepresentantResponsable = $object->isRepresentantResponsable();
+        $this->isTeledeclarationMode = ($object->responsable);
         $this->ajaxSearch = $ajaxSearch;
         parent::__construct($object, $options, $CSRFSecret);
     }
@@ -42,67 +46,67 @@ class VracSoussigneForm extends VracForm {
         $type = array(EtablissementFamilles::FAMILLE_PRODUCTEUR => 'Producteur', EtablissementFamilles::FAMILLE_NEGOCIANT => 'Négociant');
         if ($this->fromAnnuaire && $this->getObject()->createur_identifiant) {
             $vendeurs = $this->getRecoltants();
-            if(!$this->isAcheteurResponsable){
-              $acheteurs = $this->getNegociants();
-            }
+            $acheteurs = $this->getNegociants();
             $commerciaux = $this->getCommerciaux();
             $representants = $this->getRepresentants();
-            $this->setWidget('vendeur_identifiant', new bsWidgetFormChoice(array('choices' => $vendeurs), array('class' => 'autocomplete')));
 
-            if(!$this->isAcheteurResponsable){
-              $this->setWidget('acheteur_identifiant', new bsWidgetFormChoice(array('choices' => $acheteurs), array('class' => 'autocomplete')));
-              $this->setWidget('acheteur_producteur', new bsWidgetFormChoice(array('choices' => $acheteurs), array('class' => 'autocomplete')));
-              $this->setWidget('acheteur_negociant', new bsWidgetFormChoice(array('choices' => $acheteurs), array('class' => 'autocomplete')));
-              $this->setValidator('acheteur_producteur', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($acheteurs))));
-              $this->setValidator('acheteur_negociant', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($acheteurs))));
-            }
-            $this->setWidget('commercial', new bsWidgetFormChoice(array('choices' => $commerciaux), array('class' => 'autocomplete')));
-
-            $this->setValidator('vendeur_identifiant', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($vendeurs))));
-            if(!$this->isRepresentantResponsable){
-              $this->setWidget('representant_identifiant', new bsWidgetFormChoice(array('choices' => $representants), array('class' => 'autocomplete')));
-              $this->setValidator('representant_identifiant', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($representants))));
+            if (!$this->isVendeurResponsable) {
+                $this->setWidget('vendeur_identifiant', new bsWidgetFormChoice(array('choices' => $vendeurs), array('class' => 'autocomplete')));
+                $this->setValidator('vendeur_identifiant', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($vendeurs))));
+                $this->validatorSchema['vendeur_identifiant']->setMessage('required', 'Le choix d\'un vendeur est obligatoire');
             }
 
             if ($this->isAcheteurResponsable) {
                 $acheteursChoiceValides[] = 'ETABLISSEMENT-' . $this->getObject()->createur_identifiant;
             } else {
                 $acheteursChoiceValides = array_keys($acheteurs);
+                $this->setValidator('acheteur_producteur', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($acheteurs))));
+                $this->setValidator('acheteur_negociant', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($acheteurs))));
+                $this->setWidget('acheteur_producteur', new bsWidgetFormChoice(array('choices' => $acheteurs), array('class' => 'autocomplete')));
+                $this->setWidget('acheteur_negociant', new bsWidgetFormChoice(array('choices' => $acheteurs), array('class' => 'autocomplete')));
+                $this->setWidget('acheteur_type', new bsWidgetFormChoice(array('expanded' => true, 'choices' => $type)));
+                $this->setValidator('acheteur_type', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($type))));
+                $this->setWidget('acheteur_identifiant', new bsWidgetFormChoice(array('choices' => $acheteurs), array('class' => 'autocomplete')));
                 $this->setValidator('acheteur_identifiant', new sfValidatorChoice(array('required' => false, 'choices' => $acheteursChoiceValides)));
                 $this->validatorSchema['acheteur_identifiant']->setMessage('required', 'Le choix d\'un acheteur est obligatoire');
+                $this->validatorSchema->setPostValidator(new ValidatorVracSoussigne());
             }
 
+            if(!$this->isRepresentantResponsable){
+                $this->setWidget('representant_identifiant', new bsWidgetFormChoice(array('choices' => $representants), array('class' => 'autocomplete')));
+                $this->setValidator('representant_identifiant', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($representants))));
+            }
+
+            $this->setWidget('commercial', new bsWidgetFormChoice(array('choices' => $commerciaux), array('class' => 'autocomplete')));
             $this->setValidator('commercial', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($commerciaux))));
             $this->widgetSchema->setLabel('commercial', 'Sélectionner un interlocuteur commercial :');
         } else {
-            $this->setWidget('vendeur_identifiant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_PRODUCTEUR)));
-            if(!$this->isAcheteurResponsable){
-              $this->setWidget('acheteur_producteur', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_PRODUCTEUR)));
-              $this->setWidget('acheteur_negociant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_NEGOCIANT)));
-              $this->setValidator('acheteur_producteur', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_PRODUCTEUR)));
-              $this->setValidator('acheteur_negociant', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_NEGOCIANT)));
-            }
-            if(!$this->isRepresentantResponsable){
-              $this->setWidget('representant_identifiant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_REPRESENTANT)));
-            }
-            $this->setValidator('vendeur_identifiant', new ValidatorEtablissement(array('required' => true, 'familles' => EtablissementFamilles::FAMILLE_PRODUCTEUR)));
-              if(!$this->isRepresentantResponsable){
-            $this->setValidator('representant_identifiant', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_REPRESENTANT)));
-          }
-        }
-        if(!$this->isAcheteurResponsable){
-          $this->setWidget('acheteur_type', new bsWidgetFormChoice(array('choices' => $type, 'expanded' => true)));
-        }
-        if(!$this->isAcheteurResponsable && !$this->isCourtierResponsable){
+            $this->setWidget('vendeur_identifiant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => array(EtablissementFamilles::FAMILLE_PRODUCTEUR, EtablissementFamilles::FAMILLE_NEGOCIANT))));
+            $this->setValidator('vendeur_identifiant', new ValidatorEtablissement(array('required' => true)));
+            $this->validatorSchema['vendeur_identifiant']->setMessage('required', 'Le choix d\'un vendeur est obligatoire');
 
-          $this->setWidget('mandataire_exist', new bsWidgetFormInputCheckbox());
-          $this->setWidget('mandataire_identifiant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_COURTIER)));
+            $this->setWidget('acheteur_producteur', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_PRODUCTEUR)));
+            $this->setValidator('acheteur_producteur', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_PRODUCTEUR)));
+            $this->setWidget('acheteur_negociant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_NEGOCIANT)));
+            $this->setValidator('acheteur_negociant', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_NEGOCIANT)));
+            $this->setWidget('acheteur_type', new bsWidgetFormChoice(array('choices' => $type, 'expanded' => true)));
+            $this->setValidator('acheteur_type', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($type))));
+
+            $this->setWidget('representant_identifiant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_REPRESENTANT)));
+            $this->setValidator('representant_identifiant', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_REPRESENTANT)));
+
+            $this->setWidget('mandataire_exist', new bsWidgetFormInputCheckbox());
+            $this->setValidator('mandataire_exist', new sfValidatorBoolean(array('required' => false)));
+            $this->setWidget('mandataire_identifiant', new WidgetEtablissement(array('interpro_id' => 'INTERPRO-declaration', 'familles' => EtablissementFamilles::FAMILLE_COURTIER)));
+            $this->setValidator('mandataire_identifiant', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_COURTIER)));
+
+            $this->validatorSchema->setPostValidator(new ValidatorVracSoussigne());
         }
+        $this->setWidget('responsable', new bsWidgetFormChoice(array('choices' => $this->getTypesResponsable(), 'expanded' => true)));
+        $this->setValidator('responsable', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getTypesResponsable()))));
+
         $this->setWidget('type_contrat', new bsWidgetFormChoice(array('choices' => $this->getTypesContrat(), 'expanded' => true)));
-        if(!$this->fromAnnuaire) {
-            $this->setWidget('responsable', new bsWidgetFormChoice(array('choices' => $this->getTypesResponsable(), 'expanded' => true)));
-            $this->setValidator('responsable', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getTypesResponsable()))));
-        }
+
         $this->setWidget('type_transaction', new bsWidgetFormChoice(array('choices' => $this->getTypesTransaction(), 'expanded' => true)));
         $this->setWidget('interne', new bsWidgetFormInputCheckbox());
         $this->setWidget('vendeur_intermediaire', new bsWidgetFormInputCheckbox());
@@ -110,7 +114,8 @@ class VracSoussigneForm extends VracForm {
         $this->setWidget('logement', new bsWidgetFormInput());
         $this->setWidget('vendeur_tva', new bsWidgetFormInputCheckbox());
 
-
+        $this->setWidget('isVendeur', new sfWidgetFormInputHidden());
+        $this->setValidator('isVendeur', new sfValidatorPass());
 
         $this->widgetSchema->setLabels(array(
             'type_transaction' => 'Type de transaction',
@@ -129,13 +134,6 @@ class VracSoussigneForm extends VracForm {
             'logement' => 'Ville : ',
             'type_contrat' => 'Contrat pluriannuel',
         ));
-        if(!$this->isAcheteurResponsable){
-          $this->setValidator('acheteur_type', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($type))));
-        }
-          if(!$this->isAcheteurResponsable && !$this->isCourtierResponsable){
-        $this->setValidator('mandataire_identifiant', new ValidatorEtablissement(array('required' => false, 'familles' => EtablissementFamilles::FAMILLE_COURTIER)));
-        $this->setValidator('mandataire_exist', new sfValidatorBoolean(array('required' => false)));
-      }
         $this->setValidator('type_transaction', new sfValidatorChoice(array('required' => true, 'choices' => array_keys($this->getTypesTransaction()))));
         $this->setValidator('interne', new sfValidatorBoolean(array('required' => false)));
         $this->setValidator('logement_exist', new sfValidatorBoolean(array('required' => false)));
@@ -144,13 +142,9 @@ class VracSoussigneForm extends VracForm {
         $this->setValidator('type_contrat', new sfValidatorInteger(array('required' => true)));
         $this->setValidator('vendeur_tva', new sfValidatorBoolean(array('required' => false)));
 
-        $this->validatorSchema['vendeur_identifiant']->setMessage('required', 'Le choix d\'un vendeur est obligatoire');
       //  $this->validatorSchema['acheteur_producteur']->setMessage('required', 'Le choix d\'un acheteur est obligatoire');
       //  $this->validatorSchema['acheteur_negociant']->setMessage('required', 'Le choix d\'un acheteur est obligatoire');
 
-      if(!$this->isAcheteurResponsable){
-          $this->validatorSchema->setPostValidator(new ValidatorVracSoussigne());
-        }
         $this->unsetFields(VracConfiguration::getInstance()->getChampsSupprimes('soussigne', $this->getObject()->type_transaction));
         $this->widgetSchema->setNameFormat('vrac[%s]');
     }
@@ -215,6 +209,8 @@ class VracSoussigneForm extends VracForm {
             $defaults['vendeur_tva'] = false;
         }
 
+        $defaults['isVendeur'] = $this->getObject()->isVendeurResponsable();
+
         $this->setDefaults($defaults);
     }
 
@@ -223,10 +219,10 @@ class VracSoussigneForm extends VracForm {
         if (!isset($values['vendeur_intermediaire']) || !$values['vendeur_intermediaire']) {
             $values['representant_identifiant'] = null;
         }
-        if (!$values['representant_identifiant']) {
+        if (isset($values['vendeur_identifiant']) && !$values['representant_identifiant']) {
             $values['representant_identifiant'] = $values['vendeur_identifiant'];
         }
-        if(!$this->isCourtierResponsable){
+        if(!$this->isMandataireResponsable){
           if (!isset($values['mandataire_exist']) || !$values['mandataire_exist']) {
               $values['mandataire_identifiant'] = null;
               $values['mandatant'] = null;
@@ -263,6 +259,9 @@ class VracSoussigneForm extends VracForm {
         }
         if (isset($values['vendeur_tva']) && $values['vendeur_tva']) {
             $this->getObject()->vendeur_tva = 1;
+        }
+        if (isset($values['isVendeur']) && $values['isVendeur']) {
+            $this->getObject()->responsable = Vrac::VRAC_RESPONSABLE_VENDEUR;
         }
         $this->getObject()->setInformations();
     }

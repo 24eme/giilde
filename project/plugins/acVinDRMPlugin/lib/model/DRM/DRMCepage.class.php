@@ -72,4 +72,17 @@ class DRMCepage extends BaseDRMCepage {
         throw new sfException('this function need to call before lieu tree');
     }
 
+    public function hasRerserveIntepro() {
+        return $this->exist('reserve_interpro');
+    }
+    public function getRerserveIntepro() {
+        if ($this->hasRerserveIntepro()) {
+            return $this->get('reserve_interpro');
+        }
+        return 0;
+    }
+    public function getVolumeCommercialisable() {
+        return $this->total - $this->getRerserveIntepro();
+    }
+
 }

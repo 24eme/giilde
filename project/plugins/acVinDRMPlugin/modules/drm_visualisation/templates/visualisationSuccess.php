@@ -84,6 +84,8 @@
     </div>
 </div>
 
+<?php include_partial('drm_visualisation/reserveinterpro', array('drm' => $drm)) ?>
+
 <?php if ((!$isTeledeclarationMode  || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())) && $drm->commentaire): ?>
     <div class="row">
         <div class="col-xs-12">
@@ -100,6 +102,9 @@
     <?php include_partial('drm_visualisation/recap_crds', array('drm' => $drm)) ?>
     <?php include_partial('drm_visualisation/recapAnnexes', array('drm' => $drm)) ?>
 <?php endif; ?>
+
+
+
 <?php include_partial('drm_visualisation/recapCsv', array('drm' => $drm)) ?>
 <?php include_partial('drm_visualisation/recapDroits', array('drm' => $drm, 'recapCvos' => $recapCvos, 'isTeledeclarationMode' => $isTeledeclarationMode)) ?>
 
@@ -117,6 +122,9 @@
         <a href="<?php echo url_for('drm_pdf', array('identifiant' => $drm->getIdentifiant(), 'periode_version' => $drm->getPeriodeAndVersion(), 'appellation' => 0)); ?>" class="btn btn-success">Télécharger le PDF</a>
     </div>
     <div class="col-xs-4 text-right">
+      <?php if ((!$isTeledeclarationMode || (sfConfig::get('app_force_usurpation_mode') && $sf_user->isUsurpationCompte())) && $drm->isNegoce()): ?>
+        <a class="btn btn-warning btn-xs pull-right" href="<?php echo url_for('drm_edition_libelles', $drm) ?>">Modifier les libellés prodouane</a>
+      <?php endif; ?>
     <?php if(isset($compte) && $compte && $compte->hasDroit(Roles::TELEDECLARATION_DOUANE) && $isTeledeclarationMode && !$drm->isNegoce()): ?>
       <?php if (!$drm->transmission_douane->success) : ?>
         <a style="margin-left: 5px;" href="<?php echo url_for('drm_transmission', $drm); ?>" class="btn btn-success" ><span>Transmettre la Drm sur CIEL</span></a>

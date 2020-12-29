@@ -64,7 +64,7 @@ class AnnuaireClient extends acCouchdbClient {
         $annuaireWithSuspendu = new stdClass();
         $annuaireWithSuspendu->recoltants = array();
         foreach ($annuaire->recoltants as $key => $item) {
-            $isActif = (EtablissementClient::getInstance()->find($key, acCouchdbClient::HYDRATE_JSON)->statut == EtablissementClient::STATUT_ACTIF);
+            $isActif = (EtablissementClient::getInstance()->find($key, acCouchdbClient::HYDRATE_JSON) && EtablissementClient::getInstance()->find($key, acCouchdbClient::HYDRATE_JSON)->statut == EtablissementClient::STATUT_ACTIF);
             $localEtb = new stdClass();
             $localEtb->isActif = $isActif;
             $localEtb->name = $item;

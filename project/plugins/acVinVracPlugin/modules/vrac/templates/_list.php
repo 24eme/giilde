@@ -29,9 +29,16 @@ use_helper('PointsAides');
     <tbody>
         <?php
         $contrats = array();
+        $contrats_vises = array();
+
         foreach ($vracs->rows as $contrat) {
-          $contrats[] = $contrat;
+          if($contrat->key[VracSoussigneIdentifiantView::VRAC_VIEW_KEY_STATUT] == 'ATTENTE_SIGNATURE'){
+            $contrats[] = $contrat;
+          }else{
+            $contrats_vises[] = $contrat;
+          }
         }
+        $contrats = $contrats + $contrats_vises;
         foreach ($contrats as $value) {
             // $elt = $value->getRawValue()->value;
                 $v = VracClient::getInstance()->find($value->id, acCouchdbClient::HYDRATE_JSON);

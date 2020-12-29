@@ -5,26 +5,20 @@ class AnnuaireAjoutForm extends acCouchdbObjectForm {
     protected $type;
     protected $etablissements;
     protected $societeChoice = false;
-    protected $isCourtier;
-    protected $isRepresentant;
 
-    public function __construct(acCouchdbJson $object, $isCourtier = false, $isRepresentant = false, $type = null, $etablissements = null, $options = array(), $CSRFSecret = null) {
+    public function __construct(acCouchdbJson $object, $type = null, $etablissements = null, $options = array(), $CSRFSecret = null) {
         $this->type = $type;
         $this->etablissements = $etablissements;
         if ($this->etablissements && (count($this->etablissements) > 1 ) && ($this->type != AnnuaireClient::ANNUAIRE_COMMERICAUX_KEY)) {
             $this->societeChoice = true;
         }
-        $this->isCourtier = $isCourtier;
-        $this->isRepresentant = $isRepresentant;
         parent::__construct($object, $options, $CSRFSecret);
     }
 
     public function configure() {
-        if ($this->isCourtier || $this->isRepresentant) {
-            $this->setWidget('type', new sfWidgetFormChoice(array('choices' => $this->getTypes())));
-            $this->setValidator('type', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getTypes()))));
-            $this->getWidget('type')->setLabel("Type*:");
-        }
+        $this->setWidget('type', new sfWidgetFormChoice(array('choices' => $this->getTypes())));
+        $this->setValidator('type', new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->getTypes()))));
+        $this->getWidget('type')->setLabel("Type*:");
 
         $this->setWidget('tiers', new sfWidgetFormInputText());
         $this->setValidator('tiers', new sfValidatorString(array('required' => true)));
@@ -45,8 +39,7 @@ class AnnuaireAjoutForm extends acCouchdbObjectForm {
     }
 
     protected function getTypes() {
-      $types = $this->isCourtier || $this->isRepresentant;
-        return AnnuaireClient::getAnnuaireTypes($types);
+        return AnnuaireClient::getAnnuaireTypes(true);
     }
 
     public function doUpdateObject($values) {
@@ -59,7 +52,7 @@ class AnnuaireAjoutForm extends acCouchdbObjectForm {
         $libelle = ($tiers->nom) ? $tiers->nom : $tiers->raison_sociale;
 
         $type = AnnuaireClient::ANNUAIRE_RECOLTANTS_KEY;
-        if (($this->isCourtier || $this->isRepresentant) && array_key_exists('type', $values)) {
+        if (array_key_exists('type', $values)) {
             $type = $values['type'];
         }
         $entree = $this->getObject()->getOrAdd($type)->add($tiers->_id, $libelle);

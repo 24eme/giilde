@@ -68,8 +68,7 @@ use_helper('PointsAides');
     <?php if ($validation->isValide()) : ?>
         <?php if ($isTeledeclarationMode): ?>
             <?php if ($signatureDemande): ?>
-              <div class="col-xs-2 text-right" style="padding-top:5px;"><?php echo getPointAideHtml('vrac','validation_valider'); ?></div>
-              <div class="col-xs-2 text-right">
+              <div class="col-xs-2 pull-right">
                     <a data-toggle="modal" data-target="#signature_popup_content" class="signature_popup btn btn-success pull-right">Signer le contrat <span class="glyphicon glyphicon-ok"></span></a>
               </div>
               <?php include_partial('signature_popup', array('vrac' => $vrac, 'societe' => $societe, 'etablissementPrincipal' => $etablissementPrincipal, 'validation' => true)); ?>

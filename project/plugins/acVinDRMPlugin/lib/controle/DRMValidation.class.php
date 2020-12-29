@@ -33,6 +33,9 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('erreur', 'observations', "Les observations n'ont pas été renseignées");
         $this->addControle('erreur', 'replacement_date', "Pour tout type de replacement, la date de sortie du produit est nécessaire. Vous ne l'avez pas saisi");
 
+        $this->addControle('vigilance', 'reserve_interpro', "Votre stock fin de mois est inférieur à 120% de votre réserve interprofession");
+        $this->addControle('erreur', 'reserve_interpro', "Votre stock fin de mois est inférieur à votre réserve interprofession");
+
     }
 
     public function controle() {
@@ -302,6 +305,18 @@ class DRMValidation extends DocumentValidation {
                 $this->addPoint('erreur', 'documents_annexes_erreur', 'retour aux annexes', $this->generateUrl('drm_annexes', $this->document));
             }
         }
+
+        foreach ($this->document->getProduits() as $produit) {
+            if ($produit->exist('reserve_interpro')) {
+                if ($produit->getVolumeCommercialisable() < 0) {
+                    $this->addPoint('erreur', 'reserve_interpro', $produit->getLibelle(), $this->generateUrl('drm_edition', $this->document));
+                }elseif (($produit->total / $produit->getRerserveIntepro()) < 1.2) {
+                    $this->addPoint('vigilance', 'reserve_interpro', $produit->getLibelle(), $this->generateUrl('drm_edition', $this->document));
+                }
+            }
+        }
+
+
     }
 
 }

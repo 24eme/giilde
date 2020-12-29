@@ -27,7 +27,7 @@ use_helper('PointsAides');
 					</li>
 					<li class="list-group-item" >
 					<div class="row">
-						<div class="col-xs-4"><?php if(($isCourtierResponsable || $isRepresentantResponsable) && (isset($form['type']))): ?>
+						<div class="col-xs-4"><?php if((isset($form['type']))): ?>
 							<span><?php echo $form['type']->renderError() ?></span>
 								<?php echo $form['type']->render() ?>
 							<?php else: ?>

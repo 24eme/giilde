@@ -22,7 +22,7 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
     ?>
     <div class="col-xs-<?php echo $colsize; ?>">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Vendeur</strong> <?php if ($vrac->responsable == 'vendeur'): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right" autofocus="autofocus">Modifier</a><?php endif; ?></div>
+            <div class="panel-heading"><strong>Vendeur</strong> <?php if ($vrac->isVendeurResponsable()): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right" autofocus="autofocus">Modifier</a><?php endif; ?></div>
             <div class="text-center panel-body">
             	<?php if (!$isTeledeclarationMode): ?><a href="<?php echo url_for('vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $vrac->vendeur_identifiant)) ?>"><?php endif; ?>
                 <strong class="vrac_nom"><?php echo $vrac->vendeur->nom; ?></strong>
@@ -52,7 +52,7 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
     <?php if ($vrac->mandataire_identifiant != null && $vrac->mandataire_exist): ?>
         <div class="col-xs-4">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Mandataire / Courtier</strong> <?php if ($vrac->responsable == 'mandataire'): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right">Modifier</a><?php endif; ?></div>
+                <div class="panel-heading"><strong>Mandataire / Courtier</strong> <?php if ($vrac->isMandataireResponsable()): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right">Modifier</a><?php endif; ?></div>
                 <div class="text-center panel-body">
                     <?php if (!$isTeledeclarationMode): ?><a href="<?php echo url_for('vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $vrac->mandataire_identifiant)) ?>"><?php endif; ?>
                 	<strong class="vrac_nom"><?php echo $vrac->mandataire->nom; ?></strong>
@@ -83,7 +83,7 @@ $template_validation = (isset($template_validation)) ? $template_validation : fa
 
     <div class="col-xs-<?php echo $colsize; ?>">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Acheteur</strong> <?php if ($vrac->responsable == 'acheteur'): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right">Modifier</a><?php endif; ?></div>
+            <div class="panel-heading"><strong>Acheteur</strong> <?php if ($vrac->isAcheteurResponsable()): ?><span class="glyphicon glyphicon-user text-primary" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Responsable"></span>&nbsp;<?php endif; ?><?php if ($template_validation): ?><a href="<?php echo url_for('vrac_soussigne', $vrac); ?>" class="btn btn-xs btn-default pull-right">Modifier</a><?php endif; ?></div>
             <div class="text-center panel-body">
                     <?php if (!$isTeledeclarationMode): ?><a href="<?php echo url_for('vrac/recherche?identifiant=' . preg_replace('/ETABLISSEMENT-/', '', $vrac->acheteur_identifiant)) ?>"><?php endif; ?>
                 	<strong class="vrac_nom"><?php echo $vrac->acheteur->nom; ?></strong>

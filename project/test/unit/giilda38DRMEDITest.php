@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$nb_tests = 69;
+$nb_tests = 68;
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $nego =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_nego_region')->getEtablissement();
 $produits = ConfigurationClient::getInstance()->getConfiguration(date('Y')."-01-01")->getProduits();
@@ -33,23 +33,30 @@ foreach($produits as $produit) {
     }
 }
 
+//$t = new lime_test($nb_tests);
+
 $produitdefault_tranq_hash = DRMConfiguration::getInstance()->getEdiDefaultProduitHash("1B455S");
 if ($produitdefault_tranq_hash) {
+    //$t->comment("Si on a un produit defaut tranquille, +5 tests");
     $nb_tests += 5;
 }
 $produitdefault_mou_hash = DRMConfiguration::getInstance()->getEdiDefaultProduitHash("1S437M 1");
 if ($produitdefault_mou_hash) {
+    //$t->comment("Si on a un produit defaut mou, +5 tests");
     $nb_tests += 5;
 }
 $produitdefault_autre_hash = DRMConfiguration::getInstance()->getEdiDefaultProduitHash("SPIRITUEUX_GUADELOUPE_SUP_18");
 if ($produitdefault_autre_hash) {
+    //$t->comment("Si on a des spiritueux en base, +5 tests");
     $nb_tests += 5;
 }
 
 if($application == "ivso") {
-    $nb_tests += 1;
+    //$t->comment("IVSO a 1 test de plus");
+    $nb_tests += 2;
 }
 if($application == "bivc") {
+    //$t->comment("BIVC a 8 tests de plus");
     $nb_tests += 8;
 }
 

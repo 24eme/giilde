@@ -113,6 +113,17 @@ abstract class DocumentValidation
         return false;
     }
 
+    public function hasVigilance($code)
+    {
+        foreach($this->getVigilances() as $vigi) {
+            if($vigi->getCode() != $code) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+
     public function hasPoints()
     {
         return $this->hasEngagements() || $this->hasVigilances() || $this->hasErreurs();

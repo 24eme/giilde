@@ -35,9 +35,9 @@ use_helper('PointsAides');
           <div class="col-xs-6 text-right">
 
             <?php if (isset($validation) && $validation): ?>
-              <button id="signature_popup_confirm" type="submit" class="btn btn-success pull-right" ><span>Signer le contrat</span></button><div class="pull-right" style="padding-top:6px;"><?php echo getPointAideHtml('vrac','validation_popup_valider'); ?>&nbsp;</div>
+              <button id="signature_popup_confirm" type="submit" class="btn btn-success pull-right" ><span>Signer le contrat</span></button>
             <?php else : ?>
-              <a id="signature_popup_confirm" href="<?php echo url_for('vrac_signature', $vrac) ?>" class="btn btn-success pull-right"><span>Signer le contrat</span></a><div class="pull-right" style="padding-top:6px;"><?php echo getPointAideHtml('vrac','validation_popup_valider'); ?>&nbsp;</div>
+              <a id="signature_popup_confirm" href="<?php echo url_for('vrac_signature', $vrac) ?>" class="btn btn-success pull-right"><span>Signer le contrat</span></a>
             <?php endif; ?>
           </div>
         </div>

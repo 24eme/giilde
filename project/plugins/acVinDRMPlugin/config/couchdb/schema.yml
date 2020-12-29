@@ -240,6 +240,7 @@ DRM:
                                                                                                 total: { type: float }
                                                                                                 no_movements: { required: false } # Plus utilisé
                                                                                                 edited: { required: false } # Plus utilisé
+                                                                                                reserve_interpro: { required: false }
                                                                                                 '*':
                                                                                                   type: collection
                                                                                                   class: DRMDetails

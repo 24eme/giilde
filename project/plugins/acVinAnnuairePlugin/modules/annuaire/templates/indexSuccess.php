@@ -46,7 +46,6 @@ use_helper('PointsAides');
             </div>
           </div>
             </div>
-            <?php if ($isCourtierResponsable || $isRepresentantResponsable): ?>
               <div class="row">
                 <div class="col-xs-12">
                   <div class="text-right" >
@@ -116,7 +115,6 @@ use_helper('PointsAides');
                 </div>
                 </div>
               </div>
-            <?php endif; ?>
         </div>
     </div>
 

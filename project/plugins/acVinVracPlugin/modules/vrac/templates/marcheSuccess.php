@@ -38,7 +38,7 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
 
                                       <div class="col-xs-7 <?php if ($form['produit']->hasError()): ?>has-error<?php endif; ?>">
                                         <div class="row">
-                                          <div class="col-xs-1" style="padding-top:6px;" >
+                                          <div class="col-xs-1 pull-right">
                                             <?php echo getPointAideHtml('vrac','marche_selection_produit'); ?>
                                           </div>
                                           <div class="col-xs-11" >
@@ -53,7 +53,7 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                                 <div class="form-group">
                                     <div class="col-xs-2 <?php if ($form['millesime']->hasError()): ?>has-error<?php endif; ?>">
                                         <div class="row">
-                                          <div class="col-xs-3 text-right" style="padding-top:6px;" >
+                                          <div class="col-xs-3 pull-right">
                                             <?php echo getPointAideHtml('vrac','marche_millesime'); ?>
                                           </div>
                                           <div class="col-xs-9" >
@@ -65,16 +65,12 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                                         <div class="col-xs-3 <?php if ($form['millesime_85_15']->hasError()): ?>has-error<?php endif; ?>">
                                           <?php echo $form['millesime_85_15']->renderError(); ?>
                                           <div class="row">
-                                            <div class="col-xs-3 text-right" style="padding-top:6px;" >
-                                              <?php echo getPointAideHtml('vrac','marche_millesime_8515'); ?>
-                                            </div>
-                                            <div class="col-xs-9" >
                                               <div class="checkbox">
                                                   <label for="<?php echo $form['millesime_85_15']->renderId(); ?>">
                                                       <?php echo $form['millesime_85_15']->render(); ?>
                                                       <?php echo $form->getWidget('millesime_85_15')->getLabel(); ?>
+                                                      &nbsp; <?php echo getPointAideHtml('vrac','marche_millesime_8515'); ?>
                                                   </label>
-                                              </div>
                                             </div>
                                           </div>
                                       </div>
@@ -88,15 +84,13 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                                 <div class="col-xs-8 <?php if ($form['selection']->hasError()): ?>has-error<?php endif; ?>">
                                     <div class="row">
                                         <?php echo $form['selection']->renderError(); ?>
-                                        <div class="col-xs-1" style="padding-top:6px;" >
-                                            <?php echo getPointAideHtml('vrac','marche_cepage'); ?>
-                                        </div>
-                                        <div class="col-xs-11" >
+                                        <div class="col-xs-11 col-xs-offset-1" >
                                           <div class="checkbox bloc_condition" data-condition-cible="#bloc_cepage">
                                               <label for="<?php echo $form['selection']->renderId(); ?>">
                                                 <?php echo $form['selection']->render(); ?>
                                                   Déclarer un cépage
                                               </label>
+                                              &nbsp; <?php echo getPointAideHtml('vrac','marche_cepage'); ?>
                                           </div>
                                         </div>
                                       </div>
@@ -114,15 +108,13 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                                 <div class="col-xs-4 <?php if ($form['cepage_85_15']->hasError()): ?>has-error<?php endif; ?>">
                                   <?php echo $form['cepage_85_15']->renderError(); ?>
                                   <div class="row">
-                                    <div class="col-xs-3 text-right" style="padding-top:6px;" >
-                                      <?php echo getPointAideHtml('vrac','marche_cepage_8515'); ?>
-                                    </div>
-                                    <div class="col-xs-9" >
+                                    <div class="col-xs-9 col-xs-offset-3" >
                                       <div class="checkbox">
                                           <label for="<?php echo $form['cepage_85_15']->renderId(); ?>">
                                               <?php echo $form['cepage_85_15']->render(); ?>
                                               <?php echo $form->getWidget('cepage_85_15')->getLabel(); ?>
                                           </label>
+                                          &nbsp; <?php echo getPointAideHtml('vrac','marche_cepage_8515'); ?>
                                       </div>
                                     </div>
                                   </div>
@@ -179,11 +171,9 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                         <div class="form-group">
                                 <div class="col-xs-8 <?php if ($form['label']->hasError()): ?>has-error<?php endif; ?>">
                                       <div class="row">
-                                        <div class="col-xs-1" style="padding-top:6px;" >
-                                          <?php echo getPointAideHtml('vrac','marche_agriculture_bio'); ?>
-                                        </div>
-                                        <div class="col-xs-11" >
+                                        <div class="col-xs-11 col-xs-offset-1" >
                                           <?php echo $form['label']->render(); ?>
+                                          &nbsp; <?php echo getPointAideHtml('vrac','marche_agriculture_bio'); ?>
                                         </div>
                                       </div>
                                 </div>
@@ -214,8 +204,8 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                               <div class="row">
                                     <?php if (isset($form['lot'])): ?>
                                     <div class="form-group col-xs-6 <?php if ($form['lot']->hasError()): ?>has-error<?php endif; ?>">
-                                      <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','marche_numero_lot'); ?></div>
                                             <?php echo $form['lot']->renderLabel("N° de lot :", array('class' => 'col-sm-4 control-label')); ?>
+                                            &nbsp; <?php echo getPointAideHtml('vrac','marche_numero_lot'); ?>
                                         <div class="col-sm-5">
     <?php echo $form['lot']->render(array("class" => "form-control text-right", 'autocomplete' => 'off')); ?>
                                         </div>
@@ -224,8 +214,8 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
 
                                     <?php if (isset($form['degre'])): ?>
                                     <div class="form-group col-xs-6 <?php if ($form['degre']->hasError()): ?>has-error<?php endif; ?>">
-                                      <div class="col-sm-1 text-right" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','marche_degre'); ?></div>
                                       <?php echo $form['degre']->renderLabel("Degré :", array('class' => 'col-sm-2 control-label')); ?>
+                                      &nbsp; <?php echo getPointAideHtml('vrac','marche_degre'); ?>
                                         <div class="col-sm-5">
                                             <div class="input-group">
                                               <?php echo $form['degre']->render(); ?>
@@ -252,7 +242,7 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                                 <?php if (isset($form['domaine'])): ?><?php echo $form['domaine']->renderError(); ?><?php endif; ?>
                                 <div class="form-group col-sm-6">
                                 <?php if (isset($form['categorie_vin'])): ?>
-                                    <div class="col-sm-1" style="margin-top:-14px;;" ><?php echo getPointAideHtml('vrac','marche_mention'); ?></div>
+                                    <div class="col-sm-1 pull-right" style="top: -20px;left: -70px;"><?php echo getPointAideHtml('vrac','marche_mention'); ?></div>
                                     <?php echo $form['categorie_vin']->renderLabel("Type :&nbsp;", array('class' => 'col-sm-4 control-label')); ?>
                                     <div class="bloc_condition col-sm-6 <?php if ($form['categorie_vin']->hasError()): ?>has-error<?php endif; ?>" data-condition-cible="#bloc_domaine">
                                     <?php echo $form['categorie_vin']->render(); ?>
@@ -296,7 +286,7 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
 <?php if (isset($form['jus_quantite'])): ?>
                                 <div class="form-group <?php if (isset($form['bouteilles_contenance_libelle'])): ?>col-xs-4<?php else: ?>col-xs-6<?php endif; ?> <?php if ($form['jus_quantite']->hasError()): ?>has-error<?php endif; ?>">
                                     <div class="col-xs-12"><?php echo $form['jus_quantite']->renderError(); ?></div>
-                                    <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','marche_volume'); ?></div>
+                                    <div class="col-sm-1 pull-right" style="top: -20px;" ><?php echo getPointAideHtml('vrac','marche_volume'); ?></div>
                                     <?php echo $form['jus_quantite']->renderLabel("Volume :", array('class' => 'col-sm-4 control-label')); ?>
                                     <div class="col-sm-6">
                                         <div class="input-group">
@@ -328,7 +318,7 @@ $etablissementPrincipal = (isset($etablissementPrincipal))? $etablissementPrinci
                                     <div class="col-xs-12">
                                     <?php echo $form['prix_initial_unitaire']->renderError(array('class' => ' col-xs-10 col-xs-offset-1')); ?>
                                     </div>
-                                    <div class="col-sm-1 text-right" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','marche_prix'); ?></div>
+                                    <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','marche_prix'); ?></div>
     <?php echo $form['prix_initial_unitaire']->renderLabel("Prix :", array('class' => 'col-sm-3 control-label')); ?>
                                     <div class="col-sm-7">
                                         <div class="input-group">

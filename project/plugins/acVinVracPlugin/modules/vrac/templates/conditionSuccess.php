@@ -28,7 +28,7 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		        	<?php if (isset($form['delai_paiement'])): ?>
 		            <div class="form-group col-sm-6 <?php if($form['delai_paiement']->hasError()): ?>has-error<?php endif; ?>">
 		                <?php echo $form['delai_paiement']->renderError(); ?>
-                    <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_delais_paiement'); ?></div>
+                    <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','condition_delais_paiement'); ?></div>
 		                <?php echo $form['delai_paiement']->renderLabel("Délai de paiement :", array('class' => 'col-sm-4 control-label')); ?>
 		                <div class="col-sm-7">
 		                    <?php echo $form['delai_paiement']->render(array('autofocus' => 'autofocus')); ?>
@@ -38,9 +38,9 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		        	<?php if (isset($form['acompte'])): ?>
 		            <div class="form-group col-sm-6 <?php if($form['acompte']->hasError()): ?>has-error<?php endif; ?>">
 		                <?php echo $form['acompte']->renderError(); ?>
-                    <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_accompte'); ?></div>
-		                <?php echo $form['acompte']->renderLabel("Acompte à la signature :", array('class' => 'col-sm-4 control-label')); ?>
-		                <div class="col-sm-7">
+                        <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','condition_accompte'); ?></div>
+		                <?php echo $form['acompte']->renderLabel("Acompte à la signature :", array('class' => 'col-sm-6 control-label')); ?>
+		                <div class="col-sm-5 pull-right">
 							<div class="input-group">
 		                    	<?php echo $form['acompte']->render(); ?>
 								<span class="input-group-addon">&nbsp;€&nbsp;&nbsp;</span>
@@ -51,7 +51,7 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		        	<?php if (isset($form['moyen_paiement'])): ?>
 		            <div class="form-group col-sm-6 <?php if($form['moyen_paiement']->hasError()): ?>has-error<?php endif; ?>">
 		                <?php echo $form['moyen_paiement']->renderError(); ?>
-                    <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_moyen_paiement'); ?></div>
+                    <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','condition_moyen_paiement'); ?></div>
 		                <?php echo $form['moyen_paiement']->renderLabel("Moyen de paiement :", array('class' => 'col-sm-5 control-label')); ?>
 		                <div class="col-sm-6">
 		                    <?php echo $form['moyen_paiement']->render(); ?>
@@ -61,7 +61,7 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		        	<?php if (isset($form['tva'])): ?>
 		            <div class="form-group col-sm-6 <?php if($form['tva']->hasError()): ?>has-error<?php endif; ?>">
 		                <?php echo $form['tva']->renderError(); ?>
-                    <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_hors_tva'); ?></div>
+                    <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','condition_hors_tva'); ?></div>
 		                <?php echo $form['tva']->renderLabel("Facturation :", array('class' => 'col-sm-4 control-label')); ?>
 		                <div class="col-sm-7">
 		                    <?php echo $form['tva']->render(); ?>
@@ -72,7 +72,7 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
                     <?php if ($vrac->mandataire_exist && isset($form['courtage_taux'])): ?>
 		            <div class="form-group col-sm-6 <?php if($form['courtage_taux']->hasError()): ?>has-error<?php endif; ?>">
 		                <?php echo $form['courtage_taux']->renderError(); ?>
-                    <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_taux_courtage'); ?></div>
+                        <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','condition_taux_courtage'); ?></div>
 		                <?php echo $form['courtage_taux']->renderLabel("Taux de courtage :", array('class' => 'col-sm-4 control-label')); ?>
 		                <div class="col-sm-7">
 							<div class="input-group">
@@ -85,7 +85,7 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		        	<?php if (isset($form['courtage_repartition']) && $vrac->mandataire_exist): ?>
 		            <div class="form-group col-sm-6 <?php if($form['courtage_repartition']->hasError()): ?>has-error<?php endif; ?>">
 		                <?php echo $form['courtage_repartition']->renderError(); ?>
-                    <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_repartition_courtage'); ?></div>
+                    <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','condition_repartition_courtage'); ?></div>
 		                <?php echo $form['courtage_repartition']->renderLabel("Répartition du courtage :", array('class' => 'col-sm-5 control-label')); ?>
 		                <div class="col-sm-6">
 		                    <?php echo $form['courtage_repartition']->render(); ?>
@@ -113,7 +113,7 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		        	<?php if (isset($form['date_limite_retiraison'])): ?>
 		            <div class="form-group  <?php if($form['date_limite_retiraison']->hasError()): ?>has-error<?php endif; ?>">
                         <?php echo $form['date_limite_retiraison']->renderError(); ?>
-                        <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_date_retiraison'); ?></div>
+                        <div class="col-sm-1 pull-right" style="top:-20px;" ><?php echo getPointAideHtml('vrac','condition_date_retiraison'); ?></div>
                         <?php echo $form['date_limite_retiraison']->renderLabel("Date limite de retiraison :", array('class' => 'col-sm-5 control-label')); ?>
                         <div class="col-sm-6">
                             <?php echo $form['date_limite_retiraison']->render(array('placeholder' => 'jj/mm/aaaa')); ?>
@@ -125,11 +125,14 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		            <?php if(isset($form['clause_reserve_propriete'])): ?>
 						<div class="form-group">
 							<?php echo $form['clause_reserve_propriete']->renderError(); ?>
-              <div class="col-sm-1 col-sm-offset-5" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_clause_reserve_prop'); ?></div>
+                            <div class="col-sm-1 col-sm-offset-5">
+                            </div>
 							<div class="checkbox col-sm-6 ">
 								<label for="<?php echo $form['clause_reserve_propriete']->renderId(); ?>">
 									<?php echo $form['clause_reserve_propriete']->render(); ?>
-									Clause de réserve de propriété<br /><br />
+									Clause de réserve de propriété
+                                    &nbsp; <?php echo getPointAideHtml('vrac','condition_clause_reserve_prop'); ?>
+                                    <br /><br />
 								</label>
 							</div>
 						</div>
@@ -183,8 +186,10 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 			            <div class="<?php if($form['conditions_particulieres']->hasError()): ?>has-error<?php endif; ?>">
 			                <?php echo $form['conditions_particulieres']->renderError(); ?>
 
-                      <div class="col-sm-1" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_observation'); ?></div>
+                      <div class="col-sm-1" style="margin-top:-14px;" >
+                      </div>
 			                <?php echo $form['conditions_particulieres']->renderLabel("Observations :"); ?>
+                            &nbsp; <?php echo getPointAideHtml('vrac','condition_observation'); ?>
 			                <?php echo $form['conditions_particulieres']->render(); ?>
 			            </div>
 		            	<?php endif; ?>
@@ -192,7 +197,7 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
                 	<div class="row col-sm-6">
         				<?php if(isset($form['cahier_charge'])): ?>
 							<div class="form-group <?php if($form['cahier_charge']->hasError()): ?>has-error<?php endif; ?>">
-                <div class="col-sm-10 col-sm-offset-2">
+                                <div class="col-sm-10 col-sm-offset-2">
 									<?php echo $form['cahier_charge']->renderError(); ?>
 
 									<div class="checkbox">
@@ -208,12 +213,12 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		            <?php if(isset($form['autorisation_nom_vin'])): ?>
 						<div class="form-group">
 							<?php echo $form['autorisation_nom_vin']->renderError(); ?>
-                <div class="col-sm-1 col-sm-offset-2" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_nom_vin'); ?></div>
-              	<div class="checkbox col-sm-8">
+              	             <div class="checkbox col-sm-8 col-sm-offset-2">
 								<label for="<?php echo $form['autorisation_nom_vin']->renderId(); ?>">
 									<?php echo $form['autorisation_nom_vin']->render(); ?>
 									Autorisation d'utilisation du nom du vin
 								</label>
+                                &nbsp; <?php echo getPointAideHtml('vrac','condition_nom_vin'); ?>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -221,12 +226,12 @@ include_partial('vrac/breadcrumbSaisie', array('vrac' => $vrac, 'isTeledeclarati
 		            <?php if(isset($form['autorisation_nom_producteur'])): ?>
 						<div class="form-group">
 							<?php echo $form['autorisation_nom_producteur']->renderError(); ?>
-              <div class="col-sm-1 col-sm-offset-2" style="margin-top:-14px;" ><?php echo getPointAideHtml('vrac','condition_nom_producteur'); ?></div>
-							<div class="checkbox col-sm-8 ">
+							<div class="checkbox col-sm-8 col-sm-offset-2">
 								<label for="<?php echo $form['autorisation_nom_producteur']->renderId(); ?>">
 									<?php echo $form['autorisation_nom_producteur']->render(); ?>
 									Autorisation d'utilisation du nom du producteur
 								</label>
+                                &nbsp;<?php echo getPointAideHtml('vrac','condition_nom_producteur'); ?>
 							</div>
 						</div>
 					<?php endif; ?>

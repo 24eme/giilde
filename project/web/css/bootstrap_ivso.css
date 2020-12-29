@@ -7055,3 +7055,6 @@ button.close {
 #footer li + li {
   margin-left: 40px;
 }
+#contrat_soussignes .col-sm-1.pull-right .glyphicon-question-sign {
+  top: -20px;
+}
