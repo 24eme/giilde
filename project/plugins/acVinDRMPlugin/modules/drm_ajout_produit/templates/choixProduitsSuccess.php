@@ -21,7 +21,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-4 text-left">
-                    <a tabindex="-1" href="<?php echo url_for('drm_etablissement', array('identifiant' => $drm->getEtablissement()->identifiant)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                    <button type="submit" formnovalidate="formnovalidate" tabindex="-1" name="redirect" value="<?php echo url_for('drm_etablissement', array('identifiant' => $drm->getEtablissement()->identifiant)); ?>" class="btn btn-default">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Etape précédente
+                    </button>
                 </div>
                 <div class="col-xs-4 text-center">
                     <?php if (!$isTeledeclarationMode): ?>

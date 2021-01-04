@@ -26,6 +26,9 @@ class drm_ajout_produitActions extends drmGeneriqueActions {
             $this->form->bind($request->getParameter($this->form->getName()));
             if ($this->form->isValid()) {
                 $this->form->save();
+                if($redirect = $request->getParameter('redirect')) {
+                    return $this->redirect($redirect);
+                }
                 if($request->hasParameter('add_produit')) {
                     $this->redirect($this->redirect('drm_choix_produit', array('sf_subject' => $this->drm, 'add_produit' => $request->getParameter('add_produit'))));
                 }

@@ -273,7 +273,9 @@ $paiement_douane_frequence = ($societe->exist('paiement_douane_frequence')) ? $s
 
             <div class="row">
                 <div class="col-xs-4 text-left">
-                    <a tabindex="-1" href="<?php echo url_for('drm_crd', $drm); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                    <button type="submit" formnovalidate="formnovalidate" tabindex="-1" name="redirect" value="<?php echo url_for('drm_crd', $drm); ?>" class="btn btn-default">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Etape précédente
+                    </button>
                 </div>
                 <div class="col-xs-4 text-center">
                     <a class="btn btn-default" data-toggle="modal" data-target="#drm_delete_popup" >Supprimer la DRM</a>

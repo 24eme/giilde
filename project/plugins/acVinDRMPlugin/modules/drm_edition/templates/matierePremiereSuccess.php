@@ -65,7 +65,9 @@
           <?php endforeach; ?>
             <div class="row" style="margin-top: 40px;">
                 <div class="col-xs-4 text-left">
-                    <a tabindex="-1" href="<?php echo ($isTeledeclarationMode) ? url_for('drm_choix_produit', $drm) :   url_for('drm_etablissement', $drm); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                    <button type="submit" formnovalidate="formnovalidate" tabindex="-1" name="redirect" value="<?php echo ($isTeledeclarationMode) ? url_for('drm_choix_produit', $drm) :   url_for('drm_etablissement', $drm); ?>" class="btn btn-default">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Etape précédente
+                    </button>
                 </div>
                 <div class="col-xs-4 text-center">
                     <?php if (!$isTeledeclarationMode): ?>
