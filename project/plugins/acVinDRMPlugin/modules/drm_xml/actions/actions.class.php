@@ -42,7 +42,10 @@ class drm_xmlActions extends drmGeneriqueActions {
 
       return $this->redirect('drm_ciel', $this->drm);
     }
-    $this->cielResponse = $this->drm->transmission_douane->xml;
+    $this->cielResponse = null;
+    if($this->drm->exist('transmission_douane')) {
+        $this->cielResponse = $this->drm->transmission_douane->xml;
+    }
   }
 
   public function executePrint(sfWebRequest $request) {

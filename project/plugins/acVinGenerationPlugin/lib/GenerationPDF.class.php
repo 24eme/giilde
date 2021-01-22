@@ -164,10 +164,10 @@ class GenerationPDF extends GenerationAbstract {
   }
 
   protected function getDocumentName() {
-    throw new sfException('should be called from the parent class');
+    throw new sfException(__FUNCTION__.' should be called from the child class');
   }
   protected function generatePDFForADocumentID($docid) {
-    throw new sfException('should be called from the parent class');
+    throw new sfException(__FUNCTION__.' should be called from the child class');
   }
 
   function preGeneratePDF() { }

@@ -33,8 +33,8 @@ class DRMValidation extends DocumentValidation {
         $this->addControle('erreur', 'observations', "Les observations n'ont pas été renseignées");
         $this->addControle('erreur', 'replacement_date', "Pour tout type de replacement, la date de sortie du produit est nécessaire. Vous ne l'avez pas saisi");
 
-        $this->addControle('vigilance', 'reserve_interpro', "Votre stock fin de mois est inférieur à 120% de votre réserve interprofession");
-        $this->addControle('erreur', 'reserve_interpro', "Votre stock fin de mois est inférieur à votre réserve interprofession");
+        $this->addControle('vigilance', 'reserve_interpro', "Votre stock fin de mois se rapproche de la limite de votre réserve interprofessionnelle");
+        $this->addControle('erreur', 'reserve_interpro', "Votre stock fin de mois est inférieur à votre réserve interprofessionnelle");
 
     }
 

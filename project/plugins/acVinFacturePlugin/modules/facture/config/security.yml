@@ -1,3 +1,9 @@
 all:
   is_secure: true
   credentials: facture
+
+monEspace:
+  credentials: []
+
+latex:
+  credentials: []

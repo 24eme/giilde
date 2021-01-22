@@ -740,4 +740,29 @@ class Facture extends BaseFacture implements InterfaceArchivageDocument {
       return $this->hasArgument(FactureClient::TYPE_FACTURE_MOUVEMENT_DIVERS);
     }
 
+    public function isTelechargee() {
+        if(!$this->exist('telechargee')) {
+
+            return false;
+        }
+
+        return (bool) $this->telechargee;
+    }
+
+    public function setTelechargee($date = null)
+    {
+        if (!$date) {
+            $date = date('Y-m-d');
+        }
+
+        if ($this->exist('telechargee') && $this->telechargee) {
+            return;
+        }
+
+        if (! $this->exist('telechargee')) {
+            $this->add('telechargee');
+        }
+
+        $this->_set('telechargee', $date);
+    }
 }

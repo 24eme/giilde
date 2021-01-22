@@ -311,6 +311,19 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
         return null;
     }
 
+    public function isNegociantPur() {
+        if ($this->type_societe != SocieteClient::TYPE_OPERATEUR) {
+            return false;
+        }
+
+        foreach ($this->getEtablissementsObj() as $id => $e) {
+            if ($e->etablissement->famille == EtablissementFamilles::FAMILLE_NEGOCIANT_PUR) {
+                return $e->etablissement;
+            }
+        }
+        return null;
+    }
+
     public function isActif() {
         return $this->exist('statut') && $this->statut === EtablissementClient::STATUT_ACTIF;
     }

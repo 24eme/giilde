@@ -22,8 +22,7 @@ test:
   mailer:
     param:
       transport:
-        class: Swift_MailTransport
-      delivery_strategy: none
+        class: Swift_NullTransport
 
 dev:
   mailer:

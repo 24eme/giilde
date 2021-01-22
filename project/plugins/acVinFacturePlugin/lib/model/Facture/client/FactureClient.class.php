@@ -308,7 +308,7 @@ class FactureClient extends acCouchdbClient {
 
     public function createGenerationForOneFacture($facture) {
         $generation = new Generation();
-        $generation->date_emission = date('Y-m-d-H:i');
+        $generation->date_emission = date('YmdHis');
         $generation->type_document = GenerationClient::TYPE_DOCUMENT_FACTURES;
         $generation->documents = array();
         $generation->somme = $facture->total_ttc;
@@ -454,4 +454,8 @@ class FactureClient extends acCouchdbClient {
         return $taux;
     }
 
+    public static function generateAuthKey($id)
+    {
+        return hash('md5', $id . sfConfig::get('app_secret'));
+    }
 }

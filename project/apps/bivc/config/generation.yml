@@ -1,0 +1,5 @@
+all:
+  configuration:
+    generation:
+      sousgeneration:
+        FACTURE: ['FACTUREMAIL', 'FACTUREPAPIER']

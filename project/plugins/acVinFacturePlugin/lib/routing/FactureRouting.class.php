@@ -44,6 +44,10 @@ class FactureRouting {
         $r->prependRoute('facture_generation', new sfRoute('/facture/generation', array('module' => 'facture',
             'action' => 'generation')));
 
+        $r->prependRoute('facture_sous_generation', new sfRoute('/facture/generation/:generation/:type',
+            array('module' => 'facture', 'action' => 'sousGenerationFacture')
+        ));
+
         $r->prependRoute('facture_mouvements', new sfRoute('/facture_mouvements_list', array('module' => 'facture',
             'action' => 'mouvementsList')));
 
@@ -56,9 +60,16 @@ class FactureRouting {
         $r->prependRoute('facture_mouvements_supprimer', new sfRoute('/facture_mouvements_supprimer/:id', array('module' => 'facture',
             'action' => 'mouvements-supprimer')));
 
-        $r->prependRoute('facture_pdf', new sfRoute('/facture/pdf/:id', array('module' => 'facture',
+        $r->prependRoute('facture_pdf', new FactureRoute('/facture/pdf/:id', array('module' => 'facture',
             'action' => 'latex'), array('sf_method' => array('get')), array('model' => 'Facture',
             'type' => 'object')
+        ));
+
+        $r->prependRoute('facture_pdf_auth', new sfRoute(
+            '/facture/pdf/:id/:auth',
+            array('module' => 'facture', 'action' => 'getFactureWithAuth'),
+            array('sf_method' => array('get')),
+            array('model' => 'Facture', 'type' => 'object')
         ));
 
         $r->prependRoute('comptabilite_edition', new sfRoute('/comptabilite-edition', array('module' => 'facture',

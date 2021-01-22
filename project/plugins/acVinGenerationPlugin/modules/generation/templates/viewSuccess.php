@@ -8,7 +8,9 @@
         <a href="<?php // echo url_for('generation_regenerate', array('type_document' => $generation->type_document, 'date_emission' => $generation->date_emission)); ?>" onclick='return confirm("Étes vous sûr de vouloir regénérer les factures ?");' class="btn btn-sm btn-default btn-default-step btn-upper"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Regénérer</a>
         <?php endif; ?>
     </div>
-    <h2>Génération N° <?php echo $generation->identifiant; ?><small> créé le <?php echo GenerationClient::getInstance()->getDateFromIdGeneration($generation->date_maj); ?></small></h2>
+    <h2>
+      Génération N° <?= ($generation->getMasterGeneration()) ? $generation->getMasterGeneration()->identifiant.' '.$generation->type_document : $generation->identifiant; ?><small> créé le <?php echo GenerationClient::getInstance()->getDateFromIdGeneration($generation->date_maj); ?></small>
+    </h2>
 </div>
 
 <?php if($generation->libelle): ?>
@@ -44,15 +46,43 @@
     </div>
 <?php endif; ?>
 
-<?php if ($generation->statut == GenerationClient::GENERATION_STATUT_GENERE && count($generation->fichiers)) : ?>
-<div class="row row-margin">
-<div class="list-group col-xs-6 col-xs-offset-3">
+<?php if ($generation->statut == GenerationClient::GENERATION_STATUT_GENERE ) : ?>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
     <?php foreach ($generation->fichiers as $chemin => $titre): ?>
+      <p>
         <a download="<?php echo basename(urldecode($chemin)) ?>" href="<?php echo urldecode($chemin); ?>"  target="_blank" class="list-group-item text-center"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;<?php echo $titre; ?></a>
+      </p>
     <?php endforeach; ?>
-</div>
+    <?php foreach($sous_generations as $sous_generation): ?>
+        <?php foreach ($sous_generation->fichiers as $chemin => $titre): ?>
+            <p style="position: relative;">
+                <a class="list-group-item text-center" download="<?php echo basename(urldecode($chemin)) ?>" href="<?php echo urldecode($chemin); ?>"  target="_blank"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;<?php echo $titre; ?></a>
+                <a class="btn btn-link" style="position: absolute; top: 5px; right: -40px" href="<?= url_for('generation_view', [
+                  'type_document' => $generation->type_document,
+                  'date_emission' => $generation->date_emission.'-'.$sous_generation->type_document
+                ]) ?>"><span class="glyphicon glyphicon-eye-open"></span></a>
+            </p>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+
+
+    <?php if($generation->exist('sous_generation_types')): ?>
+    <?php foreach ($generation->sous_generation_types as $sous_generation_type): ?>
+        <p>
+        <?php if (!$generation->getOrCreateSubGeneration($sous_generation_type)->isNew()): continue; endif; ?>
+          <a class="btn btn-link" href="<?= url_for('facture_sous_generation', [
+            'generation' => $generation->_id,
+            'type' => $sous_generation_type
+          ]) ?>"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;<?php echo call_user_func_array(array(GenerationClient::getClassForGeneration($generation->getOrCreateSubGeneration($sous_generation_type)), "getActionLibelle"), array()); ?></a>
+        </p>
+    <?php endforeach ?>
+    <?php endif ?>
+  </div>
 </div>
 <?php endif; ?>
+
+
 
 <div class="row row-margin">
     <div class="col-xs-4 text-left">
@@ -74,6 +104,14 @@
     </div>
     <?php endif; ?>
 </div>
+
+<?php if ($generation->getMasterGeneration()): ?>
+<a href="<?= url_for('generation_view', [
+  'type_document' => $generation->getMasterGeneration()->type_document,
+  'date_emission' => $generation->getMasterGeneration()->date_emission
+]) ?>" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour</a>
+<?php endif ?>
+
 
 <?php if(in_array($generation->statut, array(GenerationClient::GENERATION_STATUT_ENATTENTE, GenerationClient::GENERATION_STATUT_ENCOURS))): ?>
 <script type="text/javascript">window.setTimeout("window.location.reload()", 30000);</script>

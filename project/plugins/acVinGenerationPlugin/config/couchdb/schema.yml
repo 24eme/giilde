@@ -15,6 +15,12 @@ Generation:
       libelle: {}
       pregeneration_needed: {required: false}
       message: {required: false;}
+      sous_generation_types:
+        type: array_collection
+        required: false
+        definition:
+          fields:
+            '*': { }
       fichiers:
         type: collection
         definition:
