@@ -7,3 +7,7 @@ monEspace:
 
 latex:
   credentials: []
+
+getFactureWithAuth:
+  is_secure: false
+  credentials: []
