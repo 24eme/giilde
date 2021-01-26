@@ -22,6 +22,10 @@ class drm_crdsActions extends drmGeneriqueActions {
             if ($this->crdsForms->isValid()) {
                 $this->crdsForms->save();
 
+                if($redirect = $request->getParameter('redirect')) {
+                    return $this->redirect($redirect);
+                }
+
                 if ($this->addCrdRegime) {
                     $this->redirect('drm_crd', array('sf_subject' => $this->crdsForms->getObject(), 'add_crd' => $this->addCrdRegime, 'genre' => $this->addCrdGenre));
                 }

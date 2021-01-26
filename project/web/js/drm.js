@@ -131,6 +131,7 @@
         initSignatureDrmPopup();
         initBoldSaisie();
         initAnnexes();
+        initNavBarChange();
 
         $("a#retransmission").click(function(){
           if(confirm("Attention! Vous êtes sur le point d'effectuer une retransmission vers le portail Ciel. Cela peut écraser la DRM si elle est en cours d'édition!")){
@@ -139,6 +140,25 @@
         });
 
     });
+
+    var initNavBarChange = function(){
+        var change = false;
+        $("form input, form select, form textarea").each(function() {
+          $(this).change(function(){
+            change = true;
+          });
+        });
+        $(".navbar-nav a").click(function(e) {
+          e.preventDefault();
+          if (change) {
+            if(confirm("Attention! Vous êtes sur le point de quitter une page en cours d'édition.\nCela entrainera la perte des données saisies.\nPour les conserver, cliquez sur annuler et utiliser les boutons d'étapes en bas de page.")){
+              window.location.href = $(this).attr('href');
+            }
+          } else {
+            window.location.href = $(this).attr('href');
+          }
+        });
+    }
 
     var initChoiceProduits = function(){
         $('.table_produit_body td.pointer').click(function() {

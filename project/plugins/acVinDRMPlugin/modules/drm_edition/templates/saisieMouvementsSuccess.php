@@ -63,15 +63,25 @@
             </div>
         </div>
         <div class="row">
+            <form action="<?php echo url_for('drm_edition_details', array('sf_subject' => $formValidation->getObject(), 'details' => $detailsKey)) ?>" method="post">
             <div class="col-sm-9">
                 <div id="navigation_etapes" class="row">
                     <div class="col-xs-3 text-left">
                         <?php if($detailsKey == DRM::DETAILS_KEY_ACQUITTE && $drm->isDouaneType(DRMClient::TYPE_DRM_SUSPENDU)): ?>
-                            <a tabindex="-1" href="<?php echo url_for('drm_edition_details', array('sf_subject' => $drm, 'details' => DRM::DETAILS_KEY_SUSPENDU)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                            <button type="submit" formnovalidate="formnovalidate" tabindex="-1" name="redirect" value="<?php echo url_for('drm_edition_details', array('sf_subject' => $drm, 'details' => DRM::DETAILS_KEY_SUSPENDU)); ?>" class="btn btn-default">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Etape précédente
+                            </button>
                         <?php else: ?>
-                            <a tabindex="-1" href="<?php  if($isTeledeclarationMode){
-                                                            echo (DRMConfiguration::getInstance()->hasMatierePremiere())? url_for('drm_matiere_premiere', array('sf_subject' => $drm, 'precedent' => 1)) : url_for('drm_choix_produit', $drm);
-                                                          }else{ echo url_for('drm_etablissement', $drm); } ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                            <?php
+                              if($isTeledeclarationMode){
+                                $redirect = (DRMConfiguration::getInstance()->hasMatierePremiere())? url_for('drm_matiere_premiere', array('sf_subject' => $drm, 'precedent' => 1)) : url_for('drm_choix_produit', $drm);
+                              } else {
+                                $redirect = url_for('drm_etablissement', $drm);
+                              }
+                            ?>
+                            <button type="submit" formnovalidate="formnovalidate" tabindex="-1" name="redirect" value="<?php echo $redirect ?>" class="btn btn-default">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Etape précédente
+                            </button>
                         <?php endif; ?>
                     </div>
                     <div class="col-xs-6 text-center">
@@ -81,13 +91,13 @@
                         <a class="btn btn-default" data-toggle="modal" data-target="#drm_delete_popup" >Supprimer la DRM</a>
                     </div>
                     <div class="col-xs-3 text-right">
-                        <form action="<?php echo url_for('drm_edition_details', array('sf_subject' => $formValidation->getObject(), 'details' => $detailsKey)) ?>" method="post">
+
         <?php echo $formValidation->renderHiddenFields(); ?>
                             <button type="submit" class="btn btn-success">Étape suivante <span class="glyphicon glyphicon-chevron-right"></span></button>
-                        </form>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </section>

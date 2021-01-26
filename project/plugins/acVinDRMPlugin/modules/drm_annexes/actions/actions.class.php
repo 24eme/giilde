@@ -19,6 +19,9 @@ class drm_annexesActions extends drmGeneriqueActions {
             $this->annexesForm->bind($request->getParameter($this->annexesForm->getName()));
             if ($this->annexesForm->isValid()) {
                 $this->annexesForm->save();
+                if($redirect = $request->getParameter('redirect')) {
+                    return $this->redirect($redirect);
+                }
                 $this->redirect('drm_validation', $this->annexesForm->getObject());
             }
         }

@@ -35,6 +35,9 @@ class drm_editionActions extends drmGeneriqueActions {
 
           $this->form->save();
 
+        if($redirect = $request->getParameter('redirect')) {
+            return $this->redirect($redirect);
+        }
         if($request->getParameter('add_produit')) {
                 return $this->redirect('drm_matiere_premiere', array('sf_subject' => $this->drm, 'add_produit' => 'ALCOOLS'));
         }
@@ -68,6 +71,9 @@ class drm_editionActions extends drmGeneriqueActions {
             $this->formValidation->bind($request->getParameter($this->formValidation->getName()));
             if ($this->formValidation->isValid()) {
                 $this->formValidation->save();
+                if($redirect = $request->getParameter('redirect')) {
+                    return $this->redirect($redirect);
+                }
                 if($this->detailsKey == DRM::DETAILS_KEY_SUSPENDU && $this->drm->isDouaneType(DRMClient::TYPE_DRM_ACQUITTE)) {
                     $this->redirect('drm_edition_details', array('sf_subject' => $this->drm, 'details' =>  DRM::DETAILS_KEY_ACQUITTE));
                 }

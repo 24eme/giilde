@@ -21,7 +21,11 @@ foreach ($conf->declaration->filter('details') as $configDetails) {
     }
 }
 
-$t = new lime_test(40);
+foreach(GenerationClient::getInstance()->findHistoryWithType(array(GenerationClient::TYPE_DOCUMENT_FACTURES, GenerationClient::TYPE_DOCUMENT_FACTURES_MAILS)) as $row) {
+    GenerationClient::getInstance()->deleteDoc(GenerationClient::getInstance()->find($row->id, acCouchdbClient::HYDRATE_JSON));
+}
+
+$t = new lime_test(65);
 
 $t->comment("Configuration");
 
@@ -102,6 +106,12 @@ $t->is($facture->total_ht, $prixHt, "Le total HT est de ".$prixHt." €");
 $t->is($facture->total_ttc, $prixTTC, "Le total TTC est de ".$prixTTC."  €");
 $t->is($facture->total_taxe, $prixTaxe, "Le total de taxe est de ".$prixTaxe."  €");
 
+$t->is(FactureClient::generateAuthKey($facture->_id), hash('md5', $facture->_id.sfConfig::get('app_secret')), "L'url d'authentification est bonne");
+$t->ok(!$facture->isTelechargee(), "La facture est marqué comme non téléchargée");
+$facture->setTelechargee();
+$t->is($facture->telechargee, date('Y-m-d'), "La date de téléchargement est mise");
+$t->ok($facture->isTelechargee(), "La facture est marqué comme téléchargée");
+
 $nbLignes = 0;
 $doublons = 0;
 foreach($facture->lignes as $lignes) {
@@ -138,8 +148,55 @@ if($application == "ivbd") {
 $t->is($facture->versement_comptable, 0, "La facture n'est pas versé comptablement");
 
 $generation = FactureClient::getInstance()->createGenerationForOneFacture($facture);
+$generation->save();
+if(count(GenerationConfiguration::getInstance()->getSousGeneration($generation->type_document))) {
+$t->is(count($generation->sous_generation_types->toArray(true, false)), 2, "Les types de sous générations possibles sont enregistrés dans le doc");
+}
+
+$generator = GenerationClient::getInstance()->getGenerator($generation, $configuration, array());
+$generator->generate();
 
 $t->ok($generation, "La génération est créée");
+$t->is(count($generation->fichiers->toArray(true, false)), 1, "Un fichier généré");
+$t->like($generation->_id, '/GENERATION-FACTURE-[0-9]{14}/', "L'id généré est bon : $generation->_id");
+
+$t->comment("Envoi des factures par mail avec un génération");
+$generationMail = $generation->getOrCreateSubGeneration(GenerationClient::TYPE_DOCUMENT_FACTURES_MAILS);
+$t->is($generationMail->type_document, GenerationClient::TYPE_DOCUMENT_FACTURES_MAILS, "Le type de la génération est facture mail");
+$t->like($generationMail->_id, '/GENERATION-FACTURE-[0-9]{14}-FACTUREMAIL/', "L'id généré est bon");
+
+$mailGenerator = GenerationClient::getInstance()->getGenerator($generationMail, $configuration, array());
+$t->is(get_class($mailGenerator), "GenerationFactureMail", "classe d'éxécution de la génération de mail");
+
+$mail = $mailGenerator->generateMailForADocumentId($facture->_id);
+$t->ok(get_class($mail), "Génération du mail d'une facture");
+$t->ok(strpos($mail, "http"), "Le mail contient une url");
+$mailGenerator->generate();
+
+$t->is($generationMail->statut, GenerationClient::GENERATION_STATUT_GENERE, "Statut généré");
+$t->is($mailGenerator->getLogFilname(), $generationMail->date_emission."-facture-envoi-mails.csv", "Nom du fichier csv de log d'envoi de mails");
+$t->is($mailGenerator->getLogPath(), sfConfig::get('sf_web_dir')."/generation/".$mailGenerator->getLogFilname(), "Chemin complet vers le fichier de log");
+$t->is($mailGenerator->getPublishFile(), "%2Fgeneration%2F".$mailGenerator->getLogFilname(), "Chemin complet relatif encodé");
+$logdate = date("Y-m-d H:i:s");
+$t->is($mailGenerator->getLog($facture->_id, "ENVOYÉ", $logdate), array($logdate, $facture->getNumeroPieceComptable(), $facture->identifiant, $facture->declarant->raison_sociale, $societeViti->getEmail(), "ENVOYÉ", $facture->_id), "La ligne de log contient les informations");
+$t->ok(file_exists($mailGenerator->getLogPath()), "Le fichier de log existe");
+$t->is(count(file($mailGenerator->getLogPath())), 2, "Le fichier de log contient 2 lignes");
+$mailGenerator->addLog($facture->_id, "ERROR", $logdate);
+$t->is(count(file($mailGenerator->getLogPath())), 3, "Le fichier de log contient 2 lignes");
+$t->is(count($generationMail->documents->toArray()), 1, "Mail envoyé");
+$t->is(count($generationMail->fichiers->toArray()), 1, "Fichier de log généré");
+
+$t->comment("Création des pdfs des factures non téléchargées");
+$generationPapier = $generation->getOrCreateSubGeneration(GenerationClient::TYPE_DOCUMENT_FACTURES_PAPIER);
+$t->is($generationPapier->type_document, GenerationClient::TYPE_DOCUMENT_FACTURES_PAPIER, "Le type de la génération est facture papier");
+$t->like($generationPapier->_id, '/GENERATION-FACTURE-[0-9]{14}-FACTUREPAPIER/', "L'id généré est bon");
+
+$papierGenerator = GenerationClient::getInstance()->getGenerator($generationPapier, $configuration, []);
+$t->is(get_class($papierGenerator), 'GenerationFacturePapier', "Classe d'exécution de la génération de facture papier");
+
+$facturePapier = $papierGenerator->generatePDFForADocumentId($facture->_id);
+$t->ok(get_class($facturePapier), "FactureLatex", "Génération d'un PDF d'une facture");
+$papierGenerator->generate();
 
 $t->comment("Test d'une nouvelle facturation sur la société pour s'assurer qu'aucune facture ne sera créée");
 

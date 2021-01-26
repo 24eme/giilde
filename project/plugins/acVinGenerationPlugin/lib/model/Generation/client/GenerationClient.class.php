@@ -9,6 +9,8 @@ class GenerationClient extends acCouchdbClient {
     const TYPE_DOCUMENT_EXPORT_SAGE = 'SAGE';
     const TYPE_DOCUMENT_EXPORT_SHELL = 'EXPORT';
     const TYPE_DOCUMENT_VRACSSANSPRIX = 'VRACSSANSPRIX';
+    const TYPE_DOCUMENT_FACTURES_MAILS = 'FACTUREMAIL';
+    const TYPE_DOCUMENT_FACTURES_PAPIER = 'FACTUREPAPIER';
     const HISTORY_KEYS_TYPE_DOCUMENT = 0;
     const HISTORY_KEYS_TYPE_DATE_EMISSION = 1;
     const HISTORY_KEYS_DOCUMENT_ID = 2;
@@ -31,6 +33,7 @@ class GenerationClient extends acCouchdbClient {
         return 'GENERATION-' . $type_document . '-' . $date;
     }
 
+
     public function findHistoryWithType($types, $limit = 100) {
         if(!is_array($types)) {
             $types = array($types);
@@ -51,6 +54,13 @@ class GenerationClient extends acCouchdbClient {
         uasort($rows, "GenerationClient::sortHistoryByDate");
 
         return array_slice($rows, 0, $limit);
+    }
+
+    public function findSubGeneration($idGeneration) {
+        return acCouchdbManager::getClient()
+                ->startkey_docid($idGeneration."-")
+                ->endkey_docid($idGeneration."-Z")
+                ->execute();
     }
 
     public static function sortHistory($a, $b) {
@@ -95,6 +105,14 @@ class GenerationClient extends acCouchdbClient {
             case GenerationClient::TYPE_DOCUMENT_FACTURES:
 
                 return 'GenerationFacturePDF';
+
+            case GenerationClient::TYPE_DOCUMENT_FACTURES_MAILS:
+
+                return 'GenerationFactureMail';
+
+            case GenerationClient::TYPE_DOCUMENT_FACTURES_PAPIER:
+
+                return 'GenerationFacturePapier';
 
             case GenerationClient::TYPE_DOCUMENT_DS:
 

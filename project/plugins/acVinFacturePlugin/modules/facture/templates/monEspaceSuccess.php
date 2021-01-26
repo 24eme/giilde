@@ -3,16 +3,19 @@ use_helper('Float');
 ?>
 
 <ol class="breadcrumb">
-    <li class="visited"><a href="<?php echo url_for('facture') ?>">Factures</a></li>
+    <li class="visited"><a href="<?php if($sf_user->hasCredential(AppUser::CREDENTIAL_ADMIN)): ?><?php echo url_for('facture') ?><?php endif; ?>">Factures</a></li>
     <li class="active"><a href="<?php echo url_for('facture_societe', $societe) ?>" class="active"><?php echo $societe->raison_sociale ?> (<?php echo $societe->identifiant ?>)</a></li>
 </ol>
 
 <div class="row">
+    <?php if($sf_user->hasCredential(AppUser::CREDENTIAL_ADMIN)): ?>
     <div class="col-xs-12">
         <?php include_component('facture', 'chooseSociete', array('identifiant' => $societe->identifiant)); ?>
     </div>
+    <?php endif; ?>
     <div class="col-xs-12">
         <?php include_partial('historiqueFactures', array('societe' => $societe, 'factures' => $factures)); ?>
+        <?php if($sf_user->hasCredential(AppUser::CREDENTIAL_ADMIN)): ?>
          <hr />
         <?php
         try {
@@ -22,5 +25,6 @@ use_helper('Float');
             echo "<p><i>Societé n'ayant pas de région (ou hors région), impossible d'afficher ses éventuels mouvements passés.</i></p>";
         }
         ?>
+        <?php endif; ?>
     </div>
 </div>

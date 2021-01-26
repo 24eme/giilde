@@ -68,16 +68,16 @@ class Swift_Transport_NullTransport implements Swift_Transport
         return 0;
       }
     }
-    
+
     if ($evt)
     {
       $evt->setResult(Swift_Events_SendEvent::RESULT_SUCCESS);
       $this->_eventDispatcher->dispatchEvent($evt, 'sendPerformed');
     }
-    
-    return 0;
+
+    return 1;
   }
-  
+
   /**
    * Register a plugin.
    *

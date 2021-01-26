@@ -129,6 +129,7 @@ Facture:
         definition:
           fields:
             '*': {}
+      telechargee: {required: false, type: date}
 
 MouvementsFacture:
   definition:

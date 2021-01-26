@@ -7,6 +7,7 @@ all:
   url_header: "http://url_header"
   url_nav: "http://url_nav"
   force_usurpation_mode: false
+  secret: mon_code_secret # 32 caractères
   cas:
     domain: login.cas
     port: 443

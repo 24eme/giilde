@@ -63,9 +63,13 @@
                 <div class="row">
                     <div class="col-xs-4 text-left">
                         <?php if($drm->isDouaneType(DRMClient::TYPE_DRM_ACQUITTE)): ?>
-                            <a tabindex="-1" href="<?php echo url_for('drm_edition', array('sf_subject' => $drm, 'details' =>  DRM::DETAILS_KEY_ACQUITTE)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                            <button type="submit" formnovalidate="formnovalidate" tabindex="-1" name="redirect" value="<?php echo url_for('drm_edition', array('sf_subject' => $drm, 'details' =>  DRM::DETAILS_KEY_ACQUITTE)); ?>" class="btn btn-default">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Etape précédente
+                            </button>
                         <?php else: ?>
-                            <a tabindex="-1" href="<?php echo url_for('drm_edition', array('sf_subject' => $drm, 'details' =>  DRM::DETAILS_KEY_SUSPENDU)); ?>" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Etape précédente</a>
+                            <button type="submit" formnovalidate="formnovalidate" tabindex="-1" name="redirect" value="<?php echo url_for('drm_edition', array('sf_subject' => $drm, 'details' =>  DRM::DETAILS_KEY_SUSPENDU)); ?>" class="btn btn-default">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Etape précédente
+                            </button>
                         <?php endif; ?>
                     </div>
                     <div class="col-xs-4 text-center">
