@@ -135,7 +135,7 @@ if ($vrac->mandataire_exist) {
 \def\CONTRATDATESIGNATUREACHETEUR{<?php echo format_date($vrac->date_signature) ?>}
 
 \def\CONTRATGENERIQUEDOMAINE{<?php echo $vrac->renderLabels(); ?>}
-\def\CONTRATCONDITIONNEMENT{<?php if ($vrac->conditionnement_crd == 'NEGOCE_ACHEMINE'): ?>\textbf{P} : Vin préparé pour la mise en bouteille<?php elseif ($vrac->conditionnement_crd == 'ACHAT_TIRE_BOUCHE'): ?>\textbf{TB} : Tiré Bouché<?php else: ?>\textbf{N} : Vin non préparé<?php endif;?>}
+\def\CONTRATCONDITIONNEMENT{<?php if ($vrac->conditionnement_crd == 'NEGOCE_ACHEMINE'): ?>\textbf{P} : Vin préparé pour la mise en bouteille<?php elseif ($vrac->conditionnement_crd == 'ACHAT_TIRE_BOUCHE'): ?>\textbf{TB} : Tiré Bouché<?php endif; ?>}
 \def\CONTRATTAUXCOURTAGE{<?php echo $vrac->courtage_taux ?>}
 
 \begin{document}
