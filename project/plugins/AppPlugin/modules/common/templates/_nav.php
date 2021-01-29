@@ -121,7 +121,8 @@
        'identifiant' => $sf_user->getCompte()->getSociete()->getEtablissementPrincipal()->identifiant,
        'target' => '_self'
 ));
-
+endif; ?>
+<?php if (FactureConfiguration::getInstance()->getTeledeclaration()):
 include_component('common', 'navItem', array(
       'libelle' => 'Factures',
       'prefix' => 'facture',

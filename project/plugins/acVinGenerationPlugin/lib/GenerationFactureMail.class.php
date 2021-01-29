@@ -5,18 +5,18 @@ class GenerationFactureMail extends GenerationAbstract {
     public function generateMailForADocumentId($id) {
         $facture = FactureClient::getInstance()->find($id);
 
-        if(!$facture->getSociete()->getEmail()) {
+        if(!$facture->getSociete()->getEmailTeledeclaration()) {
             echo $facture->getSociete()->_id."\n";
             return;
         }
 
         $message = Swift_Message::newInstance()
          ->setFrom(sfConfig::get('app_mail_from_email'))
-         ->setTo($facture->getSociete()->getEmail())
+         ->setTo($facture->getSociete()->getEmailTeledeclaration())
          ->setSubject("Facture Interpro")
          ->setBody("Bonjour,
 
-Nouvelle facture de votre interprofession : <".sfContext::getInstance()->getRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true).">
+Une nouvelle facture de votre interprofession est disponible. Vous pouvez la télécharger directement en cliquant sur le lien : <".ProjectConfiguration::getAppRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true).">
 
          ");
 
@@ -91,6 +91,9 @@ Nouvelle facture de votre interprofession : <".sfContext::getInstance()->getRout
 
         $factureAEnvoyer = array();
         $factureDejaEnvoye = $this->generation->documents->toArray();
+        $sleepMaxBatch = 5;
+        $sleepSecond = 1;
+        $i = 0;
         foreach($this->generation->getMasterGeneration()->documents as $factureId) {
             if(in_array($factureId, $factureDejaEnvoye)) {
                 continue;
@@ -113,7 +116,11 @@ Nouvelle facture de votre interprofession : <".sfContext::getInstance()->getRout
 
             $this->generation->documents->add(null, $factureId);
             $this->generation->save();
-
+            $i++;
+            if($i > $sleepMaxBatch) {
+                sleep($sleepSecond);
+                $i = 0;
+            }
         }
 
         $this->generation->setStatut(GenerationClient::GENERATION_STATUT_GENERE);

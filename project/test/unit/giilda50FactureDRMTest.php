@@ -25,7 +25,7 @@ foreach(GenerationClient::getInstance()->findHistoryWithType(array(GenerationCli
     GenerationClient::getInstance()->deleteDoc(GenerationClient::getInstance()->find($row->id, acCouchdbClient::HYDRATE_JSON));
 }
 
-$t = new lime_test(65);
+$t = new lime_test(67);
 
 $t->comment("Configuration");
 
@@ -170,7 +170,8 @@ $t->is(get_class($mailGenerator), "GenerationFactureMail", "classe d'éxécution
 
 $mail = $mailGenerator->generateMailForADocumentId($facture->_id);
 $t->ok(get_class($mail), "Génération du mail d'une facture");
-$t->ok(strpos($mail, "http"), "Le mail contient une url");
+$t->ok(strpos($mail, "https"), "Le mail contient une url");
+$t->ok(!strpos($mail, "symfony"), "L'url n'a pas symfony");
 $mailGenerator->generate();
 
 $t->is($generationMail->statut, GenerationClient::GENERATION_STATUT_GENERE, "Statut généré");
