@@ -13,12 +13,14 @@ class GenerationFactureMail extends GenerationAbstract {
         $message = Swift_Message::newInstance()
          ->setFrom(sfConfig::get('app_mail_from_email'))
          ->setTo($facture->getSociete()->getEmailTeledeclaration())
-         ->setSubject("Facture Interpro")
+         ->setSubject("Facture n°".$facture->getNumeroInterpro()." - BIVC")
          ->setBody("Bonjour,
 
-Une nouvelle facture de votre interprofession est disponible. Vous pouvez la télécharger directement en cliquant sur le lien : <".ProjectConfiguration::getAppRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true).">
+Une nouvelle facture du BIVC est disponible, vous pouvez la télécharger directement en cliquant sur le lien : <".ProjectConfiguration::getAppRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true).">
 
-         ");
+Bien cordialement,
+
+Le BIVC");
 
         return $message;
     }
