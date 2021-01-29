@@ -213,7 +213,7 @@ class factureActions extends sfActions {
         $facture->setTelechargee();
         $facture->save();
 
-        $this->forward('facture', 'latex');
+        return $this->executeLatex($request);
     }
 
     private function getLatexTmpPath() {
