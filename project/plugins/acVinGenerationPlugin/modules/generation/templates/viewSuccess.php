@@ -70,11 +70,11 @@
     <?php if($generation->exist('sous_generation_types')): ?>
     <?php foreach ($generation->sous_generation_types as $sous_generation_type): ?>
         <p>
-        <?php if (!$generation->getOrCreateSubGeneration($sous_generation_type)->isNew()): continue; endif; ?>
+        <?php if (count($generation->getOrCreateSubGeneration($sous_generation_type)->fichiers)): continue; endif; ?>
           <a class="btn btn-link" href="<?= url_for('facture_sous_generation', [
             'generation' => $generation->_id,
             'type' => $sous_generation_type
-          ]) ?>"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;<?php echo call_user_func_array(array(GenerationClient::getClassForGeneration($generation->getOrCreateSubGeneration($sous_generation_type)), "getActionLibelle"), array()); ?></a>
+          ]) ?>"><?php if($generation->getOrCreateSubGeneration($sous_generation_type)->isNew()): ?><span class="glyphicon glyphicon-play-circle"></span><?php else: ?><span class="glyphicon glyphicon-eye-open"></span><?php endif; ?>&nbsp;<?php echo call_user_func_array(array(GenerationClient::getClassForGeneration($generation->getOrCreateSubGeneration($sous_generation_type)), "getActionLibelle"), array()); ?></a>
         </p>
     <?php endforeach ?>
     <?php endif ?>
