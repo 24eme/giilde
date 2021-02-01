@@ -16,7 +16,7 @@ class GenerationFactureMail extends GenerationAbstract {
          ->setSubject("Facture n°".$facture->getNumeroInterpro()." - BIVC")
          ->setBody("Bonjour,
 
-Une nouvelle facture du BIVC est disponible, vous pouvez la télécharger directement en cliquant sur le lien : ".ProjectConfiguration::getAppRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true)."
+Une nouvelle facture du BIVC est disponible, vous pouvez la télécharger directement en cliquant sur le lien : <".ProjectConfiguration::getAppRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true).">
 
 Bien cordialement,
 

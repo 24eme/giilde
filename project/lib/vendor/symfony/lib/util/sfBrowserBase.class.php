@@ -523,7 +523,7 @@ abstract class sfBrowserBase
    */
   public function checkCurrentExceptionIsEmpty()
   {
-    return null === $this->getCurrentException() || $this->getCurrentException() instanceof sfError404Exception;
+    return null === $this->getCurrentException() || $this->getCurrentException() instanceof sfError404Exception || $this->getCurrentException() instanceof sfError403Exception;
   }
 
   /**

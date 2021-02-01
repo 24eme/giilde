@@ -203,10 +203,12 @@ class factureActions extends sfActions {
     public function executeGetFactureWithAuth(sfWebRequest $request) {
         $auth = $request->getParameter('auth');
         $id = $request->getParameter('id');
+
+        $auth = str_replace(">", '', $auth);
         $key = FactureClient::generateAuthKey($id);
 
         if ($auth !== $key) {
-            $this->redirect403();
+            throw new sfError403Exception("Vous n'avez pas le droit d'accéder à cette page");
         }
 
         $facture = FactureClient::getInstance()->find($id);

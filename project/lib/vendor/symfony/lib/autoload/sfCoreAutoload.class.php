@@ -266,6 +266,7 @@ class sfCoreAutoload
     'sfcontrollerexception' => 'exception/sfControllerException.class.php',
     'sfdatabaseexception' => 'exception/sfDatabaseException.class.php',
     'sferror404exception' => 'exception/sfError404Exception.class.php',
+    'sferror403exception' => 'exception/sfError403Exception.class.php',
     'sfexception' => 'exception/sfException.class.php',
     'sffactoryexception' => 'exception/sfFactoryException.class.php',
     'sffileexception' => 'exception/sfFileException.class.php',
