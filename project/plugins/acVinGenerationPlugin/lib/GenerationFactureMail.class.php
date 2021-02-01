@@ -16,7 +16,7 @@ class GenerationFactureMail extends GenerationAbstract {
          ->setSubject("Facture n°".$facture->getNumeroInterpro()." - BIVC")
          ->setBody("Bonjour,
 
-Une nouvelle facture du BIVC est disponible, vous pouvez la télécharger directement en cliquant sur le lien : <".ProjectConfiguration::getAppRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true).">
+Une nouvelle facture du BIVC est disponible, vous pouvez la télécharger directement en cliquant sur le lien : ".ProjectConfiguration::getAppRouting()->generate('facture_pdf_auth', array('id' => $facture->_id, 'auth' => FactureClient::generateAuthKey($id)), true)."
 
 Bien cordialement,
 
@@ -89,7 +89,7 @@ Le BIVC");
         $factureAEnvoyer = array();
         $factureDejaEnvoye = $this->generation->documents->toArray();
         $sleepMaxBatch = 5;
-        $sleepSecond = 1;
+        $sleepSecond = 2;
         $i = 0;
         foreach($this->generation->getMasterGeneration()->documents as $factureId) {
             if(in_array($factureId, $factureDejaEnvoye)) {
