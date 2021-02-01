@@ -25,7 +25,7 @@ foreach(GenerationClient::getInstance()->findHistoryWithType(array(GenerationCli
     GenerationClient::getInstance()->deleteDoc(GenerationClient::getInstance()->find($row->id, acCouchdbClient::HYDRATE_JSON));
 }
 
-$t = new lime_test(67);
+$t = new lime_test(69);
 
 $t->comment("Configuration");
 
@@ -106,7 +106,11 @@ $t->is($facture->total_ht, $prixHt, "Le total HT est de ".$prixHt." €");
 $t->is($facture->total_ttc, $prixTTC, "Le total TTC est de ".$prixTTC."  €");
 $t->is($facture->total_taxe, $prixTaxe, "Le total de taxe est de ".$prixTaxe."  €");
 
-$t->is(FactureClient::generateAuthKey($facture->_id), hash('md5', $facture->_id.sfConfig::get('app_secret')), "L'url d'authentification est bonne");
+$auth_key = hash('md5', $facture->_id.sfConfig::get('app_secret'));
+$auth_url = FactureClient::generateAuthKey($facture->_id);
+$t->is($auth_url, $auth_key, "L'url d'authentification est bonne");
+$t->is($auth_url, substr($auth_url.'%3E', 0, strlen($auth_key)), "On coupe la chaine à la taille de la key");
+$t->is($auth_url, substr($auth_url.'>', 0, strlen($auth_key)), "On coupe la chaine à la taille de la key");
 $t->ok(!$facture->isTelechargee(), "La facture est marqué comme non téléchargée");
 $facture->setTelechargee();
 $t->is($facture->telechargee, date('Y-m-d'), "La date de téléchargement est mise");
