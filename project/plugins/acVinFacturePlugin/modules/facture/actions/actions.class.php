@@ -204,8 +204,8 @@ class factureActions extends sfActions {
         $auth = $request->getParameter('auth');
         $id = $request->getParameter('id');
 
-        $auth = str_replace(">", '', $auth);
         $key = FactureClient::generateAuthKey($id);
+        $auth = substr($auth, 0, strlen($key));
 
         if ($auth !== $key) {
             throw new sfError403Exception("Vous n'avez pas le droit d'accéder à cette page");
