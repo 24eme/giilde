@@ -23,6 +23,7 @@ class EtablissementAllView extends acCouchdbView
   const VALUE_FAX = 8;
   const VALUE_RECETTE_LOCALE_SOCIETE_ID = 9;
   const VALUE_RECETTE_LOCALE_NOM = 10;
+  const VALUE_MOIS_STOCK_DEBUT = 11;
 
 	public static function getInstance() {
 
