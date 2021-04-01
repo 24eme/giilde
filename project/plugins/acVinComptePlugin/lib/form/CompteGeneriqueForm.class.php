@@ -41,9 +41,12 @@ class CompteGeneriqueForm extends acCouchdbObjectForm {
         $this->widgetSchema->setLabel('commune', 'Ville *');
         $this->widgetSchema->setLabel('pays', 'Pays *');
         $this->widgetSchema->setLabel('droits', 'Droits *');
-
-        $this->widgetSchema->setLabel('email', 'E-mail');
-        $this->widgetSchema->setLabel('teledeclaration_email', 'E-mail de télédéclaration');
+        if (get_class($this->getObject()) == "Societe") {
+            $this->widgetSchema->setLabel('email', 'E-mail de compta');
+        }else{
+            $this->widgetSchema->setLabel('email', 'E-mail');
+        }
+        $this->widgetSchema->setLabel('teledeclaration_email', 'E-mail de télédéclaration (commun soc./etabl.)');
         $this->widgetSchema->setLabel('telephone_perso', 'Telephone Perso.');
         $this->widgetSchema->setLabel('telephone_bureau', 'Telephone Bureau');
         $this->widgetSchema->setLabel('telephone_mobile', 'Mobile');
