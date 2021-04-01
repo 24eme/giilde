@@ -3,7 +3,7 @@
     <?php if ($compte->email) : ?>
         <div class="row">
             <div class="col-xs-3">
-                <strong>Email : </strong>
+                <strong>Email <?php if ($compte->isSocieteContact()) { echo " compta"; } ?> :</strong>
             </div>
             <div class="col-xs-9">
                 <a href="mailto:<?php echo $compte->email; ?>"><?php echo $compte->email; ?></a>

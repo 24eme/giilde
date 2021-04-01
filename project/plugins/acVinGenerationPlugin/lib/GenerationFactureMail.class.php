@@ -12,7 +12,7 @@ class GenerationFactureMail extends GenerationAbstract {
 
         $message = Swift_Message::newInstance()
          ->setFrom(sfConfig::get('app_mail_from_email'))
-         ->setTo($facture->getSociete()->getEmailTeledeclaration())
+         ->setTo($facture->getSociete()->getEmailCompta())
          ->setSubject("Facture n°".$facture->getNumeroInterpro()." - BIVC")
          ->setBody("Bonjour,
 
