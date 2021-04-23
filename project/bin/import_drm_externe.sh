@@ -4,7 +4,7 @@
 
 mkdir $DRMEXTERNEIMPORTDIR 2> /dev/null
 
-
+#En cas de problème avec la clé publique lftp, voir http://tutos.tangui.eu.org/2021/02/23/lftp-host-key-verification-failed/
 for u in "${GETDRMEXTERNECMD[@]}"
 do
     eval $u

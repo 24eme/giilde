@@ -1,0 +1,24 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+# Deux espaces pour les fichiers de views
+[plugins/*/modules/*/templates/*.php]
+indent_size = 2
+
+[*.js]
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

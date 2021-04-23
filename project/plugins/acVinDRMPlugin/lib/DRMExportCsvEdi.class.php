@@ -178,6 +178,10 @@ class DRMExportCsvEdi extends DRMCsvEdi {
                 }
                 $mouvementsEdi.= $debutLigne . $this->getProduitCSV($produitDetail) . ";" . "stocks_fin;" . $stockfin_key . ";" . $stockfinValue*1.0 . ";;;\n";
             }
+
+            if ($produitDetail->exist('tav') && $produitDetail->tav) {
+                $mouvementsEdi .= $debutLigne . $this->getProduitCSV($produitDetail) . ';' . 'complement;TAV;' . $produitDetail->tav . ";;;\n";
+            }
         }
         return $mouvementsEdi;
     }

@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../bootstrap/common.php');
 
-$t = new lime_test(21);
+$t = new lime_test(22);
 $viti =  CompteTagsView::getInstance()->findOneCompteByTag('test', 'test_viti_2')->getEtablissement();
 $conf = ConfigurationClient::getInstance()->getCurrent();
 $produits = array_keys($conf->getProduits());
@@ -28,6 +28,7 @@ fwrite($temp, "CAVE,201801,".$viti->identifiant.",".$viti->no_accises.",".$produ
 fwrite($temp, "CAVE,201801,".$viti->identifiant.",".$viti->no_accises.",".$produit1->getCertification()->getLibelle().",".$produit1->getGenre()->getLibelle().",".$produit1->getAppellation()->getLibelle().",".$produit1->getMention()->getLibelle().",".$produit1->getLieu()->getLibelle().",".$produit1->getCouleur()->getLibelle().",".$produit1->getCepage()->getLibelle().",,".$produit1->getLibelleFormat().",suspendu,sorties,export,1.89,PAYS-BAS,,,,,\n");
 fwrite($temp, "CAVE,201801,".$viti->identifiant.",".$viti->no_accises.",".$produit1->getCertification()->getLibelle().",".$produit1->getGenre()->getLibelle().",".$produit1->getAppellation()->getLibelle().",".$produit1->getMention()->getLibelle().",".$produit1->getLieu()->getLibelle().",".$produit1->getCouleur()->getLibelle().",".$produit1->getCepage()->getLibelle().",,".$produit1->getLibelleFormat().",suspendu,sorties,export,0.9525,BE,,,,,\n");
 fwrite($temp, "CAVE,201801,".$viti->identifiant.",".$viti->no_accises.",".$produit1->getCertification()->getLibelle().",".$produit1->getGenre()->getLibelle().",".$produit1->getAppellation()->getLibelle().",".$produit1->getMention()->getLibelle().",".$produit1->getLieu()->getLibelle().",".$produit1->getCouleur()->getLibelle().",".$produit1->getCepage()->getLibelle().",,".$produit1->getLibelleFormat().",suspendu,stocks_fin,final,944,,,,,,\n");
+fwrite($temp, "CAVE,201801,".$viti->identifiant.','.$viti->no_accises.",".$produit1->getCertification()->getLibelle().",".$produit1->getGenre()->getLibelle().",".$produit1->getAppellation()->getLibelle().",".$produit1->getMention()->getLibelle().",".$produit1->getLieu()->getLibelle().",".$produit1->getCouleur()->getLibelle().",".$produit1->getCepage()->getLibelle().",,".$produit1->getLibelleFormat().",suspendu,complement,tav,43,,,,,,\n");
 fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille75cl,,,,,,,collectif suspendu,stock_debut,debut,14742,,,,\n");
 fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75 cl,,,,,,,collectif suspendu,sorties,utilisations,3118,,,,\n");
 fwrite($temp, "CRD,201801,".$viti->identifiant.",".$viti->no_accises.",VERT,tranquille,Bouteille 75cl,,,,,,,collectif suspendu,stock_fin,fin,11624,,,,\n");
@@ -69,6 +70,7 @@ $typeMouvementOK = true;
 $volumeOK = true;
 $exportOK = true;
 $contratOK = true;
+$tav = false;
 
 $nblignes = 0;
 $nbMouvements = 0;
@@ -220,6 +222,10 @@ foreach(explode("\n", $csv) as $line) {
     if($data[DRMCsvEdi::CSV_TYPE] == "CAVE" && !preg_match('/^stock/', $data[DRMCsvEdi::CSV_CAVE_CATEGORIE_MOUVEMENT])) {
         $nbMouvements += 1;
     }
+
+    if($data[DRMCsvEdi::CSV_TYPE] == 'CAVE' && $data[DRMCsvEdi::CSV_CAVE_COMPLEMENT_PRODUIT] == 'complement' && $data[DRMCsvEdi::CSV_CAVE_TYPE_COMPLEMENT_PRODUIT] == 'TAV' && $data[DRMCsvEdi::CSV_CAVE_VALEUR_COMPLEMENT_PRODUIT] == '43') {
+        $tav = true;
+    }
 }
 $t->ok($nblignes > 0, "Plus d'une ligne analysée");
 $t->ok($typeOK, "Vérification de la colonne type");
@@ -240,5 +246,6 @@ $t->ok($typeMouvementOK, "Vérification de la colonne type de mouvement");
 $t->ok($volumeOK, "Vérification de la colonne volume");
 $t->ok($exportOK, "Vérification de la colonne export");
 $t->ok($contratOK, "Vérification de la colonne contrat");
+$t->ok($tav, 'Vérification de l\'export du tav');
 $t->is($nbMouvements, count($drm->mouvements->get($drm->identifiant)), "Tous les mouvements sont présents dans le csv");
 $t->ok($nbStocks >= count($drm->getProduitsDetails())*2 && $nbStocks % 2 == 0, "Les lignes de stocks sont toutes présentes");

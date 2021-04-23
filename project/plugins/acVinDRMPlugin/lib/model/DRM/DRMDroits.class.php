@@ -37,6 +37,9 @@ class DRMDroits extends BaseDRMDroits {
     }
 
     public function updateDroitDouane($genreKey, $configurationCepageNode, $vol, $reintegration = false) {
+        if(!array_key_exists($genreKey, self::$correspondanceGenreKey)) {
+            return;
+        }
         $keyDouane = self::$correspondanceGenreKey[$genreKey];
 
         $date = $this->getDocument()->getDate();

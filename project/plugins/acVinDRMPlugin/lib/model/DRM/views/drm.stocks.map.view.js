@@ -46,7 +46,7 @@ function(doc) {
                 				     nbDetails += 1;
                                  }
                     				if(nbDetails > 0)  {
-                     				 emit([doc.campagne, societe, doc.identifiant, hash, doc.periode, doc.version], [total_debut_mois, total_entrees, total_recolte, total_sorties, total_facturable, total, doc.declarant.nom, produit_libelle]);
+                     				 emit([doc.campagne, societe, doc.identifiant, hash, doc.periode, doc.version], [total_debut_mois, total_entrees, total_recolte, total_sorties, total_facturable, total, doc.declarant.nom, produit_libelle, doc.declarant.famille]);
                     				}
                             } // Boucle cepage
                           } // Boucle couleur

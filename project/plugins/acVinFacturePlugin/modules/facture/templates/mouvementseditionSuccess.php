@@ -64,7 +64,7 @@
             </div>
             <?php
             foreach ($form['mouvements'] as $key => $mvtForm):
-                $itemKeys = split('_', $key);
+                $itemKeys = explode('_', $key);
                 $item = ($factureMouvements->mouvements->exist($itemKeys[0]) && $factureMouvements->mouvements->get($itemKeys[0])->exist($itemKeys[1])) ?
                         $factureMouvements->mouvements->get($itemKeys[0])->get($itemKeys[1]) : null;
                 if (!preg_match('/^nouveau/', $key) || !$factureMouvements->mouvements->exist(str_replace('_', '/', $key))):
