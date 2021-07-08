@@ -306,10 +306,4 @@ class Configuration extends BaseConfiguration {
     	return $this->exist($hash);
     }
 
-    // Pour compatibilité avec declarvins
-    public function getProduit($hash) {
-
-    	return $this->get($hash);
-    }
-
 }
