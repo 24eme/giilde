@@ -1,6 +1,8 @@
 <?php
 use_helper('IvbdStatistique');
 
+$options = $options->getRawValue();
+
 $stocksfinResult = $stocksfin->getRawValue();
 $stockProduits = $stocksfinResult["disponibilites_stocks"]["agg_page"]["buckets"];
 
@@ -16,7 +18,7 @@ foreach ($vracProduits as $produivractKey => $vracProduit) {
         $s = $stock["stock_final"]["agg_column"]["value"];
         $v = ($vracProduit["volume_non_enleve"]["value"] < 0)? "0" : $vracProduit["volume_non_enleve"]["value"];
         $d = $s - $v;
-        $csv.= ConfigurationClient::getCurrent()->get($stockProduit["key"])->getLibelleFormat().";".formatNumber($s).";".formatNumber($v).";".formatNumber($d)."\n";
+        $csv.= ConfigurationClient::getConfiguration($options['fromDate'])->get($stockProduit["key"])->getLibelleFormat().";".formatNumber($s).";".formatNumber($v).";".formatNumber($d)."\n";
       }
     }
   }

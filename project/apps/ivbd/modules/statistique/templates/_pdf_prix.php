@@ -12,6 +12,9 @@ $headers[$values[0]] = $values[0];
 }
 $options = $options->getRawValue();
 $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset($options['periode'][1]))? $options['periode'] : null;
+$cm = new CampagneManager('08-01');
+$millesime = strstr($cm->getCampagneByDate(Date::getIsoDateFromFrenchDate($periode[0])),'-',true);
+
 ?>
 \documentclass[a4paper, landscape, 10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -55,7 +58,7 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \begin{table}[ht!]
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | }
 \hline
-\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{Nb de contrats} & \multicolumn{1}{c |}{Volume} & \multicolumn{1}{c |}{Cours} & \multicolumn{1}{c |}{Volume 2018} & \multicolumn{1}{c |}{Cours 2018} & \multicolumn{1}{c |}{Volume autres millesimes} & \multicolumn{1}{c |}{Cours autres millesimes} & \multicolumn{1}{c |}{Volume tous contrats} \tabularnewline
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{Nb de contrats} & \multicolumn{1}{c |}{Volume} & \multicolumn{1}{c |}{Cours} & \multicolumn{1}{c |}{Volume <?php echo $millesime; ?>} & \multicolumn{1}{c |}{Cours <?php echo $millesime; ?>} & \multicolumn{1}{c |}{Volume autres millesimes} & \multicolumn{1}{c |}{Cours autres millesimes} & \multicolumn{1}{c |}{Volume tous contrats} \tabularnewline
 <?php
 	$i = 1;
 	$page = null;
@@ -88,7 +91,7 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \begin{tabularx}{\linewidth}{ | X | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | >{\raggedleft}p{0.05\linewidth} | }
 <?php if ($newSection): ?>
 \hline
-\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{Nb de contrats} & \multicolumn{1}{c |}{Volume} & \multicolumn{1}{c |}{Courts} & \multicolumn{1}{c |}{Volume 2018} & \multicolumn{1}{c |}{Cours 2018} & \multicolumn{1}{c |}{Volume autres millesimes} & \multicolumn{1}{c |}{Cours autres millesimes} & \multicolumn{1}{c |}{Volume tous contrats} \tabularnewline
+\rowcolor{gray!40} Produit & \multicolumn{1}{c |}{Nb de contrats} & \multicolumn{1}{c |}{Volume} & \multicolumn{1}{c |}{Courts} & \multicolumn{1}{c |}{Volume <?php echo $millesime; ?>} & \multicolumn{1}{c |}{Cours <?php echo $millesime; ?>} & \multicolumn{1}{c |}{Volume autres millesimes} & \multicolumn{1}{c |}{Cours autres millesimes} & \multicolumn{1}{c |}{Volume tous contrats} \tabularnewline
 <?php endif; ?>
 \hline
 <?php $i=($newSection)? 1 : 0; else: $i++;endif; ?>

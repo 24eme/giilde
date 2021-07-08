@@ -1,0 +1,83 @@
+dsnegoce:
+  url: /dsnegoce
+  param: { module: dsnegoce, action: index }
+
+dsnegoce_etablissement:
+  url: /dsnegoce/:identifiant
+  param: { module: dsnegoce, action: monEspace }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+dsnegoce_creation:
+  url: /dsnegoce/:identifiant/creation/:date
+  param: { module: dsnegoce, action: creation }
+  class: EtablissementRoute
+  options:
+    model:    Etablissement
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+dsnegoce_infos:
+  url: /dsnegoce/:identifiant/infos/:date
+  param: { module: dsnegoce, action: infos }
+  class: DSNegoceRoute
+  options:
+    model:    DSNegoce
+    type:     object
+  requirements:
+    sf_method: [get]
+
+dsnegoce_stocks:
+  url: /dsnegoce/:identifiant/stocks/:date
+  param: { module: dsnegoce, action: stocks }
+  class: DSNegoceRoute
+  options:
+    model:    DSNegoce
+    type:     object
+  requirements:
+    sf_method: [get, post]
+
+dsnegoce_validation:
+  url: /dsnegoce/:identifiant/validation/:date
+  param: { module: dsnegoce, action: validation }
+  class: DSNegoceRoute
+  options:
+    model:    DSNegoce
+    type:     object
+  requirements:
+    sf_method: [get]
+
+dsnegoce_validate:
+  url: /dsnegoce/:identifiant/validate/:date
+  param: { module: dsnegoce, action: validate }
+  class: DSNegoceRoute
+  options:
+    model:    DSNegoce
+    type:     object
+  requirements:
+    sf_method: [get]
+
+dsnegoce_devalidate:
+  url: /dsnegoce/:identifiant/devalidate/:date
+  param: { module: dsnegoce, action: devalidate }
+  class: DSNegoceRoute
+  options:
+    model:    DSNegoce
+    type:     object
+  requirements:
+    sf_method: [get]
+
+dsnegoce_visualisation:
+  url: /dsnegoce/:identifiant/visualisation/:date
+  param: { module: dsnegoce, action: visualisation }
+  class: DSNegoceRoute
+  options:
+    model:    DSNegoce
+    type:     object
+  requirements:
+    sf_method: [get]

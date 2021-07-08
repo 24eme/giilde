@@ -10,10 +10,22 @@ function getAppellationLibelle($key)
 	return ' ';
 }
 
-function getProduitLibelle($key)
+function getProduitLibelle($key, $configuration = null)
 {
-	$item = ConfigurationClient::getCurrent()->get($key);
-	return $item->getLibelleFormat();
+    if(!$configuration){
+        $configuration = ConfigurationClient::getCurrent();
+    }
+	if(!$configuration->exist($key) && preg_match("/\/CDB\/mentions\/DEFAUT\/lieux\/DEFAUT\/couleurs\/blanc\/cepages\/DEFAUT/",$key)){
+		$key = str_replace("blanc","blanc_moelleux", $key);
+	}
+	if(!$configuration->exist($key) && preg_match("/\/CDB\/mentions\/DEFAUT\/lieux\/DEFAUT\/couleurs\/blanc_moelleux\/cepages\/DEFAUT/",$key)){
+		$key = str_replace("blanc_moelleux","blanc", $key);
+	}
+	if(!$configuration->exist($key) && preg_match("/\/couleurs\/blanc_doux\//",$key)){
+		$key = str_replace("blanc_doux","blanc_liquoreux", $key);
+	}
+    $item = $configuration->get($key);
+    return ($configuration->exist($key))? $configuration->get($key)->getLibelleFormat() : $key;
 }
 
 function getFamilleLibelle($key)

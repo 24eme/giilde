@@ -69,6 +69,10 @@ class MouvementsFacture extends BaseMouvementsFacture {
     }
 
     public function findMouvement($mvtId, $soc) {
+        if(sfConfig::get('app_societe_no_multi_etablissement')) {
+            return $this->mouvements->get($soc)->get($mvtId);
+        }
+
         return $this->mouvements->get($soc . '01')->get($mvtId);
     }
 

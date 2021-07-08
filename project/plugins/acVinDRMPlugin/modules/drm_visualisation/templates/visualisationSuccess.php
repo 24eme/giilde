@@ -129,7 +129,7 @@
       <?php if (!$drm->transmission_douane->success) : ?>
         <a style="margin-left: 5px;" href="<?php echo url_for('drm_transmission', $drm); ?>" class="btn btn-success" ><span>Transmettre la Drm sur CIEL</span></a>
       <?php else: ?>
-        <a style="margin-left: 5px;" href="https://douane.gouv.fr/" class="btn btn-success" ><span>Se rendre sur Pro Dou@ne</span></a>
+        <a style="margin-left: 5px;" href="https://douane.gouv.fr/" class="btn btn-success" ><span>Se rendre sur le site de la douane</span></a>
       <?php endif; ?>
     <?php endif; ?>
     </div>

@@ -566,4 +566,8 @@ class Societe extends BaseSociete implements InterfaceCompteGenerique {
         $this->save();
     }
 
+    public static function get01PostfixEtablissementIfExist() {
+      return (sfConfig::get('app_societe_no_multi_etablissement'))? '' : '01';
+    }
+
 }

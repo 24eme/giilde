@@ -6,9 +6,9 @@ class CsvFile
   protected $current_line = 0;
   protected $csvdata = null;
 
-  private $file = null;
-  private $separator = null;
-  private $ignore = null;
+  protected $file = null;
+  protected $separator = null;
+  protected $ignore = null;
 
   public function getFileName() {
     return $this->file;

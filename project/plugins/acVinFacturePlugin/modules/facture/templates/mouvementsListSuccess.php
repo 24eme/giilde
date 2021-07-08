@@ -1,7 +1,8 @@
 <?php
 use_helper('Float');
 ?>
-<ol class="breadcrumb">    
+<?php include_partial('facture/preTemplate'); ?>
+<ol class="breadcrumb">
     <li class="visited"><a href="<?php echo url_for('facture') ?>">Factures</a></li>
     <li class="active"><a href="<?php echo url_for('facture_mouvements') ?>">Facturation libre</a></li>
 </ol>
@@ -25,7 +26,7 @@ use_helper('Float');
             <thead>
                 <tr>
                     <th class="col-xs-4">Intitulé</th>
-                    <th class="col-xs-1 text-center" >Date</th>   
+                    <th class="col-xs-1 text-center" >Date</th>
                     <th class="col-xs-2 text-center" >Nb mouvements (à facturer)</th>
                     <th class="col-xs-2 text-right">Montant (Restant à facturer)</th>
                     <th class="col-xs-2">&nbsp;</th>
@@ -42,14 +43,14 @@ use_helper('Float');
 
                             <div class="col-xs-6 text-right">
                                 <a href="<?php echo url_for('facture_mouvements_edition', array('id' => $factureMouvement->identifiant)); ?>" class="btn btn-default">Modifier</a>
-                            </div>   
+                            </div>
                             <?php if (!$factureMouvement->getNbMvtsAFacture()): ?>
                                 <div class="col-xs-6 text-left">
                                     <a class="btn btn-default" href="<?php echo url_for('facture_mouvements_supprimer', array('id' => $factureMouvement->identifiant)); ?>">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </a>
                                 </div>
-                            <?php endif; ?>   
+                            <?php endif; ?>
 
 
                         </td>
@@ -65,3 +66,4 @@ use_helper('Float');
 
     </div>
 </div>
+<?php include_partial('facture/postTemplate'); ?>

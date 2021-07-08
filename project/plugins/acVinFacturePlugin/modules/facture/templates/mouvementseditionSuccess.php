@@ -1,6 +1,7 @@
 <?php use_helper('Float'); ?>
 <?php use_helper('Date'); ?>
 <?php use_javascript('facture.js'); ?>
+<?php include_partial('facture/preTemplate'); ?>
 
 <ol class="breadcrumb">
     <li class="visited"><a href="<?php echo url_for('facture') ?>">Factures</a></li>
@@ -91,3 +92,4 @@
     </div>
 
 </form>
+<?php include_partial('facture/postTemplate'); ?>

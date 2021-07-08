@@ -1,6 +1,7 @@
 <?php
 use_helper('Float');
 ?>
+<?php include_partial('facture/preTemplate'); ?>
 
 <ol class="breadcrumb">
     <li class="visited"><a href="<?php if($sf_user->hasCredential(AppUser::CREDENTIAL_ADMIN)): ?><?php echo url_for('facture') ?><?php endif; ?>">Factures</a></li>
@@ -9,7 +10,7 @@ use_helper('Float');
 
 <div class="row">
     <?php if($sf_user->hasCredential(AppUser::CREDENTIAL_ADMIN)): ?>
-    <div class="col-xs-12">
+    <div class="col-xs-12" id="formEtablissementChoice">
         <?php include_component('facture', 'chooseSociete', array('identifiant' => $societe->identifiant)); ?>
     </div>
     <?php endif; ?>
@@ -28,3 +29,4 @@ use_helper('Float');
         <?php endif; ?>
     </div>
 </div>
+<?php include_partial('facture/postTemplate'); ?>

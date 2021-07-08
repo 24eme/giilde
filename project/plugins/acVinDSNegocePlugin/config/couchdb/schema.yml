@@ -1,0 +1,59 @@
+#schema des DS
+DSNegoce:
+  definition:
+    fields:
+      _id: {}
+      _rev: {}
+      type: {}
+      identifiant: {}
+      campagne: {}
+      millesime: {}
+      date_echeance: {}
+      date_stock: {}
+      docid_origine_reprise_produits: {}
+      teledeclare: {}
+      declarant:
+        type: collection
+        definition:
+          fields:
+            nom: { searchable: true }
+            raison_sociale: { searchable: true }
+            cvi: {  }
+            no_accises: {   }
+            adresse: { searchable: true }
+            commune: { searchable: true }
+            code_postal: {   }
+            region: {  }
+            famille: {  }
+            sous_famille: {  }
+      declaration:
+        type: collection
+        definition:
+          fields:
+            '*':
+              type: collection
+              definition:
+                fields:
+                  libelle: {}
+                  detail:
+                    type: collection
+                    definition:
+                      fields:
+                        '*':
+                          type: collection
+                          definition:
+                            fields:
+                              denomination_complementaire: {}
+                              stock_initial_millesime_courant: { type: float }
+                              stock_declare_millesime_courant: { type: float }
+                              dont_vraclibre_millesime_courant: { type: float }
+                              stock_declare_millesime_anterieur: { type: float }
+                              dont_vraclibre_millesime_anterieur: { type: float }
+      valide:
+        type: collection
+        definition:
+          fields:
+            date_saisie: { type: date }
+            date_signee: { type: date }
+            identifiant: {  }
+            statut: { }

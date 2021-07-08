@@ -33,7 +33,7 @@ class FactureMouvementEditionLignesForm extends acCouchdbObjectForm {
 
     public function doUpdateObject($values) {
         parent::doUpdateObject($values);
-       
+
     }
 
     public function bind(array $taintedValues = null, array $taintedFiles = null) {
@@ -54,13 +54,13 @@ class FactureMouvementEditionLignesForm extends acCouchdbObjectForm {
                 foreach ($values as $keyValue => $value) {
                     if ($keyValue == 'identifiant') {
                         if ($value && SocieteClient::getInstance()->find($value) && $values['quantite']) {
-                            $identifiant = str_replace("SOCIETE-", "", $values['identifiant']) . '01';
+                            $identifiant = str_replace("SOCIETE-", "", $values['identifiant']) . Societe::get01PostfixEtablissementIfExist();
                         }
                     }
                 }
 
                 $keyMvt = str_replace("nouveau_", "", $key);
-                $mouvement = $this->getObject()->getOrAdd($identifiant)->getOrAdd($keyMvt);                
+                $mouvement = $this->getObject()->getOrAdd($identifiant)->getOrAdd($keyMvt);
                 $this->embedForm($key, new FactureMouvementEtablissementEditionLigneForm($mouvement, array('interpro_id' => $this->interpro_id, 'keyMvt' => $key)));
             }
         }
@@ -70,16 +70,16 @@ class FactureMouvementEditionLignesForm extends acCouchdbObjectForm {
                 foreach ($values as $keyValue => $value) {
                     if ($keyValue == 'identifiant') {
                         $keyEmbedded = explode('_', $key);
-                        if (($keyEmbedded[0] != str_replace('SOCIETE-', '', $value) . '01') && $keyEmbedded[0] != "nouveau") {
+                        if (($keyEmbedded[0] != str_replace('SOCIETE-', '', $value) . Societe::get01PostfixEtablissementIfExist()) && $keyEmbedded[0] != "nouveau") {
 
                             if ($value && SocieteClient::getInstance()->find($value) && $values['quantite']) {
-                                $identifiant = str_replace("SOCIETE-", "", $values['identifiant']) . '01';
+                                $identifiant = str_replace("SOCIETE-", "", $values['identifiant']) . Societe::get01PostfixEtablissementIfExist();
 
                                 $keyMvt = $keyEmbedded[1];
                                 $newKey = $identifiant . '_' . $keyMvt;
 
                                 $mouvementCloned = clone $this->getObject()->getOrAdd($keyEmbedded[0])->get($keyEmbedded[1]);
-                                $mouvementCloned->identifiant = str_replace("SOCIETE-", "", $values['identifiant']) . '01';
+                                $mouvementCloned->identifiant = str_replace("SOCIETE-", "", $values['identifiant']) . Societe::get01PostfixEtablissementIfExist();
 
                                 $mouvement = $this->getObject()->getOrAdd($mouvementCloned->identifiant)->add($keyMvt, $mouvementCloned);
 
@@ -108,7 +108,7 @@ class FactureMouvementEditionLignesForm extends acCouchdbObjectForm {
         unset($this->validatorSchema[$key]);
         unset($this->embeddedForms[$key]);
     }
-    
+
     public function unEmbedFormAndRemoveNode($socId, $uniqkey, &$taintedValues) {
         $this->getObject()->getOrAdd($socId)->remove($uniqkey);
         if (!count($this->getObject()->getOrAdd($socId))) {

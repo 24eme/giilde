@@ -113,21 +113,26 @@ class StatistiqueStatsFilterForm extends BaseForm
         return ConfigurationClient::getCurrent()->declaration->getKeys($noeud);
     }
 
-		public static function getProduitsCepage() {
+		public static function getProduitsCepage($date = null) {
         $libelles = array();
         $items = ConfigurationClient::getCurrent()->declaration->getProduits();
+        if($date){
+            $items = ConfigurationClient::getConfiguration($date)->declaration->getProduits();
+        }
 
         foreach($items as $key => $item) {
 						try {
 								if(floatval($item->getDroitCVO(date('Y-m-d'))->taux) && (floatval($item->getDroitCVO(date('Y-m-d'))->taux) > 0.0) ){
-								$libelles[$key] = $item->getLibelleFormat();
+                                if(preg_match('/^(?!CDB)\/mentions\/DEFAUT\/lieux\/DEFAUT\/couleurs\/blanc_moelleux/',$key)){
+                                    $key = str_replace('blanc_moelleux','blanc_doux' ,$key);
+                                }
+                                $libelles[$key] = $item->getLibelleFormat();
 							}
 						} catch (sfException $e) {
 							continue;
 						}
 
         }
-
         return $libelles;
     }
 
@@ -232,7 +237,7 @@ class StatistiqueStatsFilterForm extends BaseForm
     		$values['doc.date_campagne']['to'] = $values['doc.date_campagne/to'];
     	}
 			if(!in_array($values['statistiques'],array('prix','disponibilites_vracs','mentions_valorisantes')) && !$this->aggregatAppellation && !$values['doc.mouvements.produit_hash']){
-					$values['doc.mouvements.produit_hash'] = array_keys(self::getProduitsCepage());
+					$values['doc.mouvements.produit_hash'] = array_keys(self::getProduitsCepage($values['doc.mouvements.date']['from']));
 			}
 			if (!in_array($values['statistiques'],array('prix','disponibilites_vracs','mentions_valorisantes')) && isset($values['doc.mouvements.produit_hash']) && ($values['doc.mouvements.produit_hash'] || $values['doc.mouvements.produit_hash'])) {
 				 $values['doc.mouvements.produit_hash'] = array_values($values['doc.mouvements.produit_hash']);

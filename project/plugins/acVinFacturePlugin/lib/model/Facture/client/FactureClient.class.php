@@ -176,7 +176,12 @@ class FactureClient extends acCouchdbClient {
     public function getMouvementsNonFacturesBySoc($mouvements) {
         $generationFactures = array();
         foreach ($mouvements as $key => $mouvement) {
-            $societe_id = substr($mouvement->etablissement_identifiant, 0, -2);
+
+            if(sfConfig::get('app_societe_no_multi_etablissement')) {
+                $societe_id = $mouvement->etablissement_identifiant;
+            } else {
+                $societe_id = substr($mouvement->etablissement_identifiant, 0, -2);
+            }
             if (isset($generationFactures[$societe_id])) {
                 $generationFactures[$societe_id][$key] = $mouvement;
             } else {

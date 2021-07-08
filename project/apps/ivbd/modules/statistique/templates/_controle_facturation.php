@@ -8,7 +8,7 @@ use_helper('IvbdStatistique');
 	$appellationByCouleurCsv['ztotal']['ztotal'] = array("TOTAL",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0);
 	foreach ($result['agg_page']['buckets'] as $produitLine) {
 		$produitKey = $produitLine['key'];
-		$produit = ConfigurationClient::getCurrent()->get($produitKey);
+        $produit = ConfigurationClient::getConfiguration($options['fromDate'])->get($produitKey);
 		$couleur = $produit->getLibelle();
 
 		$produitLibelle = $produit->getLibelleFormat();

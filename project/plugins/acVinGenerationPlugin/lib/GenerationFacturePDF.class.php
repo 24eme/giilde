@@ -20,7 +20,13 @@ class GenerationFacturePDF extends GenerationPDF {
     public function preGeneratePDF() {
         parent::preGeneratePDF();
 
-        $allMouvementsByRegion = FactureClient::getInstance()->getMouvementsForMasse(null);
+        $regions = null;
+        if(sfConfig::get('app_facturation_region')) {
+            $regions[] = sfConfig::get('app_facturation_region');
+        }
+
+        $allMouvementsByRegion = FactureClient::getInstance()->getMouvementsForMasse($regions);
+
         $mouvementsBySoc = FactureClient::getInstance()->getMouvementsNonFacturesBySoc($allMouvementsByRegion);
         $arguments = $this->generation->arguments->toArray();
         if (!isset($arguments['modele']) || !$arguments['modele']) {

@@ -2,6 +2,8 @@
 <?php use_helper("Date"); ?>
 <?php use_helper("Float"); ?>
 
+<?php include_partial('facture/preTemplate'); ?>
+
 <div class="page-header no-border">
     <div class="btn-group pull-right">
         <?php if($generation->statut == GenerationClient::GENERATION_STATUT_GENERE && GenerationClient::getInstance()->isRegenerable($generation)): ?>
@@ -116,3 +118,5 @@
 <?php if(in_array($generation->statut, array(GenerationClient::GENERATION_STATUT_ENATTENTE, GenerationClient::GENERATION_STATUT_ENCOURS))): ?>
 <script type="text/javascript">window.setTimeout("window.location.reload()", 30000);</script>
 <?php endif; ?>
+
+<?php include_partial('facture/postTemplate'); ?>

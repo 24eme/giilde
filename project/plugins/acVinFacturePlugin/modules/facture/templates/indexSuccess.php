@@ -1,9 +1,11 @@
+<?php include_partial('facture/preTemplate'); ?>
+
 <ol class="breadcrumb">
     <li class="active"><a href="<?php echo url_for('facture') ?>">Factures</a></li>
 </ol>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12" id="formEtablissementChoice">
         <?php include_component('facture', 'chooseSociete'); ?>
     </div>
 </div>
@@ -30,3 +32,5 @@
         <a href="<?php echo url_for('facture_mouvements'); ?>" class="btn btn-md btn-default">Créer des mouvements de facturation libre</a>
     </div>
 </div>
+
+<?php include_partial('facture/postTemplate'); ?>

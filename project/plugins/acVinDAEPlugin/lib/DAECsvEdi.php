@@ -30,13 +30,14 @@ class DAECsvEdi extends CsvFile {
     const CSV_CONDITIONNEMENT_QUANTITE = 16; // AA (colonne n°20) : quantité de conditionnement (en nombre de bib, de bouteille ou, pour le vrac, en hl)
     const CSV_PRIX_UNITAIRE = 17; // AB (colonne n°20) : prix unitaire (prix en € par bouteille, bib ou hl)
     const CSV_DEVISE = 18;
-    
+
     protected $daes = null;
     protected $csv = null;
 
     public function __construct($file) {
         $this->buildCountryList();
         $this->buildDeviseList();
+
         parent::__construct($file);
     }
 

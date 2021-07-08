@@ -195,18 +195,18 @@ Assiette foncière totale correspondant aux volumes commercialisés : \textbf{\S
 \hspace*{0.5cm}
 Volume prévisionnel : \textbf{\CONTRATVOLUME} ~ Kg de raisin du cépage \textbf{\CONTRATCEPAGEPRODUIT} \\
 \hspace*{0.5cm}
-pouvant prétandre à l'appellation : \textbf{\CONTRATAPPELLATIONPRODUIT} \small {\CONTRATLABELSPRODUIT} \\
+pouvant prétendre à l'appellation : \textbf{\CONTRATAPPELLATIONPRODUIT} \small {\CONTRATLABELSPRODUIT} \\
 \hspace*{0.5cm}
 Le vendeur s'engage à livrer à l'acheteur les raisins désignés ci-dessus, issus de sa production et conformes à l'ensemble des prescriptions figurant dans \\
 \hspace*{0.5cm}
 les cahiers des charges des vins concernés. Il certifie que les renseignements ci-dessus sont repris dans sa déclaration de récolte.
  ~ \\   ~ \\
 %PARTIE 3%
-\circled{3}~~\textbf{Bordereau s'inscrivant dans le cadre d'un contrat d'achat pluriannuel:}<?php if ($vrac->pluriannuel): ?>~Non~$\square$~Oui~\squareChecked<?php else : ?>~Non~\squareChecked~Oui~$\square$<?php endif; ?> $\rightarrow$ Préciser l'année d'application : Année : 1 <?php if ($vrac->annee_contrat == 1): ?>\squareChecked<?php else : ?>$\square$<?php endif; ?> 2 <?php if ($vrac->annee_contrat == 2): ?>\squareChecked<?php else : ?>$\square$<?php endif; ?> 3 <?php if ($vrac->annee_contrat == 3): ?>\squareChecked<?php else : ?>$\square$<?php endif; ?> \\
+\circled{3}~~\textbf{Bordereau s'inscrivant dans le cadre d'un contrat d'achat pluriannuel:}<?php if ($vrac->pluriannuel): ?>~Non~$\square$~Oui~\squareChecked<?php else : ?>~Non~\squareChecked~Oui~$\square$<?php endif; ?> $\rightarrow$ Préciser l'année d'application : Année 1 <?php if ($vrac->annee_contrat == 1): ?>\squareChecked<?php else : ?>$\square$<?php endif; ?> Année 2 <?php if ($vrac->annee_contrat == 2): ?>\squareChecked<?php else : ?>$\square$<?php endif; ?> Année 3 <?php if ($vrac->annee_contrat == 3): ?>\squareChecked<?php else : ?>$\square$<?php endif; ?> \\
 \hspace*{0.5cm}
 Le volume et le prix indiqués sur ce bordereau concernent l'année d'application cochée, sous réserve du respect des règles précisées au verso. \\\hspace*{0.5cm}
-En année 1, préciser :\small ~- si une révision est envisagée pour les années suivante :<?php if ($vrac->seuil_revision || $vrac->pourcentage_variation): ?>~Non~$\square$~Oui~\squareChecked<?php else : ?>~Non~\squareChecked~Oui~$\square$<?php endif; ?> $\rightarrow$ Préciser le seuil de déclenchement de révision de prix du contrat : $\pm$ \textbf{\CONTRATSEUILDECLENCHEMENT}\% \\
-\hspace*{3.32cm}
+En année 1, préciser :\small ~- si une révision du prix est envisagée pour les années suivantes :<?php if ($vrac->seuil_revision || $vrac->pourcentage_variation): ?>~Non~$\square$~Oui~\squareChecked<?php else : ?>~Non~\squareChecked~Oui~$\square$<?php endif; ?> $\rightarrow$ Préciser le seuil de déclenchement de révision de prix du contrat : $\pm$ \textbf{\CONTRATSEUILDECLENCHEMENT}\% \\
+\hspace*{2.98cm}
 - le pourcentage de variabilité maximale du volume en année 2 ou 3 par rapport au volume prévu en année 1 est de : $\pm$ \textbf{\CONTRATBORDEREUPOURCENTAGEANNEEUN}\% \\
 \hspace*{0.5cm}
 \normalsize
@@ -221,41 +221,60 @@ Moyen de paiement : \textbf{\CONTRATMOYENPAIEMENT} \\
 \hspace*{0.5cm}
 Délais de paiement : \textbf{\CONTRATDELAIPAIEMENT} \\
 \hspace*{0.5cm}
-\tiny{Rappel : Les Accords Interprofessionnel de l'IVBD encadrent strictement, dans leur article 11, les delais de paiement maximaux. Lorsque les bordereaux prévoient des dates de retiraison, les délais de paiement ne peuvent excéder 60 jours calendaires\\
+\tiny{Lorsque les bordereaux prévoient des dates de retiraison, les délais de paiement ne peuvent excéder 60 jours calendaires après chacune des dates de retiraison prévues. Dans les autres cas, les délais de paiement sont ceux prévus\\
 \hspace*{0.5cm}
-après chacune des dates de retiraison prévues. Lorsque les bordereaux sont signés dans le cadre d'un contrat pluriannuel, les delais de paiement ne peuvent excéder 150 jours calendaires après chacune des dates de retiraison prévues. Dans tous les\\
-\hspace*{0.5cm}
-autres cas, les délais de paiement son ceux prévus à l'article L 443-1 du Code de Commerce.\\
-\hspace*{0.5cm}
-Des sanction financières conséquentes sont prévues par l'article L 632-7 du Code Rural et l'article L 443-1 du Code de Commerce (amende de 75 000\texteuro ) en cas de non respect de ces dispositions.} \\
+à l'article L 443-1 du Code de Commerce. Des sanctions financières conséquentes sont prévues par l'article L 632-7 du Code Rural et l'article L 443-1 du Code de Commerce (amende de 75 000~\texteuro ) en cas de non respect de ces dispositions.} \\
 \normalsize
 \hspace*{0.5cm}
 Le courtage de \textbf{\CONTRATPOURCENTAGECOURTAGE} \% est à la charge de \textbf{\CONTRATREPARTITION}.\\
 \hspace*{0.5cm}
-Le vendeur est assujetti à la TVA <?php if ($vrac->vendeur_tva): ?>~Oui~\squareChecked Non~$\square$<?php else: ?>~Oui~$\square$ Non~\squareChecked<?php endif;?> ~~~~~ La facturation se fera : <?php if ($vrac->tva == 'SANS'): ?>avec TVA $\square$ ~~ hors TVA \squareChecked<?php else : ?>avec TVA \squareChecked ~~ hors TVA $\square$<?php endif; ?> (attestation d'achat en franchise à fournir)
+Le vendeur est assujetti à la TVA <?php if ($vrac->vendeur_tva): ?>~Oui~\squareChecked Non~$\square$<?php else: ?>~Oui~$\square$ Non~\squareChecked<?php endif;?> ~~~~~ La facturation se fera : <?php if ($vrac->tva == 'SANS'): ?>avec TVA $\square$ ~~ hors TVA \squareChecked<?php else : ?>avec TVA \squareChecked ~~ hors TVA $\square$<?php endif; ?> (dans ce cas, attestation d'achat en franchise à fournir)
   ~ \\   ~ \\
 %PARTIE 5%
-\circled{5}~~\textbf{Retiraison, Délivrance et Réserve de propriété:}\\
+\circled{5}~~\textbf{Retiraison et Délivrance :}\\
 \hspace*{0.5cm}
 La dernière retiraison sera effectuée au plus tard le \textbf{\DATELIMITERETIRAISON}.\\
 \hspace*{0.5cm}
 De convention expresse entre les parties, la délivrance au sens de l'article 1604 du Code Civil se réalisera à la date de retiraison indiquée sur\\
 \hspace*{0.5cm}
-le bordereau. Si la retiraison intervenait avant la date précitée, la délivrance serait imputée acquise à la date figurant sur le titre de mouvement.\\
-\hspace*{0.5cm}
-Les parties entendent placer le présent contrat sous le regime de laréserve de propriété prévu par la loi du 12 mai 1980. En application de cette loi,\\
-\hspace*{0.5cm}
-le vendeur se réserve la propriété des raisins vendus jusqu'à parfait paiement de ceux-ci.\\
+le bordereau. Si la retiraison intervenait avant la date précitée, la délivrance serait réputée acquise à la date figurant sur le titre de mouvement.
   ~ \\   ~ \\
+%PARTIE 5 bis%
+\circled{5}~~\textbf{bis - Résiliation du contrat :}\\
+\hspace*{0.5cm}
+En cas de non-respect par l'acheteur des dates de retiraison ci-dessus mentionnées, le vendeur pourra invoquer l'article 1657 du code civil : "Annulation\\
+\hspace*{0.5cm}
+de droit de la vente pour non-enlèvement de la vendange à la date prévue".\\
+\hspace*{0.5cm}
+En cas de non-agrément motivé du produit (vendange non loyale et marchande), dans le délai de retiraison prévu au contrat, l'acheteur pourra demander\\
+\hspace*{0.5cm}
+la résiliation du contrat.
+  ~ \\   ~ \\
+%PARTIE 5 ter%
+\circled{5}~~\textbf{ter - Cas de Force Majeure :}\\
+\hspace*{0.5cm}
+Les parties ne sauraient être tenues responsables de l'inexécution de leurs obligations respectives si cette inexécution est due à un cas de force majeure,\\
+\hspace*{0.5cm}
+conformément aux dispositions de l'article 1218 du code civil.\\
+\hspace*{0.5cm}
+L'inexécution des obligations est suspendue pendant la durée de la force majeure, et est reprise si les effets de la cause de non- exécution prennent fin.
+ ~ \\   ~ \\
 %PARTIE 6%
-\circled{6}~~\textbf{Retiraison, Délivrance et Réserve de propriété:}\\
+\circled{6}~~\textbf{Réserve de propriété :}\\
+\hspace*{0.5cm}
+Les parties entendent placer le présent contrat sous le regime de la réserve de propriété prévu par la loi du 12 mai 1980. En application de cette loi,\\
+\hspace*{0.5cm}
+le vendeur se réserve la propriété des raisins vendus jusqu'à parfait paiement de ceux-ci.  <?php if ($vrac->clause_reserve_propriete): ?>~Oui~\squareChecked Non~$\square$<?php else: ?>~Oui~$\square$ Non~\squareChecked<?php endif;?>
+~ \\   ~ \\
+%PARTIE 7%
+\circled{7}~~\textbf{Conditions particulières : }\\
 \hspace*{0.5cm}
 Ce bordereau fait référence à un contrat assorti d'un cahier des charges établi entre le vendeur et l'acheteur : <?php if ($vrac->cahier_charge): ?>~Oui~\squareChecked Non~$\square$<?php else: ?>~Oui~$\square$ Non~\squareChecked<?php endif;?> \\
 \hspace*{0.5cm}
 Observations : \textbf{\CONTRATOBSERVATIONS} \\
   ~ \\   ~ \\
 %PARTIE 7%
-\circled{7}~~\textbf{Enregistrement à l'IVBD:}\\
+\circled{8}~~\textbf{Enregistrement à l'IVBD:}\\
 \hspace*{0.5cm}
 En vertu de l'article 4 des Accords Interprofessionnels étendus de l'IVBD conclus pour la première fois le 21 août 1981, le présent contrat\\
 \hspace*{0.5cm}
@@ -263,9 +282,7 @@ est soumis à enregistrement auprès des services de l'IVBD. Pour toute annulati
 \hspace*{0.5cm}
 son accord écrit à l'IVBD par la remise de son exemplaire (ou à défaut par courrier signé). Le courtier signataire du présent contrat pouvant\\
 \hspace*{0.5cm}
-agir au nom de chacune des parties. En cas d'annulation du contrat pour cause de non retiraison du vin dans les délais prévus, le vendeur devra\\
-\hspace*{0.5cm}
-en avertir l'IVBD par courrier signé et circonstancié.\\
+agir au nom de chacune des parties.\\
 \hspace*{0.5cm}
 \textit{Les signataires attestent avoir pris connaissance du verso du présent bordereau, et s'engagent à respecter les conditions particulières et règles}\\
 \hspace*{0.5cm}

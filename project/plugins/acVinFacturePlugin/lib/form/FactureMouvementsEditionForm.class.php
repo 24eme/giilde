@@ -80,7 +80,7 @@ class FactureMouvementsEditionForm extends acCouchdbObjectForm {
                     $societe = SocieteClient::getInstance()->find($mvtValues['identifiant']);
                     $societeIdentifiant = str_replace('SOCIETE-', '', $mvtValues['identifiant']);
                     $keys = explode('_', $keyMvt);
-                    $idEtb = ($keys[0] == 'nouveau') ? $societeIdentifiant . '01' : $keys[0];
+                    $idEtb = ($keys[0] == 'nouveau') ? $societeIdentifiant . Societe::get01PostfixEtablissementIfExist() : $keys[0];
                     $mvtObj = $this->getObject()->getOrAdd('mouvements')->getOrAdd($idEtb)->getOrAdd($keys[1]);
 
                     $mvtObj['identifiant'] = $idEtb;

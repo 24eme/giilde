@@ -9,7 +9,7 @@
 else: ?>
 	<p>Votre DRM a été transmise avec succès sur le portail <a href="https://douane.gouv.fr/">douane.gouv.fr</a>.<br/><br/></p>
 	<p>Pour terminer cette prodécure, vous devez vous rendre sur le site des douanes, une fois connecté sur l'espace DRM CIEL, vous pourrez valider votre DRM.<br/><br/></p>
-	<p style="text-align: center;"><a href="https://douane.gouv.fr/" class="btn btn-success">Se rendre sur proDouane</a>.</p>
+	<p style="text-align: center;"><a href="https://douane.gouv.fr/" class="btn btn-success">Se rendre sur le site de la douane</a>.</p>
 <?php endif; ?>
 <br/><br/>
 <div class="row">
