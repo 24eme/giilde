@@ -1,4 +1,5 @@
 <?php
+use_helper('IvbdStatistique');
 setlocale(LC_TIME, 'fr_FR');
 $items = explode(PHP_EOL, $csv);
 array_shift($items);
@@ -22,7 +23,6 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \usepackage{tabularx}
 \usepackage{multirow}
 \usepackage[framemethod=tikz]{mdframed}
-\usepackage{lastpage}
 
 \def\LOGO{<?php echo sfConfig::get('sf_web_dir'); ?>/images/logo_ivbd.png}
 \renewcommand{\arraystretch}{1.2}
@@ -35,12 +35,12 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \renewcommand{\headrulewidth}{0cm}
 \renewcommand\sfdefault{phv}
 \renewcommand{\familydefault}{\sfdefault}
-\fancyfoot[R]{\thepage~/~\pageref{LastPage}}
+\fancyfoot[R]{1}
 \fancyfoot[L]{<?php echo strftime("%e %B %Y", time()) ?>}
 \fancyhead[L]{\includegraphics[scale=0.6]{\LOGO}}
 
 \fancypagestyle{fstyle_0}{
-\fancyhead[C]{Controle de facturation des sorties <?php if ($periode): ?> - Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
+\fancyhead[C]{Sorties <?php if ($periode): ?> - Période du \textbf{<?php echo $periode[0] ?>} au \textbf{<?php echo $periode[1] ?>}<?php endif; ?>}
 }
 
 \begin{document}
@@ -52,15 +52,23 @@ $periode = (isset($options['periode']) && isset($options['periode'][0]) && isset
 \hline
 \rowcolor{gray!40} ~ 					& Sorties sous & ~        & \textbf{Facturation} & Sorties hors             & ~        & \textbf{Facturation} & Total sorties         & ~        & \textbf{Facturation} \tabularnewline
 \rowcolor{gray!40} \textbf{Appellations} & contrats & CVO & \textbf{attendue €}  & Contrats & CVO & \textbf{attendue}  & réelles à & CVO & \textbf{Attendue} \tabularnewline
-\rowcolor{gray!40} ~           & (vrac) hl     & \texteuro{}\/hl & \textbf{ \texteuro{} }  & (bouteilles) hl & \texteuro{}\/hl & en \texteuro{}   & facturer en hl & \texteuro{}\/hl & \textbf{\texteuro{}} \tabularnewline
+\rowcolor{gray!40} ~           & (vrac) hl     & \texteuro{}\/hl & \textbf{ \texteuro{} }  & (bouteilles) hl & \texteuro{}\/hl & ~ & facturer en hl & \texteuro{}\/hl & \textbf{\texteuro{}} \tabularnewline
 \hline
 <?php
 	$i = 0;
+    $bfArrayKeys = [0,3,6,9];
+    $rightArrayKeys = [1,3,4,6,7,9];
 	foreach ($items as $item):
     $values = explode(';', $item);
 		foreach ($values as $key => $value) {
-			if($key==0 || $key==3 || $key==6 || $key==9){
-				$values[$key] = '\textbf{'.$value.'}';
+            if(is_numeric(str_replace(',','.',$value))){
+                $values[$key] = number_format(str_replace(',','.',$values[$key]), 2, ',', ' ');
+            }
+			if(in_array($key,$bfArrayKeys)){
+				$values[$key] = '\textbf{'.$values[$key].'}';
+			}
+            if(in_array($key,$rightArrayKeys)){
+				$values[$key] = '\raggedleft '.$values[$key];
 			}
 		}
 		$isTotal = preg_match('/total/i', $item);

@@ -35,66 +35,73 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
 
-    $output = array();
-    $doc = acCouchdbManager::getClient()->find($arguments['doc_id']);
-    if(isset($options["delete"]) && $options["delete"]){
-      $hash = array_shift($arguments['hash_values']);
-      $doc->remove($hash);
-      $output[] = $hash.":supprimé";
-    }else{
-
-      $values = array();
-      $hash = null;
-      $value = null;
-      foreach($arguments['hash_values'] as $i => $arg) {
-          if($i % 2 == 0) {
-              $hash = $arg;
-          } else {
-              $value = $arg;
-          }
+    $values = array();
+    $hash = null;
+    $value = null;
+    foreach($arguments['hash_values'] as $i => $arg) {
+        if($i % 2 == 0) {
+            $hash = $arg;
+        } else {
+            $value = $arg;
+        }
 
 
-          if($hash && $value) {
-              $values[$hash] = $value;
-              $hash = null;
-              $value = null;
-          }
-      }
-
-
-
-      if(!$doc) {
-
-          return;
-      }
-
-      foreach($values as $hash => $value) {
-          if(!$doc->exist($hash)) {
-
-              return;
-          }
-          if($doc->get($hash) instanceof acCouchdbJson) {
-
-              return;
-          }
-          if($doc->get($hash) === $value) {
-
-              continue;
-          }
-
-          $output[] = $hash.":\"".$value."\" (".$doc->get($hash).")";
-          $doc->set($hash, $value);
-      }
+        if($hash && $value) {
+            $values[$hash] = $value;
+            $hash = null;
+            $value = null;
+        }
     }
 
-      $oldrev = $doc->_rev;
 
-      $doc->save();
+    $doc = acCouchdbManager::getClient()->find($arguments['doc_id']);
 
-      if($oldrev == $doc->_rev) {
-          return;
-      }
-      echo "Le document ".$doc->_id."@".$oldrev." a été sauvé @".$doc->_rev.", les valeurs suivantes ont été changés : ".implode(",", $output)."\n";
+    if(!$doc) {
+        error_log("doc $doc non trouvé");
+        return;
+    }
 
+    $output = array();
+    foreach($values as $hash => $value) {
+        try {
+            $docadd = $doc;
+            $hashadd = $hash;
+            if (preg_match('/(.*)\/([^\/]*)$/', $hash, $match)) {
+                $parenthash = $match[1];
+                $docadd = $doc->get($parenthash);
+                $hashadd = $match[2];
+            }
+            $docadd->add($hashadd);
+        }catch(sfException $e) {
+            error_log("$hash ne peut exister pour ".$doc->_id);
+            return;
+        }
+
+        if(!$doc->exist($hash)) {
+            error_log("$hash n'existe pas");
+            return;
+        }
+        if($doc->get($hash) instanceof acCouchdbJson) {
+            error_log("$hash n'est pas un couchedbJson pour ".$doc->_id);
+            return;
+        }
+        if($doc->get($hash) === $value) {
+
+            continue;
+        }
+
+        $output[] = $hash.":\"".$value."\" (".$doc->get($hash).")";
+        $doc->set($hash, $value);
+    }
+
+    $oldrev = $doc->_rev;
+
+    $doc->save();
+
+    if($oldrev == $doc->_rev) {
+        return;
+    }
+
+    error_log("Le document ".$doc->_id."@".$oldrev." a été sauvé @".$doc->_rev.", les valeurs suivantes ont été changés : ".implode(",", $output));
   }
 }

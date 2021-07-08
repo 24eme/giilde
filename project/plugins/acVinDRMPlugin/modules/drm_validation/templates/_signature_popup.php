@@ -10,7 +10,7 @@
                 <p>Après validation vous recevrez votre DRM par mail.</p>
 
                 <?php if($compte->hasDroit(Roles::TELEDECLARATION_DOUANE) && !$drm->isNegoce()): ?>
-                    <p>Si vous le souhaitez, en cliquant sur l'option ci-dessous, vous pouvez transmettre cette DRM directement sur le portail de la douane, qui apparaitra en mode brouillon sur le portail pro.douane.gouv.fr. Il vous restera alors à la valider en ligne sur le site web douanier.</p>
+                    <p>Si vous le souhaitez, en cliquant sur l'option ci-dessous, vous pouvez transmettre cette DRM directement sur le portail de la douane, qui apparaitra en mode brouillon sur le portail douane.gouv.fr. Il vous restera alors à la valider en ligne sur le site web douanier.</p>
                 <?php else: ?>
                     <p>Après avoir validé, vous allez être invité.e à télécharger votre DRM au format XML afin de l'importer en DTI+ sur le site de la douane.</p>
                 <?php endif; ?>
@@ -22,7 +22,7 @@
                           <?php echo $validationForm['transmission_ciel']->renderError(); ?>
                           <label>
                               <input id="drm_transmission_ciel_visible" type="checkbox"  value="1" checked="checked" />
-                              <strong>Transmission pour préremplissage de votre DRM electronique sur le portail pro.douane.gouv.fr</strong>
+                              <strong>Transmission pour préremplissage de votre DRM electronique sur le portail douane.gouv.fr</strong>
                           </label>
                       </div>
                   </div>

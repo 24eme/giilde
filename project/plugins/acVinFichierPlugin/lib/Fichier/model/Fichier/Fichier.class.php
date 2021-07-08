@@ -7,10 +7,15 @@
 class Fichier extends BaseFichier implements InterfacePieceDocument {
 
     protected $piece_document = null;
+    protected $complemente_libelle = true;
 
     public function __construct() {
         parent::__construct();
         $this->initDocuments();
+    }
+
+    public function setComplementeLibelle(bool $val) {
+      $this->complemente_libelle = $val;
     }
 
     public function __clone() {
@@ -175,11 +180,14 @@ class Fichier extends BaseFichier implements InterfacePieceDocument {
     /**** PIECES ****/
 
     public function getAllPieces() {
-    	$complement = ($this->isPapier())? '(Papier)' : '(Télédéclaration)';
+    	$complement = null;
+      if ($this->complemente_libelle) {
+        	$complement = ($this->isPapier())? ' (Papier)' : ' (Télédéclaration)';
+      }
     	return array(array(
     		'identifiant' => $this->getIdentifiant(),
     		'date_depot' => $this->getDateDepot(),
-    		'libelle' => $this->getLibelle().' '.$complement,
+    		'libelle' => $this->getLibelle().$complement,
     		'visibilite' => $this->getVisibilite(),
     		'mime' => null,
     		'source' => null,

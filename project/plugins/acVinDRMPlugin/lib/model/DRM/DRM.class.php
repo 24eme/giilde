@@ -406,45 +406,67 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
 
     }
 
+    /***
+     *  @return true if controles changed
+     **/
     public function updateControles(){
 
+        $origine_nb_controles = 0;
+        if ($this->exist('controles')) {
+            foreach($this->controles as $type => $obj) {
+                $origine_nb_controles += $obj->nb;
+            }
+        }
+
         $this->cleanControles();
+
+        if (!$this->isMaster()) {
+            return ($origine_nb_controles);
+        }
+
+        $nb_controles = 0;
 
         if($this->exist("transmission_douane")) {
             //cas d'erreur de transmission
             if ($this->transmission_douane->success === false ) {
                 $this->addControleMessage(DRM::CONTROLE_TRANSMISSION, $this->getTransmissionErreur());
+                $nb_controles++;
             }
             //cas d'incoherence
             if ($this->get("transmission_douane")->coherente === false) {
                 $this->addControleMessage(DRM::CONTROLE_COHERENCE, "Non conforme douane");
+                $nb_controles++;
             }
         }
 
         //Points de controles liés à la validation
         if ($this->isValidee()) {
-            return ;
+            return ($origine_nb_controles != $nb_controles);
         }
         $points = new DRMValidation($this, true);
         if(!$points->hasPoints()){
-            return ;
+            return ($origine_nb_controles != $nb_controles);
         }
         $this->add('controles');
         if($points->hasErreurs()){
             $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_BLOCANT, $points->getErreurs());
+            $nb_controles++;
         }
 
         if($points->hasVigilances()){
             $this->controles->add(DRM::CONTROLE_POINT_VIGILANCE);
             $this->controles->vigilance->nb = count($points->getVigilances());
             $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_VIGILANCE, $points->getVigilances());
+            $nb_controles++;
         }
 
         if($points->hasEngagements()){
                 $this->controles->add(DRM::CONTROLE_POINT_ENGAGEMENT);
                 $this->controles->engagement->nb = count($points->getEngagements());
                 $this->addControleMessagesFromPoints(DRM::CONTROLE_POINT_ENGAGEMENT, $points->getEngagements());
+                $nb_controles++;
         }
+        return ($origine_nb_controles != $nb_controles);
     }
 
     public function setDroits() {
@@ -968,6 +990,10 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
             }
         }
         $this->updateControles();
+        $drm_precedente = $this->getMother();
+        if ($drm_precedente && $drm_precedente->updateControles()) {
+            $drm_precedente->save();
+        }
         $this->getTauxTva();
     }
 
@@ -1207,7 +1233,7 @@ class DRM extends BaseDRM implements InterfaceMouvementDocument, InterfaceVersio
         if (preg_match('|^(/declaration/certifications/.+/appellations/.+/mentions/.+/lieux/.+/couleurs/.+/cepages/.+/details.*/.+)/' . $hash_match . '$|', $key, $match)) {
             $detail = $this->get($match[1]);
             if (!$drm->exist($detail->getHash())) {
-            $drm->addProduit($detail->getCepage()->getHash(), $detail->getParent()->getKey(), $detail->labels->toArray());
+            $drm->addProduit($detail->getCepage()->getHash(), $detail->getParent()->getKey(), $detail->denomination_complementaire);
             }
             $drm->get($detail->getHash())->set($hash_replication, $value);
         }

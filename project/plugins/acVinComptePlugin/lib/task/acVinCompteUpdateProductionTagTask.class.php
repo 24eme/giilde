@@ -85,7 +85,7 @@ class acVinCompteUpdateProductionTagTask extends sfBaseTask {
                     $tags['export'][$this->replaceAccents($m->detail_libelle)] = 1;
                 }
             }
-            $contratDomaines = VracDomainesView::getInstance()->findDomainesByVendeur(str_replace('ETABLISSEMENT-', '', $id));
+            $contratDomaines = VracDomainesView::getInstance()->findDomainesByVendeur(str_replace('ETABLISSEMENT-', '', $id), date('Y'), 1000);
             foreach ($contratDomaines->rows as $domaineView) {
                 $domaine = $this->replaceAccents($domaineView->key[VracDomainesView::KEY_DOMAINE]);
                 $tags['domaines'][$domaine] = 1;

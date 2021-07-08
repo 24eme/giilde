@@ -17,7 +17,7 @@ class DRMValidationCommentaireForm extends acCouchdbObjectForm {
       if (sfContext::getInstance()->getUser()->getCompte()->hasDroit(Roles::TELEDECLARATION_DOUANE) && !$this->getObject()->getDocument()->isNegoce()) {
             $this->setWidget('transmission_ciel', new sfWidgetFormInputHidden());
             $this->setValidator('transmission_ciel', new sfValidatorString(array('required' => false)));
-            $this->widgetSchema->setLabel('transmission_ciel', 'Transmission pour préremplissage de votre DRM electronique sur le portail pro.douane.gouv.fr :');
+            $this->widgetSchema->setLabel('transmission_ciel', 'Transmission pour préremplissage de votre DRM electronique sur le portail douane.gouv.fr :');
        }
 
       $this->widgetSchema->setNameFormat('drm[%s]');

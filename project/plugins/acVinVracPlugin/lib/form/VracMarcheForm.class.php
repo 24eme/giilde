@@ -227,7 +227,7 @@ class VracMarcheForm extends VracForm {
 
     public function getDomaines()
     {
-        $domaines = VracDomainesView::getInstance()->findDomainesByVendeur($this->getObject()->vendeur_identifiant);
+        $domaines = VracDomainesView::getInstance()->findDomainesByVendeur($this->getObject()->vendeur_identifiant, date('Y'));
         $this->domaines = array('' => '');
         foreach ($domaines->rows as $resultDomaine) {
             $d = $resultDomaine->key[VracDomainesView::KEY_DOMAINE];
@@ -290,7 +290,7 @@ class VracMarcheForm extends VracForm {
     }
 
     public function getDomainesForAutocomplete() {
-        $domainesView = VracDomainesView::getInstance()->findDomainesByVendeur($this->getObject()->vendeur_identifiant);
+        $domainesView = VracDomainesView::getInstance()->findDomainesByVendeur($this->getObject()->vendeur_identifiant, date('Y'));
         $domaines = array();
         foreach ($domainesView->rows as $resultDomaine) {
             $d = $resultDomaine->key[VracDomainesView::KEY_DOMAINE];
